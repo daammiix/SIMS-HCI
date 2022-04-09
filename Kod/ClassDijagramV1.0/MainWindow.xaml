@@ -6,30 +6,12 @@
         xmlns:local="clr-namespace:ClassDijagramV1._0"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <ScrollViewer>
-            <StackPanel>
-                <Button Content="Zakazi pregled" Click="AddAppontment_Click"/>
-                <Button Content="Izmijeni pregled" Click="UpdateAppontment_Click"/>
-                <Button Content="Otkazi pregled" Click="RemoveAppontment_Click"/>
-                <Button Content="Pregled pregleda" Click="AddAppontment_Click1" />
-                <DataGrid x:Name="tabelaPregledi" Height="300" Margin="20"  
-                          AutoGenerateColumns="False"
-                          ItemsSource="{Binding Path=Appointments, UpdateSourceTrigger=PropertyChanged}"
-                          SelectionMode="Single" IsReadOnly="True" >
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Ime Pacijenta" Binding="{Binding Patient.name}"/>
-                        <DataGridTextColumn Header="Ime Doktora" Binding="{Binding Doctor.name}" />
-                        <DataGridTextColumn Header="Datum pregleda" Binding="{Binding Date}" Width="*"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Izaberi ljekara" Margin="20"/>
-                    
+    <DockPanel>
+        <TabControl>
+            <TabItem Header="Rooms">
+                <local:RoomUserControl Width="793" />
+            </TabItem>
+        </TabControl>
 
-                </StackPanel>
-            </StackPanel>
-            
-        </ScrollViewer>
-    </Grid>
+    </DockPanel>
 </Window>
