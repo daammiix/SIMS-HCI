@@ -1,4 +1,4 @@
-﻿<Window x:Class="ClassDijagramV1._0.MainWindow"
+﻿<Window x:Class="ClassDijagramV1._0.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,16 +10,16 @@
         Title="MainWindow" Height="768" Width="1024">
 
     <TabControl>
-        <TabItem Header="Pacijent">
+        <TabItem Header="Patient">
             <views:PatientView/>
         </TabItem>
-        <TabItem Header="Sekretar">
+        <TabItem Header="Secretary">
             <views:SecretaryView/>
         </TabItem>
-        <TabItem Header="Lekar">
-
+        <TabItem Header="Rooms">
+            <views:RoomUserControl Width="793" />
         </TabItem>
-        <TabItem Header="Upravnik">
+        <TabItem Header="Manager">
 
         </TabItem>
     </TabControl>

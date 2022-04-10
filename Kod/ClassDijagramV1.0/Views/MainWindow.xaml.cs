@@ -17,7 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ClassDijagramV1._0
+namespace ClassDijagramV1._0.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

@@ -90,11 +90,13 @@ namespace ClassDijagramV1._0.Views
 
         }
 
+        private void AutoColumns_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
         private void AddAppontment_Click1(object sender, RoutedEventArgs e)
         {
-            var a = new MainWindow();
-            //Application.Current.MainWindow = a;
-            a.Show();
+
         }
     }
 }
