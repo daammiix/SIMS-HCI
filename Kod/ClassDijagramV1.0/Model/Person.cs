@@ -1,11 +1,6 @@
-/***********************************************************************
- * Module:  Person.cs
- * Author:  lipov
- * Purpose: Definition of the Class Model.Person
- ***********************************************************************/
-
-using ClassDijagramV1._0.Model.Accounts;
+using ClassDijagramV1._0.Model;
 using System;
+using System.Text.Json.Serialization;
 
 namespace Model
 {
@@ -18,10 +13,15 @@ namespace Model
         public String PhoneNumber { get; set; }
         public String Email { get; set; }
         public DateTime DateOfBirth { get; set; }
+
+        [JsonIgnore]
         public Account? Account { get; set; }
 
+        // Kljuc za account
+        public string AccountUsername { get; set; }
+
         public Person(string name, string surname, string jmbg, string gender,
-            string phoneNumber, string email, DateTime dateOfBirth)
+            string phoneNumber, string email, DateTime dateOfBirth, Account account = null)
         {
             this.Name = name;
             this.Surname = surname;
@@ -30,7 +30,15 @@ namespace Model
             this.PhoneNumber = phoneNumber;
             this.Email = email;
             this.DateOfBirth = dateOfBirth;
-            Account = null;
+            this.Account = account;
+            if (account != null)
+                this.AccountUsername = Account.Username;
+        }
+
+        [JsonConstructor]
+        public Person()
+        {
+
         }
     }
 }

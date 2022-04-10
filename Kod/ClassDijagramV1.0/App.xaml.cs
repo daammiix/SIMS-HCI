@@ -21,9 +21,21 @@ namespace ClassDijagramV1._0
     /// </summary>
     public partial class App : Application
     {
+        #region Fields
+
+        private string _accountsFilePath = "../../../Data/accounts.json";
+        private string _patientsFilePath = "../../../Data/patients.json";
+
+        #endregion
+
+        #region Properties
         public AppointmentController appointmentController { get; set; }
 
-        public static AccountController AccountController { get; private set; }
+        public AccountController AccountController { get; set; }
+
+        public PatientController PatientController { get; set; }
+
+        #endregion
 
         public App()
         {
@@ -33,22 +45,24 @@ namespace ClassDijagramV1._0
 
             var appointmentRepository = new AppointmentRepo();
             //var patientRepository = new PatientRepo();
-            var patientService = new PatientService();
 
             appointmentController = new AppointmentController();
 
-            initSecretary();
+            // Patients
+            var patientRepo = new PatientRepo(new PatientFileHandler(_patientsFilePath));
+            var patientService = new PatientService(patientRepo);
+            PatientController = new PatientController(patientService);
+
+            // Accounts
+            var accountRepo = new AccountRepo(new AccountFileHandler(_accountsFilePath));
+            var accountService = new AccountService(accountRepo);
+            AccountController = new AccountController(accountService);
         }
 
-        private static void initSecretary()
+        private void Application_Exit(object sender, ExitEventArgs e)
         {
-            AccountFileHandler accountFileHandler = new AccountFileHandler("../../accounts.json");
-
-            var accountRepo = new AccountRepo(accountFileHandler);
-
-            var accountService = new AccountService(accountRepo);
-
-            AccountController = new AccountController(accountService);
+            AccountController.SaveAccounts();
+            PatientController.SavePatients();
         }
     }
 }

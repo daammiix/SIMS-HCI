@@ -19,7 +19,7 @@
         <TabItem Header="Rooms">
             <views:RoomUserControl Width="793" />
         </TabItem>
-        <TabItem Header="Manager">
+        <TabItem Header="Doctor">
 
         </TabItem>
     </TabControl>

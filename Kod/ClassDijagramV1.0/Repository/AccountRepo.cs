@@ -1,8 +1,9 @@
 ﻿using ClassDijagramV1._0.FileHandlers;
-using ClassDijagramV1._0.Model.Accounts;
+using ClassDijagramV1._0.Model;
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace ClassDijagramV1._0.Repository
 
         #region Properties
 
-        public List<Account> Accounts { get; set; }
+        public ObservableCollection<Account> Accounts { get; set; }
 
         #endregion
 
@@ -29,17 +30,7 @@ namespace ClassDijagramV1._0.Repository
         {
             _fileHandler = fileHandler;
 
-            //Accounts = _fileHandler.getAccounts();
-
-            Accounts = new List<Account>();
-            DateTime date1 = new DateTime(2008, 5, 1);
-            Accounts.Add(new RegularAccount("pera123", "pera123",
-                new Patient("Djordje", "Lipovcic", "123", "musko", "3875432", "the292200", date1, null, "1234", date1)));
-            Accounts[0].Banned = true;
-
-            Accounts.Add(new GuestAccount());
-            Accounts.Add(new GuestAccount());
-            Accounts.Add(new GuestAccount());
+            Accounts = new ObservableCollection<Account>(_fileHandler.getAccounts());
         }
 
         #endregion
@@ -50,9 +41,17 @@ namespace ClassDijagramV1._0.Repository
         /// Vraca sve accounte
         /// </summary>
         /// <returns></returns>
-        public List<Account> GetAccounts()
+        public ObservableCollection<Account> GetAccounts()
         {
             return Accounts;
+        }
+
+        /// <summary>
+        /// Za cuvanje accountova u fajl
+        /// </summary>
+        public void SaveAccounts()
+        {
+            _fileHandler.saveAccounts(Accounts.ToList());
         }
 
         /// <summary>
@@ -66,11 +65,14 @@ namespace ClassDijagramV1._0.Repository
             bool notexists = true;
 
             // Provera da li postoji account sa istim username-om
-            Accounts.ForEach(account =>
+            foreach (Account account in Accounts)
             {
                 if (account.Username.Equals(newAccount.Username))
+                {
                     notexists = false;
-            });
+                    break;
+                }
+            }
 
             // Ako ne postoji dodaj ga i vrati true
             if (notexists)

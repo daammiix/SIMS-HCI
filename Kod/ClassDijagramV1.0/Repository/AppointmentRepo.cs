@@ -40,7 +40,7 @@ namespace Repository
             TimeSpan interval = date2 - date1;
             Doctor d1 = new Doctor("Drrrrjordje", "Lipovcic", "123", "musko", "3875432", "the292200", date1);
             Doctors.Add(d1);
-            Patient p1 = new Patient("Djordje", "Lipovcic", "123", "musko", "3875432", "the292200", date1, null, "1234", date1);
+            Patient p1 = new Patient("Djordje", "Lipovcic", "123", "musko", "3875432", "the292200", date1, "1234");
 
             Appointment a1 = new Appointment(p1, r1, d1, "1", date1, interval, AppointmentType.generalPractitionerCheckup);
             Appointment a2 = new Appointment(p1, r1, d1, "2", date1, interval, AppointmentType.generalPractitionerCheckup);
