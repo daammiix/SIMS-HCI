@@ -8,9 +8,9 @@ using System;
 
 namespace Model
 {
-    public class Manager : RegisteredUser
+    public class Manager : Person
     {
-        public Manager(string name, string surname, string jmbg, string gender, string phoneNumber, string email, DateTime dateOfBirth, string username, string password) : base(name, surname, jmbg, gender, phoneNumber, email, dateOfBirth, username, password)
+        public Manager(string name, string surname, string jmbg, string gender, string phoneNumber, string email, DateTime dateOfBirth) : base(name, surname, jmbg, gender, phoneNumber, email, dateOfBirth)
         {
         }
     }

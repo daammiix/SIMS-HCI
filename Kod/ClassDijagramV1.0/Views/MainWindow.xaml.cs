@@ -17,28 +17,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ClassDijagramV1._0
+namespace ClassDijagramV1._0.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        public AppointmentController _appointmentController;
-
-        public ObservableCollection<Appointment> Appointments
-        {
-            get;
-            set;
-        }
-
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void AutoColumns_Click(object sender, RoutedEventArgs e)
-        {
         }
     }
 }

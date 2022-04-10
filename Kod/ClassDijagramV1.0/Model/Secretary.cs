@@ -8,9 +8,9 @@ using System;
 
 namespace Model
 {
-    public class Secretary : RegisteredUser
+    public class Secretary : Person
     {
-        public Secretary(string name, string surname, string jmbg, string gender, string phoneNumber, string email, DateTime dateOfBirth, string username, string password) : base(name, surname, jmbg, gender, phoneNumber, email, dateOfBirth, username, password)
+        public Secretary(string name, string surname, string jmbg, string gender, string phoneNumber, string email, DateTime dateOfBirth) : base(name, surname, jmbg, gender, phoneNumber, email, dateOfBirth)
         {
         }
     }
