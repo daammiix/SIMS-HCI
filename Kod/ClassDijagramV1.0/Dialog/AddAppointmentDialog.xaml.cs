@@ -50,8 +50,8 @@ namespace ClassDijagramV1._0.Dialog
             DateTime date1 = new DateTime(2008, 5, 1, 8, 30, 52);
             DateTime date2 = new DateTime(2010, 8, 18, 13, 30, 30);
             TimeSpan interval = date2 - date1;
-            Doctor d1 = new Doctor("Drrrrjordje", "Lipovcic", "123", "musko", "3875432", "the292200", date1, "plaoludastruja", "sifra");
-            Patient p1 = new Patient("Djordje", "Lipovcic", "123", "musko", "3875432", "the292200", date1, "plaoludastruja", "sifra", null, "1234", false, date1);
+            Doctor d1 = new Doctor("Drrrrjordje", "Lipovcic", "123", "musko", "3875432", "the292200", date1);
+            Patient p1 = new Patient("Djordje", "Lipovcic", "123", "musko", "3875432", "the292200", date1, null, "1234", date1);
             Appointment a1 = new Appointment(p1, r1, d1, "3", date1, interval, AppointmentType.generalPractitionerCheckup);
 
             //Appointments.Add(a1);
@@ -62,5 +62,5 @@ namespace ClassDijagramV1._0.Dialog
 
 
     }
-    }
+}
 

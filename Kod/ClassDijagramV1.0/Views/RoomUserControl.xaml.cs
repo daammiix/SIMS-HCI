@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ClassDijagramV1._0
+namespace ClassDijagramV1._0.Views
 {
     /// <summary>
     /// Interaction logic for UserControl1.xaml

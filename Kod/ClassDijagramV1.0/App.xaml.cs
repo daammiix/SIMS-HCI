@@ -1,4 +1,8 @@
-﻿using Controller;
+﻿using ClassDijagramV1._0.Controller;
+using ClassDijagramV1._0.FileHandlers;
+using ClassDijagramV1._0.Repository;
+using ClassDijagramV1._0.Service;
+using Controller;
 using Model;
 using Repository;
 using Service;
@@ -19,6 +23,8 @@ namespace ClassDijagramV1._0
     {
         public AppointmentController appointmentController { get; set; }
 
+        public static AccountController AccountController { get; private set; }
+
         public App()
         {
             //ovo obrisati pa zamneiti iz fajla kad do toga dodjem
@@ -30,6 +36,19 @@ namespace ClassDijagramV1._0
             var patientService = new PatientService();
 
             appointmentController = new AppointmentController();
+
+            initSecretary();
+        }
+
+        private static void initSecretary()
+        {
+            AccountFileHandler accountFileHandler = new AccountFileHandler("../../accounts.json");
+
+            var accountRepo = new AccountRepo(accountFileHandler);
+
+            var accountService = new AccountService(accountRepo);
+
+            AccountController = new AccountController(accountService);
         }
     }
 }
