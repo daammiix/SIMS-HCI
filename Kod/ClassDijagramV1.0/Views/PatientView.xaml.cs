@@ -1,4 +1,5 @@
-﻿using ClassDijagramV1._0.Model.Accounts;
+﻿using ClassDijagramV1._0.Dialog;
+using ClassDijagramV1._0.Model.Accounts;
 using Controller;
 using Model;
 using System;
@@ -25,6 +26,7 @@ namespace ClassDijagramV1._0.Views
     public partial class PatientView : UserControl
     {
         public AppointmentController _appointmentController;
+        public static Appointment selectedAppointment;
 
         public ObservableCollection<Appointment> Appointments
         {
@@ -32,51 +34,34 @@ namespace ClassDijagramV1._0.Views
             set;
         }
 
-        /*public ObservableCollection<Doctor> Doctors
-        {
-            get;
-            set;
-        }*/
-
         public PatientView()
         {
             InitializeComponent();
-            _appointmentController = new AppointmentController();
             this.DataContext = this;
 
-            //Appointments = new ObservableCollection<Appointment>();
-            //Doctors = new ObservableCollection<Doctor>();
-
-            //var app = Application.Current as App;
-            //_appointmentController = app.appointmentController;
-            //Appointments = new ObservableCollection<Appointment>(_appointmentController.GetAllAppointments());
-            Appointments = _appointmentController.GetAllAppointments();
-            //tabelaPregledi.ItemsSource = Appointments;
+            App app = Application.Current as App;
+            _appointmentController = app.appointmentController;
+            Appointments = _appointmentController.GetAllAppointments("djordje");
 
         }
 
 
         private void AddAppontment_Click(object sender, RoutedEventArgs e)
         {
-            Room r1 = new Room();
-            DateTime date1 = new DateTime(2008, 5, 1, 8, 30, 52);
-            DateTime date2 = new DateTime(2010, 8, 18, 13, 30, 30);
-            TimeSpan interval = date2 - date1;
-            Doctor d1 = new Doctor("Drrrrjordje", "Lipovcic", "123", "musko", "3875432", "the292200", date1);
-            Patient p1 = new Patient("Djordje", "Lipovcic", "123", "musko", "3875432", "the292200", date1, null, "1234", date1);
-            Appointment a1 = new Appointment(p1, r1, d1, "3", date1, interval, AppointmentType.generalPractitionerCheckup);
-            // Appointments.Add(a1);
-            _appointmentController.AddAppointment(a1);
-            //var a = new AddAppointmentDialog();
-            //Application.Current.MainWindow = a;
-            //a.Show();
-            //TREBA DA SE BINDUJE IZ DRUGIH PROYORA
+            //_appointmentController.AddAppointment(a1);
+            var a = new AddAppointmentDialog();
+            a.Show();
         }
 
         private void UpdateAppontment_Click(object sender, RoutedEventArgs e)
         {
-            /*var a = new UpdateAppointmentDialog();
-            a.Show();*/
+            
+            if (tabelaPregledi.SelectedIndex != -1)
+            {
+                selectedAppointment = (Appointment)tabelaPregledi.SelectedItem;
+                var a = new UpdateAppointmentDialog();
+                a.Show();
+            }
 
         }
 
@@ -87,15 +72,6 @@ namespace ClassDijagramV1._0.Views
                 //Appointments.Remove((Appointment)tabelaPregledi.SelectedItem);
                 _appointmentController.RemoveAppointment((Appointment)tabelaPregledi.SelectedItem);
             }
-
-        }
-
-        private void AutoColumns_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void AddAppontment_Click1(object sender, RoutedEventArgs e)
-        {
 
         }
     }

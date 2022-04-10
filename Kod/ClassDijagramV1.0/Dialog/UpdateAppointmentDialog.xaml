@@ -7,6 +7,40 @@
         mc:Ignorable="d"
         Title="UpdateAppointmentDialog" Height="450" Width="800">
     <Grid>
-        
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Izaberi ljekara" Margin="20"/>
+                <ComboBox x:Name="izmjenaPregledaDoktor" ItemsSource="{Binding Path=Appointments}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="Doctor.Name"/>
+                                        <Binding Path="Doctor.Surname"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Izaberi datum" Margin="20"/>
+                <DatePicker x:Name="promjenaKalendar"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Izaberi termin" Margin="20"/>
+                <DatePickerTextBox/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Promjeni termin" Click="Button_Click"/>
+                <Button Content="Izadji" Click="Button_Click_1"/>
+
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

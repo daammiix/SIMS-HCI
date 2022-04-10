@@ -12,14 +12,14 @@
         <StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Izaberi ljekara" Margin="20"/>
-                <ComboBox ItemsSource="{Binding Path=Appointments}">
+                <ComboBox x:Name="dodavanjPregledaDoktor" ItemsSource="{Binding Path=Appointments}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock>
                                 <TextBlock.Text>
                                     <MultiBinding StringFormat="{}{0} {1}">
-                                        <Binding Path="Doctor.name"/>
-                                        <Binding Path="Doctor.surname"/>
+                                        <Binding Path="Doctor.Name"/>
+                                        <Binding Path="Doctor.Surname"/>
                                     </MultiBinding>
                                 </TextBlock.Text>
                             </TextBlock>
@@ -30,30 +30,19 @@
 
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Izaberi datum" Margin="20"/>
-                <DatePicker/>
+                <DatePicker x:Name="kalendar"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Izaberi termin" Margin="20"/>
                 <DatePickerTextBox/>
             </StackPanel>
-            
+
             <StackPanel Orientation="Horizontal">
                 <Button Content="ZakaziPregled" Click="AddAppointmentClick"/>
                 <Button Content="Izadji" Click="GoBack"/>
-                
-            </StackPanel>
-            <DataGrid x:Name="tabelaPregledi" Height="300" Margin="20"  
-                          AutoGenerateColumns="False"
-                          ItemsSource="{Binding Path=Appointments, UpdateSourceTrigger=PropertyChanged}"
-                          SelectionMode="Single" IsReadOnly="True" >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Ime Pacijenta" Binding="{Binding Patient.name}"/>
-                    <DataGridTextColumn Header="Ime Doktora" Binding="{Binding Doctor.name}" />
-                    <DataGridTextColumn Header="Datum pregleda" Binding="{Binding Date}" Width="*"/>
-                </DataGrid.Columns>
-            </DataGrid>
 
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

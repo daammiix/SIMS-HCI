@@ -14,39 +14,49 @@ using System.Windows;
 
 namespace Service
 {
-   public class AppointmentService
-   {
+    public class AppointmentService
+    {
         private AppointmentRepo _appointmentRepo = new AppointmentRepo();
-       // private PatientRepo _patientRepo = new PatientRepo();
 
         public ObservableCollection<Appointment> AddAppointment(Appointment appointment)
-      {
-            // TODO: implement
+        {
             return _appointmentRepo.AddNewAppointment(appointment);
-      }
-      
-      public void RemoveAppointment(String appointmentID)
-      {
-         // TODO: implement
-         _appointmentRepo.RemoveAppointment(appointmentID);
-      }
-      
-      public void UpdateAppointment(Model.Appointment appointment)
-      {
-         // TODO: implement
-      }
-      
-      public ObservableCollection<Appointment> GetAllAppointments()
-      {
-         // TODO: implement
-         return _appointmentRepo.GetAppointments();
-      }
-      
-      public Appointment GetOneAppointment(String appointmentID)
-      {
-         // TODO: implement
-         return null;
-      }
-   
-   }
+        }
+
+        public void RemoveAppointment(String appointmentID)
+        {
+            _appointmentRepo.RemoveAppointment(appointmentID);
+        }
+
+        public void UpdateAppointment(String oldAppointmentID, Appointment updatedAppointment)
+        {
+            _appointmentRepo.UpdateAppointment(oldAppointmentID, updatedAppointment);
+        }
+
+        public ObservableCollection<Appointment> GetAllAppointments(String username) // obrisi iz bajdinga preglede koji mi ne trebaju, tj nisu od tog pacijenta
+        {
+            List<Appointment> otherPatients = new List<Appointment>();
+            foreach (Appointment a in _appointmentRepo.GetAppointments())
+            {
+                if (!a.Patient.Name.Equals(username))
+                {
+                    otherPatients.Add(a);
+                }
+            }
+
+            foreach (Appointment a in otherPatients)
+            {
+                _appointmentRepo.RemoveAppointment(a.Id);
+            }
+            return _appointmentRepo.GetAppointments();
+        }
+
+
+        public Appointment GetOneAppointment(String appointmentID)
+        {
+            //var allAppointments = GetAllAppointments();
+            return null;
+        }
+
+    }
 }

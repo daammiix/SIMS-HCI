@@ -12,7 +12,6 @@
             <Button Content="Zakazi pregled" Click="AddAppontment_Click"/>
             <Button Content="Izmijeni pregled" Click="UpdateAppontment_Click"/>
             <Button Content="Otkazi pregled" Click="RemoveAppontment_Click"/>
-            <Button Content="Pregled pregleda" Click="AddAppontment_Click1" />
             <DataGrid x:Name="tabelaPregledi" Height="300" Margin="20"  
                           AutoGenerateColumns="False"
                           ItemsSource="{Binding Path=Appointments, UpdateSourceTrigger=PropertyChanged}"
@@ -23,11 +22,6 @@
                     <DataGridTextColumn Header="Datum pregleda" Binding="{Binding Date}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Izaberi ljekara" Margin="20"/>
-
-
-            </StackPanel>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

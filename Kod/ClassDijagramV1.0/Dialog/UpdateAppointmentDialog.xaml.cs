@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ClassDijagramV1._0.Views;
+using Controller;
+using Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +22,29 @@ namespace ClassDijagramV1._0.Dialog
     /// </summary>
     public partial class UpdateAppointmentDialog : Window
     {
+        public AppointmentController _appointmentController;
         public UpdateAppointmentDialog()
         {
             InitializeComponent();
+            App app = Application.Current as App;
+            _appointmentController = app.appointmentController;
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var oldAppointment = PatientView.selectedAppointment;
+            var updatedAppointment = oldAppointment;
+            updatedAppointment.Date = promjenaKalendar.SelectedDate.Value;
+
+            _appointmentController.UpdateAppointment(oldAppointment.Id, updatedAppointment);
+            this.Close();
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
