@@ -1,12 +1,14 @@
-﻿using ClassDijagramV1._0.Model.Accounts;
+﻿using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Service;
-using ClassDijagramV1._0.Util;
+using ClassDijagramV1._0.Views;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace ClassDijagramV1._0.Controller
 {
@@ -16,29 +18,11 @@ namespace ClassDijagramV1._0.Controller
 
         private AccountService _accountService;
 
-        private RelayCommand? _addGuestAccountCommand;
-
         #endregion
 
         #region Properties
 
-        public ObservableCollection<Account> RegularAccounts { get; private set; }
-
-        public ObservableCollection<Account> GuestAccounts { get; private set; }
-
-        public RelayCommand AddGuestAccountCommand
-        {
-            get
-            {
-                if (_addGuestAccountCommand == null)
-                    _addGuestAccountCommand = new RelayCommand(() =>
-                    {
-                        GuestAccounts.Add(new GuestAccount());
-                    });
-
-                return _addGuestAccountCommand;
-            }
-        }
+        public ObservableCollection<Account> Accounts { get; private set; }
 
         #endregion
 
@@ -48,20 +32,7 @@ namespace ClassDijagramV1._0.Controller
         {
             _accountService = accService;
 
-            RegularAccounts = new ObservableCollection<Account>();
-            GuestAccounts = new ObservableCollection<Account>();
-
-            foreach (Account acc in _accountService.GetAccounts())
-            {
-                if (acc is RegularAccount)
-                {
-                    RegularAccounts.Add(acc);
-                }
-                else
-                {
-                    GuestAccounts.Add(acc);
-                }
-            }
+            Accounts = _accountService.GetAccounts();
         }
 
         #endregion
@@ -81,9 +52,17 @@ namespace ClassDijagramV1._0.Controller
         /// Dobavlja listu svih account-a
         /// </summary>
         /// <returns></returns>
-        public List<Account> GetAccounts()
+        public ObservableCollection<Account> GetAccounts()
         {
             return _accountService.GetAccounts();
+        }
+
+        /// <summary>
+        /// Cuva accountove u fajl
+        /// </summary>
+        public void SaveAccounts()
+        {
+            _accountService.SaveAccounts();
         }
 
         /// <summary>

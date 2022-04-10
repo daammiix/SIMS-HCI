@@ -1,43 +1,51 @@
-/***********************************************************************
- * Module:  PatientController.cs
- * Author:  lipov
- * Purpose: Definition of the Class Controller.PatientController
- ***********************************************************************/
-
 using Model;
+using Service;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Controller
 {
-   public class PatientController
-   {
-      public void AddPatient(Model.Patient patient)
-      {
-         // TODO: implement
-      }
-      
-      public void RemovePatient(Model.Patient patient)
-      {
-         // TODO: implement
-      }
-      
-      public void UpdatePatient(Model.Patient patient)
-      {
-         // TODO: implement
-      }
-      
-      public List<Patient> GetAllPatients()
-      {
-         // TODO: implement
-         return null;
-      }
-      
-      public Model.Patient GetOnePatient(Model.Patient patient)
-      {
-         // TODO: implement
-         return null;
-      }
-   
-   }
+    public class PatientController
+    {
+        #region Fields
+
+        private PatientService _patientService;
+
+        #endregion
+
+        #region Constructor
+
+        public PatientController(PatientService ps)
+        {
+            _patientService = ps;
+        }
+
+        #endregion
+        public ObservableCollection<Patient> GetPatients()
+        {
+            return _patientService.GetPatients();
+        }
+
+        public void SavePatients()
+        {
+            _patientService.SavePatients();
+        }
+
+        public void AddPatient(Patient newPatient)
+        {
+            _patientService.AddPatient(newPatient);
+        }
+
+        public void RemovePatient(String username)
+        {
+            _patientService.RemovePatient(username);
+        }
+
+        public void UpdatePatient(Patient patient)
+        {
+            _patientService.UpdatePatient(patient);
+        }
+
+    }
 }

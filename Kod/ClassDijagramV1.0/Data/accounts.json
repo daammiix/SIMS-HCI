@@ -1,0 +1,20 @@
+[
+  {
+    "Username": "Guest3114",
+    "Password": "Guest3114",
+    "Banned": false,
+    "IsGuest": true
+  },
+  {
+    "Username": "fsafsa",
+    "Password": "fsagsagsa",
+    "Banned": false,
+    "IsGuest": false
+  },
+  {
+    "Username": "Guest4384",
+    "Password": "Guest4384",
+    "Banned": false,
+    "IsGuest": true
+  }
+]
