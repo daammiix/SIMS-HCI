@@ -59,9 +59,9 @@ namespace Service
                 {
                     return false;
                 }
-                if (room.Floor == r.Floor)
+                if ((room.Floor == r.Floor) && (room.Floor<=4))
                 {
-                    if (room.RoomNumber == r.RoomNumber)
+                    if ((room.RoomNumber == r.RoomNumber) && (room.RoomNumber<500))
                     {
                         return false;
                     }
