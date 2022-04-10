@@ -30,7 +30,8 @@ namespace Repository
         private String path = "..\\..\\..\\Data\\rooms.json";
         private ObservableCollection<Room> rooms = new ObservableCollection<Room>();
 
-        public RoomRepoJson() {
+        public RoomRepoJson()
+        {
             string jsonData = System.IO.File.ReadAllText(path);
             ObservableCollection<Room>? jsonRooms = JsonSerializer.Deserialize<ObservableCollection<Room>>(jsonData);
             if (jsonRooms != null)
@@ -55,8 +56,10 @@ namespace Repository
 
         public Room? GetRoom(String roomID)
         {
-            foreach (var room in rooms) {
-                if (room.RoomID == roomID) {
+            foreach (var room in rooms)
+            {
+                if (room.RoomID == roomID)
+                {
                     return room;
                 }
             }
