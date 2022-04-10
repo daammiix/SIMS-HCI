@@ -1,15 +1,15 @@
-﻿using ClassDijagramV1._0.Model;
+﻿using Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Text.Json;
-using System.IO;
+using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.FileHandlers
 {
-    public class AccountFileHandler
+    public class PatientFileHandler
     {
         #region Fields
 
@@ -19,7 +19,7 @@ namespace ClassDijagramV1._0.FileHandlers
 
         #region Constructor
 
-        public AccountFileHandler(string filepath)
+        public PatientFileHandler(string filepath)
         {
             _filePath = filepath;
         }
@@ -28,25 +28,25 @@ namespace ClassDijagramV1._0.FileHandlers
 
         #region Methods
 
-        public void saveAccounts(List<Account> accounts)
+        public void SavePatients(List<Patient> patients)
         {
-            string jsonAccounts = JsonSerializer.Serialize<List<Account>>(accounts, new JsonSerializerOptions() { WriteIndented = true });
+            string jsonAccounts = JsonSerializer.Serialize<List<Patient>>(patients, new JsonSerializerOptions() { WriteIndented = true });
 
             File.WriteAllText(_filePath, jsonAccounts);
         }
 
-        public List<Account> getAccounts()
+        public List<Patient> GetPatients()
         {
             using (Stream stream = new FileStream(_filePath, FileMode.OpenOrCreate, FileAccess.Read))
             {
                 if (File.Exists(_filePath) && stream.Length > 0)
                 {
-                    string accounts = File.ReadAllText(_filePath);
-                    return JsonSerializer.Deserialize<List<Account>>(accounts);
+                    string patients = File.ReadAllText(_filePath);
+                    return JsonSerializer.Deserialize<List<Patient>>(patients);
                 }
                 else
                 {
-                    return new List<Account>();
+                    return new List<Patient>();
                 }
             }
         }

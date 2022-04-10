@@ -1,8 +1,9 @@
-﻿using ClassDijagramV1._0.Model.Accounts;
+﻿using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Repository;
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,9 +42,17 @@ namespace ClassDijagramV1._0.Service
         /// Dobavlja listu svih account-a
         /// </summary>
         /// <returns></returns>
-        public List<Account> GetAccounts()
+        public ObservableCollection<Account> GetAccounts()
         {
             return _accountRepo.GetAccounts();
+        }
+
+        /// <summary>
+        /// Cuva accountove u fajl
+        /// </summary>
+        public void SaveAccounts()
+        {
+            _accountRepo.SaveAccounts();
         }
 
         /// <summary>
@@ -73,30 +82,6 @@ namespace ClassDijagramV1._0.Service
         public void UpdateAccount(Account account)
         {
             _accountRepo.UpdateAccount(account);
-        }
-
-        #endregion
-
-        #region Static Methods
-
-        /// <summary>
-        /// Vezuje regularan account i osobu
-        /// </summary>
-        /// <param name="p"></param>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        public static void RegisterPersonWithRegularAccount(Person p, string username, string password)
-        {
-            p.Account = new RegularAccount(username, password, p);
-        }
-
-        /// <summary>
-        /// Vezuje guest account i osobu
-        /// </summary>
-        /// <param name="p"></param>
-        public static void RegisterPersonWithGuestAccount(Person p)
-        {
-            p.Account = new GuestAccount();
         }
 
         #endregion

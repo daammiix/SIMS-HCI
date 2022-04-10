@@ -1,5 +1,8 @@
+
 ﻿using ClassDijagramV1._0.Dialog;
-using ClassDijagramV1._0.Model.Accounts;
+//using ClassDijagramV1._0.Model.Accounts;
+﻿using ClassDijagramV1._0.Model;
+
 using Controller;
 using Model;
 using System;
