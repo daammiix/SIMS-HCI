@@ -1,4 +1,4 @@
-﻿using ClassDijagramV1._0.Dialog;
+﻿using ClassDijagramV1._0.Model.Accounts;
 using Controller;
 using Model;
 using System;
@@ -17,12 +17,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ClassDijagramV1._0
+namespace ClassDijagramV1._0.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Pacijent.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PatientView : UserControl
     {
         public AppointmentController _appointmentController;
 
@@ -38,12 +38,12 @@ namespace ClassDijagramV1._0
             set;
         }*/
 
-        public MainWindow()
+        public PatientView()
         {
             InitializeComponent();
             _appointmentController = new AppointmentController();
             this.DataContext = this;
-            
+
             //Appointments = new ObservableCollection<Appointment>();
             //Doctors = new ObservableCollection<Doctor>();
 
@@ -51,8 +51,6 @@ namespace ClassDijagramV1._0
             //_appointmentController = app.appointmentController;
             //Appointments = new ObservableCollection<Appointment>(_appointmentController.GetAllAppointments());
             Appointments = _appointmentController.GetAllAppointments();
-            foreach (Appointment p in Appointments)
-                MessageBox.Show(p.Id + "MEJNVIDN");
             //tabelaPregledi.ItemsSource = Appointments;
 
         }
@@ -64,8 +62,8 @@ namespace ClassDijagramV1._0
             DateTime date1 = new DateTime(2008, 5, 1, 8, 30, 52);
             DateTime date2 = new DateTime(2010, 8, 18, 13, 30, 30);
             TimeSpan interval = date2 - date1;
-            Doctor d1 = new Doctor("Drrrrjordje", "Lipovcic", "123", "musko", "3875432", "the292200", date1, "plaoludastruja", "sifra");
-            Patient p1 = new Patient("Djordje", "Lipovcic", "123", "musko", "3875432", "the292200", date1, "plaoludastruja", "sifra", null, "1234", false, date1);
+            Doctor d1 = new Doctor("Drrrrjordje", "Lipovcic", "123", "musko", "3875432", "the292200", date1);
+            Patient p1 = new Patient("Djordje", "Lipovcic", "123", "musko", "3875432", "the292200", date1, null, "1234", date1);
             Appointment a1 = new Appointment(p1, r1, d1, "3", date1, interval, AppointmentType.generalPractitionerCheckup);
             // Appointments.Add(a1);
             _appointmentController.AddAppointment(a1);
@@ -79,7 +77,7 @@ namespace ClassDijagramV1._0
         {
             /*var a = new UpdateAppointmentDialog();
             a.Show();*/
-            
+
         }
 
         private void RemoveAppontment_Click(object sender, RoutedEventArgs e)

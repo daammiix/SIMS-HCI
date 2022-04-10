@@ -14,13 +14,13 @@ using System.Windows;
 
 namespace Repository
 {
-   public class AppointmentRepo
+    public class AppointmentRepo
     {
 
         private String Path;
 
         public ObservableCollection<Appointment> Appointments;
- 
+
         public ObservableCollection<Doctor> Doctors
         {
             get;
@@ -33,16 +33,16 @@ namespace Repository
         {
             Appointments = new ObservableCollection<Appointment>();
             Doctors = new ObservableCollection<Doctor>();
-            
+
             Room r1 = new Room();
             DateTime date1 = new DateTime(2008, 5, 1, 8, 30, 52);
             DateTime date2 = new DateTime(2010, 8, 18, 13, 30, 30);
             TimeSpan interval = date2 - date1;
-            Doctor d1 = new Doctor("Drrrrjordje", "Lipovcic", "123", "musko", "3875432", "the292200", date1, "plaoludastruja", "sifra");
+            Doctor d1 = new Doctor("Drrrrjordje", "Lipovcic", "123", "musko", "3875432", "the292200", date1);
             Doctors.Add(d1);
-            Patient p1 = new Patient("Djordje", "Lipovcic", "123", "musko", "3875432", "the292200", date1, "plaoludastruja", "sifra", null, "1234", false, date1);
+            Patient p1 = new Patient("Djordje", "Lipovcic", "123", "musko", "3875432", "the292200", date1, null, "1234", date1);
 
-            Appointment a1 = new Appointment(p1,r1,d1,"1",date1,interval, AppointmentType.generalPractitionerCheckup);
+            Appointment a1 = new Appointment(p1, r1, d1, "1", date1, interval, AppointmentType.generalPractitionerCheckup);
             Appointment a2 = new Appointment(p1, r1, d1, "2", date1, interval, AppointmentType.generalPractitionerCheckup);
             Appointments.Add(a1);
             Appointments.Add(a2);
@@ -56,15 +56,15 @@ namespace Repository
         {
             // TODO: implement
             return Appointments;
-      }
-      
-      public void SetAppointment(List<Appointment> appointments)
-      {
-         // TODO: implement
-      }
-      
-      public ObservableCollection<Appointment> AddNewAppointment(Appointment newAppointment)
-      {
+        }
+
+        public void SetAppointment(List<Appointment> appointments)
+        {
+            // TODO: implement
+        }
+
+        public ObservableCollection<Appointment> AddNewAppointment(Appointment newAppointment)
+        {
             //List<Appointment> appointments = GetAppointments();
             //appointments.Add(newAppointment);
             //SetAppointment(appointments);
