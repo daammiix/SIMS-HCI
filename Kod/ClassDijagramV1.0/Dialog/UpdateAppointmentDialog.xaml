@@ -1,0 +1,47 @@
+﻿<Window x:Class="ClassDijagramV1._0.Dialog.UpdateAppointmentDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClassDijagramV1._0.Dialog"
+        mc:Ignorable="d"
+        Title="UpdateAppointmentDialog" Height="450" Width="800">
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="DATUM OBAVEZAN!" Margin="20"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Izaberi ljekara" Margin="20"/>
+                <ComboBox x:Name="izmjenaPregledaDoktor" ItemsSource="{Binding Path=Appointments}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="Doctor.Name"/>
+                                        <Binding Path="Doctor.Surname"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Izaberi datum" Margin="20"/>
+                <DatePicker x:Name="promjenaKalendar"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Izaberi termin" Margin="20"/>
+                <DatePickerTextBox/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Promjeni termin" Click="Button_Click"/>
+                <Button Content="Izadji" Click="Button_Click_1"/>
+
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

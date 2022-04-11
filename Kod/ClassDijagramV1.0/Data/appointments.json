@@ -1,0 +1,36 @@
+[
+  {
+    "Room": {
+      "RoomID": null,
+      "RoomName": 0,
+      "Floor": 0,
+      "RoomNumber": 0,
+      "RoomStatus": 0
+    },
+    "Date": "2022-04-06T00:00:00",
+    "Id": "252",
+    "Duration": "134.13:30:30",
+    "Patient": {
+      "Appointment": null,
+      "SocialSecurityNumber": "1234",
+      "Name": "djordje",
+      "Surname": "djordje",
+      "Jmbg": "123",
+      "Gender": "musko",
+      "PhoneNumber": "3875432",
+      "Email": "the292200",
+      "DateOfBirth": "2022-04-06T00:00:00",
+      "AccountUsername": null
+    },
+    "Doctor": {
+      "Name": "noviDoktor10",
+      "Surname": "novidoktor",
+      "Jmbg": "123",
+      "Gender": "musko",
+      "PhoneNumber": "3875432",
+      "Email": "the292200",
+      "DateOfBirth": "2022-04-06T00:00:00",
+      "AccountUsername": null
+    }
+  }
+]
