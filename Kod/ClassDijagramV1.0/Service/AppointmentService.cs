@@ -20,7 +20,7 @@ namespace Service
 
         public AppointmentService(AppointmentRepo repo)
         {
-            _appointmentRepo = repo; //gucai parametri
+            _appointmentRepo = repo;
         }
 
         public ObservableCollection<Appointment> AddAppointment(Appointment appointment)
