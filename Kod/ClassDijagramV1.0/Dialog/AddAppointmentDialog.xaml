@@ -10,6 +10,7 @@
 
     <Grid>
         <StackPanel>
+            <TextBlock Text="DATUM OBAVEZAN!" Margin="20"/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Izaberi ljekara" Margin="20"/>
                 <ComboBox x:Name="dodavanjPregledaDoktor" ItemsSource="{Binding Path=Appointments}">

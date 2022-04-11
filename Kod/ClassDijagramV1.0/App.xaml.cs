@@ -25,6 +25,7 @@ namespace ClassDijagramV1._0
 
         private string _accountsFilePath = "../../../Data/accounts.json";
         private string _patientsFilePath = "../../../Data/patients.json";
+        private string _appointmentsFilePath = "../../../Data/appointments.json";
 
         #endregion
 
@@ -39,14 +40,9 @@ namespace ClassDijagramV1._0
 
         public App()
         {
-            //ovo obrisati pa zamneiti iz fajla kad do toga dodjem
-            List<Appointment> appointments = new List<Appointment>();
-
-
-            var appointmentRepository = new AppointmentRepo();
-            //var patientRepository = new PatientRepo();
-
-            appointmentController = new AppointmentController();
+            var appointmentRepository = new AppointmentRepo(new AppointmentFileHandler(_appointmentsFilePath));
+            var appointmentService = new AppointmentService(appointmentRepository);
+            appointmentController = new AppointmentController(appointmentService);
 
             // Patients
             var patientRepo = new PatientRepo(new PatientFileHandler(_patientsFilePath));
@@ -63,6 +59,7 @@ namespace ClassDijagramV1._0
         {
             AccountController.SaveAccounts();
             PatientController.SavePatients();
+            appointmentController.SaveAppointments();
         }
     }
 }

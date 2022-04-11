@@ -15,7 +15,13 @@ namespace Controller
 {
     public class AppointmentController
     {
-        private AppointmentService _appointmentService = new AppointmentService();
+        private AppointmentService _appointmentService;
+
+        public AppointmentController(AppointmentService appService)
+        {
+            _appointmentService = appService;
+        }
+
         public ObservableCollection<Appointment> AddAppointment(Appointment appointment)
         {
             return _appointmentService.AddAppointment(appointment);
@@ -40,6 +46,11 @@ namespace Controller
         {
             // TODO: implement
             return null;
+        }
+
+        public void SaveAppointments()
+        {
+            _appointmentService.SaveAppointments();
         }
 
     }

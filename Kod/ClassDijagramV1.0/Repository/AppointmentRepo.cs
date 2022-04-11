@@ -4,6 +4,7 @@
  * Purpose: Definition of the Class Repository.AppointmentRepo
  ***********************************************************************/
 
+using ClassDijagramV1._0.FileHandlers;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace Repository
     {
 
         private String Path;
+        private AppointmentFileHandler _appointmentFileHandler;
 
         public ObservableCollection<Appointment> Appointments;
 
@@ -29,12 +31,13 @@ namespace Repository
 
 
 
-        public AppointmentRepo()
+        public AppointmentRepo(AppointmentFileHandler apointmentFileHandler)
         {
-            Appointments = new ObservableCollection<Appointment>();
+            _appointmentFileHandler = apointmentFileHandler;
+            Appointments = new ObservableCollection<Appointment>(_appointmentFileHandler.GetAppointments());
             Doctors = new ObservableCollection<Doctor>();
 
-            Room r1 = new Room();
+            /*Room r1 = new Room();
             DateTime date1 = new DateTime(2008, 5, 1, 8, 30, 52);
             DateTime date2 = new DateTime(2010, 8, 18, 13, 30, 30);
             TimeSpan interval = date2 - date1;
@@ -48,7 +51,7 @@ namespace Repository
             Appointment a1 = new Appointment(p1, r1, d1, "1", date1, interval, AppointmentType.generalPractitionerCheckup);
             Appointment a2 = new Appointment(p2, r1, d2, "2", date1, interval, AppointmentType.generalPractitionerCheckup);
             Appointments.Add(a1);
-            Appointments.Add(a2);
+            Appointments.Add(a2);*/
         }
 
         public void UpdateAppointment(string oldAppointmentID, Appointment updatedAppointment)
@@ -62,9 +65,15 @@ namespace Repository
             return Appointments;
         }
 
-        public void SetAppointment(List<Appointment> appointments)
+        /*public void SetAppointment(List<Appointment> appointments)
         {
             // TODO: implement
+            _appointmentFileHandler.SaveAppointments(Appointments.ToList());
+        }*/
+
+        public void SaveAppointments()
+        {
+            _appointmentFileHandler.SaveAppointments(Appointments.ToList());
         }
 
         public ObservableCollection<Appointment> AddNewAppointment(Appointment newAppointment)

@@ -8,6 +8,7 @@
         Title="UpdateAppointmentDialog" Height="450" Width="800">
     <Grid>
         <StackPanel>
+            <TextBlock Text="DATUM OBAVEZAN!" Margin="20"/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Izaberi ljekara" Margin="20"/>
                 <ComboBox x:Name="izmjenaPregledaDoktor" ItemsSource="{Binding Path=Appointments}">

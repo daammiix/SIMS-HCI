@@ -138,9 +138,11 @@ namespace Model
             this.type = type;
         }
 
+        public Appointment()
+        {
+        }
 
-
-         protected virtual void OnPropertyChanged(string name)
+        protected virtual void OnPropertyChanged(string name)
          {
              if (PropertyChanged != null)
              {

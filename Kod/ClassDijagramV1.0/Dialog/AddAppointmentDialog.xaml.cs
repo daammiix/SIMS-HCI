@@ -38,7 +38,7 @@ namespace ClassDijagramV1._0.Dialog
 
             App app = Application.Current as App;
             _appointmentController = app.appointmentController;
-            Appointments = _appointmentController.GetAllAppointments("djordje");
+            Appointments = _appointmentController.GetAllAppointments("djordje"); // ulgovani korisnik ali ovo je za doktora
         }
 
         private void GoBack(object sender, RoutedEventArgs e)
@@ -48,20 +48,18 @@ namespace ClassDijagramV1._0.Dialog
 
         private void AddAppointmentClick(object sender, RoutedEventArgs e)
         {
-            String appointmentID = (_appointmentController.GetAllAppointments("djordje").Count + 1).ToString();
-            DateTime date11 = new DateTime(2008, 5, 1, 8, 30, 52);
+            Random rnd = new Random();
+            int card = rnd.Next(50);
 
+            //String appointmentID = (_appointmentController.GetAllAppointments("djordje").Count + 1).ToString();
+            String appointmentID = rnd.Next(1000).ToString();
             DateTime date1 = kalendar.SelectedDate.Value;
-            DateTime date2 = new DateTime(2010, 8, 18, 13, 30, 30);
+            DateTime date2 = new DateTime(2022, 8, 18, 13, 30, 30);
             TimeSpan interval = date2 - date1;
-
             Room r1 = new Room();
-
-
-            Doctor d1 = new Doctor("noviDoktor", "novidoktor", "123", "musko", "3875432", "the292200", date1);
+            Doctor d1 = new Doctor("noviDoktor" + card.ToString(), "novidoktor", "123", "musko", "3875432", "the292200", date1);
             Patient p1 = new Patient("djordje", "djordje", "123", "musko", "3875432", "the292200", date1, "1234");
             Appointment a1 = new Appointment(p1, r1, d1, appointmentID, date1, interval, AppointmentType.generalPractitionerCheckup);
-
             _appointmentController.AddAppointment(a1);
             this.Close();
 

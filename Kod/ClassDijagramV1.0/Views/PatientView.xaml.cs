@@ -44,7 +44,7 @@ namespace ClassDijagramV1._0.Views
 
             App app = Application.Current as App;
             _appointmentController = app.appointmentController;
-            Appointments = _appointmentController.GetAllAppointments("djordje");
+            Appointments = _appointmentController.GetAllAppointments("djordje"); // ulogovani korisnik
 
         }
 

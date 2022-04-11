@@ -16,7 +16,12 @@ namespace Service
 {
     public class AppointmentService
     {
-        private AppointmentRepo _appointmentRepo = new AppointmentRepo();
+        private AppointmentRepo _appointmentRepo;
+
+        public AppointmentService(AppointmentRepo repo)
+        {
+            _appointmentRepo = repo; //gucai parametri
+        }
 
         public ObservableCollection<Appointment> AddAppointment(Appointment appointment)
         {
@@ -58,5 +63,9 @@ namespace Service
             return null;
         }
 
+        public void SaveAppointments()
+        {
+            _appointmentRepo.SaveAppointments();
+        }
     }
 }
