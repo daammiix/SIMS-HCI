@@ -45,7 +45,8 @@ namespace ClassDijagramV1._0.Dialog
             Random rnd = new Random();
             int card = rnd.Next(50);
 
-            Doctor d1 = new Doctor("noviDoktor" + card.ToString(), "novidoktor", "123", "musko", "3875432", "the292200", date1);
+            //Doctor d1 = new Doctor("noviDoktor" + card.ToString(), "novidoktor", "123", "musko", "3875432", "the292200", date1);
+            Doctor d1 = new Doctor();
 
             var oldAppointment = PatientView.selectedAppointment;
             var updatedAppointment = oldAppointment;

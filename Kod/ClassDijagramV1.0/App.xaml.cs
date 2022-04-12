@@ -36,6 +36,8 @@ namespace ClassDijagramV1._0
 
         public PatientController PatientController { get; set; }
 
+        public SurgeryController surgeryController { get; set; }
+
         #endregion
 
         public App()
@@ -53,6 +55,11 @@ namespace ClassDijagramV1._0
             var accountRepo = new AccountRepo(new AccountFileHandler(_accountsFilePath));
             var accountService = new AccountService(accountRepo);
             AccountController = new AccountController(accountService);
+
+            //
+            var surgeryRepository = new SurgeryRepo();
+            var surgeryService = new SurgeryService(surgeryRepository);
+            surgeryController = new SurgeryController(surgeryService);
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)

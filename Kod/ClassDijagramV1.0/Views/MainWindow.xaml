@@ -20,7 +20,7 @@
             <views:RoomUserControl Width="793" />
         </TabItem>
         <TabItem Header="Doctor">
-
+            <views:DoctorView Width="793" />
         </TabItem>
     </TabControl>
 </Window>

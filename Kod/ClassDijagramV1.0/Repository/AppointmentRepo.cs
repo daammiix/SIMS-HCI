@@ -54,6 +54,10 @@ namespace Repository
             Appointments.Add(a2);*/
         }
 
+        public AppointmentRepo()
+        {
+        }
+
         public void UpdateAppointment(string oldAppointmentID, Appointment updatedAppointment)
         {
             var oldAppointment = FindAppointmentById(oldAppointmentID);
