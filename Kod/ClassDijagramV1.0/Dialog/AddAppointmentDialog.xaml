@@ -13,19 +13,20 @@
             <TextBlock Text="DATUM OBAVEZAN!" Margin="20"/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Izaberi ljekara" Margin="20"/>
-                <ComboBox x:Name="dodavanjPregledaDoktor" ItemsSource="{Binding Path=Appointments}">
+                <ComboBox x:Name="dodavanjPregledaDoktor" ItemsSource="{Binding Doctors}">
+                    <!--
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock>
                                 <TextBlock.Text>
                                     <MultiBinding StringFormat="{}{0} {1}">
-                                        <Binding Path="Doctor.Name"/>
-                                        <Binding Path="Doctor.Surname"/>
+                                        <Binding Path="Doctor.name"/>
+                                        <Binding Path="Doctor.surname"/>
                                     </MultiBinding>
                                 </TextBlock.Text>
                             </TextBlock>
                         </DataTemplate>
-                    </ComboBox.ItemTemplate>
+                    </ComboBox.ItemTemplate>-->
                 </ComboBox>
             </StackPanel>
 

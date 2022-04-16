@@ -26,6 +26,7 @@ namespace ClassDijagramV1._0
         private string _accountsFilePath = "../../../Data/accounts.json";
         private string _patientsFilePath = "../../../Data/patients.json";
         private string _appointmentsFilePath = "../../../Data/appointments.json";
+        private string _doctorsFilePath = "../../../Data/doctors.json";
 
         #endregion
 
@@ -37,6 +38,7 @@ namespace ClassDijagramV1._0
         public PatientController PatientController { get; set; }
 
         public SurgeryController surgeryController { get; set; }
+        public DoctorController doctorController { get; set; }
 
         public RoomController roomController { get; set; }
 
@@ -64,6 +66,11 @@ namespace ClassDijagramV1._0
             surgeryController = new SurgeryController(surgeryService);
 
             //
+            var doctorRepository = new DoctorRepo(new DoctorFileHandler(_doctorsFilePath));
+            var doctorService = new DoctorService(doctorRepository);
+            doctorController = new DoctorController(doctorService);
+
+            //
             roomController = new RoomController();
         }
 
@@ -72,6 +79,7 @@ namespace ClassDijagramV1._0
             AccountController.SaveAccounts();
             PatientController.SavePatients();
             appointmentController.SaveAppointments();
+            doctorController.SaveDoctors();
         }
     }
 }
