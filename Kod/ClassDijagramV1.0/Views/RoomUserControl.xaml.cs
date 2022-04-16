@@ -23,7 +23,9 @@ namespace ClassDijagramV1._0.Views
         {
             InitializeComponent();
             this.DataContext = this;
-            roomController = new RoomController();
+            App app = Application.Current as App;
+            roomController = app.roomController;
+            //roomController = new RoomController();
             Rooms = roomController.GetAllRooms();
         }
 

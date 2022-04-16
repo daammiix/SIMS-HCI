@@ -29,7 +29,7 @@ namespace Controller
 
         public void RemoveAppointment(Appointment appointment)
         {
-            _appointmentService.RemoveAppointment(appointment.Id);
+            _appointmentService.RemoveAppointment(appointment.AppointmentID);
         }
 
         public void UpdateAppointment(String oldAppointmentID, Appointment updatedAppointment)

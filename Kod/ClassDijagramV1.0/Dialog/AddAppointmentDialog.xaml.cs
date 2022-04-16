@@ -24,8 +24,14 @@ namespace ClassDijagramV1._0.Dialog
     public partial class AddAppointmentDialog : Window
     {
         public AppointmentController _appointmentController;
+        public RoomController _roomController;
 
         public ObservableCollection<Appointment> Appointments
+        {
+            get;
+            set;
+        }
+        public ObservableCollection<Room> Rooms
         {
             get;
             set;
@@ -38,6 +44,9 @@ namespace ClassDijagramV1._0.Dialog
 
             App app = Application.Current as App;
             _appointmentController = app.appointmentController;
+            _roomController = app.roomController;
+
+            Rooms = _roomController.GetAllRooms();
             Appointments = _appointmentController.GetAllAppointments("djordje"); // ulgovani korisnik ali ovo je za doktora
         }
 
@@ -54,30 +63,33 @@ namespace ClassDijagramV1._0.Dialog
             //String appointmentID = (_appointmentController.GetAllAppointments("djordje").Count + 1).ToString();
             String appointmentID = rnd.Next(1000).ToString();
             DateTime date1 = kalendar.SelectedDate.Value;
-            DateTime date2 = new DateTime(2022, 8, 18, 13, 30, 30);
+            DateTime date2 = date1.AddMinutes(15);
             TimeSpan interval = date2 - date1;
-            Room r1 = new Room();
+            
+            Room r1 = getFreeRoom(date1,date2);
+            //Room r1 = new Room();
             Doctor d1 = new Doctor("noviDoktor" + card.ToString(), "novidoktor", "123", "musko", "3875432", "the292200", date1, DoctorType.general, null);
             Patient p1 = new Patient("djordje", "djordje", "123", "musko", "3875432", "the292200", date1, "1234");
-            Appointment a1 = new Appointment(p1, r1, d1, appointmentID, date1, interval, AppointmentType.generalPractitionerCheckup);
+            Appointment a1 = new Appointment(appointmentID, p1, d1, r1, date1, interval, AppointmentType.generalPractitionerCheckup);
             _appointmentController.AddAppointment(a1);
             this.Close();
 
         }
 
-        /*private Room getFreeRoom(DateTime start, DateTime end) //FJA ZA DODJELU PRVE PRAZNE SOBE
+        private Room getFreeRoom(DateTime start, DateTime end) //FJA ZA DODJELU PRVE PRAZNE SOBE
         {
-            var freeRooms = new List<Room>;
-            foreach (Room r in _roomController.GetAllRooms())
+            //var freeRooms = new List<Room>;
+            foreach (Room r in Rooms)
             {
                 if (r.isFree(start, end)) // dodaj sebi polje isFree
                 {
-                    freeRooms.Add(r);
-                    break;
+                    //freeRooms.Add(r);
+                    return r;
                 }
+                
             }
-            return freeRooms.ElementAt(0);
-        }*/
+            return null;
+        }
     }
 }
 

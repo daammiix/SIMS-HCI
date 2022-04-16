@@ -96,7 +96,7 @@ namespace Repository
         {
             foreach (Appointment a in Appointments)
             {
-                if (a.Id.Equals(appointmentID))
+                if (a.AppointmentID.Equals(appointmentID))
                 {
                     return a;
                 }

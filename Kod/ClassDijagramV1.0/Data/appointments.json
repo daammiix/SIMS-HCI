@@ -1,15 +1,6 @@
 [
   {
-    "Room": {
-      "RoomID": null,
-      "RoomName": 0,
-      "Floor": 0,
-      "RoomNumber": 0,
-      "RoomStatus": 0
-    },
-    "Date": "2022-04-21T00:00:00",
-    "Id": "84",
-    "Duration": "119.13:30:30",
+    "AppointmentID": "646",
     "Patient": {
       "Appointment": null,
       "SocialSecurityNumber": "1234",
@@ -19,32 +10,33 @@
       "Gender": "musko",
       "PhoneNumber": "3875432",
       "Email": "the292200",
-      "DateOfBirth": "2022-04-21T00:00:00",
+      "DateOfBirth": "2022-04-09T00:00:00",
       "AccountUsername": null
     },
     "Doctor": {
       "surgery": null,
-      "Name": "noviDoktor9",
+      "Name": "noviDoktor18",
       "Surname": "novidoktor",
       "Jmbg": "123",
       "Gender": "musko",
       "PhoneNumber": "3875432",
       "Email": "the292200",
-      "DateOfBirth": "2022-04-21T00:00:00",
+      "DateOfBirth": "2022-04-09T00:00:00",
       "AccountUsername": null
-    }
+    },
+    "Room": {
+      "RoomID": "id",
+      "RoomName": 0,
+      "Floor": 2,
+      "RoomNumber": 23,
+      "RoomStatus": 0
+    },
+    "AppointmentDate": "2022-04-09T00:00:00",
+    "Duration": "00:15:00",
+    "AppointmentType": 0
   },
   {
-    "Room": {
-      "RoomID": null,
-      "RoomName": 0,
-      "Floor": 0,
-      "RoomNumber": 0,
-      "RoomStatus": 0
-    },
-    "Date": "2022-04-28T00:00:00",
-    "Id": "168",
-    "Duration": "112.13:30:30",
+    "AppointmentID": "757",
     "Patient": {
       "Appointment": null,
       "SocialSecurityNumber": "1234",
@@ -54,19 +46,209 @@
       "Gender": "musko",
       "PhoneNumber": "3875432",
       "Email": "the292200",
-      "DateOfBirth": "2022-04-28T00:00:00",
+      "DateOfBirth": "2022-04-09T00:00:00",
       "AccountUsername": null
     },
     "Doctor": {
       "surgery": null,
-      "Name": "noviDoktor8",
+      "Name": "noviDoktor10",
       "Surname": "novidoktor",
       "Jmbg": "123",
       "Gender": "musko",
       "PhoneNumber": "3875432",
       "Email": "the292200",
-      "DateOfBirth": "2022-04-28T00:00:00",
+      "DateOfBirth": "2022-04-09T00:00:00",
       "AccountUsername": null
-    }
+    },
+    "Room": {
+      "RoomID": "id5",
+      "RoomName": 0,
+      "Floor": 3,
+      "RoomNumber": 27,
+      "RoomStatus": 0
+    },
+    "AppointmentDate": "2022-04-09T00:00:00",
+    "Duration": "00:15:00",
+    "AppointmentType": 0
+  },
+  {
+    "AppointmentID": "20",
+    "Patient": {
+      "Appointment": null,
+      "SocialSecurityNumber": "1234",
+      "Name": "djordje",
+      "Surname": "djordje",
+      "Jmbg": "123",
+      "Gender": "musko",
+      "PhoneNumber": "3875432",
+      "Email": "the292200",
+      "DateOfBirth": "2022-04-09T00:00:00",
+      "AccountUsername": null
+    },
+    "Doctor": {
+      "surgery": null,
+      "Name": "noviDoktor11",
+      "Surname": "novidoktor",
+      "Jmbg": "123",
+      "Gender": "musko",
+      "PhoneNumber": "3875432",
+      "Email": "the292200",
+      "DateOfBirth": "2022-04-09T00:00:00",
+      "AccountUsername": null
+    },
+    "Room": {
+      "RoomID": "id10",
+      "RoomName": 0,
+      "Floor": 3,
+      "RoomNumber": 30,
+      "RoomStatus": 0
+    },
+    "AppointmentDate": "2022-04-09T00:00:00",
+    "Duration": "00:15:00",
+    "AppointmentType": 0
+  },
+  {
+    "AppointmentID": "611",
+    "Patient": {
+      "Appointment": null,
+      "SocialSecurityNumber": "1234",
+      "Name": "djordje",
+      "Surname": "djordje",
+      "Jmbg": "123",
+      "Gender": "musko",
+      "PhoneNumber": "3875432",
+      "Email": "the292200",
+      "DateOfBirth": "2022-04-16T00:00:00",
+      "AccountUsername": null
+    },
+    "Doctor": {
+      "surgery": null,
+      "Name": "noviDoktor29",
+      "Surname": "novidoktor",
+      "Jmbg": "123",
+      "Gender": "musko",
+      "PhoneNumber": "3875432",
+      "Email": "the292200",
+      "DateOfBirth": "2022-04-16T00:00:00",
+      "AccountUsername": null
+    },
+    "Room": {
+      "RoomID": "id",
+      "RoomName": 0,
+      "Floor": 2,
+      "RoomNumber": 23,
+      "RoomStatus": 0
+    },
+    "AppointmentDate": "2022-04-16T00:00:00",
+    "Duration": "00:15:00",
+    "AppointmentType": 0
+  },
+  {
+    "AppointmentID": "789",
+    "Patient": {
+      "Appointment": null,
+      "SocialSecurityNumber": "1234",
+      "Name": "djordje",
+      "Surname": "djordje",
+      "Jmbg": "123",
+      "Gender": "musko",
+      "PhoneNumber": "3875432",
+      "Email": "the292200",
+      "DateOfBirth": "2022-04-16T00:00:00",
+      "AccountUsername": null
+    },
+    "Doctor": {
+      "surgery": null,
+      "Name": "noviDoktor43",
+      "Surname": "novidoktor",
+      "Jmbg": "123",
+      "Gender": "musko",
+      "PhoneNumber": "3875432",
+      "Email": "the292200",
+      "DateOfBirth": "2022-04-16T00:00:00",
+      "AccountUsername": null
+    },
+    "Room": {
+      "RoomID": "id5",
+      "RoomName": 0,
+      "Floor": 3,
+      "RoomNumber": 27,
+      "RoomStatus": 0
+    },
+    "AppointmentDate": "2022-04-16T00:00:00",
+    "Duration": "00:15:00",
+    "AppointmentType": 0
+  },
+  {
+    "AppointmentID": "653",
+    "Patient": {
+      "Appointment": null,
+      "SocialSecurityNumber": "1234",
+      "Name": "djordje",
+      "Surname": "djordje",
+      "Jmbg": "123",
+      "Gender": "musko",
+      "PhoneNumber": "3875432",
+      "Email": "the292200",
+      "DateOfBirth": "2022-04-03T00:00:00",
+      "AccountUsername": null
+    },
+    "Doctor": {
+      "surgery": null,
+      "Name": "noviDoktor21",
+      "Surname": "novidoktor",
+      "Jmbg": "123",
+      "Gender": "musko",
+      "PhoneNumber": "3875432",
+      "Email": "the292200",
+      "DateOfBirth": "2022-04-03T00:00:00",
+      "AccountUsername": null
+    },
+    "Room": {
+      "RoomID": "id",
+      "RoomName": 0,
+      "Floor": 2,
+      "RoomNumber": 23,
+      "RoomStatus": 0
+    },
+    "AppointmentDate": "2022-04-03T00:00:00",
+    "Duration": "00:15:00",
+    "AppointmentType": 0
+  },
+  {
+    "AppointmentID": "333",
+    "Patient": {
+      "Appointment": null,
+      "SocialSecurityNumber": "1234",
+      "Name": "djordje",
+      "Surname": "djordje",
+      "Jmbg": "123",
+      "Gender": "musko",
+      "PhoneNumber": "3875432",
+      "Email": "the292200",
+      "DateOfBirth": "2022-04-03T00:00:00",
+      "AccountUsername": null
+    },
+    "Doctor": {
+      "surgery": null,
+      "Name": "noviDoktor45",
+      "Surname": "novidoktor",
+      "Jmbg": "123",
+      "Gender": "musko",
+      "PhoneNumber": "3875432",
+      "Email": "the292200",
+      "DateOfBirth": "2022-04-03T00:00:00",
+      "AccountUsername": null
+    },
+    "Room": {
+      "RoomID": "id5",
+      "RoomName": 0,
+      "Floor": 3,
+      "RoomNumber": 27,
+      "RoomStatus": 0
+    },
+    "AppointmentDate": "2022-04-03T00:00:00",
+    "Duration": "00:15:00",
+    "AppointmentType": 0
   }
 ]

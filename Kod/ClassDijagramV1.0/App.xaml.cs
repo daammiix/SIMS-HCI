@@ -38,6 +38,8 @@ namespace ClassDijagramV1._0
 
         public SurgeryController surgeryController { get; set; }
 
+        public RoomController roomController { get; set; }
+
         #endregion
 
         public App()
@@ -60,6 +62,9 @@ namespace ClassDijagramV1._0
             var surgeryRepository = new SurgeryRepo();
             var surgeryService = new SurgeryService(surgeryRepository);
             surgeryController = new SurgeryController(surgeryService);
+
+            //
+            roomController = new RoomController();
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)

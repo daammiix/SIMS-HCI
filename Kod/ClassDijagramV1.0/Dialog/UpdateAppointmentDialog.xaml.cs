@@ -1,4 +1,5 @@
 ﻿using ClassDijagramV1._0.Views;
+using ClassDijagramV1._0.Views.PatientView;
 using Controller;
 using Model;
 using System;
@@ -45,15 +46,14 @@ namespace ClassDijagramV1._0.Dialog
             Random rnd = new Random();
             int card = rnd.Next(50);
 
-            //Doctor d1 = new Doctor("noviDoktor" + card.ToString(), "novidoktor", "123", "musko", "3875432", "the292200", date1);
-            Doctor d1 = new Doctor();
+            Doctor d1 = new Doctor("noviDoktor" + card.ToString(), "novidoktor", "123", "musko", "3875432", "the292200", date1, DoctorType.general, null);
 
-            var oldAppointment = PatientView.selectedAppointment;
+            var oldAppointment = AppointmentsViewPage.selectedAppointment;
             var updatedAppointment = oldAppointment;
-            updatedAppointment.Date = promjenaKalendar.SelectedDate.Value;
+            updatedAppointment.AppointmentDate = promjenaKalendar.SelectedDate.Value;
             updatedAppointment.Doctor = d1;
 
-            _appointmentController.UpdateAppointment(oldAppointment.Id, updatedAppointment);
+            _appointmentController.UpdateAppointment(oldAppointment.AppointmentID, updatedAppointment);
             this.Close();
 
         }
