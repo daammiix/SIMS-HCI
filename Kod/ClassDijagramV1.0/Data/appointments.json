@@ -1,6 +1,6 @@
 [
   {
-    "AppointmentID": "459",
+    "AppointmentID": "909",
     "Patient": {
       "Appointment": null,
       "SocialSecurityNumber": "1234",
@@ -10,7 +10,7 @@
       "Gender": "musko",
       "PhoneNumber": "3875432",
       "Email": "the292200",
-      "DateOfBirth": "2022-04-17T00:00:00",
+      "DateOfBirth": "2022-04-27T00:00:00",
       "AccountUsername": null
     },
     "Doctor": {
@@ -31,12 +31,12 @@
       "RoomNumber": 23,
       "RoomStatus": 0
     },
-    "AppointmentDate": "2022-04-17T00:00:00",
+    "AppointmentDate": "2022-04-30T00:00:00",
     "Duration": "00:15:00",
     "AppointmentType": 0
   },
   {
-    "AppointmentID": "243",
+    "AppointmentID": "845",
     "Patient": {
       "Appointment": null,
       "SocialSecurityNumber": "1234",
@@ -46,13 +46,13 @@
       "Gender": "musko",
       "PhoneNumber": "3875432",
       "Email": "the292200",
-      "DateOfBirth": "2022-04-17T00:00:00",
+      "DateOfBirth": "2022-04-27T00:00:00",
       "AccountUsername": null
     },
     "Doctor": {
       "surgery": null,
-      "Name": "lekar",
-      "Surname": "lekar",
+      "Name": "doktor",
+      "Surname": "doktor",
       "Jmbg": "123",
       "Gender": "musko",
       "PhoneNumber": "3875432",
@@ -67,7 +67,7 @@
       "RoomNumber": 27,
       "RoomStatus": 0
     },
-    "AppointmentDate": "2022-04-17T00:00:00",
+    "AppointmentDate": "2022-04-30T00:00:00",
     "Duration": "00:15:00",
     "AppointmentType": 0
   }

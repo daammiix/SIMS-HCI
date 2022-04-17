@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClassDijagramV1._0.Dialog"
         xmlns:mejn="clr-namespace:ClassDijagramV1._0"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="AddAppointmentDialog" Height="450" Width="800">
 
     <Grid>
         <StackPanel>
-            <TextBlock Text="DATUM OBAVEZAN!" Margin="20"/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Izaberi ljekara" Margin="20"/>
                 <ComboBox x:Name="dodavanjPregledaDoktor" ItemsSource="{Binding Doctors}">
@@ -32,12 +32,16 @@
 
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Izaberi datum" Margin="20"/>
-                <DatePicker x:Name="kalendar"/>
+                <DatePicker x:Name="kalendar" FirstDayOfWeek="Monday">
+                    <DatePicker.BlackoutDates>
+                        <CalendarDateRange Start="{x:Static sys:DateTime.MinValue}" End="{x:Static sys:DateTime.Today}"/>
+                    </DatePicker.BlackoutDates>
+                </DatePicker>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Izaberi termin" Margin="20"/>
-                <DatePickerTextBox/>
+                
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
