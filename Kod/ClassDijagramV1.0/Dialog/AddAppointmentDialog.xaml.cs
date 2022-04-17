@@ -1,9 +1,11 @@
 ﻿
+using ClassDijagramV1._0.Util;
 using Controller;
 using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,11 +23,19 @@ namespace ClassDijagramV1._0.Dialog
     /// <summary>
     /// Interaction logic for AddAppointmentDialog.xaml
     /// </summary>
-    public partial class AddAppointmentDialog : Window
+    public partial class AddAppointmentDialog : Window, INotifyPropertyChanged
     {
         public AppointmentController _appointmentController;
         public RoomController _roomController;
         public DoctorController _doctorController;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void onPropertyChanged(String propertyName)
+        {
+            PropertyChangedEventArgs e = new PropertyChangedEventArgs(propertyName);
+            PropertyChanged(this, e);
+        }
 
         public ObservableCollection<Appointment> Appointments
         {
@@ -42,6 +52,12 @@ namespace ClassDijagramV1._0.Dialog
             get;
             set;
         }
+        public ObservableCollection<String> DoctorsAppointmentsTime
+        {
+            get;
+            set;
+        }
+        //private List<string> availableTimes;
 
         public AddAppointmentDialog()
         {
@@ -56,9 +72,9 @@ namespace ClassDijagramV1._0.Dialog
             Rooms = _roomController.GetAllRooms();
             Appointments = _appointmentController.GetAllAppointments("djordje"); // ulgovani korisnik ali ovo je za doktora
             Doctors = _doctorController.GetAllDoctors();
-
-            DateTime today = DateTime.Today;
-            //kalendar.BlackoutDates.Add(new CalendarDateRange(new DateTime(01, 01, 0001), today));
+            DoctorsAppointmentsTime = new ObservableCollection<String>();
+            
+            
         }
 
         private void GoBack(object sender, RoutedEventArgs e)
@@ -74,13 +90,21 @@ namespace ClassDijagramV1._0.Dialog
 
             //String appointmentID = (_appointmentController.GetAllAppointments("djordje").Count + 1).ToString();
             String appointmentID = rnd.Next(1000).ToString();
-            DateTime date1 = kalendar.SelectedDate.Value;
-            DateTime date2 = date1.AddMinutes(15);
-            TimeSpan interval = date2 - date1;
+            int year = kalendar.SelectedDate.Value.Year;
+            int month = kalendar.SelectedDate.Value.Month;
+            int day = kalendar.SelectedDate.Value.Day;
+            string[] getTimeCB = ((timeCB.SelectedItem).ToString()).Split(":");
+            int hour = Int32.Parse(getTimeCB[0]);
+            int minutes = Int32.Parse(getTimeCB[1]); 
+            DateTime date1 = new DateTime(year,month,day,hour,minutes,0);
             
+            DateTime date2 = date1.AddMinutes(30);
+            TimeSpan interval = date2 - date1;
+
             Room r1 = getFreeRoom(date1,date2);
             Doctor d1 = (Doctor)dodavanjPregledaDoktor.SelectedItem;
             Patient p1 = new Patient("djordje", "djordje", "123", "musko", "3875432", "the292200", date1, "1234");
+
             Appointment a1 = new Appointment(appointmentID, p1, d1, r1, date1, interval, AppointmentType.generalPractitionerCheckup);
             _appointmentController.AddAppointment(a1);
             this.Close();
@@ -100,6 +124,51 @@ namespace ClassDijagramV1._0.Dialog
                 
             }
             return null;
+        }
+
+        private void dodavanjPregledaDoktor_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           
+            Doctor l = (Doctor)dodavanjPregledaDoktor.SelectedItem;
+
+            DoctorsAppointmentsTime = new ObservableCollection<string>();
+            List<Appointment> termini = new List<Appointment>();
+            if (dodavanjPregledaDoktor.SelectedItem != null && kalendar.SelectedDate != null)
+            {
+                foreach (Appointment termin in Appointments)
+                {
+                    if (l.Name == termin.Doctor.Name)
+                    {
+                        if (termin.AppointmentDate.Date.Equals(kalendar.SelectedDate))
+                        {
+                            termini.Add(termin);
+                        }
+                    }
+                }
+            }
+
+            DateTime danas = DateTime.Today;
+
+            for (DateTime tm = danas.AddHours(7); tm < danas.AddHours(15); tm = tm.AddMinutes(30))
+            {
+                bool slobodno = true;
+                foreach (Appointment termin in termini)
+                {
+                    DateTime start = DateTime.Parse(termin.AppointmentDate.ToString("HH:mm"));
+                    DateTime end = DateTime.Parse(termin.AppointmentDate.AddMinutes(30).ToString("HH:mm"));
+                    if (tm >= start && tm < end)
+                    {
+                        slobodno = false;
+                    }
+                }
+
+                if (slobodno)
+                    DoctorsAppointmentsTime.Add(tm.ToString("HH:mm"));
+
+            }
+
+            timeCB.ItemsSource = DoctorsAppointmentsTime;
+
         }
     }
 }

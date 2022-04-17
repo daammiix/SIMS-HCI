@@ -13,7 +13,7 @@
         <StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Izaberi ljekara" Margin="20"/>
-                <ComboBox x:Name="dodavanjPregledaDoktor" ItemsSource="{Binding Doctors}">
+                <ComboBox x:Name="dodavanjPregledaDoktor" ItemsSource="{Binding Doctors}" SelectionChanged="dodavanjPregledaDoktor_SelectionChanged" >
                     <!--
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -32,7 +32,7 @@
 
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Izaberi datum" Margin="20"/>
-                <DatePicker x:Name="kalendar" FirstDayOfWeek="Monday">
+                <DatePicker x:Name="kalendar" FirstDayOfWeek="Monday" SelectedDateChanged="dodavanjPregledaDoktor_SelectionChanged" >
                     <DatePicker.BlackoutDates>
                         <CalendarDateRange Start="{x:Static sys:DateTime.MinValue}" End="{x:Static sys:DateTime.Today}"/>
                     </DatePicker.BlackoutDates>
@@ -41,7 +41,8 @@
 
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Izaberi termin" Margin="20"/>
-                
+                <ComboBox x:Name="timeCB" ItemsSource="{Binding DoctorsAppointmentsTime}"/>
+
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
