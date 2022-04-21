@@ -51,7 +51,7 @@ namespace Service
 
             foreach (Appointment a in otherPatients)
             {
-                _appointmentRepo.RemoveAppointment(a.Id);
+                _appointmentRepo.RemoveAppointment(a.AppointmentID);
             }
             return _appointmentRepo.GetAppointments();
         }

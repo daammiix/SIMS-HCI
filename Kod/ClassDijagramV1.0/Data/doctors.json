@@ -1,0 +1,24 @@
+[
+  {
+    "surgery": null,
+    "Name": "doktor",
+    "Surname": "doktor",
+    "Jmbg": "123",
+    "Gender": "musko",
+    "PhoneNumber": "3875432",
+    "Email": "the292200",
+    "DateOfBirth": "2008-05-01T08:30:52",
+    "AccountUsername": null
+  },
+  {
+    "surgery": null,
+    "Name": "lekar",
+    "Surname": "lekar",
+    "Jmbg": "123",
+    "Gender": "musko",
+    "PhoneNumber": "3875432",
+    "Email": "the292200",
+    "DateOfBirth": "2008-05-01T08:30:52",
+    "AccountUsername": null
+  }
+]

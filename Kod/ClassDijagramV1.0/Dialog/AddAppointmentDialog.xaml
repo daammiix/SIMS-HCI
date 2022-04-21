@@ -5,38 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClassDijagramV1._0.Dialog"
         xmlns:mejn="clr-namespace:ClassDijagramV1._0"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="AddAppointmentDialog" Height="450" Width="800">
 
     <Grid>
         <StackPanel>
-            <TextBlock Text="DATUM OBAVEZAN!" Margin="20"/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Izaberi ljekara" Margin="20"/>
-                <ComboBox x:Name="dodavanjPregledaDoktor" ItemsSource="{Binding Path=Appointments}">
+                <ComboBox x:Name="dodavanjPregledaDoktor" ItemsSource="{Binding Doctors}" SelectionChanged="dodavanjPregledaDoktor_SelectionChanged" >
+                    <!--
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock>
                                 <TextBlock.Text>
                                     <MultiBinding StringFormat="{}{0} {1}">
-                                        <Binding Path="Doctor.Name"/>
-                                        <Binding Path="Doctor.Surname"/>
+                                        <Binding Path="Doctor.name"/>
+                                        <Binding Path="Doctor.surname"/>
                                     </MultiBinding>
                                 </TextBlock.Text>
                             </TextBlock>
                         </DataTemplate>
-                    </ComboBox.ItemTemplate>
+                    </ComboBox.ItemTemplate>-->
                 </ComboBox>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Izaberi datum" Margin="20"/>
-                <DatePicker x:Name="kalendar"/>
+                <DatePicker x:Name="kalendar" FirstDayOfWeek="Monday" SelectedDateChanged="dodavanjPregledaDoktor_SelectionChanged" >
+                    <DatePicker.BlackoutDates>
+                        <CalendarDateRange Start="{x:Static sys:DateTime.MinValue}" End="{x:Static sys:DateTime.Today}"/>
+                    </DatePicker.BlackoutDates>
+                </DatePicker>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Izaberi termin" Margin="20"/>
-                <DatePickerTextBox/>
+                <ComboBox x:Name="timeCB" ItemsSource="{Binding DoctorsAppointmentsTime}"/>
+
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">

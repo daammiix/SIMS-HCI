@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClassDijagramV1._0"
         xmlns:views="clr-namespace:ClassDijagramV1._0.Views"
+        xmlns:viewsPatient="clr-namespace:ClassDijagramV1._0.Views.PatientView"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="768" Width="1024">
 
     <TabControl>
         <TabItem Header="Patient">
-            <views:PatientView/>
+            <viewsPatient:PrivremenoLoginDugme/>
         </TabItem>
         <TabItem Header="Secretary">
             <views:SecretaryView/>

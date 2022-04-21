@@ -1,0 +1,48 @@
+﻿<Window x:Class="ClassDijagramV1._0.Views.PatientView.PatientMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClassDijagramV1._0.Views.PatientView"
+        mc:Ignorable="d"
+        Title="PatientMainWindow" Height="768" Width="1024"
+        ResizeMode="NoResize"
+        WindowStyle="None" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="noBackBlue" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border>
+                            <ContentPresenter/>
+                        </Border>
+                
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Border Width="1024" Height="40" VerticalAlignment="Top" Background="#FFBBBABD"/>
+        
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Height="40">
+                <Button Style="{StaticResource ResourceKey=noBackBlue}" Cursor="Hand"
+                    Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                    Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"
+                    Click="Logout" ToolTip="Odjavi se">
+                    <Image Source="Resources/Images/notification.png"/>
+                </Button>
+                <Button Style="{StaticResource ResourceKey=noBackBlue}" Cursor="Hand"
+                    Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                    Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"
+                    Click="Logout" ToolTip="Odjavi se">
+                    <Image Source="Resources/Images/logout.png"/>
+                </Button>
+            </StackPanel>
+            
+            <Frame x:Name="startWindow" NavigationUIVisibility="Hidden" Height="700"/>
+        </StackPanel>
+    </Grid>
+</Window>

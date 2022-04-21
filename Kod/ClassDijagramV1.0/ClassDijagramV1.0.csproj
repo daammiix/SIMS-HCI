@@ -9,8 +9,23 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Views\PatientView\Resources\Images\logout.png" />
+	  <None Remove="Views\PatientView\Resources\Images\notification.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Extended.Wpf.Toolkit" Version="4.3.0" />
+		<PackageReference Include="MaterialDesignThemes" Version="4.4.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="Views\PatientView\Resources\Images\logout.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Views\PatientView\Resources\Images\notification.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
 	</ItemGroup>
 
 </Project>

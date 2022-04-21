@@ -6,14 +6,23 @@
 using ClassDijagramV1._0.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Model
 {
-   public class Doctor : Person
+   public class Doctor : Person, INotifyPropertyChanged
    {
       private DoctorType type;
-      
-      public List<Surgery> surgery { get; set; }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged(String propertyName)
+        {
+            PropertyChangedEventArgs e = new PropertyChangedEventArgs(propertyName);
+            PropertyChanged(this, e);
+        }
+
+        public List<Surgery> surgery { get; set; }
 
         public Doctor()
         {
@@ -25,5 +34,6 @@ namespace Model
             this.type = type;
 
         }
+
     }
 }

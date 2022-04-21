@@ -1,8 +1,4 @@
-
 ﻿using ClassDijagramV1._0.Dialog;
-//using ClassDijagramV1._0.Model.Accounts;
-﻿using ClassDijagramV1._0.Model;
-
 using Controller;
 using Model;
 using System;
@@ -21,14 +17,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ClassDijagramV1._0.Views
+namespace ClassDijagramV1._0.Views.PatientView
 {
     /// <summary>
-    /// Interaction logic for Pacijent.xaml
+    /// Interaction logic for AppointmentsView.xaml
     /// </summary>
-    public partial class PatientView : UserControl
+    public partial class AppointmentsViewPage : Page
     {
         public AppointmentController _appointmentController;
+        public RoomController _roomController;
         public static Appointment selectedAppointment;
 
         public ObservableCollection<Appointment> Appointments
@@ -36,19 +33,23 @@ namespace ClassDijagramV1._0.Views
             get;
             set;
         }
-
-        public PatientView()
+        public ObservableCollection<Room> Rooms
+        {
+            get;
+            set;
+        }
+        public AppointmentsViewPage()
         {
             InitializeComponent();
             this.DataContext = this;
-
             App app = Application.Current as App;
             _appointmentController = app.appointmentController;
+
+            _roomController = app.roomController;
+
             Appointments = _appointmentController.GetAllAppointments("djordje"); // ulogovani korisnik
-
+            Rooms = _roomController.GetAllRooms();
         }
-
-
         private void AddAppontment_Click(object sender, RoutedEventArgs e)
         {
             //_appointmentController.AddAppointment(a1);
@@ -58,7 +59,7 @@ namespace ClassDijagramV1._0.Views
 
         private void UpdateAppontment_Click(object sender, RoutedEventArgs e)
         {
-            
+
             if (tabelaPregledi.SelectedIndex != -1)
             {
                 selectedAppointment = (Appointment)tabelaPregledi.SelectedItem;
