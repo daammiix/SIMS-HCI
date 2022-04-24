@@ -66,7 +66,7 @@ namespace Repository
 
         internal Appointment GetOneAppointment(string appointmentID)
         {
-            throw new NotImplementedException();
+            return FindAppointmentById(appointmentID);
         }
 
         public ObservableCollection<Appointment> GetAppointments()

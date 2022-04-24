@@ -53,9 +53,9 @@ namespace Controller
             _appointmentService.SaveAppointments();
         }
 
-        internal void AddNotification(string appointmentID, NotificationType addingAppointment, string jmbg)
+        internal void AddNotification(string appointmentID, NotificationType addingAppointment, string jmbg, DateTime date)
         {
-            throw new NotImplementedException();
+            _appointmentService.AddNotification(appointmentID,addingAppointment,jmbg, date);
         }
     }
 }

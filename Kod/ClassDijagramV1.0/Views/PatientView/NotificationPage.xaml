@@ -3,7 +3,6 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:ClassDijagramV1._0.Views.PatientView"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1024"
       Title="NotificationPage"
@@ -11,16 +10,17 @@
 
     <StackPanel>
         <TextBlock Text="Obavještenja" Margin="40,20,0,20" FontSize="64"/>
-        <DataGrid x:Name="tabelaPregledi" Height="300" Margin="20"  
+        <DataGrid Height="300" Margin="20"  
                           AutoGenerateColumns="False"
-                          ItemsSource="{Binding Notification, UpdateSourceTrigger=PropertyChanged}"
+                          ItemsSource="{Binding Source=Drugs}"
                           SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Obavještenje" Binding="{Binding Notification.Title}"  Width="*" IsReadOnly="True"/>
-                <DataGridCheckBoxColumn Header="Pročitano" Binding="{Binding Notification.IsRead}" Width="100" IsReadOnly="False"/>
+                <DataGridTextColumn Header="Obavještenje" Binding="{Binding MedicineName}"  Width="*"/>
+                <DataGridTextColumn Header="Pročitano" Binding="{Binding StartTaking}" Width="100"/>
             </DataGrid.Columns>
         </DataGrid>
-
+        
         <Button Content="Dodaj zabilješku" Width="176" Height="42" HorizontalAlignment="Right" Margin="0, 20,100,0"/>
+        <Button Content="Dodaj lijek od doktora" Width="176" Height="42" HorizontalAlignment="Right" Margin="0, 20,100,0" Click="addDrug"/>
     </StackPanel>
 </Page>

@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using ClassDijagramV1._0;
+using ClassDijagramV1._0.Model;
 using Model;
 using Repository;
 using System;
@@ -56,15 +57,20 @@ namespace Service
             return _appointmentRepo.GetAppointments();
         }
 
-        internal void AddNotification(string appointmentID, NotificationType addingAppointment, string jmbg)
+        internal void AddNotification(string appointmentID, NotificationType addingAppointment, string jmbg, DateTime date)
         {
-            throw new NotImplementedException();
+            Notification note = new Notification();
+            if (NotificationType.addingAppointment.Equals(addingAppointment))
+            {
+                note.notificationType = NotificationType.addingAppointment;
+            }
+            note.NotificationID = null;
+            //note.Title  pusi kurac ne znam
         }
 
         public Appointment GetOneAppointment(String appointmentID)
         {
-            //var allAppointments = GetAllAppointments();
-            return null;
+            return _appointmentRepo.GetOneAppointment(appointmentID);
         }
 
         public void SaveAppointments()
