@@ -39,5 +39,10 @@ namespace ClassDijagramV1._0.Views.PatientView
             
             
         }
+
+        private void openNotificationClick(object sender, RoutedEventArgs e)
+        {
+            startWindow.Content = new NotificationPage(this);
+        }
     }
 }

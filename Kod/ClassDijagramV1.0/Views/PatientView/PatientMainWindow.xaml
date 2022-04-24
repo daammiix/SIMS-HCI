@@ -24,19 +24,21 @@
     </Window.Resources>
 
     <Grid>
-        <Border Width="1024" Height="40" VerticalAlignment="Top" Background="#FFBBBABD"/>
+        <Border Width="1024" Height="68" VerticalAlignment="Top" Background="#FFBBBABD"/>
         
         <StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Height="40">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Height="68">
                 <Button Style="{StaticResource ResourceKey=noBackBlue}" Cursor="Hand"
                     Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Center" 
                     Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"
-                    Click="Logout" ToolTip="Odjavi se">
+                    Margin="0, 0, 10, 0"
+                    Click="openNotificationClick" ToolTip="Obavještenja">
                     <Image Source="Resources/Images/notification.png"/>
                 </Button>
                 <Button Style="{StaticResource ResourceKey=noBackBlue}" Cursor="Hand"
                     Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Center" 
                     Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"
+                    Margin="0, 0, 10, 0"
                     Click="Logout" ToolTip="Odjavi se">
                     <Image Source="Resources/Images/logout.png"/>
                 </Button>

@@ -64,6 +64,11 @@ namespace Repository
             oldAppointment = updatedAppointment;
         }
 
+        internal Appointment GetOneAppointment(string appointmentID)
+        {
+            throw new NotImplementedException();
+        }
+
         public ObservableCollection<Appointment> GetAppointments()
         {
             return Appointments;
