@@ -1,5 +1,4 @@
 ﻿using ClassDijagramV1._0.Controller;
-using ClassDijagramV1._0.Dialog;
 using ClassDijagramV1._0.FileHandlers;
 using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Repository;

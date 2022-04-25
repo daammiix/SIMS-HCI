@@ -1,5 +1,4 @@
-﻿using ClassDijagramV1._0.Dialog;
-using Controller;
+﻿using Controller;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -43,6 +42,24 @@ namespace ClassDijagramV1._0.Views.PatientView
         private void openNotificationClick(object sender, RoutedEventArgs e)
         {
             startWindow.Content = new NotificationPage(this);
+        }
+
+        private void moveThirdArrowEnter(object sender, MouseEventArgs e)
+        {
+            thirdArrow.Margin = new Thickness(-56, 0,0,0);
+        }
+
+        private void moveThirdArrowLeave(object sender, MouseEventArgs e)
+        {
+            thirdArrow.Margin = new Thickness(-20, 0, 0, 0);
+        }
+
+        private void goBack(object sender, RoutedEventArgs e)
+        {
+
+            switch (e.Source){
+
+            }
         }
     }
 }

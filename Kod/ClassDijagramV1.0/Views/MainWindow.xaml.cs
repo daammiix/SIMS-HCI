@@ -1,5 +1,4 @@
-﻿using ClassDijagramV1._0.Dialog;
-using Controller;
+﻿using Controller;
 using Model;
 using System;
 using System.Collections.Generic;

@@ -1,5 +1,4 @@
-﻿using ClassDijagramV1._0.Dialog;
-using Controller;
+﻿using Controller;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -27,7 +26,7 @@ namespace ClassDijagramV1._0.Views.PatientView
         public AppointmentController _appointmentController;
         public RoomController _roomController;
         public static Appointment selectedAppointment;
-
+        private PatientMainWindow parent { get; set; }
         public ObservableCollection<Appointment> Appointments
         {
             get;
@@ -38,10 +37,11 @@ namespace ClassDijagramV1._0.Views.PatientView
             get;
             set;
         }
-        public AppointmentsViewPage()
+        public AppointmentsViewPage(PatientMainWindow patientMain)
         {
             InitializeComponent();
             this.DataContext = this;
+            parent = patientMain;
             App app = Application.Current as App;
             _appointmentController = app.appointmentController;
 
@@ -52,9 +52,7 @@ namespace ClassDijagramV1._0.Views.PatientView
         }
         private void AddAppontment_Click(object sender, RoutedEventArgs e)
         {
-            //_appointmentController.AddAppointment(a1);
-            var a = new AddAppointmentDialog();
-            a.Show();
+            parent.startWindow.Content = new AppointmentAddPage(parent);
         }
 
         private void UpdateAppontment_Click(object sender, RoutedEventArgs e)
@@ -63,17 +61,14 @@ namespace ClassDijagramV1._0.Views.PatientView
             if (tabelaPregledi.SelectedIndex != -1)
             {
                 selectedAppointment = (Appointment)tabelaPregledi.SelectedItem;
-                var a = new UpdateAppointmentDialog();
-                a.Show();
+                parent.startWindow.Content = new AppointmentUpdatePage(parent);
             }
-
         }
 
         private void RemoveAppontment_Click(object sender, RoutedEventArgs e)
         {
             if (tabelaPregledi.SelectedIndex != -1)
             {
-                //Appointments.Remove((Appointment)tabelaPregledi.SelectedItem);
                 _appointmentController.RemoveAppointment((Appointment)tabelaPregledi.SelectedItem);
             }
 

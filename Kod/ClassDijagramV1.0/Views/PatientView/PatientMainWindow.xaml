@@ -10,16 +10,21 @@
         WindowStyle="None" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="noBackBlue" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#FFBBBABD"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border>
-                            <ContentPresenter/>
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF818083"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Window.Resources>
 
@@ -27,24 +32,63 @@
         <Border Width="1024" Height="68" VerticalAlignment="Top" Background="#FFBBBABD"/>
         
         <StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Height="68">
-                <Button Style="{StaticResource ResourceKey=noBackBlue}" Cursor="Hand"
-                    Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                    Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"
-                    Margin="0, 0, 10, 0"
+            <DockPanel>
+                <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Height="68">
+                    <Button Style="{StaticResource ResourceKey=noBackBlue}" Cursor="Hand"
+                    Width="68" Height="68" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                    BorderBrush="{x:Null}" Foreground="{x:Null}"
+                    Margin="0, 0, 0, 0"
                     Click="openNotificationClick" ToolTip="Obavještenja">
-                    <Image Source="Resources/Images/notification.png"/>
+                        <Image Source="Resources/Images/doctor.png" Width="42" Height="42"/>
+                    </Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Height="68" >
+                    <Button Style="{StaticResource ResourceKey=noBackBlue}" Cursor="Hand"
+                    Width="68" Height="68" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                    BorderBrush="{x:Null}" Foreground="{x:Null}"
+                    Margin="0, 0, 0, 0"
+                    Click="openNotificationClick" ToolTip="Obavještenja">
+                        <Image Source="Resources/Images/notification.png" Width="42" Height="42"/>
+                    </Button>
+                    <Button x:Name="logoutBtn" Style="{StaticResource ResourceKey=noBackBlue}" Cursor="Hand"
+                    Width="68" Height="68" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                    BorderBrush="{x:Null}" Foreground="{x:Null}"
+                    Margin="0, 0, 0, 0"
+                    Click="Logout" ToolTip="Odjavi se">
+                        <Image Source="Resources/Images/logout.png" Width="42" Height="42"/>
+                    </Button>
+                </StackPanel>
+            </DockPanel>
+           
+            
+            <Frame x:Name="startWindow" NavigationUIVisibility="Hidden" Height="650"/>
+            
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Height="50"
+                        MouseEnter="moveThirdArrowEnter" MouseLeave="moveThirdArrowLeave"
+                        ToolTip="Vrati se">
+                <Button Style="{StaticResource ResourceKey=noBackBlue}" Cursor="Hand"
+                    Width="32" Height="32" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                    Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"
+                    Margin="10, 0, 0, 0"
+                    Command="NavigationCommands.BrowseBack">
+                    <Image Source="Resources/Images/back-arrow.png"/>
                 </Button>
                 <Button Style="{StaticResource ResourceKey=noBackBlue}" Cursor="Hand"
-                    Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                    Width="32" Height="32" HorizontalAlignment="Left" VerticalAlignment="Center" 
                     Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"
-                    Margin="0, 0, 10, 0"
-                    Click="Logout" ToolTip="Odjavi se">
-                    <Image Source="Resources/Images/logout.png"/>
+                    Margin="-20, 0, 0, 0"
+                        Command="NavigationCommands.BrowseBack">
+                    <Image Source="Resources/Images/back-arrow.png"/>
+                </Button>
+                <Button x:Name="thirdArrow" Style="{StaticResource ResourceKey=noBackBlue}" Cursor="Hand"
+                    Width="32" Height="32" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                    Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"
+                    Margin="-20, 0, 0, 0"
+                        Command="NavigationCommands.BrowseBack">
+                    <Image Source="Resources/Images/back-arrow.png"/>
                 </Button>
             </StackPanel>
             
-            <Frame x:Name="startWindow" NavigationUIVisibility="Hidden" Height="700"/>
         </StackPanel>
     </Grid>
 </Window>
