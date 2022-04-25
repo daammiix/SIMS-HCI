@@ -10,16 +10,22 @@
 
     <StackPanel>
         <TextBlock Text="Obavještenja" Margin="40,20,0,20" FontSize="64"/>
+        <!--<DataGrid Height="300" Margin="20"  
+                          AutoGenerateColumns="True"
+                          ItemsSource="{Binding Drugs}"
+                          SelectionMode="Single">
+
+        </DataGrid> --> 
         <DataGrid Height="300" Margin="20"  
                           AutoGenerateColumns="False"
-                          ItemsSource="{Binding Source=Drugs}"
+                          ItemsSource="{Binding Notifications}"
                           SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Obavještenje" Binding="{Binding MedicineName}"  Width="*"/>
-                <DataGridTextColumn Header="Pročitano" Binding="{Binding StartTaking}" Width="100"/>
+                <DataGridTextColumn Header="Opis" Binding="{Binding Content}" Width="auto"/>
+
+                <DataGridCheckBoxColumn Header="Pregledana" Binding="{Binding IsRead}"/>
             </DataGrid.Columns>
         </DataGrid>
-
         <Button Content="Dodaj zabilješku" Width="176" Height="42" HorizontalAlignment="Right" Margin="0, 20,100,0" Command="NavigationCommands.BrowseBack"/>
         <Button Content="Dodaj lijek od doktora" Width="176" Height="42" HorizontalAlignment="Right" Margin="0, 20,100,0" Click="addDrug"/>
     </StackPanel>

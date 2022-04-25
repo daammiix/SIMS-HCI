@@ -103,7 +103,7 @@ namespace ClassDijagramV1._0.Views.PatientView
 
             Appointment a1 = new Appointment(appointmentID, p1, d1, r1, date1, interval, AppointmentType.generalPractitionerCheckup);
             _appointmentController.AddAppointment(a1);
-            _appointmentController.AddNotification(a1.AppointmentID, NotificationType.addingAppointment, a1.Patient.Jmbg, a1.AppointmentDate);
+            _appointmentController.AddNotification(a1, NotificationType.addingAppointment);
             parent.startWindow.Content = new AppointmentsViewPage(parent);
 
         }

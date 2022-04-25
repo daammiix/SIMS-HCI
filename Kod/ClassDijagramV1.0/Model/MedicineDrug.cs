@@ -83,6 +83,8 @@ namespace ClassDijagramV1._0.Model
             Interval = interval;
         }
 
-
+        public MedicineDrug()
+        {
+        }
     }
 }

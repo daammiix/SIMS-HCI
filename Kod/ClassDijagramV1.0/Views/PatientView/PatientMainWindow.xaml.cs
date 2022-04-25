@@ -44,21 +44,21 @@ namespace ClassDijagramV1._0.Views.PatientView
             startWindow.Content = new NotificationPage(this);
         }
 
-        private void moveThirdArrowEnter(object sender, MouseEventArgs e)
+        private void moveBtnEnter(object sender, MouseEventArgs e)
         {
-            thirdArrow.Margin = new Thickness(-56, 0,0,0);
+            backBtn.Margin = new Thickness(0, 0,0,0);
         }
 
-        private void moveThirdArrowLeave(object sender, MouseEventArgs e)
+        private void moveBtnLeave(object sender, MouseEventArgs e)
         {
-            thirdArrow.Margin = new Thickness(-20, 0, 0, 0);
+            backBtn.Margin = new Thickness(10, 0, 0, 0);
         }
 
         private void goBack(object sender, RoutedEventArgs e)
         {
 
-            switch (e.Source){
-
+            switch (startWindow.Content)
+            {
             }
         }
     }

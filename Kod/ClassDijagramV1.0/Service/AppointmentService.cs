@@ -57,15 +57,31 @@ namespace Service
             return _appointmentRepo.GetAppointments();
         }
 
-        internal void AddNotification(string appointmentID, NotificationType addingAppointment, string jmbg, DateTime date)
+        internal void AddNotification(Appointment appointment, NotificationType notificationType)
         {
-            Notification note = new Notification();
-            if (NotificationType.addingAppointment.Equals(addingAppointment))
+            
+            Notification note;
+
+            if (NotificationType.addingAppointment.Equals(notificationType))
             {
-                note.notificationType = NotificationType.addingAppointment;
+                var notificationID = "1";
+                var content = "Imate zakazan pregled u " + appointment.AppointmentDate + " u sobi " + appointment.Room.RoomName;
+                DateTime created = appointment.AppointmentDate;
+                Notification n = new Notification(notificationID, content, "djordje", false, created, NotificationType.addingAppointment);
+                _appointmentRepo.AddNotification(n);
             }
-            note.NotificationID = null;
+            else if (NotificationType.deletingAppointment.Equals(notificationType))
+            {
+                // obrisi notifikaciju pomocu idija
+            }
+            
+
             //note.Title  pusi kurac ne znam
+        }
+
+        internal ObservableCollection<Notification> GetAllNotifications()
+        {
+            return _appointmentRepo.GetAllNotifications();
         }
 
         public Appointment GetOneAppointment(String appointmentID)

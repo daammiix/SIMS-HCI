@@ -8,15 +8,14 @@ using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Model
 {
-    internal class Notification : ObservableObject
+    public class Notification : ObservableObject
     {
         private String id;
-        private String title;
         private String content;
         private String patientID;
         private Boolean isRead;
         private DateTime created;
-        public NotificationType notificationType { get; set; }
+        private NotificationType notificationType;
 
         public String NotificationID
         {
@@ -30,21 +29,6 @@ namespace ClassDijagramV1._0.Model
                 {
                     id = value;
                     onPropertyChanged("NotificationID");
-                }
-            }
-        }
-        public String Title
-        {
-            get
-            {
-                return title;
-            }
-            set
-            {
-                if (value != title)
-                {
-                    title = value;
-                    onPropertyChanged("Title");
                 }
             }
         }
@@ -74,7 +58,7 @@ namespace ClassDijagramV1._0.Model
                 if (value != patientID)
                 {
                     patientID = value;
-                    //onPropertyChanged("PatientID");
+                    onPropertyChanged("PatientID");
                 }
             }
         }
@@ -107,6 +91,32 @@ namespace ClassDijagramV1._0.Model
                     onPropertyChanged("Created");
                 }
             }
+        }
+        public NotificationType NotificationType
+        {
+            get
+            {
+                return notificationType;
+            }
+            set
+            {
+                if (value != notificationType)
+                {
+                    notificationType = value;
+                    onPropertyChanged("NotificationType");
+                }
+            }
+        }
+
+        public Notification(string notificationID, string content, string patientID, bool isRead, DateTime created, NotificationType notificationType)
+        {
+            
+            NotificationID = notificationID;
+            Content = content;
+            PatientID = patientID;
+            IsRead = isRead;
+            Created = created;
+            NotificationType = notificationType;
         }
     }
 }

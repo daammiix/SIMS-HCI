@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using ClassDijagramV1._0.FileHandlers;
+using ClassDijagramV1._0.Model;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace Repository
         private AppointmentFileHandler _appointmentFileHandler;
 
         public ObservableCollection<Appointment> Appointments;
+        public ObservableCollection<Notification> Notifications;
 
         public ObservableCollection<Doctor> Doctors
         {
@@ -36,6 +38,7 @@ namespace Repository
             _appointmentFileHandler = apointmentFileHandler;
             Appointments = new ObservableCollection<Appointment>(_appointmentFileHandler.GetAppointments());
             Doctors = new ObservableCollection<Doctor>();
+            Notifications = new ObservableCollection<Notification>();
 
             /*Room r1 = new Room();
             DateTime date1 = new DateTime(2008, 5, 1, 8, 30, 52);
@@ -69,9 +72,19 @@ namespace Repository
             return FindAppointmentById(appointmentID);
         }
 
+        internal void AddNotification(Notification n)
+        {
+            Notifications.Add(n);
+        }
+
         public ObservableCollection<Appointment> GetAppointments()
         {
             return Appointments;
+        }
+
+        internal ObservableCollection<Notification> GetAllNotifications()
+        {
+            return Notifications;
         }
 
         /*public void SetAppointment(List<Appointment> appointments)
