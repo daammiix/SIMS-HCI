@@ -1,4 +1,5 @@
-﻿using ClassDijagramV1._0.Util;
+﻿using ClassDijagramV1._0.Model.Enums;
+using ClassDijagramV1._0.Util;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ namespace ClassDijagramV1._0.Model
         private string _password;
         private bool _banned;
         private bool _isGuest;
+        private int _personId;
+        private Role _role;
 
         #endregion
 
@@ -86,16 +89,44 @@ namespace ClassDijagramV1._0.Model
             }
         }
 
+        public int PersonId
+        {
+            get { return _personId; }
+            set
+            {
+                if (_personId != value)
+                {
+                    _personId = value;
+                    onPropertyChanged("PersonId");
+                }
+            }
+        }
+
+        public Role Role
+        {
+            get { return _role; }
+            set
+            {
+                if (_role != value)
+                {
+                    _role = value;
+                    onPropertyChanged("Role");
+                }
+            }
+        }
+
         #endregion
 
         #region Constructor
 
-        public Account(string username = "", string password = "", bool isGuest = false, bool banned = false)
+        public Account(int personId, Role role, string username = "", string password = "", bool isGuest = false, bool banned = false)
         {
+            Role = role;
             Username = username;
             Password = password;
             IsGuest = isGuest;
             Banned = banned;
+            PersonId = personId;
         }
 
         [JsonConstructor]

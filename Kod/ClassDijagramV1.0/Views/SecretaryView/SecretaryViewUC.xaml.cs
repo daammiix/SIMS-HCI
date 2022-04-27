@@ -2,6 +2,7 @@
 using ClassDijagramV1._0.Dialog;
 using ClassDijagramV1._0.FileHandlers;
 using ClassDijagramV1._0.Model;
+using ClassDijagramV1._0.Model.Enums;
 using ClassDijagramV1._0.Repository;
 using ClassDijagramV1._0.Service;
 using Controller;
@@ -22,12 +23,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ClassDijagramV1._0.Views
+namespace ClassDijagramV1._0.Views.SecretaryView
 {
     /// <summary>
     /// Interaction logic for Sekretar.xaml
     /// </summary>
-    public partial class SecretaryView : UserControl
+    public partial class SecretaryViewUC : UserControl
     {
         #region Fields
 
@@ -47,7 +48,7 @@ namespace ClassDijagramV1._0.Views
 
         #region Constructor
 
-        public SecretaryView()
+        public SecretaryViewUC()
         {
             InitializeComponent();
             this.DataContext = this;
@@ -59,10 +60,6 @@ namespace ClassDijagramV1._0.Views
 
             Accounts = _accountController.GetAccounts();
             Patients = _patientController.GetPatients();
-            foreach (Patient patient in Patients)
-            {
-                patient.Account = _accountController.GetAccount(patient.AccountUsername);
-            }
         }
 
         #endregion
@@ -88,16 +85,12 @@ namespace ClassDijagramV1._0.Views
         /// <param name="e"></param>
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            Patient newPatient = createPatientFromInput();
-            _patientController.AddPatient(newPatient);
-            _accountController.AddAccount(newPatient.Account);
+            createPatientAndAccountFromInput();
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            Patient patient = createPatientFromInput();
-            _patientController.UpdatePatient(patient);
-            _accountController.updateAccount(patient.Account);
+
         }
 
         #endregion
@@ -108,7 +101,7 @@ namespace ClassDijagramV1._0.Views
         /// Ucitava vrednosti iz forme i pravi novi account
         /// </summary>
         /// <returns></returns>
-        public Patient createPatientFromInput()
+        public void createPatientAndAccountFromInput()
         {
             String name = this.Name.Text;
             String surname = this.Surname.Text;
@@ -126,8 +119,11 @@ namespace ClassDijagramV1._0.Views
 
             bool isGuest = this.GuestCheckBox.IsChecked.Value;
 
-            Account acc = new Account(username, password, isGuest);
-            return new Patient(name, surname, jmbg, gender, phoneNumber, email, dateOfBirth, socialNumber, acc);
+            Patient p = new Patient(name, surname, jmbg, gender, phoneNumber, email, dateOfBirth, socialNumber);
+            _patientController.AddPatient(p);
+            Account acc = new Account(p.Id, Role.Patient, username, password, isGuest);
+            _accountController.AddAccount(acc);
+
         }
 
         /// <summary>
@@ -137,15 +133,16 @@ namespace ClassDijagramV1._0.Views
         /// <param name="e"></param>
         private void BanUnbanButton_Click(object sender, RoutedEventArgs e)
         {
-            object selectedItem = this.AcountList.SelectedItem;
-            if (selectedItem != null)
+            Account? selectedAccount = this.AccountList.SelectedItem as Account;
+            if (selectedAccount != null)
             {
-                if (((Person)selectedItem).Account != null)
+                if (selectedAccount.Banned == false)
                 {
-                    if (((Patient)selectedItem).Account.Banned == false)
-                        ((Patient)selectedItem).Account.Banned = true;
-                    else
-                        ((Patient)selectedItem).Account.Banned = false;
+                    selectedAccount.Banned = true;
+                }
+                else
+                {
+                    selectedAccount.Banned = false;
                 }
             }
         }

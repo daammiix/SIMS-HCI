@@ -1,20 +1,34 @@
 [
   {
-    "Username": "Guest3114",
-    "Password": "Guest3114",
+    "Username": "sekretar123",
+    "Password": "sekretar123",
     "Banned": false,
-    "IsGuest": true
+    "IsGuest": false,
+    "PersonId": 7,
+    "Role": 3
   },
   {
-    "Username": "fsafsa",
-    "Password": "fsagsagsa",
+    "Username": "upravnik123",
+    "Password": "upravnik123",
     "Banned": false,
-    "IsGuest": false
+    "IsGuest": false,
+    "PersonId": 8,
+    "Role": 0
   },
   {
-    "Username": "Guest4384",
-    "Password": "Guest4384",
+    "Username": "doktor123",
+    "Password": "doktor123",
     "Banned": false,
-    "IsGuest": true
+    "IsGuest": false,
+    "PersonId": 9,
+    "Role": 1
+  },
+  {
+    "Username": "pacijent123",
+    "Password": "pacijent123",
+    "Banned": false,
+    "IsGuest": false,
+    "PersonId": 6,
+    "Role": 2
   }
 ]

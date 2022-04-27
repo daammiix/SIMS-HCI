@@ -14,7 +14,7 @@ namespace ClassDijagramV1._0.Repository
     {
         #region Fields
 
-        private AccountFileHandler _fileHandler;
+        private FileHandler<Account> _fileHandler;
 
         #endregion
 
@@ -26,11 +26,12 @@ namespace ClassDijagramV1._0.Repository
 
         #region Constructor
 
-        public AccountRepo(AccountFileHandler fileHandler)
+        public AccountRepo(FileHandler<Account> fileHandler)
         {
             _fileHandler = fileHandler;
 
-            Accounts = new ObservableCollection<Account>(_fileHandler.getAccounts());
+            Accounts = new ObservableCollection<Account>(_fileHandler.GetItems());
+
         }
 
         #endregion
@@ -51,7 +52,7 @@ namespace ClassDijagramV1._0.Repository
         /// </summary>
         public void SaveAccounts()
         {
-            _fileHandler.saveAccounts(Accounts.ToList());
+            _fileHandler.SaveItems(Accounts.ToList());
         }
 
         /// <summary>

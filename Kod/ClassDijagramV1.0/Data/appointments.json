@@ -4,25 +4,25 @@
     "Patient": {
       "Appointment": null,
       "SocialSecurityNumber": "1234",
+      "Id": 0,
       "Name": "djordje",
       "Surname": "djordje",
       "Jmbg": "123",
       "Gender": "musko",
       "PhoneNumber": "3875432",
       "Email": "the292200",
-      "DateOfBirth": "2022-04-29T07:30:00",
-      "AccountUsername": null
+      "DateOfBirth": "2022-04-29T07:30:00"
     },
     "Doctor": {
       "surgery": null,
+      "Id": 0,
       "Name": "doktor",
       "Surname": "doktor",
       "Jmbg": "123",
       "Gender": "musko",
       "PhoneNumber": "3875432",
       "Email": "the292200",
-      "DateOfBirth": "2008-05-01T08:30:52",
-      "AccountUsername": null
+      "DateOfBirth": "2008-05-01T08:30:52"
     },
     "Room": {
       "RoomID": "id",
@@ -40,25 +40,25 @@
     "Patient": {
       "Appointment": null,
       "SocialSecurityNumber": "1234",
+      "Id": 0,
       "Name": "djordje",
       "Surname": "djordje",
       "Jmbg": "123",
       "Gender": "musko",
       "PhoneNumber": "3875432",
       "Email": "the292200",
-      "DateOfBirth": "2022-04-27T09:00:00",
-      "AccountUsername": null
+      "DateOfBirth": "2022-04-27T09:00:00"
     },
     "Doctor": {
       "surgery": null,
+      "Id": 0,
       "Name": "doktor",
       "Surname": "doktor",
       "Jmbg": "123",
       "Gender": "musko",
       "PhoneNumber": "3875432",
       "Email": "the292200",
-      "DateOfBirth": "2008-05-01T08:30:52",
-      "AccountUsername": null
+      "DateOfBirth": "2008-05-01T08:30:52"
     },
     "Room": {
       "RoomID": "id",

@@ -10,9 +10,9 @@ using System.ComponentModel;
 
 namespace Model
 {
-   public class Doctor : Person, INotifyPropertyChanged
-   {
-      private DoctorType type;
+    public class Doctor : Person, INotifyPropertyChanged
+    {
+        private DoctorType type;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -28,7 +28,7 @@ namespace Model
         {
         }
 
-        public Doctor(string name, string surname, string jmbg, string gender, string phoneNumber, string email, DateTime dateOfBirth, DoctorType type, List<Surgery> surgery, Account account = null) : base(name, surname, jmbg, gender, phoneNumber, email, dateOfBirth, account)
+        public Doctor(string name, string surname, string jmbg, string gender, string phoneNumber, string email, DateTime dateOfBirth, DoctorType type, List<Surgery> surgery) : base(name, surname, jmbg, gender, phoneNumber, email, dateOfBirth)
         {
             this.surgery = surgery;
             this.type = type;

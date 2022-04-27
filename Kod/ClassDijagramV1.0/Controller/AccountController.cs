@@ -16,13 +16,7 @@ namespace ClassDijagramV1._0.Controller
     {
         #region Fields
 
-        private AccountService _accountService;
-
-        #endregion
-
-        #region Properties
-
-        public ObservableCollection<Account> Accounts { get; private set; }
+        private readonly AccountService _accountService;
 
         #endregion
 
@@ -31,8 +25,6 @@ namespace ClassDijagramV1._0.Controller
         public AccountController(AccountService accService)
         {
             _accountService = accService;
-
-            Accounts = _accountService.GetAccounts();
         }
 
         #endregion

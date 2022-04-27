@@ -13,7 +13,7 @@ namespace ClassDijagramV1._0.Repository
     {
         #region Fields
 
-        private PatientFileHandler _fileHandler;
+        private FileHandler<Patient> _fileHandler;
 
         #endregion
 
@@ -25,11 +25,12 @@ namespace ClassDijagramV1._0.Repository
 
         #region Constructor
 
-        public PatientRepo(PatientFileHandler fileHandler)
+        public PatientRepo(FileHandler<Patient> fileHandler)
         {
             _fileHandler = fileHandler;
 
-            Patients = new ObservableCollection<Patient>(fileHandler.GetPatients());
+            Patients = new ObservableCollection<Patient>(fileHandler.GetItems());
+
         }
 
         #endregion
@@ -43,31 +44,37 @@ namespace ClassDijagramV1._0.Repository
 
         public void SavePatients()
         {
-            _fileHandler.SavePatients(Patients.ToList());
+            _fileHandler.SaveItems(Patients.ToList());
         }
 
         public void AddPatient(Patient newPatient)
         {
+            // Ako nema pacijenta sa istim usernameom i jmbg-om dodajemo novog
+            bool flag = true;
             foreach (Patient pat in Patients)
             {
-                if (pat.Account.Username.Equals(newPatient.Account.Username))
-                    return;
+                if (pat.Id == newPatient.Id || pat.Jmbg.Equals(newPatient.Jmbg))
+                {
+                    flag = false;
+                    break;
+                }
             }
-            // Ako ne postoji pacijent sa istim usernameom dodaj ga
-            Patients.Add(newPatient);
+            if (flag)
+            {
+                Patients.Add(newPatient);
+            }
         }
 
-        public bool RemovePatient(String username)
+        public bool RemovePatient(int id)
         {
             Patient patientToRemove = null;
             foreach (Patient patient in Patients)
             {
-                if (patient.Account != null)
-                    if (patient.Account.Username.Equals(username))
-                    {
-                        patientToRemove = patient;
-                        break;
-                    }
+                if (patient.Id == id)
+                {
+                    patientToRemove = patient;
+                    break;
+                }
             }
             if (patientToRemove != null)
             {
@@ -84,12 +91,11 @@ namespace ClassDijagramV1._0.Repository
             Patient patientToUpdate = null;
             foreach (Patient pat in Patients)
             {
-                if (patient.Account != null && pat.Account != null)
-                    if (pat.Account.Username.Equals(patient.Account.Username))
-                    {
-                        patientToUpdate = pat;
-                        break;
-                    }
+                if (patient.Id == pat.Id)
+                {
+                    patientToUpdate = pat;
+                    break;
+                }
             }
 
             if (patientToUpdate != null)
@@ -99,6 +105,25 @@ namespace ClassDijagramV1._0.Repository
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Vraca pacijenta sa zadatim id-em u suprotnom vraca null
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Patient GetPatientById(int id)
+        {
+            Patient? ret = null;
+            foreach (Patient patient in Patients)
+            {
+                if (patient.Id == id)
+                {
+                    ret = patient;
+                }
+            }
+
+            return ret;
         }
 
         #endregion

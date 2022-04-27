@@ -39,14 +39,19 @@ namespace Service
             _patientRepo.AddPatient(newPatient);
         }
 
-        public void RemovePatient(String username)
+        public void RemovePatient(int id)
         {
-            _patientRepo.RemovePatient(username);
+            _patientRepo.RemovePatient(id);
         }
 
         public void UpdatePatient(Patient patient)
         {
             _patientRepo.UpdatePatient(patient);
+        }
+
+        public Patient GetPatientById(int id)
+        {
+            return _patientRepo.GetPatientById(id);
         }
 
         #endregion

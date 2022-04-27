@@ -14,7 +14,7 @@ namespace ClassDijagramV1._0.Service
     {
         #region Fields
 
-        private AccountRepo _accountRepo;
+        private readonly AccountRepo _accountRepo;
 
         #endregion
 

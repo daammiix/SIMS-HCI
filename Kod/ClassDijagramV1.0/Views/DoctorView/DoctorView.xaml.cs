@@ -16,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ClassDijagramV1._0.Views
+namespace ClassDijagramV1._0.Views.DoctorView
 {
     /// <summary>
     /// Interaction logic for DoctorView.xaml
