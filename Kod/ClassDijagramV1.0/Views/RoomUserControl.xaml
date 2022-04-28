@@ -30,11 +30,11 @@
             <DockPanel>
                 <Menu DockPanel.Dock ="Top">
                     <Button x:Name="button1" Content="Delete room" HorizontalAlignment="Left" Height="24" 
-                        VerticalAlignment="Top" Width="100" Background="White" Foreground="#FF707070" Click="Delete_room_Click"/>
+                        VerticalAlignment="Top" Width="100" Background="White" Foreground="#FF707070" />
                     <Button x:Name="button2" Content="Add room" HorizontalAlignment="Center" Height="24" 
-                        VerticalAlignment="Top" Width="100" Background="White" Foreground="#FF707070" Click="Add_room_Click"/>
+                        VerticalAlignment="Top" Width="100" Background="White" Foreground="#FF707070" />
                     <Button x:Name="button3" Content="Change room" HorizontalAlignment="Right" Height="24" 
-                        VerticalAlignment="Top" Width="100" Background="White" Foreground="#FF707070" Click="Change_room_Click"/>
+                        VerticalAlignment="Top" Width="100" Background="White" Foreground="#FF707070" />
                 </Menu>
             </DockPanel>
             <TextBlock Grid.Column="0" Grid.Row="1">RoomID:</TextBlock>

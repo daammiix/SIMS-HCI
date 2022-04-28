@@ -8,6 +8,7 @@ using Repository;
 using Service;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Linq;
@@ -27,6 +28,8 @@ namespace ClassDijagramV1._0
         private string _patientsFilePath = "../../../Data/patients.json";
         private string _appointmentsFilePath = "../../../Data/appointments.json";
         private string _doctorsFilePath = "../../../Data/doctors.json";
+        private string _roomsFilePath = "../../../Data/rooms.json";
+        private string _equipmentFilePath = "../../../Data/equipment.json";
 
         #endregion
 
@@ -41,6 +44,10 @@ namespace ClassDijagramV1._0
         public DoctorController doctorController { get; set; }
 
         public RoomController roomController { get; set; }
+
+        public EquipmentController equipmentController { get; set; }
+
+        public EquipmentAppointmentController equipmentAppointmentController { get; set; }
 
         #endregion
 
@@ -70,8 +77,20 @@ namespace ClassDijagramV1._0
             var doctorService = new DoctorService(doctorRepository);
             doctorController = new DoctorController(doctorService);
 
-            //
-            roomController = new RoomController();
+            // Rooms
+            var roomRepo = new RoomRepoJson(new FileHandler<BindingList<Room>>(_roomsFilePath));
+            var roomService = new RoomService(roomRepo);
+            roomController = new RoomController(roomService);
+
+            // Equipment
+            var equipmentRepo = new EquipmentRepo();
+            var equipmentService = new EquipmentService(equipmentRepo);
+            equipmentController = new EquipmentController(equipmentService);
+
+            // EquipmentAppointment
+            var equipmentAppointmentRepo = new EquipmentAppointmentRepo();
+            var equipmentAppointmentService = new EquipmentAppointmentService(equipmentAppointmentRepo);
+            equipmentAppointmentController = new EquipmentAppointmentController(equipmentAppointmentService);
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)
@@ -80,6 +99,7 @@ namespace ClassDijagramV1._0
             PatientController.SavePatients();
             appointmentController.SaveAppointments();
             doctorController.SaveDoctors();
+            roomController.SaveRooms();
         }
     }
 }

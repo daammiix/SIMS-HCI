@@ -5,6 +5,7 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,7 +34,7 @@ namespace ClassDijagramV1._0.Dialog
             get;
             set;
         }
-        public ObservableCollection<Room> Rooms
+        public BindingList<Room> Rooms
         {
             get;
             set;

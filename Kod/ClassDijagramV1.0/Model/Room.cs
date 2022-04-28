@@ -5,115 +5,79 @@
  ***********************************************************************/
 
 using ClassDijagramV1._0;
-using ClassDijagramV1._0.FileHandlers;
-using ClassDijagramV1._0.Util;
-using Repository;
+using ClassDijagramV1._0.Model;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
+using System.ComponentModel;
 using System.Windows;
 
 namespace Model
 {
-    public class Room : ObservableObject
+    public class Room
     {
-        private String _roomID;
-        private RoomName _roomName;
-        private int _floor;
-        private int _roomNumber;
-        private RoomStatus _roomStatus;
-
-        public String RoomID
-        {
-            get
-            {
-                return _roomID;
-            }
-            set
-            {
-                if (_roomID != value)
-                {
-                    _roomID = value;
-                    onPropertyChanged("RoomID");
-                }
-            }
-        }
-        public RoomName RoomName
-        {
-            get
-            {
-                return _roomName;
-            }
-            set
-            {
-                if (_roomName != value)
-                {
-                    _roomName = value;
-                    onPropertyChanged("RoomName");
-                }
-            }
-        }
-        public int Floor
-        {
-            get
-            {
-                return _floor;
-            }
-            set
-            {
-                if (_floor != value)
-                {
-                    _floor = value;
-                    onPropertyChanged("Floor");
-                }
-            }
-        }
-        public int RoomNumber
-        {
-            get
-            {
-                return _roomNumber;
-            }
-            set
-            {
-                if (_roomNumber != value)
-                {
-                    _roomNumber = value;
-                    onPropertyChanged("RoomNumber");
-                }
-            }
-        }
-        public RoomStatus RoomStatus
-        {
-            get
-            {
-                return _roomStatus;
-            }
-            set
-            {
-                if (_roomStatus != value)
-                {
-                    _roomStatus = value;
-                    onPropertyChanged("RoomStatus");
-                }
-            }
-        }
+        public String RoomID { get; set; }
+        public String RoomName { get; set; }
+        public int Floor { get; set; }
+        public int RoomNumber { get; set; }
+        public String RoomStatus { get; set; }
+        public BindingList<RoomEquipmentBinding> EquipmentList { get; set; } = new BindingList<RoomEquipmentBinding>();
 
         public Room()
         {
 
         }
-        public Room(String RoomID, RoomName RoomName, int Floor, int RoomNumber, RoomStatus RoomStatus)
+
+        public Room(String RoomID, String RoomName, int Floor, int RoomNumber, String RoomStatus, BindingList<RoomEquipmentBinding>? EquipmentList = null)
         {
             this.RoomID = RoomID;
             this.RoomName = RoomName;
             this.Floor = Floor;
             this.RoomNumber = RoomNumber;
             this.RoomStatus = RoomStatus;
+            if (EquipmentList != null) { this.EquipmentList = EquipmentList; }
+        }
+
+        private RoomEquipmentBinding? getBinding(Equipment e)
+        {
+            foreach (var binding in EquipmentList)
+            {
+                if (binding.EquipmentID == e.EquipmentID)
+                {
+                    return binding;
+                }
+            }
+            return null;
+        }
+
+        public void addEquipment(Equipment e, int quantity)
+        {
+            RoomEquipmentBinding? binding = getBinding(e);
+            if (binding == null)
+            {
+                EquipmentList.Add(new RoomEquipmentBinding(e.EquipmentID, quantity));
+            } else
+            {
+                binding.Quantity += quantity;
+            }
+        }
+
+        public void removeEquipment(Equipment e, int quantity)
+        {
+            RoomEquipmentBinding? binding = getBinding(e);
+            if (binding == null)
+            {
+                throw new Exception("Binding not found");
+            }
+            if (binding.Quantity == quantity)
+            {
+                EquipmentList.Remove(binding);
+            }
+            else
+            {
+                binding.Quantity -= quantity;
+            }
         }
         
-
         public bool isFree(DateTime start, DateTime end) 
         {
             bool retVal = true;
@@ -147,9 +111,17 @@ namespace Model
             }
             return retVal;
         }
+    }
 
+    public class RoomEquipmentBinding
+    {
+        public String EquipmentID { get; set; }
+        public int Quantity { get; set; }
+
+        public RoomEquipmentBinding(String equipmentID, int quantity)
+        {
+            this.EquipmentID = equipmentID;
+            this.Quantity = quantity;
+        }
     }
 }
-
-
-

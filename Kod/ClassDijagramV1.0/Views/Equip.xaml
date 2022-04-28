@@ -1,0 +1,109 @@
+﻿<Window x:Class="ClassDijagramV1._0.Views.Equip"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClassDijagramV1._0.Views"
+        mc:Ignorable="d"
+        Title="Equip"
+        Height="650"
+        Width="850"
+         WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="#8BCDD3"
+        BorderThickness="4"
+        BorderBrush="#234A4D">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65"/>
+            <RowDefinition Height="395"/>
+            <RowDefinition Height="185"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+                   Text="Zakazivanje premeštanja"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   FontSize="34"
+                   Foreground="Black">
+        </TextBlock>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="500"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Row="1"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+                <Label Content="Odaberite opremu i količinu:" FontSize="22" Margin="15,0,0,5"/>
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox x:Name="EquipmentBox" Width="230" Height="45" Margin="10,0,0,5" FontSize="22"
+                          VerticalContentAlignment="Center" IsReadOnly="True">
+                        <ComboBoxItem Margin="5,0,0,0" Content="ID Monitor za nadgledanje"/>
+                        <ComboBoxItem Margin="5,0,0,0" Content="ID Hanzaplasti"/>
+                        <ComboBoxItem Margin="5,0,0,0" Content="ID Zavoji"/>
+                        <ComboBoxItem Margin="5,0,0,0" Content="Id Laser"/>
+                    </ComboBox>
+                    <TextBox x:Name="Quantity" Width="70" Background="#E7E7E7" Height="47" Margin="10,0,0,0" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                </StackPanel>
+
+                <Label Content="Odaberite datum" FontSize="22" Margin="15,0,0,5"/>
+                <DatePicker x:Name="PickerDate" FontSize="22" Margin="10,0,0,5" Height="40" Width="230" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+
+                <Label Content="Sala iz koje se premešta:" FontSize="22" Margin="15,0,0,5"/>
+                <ComboBox x:Name="MovingFrom" Width="230" Height="40" Margin="10,0,0,5" FontSize="22"
+                          VerticalContentAlignment="Center" IsReadOnly="True">
+                    <ComboBoxItem Margin="5,0,0,0" Content="Operaciona Sala"/>
+                    <ComboBoxItem Margin="5,0,0,0" Content="Sala za preglede"/>
+                    <ComboBoxItem Margin="5,0,0,0" Content="Bolnička soba"/>
+                    <ComboBoxItem Margin="5,0,0,0" Content="Intezivna nega"/>
+                    <ComboBoxItem Margin="5,0,0,0" Content="Sala za sastanke"/>
+                </ComboBox>
+
+                <Label Content="Sala u koju se premešta:" FontSize="22" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
+                <TextBox x:Name="Movingto" IsReadOnly="True" Width="230" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+
+            </StackPanel>
+
+            <DataGrid Grid.Column="1" Height="380" Width="450" x:Name="BusyRooms" 
+                      CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left"
+                      CanUserDeleteRows="False" AutoGenerateColumns="False"
+                      ItemsSource="{Binding Path=EquipmentList}" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Iz koje sale" Width="150" />
+                    <DataGridTextColumn Header="U koju salu" Width="150"/>
+                    <DataGridTextColumn Header="Oprema" Width="150" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="525"/>
+                <ColumnDefinition Width="275"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+                <Label Content="Zakaži opremanje:" FontSize="22" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Label Content="Od:" FontSize="22" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
+                    <TextBox x:Name="FromDate" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource DateTextBox}"/>
+                    <TextBox x:Name="FromTime" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource TimeTextBox}"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Label Content="Od:" FontSize="22" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
+                    <TextBox x:Name="ToDate" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource DateTextBox}"/>
+                    <TextBox x:Name="ToTime" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource TimeTextBox}"/>
+                </StackPanel>
+
+            </StackPanel>
+
+            <WrapPanel Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                <Button x:Name="SaveEquip" HorizontalAlignment="Right" Height="32" Width="90" Content="Sačuvaj" Margin="5,10,10,25" Style="{StaticResource CRUDButton}" Click="SaveEquip_Click"/>
+                <Button x:Name="QuitEquip" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,25,25" Style="{StaticResource CRUDButton}" Click="QuitEquip_Click"/>
+            </WrapPanel>
+        </Grid>
+    </Grid>
+</Window>
