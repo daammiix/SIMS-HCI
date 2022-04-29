@@ -13,6 +13,14 @@
         ResizeMode="NoResize"
         Background="#8BCDD3"
         BorderThickness="2">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Theme/ReservationButtonTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -29,7 +37,7 @@
             </TextBlock>
             <StackPanel Grid.Row="1"
                    HorizontalAlignment="Left">
-                
+
                 <RadioButton x:Name="Equip"
                              Content="Opremanje"
                              Style="{StaticResource ReservationButton}"

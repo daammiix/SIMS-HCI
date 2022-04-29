@@ -14,6 +14,16 @@
         Background="#8BCDD3"
         BorderThickness="4"
         BorderBrush="#234A4D">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Theme/DateTextBoxTheme.xaml"/>
+                <ResourceDictionary Source="../Theme/TimeTextBoxTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
