@@ -86,6 +86,38 @@ namespace ClassDijagramV1._0.Controller
             _accountService.UpdateAccount(account);
         }
 
+        /// <summary>
+        /// Proverava da li postoji account sa unetim podacima
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public bool isLoginValid(string username, string password)
+        {
+            return _accountService.isLoginValid(username, password);
+        }
+
+        /// <summary>
+        /// Proverava da li account sa zadatim id-em postoji
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool DoesAccountWithSameIdExist(int id)
+        {
+            return _accountService.DoesAccountWithSameIdExist(id);
+        }
+
+        /// <summary>
+        /// Proverava da li postoji account sa istim username-om
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="acc">U slucaju promene zelimo da prosledimo i trenutni acc jer njega necemo da gledamo</param>
+        /// <returns></returns>
+        public bool DoesAccountWithSameUsernameExists(string username, Account acc = null)
+        {
+            return _accountService.DoesAccountWithSameUsernameExists(username, acc);
+        }
+
         #endregion
     }
 }

@@ -41,7 +41,7 @@ namespace ClassDijagramV1._0.Views
         /// <param name="e"></param>
         private void ButtonMinimize_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.WindowState = WindowState.Minimized;
+            this.WindowState = WindowState.Minimized;
         }
 
         /// <summary>
@@ -51,13 +51,13 @@ namespace ClassDijagramV1._0.Views
         /// <param name="e"></param>
         private void WindowStateButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Application.Current.MainWindow.WindowState == WindowState.Maximized)
+            if (this.WindowState == WindowState.Maximized)
             {
-                Application.Current.MainWindow.WindowState = WindowState.Normal;
+                this.WindowState = WindowState.Normal;
             }
             else
             {
-                Application.Current.MainWindow.WindowState = WindowState.Maximized;
+                this.WindowState = WindowState.Maximized;
             }
         }
 
@@ -68,7 +68,7 @@ namespace ClassDijagramV1._0.Views
         /// <param name="e"></param>
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow?.Close();
+            this?.Close();
         }
 
 

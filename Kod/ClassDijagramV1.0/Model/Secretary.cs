@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  Secretary.cs
- * Author:  lipov
- * Purpose: Definition of the Class Model.Secretary
- ***********************************************************************/
-
 using System;
 
 namespace Model

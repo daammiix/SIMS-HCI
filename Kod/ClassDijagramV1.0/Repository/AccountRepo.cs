@@ -65,12 +65,15 @@ namespace ClassDijagramV1._0.Repository
             // Flag za proveru da li postoji account sa istim username-om kao novi account
             bool notexists = true;
 
+            // Ako postoji pregazimo ga
+            Account? toUpdate = null;
             // Provera da li postoji account sa istim username-om
             foreach (Account account in Accounts)
             {
                 if (account.Username.Equals(newAccount.Username))
                 {
                     notexists = false;
+                    toUpdate = account;
                     break;
                 }
             }
@@ -81,9 +84,14 @@ namespace ClassDijagramV1._0.Repository
                 Accounts.Add(newAccount);
                 return true;
             }
+            // Pregazi postojeci
+            else
+            {
+                toUpdate = newAccount;
+                // Vrati false kao indikator da nisi dodao novi
+                return false;
+            }
 
-            // U suprotnom vrati false
-            return false;
         }
 
         /// <summary>

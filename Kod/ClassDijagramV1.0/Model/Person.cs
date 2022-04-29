@@ -7,6 +7,8 @@ namespace Model
 {
     public abstract class Person
     {
+        // brojac id-ja
+        private static int _id = 0;
         public int Id { get; set; }
         public String Name { get; set; }
         public String Surname { get; set; }
@@ -19,7 +21,7 @@ namespace Model
         public Person(string name, string surname, string jmbg, string gender,
             string phoneNumber, string email, DateTime dateOfBirth)
         {
-            this.Id = IdCounter.getInstance().getId();
+            this.Id = ++_id;
             this.Name = name;
             this.Surname = surname;
             this.Jmbg = jmbg;

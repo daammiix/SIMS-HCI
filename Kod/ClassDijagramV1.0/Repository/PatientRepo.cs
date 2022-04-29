@@ -49,17 +49,23 @@ namespace ClassDijagramV1._0.Repository
 
         public void AddPatient(Patient newPatient)
         {
-            // Ako nema pacijenta sa istim usernameom i jmbg-om dodajemo novog
-            bool flag = true;
+            // Ako nema pacijenta sa istim idem i jmbg-om dodajemo novog, ako postoji pregazimo starog
+            bool exists = false;
+            Patient? toUpdate = null;
             foreach (Patient pat in Patients)
             {
                 if (pat.Id == newPatient.Id || pat.Jmbg.Equals(newPatient.Jmbg))
                 {
-                    flag = false;
+                    toUpdate = pat;
+                    exists = true;
                     break;
                 }
             }
-            if (flag)
+            if (toUpdate == null)
+            {
+                toUpdate = newPatient;
+            }
+            if (!exists)
             {
                 Patients.Add(newPatient);
             }

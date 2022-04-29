@@ -50,7 +50,7 @@ namespace ClassDijagramV1._0.Dialog
             App app = Application.Current as App;
             _appointmentController = app.appointmentController;
             _roomController = app.roomController;
-            _doctorController = app.doctorController;
+            _doctorController = app.DoctorController;
 
             Rooms = _roomController.GetAllRooms();
             Appointments = _appointmentController.GetAllAppointments("djordje"); // ulgovani korisnik ali ovo je za doktora
@@ -69,7 +69,7 @@ namespace ClassDijagramV1._0.Dialog
             double NDays = 5;
             DateTime NDaysBefore = oldDate.AddDays(-NDays);
             DateTime NDaysAfter = oldDate.AddDays(NDays);
-            promjenaKalendar.BlackoutDates.Add(new CalendarDateRange(DateTime.MinValue,NDaysBefore));
+            promjenaKalendar.BlackoutDates.Add(new CalendarDateRange(DateTime.MinValue, NDaysBefore));
             promjenaKalendar.BlackoutDates.Add(new CalendarDateRange(NDaysAfter, DateTime.MaxValue));
         }
 
@@ -83,7 +83,7 @@ namespace ClassDijagramV1._0.Dialog
             TimeSpan interval = date2 - date1;*/
             Doctor d1 = (Doctor)dodavanjPregledaDoktor.SelectedItem;
             Room r1 = getFreeRoom(date1, date1.AddMinutes(15));
-            
+
             updatedAppointment.AppointmentDate = promjenaKalendar.SelectedDate.Value;
             updatedAppointment.Doctor = d1;
 

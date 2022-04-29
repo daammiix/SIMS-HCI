@@ -23,12 +23,18 @@ namespace ClassDijagramV1._0
     /// </summary>
     public partial class App : Application
     {
+        // Project path
+        public static string ProjectPath = System.Reflection.Assembly.GetExecutingAssembly().Location
+            .Split(new string[] { "bin" }, StringSplitOptions.None)[0];
+
         #region Fields
 
-        public static string _accountsFilePath = "../../../Data/accounts.json";
-        public static string _patientsFilePath = "../../../Data/patients.json";
+        public string _accountsFilePath = "../../../Data/accounts.json";
+        public string _patientsFilePath = "../../../Data/patients.json";
         private string _appointmentsFilePath = "../../../Data/appointments.json";
         private string _doctorsFilePath = "../../../Data/doctors.json";
+        private string _secretaryFilePath = "../../../Data/secretary.json";
+        private string _managerFilePath = "../../../Data/managers.json";
 
         #endregion
 
@@ -40,9 +46,14 @@ namespace ClassDijagramV1._0
         public PatientController PatientController { get; set; }
 
         public SurgeryController surgeryController { get; set; }
-        public DoctorController doctorController { get; set; }
+
+        public DoctorController DoctorController { get; set; }
 
         public RoomController roomController { get; set; }
+
+        public SecretaryController SecretaryController { get; set; }
+
+        public ManagerController ManagerController { get; set; }
 
         #endregion
 
@@ -70,10 +81,21 @@ namespace ClassDijagramV1._0
             //
             var doctorRepository = new DoctorRepo(new DoctorFileHandler(_doctorsFilePath));
             var doctorService = new DoctorService(doctorRepository);
-            doctorController = new DoctorController(doctorService);
+            DoctorController = new DoctorController(doctorService);
 
             //
             roomController = new RoomController();
+
+            // Secretary
+            var secretaryRepo = new SecretaryRepo(new FileHandler<Secretary>(_secretaryFilePath));
+            var secretaryService = new SecretaryService(secretaryRepo);
+            SecretaryController = new SecretaryController(secretaryService);
+
+
+            // Managers
+            var managerRepo = new ManagerRepo(new FileHandler<Manager>(_managerFilePath));
+            var managerService = new ManagerService(managerRepo);
+            ManagerController = new ManagerController(managerService);
 
 
             MakeTestData();
@@ -84,21 +106,37 @@ namespace ClassDijagramV1._0
             AccountController.SaveAccounts();
             PatientController.SavePatients();
             appointmentController.SaveAppointments();
-            doctorController.SaveDoctors();
+            DoctorController.SaveDoctors();
+            SecretaryController.SaveSecretaries();
+            ManagerController.SaveManagers();
         }
 
         private void MakeTestData()
         {
             Patient p1 = new Patient("Pera", "Peric", "1595959565626", "M", "0655986598", "perap123@gmail.com",
                 new DateTime(1992, 5, 25), "2222");
+            p1.Id = 1; // Izbrisati kad se svi podaci budu pravili ovde
             Secretary s1 = new Secretary("Mika", "Lazic", "8921154845568", "M", "0696523145", "mikal123@gmail.com",
                 new DateTime(1994, 3, 15));
+            s1.Id = 2;
             Manager m1 = new Manager("Svetlana", "Gogalovic", "265959595959", "Z", "65959895956", "svetlanagogo@gmail.com",
                 new DateTime(1987, 11, 12));
+            m1.Id = 3;
             Doctor d1 = new Doctor("Dragana", "Cvetkovic", "54815181818", "Z", "061235236237", "dcetvkovic49@gmail.com",
                 new DateTime(1991, 7, 17), DoctorType.dermatology, null);
+            d1.Id = 4;
+            Patient p2 = new Patient("Mira", "Mirkovic", "1659599494", "Z", "065594959", "miram@gmail.com",
+                new DateTime(1998, 7, 20), "2525");
+            p2.Id = 5;
 
             PatientController.AddPatient(p1);
+            PatientController.AddPatient(p2);
+
+            ManagerController.AddManager(m1);
+
+            SecretaryController.AddSecretary(s1);
+
+            DoctorController.AddDoctor(d1);
 
             Account ac1 = new Account(p1.Id, Role.Patient, "pacijent123", "pacijent123");
             Account ac2 = new Account(s1.Id, Role.Secretary, "sekretar123", "sekretar123");

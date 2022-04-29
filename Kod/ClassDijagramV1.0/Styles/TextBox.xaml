@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="UsernameTextBox" TargetType="TextBox">
+        <Setter Property="CaretBrush" Value="DarkGray"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
@@ -18,6 +19,7 @@
                                      Background="Transparent"
                                      Foreground="#CFCFCF"
                                      VerticalAlignment="Center"
+                                     CaretBrush="{TemplateBinding CaretBrush}"
                                      Padding="5"
                                      x:Name="UsernameBox"
                                      Grid.Column="0"/>
@@ -28,25 +30,6 @@
                                    Margin="0,0,3,0"
                                    RenderOptions.BitmapScalingMode="Fant"
                                    Grid.Column="1"/>
-                            <TextBlock IsHitTestVisible="False"
-                                       Text="Username"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"
-                                       Margin="10,0,0,0"
-                                       FontSize="12"
-                                       Foreground="DarkGray">
-
-                                <TextBlock.Style>
-                                    <Style TargetType="TextBlock">
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=UsernameBox, Path=Text}" Value="">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                        <Setter Property="Visibility" Value="Hidden"/>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
                         </Grid>
                     </Border>
                 </ControlTemplate>
@@ -55,6 +38,7 @@
     </Style>
 
     <Style x:Key="LoginPasswordBox" TargetType="PasswordBox">
+        <Setter Property="CaretBrush" Value="DarkGray"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="PasswordBox">
@@ -73,28 +57,28 @@
                                    Width="20"
                                    Height="20"
                                    RenderOptions.BitmapScalingMode="Fant"/>
-
-                            <TextBlock IsHitTestVisible="False"
-                                       Grid.Column="0"
-                                       Text="Password"
-                                       Foreground="DarkGray"
-                                       FontSize="12"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Center"
-                                       Margin="10,0,0,0"
-                                       x:Name="placeHolder"
-                                       Visibility="Hidden"/>
                         </Grid>
                     </Border>
-                    <ControlTemplate.Triggers>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="Tag" Value=""/>
-                                <Condition Property="IsFocused" Value="False"/>
-                            </MultiTrigger.Conditions>
-                            <Setter Property="Visibility" TargetName="placeHolder" Value="Visible"/>
-                        </MultiTrigger>
-                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TextBoxStyleAccount" TargetType="TextBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border BorderBrush="{StaticResource SCyan}"
+                            Background="{StaticResource SDarkGrayShade}"
+                            BorderThickness="1"
+                            CornerRadius="15">
+                        <TextBox Padding="10"
+                                 CaretBrush="White"
+                                 Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 Foreground="{StaticResource SLightGrayShade}"/>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
