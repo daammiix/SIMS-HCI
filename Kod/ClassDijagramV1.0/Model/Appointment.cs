@@ -11,7 +11,7 @@ using System.ComponentModel;
 
 namespace Model
 {
-   public class Appointment : ObservableObject
+    public class Appointment : ObservableObject
     {
         private String appointmentID;
         private Patient patient;
@@ -32,7 +32,7 @@ namespace Model
                 if (value != appointmentID)
                 {
                     appointmentID = value;
-                    onPropertyChanged("AppointmentID");
+                    OnPropertyChanged("AppointmentID");
                 }
             }
         }
@@ -47,7 +47,7 @@ namespace Model
                 if (value != patient)
                 {
                     patient = value;
-                    onPropertyChanged("Patient");
+                    OnPropertyChanged("Patient");
                 }
             }
         }
@@ -62,7 +62,7 @@ namespace Model
                 if (value != doctor)
                 {
                     doctor = value;
-                    onPropertyChanged("Doctor");
+                    OnPropertyChanged("Doctor");
                 }
             }
         }
@@ -77,7 +77,7 @@ namespace Model
                 if (value != room)
                 {
                     room = value;
-                    onPropertyChanged("Room");
+                    OnPropertyChanged("Room");
                 }
             }
         }
@@ -92,7 +92,7 @@ namespace Model
                 if (value != appointmentDate)
                 {
                     appointmentDate = value;
-                    onPropertyChanged("AppointmentDate");
+                    OnPropertyChanged("AppointmentDate");
                 }
             }
         }
@@ -107,7 +107,7 @@ namespace Model
                 if (value != duration)
                 {
                     duration = value;
-                    onPropertyChanged("Duration");
+                    OnPropertyChanged("Duration");
                 }
             }
         }
@@ -122,7 +122,7 @@ namespace Model
                 if (value != type)
                 {
                     type = value;
-                    onPropertyChanged("AppointmentType");
+                    OnPropertyChanged("AppointmentType");
                 }
             }
         }

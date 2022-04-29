@@ -11,8 +11,8 @@ using System.Linq;
 
 namespace Repository
 {
-   public class DoctorRepo
-   {
+    public class DoctorRepo
+    {
         private String Path;
         private DoctorFileHandler _doctorFileHandler;
         public ObservableCollection<Doctor> Doctors;
@@ -23,7 +23,7 @@ namespace Repository
             Doctors = new ObservableCollection<Doctor>(_doctorFileHandler.GetDoctors());
             //Doctors = new ObservableCollection<Doctor>();
             DateTime date1 = new DateTime(2008, 5, 1, 8, 30, 52);
-            
+
             Doctor d1 = new Doctor("doktor", "doktor", "123", "musko", "3875432", "the292200", date1, DoctorType.general, null);
             Doctor d2 = new Doctor("lekar", "lekar", "123", "musko", "3875432", "the292200", date1, DoctorType.general, null);
             //Doctors.Add(d1);
@@ -45,19 +45,39 @@ namespace Repository
         }
 
         public Doctor GetDoctor(String doctorID)
-      {
-         throw new NotImplementedException();
-      }
-      
-      public Doctor SetDoctor(Doctor doctor)
-      {
-         throw new NotImplementedException();
-      }
-      
-      public Doctor AddNewDoctor(Doctor newDoctor)
-      {
-         throw new NotImplementedException();
-      }
+        {
+            throw new NotImplementedException();
+        }
+
+        public Doctor SetDoctor(Doctor doctor)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddDoctor(Doctor newDoctor)
+        {
+            // Dodajemo novog doktora ako vec ne postoji doktor sa istim jmbg-om i idem, ako postoji pregazimo starog
+            bool exists = false;
+            Doctor? toUpdate = null;
+
+            foreach (Doctor doctor in Doctors)
+            {
+                if (doctor.Id == newDoctor.Id || doctor.Jmbg.Equals(newDoctor.Jmbg))
+                {
+                    exists = true;
+                    toUpdate = doctor;
+                    break;
+                }
+            }
+            if (toUpdate != null)
+            {
+                toUpdate = newDoctor;
+            }
+            if (!exists)
+            {
+                Doctors.Add(newDoctor);
+            }
+        }
 
         public void RemoveDoctor(String doctorID)
         {

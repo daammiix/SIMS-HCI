@@ -1,11 +1,15 @@
 using ClassDijagramV1._0.Model;
+using ClassDijagramV1._0.Util;
 using System;
 using System.Text.Json.Serialization;
 
 namespace Model
 {
-    public class Person
+    public abstract class Person
     {
+        // brojac id-ja
+        private static int _id = 0;
+        public int Id { get; set; }
         public String Name { get; set; }
         public String Surname { get; set; }
         public String Jmbg { get; set; }
@@ -14,15 +18,10 @@ namespace Model
         public String Email { get; set; }
         public DateTime DateOfBirth { get; set; }
 
-        [JsonIgnore]
-        public Account? Account { get; set; }
-
-        // Kljuc za account
-        public string AccountUsername { get; set; }
-
         public Person(string name, string surname, string jmbg, string gender,
-            string phoneNumber, string email, DateTime dateOfBirth, Account account = null)
+            string phoneNumber, string email, DateTime dateOfBirth)
         {
+            this.Id = ++_id;
             this.Name = name;
             this.Surname = surname;
             this.Jmbg = jmbg;
@@ -30,9 +29,6 @@ namespace Model
             this.PhoneNumber = phoneNumber;
             this.Email = email;
             this.DateOfBirth = dateOfBirth;
-            this.Account = account;
-            if (account != null)
-                this.AccountUsername = Account.Username;
         }
 
         [JsonConstructor]

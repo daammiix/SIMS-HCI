@@ -27,11 +27,11 @@ namespace ClassDijagramV1._0.ViewModel
             set
             {
                 _currentStorageView = value;
-                OnPropertyChanged();
+                OnPropertyChanged("CurrentStorageView");
             }
         }
 
-        public StorageViewModel() 
+        public StorageViewModel()
         {
             StorageMedicalEquipmentVM = new StorageMedicalEquipmentViewModel();
             StorageSuppliesVM = new StorageSuppliesViewModel();

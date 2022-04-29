@@ -1,24 +1,35 @@
 [
   {
     "surgery": null,
+    "Id": 0,
     "Name": "doktor",
     "Surname": "doktor",
     "Jmbg": "123",
     "Gender": "musko",
     "PhoneNumber": "3875432",
     "Email": "the292200",
-    "DateOfBirth": "2008-05-01T08:30:52",
-    "AccountUsername": null
+    "DateOfBirth": "2008-05-01T08:30:52"
   },
   {
     "surgery": null,
+    "Id": 0,
     "Name": "lekar",
     "Surname": "lekar",
     "Jmbg": "123",
     "Gender": "musko",
     "PhoneNumber": "3875432",
     "Email": "the292200",
-    "DateOfBirth": "2008-05-01T08:30:52",
-    "AccountUsername": null
+    "DateOfBirth": "2008-05-01T08:30:52"
+  },
+  {
+    "surgery": null,
+    "Id": 4,
+    "Name": "Dragana",
+    "Surname": "Cvetkovic",
+    "Jmbg": "54815181818",
+    "Gender": "Z",
+    "PhoneNumber": "061235236237",
+    "Email": "dcetvkovic49@gmail.com",
+    "DateOfBirth": "1991-07-17T00:00:00"
   }
 ]

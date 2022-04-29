@@ -10,21 +10,19 @@ namespace ClassDijagramV1._0.Util
 {
     public class ObservableObject : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler? PropertyChanged = (sender, e) => { };
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         /// Notifikuje da se property promenio
         /// </summary>
         /// <param name="propertyName"></param>
-        protected virtual void onPropertyChanged(String propertyName)
+        protected virtual void OnPropertyChanged(String propertyName)
         {
             PropertyChangedEventArgs e = new PropertyChangedEventArgs(propertyName);
-            PropertyChanged(this,e);
-        }
-
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, e);
+            }
         }
     }
 }

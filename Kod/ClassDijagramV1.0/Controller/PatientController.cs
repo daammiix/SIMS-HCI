@@ -37,14 +37,19 @@ namespace Controller
             _patientService.AddPatient(newPatient);
         }
 
-        public void RemovePatient(String username)
+        public void RemovePatient(int id)
         {
-            _patientService.RemovePatient(username);
+            _patientService.RemovePatient(id);
         }
 
         public void UpdatePatient(Patient patient)
         {
             _patientService.UpdatePatient(patient);
+        }
+
+        public Patient GetPatientById(int id)
+        {
+            return _patientService.GetPatientById(id);
         }
 
     }

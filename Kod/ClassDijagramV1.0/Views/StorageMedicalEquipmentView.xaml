@@ -9,6 +9,15 @@
              d:DesignHeight="655"
              d:DesignWidth="930"
              Background="#8BCDD3">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Theme/TextboxTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
     <StackPanel Grid.Column="1" Height="655">
         <TextBox Width="250"
                  Height="35"

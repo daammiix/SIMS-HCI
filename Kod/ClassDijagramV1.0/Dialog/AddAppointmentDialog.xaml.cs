@@ -67,14 +67,14 @@ namespace ClassDijagramV1._0.Dialog
             App app = Application.Current as App;
             _appointmentController = app.appointmentController;
             _roomController = app.roomController;
-            _doctorController = app.doctorController;
+            _doctorController = app.DoctorController;
 
             Rooms = _roomController.GetAllRooms();
             Appointments = _appointmentController.GetAllAppointments("djordje"); // ulgovani korisnik ali ovo je za doktora
             Doctors = _doctorController.GetAllDoctors();
             DoctorsAppointmentsTime = new ObservableCollection<String>();
-            
-            
+
+
         }
 
         private void GoBack(object sender, RoutedEventArgs e)
@@ -84,7 +84,7 @@ namespace ClassDijagramV1._0.Dialog
 
         private void AddAppointmentClick(object sender, RoutedEventArgs e)
         {
-            
+
             Random rnd = new Random();
             int card = rnd.Next(50);
 
@@ -95,13 +95,13 @@ namespace ClassDijagramV1._0.Dialog
             int day = kalendar.SelectedDate.Value.Day;
             string[] getTimeCB = ((timeCB.SelectedItem).ToString()).Split(":");
             int hour = Int32.Parse(getTimeCB[0]);
-            int minutes = Int32.Parse(getTimeCB[1]); 
-            DateTime date1 = new DateTime(year,month,day,hour,minutes,0);
-            
+            int minutes = Int32.Parse(getTimeCB[1]);
+            DateTime date1 = new DateTime(year, month, day, hour, minutes, 0);
+
             DateTime date2 = date1.AddMinutes(30);
             TimeSpan interval = date2 - date1;
 
-            Room r1 = getFreeRoom(date1,date2);
+            Room r1 = getFreeRoom(date1, date2);
             Doctor d1 = (Doctor)dodavanjPregledaDoktor.SelectedItem;
             Patient p1 = new Patient("djordje", "djordje", "123", "musko", "3875432", "the292200", date1, "1234");
 
@@ -121,14 +121,14 @@ namespace ClassDijagramV1._0.Dialog
                     //freeRooms.Add(r);
                     return r;
                 }
-                
+
             }
             return null;
         }
 
         private void dodavanjPregledaDoktor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           
+
             Doctor l = (Doctor)dodavanjPregledaDoktor.SelectedItem;
 
             DoctorsAppointmentsTime = new ObservableCollection<string>();

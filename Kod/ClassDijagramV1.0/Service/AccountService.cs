@@ -14,7 +14,7 @@ namespace ClassDijagramV1._0.Service
     {
         #region Fields
 
-        private AccountRepo _accountRepo;
+        private readonly AccountRepo _accountRepo;
 
         #endregion
 
@@ -82,6 +82,72 @@ namespace ClassDijagramV1._0.Service
         public void UpdateAccount(Account account)
         {
             _accountRepo.UpdateAccount(account);
+        }
+
+        /// <summary>
+        /// Proverava da li postoji account sa zadatim usernameom i passwordom
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public bool isLoginValid(string username, string password)
+        {
+            bool ret = false;
+            foreach (Account a in _accountRepo.GetAccounts())
+            {
+                if (a.Username.Equals(username) && a.Password.Equals(password))
+                {
+                    ret = true;
+                    break;
+                }
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// Proverava da li postoji acc sa istim id-em sto bi znacilo da osoba vec ima acc
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool DoesAccountWithSameIdExist(int id)
+        {
+            bool ret = false;
+            foreach (Account a in _accountRepo.GetAccounts())
+            {
+                if (a.PersonId == id)
+                {
+                    ret = true;
+                    break;
+                }
+            }
+
+            return ret;
+        }
+
+        /// <summary>
+        /// Proverava da li postoji account sa istim username-om
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="acc">U slucaju promene zelimo da prosledimo i trenutni acc jer njega necemo da gledamo</param>
+        /// <returns></returns>
+        public bool DoesAccountWithSameUsernameExists(string username, Account acc = null)
+        {
+            bool ret = false;
+            foreach (Account a in _accountRepo.GetAccounts())
+            {
+                // U slucaju da je prosledjen acc koji treba preskociti samo ga preskocimo
+                if (acc != null && a == acc)
+                {
+                    continue;
+                }
+                if (a.Username == username)
+                {
+                    ret = true;
+                    break;
+                }
+            }
+
+            return ret;
         }
 
         #endregion

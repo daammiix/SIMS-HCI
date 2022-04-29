@@ -11,8 +11,8 @@ using System.Collections.ObjectModel;
 
 namespace Controller
 {
-   public class DoctorController
-   {
+    public class DoctorController
+    {
         private DoctorService _doctorService;
 
         public DoctorController(DoctorService service)
@@ -20,25 +20,25 @@ namespace Controller
             _doctorService = service;
         }
         public void AddDoctor(Model.Doctor doctor)
-      {
-         throw new NotImplementedException();
-      }
-      
-      public void RemoveDoctor(Model.Doctor doctor)
-      {
-         throw new NotImplementedException();
-      }
-      
-      public void UpdateDoctor(Model.Doctor doctor)
-      {
-         throw new NotImplementedException();
-      }
-     
-      
-      public Model.Doctor GetOneDoctor(Model.Doctor doctor)
-      {
-         throw new NotImplementedException();
-      }
+        {
+            _doctorService.AddDoctor(doctor);
+        }
+
+        public void RemoveDoctor(Model.Doctor doctor)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateDoctor(Model.Doctor doctor)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public Model.Doctor GetOneDoctor(Model.Doctor doctor)
+        {
+            throw new NotImplementedException();
+        }
 
 
 
@@ -50,6 +50,16 @@ namespace Controller
         public void SaveDoctors()
         {
             _doctorService.SaveDoctors();
+        }
+
+        /// <summary>
+        /// Vraca doktora sa zadatim id-em ako postoji u suprotnom vraca null
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Doctor GetDoctorById(int id)
+        {
+            return _doctorService.GetDoctorById(id);
         }
 
     }

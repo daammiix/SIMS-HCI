@@ -13,5 +13,10 @@ namespace Model
         public Manager(string name, string surname, string jmbg, string gender, string phoneNumber, string email, DateTime dateOfBirth) : base(name, surname, jmbg, gender, phoneNumber, email, dateOfBirth)
         {
         }
+
+        public Manager()
+        {
+
+        }
     }
 }

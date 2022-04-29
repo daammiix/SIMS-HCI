@@ -3,23 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ClassDijagramV1._0"
              xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
-             StartupUri="Views/MainWindow.xaml"
+             xmlns:secretaryViewModel="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels"
+             xmlns:accountViewModel="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels"
+             xmlns:secretaryView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView"
+             xmlns:accountsView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.AccountsView"
              xmlns:viewModel="clr-namespace:ClassDijagramV1._0.ViewModel"
              xmlns:view="clr-namespace:ClassDijagramV1._0.Views"
+             StartupUri="Views/MainWindow.xaml"
+             xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
              Exit="Application_Exit">
+
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
-                <ResourceDictionary Source="Theme/TextboxTheme.xaml"/>
-                <ResourceDictionary Source="Theme/CRUDButtonTheme.xaml"/>
-                <ResourceDictionary Source="Theme/YesNoButtonTheme.xaml"/>
-                <ResourceDictionary Source="Theme/ReservationButtonTheme.xaml"/>
-                <ResourceDictionary Source="Theme/DateTextBoxTheme.xaml"/>
-                <ResourceDictionary Source="Theme/TimeTextBoxTheme.xaml"/>
-                <ResourceDictionary Source="Theme/CalendarTheme.xaml"/>
-                <ResourceDictionary Source="Theme/StorageMenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="/Styles/Color.xaml"/>
+                <ResourceDictionary Source="/Theme/CRUDButtonTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type secretaryViewModel:PreglediOperacijeViewModel}">
+                <secretaryView:PreglediOperacijeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type accountViewModel:AccountsMainViewModel}">
+                <accountsView:AccountsMainView/>
+            </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:RoomsViewModel}">
                 <view:RoomsView/>
@@ -48,7 +55,6 @@
             <DataTemplate DataType="{x:Type viewModel:StorageDrugsViewModel}">
                 <view:StorageDrugsView/>
             </DataTemplate>
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -9,8 +9,44 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Images\acc.png" />
+	  <None Remove="Images\account.png" />
+	  <None Remove="Images\doctor.png" />
+	  <None Remove="Images\key.png" />
+	  <None Remove="Images\manager.png" />
+	  <None Remove="Images\medicine.png" />
+	  <None Remove="Images\patient.png" />
+	  <None Remove="Images\secretary.png" />
+	  <None Remove="Images\user.png" />
 	  <None Remove="Views\PatientView\Resources\Images\logout.png" />
 	  <None Remove="Views\PatientView\Resources\Images\notification.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Images\acc.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Images\doctor.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Images\key.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Images\manager.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Images\medicine.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Images\patient.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Images\secretary.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Images\user.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 
 	<ItemGroup>

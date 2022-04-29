@@ -18,6 +18,22 @@
         <viewModel:MainViewModel/>
     </Window.DataContext>
 
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Theme/MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="../Theme/TextboxTheme.xaml"/>
+                <ResourceDictionary Source="../Theme/CRUDButtonTheme.xaml"/>
+                <ResourceDictionary Source="../Theme/YesNoButtonTheme.xaml"/>
+                <ResourceDictionary Source="../Theme/ReservationButtonTheme.xaml"/>
+                <ResourceDictionary Source="../Theme/DateTextBoxTheme.xaml"/>
+                <ResourceDictionary Source="../Theme/TimeTextBoxTheme.xaml"/>
+                <ResourceDictionary Source="../Theme/CalendarTheme.xaml"/>
+                <ResourceDictionary Source="../Theme/StorageMenuButtonTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
