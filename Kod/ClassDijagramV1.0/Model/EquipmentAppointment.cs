@@ -16,7 +16,7 @@ namespace ClassDijagramV1._0.Model
         public DateTime FromDateTime { get; set; }
         public DateTime ToDateTime { get; set; }
 
-        public EquipmentAppointment(Room RoomFrom, Room RoomTo, Equipment SelectedEquipment, int Quantity, String RoomStatus, DateTime FromDateTime, DateTime ToDateTime)
+        public EquipmentAppointment(Room RoomFrom, Room RoomTo, Equipment SelectedEquipment, int Quantity, DateTime FromDateTime, DateTime ToDateTime)
         {
             this.RoomFrom = RoomFrom;
             this.RoomTo = RoomTo;

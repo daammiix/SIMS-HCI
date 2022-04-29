@@ -1,5 +1,6 @@
 ﻿using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Repository;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -45,6 +46,23 @@ namespace ClassDijagramV1._0.Service
         {
             // TODO
             return false;
+        }
+
+        public void ScheduledAppointment()
+        {
+            BindingList<EquipmentAppointment> equipmentAppointments = GetAllEquipmentAppointment();
+
+            foreach (EquipmentAppointment equipmentAppointment in equipmentAppointments)
+            {
+                if(DateTime.Now > equipmentAppointment.FromDateTime)
+                {
+                    equipmentAppointment.RoomFrom.removeEquipment(equipmentAppointment.SelectedEquipment, equipmentAppointment.Quantity);
+                }
+                if (DateTime.Now > equipmentAppointment.ToDateTime)
+                {
+                    equipmentAppointment.RoomTo.addEquipment(equipmentAppointment.SelectedEquipment, equipmentAppointment.Quantity);
+                }
+            }
         }
     }
 }

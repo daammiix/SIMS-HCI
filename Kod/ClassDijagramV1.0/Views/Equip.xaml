@@ -4,11 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClassDijagramV1._0.Views"
+        xmlns:converters="clr-namespace:ClassDijagramV1._0.Converters"
         mc:Ignorable="d"
         Title="Equip"
         Height="650"
         Width="850"
-         WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="#8BCDD3"
@@ -22,6 +23,7 @@
                 <ResourceDictionary Source="../Theme/TimeTextBoxTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+        <converters:RoomToStringConverter x:Key="RoomToStringConverter"/>
     </Window.Resources>
 
     <Grid>
@@ -61,16 +63,17 @@
 
                 <Label Content="Sala iz koje se premešta:" FontSize="22" Margin="15,0,0,5"/>
                 <ComboBox x:Name="MovingFrom" Width="230" Height="40" Margin="10,0,0,5" FontSize="22"
-                          VerticalContentAlignment="Center" IsReadOnly="True">
-                    <ComboBoxItem Margin="5,0,0,0" Content="Operaciona Sala"/>
-                    <ComboBoxItem Margin="5,0,0,0" Content="Sala za preglede"/>
-                    <ComboBoxItem Margin="5,0,0,0" Content="Bolnička soba"/>
-                    <ComboBoxItem Margin="5,0,0,0" Content="Intezivna nega"/>
-                    <ComboBoxItem Margin="5,0,0,0" Content="Sala za sastanke"/>
+                          VerticalContentAlignment="Center" IsReadOnly="True"
+                          ItemsSource="{Binding Rooms}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource RoomToStringConverter}}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
 
                 <Label Content="Sala u koju se premešta:" FontSize="22" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
-                <TextBox x:Name="Movingto" IsReadOnly="True" Width="230" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                <TextBox x:Name="MovingTo" IsReadOnly="True" Width="230" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedRoom.RoomName}" />
 
             </StackPanel>
 
@@ -103,7 +106,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Label Content="Od:" FontSize="22" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
+                    <Label Content="Do:" FontSize="22" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
                     <TextBox x:Name="ToDate" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource DateTextBox}"/>
                     <TextBox x:Name="ToTime" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource TimeTextBox}"/>
                 </StackPanel>

@@ -28,8 +28,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
-            <RowDefinition Height="395"/>
-            <RowDefinition Height="185"/>
+            <RowDefinition Height="585"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
                    Text="Renoviranje ili promena namene  sale"
@@ -40,77 +39,71 @@
         </TextBlock>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="450"/>
                 <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="450"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox Grid.Column="0" Height="360" Width="400" Margin="20,0,20,0">
-                <Calendar Style="{DynamicResource CalendarStyle1}" DisplayModeChanged="Calendar_DisplayModeChanged" CalendarButtonStyle="{DynamicResource CalendarButtonStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarDayButtonStyle1}" CalendarItemStyle="{DynamicResource CalendarItemStyle1}"/>
-            </Viewbox>
+            <StackPanel Grid.Row="1"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+                <Label Content="Odaberite datum:" FontSize="26" Margin="10,0,0,0" Height="40" Width="250"/>
+                <DatePicker x:Name="PickerDate" FontSize="26" Margin="10,0,0,5" Height="40" Width="250" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
 
+                <DataGrid Grid.Column="1" Height="300" Width="250" x:Name="BusyRooms" Margin="15, 10, 10,0"
+                      CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left"
+                      CanUserDeleteRows="False" AutoGenerateColumns="False"
+                      ItemsSource="{Binding Path=EquipmentList}" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Zauzetost sale:" Width="150" />
+                    </DataGrid.Columns>
+                </DataGrid>
 
-            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical">
-                <Label Content="Zakaži salu od:" FontSize="24" Margin="0,0,0,5" HorizontalContentAlignment="Left"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left" Width="450">
+                <Label Content="Zakaži salu od:" FontSize="26" Margin="0,0,0,5" HorizontalContentAlignment="Left"/>
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
-                        <Label Content="Datum:" FontSize="22" Height="40" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
-                        <Label Content="Vreme:" FontSize="22" Height="40" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
+                        <Label Content="Datum:" FontSize="26" Height="40" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
+                        <Label Content="Vreme:" FontSize="26" Height="40" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <TextBox x:Name="FromDate" Margin="0,5,0,5" Style="{StaticResource DateTextBox}"/>
-                        <TextBox x:Name="FromTime" Margin="0,5,0,5" Style="{StaticResource TimeTextBox}"/>
+                        <TextBox x:Name="FromDate" Margin="0,5,0,5" Width="200" Style="{StaticResource DateTextBox}"/>
+                        <TextBox x:Name="FromTime" Margin="0,5,0,5" Width="200" Style="{StaticResource TimeTextBox}"/>
                     </StackPanel>
                 </StackPanel>
 
-                <Label Content="Zakaži salu do:" FontSize="24" Margin="0,15,0,5" HorizontalContentAlignment="Left"/>
+                <Label Content="Zakaži salu do:" FontSize="26" Margin="0,15,0,5" HorizontalContentAlignment="Left"/>
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
-                        <Label Content="Datum:" FontSize="22" Height="40" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
-                        <Label Content="Vreme:" FontSize="22" Height="40" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
+                        <Label Content="Datum:" FontSize="26" Height="40" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
+                        <Label Content="Vreme:" FontSize="26" Height="40" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <TextBox x:Name="ToDate" Margin="0,5,0,5" Style="{StaticResource DateTextBox}"/>
-                        <TextBox x:Name="ToTime" Margin="0,5,0,5" Style="{StaticResource TimeTextBox}"/>
+                        <TextBox x:Name="ToDate" Margin="0,5,0,5" Width="200" Style="{StaticResource DateTextBox}"/>
+                        <TextBox x:Name="ToTime" Margin="0,5,0,5" Width="200" Style="{StaticResource TimeTextBox}"/>
                     </StackPanel>
                 </StackPanel>
                 <RadioButton x:Name="RenovatingRB" 
                              Content="Renoviranje" 
                              Height="40" Width="200"
-                             Margin="0,5,0,0"
+                             Margin="0,10,0,5"
                              Foreground="Black" 
                              HorizontalAlignment="Left"
                              VerticalContentAlignment="Center"
-                             FontSize="22"/>
-
+                             FontSize="24"/>
+                             
                 <RadioButton x:Name="ChangePurposeeRB" 
                              Content="Promena namene" 
                              Height="40" Width="200" 
                              Foreground="Black" 
                              HorizontalAlignment="Left"
                              VerticalContentAlignment="Center"
-                             FontSize="22"/>
+                             FontSize="24"/>
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="450"/>
-                <ColumnDefinition Width="350"/>
-            </Grid.ColumnDefinitions>
-
-            <StackPanel Grid.Column="0">
-                <Label Content="Zauzeta  sala:" FontSize="20" HorizontalContentAlignment="Left"/>
-                <DataGrid x:Name="BusyRoom" CanUserAddRows="False" SelectionMode="Single"
-                          CanUserDeleteRows="False" AutoGenerateColumns="False"
-                          BorderThickness="0" Background="Beige" OverridesDefaultStyle="True"
-                          IsReadOnly="True">
-                </DataGrid>
-            </StackPanel>
-
-            <WrapPanel Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                <Button x:Name="SaveRenovating" HorizontalAlignment="Right" Height="32" Width="90" Content="Sačuvaj" Margin="5,10,10,25" Style="{StaticResource CRUDButton}" Click="SaveRenovating_Click"/>
-                <Button x:Name="QuitRenovating" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,25,25" Style="{StaticResource CRUDButton}" Click="QuitRenovating_Click"/>
-            </WrapPanel>
-        </Grid>
+        <WrapPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+             <Button x:Name="SaveRenovating" HorizontalAlignment="Right" Height="32" Width="90" Content="Sačuvaj" Margin="5,10,10,25" Style="{StaticResource CRUDButton}" Click="SaveRenovating_Click"/>
+             <Button x:Name="QuitRenovating" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,25,25" Style="{StaticResource CRUDButton}" Click="QuitRenovating_Click"/>
+        </WrapPanel>
     </Grid>
 </Window>

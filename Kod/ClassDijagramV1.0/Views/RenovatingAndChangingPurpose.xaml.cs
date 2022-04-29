@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Controller;
+using Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,13 +21,30 @@ namespace ClassDijagramV1._0.Views
     /// </summary>
     public partial class RenovatingAndChangingPurpose : Window
     {
+        readonly private String format = "dd/MM/yyyyTHH:mm";
+        public RoomController roomController;
+        public Room selectedRoom;
         public RenovatingAndChangingPurpose()
         {
             InitializeComponent();
+            var app = Application.Current as App;
+            roomController = app.roomController;
+            this.selectedRoom = selectedRoom;
+            DataContext = this;
         }
 
         private void SaveRenovating_Click(object sender, RoutedEventArgs e)
         {
+            DateTime fromDatetime, toDatetime;
+            String date = FromDate.Text;
+            String time = FromTime.Text;
+            DateTime.TryParseExact(date + "T" + time, format, null, System.Globalization.DateTimeStyles.None, out fromDatetime);
+
+            date = ToDate.Text;
+            time = ToTime.Text;
+            DateTime.TryParseExact(date + "T" + time, format, null, System.Globalization.DateTimeStyles.None, out toDatetime);
+
+            //equipmentAppointmentController.ScheduledAppointment(selectedRoom, destinationRoom, selectedEquipment, quantity, fromDatetime, toDatetime);
             this.Close();
         }
 
@@ -34,10 +53,5 @@ namespace ClassDijagramV1._0.Views
             this.Close();
         }
 
-        private void Calendar_DisplayModeChanged(object sender, CalendarModeChangedEventArgs e)
-        {
-            Calendar calObj = sender as Calendar;
-            calObj.DisplayMode = CalendarMode.Month;
-        }
     }
 }
