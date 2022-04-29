@@ -79,7 +79,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels
                 if (_currentView != value)
                 {
                     _currentView = value;
-                    onPropertyChanged("CurrentView");
+                    OnPropertyChanged("CurrentView");
                 }
             }
         }

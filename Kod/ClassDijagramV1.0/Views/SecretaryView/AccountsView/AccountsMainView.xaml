@@ -9,6 +9,16 @@
              Background="Transparent"
              d:DesignHeight="450" d:DesignWidth="800">
 
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../../Styles/TextBox.xaml"/>
+                <ResourceDictionary Source="../../../Styles/Button.xaml"/>
+                <ResourceDictionary Source="../../../Styles/CheckBox.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
     <UserControl.DataContext>
         <accountViewModels:AccountsMainViewModel/>
     </UserControl.DataContext>

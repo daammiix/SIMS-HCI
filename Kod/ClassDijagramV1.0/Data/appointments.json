@@ -26,10 +26,11 @@
     },
     "Room": {
       "RoomID": "id",
-      "RoomName": 0,
-      "Floor": 2,
-      "RoomNumber": 23,
-      "RoomStatus": 0
+      "RoomName": "asdf",
+      "Floor": 0,
+      "RoomNumber": 0,
+      "RoomStatus": "aktivan",
+      "EquipmentList": []
     },
     "AppointmentDate": "2022-04-29T07:30:00",
     "Duration": "00:30:00",
@@ -62,10 +63,11 @@
     },
     "Room": {
       "RoomID": "id",
-      "RoomName": 0,
+      "RoomName": "asdf",
       "Floor": 2,
       "RoomNumber": 23,
-      "RoomStatus": 0
+      "RoomStatus": "aktivan",
+      "EquipmentList": []
     },
     "AppointmentDate": "2022-04-27T09:00:00",
     "Duration": "00:30:00",

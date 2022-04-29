@@ -42,7 +42,7 @@ namespace ClassDijagramV1._0.Dialog
             get;
             set;
         }
-        public ObservableCollection<Room> Rooms
+        public BindingList<Room> Rooms
         {
             get;
             set;

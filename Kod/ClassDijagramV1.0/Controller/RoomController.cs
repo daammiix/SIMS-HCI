@@ -6,6 +6,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using ClassDijagramV1._0.Model;
 using Model;
 using Service;
 
@@ -13,7 +15,12 @@ namespace Controller
 {
     public class RoomController
     {
-        private RoomService roomService = new RoomService("json");
+        private RoomService roomService;
+
+        public RoomController(RoomService roomService)
+        {
+            this.roomService = roomService;
+        }
 
         public void AddRoom(Room room)
         {
@@ -30,14 +37,19 @@ namespace Controller
             roomService.ChangeRoom(room);
         }
 
-        public Room GetARoom(String roomID)
+        public Room? GetARoom(String roomID)
         {
             return roomService.GetARoom(roomID);
         }
 
-        public ObservableCollection<Room> GetAllRooms()
+        public BindingList<Room> GetAllRooms()
         {
             return roomService.GetAllRooms();
+        }
+
+        public void SaveRooms()
+        {
+            roomService.SaveRooms();
         }
     }
 }

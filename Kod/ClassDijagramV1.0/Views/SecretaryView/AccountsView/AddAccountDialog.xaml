@@ -13,6 +13,17 @@
         FontSize="24"
         Title="AddAccount" Height="550" Width="500">
 
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../../Styles/TextBox.xaml"/>
+                <ResourceDictionary Source="../../../Styles/Button.xaml"/>
+                <ResourceDictionary Source="../../../Styles/CheckBox.xaml"/>
+                <ResourceDictionary Source="../../../Styles/ComboBox.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid VerticalAlignment="Top"
           HorizontalAlignment="Center"
           Margin="0,75,0,0">

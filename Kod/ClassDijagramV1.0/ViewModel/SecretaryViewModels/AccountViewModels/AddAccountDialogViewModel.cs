@@ -45,7 +45,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
                 if (_username != value)
                 {
                     _username = value;
-                    onPropertyChanged("Username");
+                    OnPropertyChanged("Username");
                 }
             }
         }
@@ -58,7 +58,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
                 if (_password != value)
                 {
                     _password = value;
-                    onPropertyChanged("Password");
+                    OnPropertyChanged("Password");
                 }
             }
         }

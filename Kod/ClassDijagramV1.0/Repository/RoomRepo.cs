@@ -3,10 +3,13 @@
 // Created: 08 April 2022 13:49:38
 // Purpose: Definition of Class RoomRepo
 
+using ClassDijagramV1._0.FileHandlers;
+using ClassDijagramV1._0.Model;
 using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text.Json;
 
 namespace Repository
@@ -15,7 +18,7 @@ namespace Repository
     {
         public Room? GetRoom(String roomID);
 
-        public ObservableCollection<Room> GetAllRooms();
+        public BindingList<Room> GetAllRooms();
 
         public Room? SetRoom(Room room);
 
@@ -23,21 +26,19 @@ namespace Repository
 
         public void DeleteRoom(String roomID);
 
+        public void SaveRooms();
+
     }
 
     public class RoomRepoJson : IRoomRepo
     {
-        private String path = "..\\..\\..\\Data\\rooms.json";
-        private ObservableCollection<Room> rooms = new ObservableCollection<Room>();
+        private FileHandler<BindingList<Room>> _roomFileHandler;
+        private BindingList<Room> rooms = new BindingList<Room>();
 
-        public RoomRepoJson()
+        public RoomRepoJson(FileHandler<BindingList<Room>> roomFileHandler)
         {
-            string jsonData = System.IO.File.ReadAllText(path);
-            ObservableCollection<Room>? jsonRooms = JsonSerializer.Deserialize<ObservableCollection<Room>>(jsonData);
-            if (jsonRooms != null)
-            {
-                this.rooms = jsonRooms;
-            }
+            _roomFileHandler = roomFileHandler;
+            rooms = _roomFileHandler.Read();
         }
 
         private int findRoom(String roomId)
@@ -66,7 +67,7 @@ namespace Repository
             return null;
         }
 
-        public ObservableCollection<Room> GetAllRooms()
+        public BindingList<Room> GetAllRooms()
         {
             return rooms;
         }
@@ -80,14 +81,12 @@ namespace Repository
             }
             rooms.RemoveAt(i);
             rooms.Insert(i, room);
-            writeRooms();
             return room;
         }
 
         public Room CreateNewRoom(Room room)
         {
             rooms.Add(room);
-            writeRooms();
             return room;
         }
 
@@ -101,12 +100,11 @@ namespace Repository
                     break;
                 }
             }
-            this.writeRooms();
         }
-        private void writeRooms()  // TODO: Add to class diagram
+
+        public void SaveRooms()
         {
-            String jsonString = JsonSerializer.Serialize(rooms);
-            System.IO.File.WriteAllText(path, jsonString);
+            _roomFileHandler.Write(rooms);
         }
     }
 }

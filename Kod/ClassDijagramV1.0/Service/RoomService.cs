@@ -5,20 +5,21 @@
 
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using ClassDijagramV1._0.Model;
 using Model;
+using Repository;
 
 namespace Service
 {
     public class RoomService
     {
-        Repository.IRoomRepo repo;
-        public RoomService(String repoType)
+        IRoomRepo repo;
+        public RoomService(IRoomRepo roomRepository)
         {
-            if (repoType == "json")
-            {
-                repo = new Repository.RoomRepoJson();
-            }
+            this.repo = roomRepository;
         }
+
         public void AddRoom(Room room)
         {
             if (this.CheckIfUniq(room, false))
@@ -45,7 +46,7 @@ namespace Service
             return repo.GetRoom(roomID);
         }
 
-        public ObservableCollection<Room> GetAllRooms()
+        public BindingList<Room> GetAllRooms()
         {
             return repo.GetAllRooms();
         }
@@ -59,15 +60,24 @@ namespace Service
                 {
                     return false;
                 }
-                if ((room.Floor == r.Floor) && (room.Floor<=4))
+                if((room.Floor > 4) || (room.RoomNumber > 499))
                 {
-                    if ((room.RoomNumber == r.RoomNumber) && (room.RoomNumber<500))
+                    return false;
+                }
+                if (!existingRoom && room.Floor == r.Floor)
+                {
+                    if ((room.RoomNumber == r.RoomNumber))
                     {
                         return false;
                     }
                 }
             }
             return true;
+        }
+
+        public void SaveRooms()
+        {
+            repo.SaveRooms();
         }
     }
 }

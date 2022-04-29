@@ -36,7 +36,7 @@ namespace ClassDijagramV1._0.Model
                 if (_username != value)
                 {
                     _username = value;
-                    onPropertyChanged("Username");
+                    OnPropertyChanged("Username");
                 }
             }
         }
@@ -52,7 +52,7 @@ namespace ClassDijagramV1._0.Model
                 if (_password != value)
                 {
                     _password = value;
-                    onPropertyChanged("Password");
+                    OnPropertyChanged("Password");
                 }
             }
         }
@@ -68,7 +68,7 @@ namespace ClassDijagramV1._0.Model
                 if (_banned != value)
                 {
                     _banned = value;
-                    onPropertyChanged("Banned");
+                    OnPropertyChanged("Banned");
                 }
             }
         }
@@ -84,7 +84,7 @@ namespace ClassDijagramV1._0.Model
                 if (_isGuest != value)
                 {
                     _isGuest = value;
-                    onPropertyChanged("IsGuest");
+                    OnPropertyChanged("IsGuest");
                 }
             }
         }
@@ -97,7 +97,7 @@ namespace ClassDijagramV1._0.Model
                 if (_personId != value)
                 {
                     _personId = value;
-                    onPropertyChanged("PersonId");
+                    OnPropertyChanged("PersonId");
                 }
             }
         }
@@ -110,7 +110,7 @@ namespace ClassDijagramV1._0.Model
                 if (_role != value)
                 {
                     _role = value;
-                    onPropertyChanged("Role");
+                    OnPropertyChanged("Role");
                 }
             }
         }

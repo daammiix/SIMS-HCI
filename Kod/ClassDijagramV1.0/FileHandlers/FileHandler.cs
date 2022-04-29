@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.FileHandlers
 {
+
     public class FileHandler<T>
-        where T : class
+        where T : class, new()
     {
         #region Fields
 
@@ -38,6 +40,7 @@ namespace ClassDijagramV1._0.FileHandlers
             {
                 File.Create(_path);
             }
+
             FileStream fs = new FileStream(_path, FileMode.Truncate, FileAccess.Write);
             Utf8JsonWriter writer = new Utf8JsonWriter(fs);
             if (items.Count > 0)
@@ -64,6 +67,36 @@ namespace ClassDijagramV1._0.FileHandlers
             return ret;
         }
 
+        public void Write(T obj)
+        {
+            string jsonRooms = JsonSerializer.Serialize<T>(obj, new JsonSerializerOptions() { WriteIndented = true });
+
+            File.WriteAllText(_path, jsonRooms);
+        }
+
+        public T Read()
+        {
+            using (Stream stream = new FileStream(_path, FileMode.OpenOrCreate, FileAccess.Read))
+            {
+                if (File.Exists(_path) && stream.Length > 0)
+                {
+                    string jsonData = File.ReadAllText(_path);
+                    T? jsonRooms = JsonSerializer.Deserialize<T>(jsonData);
+                    if (jsonRooms != null)
+                    {
+                        return jsonRooms;
+                    }
+                    throw new Exception("Json file is null");
+                }
+                else
+                {
+                    return new T();
+                }
+            }
+
+        }
+
         #endregion
     }
 }
+

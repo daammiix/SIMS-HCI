@@ -87,7 +87,7 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 case Role.Manager:
                     {
-                        ManagerMainWindow managerMainWindow = new ManagerMainWindow();
+                        WindowUpravnik managerMainWindow = new WindowUpravnik();
                         managerMainWindow.Show();
                         break;
                     }

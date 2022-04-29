@@ -48,7 +48,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
                 if (_account.Username != value)
                 {
                     _account.Username = value;
-                    onPropertyChanged("Username");
+                    OnPropertyChanged("Username");
                 }
             }
         }
@@ -64,7 +64,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
                 if (_account.Password != value)
                 {
                     _account.Password = value;
-                    onPropertyChanged("Password");
+                    OnPropertyChanged("Password");
                 }
             }
         }
@@ -80,7 +80,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
                 if (_account.Banned != value)
                 {
                     _account.Banned = value;
-                    onPropertyChanged("Banned");
+                    OnPropertyChanged("Banned");
                 }
             }
         }
@@ -96,7 +96,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
                 if (_account.IsGuest != value)
                 {
                     _account.IsGuest = value;
-                    onPropertyChanged("IsGuest");
+                    OnPropertyChanged("IsGuest");
                 }
             }
         }
@@ -109,7 +109,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
                 if (_account.PersonId != value)
                 {
                     _account.PersonId = value;
-                    onPropertyChanged("PersonId");
+                    OnPropertyChanged("PersonId");
                 }
             }
         }
@@ -122,7 +122,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
                 if (_account.Role != value)
                 {
                     _account.Role = value;
-                    onPropertyChanged("Role");
+                    OnPropertyChanged("Role");
                 }
             }
         }

@@ -24,6 +24,10 @@ namespace ClassDijagramV1._0.Service
             _secretaryRepo = sr;
         }
 
+        public SecretaryService()
+        {
+
+        }
         #endregion
 
         #region Methods

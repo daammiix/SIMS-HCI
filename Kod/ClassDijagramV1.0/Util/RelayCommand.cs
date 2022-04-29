@@ -32,9 +32,9 @@ namespace ClassDijagramV1._0.Util
 
         #endregion
 
+        // Ovaj event se cesto desava tako da ce stalno da se proverava da li komanda moze da se izvrsi
         public event EventHandler CanExecuteChanged
         {
-            // Ovaj event se cesto desava tako da ce stalno da se proverava da li komanda moze da se izvrsi
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }

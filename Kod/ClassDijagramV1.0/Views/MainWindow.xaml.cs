@@ -1,4 +1,4 @@
-﻿using ClassDijagramV1._0.Dialog;
+using ClassDijagramV1._0.Dialog;
 using ClassDijagramV1._0.ViewModel;
 using Controller;
 using Model;
@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
 
 namespace ClassDijagramV1._0.Views
 {

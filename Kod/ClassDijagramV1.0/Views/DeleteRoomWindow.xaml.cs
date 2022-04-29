@@ -1,0 +1,46 @@
+﻿using Controller;
+using Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace ClassDijagramV1._0.Views
+{
+    /// <summary>
+    /// Interaction logic for DeleteRoomWindow.xaml
+    /// </summary>
+    public partial class DeleteRoomWindow : Window
+    {
+        public RoomController roomController;
+
+        public String roomID;
+        public DeleteRoomWindow(String roomID)
+        {
+            InitializeComponent();
+            var app = Application.Current as App;
+            roomController = app.roomController;
+            this.roomID = roomID;
+        }
+
+        private void DeleteYesRoom_Click(object sender, RoutedEventArgs e)
+        {
+            roomController.DeleteRoom(roomID);
+            this.Close();
+        }
+
+        private void DeleteNoRoom_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+    }
+}

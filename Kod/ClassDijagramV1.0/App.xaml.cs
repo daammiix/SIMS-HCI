@@ -10,6 +10,7 @@ using Repository;
 using Service;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Linq;
@@ -35,6 +36,8 @@ namespace ClassDijagramV1._0
         private string _doctorsFilePath = "../../../Data/doctors.json";
         private string _secretaryFilePath = "../../../Data/secretary.json";
         private string _managerFilePath = "../../../Data/managers.json";
+        private string _roomsFilePath = "../../../Data/rooms.json";
+        private string _equipmentFilePath = "../../../Data/equipment.json";
 
         #endregion
 
@@ -51,9 +54,15 @@ namespace ClassDijagramV1._0
 
         public RoomController roomController { get; set; }
 
+
         public SecretaryController SecretaryController { get; set; }
 
         public ManagerController ManagerController { get; set; }
+
+        public EquipmentController equipmentController { get; set; }
+
+        public EquipmentAppointmentController equipmentAppointmentController { get; set; }
+
 
         #endregion
 
@@ -83,9 +92,6 @@ namespace ClassDijagramV1._0
             var doctorService = new DoctorService(doctorRepository);
             DoctorController = new DoctorController(doctorService);
 
-            //
-            roomController = new RoomController();
-
             // Secretary
             var secretaryRepo = new SecretaryRepo(new FileHandler<Secretary>(_secretaryFilePath));
             var secretaryService = new SecretaryService(secretaryRepo);
@@ -96,6 +102,21 @@ namespace ClassDijagramV1._0
             var managerRepo = new ManagerRepo(new FileHandler<Manager>(_managerFilePath));
             var managerService = new ManagerService(managerRepo);
             ManagerController = new ManagerController(managerService);
+
+            // Rooms
+            var roomRepo = new RoomRepoJson(new FileHandler<BindingList<Room>>(_roomsFilePath));
+            var roomService = new RoomService(roomRepo);
+            roomController = new RoomController(roomService);
+
+            // Equipment
+            var equipmentRepo = new EquipmentRepo();
+            var equipmentService = new EquipmentService(equipmentRepo);
+            equipmentController = new EquipmentController(equipmentService);
+
+            // EquipmentAppointment
+            var equipmentAppointmentRepo = new EquipmentAppointmentRepo();
+            var equipmentAppointmentService = new EquipmentAppointmentService(equipmentAppointmentRepo);
+            equipmentAppointmentController = new EquipmentAppointmentController(equipmentAppointmentService);
 
 
             MakeTestData();
@@ -109,6 +130,7 @@ namespace ClassDijagramV1._0
             DoctorController.SaveDoctors();
             SecretaryController.SaveSecretaries();
             ManagerController.SaveManagers();
+            roomController.SaveRooms();
         }
 
         private void MakeTestData()
@@ -147,6 +169,7 @@ namespace ClassDijagramV1._0
             AccountController.AddAccount(ac2);
             AccountController.AddAccount(ac3);
             AccountController.AddAccount(ac4);
+
         }
     }
 }

@@ -1,23 +1,63 @@
 [
   {
     "RoomID": "id",
-    "RoomName": 0,
+    "RoomName": "Operaciona Sala",
     "Floor": 2,
     "RoomNumber": 23,
-    "RoomStatus": 0
+    "RoomStatus": "Aktivna",
+    "EquipmentList": [
+      {
+        "EquipmentID": "id1",
+        "Quantity": 2
+      }
+    ]
   },
   {
     "RoomID": "id5",
-    "RoomName": 0,
+    "RoomName": "Operaciona Sala",
     "Floor": 3,
     "RoomNumber": 27,
-    "RoomStatus": 0
+    "RoomStatus": "Aktivna",
+    "EquipmentList": []
   },
   {
     "RoomID": "id10",
-    "RoomName": 0,
+    "RoomName": "Sala za sastanke",
     "Floor": 3,
     "RoomNumber": 30,
-    "RoomStatus": 0
+    "RoomStatus": "Renoviranje",
+    "EquipmentList": []
+  },
+  {
+    "RoomID": "id8",
+    "RoomName": "Operaciona Sala",
+    "Floor": 12,
+    "RoomNumber": 3,
+    "RoomStatus": "Aktivna",
+    "EquipmentList": []
+  },
+  {
+    "RoomID": "id7",
+    "RoomName": "Sala za preglede",
+    "Floor": 1,
+    "RoomNumber": 103,
+    "RoomStatus": "Aktivna",
+    "EquipmentList": []
+  },
+  {
+    "RoomID": "id66",
+    "RoomName": "Operaciona Sala",
+    "Floor": 25,
+    "RoomNumber": 4,
+    "RoomStatus": "Aktivna",
+    "EquipmentList": []
+  },
+  {
+    "RoomID": "id2",
+    "RoomName": "Operaciona Sala",
+    "Floor": 2,
+    "RoomNumber": 276,
+    "RoomStatus": "Aktivna",
+    "EquipmentList": []
   }
 ]

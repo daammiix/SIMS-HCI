@@ -7,18 +7,17 @@
              xmlns:accountViewModel="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels"
              xmlns:secretaryView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView"
              xmlns:accountsView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.AccountsView"
+             xmlns:viewModel="clr-namespace:ClassDijagramV1._0.ViewModel"
+             xmlns:view="clr-namespace:ClassDijagramV1._0.Views"
              StartupUri="Views/MainWindow.xaml"
-             Exit="Application_Exit"
-    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
+             xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
+             Exit="Application_Exit">
+
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles/Color.xaml"/>
-                <ResourceDictionary Source="Styles/TextBox.xaml"/>
-                <ResourceDictionary Source="Styles/Button.xaml"/>
-                <ResourceDictionary Source="Styles/DataGrid.xaml"/>
-                <ResourceDictionary Source="Styles/ComboBox.xaml"/>
-                <ResourceDictionary Source="Styles/CheckBox.xaml"/>
+                <ResourceDictionary Source="/Styles/Color.xaml"/>
+                <ResourceDictionary Source="/Theme/CRUDButtonTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type secretaryViewModel:PreglediOperacijeViewModel}">
@@ -27,6 +26,34 @@
 
             <DataTemplate DataType="{x:Type accountViewModel:AccountsMainViewModel}">
                 <accountsView:AccountsMainView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:RoomsViewModel}">
+                <view:RoomsView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:CalendarViewModel}">
+                <view:CalendarView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:StorageViewModel}">
+                <view:StorageView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:StorageMedicalEquipmentViewModel}">
+                <view:StorageMedicalEquipmentView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:StorageSuppliesViewModel}">
+                <view:StorageSuppliesView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:StorageInventoryViewModel}">
+                <view:StorageInventoryView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:StorageDrugsViewModel}">
+                <view:StorageDrugsView/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
