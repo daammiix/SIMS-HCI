@@ -39,13 +39,13 @@
         <Border Margin="5">
             <Border.Resources>
                 <Style TargetType="TextBlock">
-                    <Setter Property="FontSize" Value="13"/>
+                    <Setter Property="FontSize" Value="14"/>
                 </Style>
             </Border.Resources>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 <Image Source="{Binding Role, Converter={converters:RoleToImageConverter}}"
-                       Width="30"
-                       Height="30"
+                       Width="35"
+                       Height="35"
                        Margin="17,0,7,0"
                        RenderOptions.BitmapScalingMode="Fant"/>
                 <TextBlock Margin="5,15,0,0" Foreground="{StaticResource SLightGrayShade}"
@@ -112,7 +112,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Background" Value="{StaticResource SDarkGrayShade}"/>
         <Setter Property="Foreground" Value="White"/>
-        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Padding" Value="5,0"/>
         <Setter Property="MinHeight" Value="32"/>
@@ -169,6 +169,9 @@
         <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
         <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="CanUserReorderColumns" Value="False"/>
+        <Setter Property="CanUserResizeRows" Value="False"/>
+        <Setter Property="AutoGenerateColumns" Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGrid}">

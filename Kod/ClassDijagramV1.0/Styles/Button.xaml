@@ -60,13 +60,15 @@
     <Style x:Key="AccountButtonsStyle" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource SBackgroundPart}"/>
         <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Width" Value="160"/>
+        <Setter Property="Height" Value="40"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border BorderThickness="1"
                             BorderBrush="{StaticResource SCyan}"
                             CornerRadius="15"
-                            Padding="5"
                             Background="{TemplateBinding Background}">
                         <ContentPresenter VerticalAlignment="Center"
                                           HorizontalAlignment="Center"/>

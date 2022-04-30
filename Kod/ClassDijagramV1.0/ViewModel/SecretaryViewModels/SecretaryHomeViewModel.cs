@@ -1,5 +1,6 @@
 ﻿using ClassDijagramV1._0.Util;
 using ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels;
+using ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewModels;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,13 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels
 
         AccountsMainViewModel _accountsMainViewModel;
 
+        MedicalRecordsMainViewModel _medicalRecordsMainViewModel;
+
         // Commands
 
         RelayCommand _preglediOperacijeViewCommand;
-        RelayCommand _naloziViewCommand;
+        RelayCommand _accountsViewCommand;
+        RelayCommand _medicalRecordsViewCommand;
 
         #endregion
 
@@ -48,19 +52,35 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels
             }
         }
 
-        public RelayCommand NaloziViewCommand
+        public RelayCommand AccountsViewCommand
         {
             get
             {
-                if (_naloziViewCommand == null)
+                if (_accountsViewCommand == null)
                 {
-                    _naloziViewCommand = new RelayCommand(o =>
+                    _accountsViewCommand = new RelayCommand(o =>
                     {
                         CurrentView = _accountsMainViewModel;
                     });
                 }
 
-                return _naloziViewCommand;
+                return _accountsViewCommand;
+            }
+        }
+
+        public RelayCommand MedicalRecordsViewCommand
+        {
+            get
+            {
+                if (_medicalRecordsViewCommand == null)
+                {
+                    _medicalRecordsViewCommand = new RelayCommand(o =>
+                    {
+                        CurrentView = _medicalRecordsMainViewModel;
+                    });
+                }
+
+                return _medicalRecordsViewCommand;
             }
         }
 
@@ -110,6 +130,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels
             // Init view models
             _preglediOperacijeViewModel = new PreglediOperacijeViewModel();
             _accountsMainViewModel = new AccountsMainViewModel();
+            _medicalRecordsMainViewModel = new MedicalRecordsMainViewModel();
 
             // Na pocetku stavimo currentView na preglediOperacije(to je prvi menu item)
             _currentView = _preglediOperacijeViewModel;

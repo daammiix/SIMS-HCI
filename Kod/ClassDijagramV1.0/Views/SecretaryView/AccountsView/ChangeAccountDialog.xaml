@@ -9,7 +9,8 @@
         Background="{StaticResource SBackground}"
         Foreground="{StaticResource SCyan}"
         FontSize="24"
-        Title="ChangeAccount" Height="350" Width="500">
+        FontFamily="#Poppins"
+        Title="ChangeAccount" Height="360" Width="500">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -79,7 +80,6 @@
         <Button Grid.Row="3" Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Content="Save"
-                Width="150"
                 Margin="0,25,0,0"
                 Style="{StaticResource AccountButtonsStyle}"
                 Command="{Binding ChangeAccountCommand}"

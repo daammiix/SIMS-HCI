@@ -7,6 +7,7 @@
              xmlns:accountViewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels"
              mc:Ignorable="d"
              Background="Transparent"
+             FontFamily="#Poppins"
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
@@ -15,6 +16,7 @@
                 <ResourceDictionary Source="../../../Styles/TextBox.xaml"/>
                 <ResourceDictionary Source="../../../Styles/Button.xaml"/>
                 <ResourceDictionary Source="../../../Styles/CheckBox.xaml"/>
+                <ResourceDictionary Source="../../../Styles/DataGrid.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -23,97 +25,102 @@
         <accountViewModels:AccountsMainViewModel/>
     </UserControl.DataContext>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="70"/>
-        </Grid.RowDefinitions>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right">
+            <TextBox Style="{StaticResource TextBoxStyleAccount}"
+                     Width="170"
+                     Padding="5"
+                     FontSize="16"
+                     Margin="0,0,15,0"/>
+            <Button Content="Search"
+                    Style="{StaticResource AccountButtonsStyle}"/>
+        </StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
 
-        <!-- Accounts Data Grid -->
-        <DataGrid RowStyle="{DynamicResource DataGridRowStyleAccounts}" 
+            <!-- Accounts Data Grid -->
+            <DataGrid x:Name="AccountDataGrid" 
+                  RowStyle="{DynamicResource DataGridRowStyleAccounts}"
                   ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyleAccounts}" 
-                  x:Name="AccountDataGrid"
                   Grid.Row="0"
-                  IsReadOnly="True"
-                  SelectionMode="Single"
-                  CanUserResizeColumns="False"
-                  CanUserResizeRows="False"
+                  Margin="0,15,0,0"
                   SelectedItem="{Binding AccountViewModel, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                  ItemsSource="{Binding Accounts, UpdateSourceTrigger=PropertyChanged}"
-                  AutoGenerateColumns="False">
-            <DataGrid.Resources>
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#1F2833"/>
-                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#1F2833"/>
-                <SolidColorBrush x:Key="{x:Static SystemColors.HotTrackBrushKey}" Color="#1F2833"/>
-                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="#1F2833"/>
-                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#1F2833"/>
-            </DataGrid.Resources>
-            <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Person Id" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <WrapPanel>
-                                <Ellipse Height="7" Width="7"
+                  ItemsSource="{Binding Accounts, UpdateSourceTrigger=PropertyChanged}">
+                <DataGrid.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#1F2833"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#1F2833"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HotTrackBrushKey}" Color="#1F2833"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="#1F2833"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#1F2833"/>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Person Id" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <WrapPanel>
+                                    <Ellipse Height="7" Width="7"
                                          Margin="5,0" Fill="{StaticResource MyPink}"/>
-                                <TextBlock Text="{Binding PersonId}"/>
-                            </WrapPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Username"
+                                    <TextBlock Text="{Binding PersonId}"
+                                           FontSize="16"/>
+                                </WrapPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Username"
+                                    FontSize="16"
                                     Binding="{Binding Username}"
                                     Width="3*"/>
-                <DataGridTextColumn Header="Password"
+                    <DataGridTextColumn Header="Password"
+                                    FontSize="16"
                                     Binding="{Binding Password}"
                                     Width="3*"/>
-                <DataGridCheckBoxColumn Header="Banned"
+                    <DataGridCheckBoxColumn Header="Banned"
                                         Binding="{Binding Banned}"
                                         Width="*"/>
-                <DataGridCheckBoxColumn Header="Guest"
+                    <DataGridCheckBoxColumn Header="Guest"
                                         Binding="{Binding IsGuest}"
                                         Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
+                </DataGrid.Columns>
+            </DataGrid>
 
-        <!-- Buttons -->
-        <DockPanel Grid.Row="1">
-            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-                <Button Content="Add Account"
-                        Width="150"
-                        Height="35"
+            <!-- Buttons -->
+            <DockPanel Grid.Row="1">
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                    <Button Content="Add Account"
                         Margin="10,0,0,0"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Style="{StaticResource AccountButtonsStyle}"
                         Command="{Binding AddAccountCommand}"/>
-                <Button Content="Change Account"
-                        Width="150"
-                        Height="35"
-                        Margin="20,0,0,0"
+                    <Button Content="Change Account"
+                        Margin="15,0,0,0"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Style="{StaticResource AccountButtonsStyle}"
                         Command="{Binding ChangeAccountCommand}"/>
-                <Button Content="Remove Account"
-                        Width="150"
-                        Height="35"
-                        Margin="20,0,0,0"
+                    <Button Content="Remove Account"
+                        Margin="15,0,0,0"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Style="{StaticResource AccountButtonsStyle}"
                         Command="{Binding RemoveAccountCommand}"/>
-            </StackPanel>
+                </StackPanel>
 
-            <Button DockPanel.Dock="Right"
+                <Button DockPanel.Dock="Right"
                     Content="Ban/Unban Account"
-                    Width="150"
-                    Height="35"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"
                     Margin="0,0,10,0"
                     Style="{StaticResource AccountButtonsStyle}"
                     Command="{Binding BanUnbanAccountCommand}"/>
-        </DockPanel>
+            </DockPanel>
 
-    </Grid>
+        </Grid>
+    </DockPanel>
 </UserControl>

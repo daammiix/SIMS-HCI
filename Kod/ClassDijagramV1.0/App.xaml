@@ -7,6 +7,8 @@
              xmlns:accountViewModel="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels"
              xmlns:secretaryView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView"
              xmlns:accountsView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.AccountsView"
+             xmlns:medicalRecordsView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.MedicalRecordsView"
+             xmlns:medicalRecourdsViewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewModels"
              xmlns:viewModel="clr-namespace:ClassDijagramV1._0.ViewModel"
              xmlns:view="clr-namespace:ClassDijagramV1._0.Views"
              StartupUri="Views/MainWindow.xaml"
@@ -20,12 +22,17 @@
                 <ResourceDictionary Source="/Theme/CRUDButtonTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
+            <!-- Secretary -->
             <DataTemplate DataType="{x:Type secretaryViewModel:PreglediOperacijeViewModel}">
                 <secretaryView:PreglediOperacijeView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type accountViewModel:AccountsMainViewModel}">
                 <accountsView:AccountsMainView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type medicalRecourdsViewModels:MedicalRecordsMainViewModel}">
+                <medicalRecordsView:MedicalRecordsMainView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:RoomsViewModel}">

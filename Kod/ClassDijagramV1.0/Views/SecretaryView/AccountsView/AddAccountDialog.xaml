@@ -10,8 +10,9 @@
         WindowStartupLocation="CenterOwner"
         Background="{StaticResource SBackground}"
         Foreground="{StaticResource SCyan}"
+        FontFamily="#Poppins"
         FontSize="24"
-        Title="AddAccount" Height="550" Width="500">
+        Title="AddAccount" Height="470" Width="500">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -154,7 +155,6 @@
         <Button Grid.Row="4" Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Content="Add"
-                Width="150"
                 Margin="0,40,0,0"
                 Style="{StaticResource AccountButtonsStyle}"
                 Command="{Binding AddAccountCommand}"
