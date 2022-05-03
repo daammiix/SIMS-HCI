@@ -4,6 +4,7 @@
  * Purpose: Definition of the Class Controller.AppointmentController
  ***********************************************************************/
 
+using ClassDijagramV1._0.Model;
 using Model;
 using Service;
 using System;
@@ -53,5 +54,14 @@ namespace Controller
             _appointmentService.SaveAppointments();
         }
 
+        internal void AddNotification(Appointment appointment, NotificationType notificationType)
+        {
+            _appointmentService.AddNotification(appointment,notificationType);
+        }
+
+        internal ObservableCollection<Notification> GetAllNotifications()
+        {
+            return _appointmentService.GetAllNotifications();
+        }
     }
 }

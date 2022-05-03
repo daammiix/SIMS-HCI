@@ -1,5 +1,4 @@
-﻿using ClassDijagramV1._0.Dialog;
-using Controller;
+﻿using Controller;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -38,6 +37,29 @@ namespace ClassDijagramV1._0.Views.PatientView
             Window.GetWindow(this).Close();
             
             
+        }
+
+        private void openNotificationClick(object sender, RoutedEventArgs e)
+        {
+            startWindow.Content = new NotificationPage(this);
+        }
+
+        private void moveBtnEnter(object sender, MouseEventArgs e)
+        {
+            backBtn.Margin = new Thickness(0, 0,0,0);
+        }
+
+        private void moveBtnLeave(object sender, MouseEventArgs e)
+        {
+            backBtn.Margin = new Thickness(10, 0, 0, 0);
+        }
+
+        private void goBack(object sender, RoutedEventArgs e)
+        {
+
+            switch (startWindow.Content)
+            {
+            }
         }
     }
 }

@@ -1,11 +1,5 @@
-﻿
-using ClassDijagramV1._0.Util;
-using Controller;
-using Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,14 +10,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ClassDijagramV1._0.Util;
+using Controller;
+using Model;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
-namespace ClassDijagramV1._0.Dialog
+
+namespace ClassDijagramV1._0.Views.PatientView
 {
     /// <summary>
-    /// Interaction logic for AddAppointmentDialog.xaml
+    /// Interaction logic for AppointmentAddPage.xaml
     /// </summary>
-    public partial class AddAppointmentDialog : Window, INotifyPropertyChanged
+    public partial class AppointmentAddPage : Page, INotifyPropertyChanged
     {
         public AppointmentController _appointmentController;
         public RoomController _roomController;
@@ -31,12 +32,12 @@ namespace ClassDijagramV1._0.Dialog
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void onPropertyChanged(String propertyName)
+        protected virtual void OnPropertyChanged(String propertyName)
         {
             PropertyChangedEventArgs e = new PropertyChangedEventArgs(propertyName);
             PropertyChanged(this, e);
         }
-
+        private PatientMainWindow parent { get; set; }
         public ObservableCollection<Appointment> Appointments
         {
             get;
@@ -59,10 +60,11 @@ namespace ClassDijagramV1._0.Dialog
         }
         //private List<string> availableTimes;
 
-        public AddAppointmentDialog()
+        public AppointmentAddPage(PatientMainWindow patientMain)
         {
             InitializeComponent();
             this.DataContext = this;
+            parent = patientMain;
 
             App app = Application.Current as App;
             _appointmentController = app.appointmentController;
@@ -73,14 +75,8 @@ namespace ClassDijagramV1._0.Dialog
             Appointments = _appointmentController.GetAllAppointments("djordje"); // ulgovani korisnik ali ovo je za doktora
             Doctors = _doctorController.GetAllDoctors();
             DoctorsAppointmentsTime = new ObservableCollection<String>();
-
-
         }
 
-        private void GoBack(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
 
         private void AddAppointmentClick(object sender, RoutedEventArgs e)
         {
@@ -107,7 +103,8 @@ namespace ClassDijagramV1._0.Dialog
 
             Appointment a1 = new Appointment(appointmentID, p1, d1, r1, date1, interval, AppointmentType.generalPractitionerCheckup);
             _appointmentController.AddAppointment(a1);
-            this.Close();
+            _appointmentController.AddNotification(a1, NotificationType.addingAppointment);
+            parent.startWindow.Content = new AppointmentsViewPage(parent);
 
         }
 
@@ -168,6 +165,15 @@ namespace ClassDijagramV1._0.Dialog
             }
 
             timeCB.ItemsSource = DoctorsAppointmentsTime;
+
+            if (dodavanjPregledaDoktor.SelectedItem != null && kalendar.SelectedDate != null && timeCB.SelectedItem != null)
+            {
+                addAppBtn.IsEnabled = true;
+            }
+            else
+            {
+                addAppBtn.IsEnabled = false;
+            }
 
         }
     }

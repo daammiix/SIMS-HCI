@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using ClassDijagramV1._0;
+using ClassDijagramV1._0.Model;
 using Model;
 using Repository;
 using System;
@@ -56,11 +57,36 @@ namespace Service
             return _appointmentRepo.GetAppointments();
         }
 
+        internal void AddNotification(Appointment appointment, NotificationType notificationType)
+        {
+            
+            Notification note;
+
+            if (NotificationType.addingAppointment.Equals(notificationType))
+            {
+                var notificationID = "1";
+                var content = "Imate zakazan pregled u " + appointment.AppointmentDate + " u sobi " + appointment.Room.RoomName;
+                DateTime created = appointment.AppointmentDate;
+                Notification n = new Notification(notificationID, content, "djordje", false, created, NotificationType.addingAppointment);
+                _appointmentRepo.AddNotification(n);
+            }
+            else if (NotificationType.deletingAppointment.Equals(notificationType))
+            {
+                // obrisi notifikaciju pomocu idija
+            }
+            
+
+            //note.Title  pusi kurac ne znam
+        }
+
+        internal ObservableCollection<Notification> GetAllNotifications()
+        {
+            return _appointmentRepo.GetAllNotifications();
+        }
 
         public Appointment GetOneAppointment(String appointmentID)
         {
-            //var allAppointments = GetAllAppointments();
-            return null;
+            return _appointmentRepo.GetOneAppointment(appointmentID);
         }
 
         public void SaveAppointments()

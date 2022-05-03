@@ -29,7 +29,7 @@ namespace ClassDijagramV1._0.Views.PatientView
 
         private void AppointmentsViewOpen(object sender, RoutedEventArgs e)
         {
-            parent.startWindow.Content = new AppointmentsViewPage();
+            parent.startWindow.Content = new AppointmentsViewPage(parent);
         }
     }
 }
