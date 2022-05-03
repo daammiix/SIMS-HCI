@@ -97,7 +97,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
         /// <returns></returns>
         private bool CanChangeAccount()
         {
-            if (_accountController.DoesAccountWithSameUsernameExists(Username, _accountViewModel.Account) ||
+            if (_accountController.DoesAccountWithSameUsernameExist(Username, _accountViewModel.Account) ||
                 Username == "" || Password == "")
             {
                 return false;

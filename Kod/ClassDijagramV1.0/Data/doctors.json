@@ -1,35 +1,36 @@
 [
   {
     "surgery": null,
-    "Id": 0,
+    "Id": 4,
     "Name": "doktor",
     "Surname": "doktor",
     "Jmbg": "123",
     "Gender": "musko",
     "PhoneNumber": "3875432",
     "Email": "the292200",
-    "DateOfBirth": "2008-05-01T08:30:52"
+    "DateOfBirth": "2008-05-01T08:30:52",
+    "Address": {
+      "Country": "Srbija",
+      "City": "Novi Sad",
+      "StreetName": "Bulevar Oslobodjenja",
+      "StreetNumber": "100"
+    }
   },
   {
     "surgery": null,
-    "Id": 0,
+    "Id": 5,
     "Name": "lekar",
     "Surname": "lekar",
     "Jmbg": "123",
     "Gender": "musko",
     "PhoneNumber": "3875432",
     "Email": "the292200",
-    "DateOfBirth": "2008-05-01T08:30:52"
-  },
-  {
-    "surgery": null,
-    "Id": 4,
-    "Name": "Dragana",
-    "Surname": "Cvetkovic",
-    "Jmbg": "54815181818",
-    "Gender": "Z",
-    "PhoneNumber": "061235236237",
-    "Email": "dcetvkovic49@gmail.com",
-    "DateOfBirth": "1991-07-17T00:00:00"
+    "DateOfBirth": "2008-05-01T08:30:52",
+    "Address": {
+      "Country": "Srbija",
+      "City": "Novi Sad",
+      "StreetName": "Strazilovska",
+      "StreetNumber": "33"
+    }
   }
 ]

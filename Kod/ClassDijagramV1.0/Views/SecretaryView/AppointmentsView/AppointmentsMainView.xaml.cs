@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ClassDijagramV1._0.Views.SecretaryView
+namespace ClassDijagramV1._0.Views.SecretaryView.AppointmentsView
 {
     /// <summary>
     /// Interaction logic for PreglediOperacije.xaml
     /// </summary>
-    public partial class PreglediOperacijeView : UserControl
+    public partial class AppointmentsMainView : UserControl
     {
-        public PreglediOperacijeView()
+        public AppointmentsMainView()
         {
             InitializeComponent();
         }

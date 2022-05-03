@@ -273,6 +273,7 @@
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
         <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="MaxHeight" Value="65"/>
         <Setter Property="Template" Value="{StaticResource ComboBoxTemplate}"/>
         <Style.Triggers>
             <Trigger Property="IsEditable" Value="true">

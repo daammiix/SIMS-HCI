@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels
+namespace ClassDijagramV1._0.Model.Enums
 {
-    public class PreglediOperacijeViewModel
+    public enum BloodType
     {
-
+        O,
+        A,
+        B,
+        AB
     }
 }

@@ -14,6 +14,12 @@
         FontSize="24"
         Title="AddAccount" Height="470" Width="500">
 
+    <Window.InputBindings>
+        <KeyBinding Key="Return"
+                    Command="{Binding Path=AddAccountCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+    </Window.InputBindings>
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -73,6 +79,7 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>

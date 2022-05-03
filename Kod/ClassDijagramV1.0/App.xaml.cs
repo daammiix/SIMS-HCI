@@ -28,16 +28,17 @@ namespace ClassDijagramV1._0
         public static string ProjectPath = System.Reflection.Assembly.GetExecutingAssembly().Location
             .Split(new string[] { "bin" }, StringSplitOptions.None)[0];
 
-        #region Fields
+        #region Static Fields
 
-        public string _accountsFilePath = "../../../Data/accounts.json";
-        public string _patientsFilePath = "../../../Data/patients.json";
-        private string _appointmentsFilePath = "../../../Data/appointments.json";
-        private string _doctorsFilePath = "../../../Data/doctors.json";
-        private string _secretaryFilePath = "../../../Data/secretary.json";
-        private string _managerFilePath = "../../../Data/managers.json";
-        private string _roomsFilePath = "../../../Data/rooms.json";
-        private string _equipmentFilePath = "../../../Data/equipment.json";
+        public static string _accountsFilePath = "../../../Data/accounts.json";
+        public static string _patientsFilePath = "../../../Data/patients.json";
+        public static string _appointmentsFilePath = "../../../Data/appointments.json";
+        public static string _doctorsFilePath = "../../../Data/doctors.json";
+        public static string _secretaryFilePath = "../../../Data/secretary.json";
+        public static string _managerFilePath = "../../../Data/managers.json";
+        public static string _roomsFilePath = "../../../Data/rooms.json";
+        public static string _equipmentFilePath = "../../../Data/equipment.json";
+        public static string _medicalRecordFilePath = "../../../Data/medicalRecords.json";
 
         #endregion
 
@@ -54,7 +55,6 @@ namespace ClassDijagramV1._0
 
         public RoomController roomController { get; set; }
 
-
         public SecretaryController SecretaryController { get; set; }
 
         public ManagerController ManagerController { get; set; }
@@ -63,6 +63,7 @@ namespace ClassDijagramV1._0
 
         public EquipmentAppointmentController equipmentAppointmentController { get; set; }
 
+        public MedicalRecordController MedicalRecordController { get; set; }
 
         #endregion
 
@@ -118,6 +119,10 @@ namespace ClassDijagramV1._0
             var equipmentAppointmentService = new EquipmentAppointmentService(equipmentAppointmentRepo);
             equipmentAppointmentController = new EquipmentAppointmentController(equipmentAppointmentService);
 
+            // MedicalRecords
+            var medicalRecordRepo = new MedicalRecordRepo(new FileHandler<MedicalRecord>(_medicalRecordFilePath));
+            var medicalRecordService = new MedicalRecordService(medicalRecordRepo, patientService);
+            MedicalRecordController = new MedicalRecordController(medicalRecordService);
 
             MakeTestData();
         }
@@ -131,25 +136,27 @@ namespace ClassDijagramV1._0
             SecretaryController.SaveSecretaries();
             ManagerController.SaveManagers();
             roomController.SaveRooms();
+            MedicalRecordController.SaveMedicalRecords();
         }
 
         private void MakeTestData()
         {
             Patient p1 = new Patient("Pera", "Peric", "1595959565626", "M", "0655986598", "perap123@gmail.com",
-                new DateTime(1992, 5, 25), "2222");
+                new DateTime(1992, 5, 25), new Address("Srbija", "Novi Sad", "Dimitrija Tucovica", "12"), "2222");
             p1.Id = 1; // Izbrisati kad se svi podaci budu pravili ovde
             Secretary s1 = new Secretary("Mika", "Lazic", "8921154845568", "M", "0696523145", "mikal123@gmail.com",
-                new DateTime(1994, 3, 15));
+                new DateTime(1994, 3, 15), new Address("Srbija", "Beograd", "Vojvode Putnika", "100/A"));
             s1.Id = 2;
             Manager m1 = new Manager("Svetlana", "Gogalovic", "265959595959", "Z", "65959895956", "svetlanagogo@gmail.com",
-                new DateTime(1987, 11, 12));
+                new DateTime(1987, 11, 12), new Address("Srbija", "Novi Sad", "Dalmatinska", "123"));
             m1.Id = 3;
             Doctor d1 = new Doctor("Dragana", "Cvetkovic", "54815181818", "Z", "061235236237", "dcetvkovic49@gmail.com",
-                new DateTime(1991, 7, 17), DoctorType.dermatology, null);
+                new DateTime(1991, 7, 17), new Address("Srbija", "Beograd", "Karposeva", "56"), DoctorType.dermatology, null);
             d1.Id = 4;
             Patient p2 = new Patient("Mira", "Mirkovic", "1659599494", "Z", "065594959", "miram@gmail.com",
-                new DateTime(1998, 7, 20), "2525");
+                new DateTime(1998, 7, 20), new Address("Srbija", "Subotica", "Bulevar Cara Lazara", "167"), "2525");
             p2.Id = 5;
+            MedicalRecord mr1 = new MedicalRecord(p1.Id, "Dragan", MaritalStatus.Single, "377899", BloodType.O);
 
             PatientController.AddPatient(p1);
             PatientController.AddPatient(p2);
@@ -159,6 +166,8 @@ namespace ClassDijagramV1._0
             SecretaryController.AddSecretary(s1);
 
             DoctorController.AddDoctor(d1);
+
+            MedicalRecordController.AddMedicalRecord(mr1);
 
             Account ac1 = new Account(p1.Id, Role.Patient, "pacijent123", "pacijent123");
             Account ac2 = new Account(s1.Id, Role.Secretary, "sekretar123", "sekretar123");

@@ -1,4 +1,5 @@
 ﻿
+using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Util;
 using Controller;
 using Model;
@@ -103,7 +104,7 @@ namespace ClassDijagramV1._0.Dialog
 
             Room r1 = getFreeRoom(date1, date2);
             Doctor d1 = (Doctor)dodavanjPregledaDoktor.SelectedItem;
-            Patient p1 = new Patient("djordje", "djordje", "123", "musko", "3875432", "the292200", date1, "1234");
+            Patient p1 = new Patient("djordje", "djordje", "123", "musko", "3875432", "the292200", date1, new Address("Srbija", "Novi Sad", "Marije Kalas", "320"), "1234");
 
             Appointment a1 = new Appointment(appointmentID, p1, d1, r1, date1, interval, AppointmentType.generalPractitionerCheckup);
             _appointmentController.AddAppointment(a1);

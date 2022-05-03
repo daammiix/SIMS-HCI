@@ -28,7 +28,7 @@ namespace Model
         {
         }
 
-        public Doctor(string name, string surname, string jmbg, string gender, string phoneNumber, string email, DateTime dateOfBirth, DoctorType type, List<Surgery> surgery) : base(name, surname, jmbg, gender, phoneNumber, email, dateOfBirth)
+        public Doctor(string name, string surname, string jmbg, string gender, string phoneNumber, string email, DateTime dateOfBirth, Address adr, DoctorType type, List<Surgery> surgery) : base(name, surname, jmbg, gender, phoneNumber, email, dateOfBirth, adr)
         {
             this.surgery = surgery;
             this.type = type;

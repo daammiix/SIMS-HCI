@@ -4,6 +4,7 @@
 // Purpose: Definition of Class DoctorRepo
 
 using ClassDijagramV1._0.FileHandlers;
+using ClassDijagramV1._0.Model;
 using Model;
 using System;
 using System.Collections.ObjectModel;
@@ -24,8 +25,8 @@ namespace Repository
             //Doctors = new ObservableCollection<Doctor>();
             DateTime date1 = new DateTime(2008, 5, 1, 8, 30, 52);
 
-            Doctor d1 = new Doctor("doktor", "doktor", "123", "musko", "3875432", "the292200", date1, DoctorType.general, null);
-            Doctor d2 = new Doctor("lekar", "lekar", "123", "musko", "3875432", "the292200", date1, DoctorType.general, null);
+            Doctor d1 = new Doctor("doktor", "doktor", "123", "musko", "3875432", "the292200", date1, new Address("Srbija", "Novi Sad", "Bulevar Oslobodjenja", "100"), DoctorType.general, null);
+            Doctor d2 = new Doctor("lekar", "lekar", "123", "musko", "3875432", "the292200", date1, new Address("Srbija", "Novi Sad", "Strazilovska", "33"), DoctorType.general, null);
             //Doctors.Add(d1);
             //Doctors.Add(d2);
         }

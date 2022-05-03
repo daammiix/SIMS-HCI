@@ -1,10 +1,11 @@
-﻿<UserControl x:Class="ClassDijagramV1._0.Views.SecretaryView.PreglediOperacijeView"
+﻿<UserControl xmlns:syncfusion="http://schemas.syncfusion.com/wpf"  x:Class="ClassDijagramV1._0.Views.SecretaryView.AppointmentsView.AppointmentsMainView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ClassDijagramV1._0.Views.SecretaryView"
+             xmlns:local="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.AppointmentsView"
              mc:Ignorable="d"
+             Background="{StaticResource SBackground}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
 

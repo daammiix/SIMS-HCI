@@ -1,4 +1,5 @@
 ﻿using ClassDijagramV1._0.FileHandlers;
+using ClassDijagramV1._0.Model;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,21 @@ namespace ClassDijagramV1._0.Repository
             _fileHandler = fileHandler;
 
             Patients = new ObservableCollection<Patient>(fileHandler.GetItems());
+
+            // Sad procitamo i zdravstvene kartone da bi vezali svakog pacijenta za svoj zdravstveni karton
+            FileHandler<MedicalRecord> _fileHandlerMedicalRepo = new FileHandler<MedicalRecord>(App._medicalRecordFilePath);
+
+            // Vezemo pacijente za njihove kartone
+            foreach (Patient patient in Patients)
+            {
+                foreach (MedicalRecord medicalRecord in _fileHandlerMedicalRepo.GetItems())
+                {
+                    if (medicalRecord.PatientId == patient.Id)
+                    {
+                        patient.MedicalRecordNumber = medicalRecord.Number;
+                    }
+                }
+            }
 
         }
 

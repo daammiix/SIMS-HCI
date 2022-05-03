@@ -4,6 +4,7 @@
     "Patient": {
       "Appointment": null,
       "SocialSecurityNumber": "1234",
+      "MedicalRecordNumber": null,
       "Id": 0,
       "Name": "djordje",
       "Surname": "djordje",
@@ -11,7 +12,13 @@
       "Gender": "musko",
       "PhoneNumber": "3875432",
       "Email": "the292200",
-      "DateOfBirth": "2022-04-29T07:30:00"
+      "DateOfBirth": "2022-04-29T07:30:00",
+      "Address": {
+        "Country": "Srbija",
+        "City": "Novi Sad",
+        "StreetName": "Marije Kalas",
+        "StreetNumber": "320"
+      }
     },
     "Doctor": {
       "surgery": null,
@@ -22,7 +29,13 @@
       "Gender": "musko",
       "PhoneNumber": "3875432",
       "Email": "the292200",
-      "DateOfBirth": "2008-05-01T08:30:52"
+      "DateOfBirth": "2008-05-01T08:30:52",
+      "Address": {
+        "Country": "Srbija",
+        "City": "Novi Sad",
+        "StreetName": "Bulevar Oslobodjenja",
+        "StreetNumber": "100"
+      }
     },
     "Room": {
       "RoomID": "id",
@@ -41,6 +54,7 @@
     "Patient": {
       "Appointment": null,
       "SocialSecurityNumber": "1234",
+      "MedicalRecordNumber": null,
       "Id": 0,
       "Name": "djordje",
       "Surname": "djordje",
@@ -48,7 +62,13 @@
       "Gender": "musko",
       "PhoneNumber": "3875432",
       "Email": "the292200",
-      "DateOfBirth": "2022-04-27T09:00:00"
+      "DateOfBirth": "2022-04-27T09:00:00",
+      "Address": {
+        "Country": "Srbija",
+        "City": "Novi Sad",
+        "StreetName": "Marije Kalas",
+        "StreetNumber": "320"
+      }
     },
     "Doctor": {
       "surgery": null,
@@ -59,7 +79,13 @@
       "Gender": "musko",
       "PhoneNumber": "3875432",
       "Email": "the292200",
-      "DateOfBirth": "2008-05-01T08:30:52"
+      "DateOfBirth": "2008-05-01T08:30:52",
+      "Address": {
+        "Country": "Srbija",
+        "City": "Novi Sad",
+        "StreetName": "Bulevar Oslobodjenja",
+        "StreetNumber": "100"
+      }
     },
     "Room": {
       "RoomID": "id",

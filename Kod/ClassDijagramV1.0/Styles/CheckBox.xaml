@@ -7,16 +7,16 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type CheckBox}">
                     <Grid>
-                        <Ellipse x:Name="Elipse" Width="25" Height="25" Fill="{StaticResource CheckBoxUnchecked}">
+                        <Ellipse x:Name="Ellipse" Width="25" Height="25" Fill="{StaticResource CheckBoxUnchecked}">
                         </Ellipse>
                         <ContentPresenter x:Name="content" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="Elipse" Property="Fill" Value="{StaticResource CheckBoxChecked}"/>
+                            <Setter TargetName="Ellipse" Property="Fill" Value="{StaticResource CheckBoxChecked}"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="False">
-                            <Setter TargetName="Elipse" Property="Fill" Value="{StaticResource CheckBoxUnchecked}"/>
+                            <Setter TargetName="Ellipse" Property="Fill" Value="{StaticResource CheckBoxUnchecked}"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Cursor" Value="Hand"/>

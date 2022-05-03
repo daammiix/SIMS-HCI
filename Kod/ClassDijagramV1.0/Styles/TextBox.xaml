@@ -20,7 +20,7 @@
                                      Foreground="#CFCFCF"
                                      VerticalAlignment="Center"
                                      CaretBrush="{TemplateBinding CaretBrush}"
-                                     Padding="5"
+                                     Padding="8"
                                      x:Name="UsernameBox"
                                      Grid.Column="0"/>
                             <Image Source="../Images/user.png"
@@ -44,13 +44,14 @@
                 <ControlTemplate TargetType="PasswordBox">
                     <Border Background="#353340"
                             CornerRadius="10"
-                            Padding="5">
+                            Padding="8">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <ScrollViewer Grid.Column="0" x:Name="PART_ContentHost" VerticalScrollBarVisibility="Disabled"
+                                          Padding="8"
                                           HorizontalScrollBarVisibility="Disabled"/>
                             <Image Grid.Column="1"
                                    Source="../Images/key.png"
@@ -76,6 +77,9 @@
                                  CaretBrush="White"
                                  Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
                                  BorderThickness="0"
+                                 MaxWidth="300"
+                                 MaxHeight="65"
+                                 VerticalAlignment="Center"
                                  Background="Transparent"
                                  Foreground="{StaticResource SLightGrayShade}"/>
                     </Border>
@@ -83,4 +87,27 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style x:Key="TextBoxStyleAccountMultiLine" TargetType="TextBox">
+        <Setter Property="Text" Value=""/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border BorderBrush="{StaticResource SCyan}"
+                            Background="{StaticResource SDarkGrayShade}"
+                            BorderThickness="1"
+                            CornerRadius="15">
+                        <TextBox Padding="10"
+                                 CaretBrush="White"
+                                 Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
+                                 BorderThickness="0"
+                                 MaxWidth="300"
+                                 TextWrapping="Wrap"
+                                 Background="Transparent"
+                                 Foreground="{StaticResource SLightGrayShade}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

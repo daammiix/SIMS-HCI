@@ -17,9 +17,10 @@ namespace Model
         public String PhoneNumber { get; set; }
         public String Email { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public Address Address { get; set; }
 
         public Person(string name, string surname, string jmbg, string gender,
-            string phoneNumber, string email, DateTime dateOfBirth)
+            string phoneNumber, string email, DateTime dateOfBirth, Address adr)
         {
             this.Id = ++_id;
             this.Name = name;
@@ -29,6 +30,7 @@ namespace Model
             this.PhoneNumber = phoneNumber;
             this.Email = email;
             this.DateOfBirth = dateOfBirth;
+            this.Address = adr;
         }
 
         [JsonConstructor]
