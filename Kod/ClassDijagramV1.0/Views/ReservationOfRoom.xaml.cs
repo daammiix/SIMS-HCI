@@ -42,15 +42,15 @@ namespace ClassDijagramV1._0.Views
 
         private void Renovating_Click(object sender, RoutedEventArgs e)
         {
-            RenovatingAndChangingPurpose renovatingAndChangingPurpose = new RenovatingAndChangingPurpose();
-            renovatingAndChangingPurpose.Show();
+            RenovaitingWindow renovating = new RenovaitingWindow(selectedRoom);
+            renovating.Show();
             this.Close();
         }
 
         private void ChangingPurpose_Click(object sender, RoutedEventArgs e)
         {
-            RenovatingAndChangingPurpose renovatingAndChangingPurpose = new RenovatingAndChangingPurpose();
-            renovatingAndChangingPurpose.Show();
+            ChangingPurposeWindow changingPurpose = new ChangingPurposeWindow();
+            changingPurpose.Show();
             this.Close();
         }
     }

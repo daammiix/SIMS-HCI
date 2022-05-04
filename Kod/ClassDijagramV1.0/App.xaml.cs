@@ -38,6 +38,8 @@ namespace ClassDijagramV1._0
         private string _managerFilePath = "../../../Data/managers.json";
         private string _roomsFilePath = "../../../Data/rooms.json";
         private string _equipmentFilePath = "../../../Data/equipment.json";
+        private string _storageFilePath = "../../../Data/storage.json";
+        private string _roomAppointmentsFilePath = "../../../Data/roomAppointments.json";
 
         #endregion
 
@@ -53,8 +55,7 @@ namespace ClassDijagramV1._0
         public DoctorController DoctorController { get; set; }
 
         public RoomController roomController { get; set; }
-
-
+        
         public SecretaryController SecretaryController { get; set; }
 
         public ManagerController ManagerController { get; set; }
@@ -62,6 +63,7 @@ namespace ClassDijagramV1._0
         public EquipmentController equipmentController { get; set; }
 
         public EquipmentAppointmentController equipmentAppointmentController { get; set; }
+        public RoomAppointmentController roomAppointmentController { get; set; }
 
 
         #endregion
@@ -103,8 +105,8 @@ namespace ClassDijagramV1._0
             var managerService = new ManagerService(managerRepo);
             ManagerController = new ManagerController(managerService);
 
-            // Rooms
-            var roomRepo = new RoomRepoJson(new FileHandler<BindingList<Room>>(_roomsFilePath));
+            // Rooms-Storage
+            var roomRepo = new RoomRepoJson(new FileHandler<BindingList<Room>>(_roomsFilePath), new FileHandler<BindingList<Storage>>(_storageFilePath));
             var roomService = new RoomService(roomRepo);
             roomController = new RoomController(roomService);
 
@@ -118,6 +120,11 @@ namespace ClassDijagramV1._0
             var equipmentAppointmentService = new EquipmentAppointmentService(equipmentAppointmentRepo);
             equipmentAppointmentController = new EquipmentAppointmentController(equipmentAppointmentService);
 
+            // RoomAppointment
+            var roomAppointmentRepo = new RoomAppointmentRepo(new FileHandler<BindingList<RoomAppointment>>(_roomAppointmentsFilePath));
+            var roomAppointmentService = new RoomAppointmentService(roomAppointmentRepo);
+            roomAppointmentController = new RoomAppointmentController(roomAppointmentService);
+
             var dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 10);
@@ -126,9 +133,10 @@ namespace ClassDijagramV1._0
             MakeTestData();
         }
 
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        private void dispatcherTimer_Tick(object? sender, EventArgs e)
         {
             equipmentAppointmentController.ScheduledAppointment();
+            roomAppointmentController.ScheduledAppointments();
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)
@@ -140,6 +148,7 @@ namespace ClassDijagramV1._0
             SecretaryController.SaveSecretaries();
             ManagerController.SaveManagers();
             roomController.SaveRooms();
+            roomAppointmentController.SaveRoomAppointment();
         }
 
         private void MakeTestData()

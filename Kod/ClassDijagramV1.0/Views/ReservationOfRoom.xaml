@@ -44,9 +44,14 @@
                              Click="Equip_Click"/>
 
                 <RadioButton x:Name="Renovating"
-                             Content="Renoviranje i promena namene sale"
+                             Content="Renoviranje"
                              Style="{StaticResource ReservationButton}"
                              Click="Renovating_Click"/>
+                
+                <RadioButton x:Name="ChangingPurpose"
+                             Content="Promena namene sale"
+                             Style="{StaticResource ReservationButton}"
+                             Click="ChangingPurpose_Click"/>
 
             </StackPanel>
             <WrapPanel Grid.Row="2" HorizontalAlignment="Right">

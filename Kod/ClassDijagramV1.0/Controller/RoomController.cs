@@ -42,6 +42,11 @@ namespace Controller
             return roomService.GetAllRooms();
         }
 
+        public void ChangeStorageQuantity(string equipmentId, int quantity)
+        {
+            roomService.ChangeStorageQuantity(equipmentId, quantity);
+        }
+
         public void SaveRooms()
         {
             roomService.SaveRooms();

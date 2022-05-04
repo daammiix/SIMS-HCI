@@ -6,6 +6,7 @@
 
 using ClassDijagramV1._0;
 using ClassDijagramV1._0.Model;
+using ClassDijagramV1._0.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -58,6 +59,34 @@ namespace Model
             } else
             {
                 binding.Quantity += quantity;
+            }
+        }
+
+        public void addNewEquipment(Equipment e, int quantity)
+        {
+            RoomEquipmentBinding? binding = getBinding(e);
+            if (binding == null)
+            {
+                EquipmentList.Add(new RoomEquipmentBinding(e.EquipmentID, quantity));
+            }
+            else
+            {
+                WarningId warningId = new WarningId();
+                warningId.Show();
+            }
+        }
+
+        public void insertChangedEquipment(Equipment e, int quantity, int index)
+        {
+            RoomEquipmentBinding? binding = getBinding(e);
+            if (binding != null)
+            {
+                EquipmentList.Insert(index, new RoomEquipmentBinding(e.EquipmentID, quantity));
+            }
+            else
+            {
+                WarningId warningId = new WarningId();
+                warningId.Show();
             }
         }
 

@@ -4,14 +4,16 @@
            x:Key="TimeTextBox">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TextBox}">
+                <ControlTemplate TargetType="{x:Type TextBoxBase}">
                     <Border CornerRadius="10"
                             Background="White"
                             Width="{TemplateBinding Property=Width}" Height="40">
-                        <Grid>
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+
+                        <!--<Grid>
                             <Rectangle StrokeThickness="1"/>
                             <TextBox Margin="1"
-                                     Text="{TemplateBinding Text}"
+                                     Text="{Binding , RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                      BorderThickness="0"
                                      Background="Transparent"
                                      VerticalContentAlignment="Center"
@@ -19,29 +21,7 @@
                                      Foreground="Black"
                                      FontSize="18"
                                      x:Name="TimeTextBox"/>
-
-                            <TextBlock IsHitTestVisible="False"
-                                       Text="15:45"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"
-                                       Margin="10,0,0,0"
-                                       FontSize="18"
-                                       Foreground="Gray">
-
-                                <TextBlock.Style>
-                                    <Style TargetType="{x:Type TextBlock}">
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, ElementName=TimeTextBox}" Value="">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                        <Setter Property="Visibility" Value="Hidden"/>
-                                    </Style>
-                                </TextBlock.Style>
-
-                            </TextBlock>
-                        </Grid>
-
+                        </Grid>-->
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

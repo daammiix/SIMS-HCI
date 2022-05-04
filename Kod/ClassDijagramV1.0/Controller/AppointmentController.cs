@@ -53,5 +53,9 @@ namespace Controller
             _appointmentService.SaveAppointments();
         }
 
+        public ObservableCollection<Appointment> GetListOfAppointments()
+        {
+            return _appointmentService.GetListOfAppointments();
+        }
     }
 }

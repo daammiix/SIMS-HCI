@@ -67,5 +67,10 @@ namespace Service
         {
             _appointmentRepo.SaveAppointments();
         }
+
+        public ObservableCollection<Appointment> GetListOfAppointments()
+        {
+            return _appointmentRepo.GetListOfAppointments();
+        }
     }
 }

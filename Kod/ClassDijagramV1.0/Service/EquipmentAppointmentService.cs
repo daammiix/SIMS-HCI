@@ -1,5 +1,6 @@
 ﻿using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Repository;
+using Controller;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -7,30 +8,25 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ClassDijagramV1._0.Service
 {
     public class EquipmentAppointmentService
     {
         private EquipmentAppointmentRepo equipmentAppointmentRepository;
+        private RoomController roomController;
         public EquipmentAppointmentService(EquipmentAppointmentRepo equipmentAppointmentServiceRepository)
         {
             this.equipmentAppointmentRepository = equipmentAppointmentServiceRepository;
+            var app = Application.Current as App;
+            roomController = app.roomController;
         }
 
         public void AddEquipmentAppointment(EquipmentAppointment equipmentAppointment)
         {
-            if (this.CheckIfUniq(equipmentAppointment, false))
-            {
-                equipmentAppointmentRepository.CreateNewEquipmentAppointment(equipmentAppointment);
-            }
+             equipmentAppointmentRepository.CreateNewEquipmentAppointment(equipmentAppointment);
         }
-
-        public void DeleteEquipmentAppointment(EquipmentAppointment equipmentAppointment)
-        {
-            equipmentAppointmentRepository.DeleteEquipmentAppointment(equipmentAppointment);
-        }
-
 
         public EquipmentAppointment? GetAEquipmentAppointment(EquipmentAppointment equipmentAppointment)
         {
@@ -42,25 +38,28 @@ namespace ClassDijagramV1._0.Service
             return equipmentAppointmentRepository.GetAllEquipmentAppointments();
         }
 
-        public Boolean CheckIfUniq(EquipmentAppointment equipmentAppointment, bool existingEquipmentAppointment)
-        {
-            // TODO
-            return false;
-        }
-
         public void ScheduledAppointment()
         {
             BindingList<EquipmentAppointment> equipmentAppointments = GetAllEquipmentAppointment();
 
-            foreach (EquipmentAppointment equipmentAppointment in equipmentAppointments)
+            for (int i = 0; i < equipmentAppointments.Count; i++)
             {
+                var equipmentAppointment = equipmentAppointments[i];
+                if (equipmentAppointment.Started)
+                {
+                    continue;
+                }
                 if(DateTime.Now > equipmentAppointment.FromDateTime)
                 {
-                    equipmentAppointment.RoomFrom.removeEquipment(equipmentAppointment.SelectedEquipment, equipmentAppointment.Quantity);
+                    Room room = roomController.GetARoom(equipmentAppointment.RoomFrom);
+                    room.removeEquipment(equipmentAppointment.SelectedEquipment, equipmentAppointment.Quantity);
+                    equipmentAppointment.Started = true;
                 }
                 if (DateTime.Now > equipmentAppointment.ToDateTime)
                 {
-                    equipmentAppointment.RoomTo.addEquipment(equipmentAppointment.SelectedEquipment, equipmentAppointment.Quantity);
+                    Room room = roomController.GetARoom(equipmentAppointment.RoomTo);
+                    room.addEquipment(equipmentAppointment.SelectedEquipment, equipmentAppointment.Quantity);
+                    equipmentAppointmentRepository.DeleteEquipmentAppointment(i--);
                 }
             }
         }

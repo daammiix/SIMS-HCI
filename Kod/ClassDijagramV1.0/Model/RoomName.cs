@@ -15,5 +15,6 @@ namespace Model
         public const string recoveryRoom = "Bolnička soba";
         public const string intensiveCareRoom = "Intezivna nega";
         public const string meetingRoom = "Sala za sastanke";
+        public const string storageRoom = "Magacin";
     }
 }

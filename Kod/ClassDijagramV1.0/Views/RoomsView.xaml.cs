@@ -1,4 +1,5 @@
-﻿using Controller;
+﻿using ClassDijagramV1._0.Views.ManagerView;
+using Controller;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -43,8 +44,8 @@ namespace ClassDijagramV1._0.Views
 
         private void GenerateRoom_Click(object sender, RoutedEventArgs e)
         {
-            RenovatingAndChangingPurpose renovatingAndChangingPurpose = new RenovatingAndChangingPurpose();
-            renovatingAndChangingPurpose.Show();
+            //RenovaitingWindow renovatingAndChangingPurpose = new RenovaitingWindow();
+            //renovatingAndChangingPurpose.Show();
         }
 
         private void AddRoom_Click(object sender, RoutedEventArgs e)

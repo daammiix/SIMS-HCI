@@ -37,5 +37,10 @@ namespace ClassDijagramV1._0.Controller
         {
             return equipmentService.GetAllEquipments();
         }
+
+        public Equipment? GetEquipmentByID(String EquipmentID)
+        {
+            return equipmentService.GetAEquipment(EquipmentID);
+        }
     }
 }

@@ -51,6 +51,11 @@ namespace Service
             return repo.GetAllRooms();
         }
 
+        public void ChangeStorageQuantity(string equipmentId, int quantity)
+        {
+            repo.ChangeStorageQuantity(equipmentId, quantity);
+        }
+
         public Boolean CheckIfUniq(Room room, bool existingRoom)
         {
             var rooms = repo.GetAllRooms();

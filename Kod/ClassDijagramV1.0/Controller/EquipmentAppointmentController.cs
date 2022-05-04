@@ -24,11 +24,6 @@ namespace ClassDijagramV1._0.Controller
             equipmentAppointmentService.AddEquipmentAppointment(equipmentAppointment);
         }
 
-        public void DeleteEquipmentAppointment(EquipmentAppointment equipmentAppointment)
-        {
-            equipmentAppointmentService.DeleteEquipmentAppointment(equipmentAppointment);
-        }
-
         public EquipmentAppointment? GetAEquipmentAppointment(EquipmentAppointment equipmentAppointment)
         {
             return equipmentAppointmentService.GetAEquipmentAppointment(equipmentAppointment);
