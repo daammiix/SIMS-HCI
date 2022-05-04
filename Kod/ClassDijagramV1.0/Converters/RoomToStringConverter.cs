@@ -8,12 +8,12 @@ namespace ClassDijagramV1._0.Converters
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            Room room = (Room)value;
-            if (room != null)
+            if (value == null || value == "")
             {
-                return room.RoomID + " " + room.RoomName;
+                return "";
             }
-            return "";
+            var room = (Room)value;
+            return room.RoomID + " " + room.RoomName;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

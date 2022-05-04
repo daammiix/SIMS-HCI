@@ -43,8 +43,6 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Row="1"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
-                <Label Content="Odaberite datum:" FontSize="26" Margin="10,0,0,0" Height="40" Width="250"/>
-                <DatePicker x:Name="PickerDate" FontSize="22" Margin="10,0,0,5" Height="40" Width="230" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" SelectedDateChanged="PickerDate_SelectedDateChanged" SelectedDate="{Binding Path=selectedDate, Mode=TwoWay, StringFormat=dd/MM/yyyy}"/>
 
                 <DataGrid Grid.Column="1" Height="200" Width="250" x:Name="BusyRooms" Margin="15, 10, 10,0"
                       CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left"
@@ -64,7 +62,7 @@
                         <Label Content="Vreme:" FontSize="26" Height="40" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromDate,Mode=TwoWay}" Style="{StaticResource DateTextBox}"/>
+                        <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromDate,Mode=TwoWay}" Style="{StaticResource DateTextBox}" TextChanged="FromDateField_TextChanged"/>
                         <TextBox x:Name="FromTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromTime,Mode=TwoWay}"  Style="{StaticResource TimeTextBox}"/>
                     </StackPanel>
                 </StackPanel>
@@ -76,7 +74,7 @@
                         <Label Content="Vreme:" FontSize="26" Height="40" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToDate,Mode=TwoWay}"  Style="{StaticResource DateTextBox}"/>
+                        <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToDate,Mode=TwoWay}"  Style="{StaticResource DateTextBox}" TextChanged="FromDateField_TextChanged"/>
                         <TextBox x:Name="ToTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToTime,Mode=TwoWay}"  Style="{StaticResource TimeTextBox}"/>
                     </StackPanel>
                 </StackPanel>

@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "appointmentID": "vcds62",
+    "roomId": "id",
+    "startDate": "2022-05-06T00:08:00",
+    "duration": "1.02:36:00"
+  },
+  {
+    "appointmentID": "zvhh76",
+    "roomId": "id",
+    "startDate": "2022-05-06T00:09:00",
+    "duration": "1.00:02:00"
+  }
+]

@@ -27,6 +27,7 @@ namespace ClassDijagramV1._0.Views
     {
         readonly private String format = "dd/MM/yyyyTHH:mm";
         readonly private String timeFormat = "HH:mm";
+        readonly private String fullFormat = "dd/MM/yyyy HH:mm";
 
         public EquipmentController equipmentController;
         public EquipmentAppointmentController equipmentAppointmentController;
@@ -42,10 +43,10 @@ namespace ClassDijagramV1._0.Views
         public int quantity;
 
         public BindingList<String> RoomsAvailable { get; set; }
-        public String FromDate { get; set; }
-        public String FromTime { get; set; }
-        public String ToDate { get; set; }
-        public String ToTime { get; set; }
+        public String FromDate { get; set; } = DateTime.Now.ToString("dd/MM/yyyy");
+        public String FromTime { get; set; } = DateTime.Now.ToString("HH:mm");
+        public String ToDate { get; set; } = DateTime.Now.ToString("dd/MM/yyyy");
+        public String ToTime { get; set; } = DateTime.Now.ToString("HH:mm");
         private BindingList<Availability> availabilities { get; set; }
 
         public StorageEquip(QuantifiedEquipment qEquipment)
@@ -65,11 +66,6 @@ namespace ClassDijagramV1._0.Views
             this.QEquipment = qEquipment;
             this.selectedEquipment = QEquipment.Equipment;
 
-            FromDate = DateTime.Now.ToString("dd/MM/yyyy");
-            ToDate = DateTime.Now.ToString("dd/MM/yyyy");
-            FromTime = DateTime.Now.ToString(timeFormat);
-            ToTime = DateTime.Now.ToString(timeFormat);
-
             RoomsAvailable = new BindingList<String>();
             availabilities = new BindingList<Availability>();
         }
@@ -79,9 +75,8 @@ namespace ClassDijagramV1._0.Views
             selectedToRoom = (Room)MovingTo.SelectedItem;
             quantity = Convert.ToInt32(Quantity.Text);
 
-            DateTime fromDatetime, toDatetime;
-            DateTime.TryParseExact(FromDate + "T" + FromTime, format, null, System.Globalization.DateTimeStyles.None, out fromDatetime);
-            DateTime.TryParseExact(ToDate + "T" + ToTime, format, null, System.Globalization.DateTimeStyles.None, out toDatetime);
+            DateTime fromDatetime = DateTime.ParseExact(FromDateField.Text + "T" + FromTimeField.Text, format, null);
+            DateTime toDatetime = DateTime.ParseExact(ToDateField.Text + "T" + ToTimeField.Text, format, null);
 
             if (!checkDateTimeAvailable(fromDatetime, toDatetime))
             {
@@ -101,11 +96,16 @@ namespace ClassDijagramV1._0.Views
             this.Close();
         }
 
+        private bool checkTimeSpansOverlap(DateTime fromDatetimeA, DateTime toDatetimeA, DateTime fromDatetimeB, DateTime toDatetimeB)
+        {
+            return fromDatetimeA <= toDatetimeB && fromDatetimeB <= toDatetimeA;
+        }
+
         private bool checkDateTimeAvailable(DateTime fromDatetime, DateTime toDatetime)
         {
             foreach (var avaible in availabilities)
             {
-                if (fromDatetime < avaible.To && avaible.From < toDatetime)
+                if (checkTimeSpansOverlap(fromDatetime, toDatetime, avaible.From, avaible.To))
                 {
                     return false;
                 }
@@ -118,7 +118,12 @@ namespace ClassDijagramV1._0.Views
             UpdateAvailabilityOfEquipment();
         }
 
-        private void PickerDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        private void FromDateField_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListsHandler();
+        }
+
+        private void MovingTo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListsHandler();
         }
@@ -127,7 +132,7 @@ namespace ClassDijagramV1._0.Views
         {
             availabilities.Add(new Availability(start, end));
 
-            return start.ToString(timeFormat) + " - " + end.ToString(timeFormat);
+            return start.ToString(fullFormat) + " - " + end.ToString(fullFormat);
         }
 
         public void UpdateAvailabilityOfEquipment()
@@ -158,12 +163,27 @@ namespace ClassDijagramV1._0.Views
             var appointments = appointmentController.GetListOfAppointments();
             var equipmentAppointments = equipmentAppointmentController.GetAllEquipmentAppointment();
 
-            DateTime selectedDate = DateTime.ParseExact(PickerDate.Text, "dd/MM/yyyy", null);
-            selectedToRoom = (Room)MovingTo.SelectedItem;
+            Room? selectedToRoom = (Room?)MovingTo.SelectedItem;
+            if (selectedToRoom == null)
+            {
+                return;
+            }
+            DateTime selectedFrom, selectedTo;
+            try
+            {
+                selectedFrom = DateTime.ParseExact(FromDateField.Text, "dd/MM/yyyy", null);
+                selectedTo = DateTime.ParseExact(ToDateField.Text, "dd/MM/yyyy", null);
+            }
+            catch (FormatException)
+            {
+                return;
+            }
 
             foreach (var equipmentAppointment in equipmentAppointments)
             {
-                if (equipmentAppointment.FromDateTime.Date == selectedDate)
+                var aptFrom = equipmentAppointment.FromDateTime.Date;
+                var aptTo = equipmentAppointment.ToDateTime.Date;
+                if (checkTimeSpansOverlap(aptFrom, aptTo, selectedFrom, selectedTo))
                 {
                     if (selectedToRoom != null && (equipmentAppointment.RoomFrom == selectedToRoom.RoomID || equipmentAppointment.RoomTo == selectedToRoom.RoomID))
                     {
@@ -173,7 +193,9 @@ namespace ClassDijagramV1._0.Views
             }
             foreach (var roomAppointment in roomAppointments)
             {
-                if (roomAppointment.startDate.Date == selectedDate)
+                var aptFrom = roomAppointment.startDate.Date;
+                var aptTo = (roomAppointment.startDate + roomAppointment.duration).Date;
+                if (checkTimeSpansOverlap(aptFrom, aptTo, selectedFrom, selectedTo))
                 {
                     if (roomAppointment.roomId == selectedToRoom.RoomID)
                     {
@@ -183,7 +205,9 @@ namespace ClassDijagramV1._0.Views
             }
             foreach (var appointment in appointments)
             {
-                if (appointment.AppointmentDate.Date == selectedDate)
+                var aptFrom = appointment.AppointmentDate.Date;
+                var aptTo = (appointment.AppointmentDate + appointment.Duration).Date;
+                if (checkTimeSpansOverlap(aptFrom, aptTo, selectedFrom, selectedTo))
                 {
                     if (appointment.Room.RoomID == selectedToRoom.RoomID)
                     {
