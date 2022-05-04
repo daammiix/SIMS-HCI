@@ -44,16 +44,6 @@ namespace ClassDijagramV1._0.Views.PatientView
             startWindow.Content = new NotificationPage(this);
         }
 
-        private void moveBtnEnter(object sender, MouseEventArgs e)
-        {
-            backBtn.Margin = new Thickness(0, 0,0,0);
-        }
-
-        private void moveBtnLeave(object sender, MouseEventArgs e)
-        {
-            backBtn.Margin = new Thickness(10, 0, 0, 0);
-        }
-
         private void goBack(object sender, RoutedEventArgs e)
         {
 

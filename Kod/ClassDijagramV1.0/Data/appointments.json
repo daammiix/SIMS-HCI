@@ -1,47 +1,5 @@
 [
   {
-    "AppointmentID": "189",
-    "Patient": {
-      "Appointment": null,
-      "SocialSecurityNumber": "1234",
-      "Id": 11,
-      "Name": "djordje",
-      "Surname": "djordje",
-      "Jmbg": "123",
-      "Gender": "musko",
-      "PhoneNumber": "3875432",
-      "Email": "the292200",
-      "DateOfBirth": "2022-05-04T08:30:00"
-    },
-    "Doctor": {
-      "surgery": null,
-      "Id": 0,
-      "Name": "doktor",
-      "Surname": "doktor",
-      "Jmbg": "123",
-      "Gender": "musko",
-      "PhoneNumber": "3875432",
-      "Email": "the292200",
-      "DateOfBirth": "2008-05-01T08:30:52"
-    },
-    "Room": {
-      "RoomID": "id",
-      "RoomName": "Operaciona Sala",
-      "Floor": 2,
-      "RoomNumber": 23,
-      "RoomStatus": "Aktivna",
-      "EquipmentList": [
-        {
-          "EquipmentID": "id1",
-          "Quantity": 2
-        }
-      ]
-    },
-    "AppointmentDate": "2022-05-04T08:30:00",
-    "Duration": "00:30:00",
-    "AppointmentType": 0
-  },
-  {
     "AppointmentID": "262",
     "Patient": {
       "Appointment": null,
@@ -122,6 +80,48 @@
       ]
     },
     "AppointmentDate": "2022-05-14T08:30:00",
+    "Duration": "00:30:00",
+    "AppointmentType": 0
+  },
+  {
+    "AppointmentID": "969",
+    "Patient": {
+      "Appointment": null,
+      "SocialSecurityNumber": "1234",
+      "Id": 11,
+      "Name": "djordje",
+      "Surname": "djordje",
+      "Jmbg": "123",
+      "Gender": "musko",
+      "PhoneNumber": "3875432",
+      "Email": "the292200",
+      "DateOfBirth": "2022-05-05T09:00:00"
+    },
+    "Doctor": {
+      "surgery": null,
+      "Id": 0,
+      "Name": "doktor",
+      "Surname": "doktor",
+      "Jmbg": "123",
+      "Gender": "musko",
+      "PhoneNumber": "3875432",
+      "Email": "the292200",
+      "DateOfBirth": "2008-05-01T08:30:52"
+    },
+    "Room": {
+      "RoomID": "id",
+      "RoomName": "Operaciona Sala",
+      "Floor": 2,
+      "RoomNumber": 23,
+      "RoomStatus": "Aktivna",
+      "EquipmentList": [
+        {
+          "EquipmentID": "id1",
+          "Quantity": 2
+        }
+      ]
+    },
+    "AppointmentDate": "2022-05-05T09:00:00",
     "Duration": "00:30:00",
     "AppointmentType": 0
   }

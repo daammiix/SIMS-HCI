@@ -4,28 +4,55 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClassDijagramV1._0.Views.PatientView"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="PatientMainWindow" Height="768" Width="1024"
         ResizeMode="NoResize"
-        WindowStyle="None" WindowStartupLocation="CenterScreen">
+        WindowStyle="None" WindowStartupLocation="CenterScreen"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}">
+    
     <Window.Resources>
-        <Style x:Key="noBackBlue" TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="#FFBBBABD"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#FF818083"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Grey.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        
+        
+            <Style x:Key="noBackBlue" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="#FFBBBABD"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#FF818083"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="moving" TargetType="{x:Type Button}" BasedOn="{StaticResource noBackBlue}">
+                <Setter Property="Margin" Value="20,0,0,0"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Margin" Value="10,0,0,0"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
     </Window.Resources>
 
     <Grid>
@@ -36,23 +63,33 @@
                 <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Height="68">
                     <Button Style="{StaticResource ResourceKey=noBackBlue}" Cursor="Hand"
                     Width="68" Height="68" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                    BorderBrush="{x:Null}" Foreground="{x:Null}"
+                    BorderBrush="{x:Null}"
                     Margin="0, 0, 0, 0"
                     Click="openNotificationClick" ToolTip="Obavještenja">
                         <Image Source="Resources/Images/doctor.png" Width="42" Height="42"/>
                     </Button>
                 </StackPanel>
+                <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
+                        HorizontalAlignment="Left"
+                        BorderBrush="{x:Null}"
+                        Background="{x:Null}"
+                        Foreground="Black"
+                        x:Name="btnExit">
+                    <StackPanel Margin="-5">
+                        <materialDesign:PackIcon Kind="Logout" Height="48" Width="48"/>
+                    </StackPanel>
+                </Button>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Height="68" >
                     <Button Style="{StaticResource ResourceKey=noBackBlue}" Cursor="Hand"
                     Width="68" Height="68" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                    BorderBrush="{x:Null}" Foreground="{x:Null}"
+                    BorderBrush="{x:Null}"
                     Margin="0, 0, 0, 0"
                     Click="openNotificationClick" ToolTip="Obavještenja">
                         <Image Source="Resources/Images/notification.png" Width="42" Height="42"/>
                     </Button>
                     <Button x:Name="logoutBtn" Style="{StaticResource ResourceKey=noBackBlue}" Cursor="Hand"
                     Width="68" Height="68" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                    BorderBrush="{x:Null}" Foreground="{x:Null}"
+                    BorderBrush="{x:Null}"
                     Margin="0, 0, 0, 0"
                     Click="Logout" ToolTip="Odjavi se">
                         <Image Source="Resources/Images/logout.png" Width="42" Height="42"/>
@@ -66,12 +103,9 @@
             <StackPanel x:Name="backStack" Orientation="Horizontal" VerticalAlignment="Bottom"
                         Height="50"
                         ToolTip="Vrati se">
-                <Button x:Name="backBtn" Style="{StaticResource ResourceKey=noBackBlue}" Cursor="Hand"
+                <Button x:Name="backBtn" Style="{StaticResource ResourceKey=moving}" Cursor="Hand"
                     Height="32" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                    Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"
-                    Margin="10, 0, 0, 0"
-                    MouseEnter="moveBtnEnter" MouseLeave="moveBtnLeave" Click="goBack"
-                        >
+                    Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="Resources/Images/back-arrow.png"/>
                         <Image Source="Resources/Images/back-arrow.png" Margin="-20,0,0,0"/>
