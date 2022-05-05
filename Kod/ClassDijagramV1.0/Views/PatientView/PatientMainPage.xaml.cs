@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,21 +22,39 @@ namespace ClassDijagramV1._0.Views.PatientView
     /// </summary>
     public partial class PatientMainPage : Page
     {
+        #region Fields
+
+        private Patient _logedPatient;
+
+        private ObservableCollection<AppointmentViewModel> _appointmentViewModels;
+
+        #endregion
+
         private PatientMainWindow parent { get; set; }
-        public PatientMainPage(PatientMainWindow patientMain)
+        public PatientMainPage(PatientMainWindow patientMain, Patient logedPatient)
         {
             InitializeComponent();
             parent = patientMain;
+            _logedPatient = logedPatient;
+
+            // napravimo listu appointmentViewModela od svakog appointmenta pacijenta
+            _appointmentViewModels = new ObservableCollection<AppointmentViewModel>();
+            foreach (Appointment a in _logedPatient.Appointments)
+            {
+                _appointmentViewModels.Add(new AppointmentViewModel(a));
+            }
+
         }
 
         private void AppointmentsViewOpen(object sender, RoutedEventArgs e)
         {
-            parent.startWindow.Content = new AppointmentsViewPage(parent);
+            // Proslledimo appointmentViewModels da bi mogli da prikazemo appointmente i ulogovanog pacijenta
+            parent.startWindow.Content = new AppointmentsViewPage(_appointmentViewModels, parent, _logedPatient);
         }
 
         private void AddAppointmetClick(object sender, RoutedEventArgs e)
         {
-            parent.startWindow.Content = new AppointmentAddPage(parent);
+            parent.startWindow.Content = new AppointmentAddPage(parent, _appointmentViewModels, _logedPatient);
         }
     }
 }

@@ -26,6 +26,17 @@ namespace ClassDijagramV1._0.Views.PatientView
     /// </summary>
     public partial class AppointmentAddPage : Page//, INotifyPropertyChanged
     {
+        #region Fields
+
+        // prosledjena lista u koju se dodaj appointmentViewModel kako bi se view azurirao
+        private ObservableCollection<AppointmentViewModel> _appointments;
+
+        // ulogovan pacijent
+        private Patient _logedPatient;
+
+        #endregion
+
+
         /*public AppointmentController _appointmentController;
         public RoomController _roomController;
         public DoctorController _doctorController;
@@ -60,17 +71,24 @@ namespace ClassDijagramV1._0.Views.PatientView
         }*/
         //private List<string> availableTimes;
 
-        public AppointmentAddPage(PatientMainWindow patientMain)
+        public AppointmentAddPage(PatientMainWindow patientMain,
+            ObservableCollection<AppointmentViewModel> appointmentViewModels, Patient logedPatient)
         {
             InitializeComponent();
+            _logedPatient = logedPatient;
+
             this.DataContext = this;
             parent = patientMain;
+
+            _appointments = appointmentViewModels;
+
+
             doctorRB.IsChecked = true;
         }
 
         private void doctorRB_Checked(object sender, RoutedEventArgs e)
         {
-            prioritetFrame.Content = new PriorityDoctor(parent);
+            prioritetFrame.Content = new PriorityDoctor(parent, _appointments, _logedPatient);
         }
 
         private void timeRB_Checked(object sender, RoutedEventArgs e)

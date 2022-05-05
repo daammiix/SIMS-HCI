@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  AppointmentController.cs
- * Author:  lipov
- * Purpose: Definition of the Class Controller.AppointmentController
- ***********************************************************************/
-
 using ClassDijagramV1._0.Model;
 using Model;
 using Service;
@@ -23,17 +17,17 @@ namespace Controller
             _appointmentService = appService;
         }
 
-        public ObservableCollection<Appointment> AddAppointment(Appointment appointment)
+        public void AddAppointment(Appointment appointment)
         {
-            return _appointmentService.AddAppointment(appointment);
+            _appointmentService.AddAppointment(appointment);
         }
 
-        public void RemoveAppointment(Appointment appointment)
+        public void RemoveAppointment(int appointmentId)
         {
-            _appointmentService.RemoveAppointment(appointment.AppointmentID);
+            _appointmentService.RemoveAppointment(appointmentId);
         }
 
-        public void UpdateAppointment(String oldAppointmentID, Appointment updatedAppointment)
+        public void UpdateAppointment(int oldAppointmentID, Appointment updatedAppointment)
         {
             _appointmentService.UpdateAppointment(oldAppointmentID, updatedAppointment);
         }
@@ -59,14 +53,52 @@ namespace Controller
             _appointmentService.SaveAppointments();
         }
 
-        internal void AddNotification(Appointment appointment, NotificationType notificationType)
+        internal void AddNotification(Appointment appointment, Room r1, NotificationType notificationType)
         {
-            _appointmentService.AddNotification(appointment,notificationType);
+            _appointmentService.AddNotification(appointment, r1, notificationType);
         }
 
         internal ObservableCollection<Notification> GetAllNotifications()
         {
             return _appointmentService.GetAllNotifications();
         }
+
+        /// <summary>
+        /// Vraca sve appointmente
+        /// </summary>
+        /// <returns></returns>
+        public ObservableCollection<Appointment> GetAppointments()
+        {
+            return _appointmentService.GetAppointments();
+        }
+
+        /// <summary>
+        /// Vraca appointment sa zadatim id-em, ako ne postoji vraca null
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Appointment GetAppointmentById(int id)
+        {
+            return _appointmentService.GetAppointmentById(id);
+        }
+
+        /// <summary>
+        /// Proverava da li je termin zauzet odnosno da li vec postoji neki appointment u istoj sobi za dato vreme
+        /// ili da li neki lekar vec ima appointment u to vreme
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="duration"></param>
+        /// <returns></returns>
+        public bool CheckIsTerminFree(Appointment newAppointment)
+        {
+            return _appointmentService.CheckIsTerminFree(newAppointment);
+        }
+
+
+        public ObservableCollection<Appointment> GetListOfAppointments()
+        {
+            return _appointmentService.GetListOfAppointments();
+        }
+
     }
 }

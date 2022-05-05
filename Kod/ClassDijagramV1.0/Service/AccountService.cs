@@ -1,4 +1,5 @@
 ﻿using ClassDijagramV1._0.Model;
+using ClassDijagramV1._0.Model.Enums;
 using ClassDijagramV1._0.Repository;
 using Model;
 using System;
@@ -130,7 +131,7 @@ namespace ClassDijagramV1._0.Service
         /// <param name="username"></param>
         /// <param name="acc">U slucaju promene zelimo da prosledimo i trenutni acc jer njega necemo da gledamo</param>
         /// <returns></returns>
-        public bool DoesAccountWithSameUsernameExists(string username, Account acc = null)
+        public bool DoesAccountWithSameUsernameExist(string username, Account acc = null)
         {
             bool ret = false;
             foreach (Account a in _accountRepo.GetAccounts())
@@ -148,6 +149,46 @@ namespace ClassDijagramV1._0.Service
             }
 
             return ret;
+        }
+
+        /// <summary>
+        /// Vraca true ako osoba ima acc, u suprotnom vraca false
+        /// </summary>
+        /// <param name="personId"></param>
+        /// <returns></returns>
+        public bool PersonHasAccount(int personId)
+        {
+            bool hasAccount = false;
+            foreach (Account a in _accountRepo.GetAccounts())
+            {
+                if (a.PersonId == personId)
+                {
+                    hasAccount = true;
+                    break;
+                }
+            }
+
+            return hasAccount;
+        }
+
+        /// <summary>
+        /// Vraca observable collection svih akaunta pacijenata
+        /// </summary>
+        /// <returns></returns>
+        public ObservableCollection<Account> GetPatientsAccounts()
+        {
+            // Ret value
+            ObservableCollection<Account> accounts = new ObservableCollection<Account>();
+
+            foreach (Account a in _accountRepo.GetAccounts())
+            {
+                if (a.Role == Role.Patient)
+                {
+                    accounts.Add(a);
+                }
+            }
+
+            return accounts;
         }
 
         #endregion

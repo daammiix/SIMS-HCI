@@ -37,6 +37,5 @@ namespace ClassDijagramV1._0.Views
             roomController = app.roomController;
             Rooms = roomController.GetAllRooms();
         }
-
     }
 }

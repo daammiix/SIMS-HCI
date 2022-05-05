@@ -10,6 +10,12 @@
              Foreground="{StaticResource MyPink}"
              d:DesignHeight="450" d:DesignWidth="800">
 
+    <UserControl.InputBindings>
+        <KeyBinding Key="Return"
+                    Command="{Binding Path=SubmitCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+    </UserControl.InputBindings>
+
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -37,8 +43,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Image  Width="100"
-                    Height="100"
+            <Image  Width="150"
+                    Height="150"
                     Grid.Row="0"
                     Grid.ColumnSpan="2"
                     Margin="0,10,0,50"
@@ -58,8 +64,8 @@
                        HorizontalAlignment="Center"/>
             <TextBox Grid.Row="1"
                      Grid.Column="1"
-                     MinWidth="150"
-                     MaxWidth="150"
+                     MinWidth="200"
+                     MaxWidth="200"
                      Margin="0,0,0,15"
                      Style="{StaticResource UsernameTextBox}"
                      x:Name="UserNameBox"
@@ -76,8 +82,8 @@
 
             <PasswordBox Grid.Row="2"
                          Grid.Column="1"
-                         MinWidth="150"
-                         MaxWidth="150"
+                         MinWidth="200"
+                         MaxWidth="200"
                          x:Name="PasswordBox"
                          PasswordChanged="PasswordBox_PasswordChanged"
                          Style="{StaticResource LoginPasswordBox}"/>
@@ -85,7 +91,11 @@
             <Button Content="Login" 
                     Grid.Row="3"
                     Grid.ColumnSpan="2"
-                    MaxWidth="150"
+                    MinWidth="170"
+                    MaxWidth="170"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Height="50"
                     Margin="0,20,0,0"
                     Style="{StaticResource SubmitButton}"
                     Command="{Binding Path=SubmitCommand}"

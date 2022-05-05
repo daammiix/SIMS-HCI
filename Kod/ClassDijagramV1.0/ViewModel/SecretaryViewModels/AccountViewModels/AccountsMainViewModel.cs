@@ -62,7 +62,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
             }
         }
 
-        public RelayCommand RemoveAccountCommand
+        public RelayCommand DeleteAccountCommand
         {
             get
             {

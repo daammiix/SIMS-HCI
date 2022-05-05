@@ -52,12 +52,13 @@
                   Grid.Row="2" Grid.Column="1"
                   Margin="8"
                   AutoGenerateColumns="False"
+                  SelectedItem="{Binding SelectedAppointment, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Appointments, UpdateSourceTrigger=PropertyChanged}"
                   SelectionMode="Single" IsReadOnly="True" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Ime Pacijenta" Binding="{Binding PatientsByID}"/>
-                <DataGridTextColumn Header="Ime Doktora" Binding="{Binding Doctor.Name}" />
-                <DataGridTextColumn Header="Soba" Binding="{Binding Room.RoomID}" />
+                <DataGridTextColumn Header="Ime Pacijenta" Binding="{Binding PatientName}"/>
+                <DataGridTextColumn Header="Ime Doktora" Binding="{Binding DoctorName}" />
+                <DataGridTextColumn Header="Soba" Binding="{Binding Room.RoomNumber}" />
                 <DataGridTextColumn Header="Trajanje" Binding="{Binding Duration}" />
                 <DataGridTextColumn Header="Datum pregleda" Binding="{Binding AppointmentDate}" Width="*"/>
             </DataGrid.Columns>
@@ -71,9 +72,9 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock>Generisi</TextBlock>
                     <Image Source="Resources/Images/pdf.png"/>
-                    
+
                 </StackPanel>
-                
+
             </Button>
         </DockPanel>
     </Grid>

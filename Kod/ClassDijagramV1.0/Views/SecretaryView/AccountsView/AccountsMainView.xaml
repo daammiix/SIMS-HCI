@@ -104,12 +104,12 @@
                         HorizontalAlignment="Center"
                         Style="{StaticResource AccountButtonsStyle}"
                         Command="{Binding ChangeAccountCommand}"/>
-                    <Button Content="Remove Account"
+                    <Button Content="Delete Account"
                         Margin="15,0,0,0"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Style="{StaticResource AccountButtonsStyle}"
-                        Command="{Binding RemoveAccountCommand}"/>
+                        Command="{Binding DeleteAccountCommand}"/>
                 </StackPanel>
 
                 <Button DockPanel.Dock="Right"

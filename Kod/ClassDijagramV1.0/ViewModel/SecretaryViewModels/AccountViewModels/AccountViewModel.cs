@@ -15,6 +15,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
 {
     public class AccountViewModel : ObservableObject
     {
+        #region Fields
 
         private Account _account;
 
@@ -28,6 +29,8 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
         private DoctorController _doctorController;
 
         private ManagerController _managerController;
+
+        #endregion
 
         #region Properties
 

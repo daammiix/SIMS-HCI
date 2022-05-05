@@ -22,21 +22,28 @@ namespace ClassDijagramV1._0.Views.PatientView
     /// </summary>
     public partial class PatientMainWindow : Window
     {
-        public int patientID { get; set; }
-        
-        public PatientMainWindow(int personID)
+
+        #region Properties
+
+        // Pacijent koji je ulogovan
+        public Patient Patient { get; set; }
+
+        #endregion
+
+        public PatientMainWindow(Patient p)
         {
             InitializeComponent();
+            Patient = p;
             this.DataContext = this;
-            patientID = personID;
-            startWindow.Content = new PatientMainPage(this);
+            // prosledimo i pacijenta koji je ulogovan
+            startWindow.Content = new PatientMainPage(this, Patient);
         }
 
         private void Logout(object sender, RoutedEventArgs e)
         {
             var a = new MainWindow();
             a.Show();
-            Window.GetWindow(this).Close();  
+            Window.GetWindow(this).Close();
         }
 
         private void openNotificationClick(object sender, RoutedEventArgs e)
@@ -48,7 +55,9 @@ namespace ClassDijagramV1._0.Views.PatientView
         {
             switch (startWindow.Content)
             {
+
             }
+            Window.GetWindow(this).Close();
         }
     }
 }

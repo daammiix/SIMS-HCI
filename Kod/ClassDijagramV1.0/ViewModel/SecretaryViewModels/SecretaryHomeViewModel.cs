@@ -1,5 +1,6 @@
 ﻿using ClassDijagramV1._0.Util;
 using ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels;
+using ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModels;
 using ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewModels;
 using Model;
 using System;
@@ -20,7 +21,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels
 
         private object? _currentView;
 
-        PreglediOperacijeViewModel _preglediOperacijeViewModel;
+        AppointmentsMainViewModel _appointmentsViewModel;
 
         AccountsMainViewModel _accountsMainViewModel;
 
@@ -28,7 +29,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels
 
         // Commands
 
-        RelayCommand _preglediOperacijeViewCommand;
+        RelayCommand _appointmentsViewCommand;
         RelayCommand _accountsViewCommand;
         RelayCommand _medicalRecordsViewCommand;
 
@@ -36,19 +37,19 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels
 
         #region Commands
 
-        public RelayCommand PreglediOperacijeViewCommand
+        public RelayCommand AppointmentsViewCommand
         {
             get
             {
-                if (_preglediOperacijeViewCommand == null)
+                if (_appointmentsViewCommand == null)
                 {
-                    _preglediOperacijeViewCommand = new RelayCommand(o =>
+                    _appointmentsViewCommand = new RelayCommand(o =>
                     {
-                        CurrentView = _preglediOperacijeViewModel;
+                        CurrentView = _appointmentsViewModel;
                     });
                 }
 
-                return _preglediOperacijeViewCommand;
+                return _appointmentsViewCommand;
             }
         }
 
@@ -128,12 +129,12 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels
         public SecretaryHomeViewModel()
         {
             // Init view models
-            _preglediOperacijeViewModel = new PreglediOperacijeViewModel();
+            _appointmentsViewModel = new AppointmentsMainViewModel();
             _accountsMainViewModel = new AccountsMainViewModel();
             _medicalRecordsMainViewModel = new MedicalRecordsMainViewModel();
 
             // Na pocetku stavimo currentView na preglediOperacije(to je prvi menu item)
-            _currentView = _preglediOperacijeViewModel;
+            _currentView = _appointmentsViewModel;
         }
 
         #endregion

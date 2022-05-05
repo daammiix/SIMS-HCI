@@ -1,4 +1,5 @@
 ﻿using ClassDijagramV1._0.FileHandlers;
+using ClassDijagramV1._0.Model;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,41 @@ namespace ClassDijagramV1._0.Repository
 
             Patients = new ObservableCollection<Patient>(fileHandler.GetItems());
 
+            // Sad procitamo i zdravstvene kartone da bi vezali svakog pacijenta za svoj zdravstveni karton
+            FileHandler<MedicalRecord> _fileHandlerMedicalRecords = new FileHandler<MedicalRecord>(App._medicalRecordFilePath);
+
+            // Procitamo i sve appointmente i popunimo listu appointmenta pacijenta
+            FileHandler<Appointment> _fileHandlerAppointments = new FileHandler<Appointment>(App._appointmentsFilePath);
+
+            // Ovo se sad radi u app.xaml.cs
+            /* 
+            foreach (Patient patient in Patients)
+            {
+                // Vezemo pacijente za njihove kartone
+                foreach (MedicalRecord medicalRecord in _fileHandlerMedicalRecords.GetItems())
+                {
+                    if (medicalRecord.PatientId == patient.Id)
+                    {
+                        patient.MedicalRecordNumber = medicalRecord.Number;
+                    }
+                }
+
+                // Ako su im appointmenti null sto ce da bude slucaj uvek jer ih ne serijalizujemo
+                if (patient.Appointments == null)
+                {
+                    patient.Appointments = new List<Appointment>();
+                }
+
+                // Vezemo pacijente za njihove appointmente
+                foreach (Appointment appointment in _fileHandlerAppointments.GetItems())
+                {
+                    if (appointment.PatientId == patient.Id)
+                    {
+                        patient.Appointments.Add(appointment);
+                    }
+                }
+            }
+            */
         }
 
         #endregion
@@ -61,7 +97,7 @@ namespace ClassDijagramV1._0.Repository
                     break;
                 }
             }
-            if (toUpdate == null)
+            if (toUpdate != null)
             {
                 toUpdate = newPatient;
             }

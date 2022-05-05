@@ -8,11 +8,11 @@ using System.ComponentModel;
 
 namespace Model
 {
-   public class Surgery : INotifyPropertyChanged
-   {
-      private String surgeryID;
-      private DateTime date;
-      private TimeSpan duration;
+    public class Surgery : INotifyPropertyChanged
+    {
+        private String surgeryID;
+        private DateTime date;
+        private TimeSpan duration;
         private Patient patient;
         private Room room;
         private Doctor doctor;

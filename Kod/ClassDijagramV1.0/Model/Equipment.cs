@@ -12,11 +12,11 @@ namespace ClassDijagramV1._0.Model
         public String Name { get; set; }
         public String EquipmentType { get; set; }
 
-        public Equipment(String equipmentID, String name, String equipmentType)
+        public Equipment(String EquipmentID, String Name, String EquipmentType)
         {
-            this.EquipmentID = equipmentID;
-            this.Name = name;
-            this.EquipmentType = equipmentType;
+            this.EquipmentID = EquipmentID;
+            this.Name = Name;
+            this.EquipmentType = EquipmentType;
         }
     }
 }

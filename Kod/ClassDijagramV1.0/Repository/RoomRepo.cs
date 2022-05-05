@@ -26,6 +26,8 @@ namespace Repository
 
         public void DeleteRoom(String roomID);
 
+        public void ChangeStorageQuantity(string equipmentId, int quantity);
+
         public void SaveRooms();
 
     }
@@ -33,12 +35,17 @@ namespace Repository
     public class RoomRepoJson : IRoomRepo
     {
         private FileHandler<BindingList<Room>> _roomFileHandler;
+        private FileHandler<BindingList<Storage>> _storageFileHandler;
         private BindingList<Room> rooms = new BindingList<Room>();
+        private Storage storage;
 
-        public RoomRepoJson(FileHandler<BindingList<Room>> roomFileHandler)
+        public RoomRepoJson(FileHandler<BindingList<Room>> roomFileHandler, FileHandler<BindingList<Storage>> storageFileHandler)
         {
             _roomFileHandler = roomFileHandler;
             rooms = _roomFileHandler.Read();
+
+            _storageFileHandler = storageFileHandler;
+            storage = _storageFileHandler.Read()[0];
         }
 
         private int findRoom(String roomId)
@@ -57,6 +64,10 @@ namespace Repository
 
         public Room? GetRoom(String roomID)
         {
+            if (roomID == "storage")
+            {
+                return GetStorage();
+            }
             foreach (var room in rooms)
             {
                 if (room.RoomID == roomID)
@@ -66,6 +77,11 @@ namespace Repository
             }
             return null;
         }
+        public Storage GetStorage()
+        {
+            return storage;
+        }
+
 
         public BindingList<Room> GetAllRooms()
         {
@@ -102,9 +118,22 @@ namespace Repository
             }
         }
 
+        public void ChangeStorageQuantity(string equipmentId, int quantity)
+        {
+            var equipmentList = storage.EquipmentList;
+            foreach (var e in equipmentList)
+            {
+                if (e.EquipmentID == equipmentId)
+                {
+                    e.Quantity = quantity;
+                }
+            }
+        }
+
         public void SaveRooms()
         {
             _roomFileHandler.Write(rooms);
+            _storageFileHandler.Write(new BindingList<Storage>() { storage });
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using Controller;
+using ClassDijagramV1._0.Model;
+using ClassDijagramV1._0.Util;
+using ClassDijagramV1._0.Views.PatientView;
+using Controller;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -24,6 +27,12 @@ namespace ClassDijagramV1._0.Views.PatientView
     /// </summary>
     public partial class PriorityDoctor : Page, INotifyPropertyChanged
     {
+        // pacijentovi appointmenti, lista appointmentViewModela prosledjena konstruktoru
+        private ObservableCollection<AppointmentViewModel> _patientAppointments;
+
+        // ulogovan pacijent
+        private Patient _logedPatient;
+
         public AppointmentController _appointmentController;
         public RoomController _roomController;
         public DoctorController _doctorController;
@@ -36,10 +45,11 @@ namespace ClassDijagramV1._0.Views.PatientView
             PropertyChanged(this, e);
         }
         private PatientMainWindow parent { get; set; }
+
         public ObservableCollection<Appointment> Appointments
         {
             get;
-            set;
+            private set;
         }
         public BindingList<Room> Rooms
         {
@@ -56,14 +66,20 @@ namespace ClassDijagramV1._0.Views.PatientView
             get;
             set;
         }
-        public PriorityDoctor(PatientMainWindow patientMain)
+
+        public PriorityDoctor(PatientMainWindow patientMain, ObservableCollection<AppointmentViewModel> patientAppointments,
+            Patient logedPatient)
         {
             InitializeComponent();
             this.DataContext = this;
             parent = patientMain;
 
+            _patientAppointments = patientAppointments;
+
+            _logedPatient = logedPatient;
+
             App app = Application.Current as App;
-            _appointmentController = app.appointmentController;
+            _appointmentController = app.AppointmentController;
             _roomController = app.roomController;
             _doctorController = app.DoctorController;
 
@@ -93,13 +109,15 @@ namespace ClassDijagramV1._0.Views.PatientView
 
             Room r1 = getFreeRoom(date1, date2);
             Doctor d1 = (Doctor)dodavanjPregledaDoktor.SelectedItem;
-            Patient p1 = new Patient("djordje", "djordje", "123", "musko", "3875432", "the292200", date1, "1234");
+            // Patient p1 = new Patient("djordje", "djordje", "123", "musko", "3875432", "the292200", date1, new Address("Srbija", "Novi Sad", "Marije Kalas", "320"), "1234");
 
+            Appointment a1 = new Appointment(_logedPatient.Id, d1.Id, r1.RoomID, date1, interval, AppointmentType.generalPractitionerCheckup);
 
-            Appointment a1 = new Appointment(appointmentID, parent.patientID, d1, r1, date1, interval, AppointmentType.generalPractitionerCheckup);
             _appointmentController.AddAppointment(a1);
-            _appointmentController.AddNotification(a1, NotificationType.addingAppointment);
-            parent.startWindow.Content = new AppointmentsViewPage(parent);
+            // Da bi se updatovao i view
+            _patientAppointments.Add(new AppointmentViewModel(a1));
+            _appointmentController.AddNotification(a1, r1, NotificationType.addingAppointment);
+            parent.startWindow.Content = new AppointmentsViewPage(_patientAppointments, parent, _logedPatient);
 
         }
 
@@ -125,11 +143,13 @@ namespace ClassDijagramV1._0.Views.PatientView
 
             DoctorsAppointmentsTime = new ObservableCollection<string>();
             List<Appointment> termini = new List<Appointment>();
+
             if (dodavanjPregledaDoktor.SelectedItem != null && kalendar.SelectedDate != null)
             {
                 foreach (Appointment termin in Appointments)
                 {
-                    if (l.Name == termin.Doctor.Name)
+                    Doctor doktor = _doctorController.GetDoctorById(termin.DoctorId);
+                    if (l.Name == doktor.Name)
                     {
                         if (termin.AppointmentDate.Date.Equals(kalendar.SelectedDate))
                         {

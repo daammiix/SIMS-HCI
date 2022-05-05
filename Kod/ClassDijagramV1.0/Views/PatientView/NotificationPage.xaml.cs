@@ -58,21 +58,21 @@ namespace ClassDijagramV1._0.Views.PatientView
                 }
             }
         }
-        
+
         //ObservableCollection<MedicineDrug> Drugs = new ObservableCollection<MedicineDrug>();
 
         private PatientMainWindow parent { get; set; }
         public NotificationPage(PatientMainWindow patientMain)
         {
-            InitializeComponent(); 
+            InitializeComponent();
             this.DataContext = this;
             App app = Application.Current as App;
-            _appointmentController = app.appointmentController;
+            _appointmentController = app.AppointmentController;
 
             Drugs = new ObservableCollection<MedicineDrug>();
             //Notifications = new ObservableCollection<Notification>();
             Notifications = _appointmentController.GetAllNotifications();
-            parent = patientMain; 
+            parent = patientMain;
         }
 
         private void addDrug(object sender, RoutedEventArgs e)
@@ -80,7 +80,7 @@ namespace ClassDijagramV1._0.Views.PatientView
             //drug1 = new MedicineDrug("Lekadol", DateTime.Now.AddSeconds(10), DateTime.Now.AddSeconds(40), 8);
             //var start = new DateTime(2022, 4, 25, 20, 46 , 0);
             var start = DateTime.Now;
-            drug1 = new MedicineDrug("Lekadol", start , start.AddMinutes(1), 8);    // doktor pravi recept, tj lijek koji se pije tad i tad
+            drug1 = new MedicineDrug("Lekadol", start, start.AddMinutes(1), 8);    // doktor pravi recept, tj lijek koji se pije tad i tad
             Drugs.Add(drug1);
 
             const int interval = 5000;
@@ -91,7 +91,7 @@ namespace ClassDijagramV1._0.Views.PatientView
                 aTimer.Interval = interval;
                 //if (drug1.StopTaking.AddSeconds(-30) <= DateTime.Now) // dok ne dodje zadnja notifikacija salje se
                 if (drug1.StopTaking.AddSeconds(-5) <= DateTime.Now)
-                    {
+                {
                     aTimer.Enabled = false;
                 }
 

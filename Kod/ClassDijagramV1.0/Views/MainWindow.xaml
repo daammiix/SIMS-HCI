@@ -36,18 +36,20 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="30"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Grid MouseDown="Header_MouseDown">
+        <Grid MouseDown="Header_MouseDown"
+              Background="{StaticResource Background}">
             <!-- Title -->
             <TextBlock Text="Zdravo" 
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        Foreground="{StaticResource MyGray}"
-                       FontSize="20"
+                       FontSize="26"
+                       Padding="10"
                        FontWeight="Bold"/>
 
             <!-- Application state menu -->

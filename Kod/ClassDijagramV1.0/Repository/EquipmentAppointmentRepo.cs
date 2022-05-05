@@ -49,16 +49,9 @@ namespace ClassDijagramV1._0.Repository
                 return equipmentAppointment;
             }
 
-            public void DeleteEquipmentAppointment(EquipmentAppointment equipmentAppointment)
+            public void DeleteEquipmentAppointment(int index)
             {
-                foreach (var equipmentAppoint in equipmentAppointments)
-                {
-                    if (equipmentAppoint == equipmentAppointment)
-                    {
-                        equipmentAppointments.Remove(equipmentAppoint);
-                        break;
-                    }
-                }
+                equipmentAppointments.RemoveAt(index);
                 this.writeEquipmentAppointments();
             }
             private void writeEquipmentAppointments()  // TODO: Add to class diagram

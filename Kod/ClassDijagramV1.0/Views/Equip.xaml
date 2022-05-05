@@ -4,11 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClassDijagramV1._0.Views"
+        xmlns:converters="clr-namespace:ClassDijagramV1._0.Converters"
         mc:Ignorable="d"
         Title="Equip"
         Height="650"
-        Width="850"
-         WindowStartupLocation="CenterScreen"
+        Width="1050"
+        WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="#8BCDD3"
@@ -21,6 +22,8 @@
                 <ResourceDictionary Source="../Theme/DateTextBoxTheme.xaml"/>
                 <ResourceDictionary Source="../Theme/TimeTextBoxTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <converters:RoomToStringConverter x:Key="RoomToStringConverter"/>
+            <converters:EquipmentToStringConverter x:Key="EquipmentToStringConverter"/>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -40,51 +43,71 @@
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="350"/>
-                <ColumnDefinition Width="500"/>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="350"/>
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Row="1"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
                 <Label Content="Odaberite opremu i količinu:" FontSize="22" Margin="15,0,0,5"/>
                 <StackPanel Orientation="Horizontal">
                     <ComboBox x:Name="EquipmentBox" Width="230" Height="45" Margin="10,0,0,5" FontSize="22"
-                          VerticalContentAlignment="Center" IsReadOnly="True">
-                        <ComboBoxItem Margin="5,0,0,0" Content="ID Monitor za nadgledanje"/>
-                        <ComboBoxItem Margin="5,0,0,0" Content="ID Hanzaplasti"/>
-                        <ComboBoxItem Margin="5,0,0,0" Content="ID Zavoji"/>
-                        <ComboBoxItem Margin="5,0,0,0" Content="Id Laser"/>
+                          VerticalContentAlignment="Center" IsReadOnly="True" ItemsSource="{Binding Equipments}" SelectionChanged="EquipmentBox_SelectionChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={StaticResource EquipmentToStringConverter}}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <TextBox x:Name="Quantity" Width="70" Background="#E7E7E7" Height="47" Margin="10,0,0,0" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="Quantity" Width="70" Background="#E7E7E7" Height="47" Margin="10,0,0,0" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" TextChanged="Quantity_TextChanged"/>
+
                 </StackPanel>
 
-                <Label Content="Odaberite datum" FontSize="22" Margin="15,0,0,5"/>
-                <DatePicker x:Name="PickerDate" FontSize="22" Margin="10,0,0,5" Height="40" Width="230" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
 
-                <Label Content="Sala iz koje se premešta:" FontSize="22" Margin="15,0,0,5"/>
-                <ComboBox x:Name="MovingFrom" Width="230" Height="40" Margin="10,0,0,5" FontSize="22"
-                          VerticalContentAlignment="Center" IsReadOnly="True">
-                    <ComboBoxItem Margin="5,0,0,0" Content="Operaciona Sala"/>
-                    <ComboBoxItem Margin="5,0,0,0" Content="Sala za preglede"/>
-                    <ComboBoxItem Margin="5,0,0,0" Content="Bolnička soba"/>
-                    <ComboBoxItem Margin="5,0,0,0" Content="Intezivna nega"/>
-                    <ComboBoxItem Margin="5,0,0,0" Content="Sala za sastanke"/>
-                </ComboBox>
-
-                <Label Content="Sala u koju se premešta:" FontSize="22" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
-                <TextBox x:Name="Movingto" IsReadOnly="True" Width="230" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-
-            </StackPanel>
-
-            <DataGrid Grid.Column="1" Height="380" Width="450" x:Name="BusyRooms" 
+                <DataGrid  Height="200" Width="250" x:Name="BusyEquipment" 
                       CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left"
                       CanUserDeleteRows="False" AutoGenerateColumns="False"
-                      ItemsSource="{Binding Path=EquipmentList}" IsReadOnly="True">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Iz koje sale" Width="150" />
-                    <DataGridTextColumn Header="U koju salu" Width="150"/>
-                    <DataGridTextColumn Header="Oprema" Width="150" />
-                </DataGrid.Columns>
-            </DataGrid>
+                      ItemsSource="{Binding Path=EquipmentAvailable}" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Zauzetost opreme" Width="*" Binding="{Binding Path=.}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            
+            <StackPanel Grid.Column="1">
+                <Label Content="Sala iz koje se premešta:" FontSize="22" Margin="15,0,0,5"/>
+                <ComboBox x:Name="MovingFrom" Width="230" Height="40" Margin="10,0,0,5" FontSize="22"
+                          VerticalContentAlignment="Center" IsReadOnly="True"
+                          ItemsSource="{Binding Rooms}" SelectionChanged="MovingFrom_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource RoomToStringConverter}}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <DataGrid  Height="200" Width="250" x:Name="BusyRooms" 
+                      CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left"
+                      CanUserDeleteRows="False" AutoGenerateColumns="False"
+                      ItemsSource="{Binding Path=RoomsFromAvailable}" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Zauzetost sale" Width="*" Binding="{Binding Path=.}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
 
+            <StackPanel Grid.Column="2">
+
+                <Label Content="Sala u koju se premešta:" FontSize="22" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
+                <TextBox x:Name="MovingTo" IsReadOnly="True" Width="230" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedRoom,Converter={StaticResource RoomToStringConverter}}" />
+
+                <DataGrid  Height="200" Width="250" x:Name="BusyRoomTo" 
+                      CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left"
+                      CanUserDeleteRows="False" AutoGenerateColumns="False"
+                      ItemsSource="{Binding Path=RoomsToAvailable}" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Zauzetost sale" Width="*" Binding="{Binding Path=.}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
         </Grid>
 
         <Grid Grid.Row="2">
@@ -98,14 +121,14 @@
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <Label Content="Od:" FontSize="22" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
-                    <TextBox x:Name="FromDate" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource DateTextBox}"/>
-                    <TextBox x:Name="FromTime" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource TimeTextBox}"/>
+                    <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromDate}" Style="{StaticResource DateTextBox}" TextChanged="DateField_TextChanged"/>
+                    <TextBox x:Name="FromTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromTime}"  Style="{StaticResource TimeTextBox}"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Label Content="Od:" FontSize="22" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
-                    <TextBox x:Name="ToDate" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource DateTextBox}"/>
-                    <TextBox x:Name="ToTime" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource TimeTextBox}"/>
+                    <Label Content="Do:" FontSize="22" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
+                    <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToDate}"  Style="{StaticResource DateTextBox}" TextChanged="DateField_TextChanged"/>
+                    <TextBox x:Name="ToTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToTime}"  Style="{StaticResource TimeTextBox}"/>
                 </StackPanel>
 
             </StackPanel>

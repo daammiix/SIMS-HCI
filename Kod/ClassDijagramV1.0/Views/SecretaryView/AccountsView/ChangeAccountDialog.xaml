@@ -12,6 +12,12 @@
         FontFamily="#Poppins"
         Title="ChangeAccount" Height="360" Width="500">
 
+    <Window.InputBindings>
+        <KeyBinding Key="Return"
+                    Command="{Binding Path=ChangeAccountCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+    </Window.InputBindings>
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

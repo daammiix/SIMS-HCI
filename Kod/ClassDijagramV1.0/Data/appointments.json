@@ -1,1 +1,56 @@
-[{"AppointmentID":"659","PatientID":1,"Doctor":{"surgery":null,"Id":0,"Jmbg":"123","Gender":"musko","PhoneNumber":"3875432","Email":"the292200","DateOfBirth":"2008-05-01T08:30:52","Name":"doktor","Surname":"doktor"},"Room":{"RoomID":"id","RoomName":"Operaciona Sala","Floor":2,"RoomNumber":23,"RoomStatus":"Aktivna","EquipmentList":[{"EquipmentID":"id1","Quantity":2}]},"AppointmentDate":"2022-05-07T08:30:00","Duration":"00:30:00","AppointmentType":0}]
+[
+  {
+    "Id": 1,
+    "PatientId": 1,
+    "DoctorId": 4,
+    "RoomId": "id",
+    "AppointmentDate": "2022-05-08T10:30:00",
+    "Duration": "00:30:00",
+    "AppointmentType": 0
+  },
+  {
+    "Id": 2,
+    "PatientId": 7,
+    "DoctorId": 4,
+    "RoomId": "id5",
+    "AppointmentDate": "2022-05-12T10:10:00",
+    "Duration": "00:30:00",
+    "AppointmentType": 0
+  },
+  {
+    "Id": 3,
+    "PatientId": 8,
+    "DoctorId": 13,
+    "RoomId": "id7",
+    "AppointmentDate": "2022-05-10T17:15:00",
+    "Duration": "00:25:00",
+    "AppointmentType": 1
+  },
+  {
+    "Id": 6,
+    "PatientId": 7,
+    "DoctorId": 4,
+    "RoomId": "id8",
+    "AppointmentDate": "2022-05-10T17:10:00",
+    "Duration": "01:30:00",
+    "AppointmentType": 2
+  },
+  {
+    "Id": 8,
+    "PatientId": 1,
+    "DoctorId": 12,
+    "RoomId": "id",
+    "AppointmentDate": "2022-05-21T10:00:00",
+    "Duration": "00:30:00",
+    "AppointmentType": 0
+  },
+  {
+    "Id": 9,
+    "PatientId": 1,
+    "DoctorId": 12,
+    "RoomId": "id",
+    "AppointmentDate": "2022-05-21T12:00:00",
+    "Duration": "00:30:00",
+    "AppointmentType": 0
+  }
+]

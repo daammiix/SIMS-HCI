@@ -38,7 +38,8 @@ namespace ClassDijagramV1._0.FileHandlers
         {
             if (!File.Exists(_path))
             {
-                File.Create(_path);
+                FileStream fileStream = File.Create(_path);
+                fileStream.Close();
             }
 
             FileStream fs = new FileStream(_path, FileMode.Truncate, FileAccess.Write);

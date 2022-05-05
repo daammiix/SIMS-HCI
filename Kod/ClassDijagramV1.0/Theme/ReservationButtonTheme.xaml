@@ -14,7 +14,7 @@
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        Height="63"
-                                       Width="300"
+                                       Width="450"
                                        Foreground="Black"
                                        FontSize="26"
                                        Margin="10,0,0,0"

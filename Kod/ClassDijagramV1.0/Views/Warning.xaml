@@ -29,7 +29,7 @@
                    Foreground="Black">
         </TextBlock>
         <TextBlock Grid.Row="1"
-                   Text="Niste označili salu!"
+                   Text="Niste označili entitet u tabeli!"
                    VerticalAlignment="Top"
                    Margin="0,15,0,0"
                    HorizontalAlignment="Center"

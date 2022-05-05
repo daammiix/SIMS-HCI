@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ClassDijagramV1._0.Views
+namespace ClassDijagramV1._0.Views.ManagerView
 {
     /// <summary>
     /// Interaction logic for AddRoomWindow.xaml

@@ -15,6 +15,13 @@
         BorderThickness="4"
         BorderBrush="#8E4D58"
         FontFamily="Comic Sans MS">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Theme/YesNoButtonTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>

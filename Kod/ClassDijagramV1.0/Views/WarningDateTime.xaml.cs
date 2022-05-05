@@ -10,19 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ClassDijagramV1._0.Views.SecretaryView
+namespace ClassDijagramV1._0.Views
 {
     /// <summary>
-    /// Interaction logic for PreglediOperacije.xaml
+    /// Interaction logic for WarningDateTime.xaml
     /// </summary>
-    public partial class PreglediOperacijeView : UserControl
+    public partial class WarningDateTime : Window
     {
-        public PreglediOperacijeView()
+        public WarningDateTime()
         {
             InitializeComponent();
+        }
+
+        private void WarningOk_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

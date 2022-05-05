@@ -1,0 +1,55 @@
+[
+  {
+    "RoomID": "storage",
+    "RoomName": "Magacin",
+    "Floor": 0,
+    "RoomNumber": 23,
+    "RoomStatus": "Aktivna",
+    "EquipmentList": [
+      {
+        "EquipmentID": "OL36",
+        "Quantity": 4
+      },
+      {
+        "EquipmentID": "OUL5",
+        "Quantity": 10
+      },
+      {
+        "EquipmentID": "PRZ42",
+        "Quantity": 20
+      },
+      {
+        "EquipmentID": "PRG5",
+        "Quantity": 22
+      },
+      {
+        "EquipmentID": "PRG10",
+        "Quantity": 25
+      },
+      {
+        "EquipmentID": "PRGA35",
+        "Quantity": 30
+      },
+      {
+        "EquipmentID": "INST6",
+        "Quantity": 10
+      },
+      {
+        "EquipmentID": "INS8",
+        "Quantity": 10
+      },
+      {
+        "EquipmentID": "INN91",
+        "Quantity": 7
+      },
+      {
+        "EquipmentID": "INPK13",
+        "Quantity": 8
+      },
+      {
+        "EquipmentID": "mnbfd",
+        "Quantity": 10
+      }
+    ]
+  }
+]

@@ -1,1 +1,1 @@
-[{"Id":3,"Jmbg":"265959595959","Gender":"Z","PhoneNumber":"65959895956","Email":"svetlanagogo@gmail.com","DateOfBirth":"1987-11-12T00:00:00","Name":"Svetlana","Surname":"Gogalovic"}]
+[{"Id":3,"Jmbg":"265959595959","Gender":"Z","PhoneNumber":"65959895956","Email":"svetlanagogo@gmail.com","DateOfBirth":"1987-11-12T00:00:00","Address":{"Country":"Srbija","City":"Novi Sad","StreetName":"Dalmatinska","StreetNumber":"123"},"Name":"Svetlana","Surname":"Gogalovic"}]

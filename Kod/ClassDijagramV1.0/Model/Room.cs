@@ -1,11 +1,7 @@
-/***********************************************************************
- * Module:  Room.cs
- * Author:  lipov
- * Purpose: Definition of the Class Model.Room
- ***********************************************************************/
-
 using ClassDijagramV1._0;
 using ClassDijagramV1._0.Model;
+using Controller;
+using ClassDijagramV1._0.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -55,9 +51,38 @@ namespace Model
             if (binding == null)
             {
                 EquipmentList.Add(new RoomEquipmentBinding(e.EquipmentID, quantity));
-            } else
+            }
+            else
             {
                 binding.Quantity += quantity;
+            }
+        }
+
+        public void addNewEquipment(Equipment e, int quantity)
+        {
+            RoomEquipmentBinding? binding = getBinding(e);
+            if (binding == null)
+            {
+                EquipmentList.Add(new RoomEquipmentBinding(e.EquipmentID, quantity));
+            }
+            else
+            {
+                WarningId warningId = new WarningId();
+                warningId.Show();
+            }
+        }
+
+        public void insertChangedEquipment(Equipment e, int quantity, int index)
+        {
+            RoomEquipmentBinding? binding = getBinding(e);
+            if (binding != null)
+            {
+                EquipmentList.Insert(index, new RoomEquipmentBinding(e.EquipmentID, quantity));
+            }
+            else
+            {
+                WarningId warningId = new WarningId();
+                warningId.Show();
             }
         }
 
@@ -77,21 +102,24 @@ namespace Model
                 binding.Quantity -= quantity;
             }
         }
-        
-        public bool isFree(DateTime start, DateTime end) 
+
+        public bool isFree(DateTime start, DateTime end)
         {
             bool retVal = true;
-           // AppointmentFileHandler ap = new AppointmentFileHandler("../../../Data/appointments.json");
+            // AppointmentFileHandler ap = new AppointmentFileHandler("../../../Data/appointments.json");
 
             App app = Application.Current as App;
 
             //AppointmentRepo ap = new AppointmentRepo();
-            ObservableCollection<Appointment> termini = app.appointmentController.GetAllAppointments(); // ovde trebaju svi termini
 
-            foreach (Appointment termin in termini)
+            AppointmentController appointmentController = app.AppointmentController;
+
+            ObservableCollection<Appointment> termini = appointmentController.GetAllAppointments(); // ovde trebaju svi termini
+
+            foreach (Appointment termin in appointmentController.GetAppointments())
             {
-                if (termin.Room.RoomID.Equals(this.RoomID) && this.RoomStatus.Equals("Aktivna"))
-                {    
+                if (termin.RoomId.Equals(this.RoomID)/* && termin.AppointmentStatus == AppointmentStatus.scheduled*/)
+                {
                     if (start >= termin.AppointmentDate && start <= termin.AppointmentDate.Add(termin.Duration))
                     {
                         retVal = false;

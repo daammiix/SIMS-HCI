@@ -7,33 +7,45 @@ using ClassDijagramV1._0.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace Model
 {
-    public class Doctor : Person, INotifyPropertyChanged
+    public class Doctor : Person
     {
-        private DoctorType type;
+        #region Properties
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public DoctorType Type;
 
-        protected virtual void OnPropertyChanged(String propertyName)
-        {
-            PropertyChangedEventArgs e = new PropertyChangedEventArgs(propertyName);
-            PropertyChanged(this, e);
-        }
+        [JsonIgnore]
+        public List<Surgery> Surgery { get; set; }
 
-        public List<Surgery> surgery { get; set; }
+        #endregion
 
+        #region Constructor
+
+        [JsonConstructor]
         public Doctor()
         {
+
         }
 
-        public Doctor(string name, string surname, string jmbg, string gender, string phoneNumber, string email, DateTime dateOfBirth, DoctorType type, List<Surgery> surgery) : base(name, surname, jmbg, gender, phoneNumber, email, dateOfBirth)
+        public Doctor(string name, string surname, string jmbg, string gender, string phoneNumber, string email,
+            DateTime dateOfBirth, Address adr, DoctorType type, List<Surgery> surgery = null) : base(name, surname, jmbg,
+                gender, phoneNumber, email, dateOfBirth, adr)
         {
-            this.surgery = surgery;
-            this.type = type;
-
+            if (surgery == null)
+            {
+                Surgery = new List<Surgery>();
+            }
+            else
+            {
+                Surgery = surgery;
+            }
+            Type = type;
         }
+
+        #endregion
 
     }
 }

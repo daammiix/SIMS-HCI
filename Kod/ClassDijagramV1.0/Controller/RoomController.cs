@@ -1,8 +1,3 @@
-// File:    RoomController.cs
-// Author:  Milana
-// Created: 08 April 2022 14:22:33
-// Purpose: Definition of Class RoomController
-
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -47,9 +42,15 @@ namespace Controller
             return roomService.GetAllRooms();
         }
 
+        public void ChangeStorageQuantity(string equipmentId, int quantity)
+        {
+            roomService.ChangeStorageQuantity(equipmentId, quantity);
+        }
+
         public void SaveRooms()
         {
             roomService.SaveRooms();
         }
+
     }
 }

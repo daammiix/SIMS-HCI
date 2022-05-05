@@ -10,6 +10,7 @@ using ClassDijagramV1._0.Views.ManagerView;
 using ClassDijagramV1._0.Views.PatientView;
 using ClassDijagramV1._0.Views.SecretaryView;
 using Controller;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -99,7 +100,10 @@ namespace ClassDijagramV1._0.ViewModel
                     }
                 case Role.Patient:
                     {
-                        PatientMainWindow patientMainWindow = new PatientMainWindow(a.PersonId);
+                        // Uzmemo pacijenta koji se loguje
+                        Patient logedPatient = _pattientController.GetPatientById(a.PersonId);
+                        // Prosledimo mainWindowu pacijenta koji se ulogovao kako bi mogle da se prikazuju informacije
+                        PatientMainWindow patientMainWindow = new PatientMainWindow(logedPatient);
                         patientMainWindow.Show();
                         //datacontex pma 
                         break;
