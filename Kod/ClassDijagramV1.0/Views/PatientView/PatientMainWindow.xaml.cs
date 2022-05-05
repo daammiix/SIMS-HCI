@@ -1,5 +1,4 @@
-﻿using ClassDijagramV1._0.Dialog;
-using Controller;
+﻿using Controller;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -36,7 +35,8 @@ namespace ClassDijagramV1._0.Views.PatientView
             InitializeComponent();
             Patient = p;
             this.DataContext = this;
-            startWindow.Content = new PatientMainPage(this);
+            // prosledimo i pacijenta koji je ulogovan
+            startWindow.Content = new PatientMainPage(this, Patient);
         }
 
         private void Logout(object sender, RoutedEventArgs e)
@@ -44,7 +44,20 @@ namespace ClassDijagramV1._0.Views.PatientView
             var a = new MainWindow();
             a.Show();
             Window.GetWindow(this).Close();
+        }
 
+        private void openNotificationClick(object sender, RoutedEventArgs e)
+        {
+            startWindow.Content = new NotificationPage(this);
+        }
+
+        private void goBack(object sender, RoutedEventArgs e)
+        {
+            switch (startWindow.Content)
+            {
+
+            }
+            Window.GetWindow(this).Close();
         }
     }
 }

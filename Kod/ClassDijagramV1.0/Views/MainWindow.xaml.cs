@@ -1,4 +1,3 @@
-using ClassDijagramV1._0.Dialog;
 using ClassDijagramV1._0.ViewModel;
 using Controller;
 using Model;

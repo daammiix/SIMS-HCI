@@ -1,3 +1,4 @@
+using ClassDijagramV1._0.Model;
 using Model;
 using Service;
 using System;
@@ -31,10 +32,15 @@ namespace Controller
             _appointmentService.UpdateAppointment(oldAppointmentID, updatedAppointment);
         }
 
-        //public ObservableCollection<Appointment> GetAllAppointments(String username)
-        //{
-        //    return _appointmentService.GetAllAppointments(username);
-        //}
+        public ObservableCollection<Appointment> GetAllAppointmentsByPatient(int patientID)
+        {
+            return _appointmentService.GetAllAppointmentsByPatient(patientID);
+        }
+
+        public ObservableCollection<Appointment> GetAllAppointments()
+        {
+            return _appointmentService.GetAllAppointments();
+        }
 
         public Appointment GetOneAppointment(Appointment appointment)
         {
@@ -47,6 +53,15 @@ namespace Controller
             _appointmentService.SaveAppointments();
         }
 
+        internal void AddNotification(Appointment appointment, Room r1, NotificationType notificationType)
+        {
+            _appointmentService.AddNotification(appointment, r1, notificationType);
+        }
+
+        internal ObservableCollection<Notification> GetAllNotifications()
+        {
+            return _appointmentService.GetAllNotifications();
+        }
 
         /// <summary>
         /// Vraca sve appointmente

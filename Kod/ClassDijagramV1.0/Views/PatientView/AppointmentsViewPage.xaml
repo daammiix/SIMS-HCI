@@ -4,26 +4,79 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClassDijagramV1._0.Views.PatientView"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
-        <Button Content="Zakazi pregled" Click="AddAppontment_Click"/>
-        <Button Content="Izmijeni pregled" Click="UpdateAppontment_Click"/>
-        <Button Content="Otkazi pregled" Click="RemoveAppontment_Click"/>
-        <DataGrid x:Name="tabelaPregledi" Height="300" Margin="20"  
-                          AutoGenerateColumns="False"
-                          SelectedItem="{Binding SelectedAppointment, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                          ItemsSource="{Binding Appointments, UpdateSourceTrigger=PropertyChanged}"
-                          SelectionMode="Single" IsReadOnly="True" >
+             d:DesignHeight="650" d:DesignWidth="1024">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Grey.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.LightBlue.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid Background="{StaticResource MaterialDesignToolBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="12"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="12"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="1" Grid.Column="1"
+                   Foreground="{StaticResource PrimaryHueLightForegroundBrush}"
+            Text="Pregled termina" FontSize="64"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" 
+            Margin="42 0 0 0"/>
+        <StackPanel Grid.Row="2" Grid.Column="2">
+            <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}" Content="Zakazi pregled" Click="AddAppontment_Click"
+                    Margin="8 8 8 16"/>
+            <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}" Content="Izmijeni pregled" Click="UpdateAppontment_Click"
+                    Margin="8 0 8 16"/>
+            <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}" Content="Otkazi pregled" Click="RemoveAppontment_Click"
+                    Margin="8 0 8 16"/>
+        </StackPanel>
+
+        <DataGrid x:Name="tabelaPregledi" 
+                  Grid.Row="2" Grid.Column="1"
+                  Margin="8"
+                  AutoGenerateColumns="False"
+                  SelectedItem="{Binding SelectedAppointment, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Appointments, UpdateSourceTrigger=PropertyChanged}"
+                  SelectionMode="Single" IsReadOnly="True" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Ime Pacijenta" Binding="{Binding PatientName}"/>
                 <DataGridTextColumn Header="Ime Doktora" Binding="{Binding DoctorName}" />
-                <DataGridTextColumn Header="Soba" Binding="{Binding RoomId}" />
-                <DataGridTextColumn Header="Trajanje" Binding="{Binding Duration}" />
+                <DataGridTextColumn Header="Soba" Binding="{Binding Room.RoomNumber}" />
                 <DataGridTextColumn Header="Trajanje" Binding="{Binding Duration}" />
                 <DataGridTextColumn Header="Datum pregleda" Binding="{Binding AppointmentDate}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-    </StackPanel>
+        <DockPanel Grid.Row="3" Grid.Column="1">
+            <TextBlock Text="Generisi izvjestaj o pregledima i operacijama" FontSize="28"
+                        Margin="8" VerticalAlignment="Top"/>
+            <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
+                    VerticalAlignment="Center" HorizontalAlignment="Right"
+                    Margin="8">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>Generisi</TextBlock>
+                    <Image Source="Resources/Images/pdf.png"/>
+
+                </StackPanel>
+
+            </Button>
+        </DockPanel>
+    </Grid>
 </Page>
+ 

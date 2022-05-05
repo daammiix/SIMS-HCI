@@ -1,4 +1,3 @@
-﻿using ClassDijagramV1._0.Dialog;
 using ClassDijagramV1._0.Util;
 using Controller;
 using Model;
@@ -31,25 +30,32 @@ namespace ClassDijagramV1._0.Views.PatientView
         private AppointmentController _appointmentController;
         private RoomController _roomController;
 
+        private PatientController _patientController;
+        private PatientMainWindow parent { get; set; }
+
+        // Ulogovan pacijent
+        private Patient _logedPatient;
+
         #endregion
 
 
         #region Properties
 
-        public AppointmentViewModel SelectedAppointment { get; set; }
+        public static AppointmentViewModel? SelectedAppointment { get; set; }
+
+        //public AppointmentViewModel SelectedAppointment { get; set; }
 
         public ObservableCollection<AppointmentViewModel> Appointments
         {
             get;
             set;
         }
+
         public BindingList<Room> Rooms
         {
             get;
             set;
         }
-
-        public Patient Patient { get; set; }
 
         #endregion
 
@@ -57,34 +63,32 @@ namespace ClassDijagramV1._0.Views.PatientView
         /// Pacijent koji je ulogovan
         /// </summary>
         /// <param name="p"></param>
-        public AppointmentsViewPage(Patient p)
+        public AppointmentsViewPage(ObservableCollection<AppointmentViewModel> appointments,
+            PatientMainWindow patientMain, Patient logedPatient)
         {
             InitializeComponent();
 
-            Patient = p;
+            _logedPatient = logedPatient;
 
             this.DataContext = this;
+            parent = patientMain;
             App app = Application.Current as App;
             _appointmentController = app.AppointmentController;
 
             _roomController = app.roomController;
+            _patientController = app.PatientController;
 
-            // Ucitamo pacijentove appointmente i napravimo AppointmentViewModel od svakog
-            Appointments = new ObservableCollection<AppointmentViewModel>();
-            p.Appointments.ForEach(a =>
-            {
-                Appointments.Add(new AppointmentViewModel(a));
-            });
+            Appointments = appointments;
 
-            //Appointments = _appointmentController.GetAllAppointments("djordje"); // ulogovani korisnik
+            // Pokupimo sve sobe
             Rooms = _roomController.GetAllRooms();
+
         }
         private void AddAppontment_Click(object sender, RoutedEventArgs e)
         {
-            //_appointmentController.AddAppointment(a1);
             // Prosledimo listu AppointmentViewModela jer tu dodajemo novi appointment kako bi se view azurirao
-            var a = new AddAppointmentDialog(Appointments);
-            a.Show();
+            parent.startWindow.Content = new AppointmentAddPage(parent, Appointments, _logedPatient);
+            // tabelaPregledi.ItemsSource = _appointmentController.GetAllAppointmentsByPatient(parent.Patient.Id);
         }
 
         private void UpdateAppontment_Click(object sender, RoutedEventArgs e)
@@ -92,16 +96,17 @@ namespace ClassDijagramV1._0.Views.PatientView
 
             if (tabelaPregledi.SelectedIndex != -1)
             {
-                var a = new UpdateAppointmentDialog(SelectedAppointment);
-                a.Show();
+                parent.startWindow.Content = new AppointmentUpdatePage(parent, Appointments, _logedPatient);
+                //tabelaPregledi.ItemsSource = _appointmentController.GetAllAppointmentsByPatient(parent.patientID);
             }
-
         }
 
         private void RemoveAppontment_Click(object sender, RoutedEventArgs e)
         {
             if (tabelaPregledi.SelectedIndex != -1)
             {
+                //_appointmentController.AddNotification((Appointment)tabelaPregledi.SelectedItem, NotificationType.deletingAppointment);
+                //tabelaPregledi.ItemsSource = _appointmentController.GetAllAppointmentsByPatient(parent.patientID);
                 //Appointments.Remove((Appointment)tabelaPregledi.SelectedItem);
                 AppointmentViewModel selectedAppointment = (AppointmentViewModel)tabelaPregledi.SelectedItem;
                 // Izbrisemo i iz view-a i iz baze

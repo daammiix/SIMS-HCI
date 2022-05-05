@@ -1,4 +1,5 @@
 using ClassDijagramV1._0;
+using ClassDijagramV1._0.Model;
 using Model;
 using Repository;
 using System;
@@ -30,33 +31,6 @@ namespace Service
         public void UpdateAppointment(int oldAppointmentID, Appointment updatedAppointment)
         {
             _appointmentRepo.UpdateAppointment(oldAppointmentID, updatedAppointment);
-        }
-
-        // ?????
-
-        //public ObservableCollection<Appointment> GetAllAppointments(String username) // obrisi iz bajdinga preglede koji mi ne trebaju, tj nisu od tog pacijenta
-        //{
-        //    List<Appointment> otherPatients = new List<Appointment>();
-        //    foreach (Appointment a in _appointmentRepo.GetAppointments())
-        //    {
-        //        if (!a.Patient.Name.Equals(username))
-        //        {
-        //            otherPatients.Add(a);
-        //        }
-        //    }
-
-        //    foreach (Appointment a in otherPatients)
-        //    {
-        //        _appointmentRepo.RemoveAppointment(a.Id);
-        //    }
-        //    return _appointmentRepo.GetAppointments();
-        //}
-
-
-        public Appointment GetOneAppointment(int appointmentID)
-        {
-            //var allAppointments = GetAllAppointments();
-            return null;
         }
 
         public void SaveAppointments()
@@ -92,6 +66,58 @@ namespace Service
             }
 
             return ret;
+
+        }
+
+        public ObservableCollection<Appointment> GetAllAppointmentsByPatient(int patientID) // obrisi iz bajdinga preglede koji mi ne trebaju, tj nisu od tog pacijenta
+        {
+            ObservableCollection<Appointment> otherPatients = new ObservableCollection<Appointment>();
+            foreach (Appointment a in _appointmentRepo.GetAppointments())
+            {
+                if (a.PatientId.Equals(patientID))
+                {
+                    otherPatients.Add(a);
+                }
+            }
+            return otherPatients;
+        }
+
+        public ObservableCollection<Appointment> GetAllAppointments()
+        {
+            return _appointmentRepo.GetAppointments();
+        }
+
+        // room prosledjen jer nema u appointment-u 
+        internal void AddNotification(Appointment appointment, Room r1, NotificationType notificationType)
+        {
+
+            Notification note;
+
+
+
+            if (NotificationType.addingAppointment.Equals(notificationType))
+            {
+                var notificationID = "1";
+                var content = "Imate zakazan pregled u " + appointment.AppointmentDate + " u sobi " + r1.RoomName;
+                DateTime created = appointment.AppointmentDate;
+                Notification n = new Notification(notificationID, content, "djordje", false, created, NotificationType.addingAppointment);
+                _appointmentRepo.AddNotification(n);
+            }
+            else if (NotificationType.deletingAppointment.Equals(notificationType))
+            {
+                // _appointmentRepo.RemoveNotification()
+                // mora se povezati apojntment sa notifikacijom
+            }
+        }
+
+        internal ObservableCollection<Notification> GetAllNotifications()
+        {
+            return _appointmentRepo.GetAllNotifications();
+        }
+
+        public Appointment GetOneAppointment(int appointmentID)
+        {
+            return _appointmentRepo.GetOneAppointment(appointmentID);
         }
 
         /// <summary>
@@ -145,7 +171,6 @@ namespace Service
                     }
                 }
             }
-
             return free;
         }
 

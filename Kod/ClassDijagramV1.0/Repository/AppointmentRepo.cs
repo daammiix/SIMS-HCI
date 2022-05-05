@@ -1,4 +1,5 @@
 using ClassDijagramV1._0.FileHandlers;
+using ClassDijagramV1._0.Model;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,14 @@ namespace Repository
     public class AppointmentRepo
     {
 
+        private String Path;
+
+        private FileHandler<Notification> _notificationFileHandler;
         private FileHandler<Appointment> _appointmentFileHandler;
 
         public ObservableCollection<Appointment> Appointments;
+        public ObservableCollection<Appointment> AppointmentsByPatient;
+        public ObservableCollection<Notification> Notifications;
 
         public ObservableCollection<Doctor> Doctors
         {
@@ -22,12 +28,12 @@ namespace Repository
             set;
         }
 
-
-        public AppointmentRepo(FileHandler<Appointment> apointmentFileHandler)
+        public AppointmentRepo(FileHandler<Appointment> fileHandler)
         {
-            _appointmentFileHandler = apointmentFileHandler;
+            _appointmentFileHandler = fileHandler;
             Appointments = new ObservableCollection<Appointment>(_appointmentFileHandler.GetItems());
-
+            Doctors = new ObservableCollection<Doctor>();
+            Notifications = new ObservableCollection<Notification>();
             /*Room r1 = new Room();
             DateTime date1 = new DateTime(2008, 5, 1, 8, 30, 52);
             DateTime date2 = new DateTime(2010, 8, 18, 13, 30, 30);
@@ -51,9 +57,24 @@ namespace Repository
             oldAppointment = updatedAppointment;
         }
 
+        internal Appointment GetOneAppointment(int appointmentID)
+        {
+            return FindAppointmentById(appointmentID);
+        }
+
+        internal void AddNotification(Notification n)
+        {
+            Notifications.Add(n);
+        }
+
         public ObservableCollection<Appointment> GetAppointments()
         {
             return Appointments;
+        }
+
+        internal ObservableCollection<Notification> GetAllNotifications()
+        {
+            return Notifications;
         }
 
         /*public void SetAppointment(List<Appointment> appointments)

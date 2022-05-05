@@ -16,15 +16,14 @@ using System.Windows.Shapes;
 namespace ClassDijagramV1._0.Views.PatientView
 {
     /// <summary>
-    /// Interaction logic for PrivremenoLoginDugme.xaml
+    /// Interaction logic for PriorityTime.xaml
     /// </summary>
-    public partial class PrivremenoLoginDugme : UserControl
+    public partial class PriorityTime : Page
     {
-        public PrivremenoLoginDugme()
+        public PriorityTime()
         {
             InitializeComponent();
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //var PacijentHome = new PatientMainWindow();
@@ -32,7 +31,6 @@ namespace ClassDijagramV1._0.Views.PatientView
             //Window.GetWindow(this).Close();
             //MainWindow.Close();
         }
-
 
     }
 }

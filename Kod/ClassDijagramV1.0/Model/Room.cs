@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  Room.cs
- * Author:  lipov
- * Purpose: Definition of the Class Model.Room
- ***********************************************************************/
-
 using ClassDijagramV1._0;
 using ClassDijagramV1._0.Model;
 using Controller;
@@ -117,11 +111,12 @@ namespace Model
             App app = Application.Current as App;
 
             //AppointmentRepo ap = new AppointmentRepo();
-            //ObservableCollection<Appointment> termini = app.AppointmentController.GetAllAppointments("djordje");
 
-            AppointmentController _appointmentController = app.AppointmentController;
+            AppointmentController appointmentController = app.AppointmentController;
 
-            foreach (Appointment termin in _appointmentController.GetAppointments())
+            ObservableCollection<Appointment> termini = appointmentController.GetAllAppointments(); // ovde trebaju svi termini
+
+            foreach (Appointment termin in appointmentController.GetAppointments())
             {
                 if (termin.RoomId.Equals(this.RoomID)/* && termin.AppointmentStatus == AppointmentStatus.scheduled*/)
                 {

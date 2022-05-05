@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  Appointment.cs
- * Author:  lipov
- * Purpose: Definition of the Class Model.Appointment
- ***********************************************************************/
-
 using ClassDijagramV1._0.Util;
 using System;
 using System.Collections.Generic;
@@ -13,6 +7,7 @@ namespace Model
 {
     public class Appointment : ObservableObject
     {
+
         public static int idCounter = 0;
 
         #region Fields

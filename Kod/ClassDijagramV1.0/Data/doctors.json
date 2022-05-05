@@ -1,8 +1,6 @@
 [
   {
     "Id": 4,
-    "Name": "Dragana",
-    "Surname": "Cvetkovic",
     "Jmbg": "54815181818",
     "Gender": "Z",
     "PhoneNumber": "061235236237",
@@ -13,12 +11,12 @@
       "City": "Beograd",
       "StreetName": "Karposeva",
       "StreetNumber": "56"
-    }
+    },
+    "Name": "Dragana",
+    "Surname": "Cvetkovic"
   },
   {
     "Id": 12,
-    "Name": "Milica",
-    "Surname": "Jovanovic",
     "Jmbg": "5959884823",
     "Gender": "musko",
     "PhoneNumber": "3875432",
@@ -29,12 +27,12 @@
       "City": "Novi Sad",
       "StreetName": "Bulevar Oslobodjenja",
       "StreetNumber": "100"
-    }
+    },
+    "Name": "Milica",
+    "Surname": "Jovanovic"
   },
   {
     "Id": 13,
-    "Name": "Dragisa",
-    "Surname": "Perovic",
     "Jmbg": "9897112156",
     "Gender": "musko",
     "PhoneNumber": "3875432",
@@ -45,6 +43,8 @@
       "City": "Novi Sad",
       "StreetName": "Strazilovska",
       "StreetNumber": "33"
-    }
+    },
+    "Name": "Dragisa",
+    "Surname": "Perovic"
   }
 ]
