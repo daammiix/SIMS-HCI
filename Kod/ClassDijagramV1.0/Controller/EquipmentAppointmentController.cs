@@ -38,5 +38,17 @@ namespace ClassDijagramV1._0.Controller
         {
             equipmentAppointmentService.ScheduledAppointment();
         }
+
+        /// <summary>
+        /// Proverava da li je sobe zauzeta u odgovarajucem periodu zbog premestanja opreme
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="duration"></param>
+        /// <param name="room"></param>
+        /// <returns></returns>
+        public bool CheckIsTerminFree(DateTime from, TimeSpan duration, Room room)
+        {
+            return equipmentAppointmentService.CheckIsTerminFree(from, duration, room);
+        }
     }
 }

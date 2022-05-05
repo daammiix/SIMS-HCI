@@ -25,7 +25,7 @@ namespace ClassDijagramV1._0.Service
 
         public void AddEquipmentAppointment(EquipmentAppointment equipmentAppointment)
         {
-             equipmentAppointmentRepository.CreateNewEquipmentAppointment(equipmentAppointment);
+            equipmentAppointmentRepository.CreateNewEquipmentAppointment(equipmentAppointment);
         }
 
         public EquipmentAppointment? GetAEquipmentAppointment(EquipmentAppointment equipmentAppointment)
@@ -49,7 +49,7 @@ namespace ClassDijagramV1._0.Service
                 {
                     continue;
                 }
-                if(DateTime.Now > equipmentAppointment.FromDateTime)
+                if (DateTime.Now > equipmentAppointment.FromDateTime)
                 {
                     Room room = roomController.GetARoom(equipmentAppointment.RoomFrom);
                     room.removeEquipment(equipmentAppointment.SelectedEquipment, equipmentAppointment.Quantity);
@@ -62,6 +62,45 @@ namespace ClassDijagramV1._0.Service
                     equipmentAppointmentRepository.DeleteEquipmentAppointment(i--);
                 }
             }
+        }
+
+        /// <summary>
+        /// Proverava da li je sobe zauzeta u odgovarajucem periodu zbog premestanja opreme
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="duration"></param>
+        /// <param name="room"></param>
+        /// <returns></returns>
+        public bool CheckIsTerminFree(DateTime from, TimeSpan duration, Room room)
+        {
+            // ret val
+            bool free = true;
+
+            foreach (EquipmentAppointment equipmentAppointment in GetAllEquipmentAppointment())
+            {
+
+
+                string roomFromId = equipmentAppointment.RoomFrom;
+                string roomToId = equipmentAppointment.RoomTo;
+
+                // prvo prvoerimo da li premestaj ima veze sa sobom u kojoj zakazujemo pregled ili sta vec
+                if (roomFromId.Equals(room.RoomID) || roomToId.Equals(room.RoomID))
+                {
+                    // Sad proveravamo da li se vremena poklapaju
+                    // 1. da li pocinje pre i zavrsava se posle pocetka termina premestaja
+                    // 2. da li pocinje izmedju
+                    if ((from < equipmentAppointment.FromDateTime && (from + duration) > equipmentAppointment.FromDateTime)
+                        || (from >= equipmentAppointment.FromDateTime && from <= equipmentAppointment.ToDateTime))
+                    {
+                        // Ako se poklapaju i sobe i vreme vratimo false
+                        free = false;
+                        break;
+                    }
+                }
+
+            }
+
+            return free;
         }
     }
 }

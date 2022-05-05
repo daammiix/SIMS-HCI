@@ -1,4 +1,5 @@
-﻿using ClassDijagramV1._0.Util;
+﻿using ClassDijagramV1._0.Controller;
+using ClassDijagramV1._0.Util;
 using Controller;
 using Model;
 using System;
@@ -24,6 +25,10 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModel
         private DoctorController _doctorController;
 
         private AppointmentController _appointmentController;
+
+        private EquipmentAppointmentController _equipmentAppointmentController;
+
+        private RoomAppointmentController _roomAppointmentController;
 
         // Liste za vreme
 
@@ -139,6 +144,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModel
             _roomController = app.roomController;
             _doctorController = app.DoctorController;
             _appointmentController = app.AppointmentController;
+            _equipmentAppointmentController = app.equipmentAppointmentController;
 
             // Popunimo liste
             Rooms = new ObservableCollection<Room>(_roomController.GetAllRooms());
@@ -182,6 +188,8 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModel
             DateTime start = new DateTime(year, month, day, Hour, Minute, 0);
             // Nece duration da bude null nikad ovde jer ne moze da se pritisne dugme kao je null
             DateTime end = start.AddMinutes((double)Duration);
+            // trajanje
+            TimeSpan duration = end - start;
 
             // Napravimo dummy appointment samo da bi proverili da li je termin slobodan 
             // Patient id nije bitan za proveru termina
@@ -192,7 +200,9 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModel
             Appointment.idCounter--;
 
             // Ako je termin free updatujemo appointment
-            if (_appointmentController.CheckIsTerminFree(a))
+            if (_appointmentController.CheckIsTerminFree(a) &&
+                _equipmentAppointmentController.CheckIsTerminFree(start, duration, Room) &&
+                _roomAppointmentController.CheckIsTerminFree(start, duration, Room))
             {
                 _appointmentToChange.From = start;
                 _appointmentToChange.To = end;

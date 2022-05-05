@@ -90,5 +90,38 @@ namespace ClassDijagramV1._0.Service
                 roomAppointmentRepo.DeleteRoomAppointmentAt(i--);
             }
         }
+
+        /// <summary>
+        /// Proverava da li je soba u datom terminu slobodna odnosno nema nikakvi roomAppointmenta
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="duration"></param>
+        /// <param name="room"></param>
+        /// <returns></returns>
+        public bool CheckIsTerminFree(DateTime from, TimeSpan duration, Room room)
+        {
+            // ret val
+            bool free = true;
+            // prodjemo kroz sve Room Appointmente
+            foreach (RoomAppointment appointment in GetAllRoomAppointments())
+            {
+                // Proverimo da li je soba u koju mi zakazujemo ista kao soba iz roomAppointmenta
+                if (appointment.roomId.Equals(room.RoomID))
+                {
+                    // Sad proverimo da li se vremena preklapaju
+                    // 1. da li pocinje pre i zavrsava se posle pocetka termina premestaja
+                    // 2. da li pocinje izmedju
+                    if ((from < appointment.startDate && (from + duration) > (appointment.startDate + appointment.duration))
+                        || (from >= appointment.startDate && from <= (appointment.startDate + appointment.duration)))
+                    {
+                        // Ako se poklapaju i sobe i vreme vratimo false
+                        free = false;
+                        break;
+                    }
+                }
+            }
+
+            return free;
+        }
     }
 }

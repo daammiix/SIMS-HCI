@@ -126,7 +126,7 @@ namespace Service
                 // 1. Moze novi da pocinje pre i da kad se doda duration udje u termin ovog
                 // 2. Moze novi da pocne u terminu ovog
                 if ((start < a.AppointmentDate && (start + duration) > a.AppointmentDate) ||
-                    (start > a.AppointmentDate && start < (a.AppointmentDate + a.Duration)))
+                    (start >= a.AppointmentDate && start <= (a.AppointmentDate + a.Duration)))
                 {
                     // Sad proverimo da li su ista soba
                     if (roomId.Equals(a.RoomId))
