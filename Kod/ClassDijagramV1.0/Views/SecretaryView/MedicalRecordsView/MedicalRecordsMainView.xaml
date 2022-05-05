@@ -4,10 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.MedicalRecordsView"
+             xmlns:medicalRecordsViewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewModels"
              mc:Ignorable="d"
              Background="Transparent"
              FontFamily="#Poppins"
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <medicalRecordsViewModels:MedicalRecordsMainViewModel/>
+    </UserControl.DataContext>
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -42,34 +47,52 @@
             <DataGrid x:Name="MedicalRecordsDataGrid"
                       Grid.Row="0"
                       Margin="0,15,0,0"
-                      RowStyle="{StaticResource DataGridRowStyleAccounts}"
+                      ItemsSource="{Binding MedicalRecords}"
+                      SelectedItem="{Binding SelectedMedicalRecord, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                      RowStyle="{StaticResource DataGridRowStyleMedicalRecords}"
                       ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyleAccounts}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Number"
-                                        Width="*"/>
-                    <DataGridTextColumn Header="Name"
-                                        Width="2*"/>
-                    <DataGridTextColumn Header="Surname"
-                                        Width="2*"/>
-                    <DataGridTextColumn Header="Uid"
-                                        Width="3*"/>
-                    <DataGridTemplateColumn Header="Details"
-                                            Width="*">
 
-                    </DataGridTemplateColumn>
+                <DataGrid.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#1F2833"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#1F2833"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HotTrackBrushKey}" Color="#1F2833"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="#1F2833"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#1F2833"/>
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Record Number"
+                                        Width="*"
+                                        FontSize="16"
+                                        Binding="{Binding MedicalRecord.Number}"/>
+                    <DataGridTextColumn Header="Name"
+                                        Width="*"
+                                        FontSize="16"
+                                        Binding="{Binding Patient.Name}"/>
+                    <DataGridTextColumn Header="Surname"
+                                        Width="*"
+                                        FontSize="16"
+                                        Binding="{Binding Patient.Surname}"/>
+                    <DataGridTextColumn Header="Uid"
+                                        Width="*"
+                                        FontSize="16"
+                                        Binding="{Binding Patient.Jmbg}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <!-- Buttons -->
             <StackPanel Grid.Row="1"
                         Orientation="Horizontal">
 
-                <Button Content="Create Record"
+                <Button Content="Add Record"
                         Margin="10,0,15,0"
-                        Style="{StaticResource AccountButtonsStyle}"/>
+                        Style="{StaticResource AccountButtonsStyle}"
+                        Command="{Binding AddRecord}"/>
                 <Button Content="Change Record"
                         Margin="0,0,15,0"
+                        Command="{Binding ChangeRecord}"
                         Style="{StaticResource AccountButtonsStyle}"/>
                 <Button Content="Delete Record"
+                        Command="{Binding DeleteRecord}"
                         Style="{StaticResource AccountButtonsStyle}"/>
             </StackPanel>
         </Grid>

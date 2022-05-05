@@ -25,9 +25,17 @@ namespace ClassDijagramV1._0.Dialog
     /// </summary>
     public partial class UpdateAppointmentDialog : Window
     {
-        public AppointmentController _appointmentController;
-        public RoomController _roomController;
-        public DoctorController _doctorController;
+        #region Fields
+
+        private AppointmentController _appointmentController;
+        private RoomController _roomController;
+        private DoctorController _doctorController;
+
+        #endregion
+
+        #region Properties
+
+        public AppointmentViewModel SelectedAppointment { get; set; }
 
         public ObservableCollection<Appointment> Appointments
         {
@@ -44,27 +52,37 @@ namespace ClassDijagramV1._0.Dialog
             get;
             set;
         }
-        public UpdateAppointmentDialog()
+
+        #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="selectedAppointment">Selektovani appointment koji updatujemo</param>
+        public UpdateAppointmentDialog(AppointmentViewModel selectedAppointment)
         {
             InitializeComponent();
+
+            SelectedAppointment = selectedAppointment;
+
             this.DataContext = this;
             App app = Application.Current as App;
-            _appointmentController = app.appointmentController;
+            _appointmentController = app.AppointmentController;
             _roomController = app.roomController;
             _doctorController = app.DoctorController;
 
             Rooms = _roomController.GetAllRooms();
-            Appointments = _appointmentController.GetAllAppointments("djordje"); // ulgovani korisnik ali ovo je za doktora
+            //Appointments = _appointmentController.GetAllAppointments("djordje"); // ulgovani korisnik ali ovo je za doktora
             Doctors = _doctorController.GetAllDoctors();
 
             BlackoutDates();
-            promjenaKalendar.SelectedDate = AppointmentsViewPage.selectedAppointment.AppointmentDate;
+            promjenaKalendar.SelectedDate = SelectedAppointment.AppointmentDate;
 
         }
 
         private void BlackoutDates()
         {
-            var oldDate = AppointmentsViewPage.selectedAppointment.AppointmentDate;
+            var oldDate = SelectedAppointment.AppointmentDate;
             var firstDate = DateTime.MinValue;
             var lastDate = DateTime.MaxValue;
             double NDays = 5;
@@ -76,7 +94,7 @@ namespace ClassDijagramV1._0.Dialog
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var oldAppointment = AppointmentsViewPage.selectedAppointment;
+            var oldAppointment = SelectedAppointment;
             var updatedAppointment = oldAppointment;
 
             DateTime date1 = promjenaKalendar.SelectedDate.Value;
@@ -85,12 +103,19 @@ namespace ClassDijagramV1._0.Dialog
             Doctor d1 = (Doctor)dodavanjPregledaDoktor.SelectedItem;
             Room r1 = getFreeRoom(date1, date1.AddMinutes(15));
 
+            // Ovo menja i view i bazu 
             updatedAppointment.AppointmentDate = promjenaKalendar.SelectedDate.Value;
+            // Menjamo u samoj bazi(sam appointment model)
+            updatedAppointment.Appointment.DoctorId = d1.Id;
+            updatedAppointment.Appointment.RoomId = r1.RoomID;
+            // Menjamo i view
+            updatedAppointment.DoctorName = d1.Name;
             updatedAppointment.Doctor = d1;
+            updatedAppointment.Room = r1;
 
-            _appointmentController.UpdateAppointment(oldAppointment.AppointmentID, updatedAppointment);
+            // ovo sad ne treba updatovan je odmah ovde
+            //_appointmentController.UpdateAppointment(oldAppointment.Id, updatedAppointment.Appointment);
             this.Close();
-
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

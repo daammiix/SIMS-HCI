@@ -1,9 +1,3 @@
-/***********************************************************************
- * Module:  AppointmentRepo.cs
- * Author:  lipov
- * Purpose: Definition of the Class Repository.AppointmentRepo
- ***********************************************************************/
-
 using ClassDijagramV1._0.FileHandlers;
 using Model;
 using System;
@@ -18,8 +12,7 @@ namespace Repository
     public class AppointmentRepo
     {
 
-        private String Path;
-        private AppointmentFileHandler _appointmentFileHandler;
+        private FileHandler<Appointment> _appointmentFileHandler;
 
         public ObservableCollection<Appointment> Appointments;
 
@@ -30,12 +23,10 @@ namespace Repository
         }
 
 
-
-        public AppointmentRepo(AppointmentFileHandler apointmentFileHandler)
+        public AppointmentRepo(FileHandler<Appointment> apointmentFileHandler)
         {
             _appointmentFileHandler = apointmentFileHandler;
-            Appointments = new ObservableCollection<Appointment>(_appointmentFileHandler.GetAppointments());
-            Doctors = new ObservableCollection<Doctor>();
+            Appointments = new ObservableCollection<Appointment>(_appointmentFileHandler.GetItems());
 
             /*Room r1 = new Room();
             DateTime date1 = new DateTime(2008, 5, 1, 8, 30, 52);
@@ -54,11 +45,7 @@ namespace Repository
             Appointments.Add(a2);*/
         }
 
-        public AppointmentRepo()
-        {
-        }
-
-        public void UpdateAppointment(string oldAppointmentID, Appointment updatedAppointment)
+        public void UpdateAppointment(int oldAppointmentID, Appointment updatedAppointment)
         {
             var oldAppointment = FindAppointmentById(oldAppointmentID);
             oldAppointment = updatedAppointment;
@@ -77,26 +64,49 @@ namespace Repository
 
         public void SaveAppointments()
         {
-            _appointmentFileHandler.SaveAppointments(Appointments.ToList());
+            _appointmentFileHandler.SaveItems(Appointments.ToList());
         }
 
-        public ObservableCollection<Appointment> AddNewAppointment(Appointment newAppointment)
+        /// <summary>
+        /// Dodaje novi appointment ako ne postoji appointment sa istim id-em, u suprotnom ce da pregazi stari
+        /// </summary>
+        /// <param name="newAppointment"></param>
+        /// <returns></returns>
+        public void AddNewAppointment(Appointment newAppointment)
         {
-            Appointments.Add(newAppointment);
-            return GetAppointments();
+            bool exists = false;
+            Appointment toUpdate = null;
+            foreach (Appointment appointment in Appointments)
+            {
+                if (appointment.Id == newAppointment.Id)
+                {
+                    exists = true;
+                    toUpdate = appointment;
+                    break;
+                }
+            }
+
+            if (!exists)
+            {
+                Appointments.Add(newAppointment);
+            }
+            else
+            {
+                toUpdate = newAppointment;
+            }
         }
 
-        public void RemoveAppointment(String appointmentID)
+        public void RemoveAppointment(int appointmentID)
         {
             Appointments.Remove(FindAppointmentById(appointmentID));
         }
 
 
-        public Appointment FindAppointmentById(String appointmentID)
+        public Appointment FindAppointmentById(int appointmentID)
         {
             foreach (Appointment a in Appointments)
             {
-                if (a.AppointmentID.Equals(appointmentID))
+                if (a.Id == appointmentID)
                 {
                     return a;
                 }

@@ -59,7 +59,7 @@ namespace ClassDijagramV1._0.Views
             roomController = app.roomController;
             equipmentAppointmentController = app.equipmentAppointmentController;
             roomAppointmentController = app.roomAppointmentController;
-            appointmentController = app.appointmentController;
+            appointmentController = app.AppointmentController;
 
             this.selectedRoom = selectedRoom;
 
@@ -173,7 +173,7 @@ namespace ClassDijagramV1._0.Views
                 var aptTo = (appointment.AppointmentDate + appointment.Duration).Date;
                 if (checkTimeSpansOverlap(aptFrom, aptTo, selectedFrom, selectedTo))
                 {
-                    if (appointment.Room.RoomID == selectedRoom.RoomID)
+                    if (appointment.RoomId == selectedRoom.RoomID)
                     {
                         RoomsAvailable.Add(formatAvailableTime(appointment.AppointmentDate, appointment.AppointmentDate + appointment.Duration));
                     }

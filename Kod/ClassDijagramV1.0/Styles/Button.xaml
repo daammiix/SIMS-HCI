@@ -7,7 +7,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border CornerRadius="10"
+                    <Border CornerRadius="15"
                             Background="{TemplateBinding Background}"
                             Padding="30 5">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -24,14 +24,14 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="MenuButtonTheme" BasedOn="{StaticResource {x:Type ToggleButton}}" TargetType="RadioButton">
+    <Style x:Key="MenuButton" BasedOn="{StaticResource {x:Type ToggleButton}}" TargetType="RadioButton">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
                     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{TemplateBinding Background}">
                         <TextBlock Text="{TemplateBinding Content}"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"/>
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

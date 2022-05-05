@@ -15,7 +15,7 @@ namespace ClassDijagramV1._0.Views
 
         public Availability(DateTime from, DateTime to)
         {
-            From = from; To = to; 
+            From = from; To = to;
         }
     }
 
@@ -47,7 +47,7 @@ namespace ClassDijagramV1._0.Views
         public String FromDate { get; set; } = DateTime.Now.ToString("dd/MM/yyyy");
         public String FromTime { get; set; } = DateTime.Now.ToString("HH:mm");
         public String ToDate { get; set; } = DateTime.Now.ToString("dd/MM/yyyy");
-        public String ToTime{ get; set; } = DateTime.Now.ToString("HH:mm");
+        public String ToTime { get; set; } = DateTime.Now.ToString("HH:mm");
 
         private BindingList<Availability> availabilities { get; set; }
 
@@ -61,7 +61,7 @@ namespace ClassDijagramV1._0.Views
             equipmentAppointmentController = app.equipmentAppointmentController;
             equipmentController = app.equipmentController;
             roomAppointmentController = app.roomAppointmentController;
-            appointmentController = app.appointmentController;
+            appointmentController = app.AppointmentController;
             this.selectedRoom = selectedRoom;
             Rooms = new BindingList<Room>();
             Equipments = equipmentController.GetAllEquipments();
@@ -97,7 +97,7 @@ namespace ClassDijagramV1._0.Views
 
         private bool checkDateTimeAvailable(DateTime fromDatetime, DateTime toDatetime)
         {
-            foreach (var avaible in availabilities) 
+            foreach (var avaible in availabilities)
             {
                 if (checkTimeSpansOverlap(fromDatetime, toDatetime, avaible.From, avaible.To))
                 {
@@ -190,7 +190,8 @@ namespace ClassDijagramV1._0.Views
             {
                 selectedFrom = DateTime.ParseExact(FromDateField.Text, "dd/MM/yyyy", null);
                 selectedTo = DateTime.ParseExact(ToDateField.Text, "dd/MM/yyyy", null);
-            } catch (FormatException)
+            }
+            catch (FormatException)
             {
                 return;
             }
@@ -234,11 +235,11 @@ namespace ClassDijagramV1._0.Views
                 var aptTo = (appointment.AppointmentDate + appointment.Duration).Date;
                 if (checkTimeSpansOverlap(aptFrom, aptTo, selectedFrom, selectedTo))
                 {
-                    if (appointment.Room.RoomID == sourceRoom.RoomID)
+                    if (appointment.RoomId == sourceRoom.RoomID)
                     {
                         RoomsToAvailable.Add(formatAvailableTime(appointment.AppointmentDate, appointment.AppointmentDate + appointment.Duration));
                     }
-                    if (appointment.Room.RoomID == selectedRoom.RoomID)
+                    if (appointment.RoomId == selectedRoom.RoomID)
                     {
                         RoomsFromAvailable.Add(formatAvailableTime(appointment.AppointmentDate, appointment.AppointmentDate + appointment.Duration));
                     }

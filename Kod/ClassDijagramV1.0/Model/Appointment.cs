@@ -13,70 +13,78 @@ namespace Model
 {
     public class Appointment : ObservableObject
     {
-        private String appointmentID;
-        private Patient patient;
-        private Doctor doctor;
-        private Room room;
-        private DateTime appointmentDate;
-        private TimeSpan duration;
-        private AppointmentType type;
+        public static int idCounter = 0;
 
-        public String AppointmentID
+        #region Fields
+
+        private int _appointmentId;
+        private int _patientId;
+        private int _doctorId;
+        private string _roomId;
+        private DateTime _apointmentDate;
+        private TimeSpan _duration;
+        private AppointmentType _type;
+
+        #endregion
+
+        #region Properties
+
+        public int Id
         {
             get
             {
-                return appointmentID;
+                return _appointmentId;
             }
             set
             {
-                if (value != appointmentID)
+                if (value != _appointmentId)
                 {
-                    appointmentID = value;
-                    OnPropertyChanged("AppointmentID");
+                    _appointmentId = value;
+                    OnPropertyChanged("Id");
                 }
             }
         }
-        public Patient Patient
+        public int PatientId
         {
             get
             {
-                return patient;
+                return _patientId;
             }
             set
             {
-                if (value != patient)
+                if (value != _patientId)
                 {
-                    patient = value;
+                    _patientId = value;
                     OnPropertyChanged("Patient");
                 }
             }
         }
-        public Doctor Doctor
+        public int DoctorId
         {
             get
             {
-                return doctor;
+                return _doctorId;
             }
             set
             {
-                if (value != doctor)
+                if (value != _doctorId)
                 {
-                    doctor = value;
+                    _doctorId = value;
                     OnPropertyChanged("Doctor");
                 }
             }
         }
-        public Room Room
+        public string RoomId
         {
             get
             {
-                return room;
+                return _roomId;
             }
             set
             {
-                if (value != room)
+                if (value != _roomId)
                 {
-                    room = value;
+                    _roomId = value;
                     OnPropertyChanged("Room");
                 }
             }
@@ -85,13 +93,13 @@ namespace Model
         {
             get
             {
-                return appointmentDate;
+                return _apointmentDate;
             }
             set
             {
-                if (value != appointmentDate)
+                if (value != _apointmentDate)
                 {
-                    appointmentDate = value;
+                    _apointmentDate = value;
                     OnPropertyChanged("AppointmentDate");
                 }
             }
@@ -100,13 +108,13 @@ namespace Model
         {
             get
             {
-                return duration;
+                return _duration;
             }
             set
             {
-                if (value != duration)
+                if (value != _duration)
                 {
-                    duration = value;
+                    _duration = value;
                     OnPropertyChanged("Duration");
                 }
             }
@@ -115,33 +123,39 @@ namespace Model
         {
             get
             {
-                return type;
+                return _type;
             }
             set
             {
-                if (value != type)
+                if (value != _type)
                 {
-                    type = value;
+                    _type = value;
                     OnPropertyChanged("AppointmentType");
                 }
             }
         }
 
+        #endregion
 
+        #region Constructor
 
-        public Appointment(String appointmentID, Patient patient, Doctor doctor, Room room, DateTime appointmentDate, TimeSpan duration, AppointmentType appointmentType)
+        public Appointment(int patientId, int doctorId, string roomId, DateTime _apointmentDate, TimeSpan _duration, AppointmentType appointmentType)
         {
-            AppointmentID = appointmentID;
-            Patient = patient;
-            Doctor = doctor;
-            Room = room;
-            AppointmentDate = appointmentDate;
-            Duration = duration;
+            Id = ++idCounter;
+            PatientId = patientId;
+            DoctorId = doctorId;
+            RoomId = roomId;
+            AppointmentDate = _apointmentDate;
+            Duration = _duration;
             AppointmentType = appointmentType;
         }
         public Appointment()
         {
+
         }
+
+        #endregion
+
     }
 
 }

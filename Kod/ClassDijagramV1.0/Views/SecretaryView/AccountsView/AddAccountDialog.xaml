@@ -14,6 +14,12 @@
         FontSize="24"
         Title="AddAccount" Height="470" Width="500">
 
+    <Window.InputBindings>
+        <KeyBinding Key="Return"
+                    Command="{Binding Path=AddAccountCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+    </Window.InputBindings>
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -52,62 +58,9 @@
                   Margin="0,0,0,15"
                   ItemsSource="{Binding Persons}"
                   SelectedItem="{Binding Person, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                  Style="{StaticResource ComboBoxStyleAccounts}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="../../../Images/acc.png"
-                               Width="25"
-                               Height="25"
-                               Margin="3,0,8,0"
-                               RenderOptions.BitmapScalingMode="Fant"/>
-                        <Grid>
-                            <Grid.Resources>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="FontSize" Value="14"/>
-                                    <Setter Property="Foreground" Value="{StaticResource SLightGrayShade}"/>
-                                </Style>
-                            </Grid.Resources>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-
-                            <!-- Name -->
-                            <TextBlock Grid.Row="0" Grid.Column="0"
-                                       Text="Name:"
-                                       Margin="0,0,10,0"/>
-                            <TextBlock Grid.Row="0" Grid.Column="1"
-                                       Text="{Binding Name}"/>
-
-                            <!-- Surname -->
-                            <TextBlock Grid.Row="1" Grid.Column="0"
-                                       Text="Surname:"
-                                       Margin="0,0,10,0"/>
-                            <TextBlock Grid.Row="1" Grid.Column="1" 
-                                       Text="{Binding Surname}"/>
-
-                            <!-- Email -->
-                            <TextBlock Grid.Row="2" Grid.Column="1" 
-                                       Text="{Binding Email}"/>
-                            <TextBlock Grid.Row="2" Grid.Column="0"
-                                       Text="Email:"
-                                       Margin="0,0,10,0"/>
-                        </Grid>
-                    </StackPanel>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-            <ComboBox.ItemContainerStyle>
-                <Style TargetType="{x:Type ComboBoxItem}">
-                    <Setter Property="Background" Value="{StaticResource SDarkGrayShade}"/>
-                    <Setter Property="BorderThickness" Value="0"/>
-                </Style>
-            </ComboBox.ItemContainerStyle>
+                  Style="{StaticResource ComboBoxStyleAccounts}"
+                  ItemTemplate="{StaticResource ItemTemplatePerson}"
+                  ItemContainerStyle="{StaticResource ItemContainerStyle}">
         </ComboBox>
 
         <!-- Row 2 -->

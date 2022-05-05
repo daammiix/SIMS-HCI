@@ -12,13 +12,14 @@
         <Button Content="Otkazi pregled" Click="RemoveAppontment_Click"/>
         <DataGrid x:Name="tabelaPregledi" Height="300" Margin="20"  
                           AutoGenerateColumns="False"
+                          SelectedItem="{Binding SelectedAppointment, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                           ItemsSource="{Binding Appointments, UpdateSourceTrigger=PropertyChanged}"
                           SelectionMode="Single" IsReadOnly="True" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding AppointmentID}"/>
-                <DataGridTextColumn Header="Ime Pacijenta" Binding="{Binding Patient.Name}"/>
-                <DataGridTextColumn Header="Ime Doktora" Binding="{Binding Doctor.Name}" />
-                <DataGridTextColumn Header="Soba" Binding="{Binding Room.RoomID}" />
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Ime Pacijenta" Binding="{Binding PatientName}"/>
+                <DataGridTextColumn Header="Ime Doktora" Binding="{Binding DoctorName}" />
+                <DataGridTextColumn Header="Soba" Binding="{Binding RoomId}" />
                 <DataGridTextColumn Header="Trajanje" Binding="{Binding Duration}" />
                 <DataGridTextColumn Header="Trajanje" Binding="{Binding Duration}" />
                 <DataGridTextColumn Header="Datum pregleda" Binding="{Binding AppointmentDate}" Width="*"/>

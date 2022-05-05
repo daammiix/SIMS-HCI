@@ -113,9 +113,28 @@ namespace ClassDijagramV1._0.Controller
         /// <param name="username"></param>
         /// <param name="acc">U slucaju promene zelimo da prosledimo i trenutni acc jer njega necemo da gledamo</param>
         /// <returns></returns>
-        public bool DoesAccountWithSameUsernameExists(string username, Account acc = null)
+        public bool DoesAccountWithSameUsernameExist(string username, Account acc = null)
         {
-            return _accountService.DoesAccountWithSameUsernameExists(username, acc);
+            return _accountService.DoesAccountWithSameUsernameExist(username, acc);
+        }
+
+        /// <summary>
+        /// Vraca true ako osoba ima acc, u suprotnom vraca false
+        /// </summary>
+        /// <param name="personId"></param>
+        /// <returns></returns>
+        public bool PersonHasAccount(int personId)
+        {
+            return _accountService.PersonHasAccount(personId);
+        }
+
+        /// <summary>
+        /// Vraca observable collection svih akaunta pacijenata
+        /// </summary>
+        /// <returns></returns>
+        public ObservableCollection<Account> GetPatientsAccounts()
+        {
+            return _accountService.GetPatientsAccounts();
         }
 
         #endregion

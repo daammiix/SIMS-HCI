@@ -128,21 +128,34 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
 
             _persons = new ObservableCollection<Person>();
 
+            // Dodamo samo osobe koje nemaju acc
             foreach (var patient in patients)
             {
-                _persons.Add(patient);
+                if (!_accountController.PersonHasAccount(patient.Id))
+                {
+                    _persons.Add(patient);
+                }
             }
             foreach (var secretary in secretaries)
             {
-                _persons.Add(secretary);
+                if (!_accountController.PersonHasAccount(secretary.Id))
+                {
+                    _persons.Add(secretary);
+                }
             }
             foreach (var doctor in doctors)
             {
-                _persons.Add(doctor);
+                if (!_accountController.PersonHasAccount(doctor.Id))
+                {
+                    _persons.Add(doctor);
+                }
             }
             foreach (var manager in managers)
             {
-                _persons.Add(manager);
+                if (!_accountController.PersonHasAccount(manager.Id))
+                {
+                    _persons.Add(manager);
+                }
             }
         }
 
@@ -162,7 +175,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
             // proverimo da li account sa tim id-em postoji, jedna osoba moze da ima samo jedan account
             // proverimo da li account sa istim username-om postoji, jedan username moze da bude vezan samo za jedan acc
             if (_accountController.DoesAccountWithSameIdExist(_person.Id)
-                || _accountController.DoesAccountWithSameUsernameExists(Username))
+                || _accountController.DoesAccountWithSameUsernameExist(Username))
             {
                 // Priakzemo samo error dialog
                 MessageBox.Show("Username already in use or person already has account!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -172,6 +185,10 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
                 // Dodamo account i u bazu i u tabelu preko AccountViewModela i zatvorimo window
                 _accountController.AddAccount(newAccount);
                 AccountsViewModels.Add(new AccountViewModel(newAccount));
+
+                // Izbacimo osobu iz liste osoba koje nemaju acc
+                Persons.Remove(_person);
+
                 window.Close();
             }
 
