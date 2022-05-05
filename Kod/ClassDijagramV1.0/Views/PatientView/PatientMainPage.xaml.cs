@@ -31,5 +31,10 @@ namespace ClassDijagramV1._0.Views.PatientView
         {
             parent.startWindow.Content = new AppointmentsViewPage(parent);
         }
+
+        private void AddAppointmetClick(object sender, RoutedEventArgs e)
+        {
+            parent.startWindow.Content = new AppointmentAddPage(parent);
+        }
     }
 }

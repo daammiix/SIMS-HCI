@@ -27,12 +27,15 @@ namespace ClassDijagramV1._0.Views.PatientView
         public AppointmentController _appointmentController;
         public RoomController _roomController;
         public static Appointment selectedAppointment;
+        public PatientController _patientController;
         private PatientMainWindow parent { get; set; }
         public ObservableCollection<Appointment> Appointments
         {
             get;
             set;
         }
+        public Patient PatientsByID { get; set; }
+  
         public BindingList<Room> Rooms
         {
             get;
@@ -47,13 +50,15 @@ namespace ClassDijagramV1._0.Views.PatientView
             _appointmentController = app.appointmentController;
 
             _roomController = app.roomController;
+            _patientController = app.PatientController;
 
-            Appointments = _appointmentController.GetAllAppointments("djordje"); // ulogovani korisnik
-            Rooms = _roomController.GetAllRooms();
+            Appointments = _appointmentController.GetAllAppointmentsByPatient(parent.patientID); // ulogovani korisnik
+            PatientsByID = _patientController.GetPatientById(parent.patientID);
         }
         private void AddAppontment_Click(object sender, RoutedEventArgs e)
         {
             parent.startWindow.Content = new AppointmentAddPage(parent);
+            tabelaPregledi.ItemsSource = _appointmentController.GetAllAppointmentsByPatient(parent.patientID);
         }
 
         private void UpdateAppontment_Click(object sender, RoutedEventArgs e)
@@ -63,6 +68,7 @@ namespace ClassDijagramV1._0.Views.PatientView
             {
                 selectedAppointment = (Appointment)tabelaPregledi.SelectedItem;
                 parent.startWindow.Content = new AppointmentUpdatePage(parent);
+                tabelaPregledi.ItemsSource = _appointmentController.GetAllAppointmentsByPatient(parent.patientID);
             }
         }
 
@@ -71,8 +77,9 @@ namespace ClassDijagramV1._0.Views.PatientView
             if (tabelaPregledi.SelectedIndex != -1)
             {
                 _appointmentController.RemoveAppointment((Appointment)tabelaPregledi.SelectedItem);
+                //_appointmentController.AddNotification((Appointment)tabelaPregledi.SelectedItem, NotificationType.deletingAppointment);
+                tabelaPregledi.ItemsSource = _appointmentController.GetAllAppointmentsByPatient(parent.patientID);
             }
-
         }
     }
 }

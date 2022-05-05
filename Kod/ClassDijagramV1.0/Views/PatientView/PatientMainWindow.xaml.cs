@@ -22,11 +22,13 @@ namespace ClassDijagramV1._0.Views.PatientView
     /// </summary>
     public partial class PatientMainWindow : Window
     {
+        public int patientID { get; set; }
         
-        public PatientMainWindow()
+        public PatientMainWindow(int personID)
         {
             InitializeComponent();
             this.DataContext = this;
+            patientID = personID;
             startWindow.Content = new PatientMainPage(this);
         }
 
@@ -34,9 +36,7 @@ namespace ClassDijagramV1._0.Views.PatientView
         {
             var a = new MainWindow();
             a.Show();
-            Window.GetWindow(this).Close();
-            
-            
+            Window.GetWindow(this).Close();  
         }
 
         private void openNotificationClick(object sender, RoutedEventArgs e)
@@ -46,7 +46,6 @@ namespace ClassDijagramV1._0.Views.PatientView
 
         private void goBack(object sender, RoutedEventArgs e)
         {
-
             switch (startWindow.Content)
             {
             }

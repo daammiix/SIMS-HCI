@@ -26,7 +26,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
             </ResourceDictionary.MergedDictionaries>
         
-        
+            <!--da bude siva pozadina kad se hoveruje-->
             <Style x:Key="noBackBlue" TargetType="{x:Type Button}">
                 <Setter Property="Background" Value="#FFBBBABD"/>
                 <Setter Property="Template">
@@ -44,6 +44,7 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+            <!--animacija za nazad-->
             <Style x:Key="moving" TargetType="{x:Type Button}" BasedOn="{StaticResource noBackBlue}">
                 <Setter Property="Margin" Value="20,0,0,0"/>
                 <Style.Triggers>
@@ -57,55 +58,71 @@
 
     <Grid>
         <Border Width="1024" Height="68" VerticalAlignment="Top" Background="#FFBBBABD"/>
-        
+        <!--meni na vrhu-->
         <StackPanel>
             <DockPanel>
-                <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Height="68">
-                    <Button Style="{StaticResource ResourceKey=noBackBlue}" Cursor="Hand"
-                    Width="68" Height="68" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                    BorderBrush="{x:Null}"
-                    Margin="0, 0, 0, 0"
-                    Click="openNotificationClick" ToolTip="Obavještenja">
-                        <Image Source="Resources/Images/doctor.png" Width="42" Height="42"/>
+                
+                <StackPanel
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Height="68">
+                    <Button
+                        Style="{StaticResource ResourceKey=noBackBlue}"
+                        Cursor="Hand"
+                        Width="68" Height="68"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center" 
+                        BorderBrush="{x:Null}"
+                        Click="openNotificationClick"
+                        ToolTip="Obavještenja">
+                        <Image Source="Resources/Images/doctor.png"
+                                Width="42" Height="42"/>
                     </Button>
                 </StackPanel>
-                <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
-                        HorizontalAlignment="Left"
-                        BorderBrush="{x:Null}"
-                        Background="{x:Null}"
-                        Foreground="Black"
-                        x:Name="btnExit">
-                    <StackPanel Margin="-5">
-                        <materialDesign:PackIcon Kind="Logout" Height="48" Width="48"/>
-                    </StackPanel>
-                </Button>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Height="68" >
-                    <Button Style="{StaticResource ResourceKey=noBackBlue}" Cursor="Hand"
-                    Width="68" Height="68" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                    BorderBrush="{x:Null}"
-                    Margin="0, 0, 0, 0"
-                    Click="openNotificationClick" ToolTip="Obavještenja">
-                        <Image Source="Resources/Images/notification.png" Width="42" Height="42"/>
-                    </Button>
-                    <Button x:Name="logoutBtn" Style="{StaticResource ResourceKey=noBackBlue}" Cursor="Hand"
-                    Width="68" Height="68" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Height="68" >
+                            <Button x:Name="notificationBtn" Style="{StaticResource ResourceKey=noBackBlue}"
+                                    Cursor="Hand"
+                                    Width="68" Height="68"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center" 
+                                    BorderBrush="{x:Null}"
+                                    Click="openNotificationClick"
+                                    ToolTip="Obavještenja">
+                                    <Image Source="Resources/Images/notification.png"
+                                           Width="42" Height="42"/>
+                            </Button>
+                    
+                            <Button x:Name="logoutBtn" Style="{StaticResource ResourceKey=noBackBlue}"
+                                    Cursor="Hand"
+                                    Width="68" Height="68"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center" 
                     BorderBrush="{x:Null}"
                     Margin="0, 0, 0, 0"
                     Click="Logout" ToolTip="Odjavi se">
                         <Image Source="Resources/Images/logout.png" Width="42" Height="42"/>
                     </Button>
                 </StackPanel>
+                
             </DockPanel>
-           
-            
-            <Frame x:Name="startWindow" NavigationUIVisibility="Hidden" Height="650"/>
+
+
+            <Frame Background="{StaticResource MaterialDesignToolBackground}" x:Name="startWindow" NavigationUIVisibility="Hidden" Height="650"/>
 
             <StackPanel x:Name="backStack" Orientation="Horizontal" VerticalAlignment="Bottom"
                         Height="50"
-                        ToolTip="Vrati se">
+                        ToolTip="Vrati se"
+                        Background="{StaticResource MaterialDesignToolBackground}">
                 <Button x:Name="backBtn" Style="{StaticResource ResourceKey=moving}" Cursor="Hand"
                     Height="32" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                    Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                    Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"
+                        Command="NavigationCommands.BrowseBack"
+                        CommandTarget="{Binding ElementName=startWindow}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="Resources/Images/back-arrow.png"/>
                         <Image Source="Resources/Images/back-arrow.png" Margin="-20,0,0,0"/>

@@ -23,7 +23,7 @@
     
     <Grid Background="{StaticResource MaterialDesignToolBackground}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <RowDefinition Height="8" />
             <RowDefinition Height="100" />
             <RowDefinition Height="50" />
             <RowDefinition Height="*" />
@@ -42,10 +42,20 @@
             Margin="42 0 0 0"/>
         <StackPanel Margin="10" Grid.Row="2" Grid.Column="1" 
                     Orientation="Horizontal">
-                <Label FontWeight="Bold">Prioritet</Label>
-
-            <RadioButton x:Name="doctorRB" GroupName="prioritet"  Checked="doctorRB_Checked" >Doktor</RadioButton>
-            <RadioButton x:Name="timeRB" GroupName="prioritet" Checked="timeRB_Checked">Vrijeme</RadioButton>
+            <Label FontWeight="Bold" Content="Prioritet :"
+                   Margin="0 0 20 0"
+                   VerticalAlignment="Center"/>
+            <RadioButton x:Name="doctorRB" Style="{StaticResource MaterialDesignAccentRadioButton}"
+                         GroupName="prioritet"
+                         Checked="doctorRB_Checked"
+                         Content="Doktor"
+                         VerticalAlignment="Stretch"/>
+            <RadioButton x:Name="timeRB" Style="{StaticResource MaterialDesignAccentRadioButton}"
+                         GroupName="prioritet"
+                         Checked="timeRB_Checked"
+                         VerticalAlignment="Stretch"
+                         Content="Vrijeme"
+                         Margin="10 0 0 0"/>
         </StackPanel>
         
         <Frame Grid.Row="3" Grid.Column="1" x:Name="prioritetFrame" NavigationUIVisibility="Hidden" Height="400"/>

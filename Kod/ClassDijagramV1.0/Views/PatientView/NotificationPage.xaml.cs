@@ -110,5 +110,10 @@ namespace ClassDijagramV1._0.Views.PatientView
             timer.Start();
 
         }
+
+        private void DataGridCheckBoxColumn_CopyingCellClipboardContent(object sender, DataGridCellClipboardEventArgs e)
+        {
+
+        }
     }
 }

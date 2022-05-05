@@ -38,9 +38,14 @@ namespace Controller
             _appointmentService.UpdateAppointment(oldAppointmentID, updatedAppointment);
         }
 
-        public ObservableCollection<Appointment> GetAllAppointments(String username)
+        public ObservableCollection<Appointment> GetAllAppointmentsByPatient(int patientID)
         {
-            return _appointmentService.GetAllAppointments(username);
+            return _appointmentService.GetAllAppointmentsByPatient(patientID);
+        }
+
+        public ObservableCollection<Appointment> GetAllAppointments()
+        {
+            return _appointmentService.GetAllAppointments();
         }
 
         public Appointment GetOneAppointment(Appointment appointment)

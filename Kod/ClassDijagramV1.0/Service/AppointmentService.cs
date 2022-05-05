@@ -39,12 +39,12 @@ namespace Service
             _appointmentRepo.UpdateAppointment(oldAppointmentID, updatedAppointment);
         }
 
-        public ObservableCollection<Appointment> GetAllAppointments(String username) // obrisi iz bajdinga preglede koji mi ne trebaju, tj nisu od tog pacijenta
+        /*public ObservableCollection<Appointment> GetAllAppointmentsByPatient(int patientID) // obrisi iz bajdinga preglede koji mi ne trebaju, tj nisu od tog pacijenta
         {
             List<Appointment> otherPatients = new List<Appointment>();
             foreach (Appointment a in _appointmentRepo.GetAppointments())
             {
-                if (!a.Patient.Name.Equals(username))
+                if (!a.PatientID.Equals(patientID))
                 {
                     otherPatients.Add(a);
                 }
@@ -54,6 +54,24 @@ namespace Service
             {
                 _appointmentRepo.RemoveAppointment(a.AppointmentID);
             }
+            return _appointmentRepo.GetAppointments();
+        }*/
+
+        public ObservableCollection<Appointment> GetAllAppointmentsByPatient(int patientID) // obrisi iz bajdinga preglede koji mi ne trebaju, tj nisu od tog pacijenta
+        {
+            ObservableCollection<Appointment> otherPatients = new ObservableCollection<Appointment>();
+            foreach (Appointment a in _appointmentRepo.GetAppointments())
+            {
+                if (a.PatientID.Equals(patientID))
+                {
+                    otherPatients.Add(a);
+                }
+            }
+            return otherPatients;
+        }
+
+        public ObservableCollection<Appointment> GetAllAppointments()
+        {
             return _appointmentRepo.GetAppointments();
         }
 
@@ -72,11 +90,9 @@ namespace Service
             }
             else if (NotificationType.deletingAppointment.Equals(notificationType))
             {
-                // obrisi notifikaciju pomocu idija
+               // _appointmentRepo.RemoveNotification()
+               // mora se povezati apojntment sa notifikacijom
             }
-            
-
-            //note.Title  pusi kurac ne znam
         }
 
         internal ObservableCollection<Notification> GetAllNotifications()

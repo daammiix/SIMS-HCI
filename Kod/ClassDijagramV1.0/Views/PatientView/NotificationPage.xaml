@@ -6,8 +6,18 @@
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1024"
       Title="NotificationPage"
-      Background="AntiqueWhite">
+      >
 
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Grey.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.LightBlue.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
     <StackPanel>
         <TextBlock Text="Obavještenja" Margin="40,20,0,20" FontSize="64"/>
         <!--<DataGrid Height="300" Margin="20"  
@@ -21,9 +31,9 @@
                           ItemsSource="{Binding Notifications}"
                           SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Opis" Binding="{Binding Content}" Width="auto"/>
+                <DataGridTextColumn Header="Opis" Binding="{Binding Content}" Width="auto" IsReadOnly="True"/>
 
-                <DataGridCheckBoxColumn Header="Pregledana" Binding="{Binding IsRead}"/>
+                <DataGridCheckBoxColumn Header="Pregledana" Binding="{Binding IsRead, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Dodaj zabilješku" Width="176" Height="42" HorizontalAlignment="Right" Margin="0, 20,100,0" Command="NavigationCommands.BrowseBack"/>

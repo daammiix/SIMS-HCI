@@ -14,7 +14,7 @@ namespace Model
     public class Appointment : ObservableObject
     {
         private String appointmentID;
-        private Patient patient;
+        private int patientID;
         private Doctor doctor;
         private Room room;
         private DateTime appointmentDate;
@@ -36,18 +36,18 @@ namespace Model
                 }
             }
         }
-        public Patient Patient
+        public int PatientID
         {
             get
             {
-                return patient;
+                return patientID;
             }
             set
             {
-                if (value != patient)
+                if (value != patientID)
                 {
-                    patient = value;
-                    OnPropertyChanged("Patient");
+                    patientID = value;
+                    OnPropertyChanged("PatientID");
                 }
             }
         }
@@ -129,10 +129,10 @@ namespace Model
 
 
 
-        public Appointment(String appointmentID, Patient patient, Doctor doctor, Room room, DateTime appointmentDate, TimeSpan duration, AppointmentType appointmentType)
+        public Appointment(String appointmentID, int patientID, Doctor doctor, Room room, DateTime appointmentDate, TimeSpan duration, AppointmentType appointmentType)
         {
             AppointmentID = appointmentID;
-            Patient = patient;
+            PatientID = patientID;
             Doctor = doctor;
             Room = room;
             AppointmentDate = appointmentDate;

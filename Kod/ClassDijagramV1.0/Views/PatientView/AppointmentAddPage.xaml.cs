@@ -24,9 +24,9 @@ namespace ClassDijagramV1._0.Views.PatientView
     /// <summary>
     /// Interaction logic for AppointmentAddPage.xaml
     /// </summary>
-    public partial class AppointmentAddPage : Page, INotifyPropertyChanged
+    public partial class AppointmentAddPage : Page//, INotifyPropertyChanged
     {
-        public AppointmentController _appointmentController;
+        /*public AppointmentController _appointmentController;
         public RoomController _roomController;
         public DoctorController _doctorController;
 
@@ -36,9 +36,9 @@ namespace ClassDijagramV1._0.Views.PatientView
         {
             PropertyChangedEventArgs e = new PropertyChangedEventArgs(propertyName);
             PropertyChanged(this, e);
-        }
+        }*/
         private PatientMainWindow parent { get; set; }
-        public ObservableCollection<Appointment> Appointments
+        /*public ObservableCollection<Appointment> Appointments
         {
             get;
             set;
@@ -57,7 +57,7 @@ namespace ClassDijagramV1._0.Views.PatientView
         {
             get;
             set;
-        }
+        }*/
         //private List<string> availableTimes;
 
         public AppointmentAddPage(PatientMainWindow patientMain)
@@ -70,7 +70,7 @@ namespace ClassDijagramV1._0.Views.PatientView
 
         private void doctorRB_Checked(object sender, RoutedEventArgs e)
         {
-            prioritetFrame.Content = new PriorityDoctor();
+            prioritetFrame.Content = new PriorityDoctor(parent);
         }
 
         private void timeRB_Checked(object sender, RoutedEventArgs e)

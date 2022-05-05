@@ -41,13 +41,17 @@ namespace ClassDijagramV1._0.Views.PatientView
             InitializeComponent();
             this.DataContext = this;
             parent = patientMain;
-            App app = Application.Current as App;
+            doctorRB.IsChecked = true;
+            dr.Text = AppointmentsViewPage.selectedAppointment.Doctor.Name + " " + AppointmentsViewPage.selectedAppointment.Doctor.Surname;
+            date.Text = AppointmentsViewPage.selectedAppointment.AppointmentDate.ToString("HH:mm dd.MM.yyyy.");
+            room.Text = AppointmentsViewPage.selectedAppointment.Room.RoomName.ToString();
+            /*App app = Application.Current as App;
             _appointmentController = app.appointmentController;
             _roomController = app.roomController;
             _doctorController = app.DoctorController;
 
             Rooms = _roomController.GetAllRooms();
-            Appointments = _appointmentController.GetAllAppointments("djordje"); // ulgovani korisnik ali ovo je za doktora
+            Appointments = _appointmentController.GetAllAppointments(); // ulgovani korisnik ali ovo je za doktora
             Doctors = _doctorController.GetAllDoctors();
             DoctorsAppointmentsTime = new ObservableCollection<String>();
 
@@ -57,10 +61,10 @@ namespace ClassDijagramV1._0.Views.PatientView
             timeCB.SelectedItem = AppointmentsViewPage.selectedAppointment.AppointmentDate.ToString("HH:mm");
             dr.Text = AppointmentsViewPage.selectedAppointment.Doctor.Name + " " + AppointmentsViewPage.selectedAppointment.Doctor.Surname;
             date.Text = AppointmentsViewPage.selectedAppointment.AppointmentDate.ToString("HH:mm dd.MM.yyyy.");
-            room.Text = AppointmentsViewPage.selectedAppointment.Room.RoomName.ToString();
+            room.Text = AppointmentsViewPage.selectedAppointment.Room.RoomName.ToString();*/
         }
 
-        private void BlackoutDates()
+        /*private void BlackoutDates()
         {
             var oldDate = AppointmentsViewPage.selectedAppointment.AppointmentDate;
             var firstDate = DateTime.MinValue;
@@ -166,6 +170,17 @@ namespace ClassDijagramV1._0.Views.PatientView
                 addAppBtn.IsEnabled = false;
             }
 
+        }*/
+
+        private void doctorRB_Checked(object sender, RoutedEventArgs e)
+        {
+            prioritetFrame.Content = new UpdatePriorityDoctor(parent);
         }
+
+        private void timeRB_Checked(object sender, RoutedEventArgs e)
+        {
+            //prioritetFrame.Content = new UpdatePriorityTime();
+        }
+
     }
 }

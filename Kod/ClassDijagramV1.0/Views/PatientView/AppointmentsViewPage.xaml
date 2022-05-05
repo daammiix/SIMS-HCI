@@ -20,7 +20,7 @@
     </Page.Resources>
     <Grid Background="{StaticResource MaterialDesignToolBackground}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <RowDefinition Height="8" />
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -41,7 +41,7 @@
             Margin="42 0 0 0"/>
         <StackPanel Grid.Row="2" Grid.Column="2">
             <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}" Content="Zakazi pregled" Click="AddAppontment_Click"
-                    Margin="8 48 8 16"/>
+                    Margin="8 8 8 16"/>
             <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}" Content="Izmijeni pregled" Click="UpdateAppontment_Click"
                     Margin="8 0 8 16"/>
             <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}" Content="Otkazi pregled" Click="RemoveAppontment_Click"
@@ -55,7 +55,7 @@
                   ItemsSource="{Binding Appointments, UpdateSourceTrigger=PropertyChanged}"
                   SelectionMode="Single" IsReadOnly="True" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Ime Pacijenta" Binding="{Binding Patient.Name}"/>
+                <DataGridTextColumn Header="Ime Pacijenta" Binding="{Binding PatientsByID}"/>
                 <DataGridTextColumn Header="Ime Doktora" Binding="{Binding Doctor.Name}" />
                 <DataGridTextColumn Header="Soba" Binding="{Binding Room.RoomID}" />
                 <DataGridTextColumn Header="Trajanje" Binding="{Binding Duration}" />

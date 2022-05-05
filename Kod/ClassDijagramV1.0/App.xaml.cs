@@ -68,7 +68,7 @@ namespace ClassDijagramV1._0
 
         public App()
         {
-            var appointmentRepository = new AppointmentRepo(new AppointmentFileHandler(_appointmentsFilePath));
+            var appointmentRepository = new AppointmentRepo(new FileHandler<Appointment>(_appointmentsFilePath));
             var appointmentService = new AppointmentService(appointmentRepository);
             appointmentController = new AppointmentController(appointmentService);
 
@@ -150,6 +150,7 @@ namespace ClassDijagramV1._0
             Patient p2 = new Patient("Mira", "Mirkovic", "1659599494", "Z", "065594959", "miram@gmail.com",
                 new DateTime(1998, 7, 20), "2525");
             p2.Id = 5;
+            
 
             PatientController.AddPatient(p1);
             PatientController.AddPatient(p2);
@@ -160,15 +161,17 @@ namespace ClassDijagramV1._0
 
             DoctorController.AddDoctor(d1);
 
-            Account ac1 = new Account(p1.Id, Role.Patient, "pacijent123", "pacijent123");
+            Account ac1 = new Account(p1.Id, Role.Patient, "p", "p");
             Account ac2 = new Account(s1.Id, Role.Secretary, "sekretar123", "sekretar123");
             Account ac3 = new Account(m1.Id, Role.Manager, "upravnik123", "upravnik123");
             Account ac4 = new Account(d1.Id, Role.Doctor, "doktor123", "doktor123");
+            Account ac5 = new Account(p2.Id, Role.Patient, "pp", "p");
 
             AccountController.AddAccount(ac1);
             AccountController.AddAccount(ac2);
             AccountController.AddAccount(ac3);
             AccountController.AddAccount(ac4);
+            AccountController.AddAccount(ac5);
 
         }
     }

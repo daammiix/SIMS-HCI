@@ -118,5 +118,9 @@ namespace ClassDijagramV1._0.Model
             Created = created;
             NotificationType = notificationType;
         }
+
+        public Notification()
+        {
+        }
     }
 }

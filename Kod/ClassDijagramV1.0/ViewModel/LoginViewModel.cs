@@ -99,8 +99,9 @@ namespace ClassDijagramV1._0.ViewModel
                     }
                 case Role.Patient:
                     {
-                        PatientMainWindow patientMainWindow = new PatientMainWindow();
+                        PatientMainWindow patientMainWindow = new PatientMainWindow(a.PersonId);
                         patientMainWindow.Show();
+                        //datacontex pma 
                         break;
                     }
                 case Role.Secretary:

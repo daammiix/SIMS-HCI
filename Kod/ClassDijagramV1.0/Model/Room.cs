@@ -86,11 +86,11 @@ namespace Model
             App app = Application.Current as App;
 
             //AppointmentRepo ap = new AppointmentRepo();
-            ObservableCollection<Appointment> termini = app.appointmentController.GetAllAppointments("djordje");
+            ObservableCollection<Appointment> termini = app.appointmentController.GetAllAppointments(); // ovde trebaju svi termini
 
             foreach (Appointment termin in termini)
             {
-                if (termin.Room.RoomID.Equals(this.RoomID)/* && termin.AppointmentStatus == AppointmentStatus.scheduled*/)
+                if (termin.Room.RoomID.Equals(this.RoomID) && this.RoomStatus.Equals("Aktivna"))
                 {    
                     if (start >= termin.AppointmentDate && start <= termin.AppointmentDate.Add(termin.Duration))
                     {

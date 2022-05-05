@@ -20,9 +20,12 @@ namespace Repository
     {
 
         private String Path;
-        private AppointmentFileHandler _appointmentFileHandler;
+        //private AppointmentFileHandler _appointmentFileHandler;
+        private FileHandler<Notification> _notificationFileHandler;
+        private FileHandler<Appointment> _appointmentFileHandler;
 
         public ObservableCollection<Appointment> Appointments;
+        public ObservableCollection<Appointment> AppointmentsByPatient;
         public ObservableCollection<Notification> Notifications;
 
         public ObservableCollection<Doctor> Doctors
@@ -33,13 +36,13 @@ namespace Repository
 
 
 
-        public AppointmentRepo(AppointmentFileHandler apointmentFileHandler)
+        public AppointmentRepo(FileHandler<Appointment> fileHandler)
         {
-            _appointmentFileHandler = apointmentFileHandler;
-            Appointments = new ObservableCollection<Appointment>(_appointmentFileHandler.GetAppointments());
+            _appointmentFileHandler = fileHandler;
+            Appointments = new ObservableCollection<Appointment>(_appointmentFileHandler.GetItems());
             Doctors = new ObservableCollection<Doctor>();
             Notifications = new ObservableCollection<Notification>();
-
+            
             /*Room r1 = new Room();
             DateTime date1 = new DateTime(2008, 5, 1, 8, 30, 52);
             DateTime date2 = new DateTime(2010, 8, 18, 13, 30, 30);
@@ -95,7 +98,7 @@ namespace Repository
 
         public void SaveAppointments()
         {
-            _appointmentFileHandler.SaveAppointments(Appointments.ToList());
+            _appointmentFileHandler.SaveItems(Appointments.ToList());
         }
 
         public ObservableCollection<Appointment> AddNewAppointment(Appointment newAppointment)

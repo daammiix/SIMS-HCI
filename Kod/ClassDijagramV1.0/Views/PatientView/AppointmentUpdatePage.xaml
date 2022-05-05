@@ -8,7 +8,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="650" d:DesignWidth="1024"
       Title="AppointmentUpdatePage" Background="Aquamarine">
-    <Grid>
+    <!--<Grid>
         <StackPanel HorizontalAlignment="Left">
             <TextBlock Text="Izmjena zakanog pregleda" Margin="40,20,0,20" FontSize="64"/>
             <StackPanel Orientation="Horizontal">
@@ -16,19 +16,18 @@
                 <ComboBox x:Name="dodavanjPregledaDoktor" ItemsSource="{Binding Doctors}"
                       SelectionChanged="dodavanjPregledaDoktor_SelectionChanged"
                       Width="120" Height="28">
-                    <!--
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock>
-                            <TextBlock.Text>
-                                <MultiBinding StringFormat="{}{0} {1}">
-                                    <Binding Path="Doctor.name"/>
-                                    <Binding Path="Doctor.surname"/>
-                                </MultiBinding>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>-->
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="Doctor.name"/>
+                                        <Binding Path="Doctor.surname"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
 
@@ -67,5 +66,81 @@
                 
             </GroupBox>
         </StackPanel>
+    </Grid>-->
+
+
+
+
+
+
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Grey.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.LightBlue.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource MaterialDesignToolBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="12"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="12"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="1" Grid.Column="1"
+                   Foreground="{StaticResource PrimaryHueLightForegroundBrush}"
+            Text="Izmijeni zakazani pregled" FontSize="64"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" 
+            Margin="42 0 0 0"/>
+        <StackPanel Margin="10" Grid.Row="2" Grid.Column="1" 
+                    Orientation="Horizontal">
+            <Label FontWeight="Bold" Content="Prioritet :"
+                   Margin="0 0 20 0"
+                   VerticalAlignment="Center"/>
+            <RadioButton x:Name="doctorRB" Style="{StaticResource MaterialDesignAccentRadioButton}"
+                         GroupName="prioritet"
+                         Checked="doctorRB_Checked"
+                         Content="Doktor"
+                         VerticalAlignment="Stretch"/>
+            <RadioButton x:Name="timeRB" Style="{StaticResource MaterialDesignAccentRadioButton}"
+                         GroupName="prioritet"
+                         Checked="timeRB_Checked"
+                         VerticalAlignment="Stretch"
+                         Content="Vrijeme"
+                         Margin="10 0 0 0"/>
+        </StackPanel>
+
+        <Frame Grid.Row="3" Grid.Column="1" x:Name="prioritetFrame" NavigationUIVisibility="Hidden" Height="400"/>
+
+
+        <GroupBox x:Name="oldAppointment" BorderBrush="Red"
+                  Grid.Row="3" Grid.Column="1"
+                  Width="200"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Right">
+                    
+            <GroupBox.Header>
+                <Label>Stari termin</Label>
+            </GroupBox.Header>
+            <StackPanel>
+                <TextBlock x:Name="dr"/>
+                <TextBlock x:Name="date"/>
+                <TextBlock x:Name="room"/>
+            </StackPanel>
+
+        </GroupBox>
     </Grid>
 </Page>
