@@ -4,10 +4,228 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.AppointmentsView"
+             xmlns:viewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModels"
+             xmlns:syncfusionskin ="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
+             syncfusionskin:SfSkinManager.Theme="{syncfusionskin:SkinManagerExtension ThemeName=MaterialDark}"
              mc:Ignorable="d"
+             FontSize="20"
+             Foreground="{StaticResource SLightGrayShade}"
              Background="{StaticResource SBackground}"
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             d:DesignHeight="550" d:DesignWidth="800">
 
+
+    <UserControl.DataContext>
+        <viewModels:AppointmentsMainViewModel/>
+    </UserControl.DataContext>
+
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="syncfusion:MonthAgendaView">
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Background" Value="{StaticResource SBackground}"/>
+                <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+                <Setter Property="ItemContainerStyle">
+                    <Setter.Value>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick"/>
+                        </Style>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ItemTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <DataTemplate.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="FontSize" Value="16"/>
+                                    <Setter Property="Foreground" Value="{StaticResource SCyan}"/>
+                                </Style>
+                            </DataTemplate.Resources>
+                            <Border BorderThickness="2"
+                                BorderBrush="{StaticResource SDarkGrayShade}"
+                                Padding="5"
+                                Margin="0,3,0,0">
+                                <Grid HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch"
+                                  Background="Transparent">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <!-- Row 1 -->
+                                    <TextBlock Grid.Column="0" Grid.Row="0"
+                                           HorizontalAlignment="Stretch"
+                                           Text="Room:"
+                                           Foreground="{StaticResource SLightGrayShade}"
+                                           Margin="0,0,5,0"
+                                           TextTrimming="CharacterEllipsis"       
+                                           TextWrapping="Wrap"/>
+                                    <TextBlock Grid.Column="1" Grid.Row="0"
+                                           HorizontalAlignment="Stretch"
+                                           Text="{Binding Data.RoomNumber}" 
+                                           TextTrimming="CharacterEllipsis"      
+                                           TextWrapping="Wrap"/>
+                                    <!-- Row 2 -->
+                                    <TextBlock Grid.Column="0" Grid.Row="1"
+                                           HorizontalAlignment="Stretch"
+                                           Text="Patient:"
+                                           Foreground="{StaticResource SLightGrayShade}"
+                                           Margin="0,0,5,0"
+                                           TextTrimming="CharacterEllipsis"       
+                                           TextWrapping="Wrap"/>
+                                    <TextBlock Grid.Column="1" Grid.Row="1"
+                                           HorizontalAlignment="Stretch"
+                                           Text="{Binding Data.PatientName}" 
+                                           TextTrimming="CharacterEllipsis"     
+                                           TextWrapping="Wrap"/>
+
+                                    <!-- Row 3 -->
+                                    <TextBlock Grid.Column="0" Grid.Row="2"
+                                           HorizontalAlignment="Stretch"
+                                           Text="Doctor:"
+                                           Foreground="{StaticResource SLightGrayShade}"
+                                           Margin="0,0,5,0"
+                                           TextTrimming="CharacterEllipsis"     
+                                           TextWrapping="Wrap"/>
+                                    <TextBlock Grid.Column="1" Grid.Row="2"
+                                           HorizontalAlignment="Stretch"
+                                           Text="{Binding Data.DoctorName}" 
+                                           TextTrimming="CharacterEllipsis"        
+                                           TextWrapping="Wrap"/>
+
+                                    <!-- Row 4 -->
+                                    <TextBlock Grid.Column="0" Grid.Row="3"
+                                           HorizontalAlignment="Stretch"
+                                           Text="Start Time:"
+                                           Foreground="{StaticResource SLightGrayShade}"
+                                           Margin="0,0,20,0"
+                                           TextTrimming="CharacterEllipsis"     
+                                           TextWrapping="Wrap"/>
+                                    <TextBlock Grid.Column="1" Grid.Row="3"
+                                           HorizontalAlignment="Stretch"
+                                           Text="{Binding Data.StartTime}" 
+                                           TextTrimming="CharacterEllipsis"        
+                                           TextWrapping="Wrap"/>
+
+                                    <!-- Row 5 -->
+                                    <TextBlock Grid.Column="0" Grid.Row="4"
+                                           HorizontalAlignment="Stretch"
+                                           Text="End Time:"
+                                           Foreground="{StaticResource SLightGrayShade}"
+                                           Margin="0,0,5,0"
+                                           TextTrimming="CharacterEllipsis"     
+                                           TextWrapping="Wrap"/>
+                                    <TextBlock Grid.Column="1" Grid.Row="4"
+                                           HorizontalAlignment="Stretch"
+                                           Text="{Binding Data.EndTime}" 
+                                           TextTrimming="CharacterEllipsis"        
+                                           TextWrapping="Wrap"/>
+
+                                    <!-- Row 6 -->
+                                    <TextBlock Grid.Column="0" Grid.Row="5"
+                                           HorizontalAlignment="Stretch"
+                                           Text="Type:"
+                                           Foreground="{StaticResource SLightGrayShade}"
+                                           Margin="0,0,5,0"
+                                           TextTrimming="CharacterEllipsis"     
+                                           TextWrapping="Wrap"/>
+                                    <TextBlock Grid.Column="1" Grid.Row="5"
+                                           HorizontalAlignment="Stretch"
+                                           Text="{Binding Data.AppointmentType}" 
+                                           TextTrimming="CharacterEllipsis"        
+                                           TextWrapping="Wrap"/>
+
+                                    <!-- Row 6 -->
+                                    <TextBlock Grid.Column="0" Grid.Row="6"
+                                           HorizontalAlignment="Stretch"
+                                           Text="Status:"
+                                           Foreground="{StaticResource SLightGrayShade}"
+                                           Margin="0,0,5,0"
+                                           TextTrimming="CharacterEllipsis"     
+                                           TextWrapping="Wrap"/>
+                                    <TextBlock Grid.Column="1" Grid.Row="6"
+                                           HorizontalAlignment="Stretch"
+                                           Text="{Binding Data.AppointmentStatus}" 
+                                           TextTrimming="CharacterEllipsis"        
+                                           TextWrapping="Wrap"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <syncfusion:SfScheduler Grid.Row="0" 
+                                x:Name="Schedule"
+                                ItemsSource="{Binding ScheduleViewModel.Appointments}"
+                                ViewType="Month"
+                                FontSize="20"
+                                Margin="0,0,0,20"
+                                FirstDayOfWeek="Monday"
+                                AppointmentEditorOpening="Schedule_AppointmentEditorOpening">
+
+            <syncfusion:SfScheduler.DaysViewSettings>
+                <syncfusion:DaysViewSettings TimeIntervalHeight="100"/>
+            </syncfusion:SfScheduler.DaysViewSettings>
+
+            <syncfusion:SfScheduler.AppointmentMapping>
+                <syncfusion:AppointmentMapping
+                    Subject="IdStr"
+                    StartTime="From"
+                    AppointmentBackground="Color"
+                    Location="RoomName"
+                    EndTime="To"/>
+            </syncfusion:SfScheduler.AppointmentMapping>
+            <syncfusion:SfScheduler.MonthViewSettings>
+                <syncfusion:MonthViewSettings MonthNavigationDirection="Vertical"
+                                              ShowAgendaView="True"
+                                              AppointmentDisplayCount="5"
+                                              AgendaViewHeight="280"
+                                              AppointmentDisplayMode="Indicator">
+                </syncfusion:MonthViewSettings>
+            </syncfusion:SfScheduler.MonthViewSettings>
+        </syncfusion:SfScheduler>
+
+        <Border Grid.Row="1"
+                BorderBrush="{StaticResource SDarkGrayShade}"
+                BorderThickness="0,2,0,0"
+                Padding="0,15,0,0">
+            <StackPanel 
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+                <StackPanel.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                            <ResourceDictionary Source="../../../Styles/Button.xaml"/>
+                        </ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary>
+                </StackPanel.Resources>
+
+                <TextBlock Text="Izvestaj o zakazanim operacijama i pregledima&#x0a;u odredjenom vremenskom periodu"
+                       FontSize="20"
+                       Foreground="{StaticResource SLightGrayShade}"/>
+                <Button Content="Generisi" 
+                    Style="{StaticResource AccountButtonsStyle}"
+                    Margin="20,0,0,0"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

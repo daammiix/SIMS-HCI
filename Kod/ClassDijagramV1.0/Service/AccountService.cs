@@ -1,4 +1,5 @@
 ﻿using ClassDijagramV1._0.Model;
+using ClassDijagramV1._0.Model.Enums;
 using ClassDijagramV1._0.Repository;
 using Model;
 using System;
@@ -168,6 +169,26 @@ namespace ClassDijagramV1._0.Service
             }
 
             return hasAccount;
+        }
+
+        /// <summary>
+        /// Vraca observable collection svih akaunta pacijenata
+        /// </summary>
+        /// <returns></returns>
+        public ObservableCollection<Account> GetPatientsAccounts()
+        {
+            // Ret value
+            ObservableCollection<Account> accounts = new ObservableCollection<Account>();
+
+            foreach (Account a in _accountRepo.GetAccounts())
+            {
+                if (a.Role == Role.Patient)
+                {
+                    accounts.Add(a);
+                }
+            }
+
+            return accounts;
         }
 
         #endregion

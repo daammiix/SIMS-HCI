@@ -1,14 +1,29 @@
 [
   {
-    "surgery": null,
     "Id": 4,
-    "Name": "doktor",
-    "Surname": "doktor",
-    "Jmbg": "123",
+    "Name": "Dragana",
+    "Surname": "Cvetkovic",
+    "Jmbg": "54815181818",
+    "Gender": "Z",
+    "PhoneNumber": "061235236237",
+    "Email": "dcetvkovic49@gmail.com",
+    "DateOfBirth": "1991-07-17T00:00:00",
+    "Address": {
+      "Country": "Srbija",
+      "City": "Beograd",
+      "StreetName": "Karposeva",
+      "StreetNumber": "56"
+    }
+  },
+  {
+    "Id": 12,
+    "Name": "Milica",
+    "Surname": "Jovanovic",
+    "Jmbg": "5959884823",
     "Gender": "musko",
     "PhoneNumber": "3875432",
-    "Email": "the292200",
-    "DateOfBirth": "2008-05-01T08:30:52",
+    "Email": "the292200@gmail.com",
+    "DateOfBirth": "1989-05-20T00:00:00",
     "Address": {
       "Country": "Srbija",
       "City": "Novi Sad",
@@ -17,15 +32,14 @@
     }
   },
   {
-    "surgery": null,
-    "Id": 5,
-    "Name": "lekar",
-    "Surname": "lekar",
-    "Jmbg": "123",
+    "Id": 13,
+    "Name": "Dragisa",
+    "Surname": "Perovic",
+    "Jmbg": "9897112156",
     "Gender": "musko",
     "PhoneNumber": "3875432",
-    "Email": "the292200",
-    "DateOfBirth": "2008-05-01T08:30:52",
+    "Email": "the292200@gmail.com",
+    "DateOfBirth": "1985-02-22T00:00:00",
     "Address": {
       "Country": "Srbija",
       "City": "Novi Sad",

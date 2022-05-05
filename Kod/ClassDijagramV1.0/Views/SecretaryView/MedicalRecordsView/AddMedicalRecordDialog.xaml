@@ -68,63 +68,9 @@
                       Width="300"
                       Margin="0,0,0,15"
                       SelectedItem="{Binding SelectedPatient, Mode=OneWayToSource}"
-                      ItemsSource="{Binding Patients}">
-
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="../../../Images/patient.png"
-                               Width="25"
-                               Height="25"
-                               Margin="3,0,8,0"
-                               RenderOptions.BitmapScalingMode="Fant"/>
-                            <Grid>
-                                <Grid.Resources>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="FontSize" Value="14"/>
-                                        <Setter Property="Foreground" Value="{StaticResource SLightGrayShade}"/>
-                                    </Style>
-                                </Grid.Resources>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-
-                                <!-- Name -->
-                                <TextBlock Grid.Row="0" Grid.Column="0"
-                                       Text="Name:"
-                                       Margin="0,0,10,0"/>
-                                <TextBlock Grid.Row="0" Grid.Column="1"
-                                       Text="{Binding Name}"/>
-
-                                <!-- Surname -->
-                                <TextBlock Grid.Row="1" Grid.Column="0"
-                                       Text="Surname:"
-                                       Margin="0,0,10,0"/>
-                                <TextBlock Grid.Row="1" Grid.Column="1" 
-                                       Text="{Binding Surname}"/>
-
-                                <!-- Email -->
-                                <TextBlock Grid.Row="2" Grid.Column="1" 
-                                       Text="{Binding Email}"/>
-                                <TextBlock Grid.Row="2" Grid.Column="0"
-                                       Text="Email:"
-                                       Margin="0,0,10,0"/>
-                            </Grid>
-                        </StackPanel>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-                <ComboBox.ItemContainerStyle>
-                    <Style TargetType="ComboBoxItem">
-                        <Setter Property="Background" Value="{StaticResource SBackground}"/>
-                        <Setter Property="BorderThickness" Value="0"/>
-                    </Style>
-                </ComboBox.ItemContainerStyle>
+                      ItemsSource="{Binding Patients}"
+                      ItemTemplate="{StaticResource ItemTemplatePatient}"
+                      ItemContainerStyle="{StaticResource ItemContainerStyle}">
             </ComboBox>
 
             <!-- Row 2 -->

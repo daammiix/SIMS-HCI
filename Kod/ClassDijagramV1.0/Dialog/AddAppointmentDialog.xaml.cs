@@ -1,6 +1,6 @@
-﻿
-using ClassDijagramV1._0.Model;
+﻿using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Util;
+using ClassDijagramV1._0.Views.PatientView;
 using Controller;
 using Model;
 using System;
@@ -24,24 +24,16 @@ namespace ClassDijagramV1._0.Dialog
     /// <summary>
     /// Interaction logic for AddAppointmentDialog.xaml
     /// </summary>
-    public partial class AddAppointmentDialog : Window, INotifyPropertyChanged
+    public partial class AddAppointmentDialog : Window
     {
         public AppointmentController _appointmentController;
         public RoomController _roomController;
         public DoctorController _doctorController;
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void onPropertyChanged(String propertyName)
-        {
-            PropertyChangedEventArgs e = new PropertyChangedEventArgs(propertyName);
-            PropertyChanged(this, e);
-        }
-
-        public ObservableCollection<Appointment> Appointments
+        public ObservableCollection<AppointmentViewModel> Appointments
         {
             get;
-            set;
+            private set;
         }
         public BindingList<Room> Rooms
         {
@@ -60,21 +52,22 @@ namespace ClassDijagramV1._0.Dialog
         }
         //private List<string> availableTimes;
 
-        public AddAppointmentDialog()
+        public AddAppointmentDialog(ObservableCollection<AppointmentViewModel> appointments)
         {
             InitializeComponent();
             this.DataContext = this;
 
+            Appointments = appointments;
+
             App app = Application.Current as App;
-            _appointmentController = app.appointmentController;
+            _appointmentController = app.AppointmentController;
             _roomController = app.roomController;
             _doctorController = app.DoctorController;
 
             Rooms = _roomController.GetAllRooms();
-            Appointments = _appointmentController.GetAllAppointments("djordje"); // ulgovani korisnik ali ovo je za doktora
+            // Appointments = _appointmentController.GetAllAppointments("djordje"); // ulgovani korisnik ali ovo je za doktora
             Doctors = _doctorController.GetAllDoctors();
             DoctorsAppointmentsTime = new ObservableCollection<String>();
-
 
         }
 
@@ -106,7 +99,10 @@ namespace ClassDijagramV1._0.Dialog
             Doctor d1 = (Doctor)dodavanjPregledaDoktor.SelectedItem;
             Patient p1 = new Patient("djordje", "djordje", "123", "musko", "3875432", "the292200", date1, new Address("Srbija", "Novi Sad", "Marije Kalas", "320"), "1234");
 
-            Appointment a1 = new Appointment(appointmentID, p1, d1, r1, date1, interval, AppointmentType.generalPractitionerCheckup);
+            Appointment a1 = new Appointment(p1.Id, d1.Id, r1.RoomID, date1, interval, AppointmentType.generalPractitionerCheckup);
+
+            // Dodamo ga i u listu i preko konstrolera u bazu
+            Appointments.Add(new AppointmentViewModel(a1));
             _appointmentController.AddAppointment(a1);
             this.Close();
 
@@ -136,13 +132,13 @@ namespace ClassDijagramV1._0.Dialog
             List<Appointment> termini = new List<Appointment>();
             if (dodavanjPregledaDoktor.SelectedItem != null && kalendar.SelectedDate != null)
             {
-                foreach (Appointment termin in Appointments)
+                foreach (AppointmentViewModel termin in Appointments)
                 {
-                    if (l.Name == termin.Doctor.Name)
+                    if (l.Name == termin.DoctorName)
                     {
                         if (termin.AppointmentDate.Date.Equals(kalendar.SelectedDate))
                         {
-                            termini.Add(termin);
+                            termini.Add(termin.Appointment);
                         }
                     }
                 }

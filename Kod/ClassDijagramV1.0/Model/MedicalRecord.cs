@@ -11,7 +11,7 @@ namespace ClassDijagramV1._0.Model
 {
     public class MedicalRecord : ObservableObject
     {
-        private static int _numCounter = 0;
+        public static int numCounter = 0;
 
         #region Fields
 
@@ -164,7 +164,7 @@ namespace ClassDijagramV1._0.Model
             , List<string>? allergens = null, List<string>? diseases = null)
         {
             PatientId = pId;
-            Number = ++_numCounter;
+            Number = ++numCounter;
             ParentName = parName;
             MaritalStatus = ms;
             HealthCardNumber = hcNum;
@@ -176,7 +176,9 @@ namespace ClassDijagramV1._0.Model
         // Zbog fileHandlera, mora da bude parameterless constructor
         public MedicalRecord()
         {
-
+            // uvecamo numCounter za svaki koji ucitamo
+            // procitati Person klasu
+            // numCounter++;
         }
 
         #endregion

@@ -27,9 +27,9 @@ namespace ClassDijagramV1._0.Views.PatientView
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var PacijentHome = new PatientMainWindow();
-            PacijentHome.Show();
-            Window.GetWindow(this).Close();
+            //var PacijentHome = new PatientMainWindow();
+            //PacijentHome.Show();
+            //Window.GetWindow(this).Close();
             //MainWindow.Close();
         }
 

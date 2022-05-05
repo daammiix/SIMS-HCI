@@ -6,6 +6,7 @@
 
 using ClassDijagramV1._0;
 using ClassDijagramV1._0.Model;
+using Controller;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -55,7 +56,8 @@ namespace Model
             if (binding == null)
             {
                 EquipmentList.Add(new RoomEquipmentBinding(e.EquipmentID, quantity));
-            } else
+            }
+            else
             {
                 binding.Quantity += quantity;
             }
@@ -77,21 +79,23 @@ namespace Model
                 binding.Quantity -= quantity;
             }
         }
-        
-        public bool isFree(DateTime start, DateTime end) 
+
+        public bool isFree(DateTime start, DateTime end)
         {
             bool retVal = true;
-           // AppointmentFileHandler ap = new AppointmentFileHandler("../../../Data/appointments.json");
+            // AppointmentFileHandler ap = new AppointmentFileHandler("../../../Data/appointments.json");
 
             App app = Application.Current as App;
 
             //AppointmentRepo ap = new AppointmentRepo();
-            ObservableCollection<Appointment> termini = app.appointmentController.GetAllAppointments("djordje");
+            //ObservableCollection<Appointment> termini = app.AppointmentController.GetAllAppointments("djordje");
 
-            foreach (Appointment termin in termini)
+            AppointmentController _appointmentController = app.AppointmentController;
+
+            foreach (Appointment termin in _appointmentController.GetAppointments())
             {
-                if (termin.Room.RoomID.Equals(this.RoomID)/* && termin.AppointmentStatus == AppointmentStatus.scheduled*/)
-                {    
+                if (termin.RoomId.Equals(this.RoomID)/* && termin.AppointmentStatus == AppointmentStatus.scheduled*/)
+                {
                     if (start >= termin.AppointmentDate && start <= termin.AppointmentDate.Add(termin.Duration))
                     {
                         retVal = false;

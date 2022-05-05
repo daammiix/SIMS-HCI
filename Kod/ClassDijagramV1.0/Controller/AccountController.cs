@@ -128,6 +128,15 @@ namespace ClassDijagramV1._0.Controller
             return _accountService.PersonHasAccount(personId);
         }
 
+        /// <summary>
+        /// Vraca observable collection svih akaunta pacijenata
+        /// </summary>
+        /// <returns></returns>
+        public ObservableCollection<Account> GetPatientsAccounts()
+        {
+            return _accountService.GetPatientsAccounts();
+        }
+
         #endregion
     }
 }

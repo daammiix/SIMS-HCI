@@ -17,7 +17,6 @@ namespace ClassDijagramV1._0.Controller
 
         #endregion
 
-
         #region Constructor
 
         public MedicalRecordController(MedicalRecordService mrs)

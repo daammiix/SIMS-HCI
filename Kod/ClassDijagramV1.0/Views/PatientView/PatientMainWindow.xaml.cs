@@ -23,10 +23,18 @@ namespace ClassDijagramV1._0.Views.PatientView
     /// </summary>
     public partial class PatientMainWindow : Window
     {
-        
-        public PatientMainWindow()
+
+        #region Properties
+
+        // Pacijent koji je ulogovan
+        public Patient Patient { get; set; }
+
+        #endregion
+
+        public PatientMainWindow(Patient p)
         {
             InitializeComponent();
+            Patient = p;
             this.DataContext = this;
             startWindow.Content = new PatientMainPage(this);
         }
@@ -36,8 +44,7 @@ namespace ClassDijagramV1._0.Views.PatientView
             var a = new MainWindow();
             a.Show();
             Window.GetWindow(this).Close();
-            
-            
+
         }
     }
 }

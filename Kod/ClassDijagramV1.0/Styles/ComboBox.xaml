@@ -270,7 +270,7 @@
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="Padding" Value="6,3,5,3"/>
-        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
         <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
         <Setter Property="MaxHeight" Value="65"/>
@@ -283,4 +283,259 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <!-- Item container style-->
+
+    <Style TargetType="ComboBoxItem" x:Key="ItemContainerStyle">
+        <Setter Property="Background" Value="{StaticResource SBackground}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+    <!-- Item templates -->
+
+    <!-- Patient -->
+    <DataTemplate x:Key="ItemTemplatePatient">
+        <StackPanel Orientation="Horizontal">
+            <Image Source="../../../Images/patient.png"
+                               Width="25"
+                               Height="25"
+                               Margin="3,0,8,0"
+                               RenderOptions.BitmapScalingMode="Fant"/>
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="Foreground" Value="{StaticResource SLightGrayShade}"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Name -->
+                <TextBlock Grid.Row="0" Grid.Column="0"
+                                       Text="Name:"
+                                       Margin="0,0,10,0"/>
+                <TextBlock Grid.Row="0" Grid.Column="1"
+                                       Text="{Binding Name}"/>
+
+                <!-- Surname -->
+                <TextBlock Grid.Row="1" Grid.Column="0"
+                                       Text="Surname:"
+                                       Margin="0,0,10,0"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" 
+                                       Text="{Binding Surname}"/>
+
+                <!-- Email -->
+                <TextBlock Grid.Row="2" Grid.Column="1" 
+                                       Text="{Binding Email}"/>
+                <TextBlock Grid.Row="2" Grid.Column="0"
+                                       Text="Email:"
+                                       Margin="0,0,10,0"/>
+            </Grid>
+        </StackPanel>
+    </DataTemplate>
+
+    <!-- Person -->
+    <DataTemplate x:Key="ItemTemplatePerson">
+        <StackPanel Orientation="Horizontal">
+            <Image Source="../../../Images/acc.png"
+                               Width="25"
+                               Height="25"
+                               Margin="3,0,8,0"
+                               RenderOptions.BitmapScalingMode="Fant"/>
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="Foreground" Value="{StaticResource SLightGrayShade}"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Name -->
+                <TextBlock Grid.Row="0" Grid.Column="0"
+                                       Text="Name:"
+                                       Margin="0,0,10,0"/>
+                <TextBlock Grid.Row="0" Grid.Column="1"
+                                       Text="{Binding Name}"/>
+
+                <!-- Surname -->
+                <TextBlock Grid.Row="1" Grid.Column="0"
+                                       Text="Surname:"
+                                       Margin="0,0,10,0"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" 
+                                       Text="{Binding Surname}"/>
+
+                <!-- Email -->
+                <TextBlock Grid.Row="2" Grid.Column="1" 
+                                       Text="{Binding Email}"/>
+                <TextBlock Grid.Row="2" Grid.Column="0"
+                                       Text="Email:"
+                                       Margin="0,0,10,0"/>
+            </Grid>
+        </StackPanel>
+    </DataTemplate>
+
+    <!-- Doctor -->
+    <DataTemplate x:Key="ItemTemplateDoctor">
+        <StackPanel Orientation="Horizontal">
+            <Image Source="../../../Images/doctor.png"
+                               Width="25"
+                               Height="25"
+                               Margin="3,0,8,0"
+                               RenderOptions.BitmapScalingMode="Fant"/>
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="Foreground" Value="{StaticResource SLightGrayShade}"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Name -->
+                <TextBlock Grid.Row="0" Grid.Column="0"
+                                       Text="Name:"
+                                       Margin="0,0,10,0"/>
+                <TextBlock Grid.Row="0" Grid.Column="1"
+                                       Text="{Binding Name}"/>
+
+                <!-- Surname -->
+                <TextBlock Grid.Row="1" Grid.Column="0"
+                                       Text="Surname:"
+                                       Margin="0,0,10,0"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" 
+                                       Text="{Binding Surname}"/>
+
+                <!-- Email -->
+                <TextBlock Grid.Row="2" Grid.Column="1" 
+                                       Text="{Binding Email}"/>
+                <TextBlock Grid.Row="2" Grid.Column="0"
+                                       Text="Email:"
+                                       Margin="0,0,10,0"/>
+            </Grid>
+        </StackPanel>
+    </DataTemplate>
+
+    <!-- Room -->
+    <DataTemplate x:Key="ItemTemplatRoom">
+        <StackPanel Orientation="Horizontal">
+            <Image Source="../../../Images/roomDoor.png"
+                               Width="25"
+                               Height="25"
+                               Margin="3,0,8,0"
+                               RenderOptions.BitmapScalingMode="Fant"/>
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="Foreground" Value="{StaticResource SLightGrayShade}"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Name -->
+                <TextBlock Grid.Row="0" Grid.Column="0"
+                                       Text="Name:"
+                                       Margin="0,0,10,0"/>
+                <TextBlock Grid.Row="0" Grid.Column="1"
+                                       Text="{Binding RoomName}"/>
+
+                <!-- Surname -->
+                <TextBlock Grid.Row="1" Grid.Column="0"
+                                       Text="Number:"
+                                       Margin="0,0,10,0"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" 
+                                       Text="{Binding RoomNumber}"/>
+
+                <!-- Email -->
+                <TextBlock Grid.Row="2" Grid.Column="1" 
+                                       Text="{Binding RoomStatus}"/>
+                <TextBlock Grid.Row="2" Grid.Column="0"
+                                       Text="Status:"
+                                       Margin="0,0,10,0"/>
+            </Grid>
+        </StackPanel>
+    </DataTemplate>
+
+    <!-- Patient -->
+    <DataTemplate x:Key="ItemTemplatePatientAccount">
+        <StackPanel Orientation="Horizontal">
+            <Image Source="../../../Images/patient.png"
+                               Width="25"
+                               Height="25"
+                               Margin="3,0,8,0"
+                               RenderOptions.BitmapScalingMode="Fant"/>
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="Foreground" Value="{StaticResource SLightGrayShade}"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Name -->
+                <TextBlock Grid.Row="0" Grid.Column="0"
+                                       Text="Username:"
+                                       Margin="0,0,10,0"/>
+                <TextBlock Grid.Row="0" Grid.Column="1"
+                                       Text="{Binding Username}"/>
+
+                <!-- Surname -->
+                <TextBlock Grid.Row="1" Grid.Column="0"
+                                       Text="Guest:"
+                                       Margin="0,0,10,0"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" 
+                                       Text="{Binding IsGuest}"/>
+
+                <!-- Email -->
+                <TextBlock Grid.Row="2" Grid.Column="1" 
+                                       Text="{Binding Banned}"/>
+                <TextBlock Grid.Row="2" Grid.Column="0"
+                                       Text="Banned:"
+                                       Margin="0,0,10,0"/>
+            </Grid>
+        </StackPanel>
+    </DataTemplate>
 </ResourceDictionary>
