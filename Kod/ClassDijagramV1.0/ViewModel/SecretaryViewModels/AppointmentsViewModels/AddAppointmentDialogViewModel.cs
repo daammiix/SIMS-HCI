@@ -27,6 +27,10 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModel
 
         private AccountController _accountController;
 
+        private EquipmentAppointmentController _equipmentAppointmentController;
+
+        private RoomAppointmentController _roomAppointmentController;
+
         // Liste za vreme
 
         private List<int> _hours;
@@ -126,6 +130,8 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModel
             _roomController = app.roomController;
             _doctorController = app.DoctorController;
             _accountController = app.AccountController;
+            _equipmentAppointmentController = app.equipmentAppointmentController;
+            _roomAppointmentController = app.roomAppointmentController;
 
             PatientsAccounts = _accountController.GetPatientsAccounts();
             Rooms = new ObservableCollection<Room>(_roomController.GetAllRooms());
@@ -161,14 +167,14 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModel
             DateTime end = start.AddMinutes((double)Duration);
             TimeSpan duration = end - start;
 
-            // moramo da proverimo sta je sve zauzeto
-
             // Napravimo novi appointment i njegov ViewModel
             Appointment appointment = new Appointment(SelectedPatientAccount.PersonId, SelectedDoctor.Id
                 , SelectedRoom.RoomID, start, duration, SelectedAppointmentType);
 
             // Ako je termin slobodan napravimo i viewModel i dodamo appointment i u view i u bazu
-            if (_appointmentController.CheckIsTerminFree(appointment))
+            if (_appointmentController.CheckIsTerminFree(appointment) &&
+                _equipmentAppointmentController.CheckIsTerminFree(start, duration, SelectedRoom) &&
+                _roomAppointmentController.CheckIsTerminFree(start, duration, SelectedRoom))
             {
                 AppointmentViewModel appointmentViewModel = new AppointmentViewModel(appointment);
 

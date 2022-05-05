@@ -1,5 +1,6 @@
 ﻿using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Service;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,7 +27,7 @@ namespace ClassDijagramV1._0.Controller
         public void DeleteRoomAppointment(String roomAppointmentID)
         {
             roomAppointmentService.DeleteRoomAppointment(roomAppointmentID);
-        } 
+        }
 
         public void ChangeRoomAppointment(RoomAppointment roomAppointment)
         {
@@ -51,6 +52,18 @@ namespace ClassDijagramV1._0.Controller
         public void SaveRoomAppointment()
         {
             roomAppointmentService.SaveRoomAppointment();
+        }
+
+        /// <summary>
+        /// Proverava da li je soba u datom terminu slobodna odnosno nema nikakvi roomAppointmenta
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="duration"></param>
+        /// <param name="room"></param>
+        /// <returns></returns>
+        public bool CheckIsTerminFree(DateTime from, TimeSpan duration, Room room)
+        {
+            return roomAppointmentService.CheckIsTerminFree(from, duration, room);
         }
     }
 }
