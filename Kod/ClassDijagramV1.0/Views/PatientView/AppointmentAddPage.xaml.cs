@@ -93,7 +93,7 @@ namespace ClassDijagramV1._0.Views.PatientView
 
         private void timeRB_Checked(object sender, RoutedEventArgs e)
         {
-            prioritetFrame.Content = new PriorityTime();
+            prioritetFrame.Content = new PriorityTime(parent, _appointments, _logedPatient);
         }
     }
 }
