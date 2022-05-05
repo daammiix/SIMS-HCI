@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Login and Main Window-->
+    <SolidColorBrush Color="#1A1A1D" x:Key="Background"/>
+    <SolidColorBrush Color="#4E4E50" x:Key="MyGray"/>
+    <SolidColorBrush Color="#6F2232" x:Key="MyDarkRed"/>
+    <SolidColorBrush Color="#950740" x:Key="MyPink"/>
+    <SolidColorBrush Color="#C3073F" x:Key="MyRed"/>
+
+    <!-- Secretary -->
+    <SolidColorBrush Color="#0B0C10" x:Key="SBackgroundPart"/>
+    <SolidColorBrush Color="#1F2833" x:Key="SDarkGrayShade"/>
+    <SolidColorBrush Color="#C5C6C7" x:Key="SLightGrayShade"/>
+    <SolidColorBrush Color="#66FCF1" x:Key="SCyan"/>
+    <SolidColorBrush Color="#45A29E" x:Key="SDarkCyan"/>
+    <SolidColorBrush Color="#5CDB95" x:Key="CheckBoxChecked"/>
+    <SolidColorBrush Color="#EE4C7C" x:Key="CheckBoxUnchecked"/>
+
+    <LinearGradientBrush x:Key="SBackground" StartPoint="0.5,0" EndPoint="0.5,1.5">
+        <GradientStop Color="#0B0C10" Offset="0.1"/>
+        <GradientStop Color="#1F2833" Offset="0.9"/>
+    </LinearGradientBrush>
+
+</ResourceDictionary>

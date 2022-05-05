@@ -1,0 +1,50 @@
+[
+  {
+    "Id": 4,
+    "Jmbg": "54815181818",
+    "Gender": "Z",
+    "PhoneNumber": "061235236237",
+    "Email": "dcetvkovic49@gmail.com",
+    "DateOfBirth": "1991-07-17T00:00:00",
+    "Address": {
+      "Country": "Srbija",
+      "City": "Beograd",
+      "StreetName": "Karposeva",
+      "StreetNumber": "56"
+    },
+    "Name": "Dragana",
+    "Surname": "Cvetkovic"
+  },
+  {
+    "Id": 12,
+    "Jmbg": "5959884823",
+    "Gender": "musko",
+    "PhoneNumber": "3875432",
+    "Email": "the292200@gmail.com",
+    "DateOfBirth": "1989-05-20T00:00:00",
+    "Address": {
+      "Country": "Srbija",
+      "City": "Novi Sad",
+      "StreetName": "Bulevar Oslobodjenja",
+      "StreetNumber": "100"
+    },
+    "Name": "Milica",
+    "Surname": "Jovanovic"
+  },
+  {
+    "Id": 13,
+    "Jmbg": "9897112156",
+    "Gender": "musko",
+    "PhoneNumber": "3875432",
+    "Email": "the292200@gmail.com",
+    "DateOfBirth": "1985-02-22T00:00:00",
+    "Address": {
+      "Country": "Srbija",
+      "City": "Novi Sad",
+      "StreetName": "Strazilovska",
+      "StreetNumber": "33"
+    },
+    "Name": "Dragisa",
+    "Surname": "Perovic"
+  }
+]

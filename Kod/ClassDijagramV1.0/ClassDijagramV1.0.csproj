@@ -9,8 +9,103 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Images\acc.png" />
+	  <None Remove="Images\account.png" />
+	  <None Remove="Images\appointment.png" />
+	  <None Remove="Images\doctor.png" />
+	  <None Remove="Images\key.png" />
+	  <None Remove="Images\manager.png" />
+	  <None Remove="Images\medical-record.png" />
+	  <None Remove="Images\medicine.png" />
+	  <None Remove="Images\patient.png" />
+	  <None Remove="Images\roomDoor.png" />
+	  <None Remove="Images\secretary.png" />
+	  <None Remove="Images\user.png" />
+	  <None Remove="Views\PatientView\Resources\Images\back-arrow.png" />
+	  <None Remove="Views\PatientView\Resources\Images\doctor.png" />
+	  <None Remove="Views\PatientView\Resources\Images\logout.png" />
+	  <None Remove="Views\PatientView\Resources\Images\notification.png" />
+	  <None Remove="Views\PatientView\Resources\Images\ocjeni.jpg" />
+	  <None Remove="Views\PatientView\Resources\Images\pdf.png" />
+	  <None Remove="Views\PatientView\Resources\Images\pregledTermina.jpg" />
+	  <None Remove="Views\PatientView\Resources\Images\zakazivanjeTermina.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Images\acc.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Images\appointment.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Images\doctor.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Images\key.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Images\manager.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Images\medical-record.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Images\medicine.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Images\patient.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Images\roomDoor.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Images\secretary.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Images\user.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Extended.Wpf.Toolkit" Version="4.3.0" />
+		<PackageReference Include="MaterialDesignColors" Version="2.0.6" />
+		<PackageReference Include="MaterialDesignThemes" Version="4.4.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="Syncfusion.SfScheduler.WPF" Version="20.1.0.52" />
+		<PackageReference Include="Syncfusion.SfSkinManager.WPF" Version="20.1.0.52" />
+		<PackageReference Include="Syncfusion.Themes.MaterialDark.WPF" Version="20.1.0.52" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="Views\PatientView\Resources\Images\back-arrow.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Views\PatientView\Resources\Images\doctor.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Views\PatientView\Resources\Images\logout.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Views\PatientView\Resources\Images\notification.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Views\PatientView\Resources\Images\ocjeni.jpg">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Views\PatientView\Resources\Images\pdf.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Views\PatientView\Resources\Images\pregledTermina.jpg">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Views\PatientView\Resources\Images\zakazivanjeTermina.jpg">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="ViewModel\PatientViewModels\" />
 	</ItemGroup>
 
 </Project>

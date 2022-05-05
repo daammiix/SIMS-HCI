@@ -1,0 +1,94 @@
+﻿<Window x:Class="ClassDijagramV1._0.Views.SecretaryView.AccountsView.ChangeAccountDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.AccountsView"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
+        Background="{StaticResource SBackground}"
+        Foreground="{StaticResource SCyan}"
+        FontSize="24"
+        FontFamily="#Poppins"
+        Title="ChangeAccount" Height="360" Width="500">
+
+    <Window.InputBindings>
+        <KeyBinding Key="Return"
+                    Command="{Binding Path=ChangeAccountCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+    </Window.InputBindings>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../../Styles/TextBox.xaml"/>
+                <ResourceDictionary Source="../../../Styles/Button.xaml"/>
+                <ResourceDictionary Source="../../../Styles/CheckBox.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid VerticalAlignment="Top"
+          HorizontalAlignment="Center"
+          Margin="0,70,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Row 1 -->
+        <TextBlock Grid.Row="0" Grid.Column="0"
+                   Text="Username:"
+                   VerticalAlignment="Center"
+                   Margin="0,0,15,15"/>
+        <TextBox Grid.Row="0" Grid.Column="1"
+                 VerticalAlignment="Center"
+                 Padding="5"
+                 Width="180"
+                 Margin="0,0,0,15"
+                 Style="{StaticResource TextBoxStyleAccount}"
+                 Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <!-- Row 2 -->
+        <TextBlock Grid.Row="1" Grid.Column="0"
+                   Text="Password:"
+                   VerticalAlignment="Center"
+                   Margin="0,0,15,15"/>
+        <TextBox Grid.Row="1" Grid.Column="1"
+                 VerticalAlignment="Center"
+                 Padding="5"
+                 Margin="0,0,0,15"
+                 Style="{StaticResource TextBoxStyleAccount}"
+                 Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <!-- Row 3 -->
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" 
+                    Grid.ColumnSpan="2"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <TextBlock Text="Guest"
+                       Margin="0,0,10,0"
+                       VerticalAlignment="Center"/>
+            <CheckBox VerticalContentAlignment="Center"
+                      HorizontalAlignment="Center"
+                      Style="{StaticResource CircleCheckBox}"
+                      Foreground="{StaticResource SCyan}"
+                      IsChecked="{Binding IsGuest, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+
+        <!-- Row 4 -->
+        <Button Grid.Row="3" Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Content="Save"
+                Margin="0,25,0,0"
+                Style="{StaticResource AccountButtonsStyle}"
+                Command="{Binding ChangeAccountCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
+    </Grid>
+</Window>

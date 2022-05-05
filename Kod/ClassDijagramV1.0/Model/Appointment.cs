@@ -1,162 +1,155 @@
-/***********************************************************************
- * Module:  Appointment.cs
- * Author:  lipov
- * Purpose: Definition of the Class Model.Appointment
- ***********************************************************************/
-
+using ClassDijagramV1._0.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Model
 {
-   public class Appointment : INotifyPropertyChanged
+    public class Appointment : ObservableObject
     {
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public event PropertyChangedEventHandler PropertyChanging;
-        /*public Patient patient { get; set; }
-      public Room room { get; set; }
-      public Doctor doctor { get; set; }
-      public String appointmentID { get; set; }
-      public DateTime appointmentDate { get; set; }
-      public TimeSpan duration { get; set; }
-      public AppointmentType type { get; set; }*/
+        public static int idCounter = 0;
 
-        private Patient patient;
-        private Room room;
-        private Doctor doctor;
-        private String appointmentID;
-        private DateTime appointmentDate;
-        private TimeSpan duration;
-        private AppointmentType type;
+        #region Fields
 
-        public Room Room
+        private int _appointmentId;
+        private int _patientId;
+        private int _doctorId;
+        private string _roomId;
+        private DateTime _apointmentDate;
+        private TimeSpan _duration;
+        private AppointmentType _type;
+
+        #endregion
+
+        #region Properties
+
+        public int Id
         {
             get
             {
-                return room;
+                return _appointmentId;
             }
             set
             {
-                if (value != room)
+                if (value != _appointmentId)
                 {
-                    room = value;
-                    OnPropertyChanged("Room");
+                    _appointmentId = value;
+                    OnPropertyChanged("Id");
                 }
             }
         }
-
-        public DateTime Date
+        public int PatientId
         {
             get
             {
-                return appointmentDate;
+                return _patientId;
             }
             set
             {
-                if (value != appointmentDate)
+                if (value != _patientId)
                 {
-                    appointmentDate = value;
-                    OnPropertyChanged("Date");
-                }
-            }
-        }
-
-        public string Id
-        {
-            get
-            {
-                return appointmentID;
-            }
-            set
-            {
-                if (value != appointmentID)
-                {
-                    appointmentID = value;
-                    OnPropertyChanged("AppointmentID");
-                }
-            }
-        }
-
-        public TimeSpan Duration
-        {
-            get
-            {
-                return duration;
-            }
-            set
-            {
-                if (value != duration)
-                {
-                    duration = value;
-                    OnPropertyChanged("Duration");
-                }
-            }
-        }
-
-        public Patient Patient
-        {
-            get
-            {
-                return patient;
-            }
-            set
-            {
-                if (value != patient)
-                {
-                    patient = value;
+                    _patientId = value;
                     OnPropertyChanged("Patient");
                 }
             }
         }
-
-        public Doctor Doctor
+        public int DoctorId
         {
             get
             {
-                return doctor;
+                return _doctorId;
             }
             set
             {
-                if (value != doctor)
+                if (value != _doctorId)
                 {
-                    doctor = value;
+                    _doctorId = value;
                     OnPropertyChanged("Doctor");
                 }
             }
         }
-
-        public Appointment(Patient patient, Room room, Doctor doctor, string appointmentID, DateTime appointmentDate, TimeSpan duration, AppointmentType type)
+        public string RoomId
         {
-            this.patient = patient;
-            this.Room = room;
-            this.doctor = doctor;
-            this.appointmentID = appointmentID;
-            this.appointmentDate = appointmentDate;
-            this.duration = duration;
-            this.type = type;
+            get
+            {
+                return _roomId;
+            }
+            set
+            {
+                if (value != _roomId)
+                {
+                    _roomId = value;
+                    OnPropertyChanged("Room");
+                }
+            }
+        }
+        public DateTime AppointmentDate
+        {
+            get
+            {
+                return _apointmentDate;
+            }
+            set
+            {
+                if (value != _apointmentDate)
+                {
+                    _apointmentDate = value;
+                    OnPropertyChanged("AppointmentDate");
+                }
+            }
+        }
+        public TimeSpan Duration
+        {
+            get
+            {
+                return _duration;
+            }
+            set
+            {
+                if (value != _duration)
+                {
+                    _duration = value;
+                    OnPropertyChanged("Duration");
+                }
+            }
+        }
+        public AppointmentType AppointmentType
+        {
+            get
+            {
+                return _type;
+            }
+            set
+            {
+                if (value != _type)
+                {
+                    _type = value;
+                    OnPropertyChanged("AppointmentType");
+                }
+            }
         }
 
+        #endregion
+
+        #region Constructor
+
+        public Appointment(int patientId, int doctorId, string roomId, DateTime _apointmentDate, TimeSpan _duration, AppointmentType appointmentType)
+        {
+            Id = ++idCounter;
+            PatientId = patientId;
+            DoctorId = doctorId;
+            RoomId = roomId;
+            AppointmentDate = _apointmentDate;
+            Duration = _duration;
+            AppointmentType = appointmentType;
+        }
         public Appointment()
         {
+
         }
 
-        protected virtual void OnPropertyChanged(string name)
-         {
-             if (PropertyChanged != null)
-             {
-                 PropertyChanged(this, new PropertyChangedEventArgs(name));
-             }
-         }
-
-         protected virtual void OnPropertyChanging(string name)
-         {
-             if (PropertyChanging != null)
-             {
-                 PropertyChanging(this, new PropertyChangedEventArgs(name));
-             }
-         }
+        #endregion
 
     }
 

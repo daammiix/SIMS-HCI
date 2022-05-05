@@ -3,9 +3,67 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ClassDijagramV1._0"
              xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+             xmlns:secretaryViewModel="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels"
+             xmlns:accountViewModel="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels"
+             xmlns:secretaryView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView"
+             xmlns:accountsView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.AccountsView"
+             xmlns:medicalRecordsView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.MedicalRecordsView"
+             xmlns:medicalRecourdsViewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewModels"
+             xmlns:appointmentsViewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModels"
+             xmlns:appointmentsView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.AppointmentsView"
+             xmlns:viewModel="clr-namespace:ClassDijagramV1._0.ViewModel"
+             xmlns:view="clr-namespace:ClassDijagramV1._0.Views"
              StartupUri="Views/MainWindow.xaml"
+             xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
              Exit="Application_Exit">
-    <Application.Resources>
 
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/Color.xaml"/>
+                <ResourceDictionary Source="/Theme/CRUDButtonTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Secretary -->
+            <DataTemplate DataType="{x:Type appointmentsViewModels:AppointmentsMainViewModel}">
+                <appointmentsView:AppointmentsMainView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type accountViewModel:AccountsMainViewModel}">
+                <accountsView:AccountsMainView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type medicalRecourdsViewModels:MedicalRecordsMainViewModel}">
+                <medicalRecordsView:MedicalRecordsMainView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:RoomsViewModel}">
+                <view:RoomsView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:CalendarViewModel}">
+                <view:CalendarView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:StorageViewModel}">
+                <view:StorageView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:StorageMedicalEquipmentViewModel}">
+                <view:StorageMedicalEquipmentView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:StorageSuppliesViewModel}">
+                <view:StorageSuppliesView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:StorageInventoryViewModel}">
+                <view:StorageInventoryView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:StorageDrugsViewModel}">
+                <view:StorageDrugsView/>
+            </DataTemplate>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

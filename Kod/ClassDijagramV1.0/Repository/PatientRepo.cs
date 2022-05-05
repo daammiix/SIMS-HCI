@@ -1,4 +1,5 @@
 ﻿using ClassDijagramV1._0.FileHandlers;
+using ClassDijagramV1._0.Model;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace ClassDijagramV1._0.Repository
     {
         #region Fields
 
-        private PatientFileHandler _fileHandler;
+        private FileHandler<Patient> _fileHandler;
 
         #endregion
 
@@ -25,11 +26,47 @@ namespace ClassDijagramV1._0.Repository
 
         #region Constructor
 
-        public PatientRepo(PatientFileHandler fileHandler)
+        public PatientRepo(FileHandler<Patient> fileHandler)
         {
             _fileHandler = fileHandler;
 
-            Patients = new ObservableCollection<Patient>(fileHandler.GetPatients());
+            Patients = new ObservableCollection<Patient>(fileHandler.GetItems());
+
+            // Sad procitamo i zdravstvene kartone da bi vezali svakog pacijenta za svoj zdravstveni karton
+            FileHandler<MedicalRecord> _fileHandlerMedicalRecords = new FileHandler<MedicalRecord>(App._medicalRecordFilePath);
+
+            // Procitamo i sve appointmente i popunimo listu appointmenta pacijenta
+            FileHandler<Appointment> _fileHandlerAppointments = new FileHandler<Appointment>(App._appointmentsFilePath);
+
+            // Ovo se sad radi u app.xaml.cs
+            /* 
+            foreach (Patient patient in Patients)
+            {
+                // Vezemo pacijente za njihove kartone
+                foreach (MedicalRecord medicalRecord in _fileHandlerMedicalRecords.GetItems())
+                {
+                    if (medicalRecord.PatientId == patient.Id)
+                    {
+                        patient.MedicalRecordNumber = medicalRecord.Number;
+                    }
+                }
+
+                // Ako su im appointmenti null sto ce da bude slucaj uvek jer ih ne serijalizujemo
+                if (patient.Appointments == null)
+                {
+                    patient.Appointments = new List<Appointment>();
+                }
+
+                // Vezemo pacijente za njihove appointmente
+                foreach (Appointment appointment in _fileHandlerAppointments.GetItems())
+                {
+                    if (appointment.PatientId == patient.Id)
+                    {
+                        patient.Appointments.Add(appointment);
+                    }
+                }
+            }
+            */
         }
 
         #endregion
@@ -43,31 +80,43 @@ namespace ClassDijagramV1._0.Repository
 
         public void SavePatients()
         {
-            _fileHandler.SavePatients(Patients.ToList());
+            _fileHandler.SaveItems(Patients.ToList());
         }
 
         public void AddPatient(Patient newPatient)
         {
+            // Ako nema pacijenta sa istim idem i jmbg-om dodajemo novog, ako postoji pregazimo starog
+            bool exists = false;
+            Patient? toUpdate = null;
             foreach (Patient pat in Patients)
             {
-                if (pat.Account.Username.Equals(newPatient.Account.Username))
-                    return;
+                if (pat.Id == newPatient.Id || pat.Jmbg.Equals(newPatient.Jmbg))
+                {
+                    toUpdate = pat;
+                    exists = true;
+                    break;
+                }
             }
-            // Ako ne postoji pacijent sa istim usernameom dodaj ga
-            Patients.Add(newPatient);
+            if (toUpdate != null)
+            {
+                toUpdate = newPatient;
+            }
+            if (!exists)
+            {
+                Patients.Add(newPatient);
+            }
         }
 
-        public bool RemovePatient(String username)
+        public bool RemovePatient(int id)
         {
             Patient patientToRemove = null;
             foreach (Patient patient in Patients)
             {
-                if (patient.Account != null)
-                    if (patient.Account.Username.Equals(username))
-                    {
-                        patientToRemove = patient;
-                        break;
-                    }
+                if (patient.Id == id)
+                {
+                    patientToRemove = patient;
+                    break;
+                }
             }
             if (patientToRemove != null)
             {
@@ -84,12 +133,11 @@ namespace ClassDijagramV1._0.Repository
             Patient patientToUpdate = null;
             foreach (Patient pat in Patients)
             {
-                if (patient.Account != null && pat.Account != null)
-                    if (pat.Account.Username.Equals(patient.Account.Username))
-                    {
-                        patientToUpdate = pat;
-                        break;
-                    }
+                if (patient.Id == pat.Id)
+                {
+                    patientToUpdate = pat;
+                    break;
+                }
             }
 
             if (patientToUpdate != null)
@@ -99,6 +147,25 @@ namespace ClassDijagramV1._0.Repository
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Vraca pacijenta sa zadatim id-em u suprotnom vraca null
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Patient GetPatientById(int id)
+        {
+            Patient? ret = null;
+            foreach (Patient patient in Patients)
+            {
+                if (patient.Id == id)
+                {
+                    ret = patient;
+                }
+            }
+
+            return ret;
         }
 
         #endregion

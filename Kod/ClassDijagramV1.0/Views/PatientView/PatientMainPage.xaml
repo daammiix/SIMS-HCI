@@ -1,0 +1,397 @@
+﻿<Page x:Class="ClassDijagramV1._0.Views.PatientView.PatientMainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:ClassDijagramV1._0.Views.PatientView"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="1024"
+      Title="PatientMainPage">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Grey.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource MaterialDesignToolBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="250" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="250" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="12"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="12"/>
+        </Grid.ColumnDefinitions>
+
+        
+        <!--Pregled termina-->
+        <materialDesign:Card Grid.Column="1" Grid.Row="1" UniformCornerRadius="6">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="120" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                    <StackPanel
+                        Grid.Row="0"
+                        Margin="8 8 8 0">
+                        <Image
+                            Source="Resources/Images/pregledTermina.jpg"
+                            Height="100"/>
+                        <Button
+                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Margin="0 -35 16 -20"
+                            Click="AppointmentsViewOpen"
+                            >
+                            <materialDesign:PackIcon Kind="Medicine" />
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel
+                      Margin="8 16 8 0"
+                        Grid.Row="1">
+                        <TextBlock FontWeight="Bold">Pregled termina</TextBlock>
+
+                        <TextBlock
+                        TextWrapping="Wrap"
+                        VerticalAlignment="Center"
+                        Margin="4,8,0,0"
+                        Text="Pregledajte svoje termine u narednom periodu" />
+                    </StackPanel>
+
+                    <StackPanel
+                            Grid.Row="2"
+                         HorizontalAlignment="Right"
+                         VerticalAlignment="Top"
+                         Orientation="Horizontal"
+                         Margin="8">
+                        <Button
+                            Style="{StaticResource MaterialDesignToolButton}"
+                            Width="30"
+                            Padding="2 0 2 0"
+                            materialDesign:RippleAssist.IsCentered="True">
+                            <materialDesign:PackIcon Kind="ShareVariant" />
+                        </Button>
+                        <Button
+                            Style="{StaticResource MaterialDesignToolButton}"
+                            Width="30"
+                            Padding="2 0 2 0"
+                            materialDesign:RippleAssist.IsCentered="True">
+                            <materialDesign:PackIcon Kind="Heart" />
+                        </Button>
+                        <materialDesign:PopupBox
+                             Padding="2 0 2 0">
+                            <StackPanel>
+                                <Button
+                                    Content="More" />
+                                <Button
+                                    Content="Options" />
+                            </StackPanel>
+                        </materialDesign:PopupBox>
+
+                    </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+            
+            
+ <!--OCjenjivanje-->
+        <materialDesign:Card Grid.Column="1" Grid.Row="3" UniformCornerRadius="6">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="120" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel
+                    Grid.Row="0"
+                    Margin="8 8 8 0">
+                    <Image
+                    Source="Resources/Images/ocjeni.jpg"
+                    Height="100"/>
+                    <Button
+                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Margin="0 -35 16 -20">
+                        <materialDesign:PackIcon Kind="Medicine" />
+                    </Button>
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Row="1"
+                      Margin="8 16 8 0">
+                    <TextBlock FontWeight="Bold">Ocjenjivanje</TextBlock>
+
+                    <TextBlock
+                        TextWrapping="Wrap"
+                        VerticalAlignment="Center"
+                        Margin="4,8,0,0"
+                        Text="Dodajte komentar tako da nasa ustanova i nasi ljekari postani sto bolji" />
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Row="2"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Bottom"
+                     Orientation="Horizontal"
+                     Margin="8">
+                    <Button
+                        Style="{StaticResource MaterialDesignToolButton}"
+                        Width="30"
+                        Padding="2 0 2 0"
+                        materialDesign:RippleAssist.IsCentered="True">
+                        <materialDesign:PackIcon Kind="ShareVariant" />
+                    </Button>
+                    <Button
+                        Style="{StaticResource MaterialDesignToolButton}"
+                        Width="30"
+                        Padding="2 0 2 0"
+                        materialDesign:RippleAssist.IsCentered="True">
+                        <materialDesign:PackIcon Kind="Heart" />
+                    </Button>
+                    <materialDesign:PopupBox
+                         Padding="2 0 2 0">
+                        <StackPanel>
+                            <Button
+                                Content="More" />
+                            <Button
+                                Content="Options" />
+                        </StackPanel>
+                    </materialDesign:PopupBox>
+
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+<!--zakazivanje-->
+        <materialDesign:Card Grid.Row="1" Grid.Column="3" UniformCornerRadius="6" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="120" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel
+                    Grid.Row="0"
+                    Margin="8 8 8 0">
+                    <Image
+                    Source="Resources/Images/zakazivanjeTermina.jpg"
+                    Height="100"/>
+                    <Button
+                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Margin="0 -35 16 -20" Click="AddAppointmetClick"
+                        >
+                        <materialDesign:PackIcon Kind="Medicine" />
+                    </Button>
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Row="1"
+                      Margin="8 16 8 0">
+                    <TextBlock FontWeight="Bold">Zakazivanje pregleda</TextBlock>
+
+                    <TextBlock
+                        TextWrapping="Wrap"
+                        VerticalAlignment="Center"
+                        Margin="4,8,0,0"
+                        Text="Zakazite pregled kod nasih najstrustnijih doktora" />
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Row="2"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Bottom"
+                     Orientation="Horizontal"
+                     Margin="8">
+                    <Button
+                        Style="{StaticResource MaterialDesignToolButton}"
+                        Width="30"
+                        Padding="2 0 2 0"
+                        materialDesign:RippleAssist.IsCentered="True">
+                        <materialDesign:PackIcon Kind="ShareVariant" />
+                    </Button>
+                    <Button
+                        Style="{StaticResource MaterialDesignToolButton}"
+                        Width="30"
+                        Padding="2 0 2 0"
+                        materialDesign:RippleAssist.IsCentered="True">
+                        <materialDesign:PackIcon Kind="Heart" />
+                    </Button>
+                    <materialDesign:PopupBox
+                         Padding="2 0 2 0">
+                        <StackPanel>
+                            <Button
+                                Content="More" />
+                            <Button
+                                Content="Options" />
+                        </StackPanel>
+                    </materialDesign:PopupBox>
+
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+
+        <!--uvid u terapiju-->
+        <materialDesign:Card Grid.Row="3" Grid.Column="3" UniformCornerRadius="6" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="120" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel
+                    Grid.Row="0"
+                    Margin="8 8 8 0">
+                    <Image
+                    Source="Resources/Images/zakazivanjeTermina.jpg"
+                    Height="100"/>
+                    <Button
+                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Margin="0 -35 16 -20" Click="AddAppointmetClick"
+                        >
+                        <materialDesign:PackIcon Kind="Medicine" />
+                    </Button>
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Row="1"
+                      Margin="8 16 8 0">
+                    <TextBlock FontWeight="Bold">Uvid u terapiju</TextBlock>
+
+                    <TextBlock
+                        TextWrapping="Wrap"
+                        VerticalAlignment="Center"
+                        Margin="4,8,0,0"
+                        Text="Pogledajte kaea i koju terapiju pijete" />
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Row="2"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Bottom"
+                     Orientation="Horizontal"
+                     Margin="8">
+                    <Button
+                        Style="{StaticResource MaterialDesignToolButton}"
+                        Width="30"
+                        Padding="2 0 2 0"
+                        materialDesign:RippleAssist.IsCentered="True">
+                        <materialDesign:PackIcon Kind="ShareVariant" />
+                    </Button>
+                    <Button
+                        Style="{StaticResource MaterialDesignToolButton}"
+                        Width="30"
+                        Padding="2 0 2 0"
+                        materialDesign:RippleAssist.IsCentered="True">
+                        <materialDesign:PackIcon Kind="Heart" />
+                    </Button>
+                    <materialDesign:PopupBox
+                         Padding="2 0 2 0">
+                        <StackPanel>
+                            <Button
+                                Content="More" />
+                            <Button
+                                Content="Options" />
+                        </StackPanel>
+                    </materialDesign:PopupBox>
+
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+
+
+        <!--zakazivanje-->
+        <materialDesign:Card Grid.Row="1" Grid.Column="5" UniformCornerRadius="6" 
+                             Grid.RowSpan="3">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="120" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel
+                    Grid.Row="0"
+                    Margin="8 8 8 0">
+                    <Image
+                    Source="Resources/Images/zakazivanjeTermina.jpg"
+                    Height="100"/>
+                    <Button
+                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Margin="0 -35 16 -20" Click="AddAppointmetClick"
+                        >
+                        <materialDesign:PackIcon Kind="Medicine" />
+                    </Button>
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Row="1"
+                      Margin="8 16 8 0">
+                    <TextBlock FontWeight="Bold">Zdravstveni karton</TextBlock>
+
+                    <TextBlock
+                        TextWrapping="Wrap"
+                        VerticalAlignment="Center"
+                        Margin="4,8,0,0"
+                        Text="Uvid u sve vase" />
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Row="2"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Bottom"
+                     Orientation="Horizontal"
+                     Margin="8">
+                    <Button
+                        Style="{StaticResource MaterialDesignToolButton}"
+                        Width="30"
+                        Padding="2 0 2 0"
+                        materialDesign:RippleAssist.IsCentered="True">
+                        <materialDesign:PackIcon Kind="ShareVariant" />
+                    </Button>
+                    <Button
+                        Style="{StaticResource MaterialDesignToolButton}"
+                        Width="30"
+                        Padding="2 0 2 0"
+                        materialDesign:RippleAssist.IsCentered="True">
+                        <materialDesign:PackIcon Kind="Heart" />
+                    </Button>
+                    <materialDesign:PopupBox
+                         Padding="2 0 2 0">
+                        <StackPanel>
+                            <Button
+                                Content="More" />
+                            <Button
+                                Content="Options" />
+                        </StackPanel>
+                    </materialDesign:PopupBox>
+
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+
+    </Grid>
+</Page>

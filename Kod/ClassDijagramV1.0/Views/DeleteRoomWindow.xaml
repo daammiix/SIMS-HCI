@@ -1,0 +1,51 @@
+﻿<Window x:Class="ClassDijagramV1._0.Views.DeleteRoomWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClassDijagramV1._0.Views"
+        mc:Ignorable="d"
+        Title="DeleteRoomWindow"
+        Height="300"
+        Width="600"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="#B07E86"
+        BorderThickness="4"
+        BorderBrush="#8E4D58"
+        FontFamily="Comic Sans MS">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Theme/YesNoButtonTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65"/>
+            <RowDefinition Height="190"/>
+            <RowDefinition Height="45"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+                   Text="Brisanje sale"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   FontSize="34"
+                   Foreground="Black">
+        </TextBlock>
+        <TextBlock Grid.Row="1"
+                   Text="Da li ste sigurni da želite da obrišete salu?"
+                   VerticalAlignment="Top"
+                   Margin="0,15,0,0"
+                   HorizontalAlignment="Center"
+                   FontSize="28"
+                   Foreground="Black">
+        </TextBlock>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button x:Name="DeleteYesRoom"  Height="45" Width="300" Content="Da" Style="{StaticResource YesNoButton}" Click="DeleteYesRoom_Click"/>
+            <Button x:Name="DeleteNoRoom"  Height="45" Width="300" Content="Ne" Style="{StaticResource YesNoButton}" Click="DeleteNoRoom_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

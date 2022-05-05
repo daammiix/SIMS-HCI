@@ -3,24 +3,98 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ClassDijagramV1._0"
+        xmlns:local="clr-namespace:ClassDijagramV1._0.Views"
         xmlns:views="clr-namespace:ClassDijagramV1._0.Views"
+        xmlns:viewModel="clr-namespace:ClassDijagramV1._0.ViewModel"
+        xmlns:viewsPatient="clr-namespace:ClassDijagramV1._0.Views.PatientView"
         mc:Ignorable="d"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip"
+        FontFamily="#Poppins"
+        Background="{StaticResource Background}"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="768" Width="1024">
 
-    <TabControl>
+    <!--<TabControl>
         <TabItem Header="Patient">
-            <views:PatientView/>
+            <viewsPatient:PrivremenoLoginDugme/>
         </TabItem>
         <TabItem Header="Secretary">
-            <views:SecretaryView/>
+            <local:SecretaryViewUC/>
         </TabItem>
         <TabItem Header="Rooms">
-            <views:RoomUserControl Width="793" />
+            <local:RoomUserControl Width="793" />
         </TabItem>
         <TabItem Header="Doctor">
-
+            <local:DoctorView Width="793" />
         </TabItem>
-    </TabControl>
+    </TabControl>-->
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid MouseDown="Header_MouseDown"
+              Background="{StaticResource Background}">
+            <!-- Title -->
+            <TextBlock Text="Zdravo" 
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="{StaticResource MyGray}"
+                       FontSize="26"
+                       Padding="10"
+                       FontWeight="Bold"/>
+
+            <!-- Application state menu -->
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Margin="0,0,2,0">
+                <Button Content="&#128469;"
+                        Background="Transparent"
+                        Foreground="{StaticResource MyGray}"
+                        BorderThickness="0"
+                        Padding="5 3"
+                        Click="ButtonMinimize_Click"/>
+                <Button Content="&#x1F5D6;"
+                        Background="Transparent"
+                        Foreground="{StaticResource MyGray}"
+                        BorderThickness="0"
+                        Padding="5 0"
+                        Click="WindowStateButton_Click"/>
+                <Button Content="&#10006;"
+                        FontSize="10"
+                        Background="Transparent"
+                        Foreground="{StaticResource MyGray}"
+                        BorderThickness="0"
+                        Padding="5 0"
+                        Click="ExitButton_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Content -->
+        <DockPanel Grid.Row="1">
+            <!--<Menu DockPanel.Dock="Top" 
+                  FontSize="16"
+                  Background="Transparent"
+                  Foreground="{StaticResource MyGray}">
+                <MenuItem Header="_Account">
+                    <MenuItem x:Name="Login" Header="_Login"/>
+                </MenuItem>
+                <MenuItem Header="_About Us">
+
+                </MenuItem>
+            </Menu>-->
+            <local:LoginView Margin="0,50,0,0"
+                             VerticalAlignment="Top"
+                             HorizontalAlignment="Center"/>
+        </DockPanel>
+    </Grid>
 </Window>

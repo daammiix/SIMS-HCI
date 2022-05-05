@@ -4,13 +4,24 @@
 // Purpose: Definition of Enum RoomStatus
 
 using System;
+using System.Collections.Generic;
 
 namespace Model
 {
-   public enum RoomStatus
-   {
-      active,
-      renovating,
-      changingPurpose
-   }
+    public static class RoomStatus
+    {
+        public const String active = "Aktivna";
+        public const String renovating = "Renoviranje";
+        public const String changePurpose = "Promena namene sale";
+
+        public static List<String> getAllStatuses()
+        {
+            return new List<String>()
+            {
+                active,
+                renovating,
+                changePurpose,
+            };
+        }
+    }
 }

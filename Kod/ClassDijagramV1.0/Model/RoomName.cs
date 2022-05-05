@@ -1,4 +1,4 @@
-// File:    RoomType.cs
+﻿// File:    RoomType.cs
 // Author:  Milana
 // Created: 08 April 2022 13:17:18
 // Purpose: Definition of Enum RoomType
@@ -8,12 +8,13 @@ using System.Runtime.Serialization;
 
 namespace Model
 {
-    public enum RoomName
+    public static class RoomName
     {
-        operatingRoom,
-        examRoom,
-        recoveryRoom,
-        intensiveCareRoom,
-        meetingRoom
+        public const string operatingRoom = "Operaciona Sala";
+        public const string examRoom = "Sala za preglede";
+        public const string recoveryRoom = "Bolnička soba";
+        public const string intensiveCareRoom = "Intezivna nega";
+        public const string meetingRoom = "Sala za sastanke";
+        public const string storageRoom = "Magacin";
     }
 }

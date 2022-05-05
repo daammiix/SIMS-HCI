@@ -1,4 +1,5 @@
-﻿using ClassDijagramV1._0.Util;
+﻿using ClassDijagramV1._0.Model.Enums;
+using ClassDijagramV1._0.Util;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ namespace ClassDijagramV1._0.Model
         private string _password;
         private bool _banned;
         private bool _isGuest;
+        private int _personId;
+        private Role _role;
 
         #endregion
 
@@ -33,7 +36,7 @@ namespace ClassDijagramV1._0.Model
                 if (_username != value)
                 {
                     _username = value;
-                    onPropertyChanged("Username");
+                    OnPropertyChanged("Username");
                 }
             }
         }
@@ -49,7 +52,7 @@ namespace ClassDijagramV1._0.Model
                 if (_password != value)
                 {
                     _password = value;
-                    onPropertyChanged("Password");
+                    OnPropertyChanged("Password");
                 }
             }
         }
@@ -65,7 +68,7 @@ namespace ClassDijagramV1._0.Model
                 if (_banned != value)
                 {
                     _banned = value;
-                    onPropertyChanged("Banned");
+                    OnPropertyChanged("Banned");
                 }
             }
         }
@@ -81,7 +84,33 @@ namespace ClassDijagramV1._0.Model
                 if (_isGuest != value)
                 {
                     _isGuest = value;
-                    onPropertyChanged("IsGuest");
+                    OnPropertyChanged("IsGuest");
+                }
+            }
+        }
+
+        public int PersonId
+        {
+            get { return _personId; }
+            set
+            {
+                if (_personId != value)
+                {
+                    _personId = value;
+                    OnPropertyChanged("PersonId");
+                }
+            }
+        }
+
+        public Role Role
+        {
+            get { return _role; }
+            set
+            {
+                if (_role != value)
+                {
+                    _role = value;
+                    OnPropertyChanged("Role");
                 }
             }
         }
@@ -90,12 +119,14 @@ namespace ClassDijagramV1._0.Model
 
         #region Constructor
 
-        public Account(string username = "", string password = "", bool isGuest = false, bool banned = false)
+        public Account(int personId, Role role, string username = "", string password = "", bool isGuest = false, bool banned = false)
         {
+            Role = role;
             Username = username;
             Password = password;
             IsGuest = isGuest;
             Banned = banned;
+            PersonId = personId;
         }
 
         [JsonConstructor]
