@@ -15,29 +15,23 @@ using System.Windows.Shapes;
 namespace ClassDijagramV1._0.Views
 {
     /// <summary>
-    /// Interaction logic for RenovatingAndChangingPurpose.xaml
+    /// Interaction logic for ChangingPurposeWindow.xaml
     /// </summary>
-    public partial class RenovatingAndChangingPurpose : Window
+    public partial class ChangingPurposeWindow : Window
     {
-        public RenovatingAndChangingPurpose()
+        public ChangingPurposeWindow()
         {
             InitializeComponent();
         }
 
-        private void SaveRenovating_Click(object sender, RoutedEventArgs e)
+        private void SaveChangingPurpose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void QuitRenovating_Click(object sender, RoutedEventArgs e)
+        private void QuitChangingPurpose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-
-        private void Calendar_DisplayModeChanged(object sender, CalendarModeChangedEventArgs e)
-        {
-            Calendar calObj = sender as Calendar;
-            calObj.DisplayMode = CalendarMode.Month;
         }
     }
 }

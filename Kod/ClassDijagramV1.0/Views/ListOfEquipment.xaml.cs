@@ -17,6 +17,7 @@ using System.Collections.ObjectModel;
 using ClassDijagramV1._0.Controller;
 using System.ComponentModel;
 using ClassDijagramV1._0.Model;
+using ClassDijagramV1._0.Helpers;
 
 namespace ClassDijagramV1._0.Views
 {
@@ -25,11 +26,6 @@ namespace ClassDijagramV1._0.Views
     /// </summary>
     public partial class ListOfEquipment : Window
     {
-        public struct QuantifiedEquipment
-        {
-            public Equipment Equipment { get; set; }
-            public int Quantity { get; set; }
-        }
 
         EquipmentController equipmentController;
         public BindingList<QuantifiedEquipment> EquipmentList { get; set; }
@@ -48,11 +44,7 @@ namespace ClassDijagramV1._0.Views
                 {
                     if (e.EquipmentID == binding.EquipmentID)
                     {
-                        EquipmentList.Add(new QuantifiedEquipment()
-                        {
-                            Equipment = e,
-                            Quantity = binding.Quantity,
-                        });
+                        EquipmentList.Add(new QuantifiedEquipment(e, binding.Quantity));
                     }
                 }
             }

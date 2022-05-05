@@ -1,5 +1,6 @@
 ﻿using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Service;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,11 +24,6 @@ namespace ClassDijagramV1._0.Controller
             equipmentAppointmentService.AddEquipmentAppointment(equipmentAppointment);
         }
 
-        public void DeleteEquipmentAppointment(EquipmentAppointment equipmentAppointment)
-        {
-            equipmentAppointmentService.DeleteEquipmentAppointment(equipmentAppointment);
-        }
-
         public EquipmentAppointment? GetAEquipmentAppointment(EquipmentAppointment equipmentAppointment)
         {
             return equipmentAppointmentService.GetAEquipmentAppointment(equipmentAppointment);
@@ -36,6 +32,11 @@ namespace ClassDijagramV1._0.Controller
         public BindingList<EquipmentAppointment> GetAllEquipmentAppointment()
         {
             return equipmentAppointmentService.GetAllEquipmentAppointment();
+        }
+
+        public void ScheduledAppointment()
+        {
+            equipmentAppointmentService.ScheduledAppointment();
         }
     }
 }

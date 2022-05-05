@@ -47,6 +47,7 @@ namespace Controller
             _appointmentService.SaveAppointments();
         }
 
+
         /// <summary>
         /// Vraca sve appointmente
         /// </summary>
@@ -76,6 +77,12 @@ namespace Controller
         public bool CheckIsTerminFree(Appointment newAppointment)
         {
             return _appointmentService.CheckIsTerminFree(newAppointment);
+        }
+
+
+        public ObservableCollection<Appointment> GetListOfAppointments()
+        {
+            return _appointmentService.GetListOfAppointments();
         }
 
     }

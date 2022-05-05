@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClassDijagramV1._0.Views"
             xmlns:viewModel="clr-namespace:ClassDijagramV1._0.ViewModel"
+             xmlns:converters="clr-namespace:ClassDijagramV1._0.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="655"
              d:DesignWidth="930"
@@ -15,6 +16,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Theme/TextboxTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <converters:MedicalEquipmentConverter x:Key="MedicalEquipmentConverter"/>
+            <converters:EquipmentToQuantifiedConverter x:Key="EquipmentToQuantifiedConverter"/>
+
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -28,34 +32,43 @@
         <StackPanel>
             <Grid Width="930" Height="468">
 
-                <DataGrid x:Name="RoomList" CanUserAddRows="True" SelectionMode="Single"
+                <DataGrid x:Name="EquipmentListGrid" CanUserAddRows="True" SelectionMode="Single"
                           CanUserResizeColumns="False"  CanUserResizeRows="False"
                           RowBackground="#ECCB8D" Background="#EDE1CC" BorderBrush="#EEA61A"
                           FontSize="18" BorderThickness="4" CanUserReorderColumns="False"
                           CanUserDeleteRows="False" AutoGenerateColumns="False"
-                          ItemsSource="{Binding Path=Rooms}" IsReadOnly="True">
+                          ItemsSource="{Binding Path=EquipmentList}" IsReadOnly="True">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Šifra" Width="100" Binding="{Binding Path=RoomID}"/>
-                        <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=RoomName}"/>
-                        <DataGridTextColumn Header="Količina" Width="100" Binding="{Binding Path=Floor}"/>
-                        <DataGridTemplateColumn Header="Premeštanje" Width="*">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock>
-                                        <Hyperlink Foreground="Black">Zakazivanje</Hyperlink>
-                                    </TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Šifra" Width="100" Binding="{Binding Path=Equipment.EquipmentID}"/>
+                            <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=Equipment.Name}"/>
+                            <DataGridTextColumn Header="Količina" Width="100" Binding="{Binding Path=Quantity}"/>
+                                <DataGridTemplateColumn Header="Premeštanje" Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock>
+                                        <Hyperlink Foreground="Black" Click="Hyperlink_Click">Zakazivanje</Hyperlink>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                     </DataGrid.Columns>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=., Converter={StaticResource MedicalEquipmentConverter}}" Value="True">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
                 </DataGrid>
             </Grid>
         </StackPanel>
         <StackPanel Height="98" Width="930">
             <WrapPanel HorizontalAlignment="Right">
-                <Button x:Name="AddRoom" HorizontalAlignment="Right" Height="32" Width="70" Content="Dodaj" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" />
-                <Button x:Name="ChangeRoom" HorizontalAlignment="Right" Height="32" Width="75" Content="Izmeni" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" />
-                <Button x:Name="DeleteRoom" HorizontalAlignment="Right" Height="32" Width="75" Content="Obriši" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" IsEnabled="{Binding SelectedItems.Count, ElementName=lv}"/>
+                <Button x:Name="AddEquipment" HorizontalAlignment="Right" Height="32" Width="70" Content="Dodaj" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" Click="AddEquipment_Click"/>
+                <Button x:Name="ChangeEquipment" HorizontalAlignment="Right" Height="32" Width="75" Content="Izmeni" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" Click="ChangeEquipment_Click"/>
+                <Button x:Name="DeleteEquipment" HorizontalAlignment="Right" Height="32" Width="75" Content="Obriši" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" Click="DeleteEquipment_Click"/>
             </WrapPanel>
         </StackPanel>
     </StackPanel>

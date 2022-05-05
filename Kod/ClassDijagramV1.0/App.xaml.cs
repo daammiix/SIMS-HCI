@@ -39,6 +39,9 @@ namespace ClassDijagramV1._0
         public static string _roomsFilePath = "../../../Data/rooms.json";
         public static string _equipmentFilePath = "../../../Data/equipment.json";
         public static string _medicalRecordFilePath = "../../../Data/medicalRecords.json";
+        public string _storageFilePath = "../../../Data/storage.json";
+        public string _roomAppointmentsFilePath = "../../../Data/roomAppointments.json";
+
 
         #endregion
 
@@ -62,6 +65,7 @@ namespace ClassDijagramV1._0
         public EquipmentController equipmentController { get; set; }
 
         public EquipmentAppointmentController equipmentAppointmentController { get; set; }
+        public RoomAppointmentController roomAppointmentController { get; set; }
 
         public MedicalRecordController MedicalRecordController { get; set; }
 
@@ -104,8 +108,8 @@ namespace ClassDijagramV1._0
             var managerService = new ManagerService(managerRepo);
             ManagerController = new ManagerController(managerService);
 
-            // Rooms
-            var roomRepo = new RoomRepoJson(new FileHandler<BindingList<Room>>(_roomsFilePath));
+            // Rooms-Storage
+            var roomRepo = new RoomRepoJson(new FileHandler<BindingList<Room>>(_roomsFilePath), new FileHandler<BindingList<Storage>>(_storageFilePath));
             var roomService = new RoomService(roomRepo);
             roomController = new RoomController(roomService);
 
@@ -124,6 +128,15 @@ namespace ClassDijagramV1._0
             var medicalRecordService = new MedicalRecordService(medicalRecordRepo, patientService);
             MedicalRecordController = new MedicalRecordController(medicalRecordService);
 
+            var roomAppointmentRepo = new RoomAppointmentRepo(new FileHandler<BindingList<RoomAppointment>>(_roomAppointmentsFilePath));
+            var roomAppointmentService = new RoomAppointmentService(roomAppointmentRepo);
+            roomAppointmentController = new RoomAppointmentController(roomAppointmentService);
+
+            var dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 10);
+            dispatcherTimer.Start();
+
             MakeTestData();
 
             // Namestimo brojace 
@@ -134,6 +147,12 @@ namespace ClassDijagramV1._0
             // tako da u trenutku formiranja ovi podaci ne postoje trebalo bi ovde ispod povezati sve
             // da bi se i ovi podaci lepo povezali
             ConnectData();
+        }
+
+        private void dispatcherTimer_Tick(object? sender, EventArgs e)
+        {
+            equipmentAppointmentController.ScheduledAppointment();
+            roomAppointmentController.ScheduledAppointments();
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)
@@ -151,6 +170,7 @@ namespace ClassDijagramV1._0
             ManagerController.SaveManagers();
             roomController.SaveRooms();
             MedicalRecordController.SaveMedicalRecords();
+            roomAppointmentController.SaveRoomAppointment();
         }
 
         private void MakeTestData()

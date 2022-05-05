@@ -12,16 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ClassDijagramV1._0.Views.ManagerView
+namespace ClassDijagramV1._0.Views
 {
     /// <summary>
-    /// Interaction logic for ManagerMainWindow.xaml
+    /// Interaction logic for WarningQuantity.xaml
     /// </summary>
-    public partial class ManagerMainWindow : Window
+    public partial class WarningQuantity : Window
     {
-        public ManagerMainWindow()
+        public WarningQuantity()
         {
             InitializeComponent();
+        }
+
+        private void WarningOk_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -113,5 +113,10 @@ namespace Repository
             }
             return null;
         }
+
+        public ObservableCollection<Appointment> GetListOfAppointments()
+        {
+            return Appointments;
+        }
     }
 }

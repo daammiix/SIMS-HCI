@@ -64,6 +64,7 @@ namespace Service
             _appointmentRepo.SaveAppointments();
         }
 
+
         /// <summary>
         /// Vraca sve appointmente
         /// </summary>
@@ -147,5 +148,12 @@ namespace Service
 
             return free;
         }
+
+        public ObservableCollection<Appointment> GetListOfAppointments()
+        {
+            return _appointmentRepo.GetListOfAppointments();
+
+        }
+
     }
 }

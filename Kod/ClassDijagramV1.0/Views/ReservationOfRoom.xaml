@@ -47,7 +47,7 @@
                              Content="Renoviranje"
                              Style="{StaticResource ReservationButton}"
                              Click="Renovating_Click"/>
-
+                
                 <RadioButton x:Name="ChangingPurpose"
                              Content="Promena namene sale"
                              Style="{StaticResource ReservationButton}"

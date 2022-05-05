@@ -7,8 +7,12 @@
     "RoomStatus": "Aktivna",
     "EquipmentList": [
       {
-        "EquipmentID": "id1",
-        "Quantity": 2
+        "EquipmentID": "OMR5",
+        "Quantity": 1
+      },
+      {
+        "EquipmentID": "OL36",
+        "Quantity": 1
       }
     ]
   },
@@ -18,7 +22,16 @@
     "Floor": 3,
     "RoomNumber": 27,
     "RoomStatus": "Aktivna",
-    "EquipmentList": []
+    "EquipmentList": [
+      {
+        "EquipmentID": "OUL5",
+        "Quantity": 2
+      },
+      {
+        "EquipmentID": "PRG5",
+        "Quantity": 3
+      }
+    ]
   },
   {
     "RoomID": "id10",
