@@ -9,7 +9,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="655"
              d:DesignWidth="930"
-             Background="#8BCDD3">
+             Background="#D9D4CC"
+             FontFamily="Berlin Sans FB Demi">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -34,7 +35,7 @@
 
                 <DataGrid x:Name="EquipmentListGrid" CanUserAddRows="True" SelectionMode="Single"
                           CanUserResizeColumns="False"  CanUserResizeRows="False"
-                          RowBackground="#ECCB8D" Background="#EDE1CC" BorderBrush="#EEA61A"
+                          RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
                           FontSize="18" BorderThickness="4" CanUserReorderColumns="False"
                           CanUserDeleteRows="False" AutoGenerateColumns="False"
                           ItemsSource="{Binding Path=EquipmentList}" IsReadOnly="True">
@@ -46,7 +47,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBlock>
-                                        <Hyperlink Foreground="Black" Click="Hyperlink_Click">Zakazivanje</Hyperlink>
+                                        <Hyperlink Foreground="#1F1313" Click="Hyperlink_Click">Zakazivanje</Hyperlink>
                                             </TextBlock>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>

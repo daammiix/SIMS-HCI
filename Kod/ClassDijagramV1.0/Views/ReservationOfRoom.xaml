@@ -11,8 +11,10 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
-        Background="#8BCDD3"
-        BorderThickness="2">
+        Background="#B0C69D"
+        FontFamily="Berlin Sans FB Demi"
+        BorderThickness="4"
+        BorderBrush="#455736">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -33,7 +35,7 @@
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    FontSize="34"
-                   Foreground="Black">
+                   Foreground="#1F1313">
             </TextBlock>
             <StackPanel Grid.Row="1"
                    HorizontalAlignment="Left">
