@@ -1,4 +1,5 @@
 ﻿using ClassDijagramV1._0.Controller;
+using ClassDijagramV1._0.Converters;
 using ClassDijagramV1._0.FileHandlers;
 using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Model.Enums;
@@ -44,6 +45,7 @@ namespace ClassDijagramV1._0
         public static string _hospitalRatingsFilePath = "../../../Data/hospitalratings.json";
         public static string _doctorRatingsFilePath = "../../../Data/doctorratings.json";
         public static string _activityFilePath = "../../../Data/activity.json";
+        public string _drugsFilePath = "../../../Data/drugs.json";
 
 
         #endregion
@@ -72,6 +74,7 @@ namespace ClassDijagramV1._0
         public RoomAppointmentController roomAppointmentController { get; set; }
 
         public MedicalRecordController MedicalRecordController { get; set; }
+        public DrugsController drugsController { get; set; }
 
         public RatingController RatingController { get; set; }
 
@@ -158,6 +161,10 @@ namespace ClassDijagramV1._0
             //var activityRepository = new ActivityRepo(new FileHandler<ActivityLog>(_activityFilePath));
             var banningPatientService = new BanningPatientService(activityService, accountRepo);
             BanningPatientController = new BanningPatientController(banningPatientService);
+            //Drugs
+            var drugsRepo = new DrugsRepo();
+            var drugsService = new DrugsService(drugsRepo);
+            drugsController = new DrugsController(drugsService);
 
             var dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
