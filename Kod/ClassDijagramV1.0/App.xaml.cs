@@ -1,4 +1,5 @@
 ﻿using ClassDijagramV1._0.Controller;
+using ClassDijagramV1._0.Converters;
 using ClassDijagramV1._0.FileHandlers;
 using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Model.Enums;
@@ -41,6 +42,7 @@ namespace ClassDijagramV1._0
         public static string _medicalRecordFilePath = "../../../Data/medicalRecords.json";
         public string _storageFilePath = "../../../Data/storage.json";
         public string _roomAppointmentsFilePath = "../../../Data/roomAppointments.json";
+        public string _drugsFilePath = "../../../Data/drugs.json";
 
 
         #endregion
@@ -68,6 +70,7 @@ namespace ClassDijagramV1._0
         public RoomAppointmentController roomAppointmentController { get; set; }
 
         public MedicalRecordController MedicalRecordController { get; set; }
+        public DrugsController drugsController { get; set; }
 
         #endregion
 
@@ -131,6 +134,11 @@ namespace ClassDijagramV1._0
             var roomAppointmentRepo = new RoomAppointmentRepo(new FileHandler<BindingList<RoomAppointment>>(_roomAppointmentsFilePath));
             var roomAppointmentService = new RoomAppointmentService(roomAppointmentRepo);
             roomAppointmentController = new RoomAppointmentController(roomAppointmentService);
+
+            //Drugs
+            var drugsRepo = new DrugsRepo();
+            var drugsService = new DrugsService(drugsRepo);
+            drugsController = new DrugsController(drugsService);
 
             var dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);

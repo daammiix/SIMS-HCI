@@ -1,5 +1,11 @@
-﻿using System;
+﻿using ClassDijagramV1._0.Controller;
+using ClassDijagramV1._0.Converters;
+using ClassDijagramV1._0.Helpers;
+using ClassDijagramV1._0.Model;
+using Controller;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +26,32 @@ namespace ClassDijagramV1._0.Views
     /// </summary>
     public partial class StorageDrugsView : UserControl
     {
+        DrugsController drugsController;
+        Drugs drug;
+        RoomController roomController;
+        BindingList<Equipment> allEquipment;
+        public BindingList<QuantifiedEquipment> EquipmentList { get; set; }
         public StorageDrugsView()
         {
             InitializeComponent();
+        }
+
+        private void AddDrugs_Click(object sender, RoutedEventArgs e)
+        {
+            AddDrugsWindow addDrugsWindow = new AddDrugsWindow();
+            addDrugsWindow.Show();
+        }
+
+        private void ChangeDrugs_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeDrugsWindow changeDrugsWindow = new ChangeDrugsWindow();
+            changeDrugsWindow.Show();
+        }
+
+        private void DeleteDrugs_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteDrugsWindow deleteDrugsWindow = new DeleteDrugsWindow();
+            deleteDrugsWindow.Show();
         }
     }
 }
