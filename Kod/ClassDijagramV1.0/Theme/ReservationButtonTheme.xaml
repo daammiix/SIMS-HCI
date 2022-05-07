@@ -15,9 +15,9 @@
                                        HorizontalAlignment="Center"
                                        Height="38"
                                        Width="450"
-                                       Foreground="Black"
-                                       FontSize="24"
-                                       Margin="0,0,0,0"
+                                       Foreground="#1F1313"
+                                       FontSize="26"
+                                       Margin="10,0,0,0"
                                        Padding="5"/>
 
                         </Grid>

@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style TargetType="{x:Type Button}"
            x:Key="YesNoButton">
-        <Setter Property="Background" Value="#3E898F"/>
+        <Setter Property="Background" Value="#C0937C"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -13,14 +13,14 @@
                             <Button BorderThickness="0"
                                     OverridesDefaultStyle="True"
                                     Padding="5"
-                                    Foreground="Black"
+                                    Foreground="#1F1313"
                                     x:Name="CRUDButton"/>
                             <TextBlock IsHitTestVisible="False"
                                        Text="{TemplateBinding Property=Content}"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        FontSize="18"
-                                       Foreground="Black">
+                                       Foreground="#1F1313">
                             </TextBlock>
 
                         </Grid>
@@ -31,7 +31,7 @@
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#234A4D"/>
+                <Setter Property="Background" Value="#A57862"/>
             </Trigger>
         </Style.Triggers>
 
