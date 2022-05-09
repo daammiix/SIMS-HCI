@@ -32,22 +32,6 @@ namespace Controller
             _appointmentService.UpdateAppointment(oldAppointmentID, updatedAppointment);
         }
 
-        public ObservableCollection<Appointment> GetAllAppointmentsByPatient(int patientID)
-        {
-            return _appointmentService.GetAllAppointmentsByPatient(patientID);
-        }
-
-        public ObservableCollection<Appointment> GetAllAppointments()
-        {
-            return _appointmentService.GetAllAppointments();
-        }
-
-        public Appointment GetOneAppointment(Appointment appointment)
-        {
-            // TODO: implement
-            return null;
-        }
-
         public void SaveAppointments()
         {
             _appointmentService.SaveAppointments();

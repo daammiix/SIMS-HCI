@@ -109,12 +109,7 @@ namespace Model
             // AppointmentFileHandler ap = new AppointmentFileHandler("../../../Data/appointments.json");
 
             App app = Application.Current as App;
-
-            //AppointmentRepo ap = new AppointmentRepo();
-
             AppointmentController appointmentController = app.AppointmentController;
-
-            ObservableCollection<Appointment> termini = appointmentController.GetAllAppointments(); // ovde trebaju svi termini
 
             foreach (Appointment termin in appointmentController.GetAppointments())
             {
