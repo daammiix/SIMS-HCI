@@ -61,7 +61,7 @@ namespace ClassDijagramV1._0.Views.PatientView
             _doctorController = app.DoctorController;
 
             Rooms = _roomController.GetAllRooms();
-            Appointments = _appointmentController.GetAllAppointments(); // ulgovani korisnik ali ovo je za doktora
+            Appointments = _appointmentController.GetAppointments(); // ulgovani korisnik ali ovo je za doktora
             Doctors = _doctorController.GetAllDoctors();
             DoctorsAppointmentsTime = new ObservableCollection<String>();
             dodavanjPregledaDoktor.ItemsSource = Doctors;

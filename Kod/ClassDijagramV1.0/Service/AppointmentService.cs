@@ -69,25 +69,6 @@ namespace Service
 
         }
 
-        public ObservableCollection<Appointment> GetAllAppointmentsByPatient(int patientID) // obrisi iz bajdinga preglede koji mi ne trebaju, tj nisu od tog pacijenta
-        {
-            ObservableCollection<Appointment> otherPatients = new ObservableCollection<Appointment>();
-            foreach (Appointment a in _appointmentRepo.GetAppointments())
-            {
-                if (a.PatientId.Equals(patientID))
-                {
-                    otherPatients.Add(a);
-                }
-            }
-            return otherPatients;
-        }
-
-        public ObservableCollection<Appointment> GetAllAppointments()
-        {
-            return _appointmentRepo.GetAppointments();
-        }
-
-        // room prosledjen jer nema u appointment-u 
         internal void AddNotification(Appointment appointment, Room r1, NotificationType notificationType)
         {
 
@@ -113,11 +94,6 @@ namespace Service
         internal ObservableCollection<Notification> GetAllNotifications()
         {
             return _appointmentRepo.GetAllNotifications();
-        }
-
-        public Appointment GetOneAppointment(int appointmentID)
-        {
-            return _appointmentRepo.GetOneAppointment(appointmentID);
         }
 
         /// <summary>

@@ -56,5 +56,10 @@ namespace ClassDijagramV1._0.Views.PatientView
         {
             parent.startWindow.Content = new AppointmentAddPage(parent, _appointmentViewModels, _logedPatient);
         }
+
+        private void RatingOpen(object sender, RoutedEventArgs e)
+        {
+            parent.startWindow.Content = new RatingPage(parent, _logedPatient);
+        }
     }
 }
