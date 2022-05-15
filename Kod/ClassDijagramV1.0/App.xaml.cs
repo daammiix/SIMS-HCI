@@ -42,7 +42,7 @@ namespace ClassDijagramV1._0
         public static string _medicalRecordFilePath = "../../../Data/medicalRecords.json";
         public string _storageFilePath = "../../../Data/storage.json";
         public string _roomAppointmentsFilePath = "../../../Data/roomAppointments.json";
-        public string _drugsFilePath = "../../../Data/drugs.json";
+        public string _medicinesFilePath = "../../../Data/medicines.json";
 
 
         #endregion
@@ -70,7 +70,7 @@ namespace ClassDijagramV1._0
         public RoomAppointmentController roomAppointmentController { get; set; }
 
         public MedicalRecordController MedicalRecordController { get; set; }
-        public DrugsController drugsController { get; set; }
+        public MedicineController medicinesController { get; set; }
 
         #endregion
 
@@ -135,10 +135,10 @@ namespace ClassDijagramV1._0
             var roomAppointmentService = new RoomAppointmentService(roomAppointmentRepo);
             roomAppointmentController = new RoomAppointmentController(roomAppointmentService);
 
-            //Drugs
-            var drugsRepo = new DrugsRepo();
-            var drugsService = new DrugsService(drugsRepo);
-            drugsController = new DrugsController(drugsService);
+            //Medicines
+            var medicinesRepo = new MedicinesRepo();
+            var medicinesService = new MedicinesService(medicinesRepo);
+            medicinesController = new MedicineController(medicinesService);
 
             var dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
@@ -212,8 +212,8 @@ namespace ClassDijagramV1._0
             MedicalRecord mr1 = new MedicalRecord(p1.Id, "Dragan", MaritalStatus.Single, "377899", BloodType.O);
 
 
-            Room r1 = roomController.GetARoom("id");
-            Room r2 = roomController.GetARoom("id5");
+            Room r1 = roomController.GetRoom("id");
+            Room r2 = roomController.GetRoom("id5");
 
             Appointment? a1 = null;
             Appointment? a2 = null;

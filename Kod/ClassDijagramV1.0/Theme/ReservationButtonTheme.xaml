@@ -13,11 +13,11 @@
                             <TextBlock Text="{TemplateBinding Property=Content}"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
-                                       Height="63"
+                                       Height="38"
                                        Width="450"
                                        Foreground="Black"
-                                       FontSize="26"
-                                       Margin="10,0,0,0"
+                                       FontSize="24"
+                                       Margin="0,0,0,0"
                                        Padding="5"/>
 
                         </Grid>

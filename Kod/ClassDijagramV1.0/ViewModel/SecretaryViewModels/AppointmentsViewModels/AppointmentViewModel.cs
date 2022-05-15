@@ -45,7 +45,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModel
 
             // Ucitamo reference na sobu,doktora i pacijenta posto imamo samo id
             _patient = _patientController.GetPatientById(_appointment.PatientId);
-            _room = _roomController.GetARoom(_appointment.RoomId);
+            _room = _roomController.GetRoom(_appointment.RoomId);
             _doctor = _doctorController.GetDoctorById(_appointment.DoctorId);
 
             SetAppropriateColor();

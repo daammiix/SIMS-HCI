@@ -20,17 +20,17 @@ using System.Windows.Shapes;
 namespace ClassDijagramV1._0.Views
 {
     /// <summary>
-    /// Interaction logic for ChangeDrugsWindow.xaml
+    /// Interaction logic for ChangeRejectedDrugsWindow.xaml
     /// </summary>
-    public partial class ChangeDrugsWindow : Window
+    public partial class ChangeRejectedDrugsWindow : Window
     {
-
         public RoomController roomController;
         public MedicineController medicineController;
         public Storage storage;
         private IRefreshableMedicineView medicineView;
         QuantifiedMedicine quantifiedMedicine;
-        public ChangeDrugsWindow(QuantifiedMedicine? quantifiedMedicine, IRefreshableMedicineView medicineView)
+        public BindingList<String> MedicineComponents { get; set; }
+        public ChangeRejectedDrugsWindow(QuantifiedMedicine? quantifiedMedicine, IRefreshableMedicineView medicineView)
         {
             InitializeComponent();
             var app = Application.Current as App;
@@ -39,15 +39,19 @@ namespace ClassDijagramV1._0.Views
             this.medicineView = medicineView;
             this.quantifiedMedicine = (QuantifiedMedicine)quantifiedMedicine;
             storage = (Storage)roomController.GetRoom("storage");
+            this.MedicineComponents = quantifiedMedicine.Medicines.MedicineComponents;
+
+            ChangeComponents.Clear();
+
+            foreach (var component in MedicineComponents)
+            {
+                ChangeComponents.AppendText(component + Environment.NewLine);
+            }
+
             this.DataContext = quantifiedMedicine;
         }
 
-        private Medicines MedicineFromTextBoxes()
-        {
-            return new Medicines(ChangedDrugsId.Text, ChangedDrugsName.Text, ChangeDrugsStatus.Text);
-        }
-
-        private void SaveChangedDrugs_Click(object sender, RoutedEventArgs e)
+        private void SaveChangedRejectedDrugs_Click(object sender, RoutedEventArgs e)
         {
             var medicine = MedicineFromTextBoxes();
             var quantity = Int32.Parse(ChangedDrugsQuantity.Text);
@@ -60,9 +64,22 @@ namespace ClassDijagramV1._0.Views
             this.Close();
         }
 
-        private void QuitChangedDrugs_Click(object sender, RoutedEventArgs e)
+        private void QuitChangedRejectedDrugs_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private Medicines MedicineFromTextBoxes()
+        {
+            var addComponents = ChangeComponents.Text;
+            MedicineComponents.Clear();
+            string[] components = addComponents.Split(',');
+            foreach (string c in components)
+            {
+                var component = c.Trim();
+                MedicineComponents.Add(component);
+            }
+            return new Medicines(ChangedDrugsId.Text, ChangedDrugsName.Text, ChangeDrugsStatus.Text, MedicineComponents);
         }
     }
 }

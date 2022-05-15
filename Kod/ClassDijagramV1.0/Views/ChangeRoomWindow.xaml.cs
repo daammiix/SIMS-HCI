@@ -48,7 +48,8 @@ namespace ClassDijagramV1._0.Views
                 Int32.Parse(ChangeFloor.Text),
                 Int32.Parse(ChangeNumber.Text),
                 ChangeStatus.Text,
-                room.EquipmentList
+                room.EquipmentList,
+                room.MedicineList
             );
         }
 

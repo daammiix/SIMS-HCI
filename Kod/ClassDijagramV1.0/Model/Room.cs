@@ -18,12 +18,14 @@ namespace Model
         public String RoomStatus { get; set; }
         public BindingList<RoomEquipmentBinding> EquipmentList { get; set; } = new BindingList<RoomEquipmentBinding>();
 
+        public BindingList<RoomMedicineBinding> MedicineList { get; set; } = new BindingList<RoomMedicineBinding>();
+
         public Room()
         {
 
         }
 
-        public Room(String RoomID, String RoomName, int Floor, int RoomNumber, String RoomStatus, BindingList<RoomEquipmentBinding>? EquipmentList = null)
+        public Room(String RoomID, String RoomName, int Floor, int RoomNumber, String RoomStatus, BindingList<RoomEquipmentBinding>? EquipmentList = null, BindingList<RoomMedicineBinding>? MedicineList = null)
         {
             this.RoomID = RoomID;
             this.RoomName = RoomName;
@@ -31,6 +33,7 @@ namespace Model
             this.RoomNumber = RoomNumber;
             this.RoomStatus = RoomStatus;
             if (EquipmentList != null) { this.EquipmentList = EquipmentList; }
+            if (MedicineList != null) { this.MedicineList = MedicineList; }
         }
 
         private RoomEquipmentBinding? getBinding(Equipment e)
@@ -38,6 +41,18 @@ namespace Model
             foreach (var binding in EquipmentList)
             {
                 if (binding.EquipmentID == e.EquipmentID)
+                {
+                    return binding;
+                }
+            }
+            return null;
+        }
+
+        private RoomMedicineBinding? getMedicineBinding(Medicines medicine)
+        {
+            foreach (var binding in MedicineList)
+            {
+                if (binding.MedicineID == medicine.ID)
                 {
                     return binding;
                 }
@@ -58,12 +73,39 @@ namespace Model
             }
         }
 
+        public void addMedicine(Medicines m, int quantity)
+        {
+            RoomMedicineBinding? binding = getMedicineBinding(m);
+            if (binding == null)
+            {
+                MedicineList.Add(new RoomMedicineBinding(m.ID, quantity));
+            }
+            else
+            {
+                binding.Quantity += quantity;
+            }
+        }
+
         public void addNewEquipment(Equipment e, int quantity)
         {
             RoomEquipmentBinding? binding = getBinding(e);
             if (binding == null)
             {
                 EquipmentList.Add(new RoomEquipmentBinding(e.EquipmentID, quantity));
+            }
+            else
+            {
+                WarningId warningId = new WarningId();
+                warningId.Show();
+            }
+        }
+
+        public void addNewMedicine(Medicines m, int quantity)
+        {
+            RoomMedicineBinding? binding = getMedicineBinding(m);
+            if (binding == null)
+            {
+                MedicineList.Add(new RoomMedicineBinding(m.ID, quantity));
             }
             else
             {
@@ -96,6 +138,23 @@ namespace Model
             if (binding.Quantity == quantity)
             {
                 EquipmentList.Remove(binding);
+            }
+            else
+            {
+                binding.Quantity -= quantity;
+            }
+        }
+
+        public void removeMedicine(Medicines m, int quantity)
+        {
+            RoomMedicineBinding? binding = getMedicineBinding(m);
+            if (binding == null)
+            {
+                throw new Exception("Binding not found");
+            }
+            if (binding.Quantity == quantity)
+            {
+                MedicineList.Remove(binding);
             }
             else
             {
@@ -150,6 +209,18 @@ namespace Model
         {
             this.EquipmentID = equipmentID;
             this.Quantity = quantity;
+        }
+    }
+
+    public class RoomMedicineBinding
+    {
+        public String MedicineID { get; set; }
+        public int Quantity { get; set; }
+
+        public RoomMedicineBinding(string medicineID, int quantity)
+        {
+            MedicineID = medicineID;
+            Quantity = quantity;
         }
     }
 }

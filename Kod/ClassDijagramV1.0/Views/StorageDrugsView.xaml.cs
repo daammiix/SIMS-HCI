@@ -2,6 +2,7 @@
 using ClassDijagramV1._0.Converters;
 using ClassDijagramV1._0.Helpers;
 using ClassDijagramV1._0.Model;
+using ClassDijagramV1._0.Util;
 using Controller;
 using System;
 using System.Collections.Generic;
@@ -24,34 +25,91 @@ namespace ClassDijagramV1._0.Views
     /// <summary>
     /// Interaction logic for StorageDrugsView.xaml
     /// </summary>
-    public partial class StorageDrugsView : UserControl
+    public partial class StorageDrugsView : UserControl, IRefreshableMedicineView
     {
-        DrugsController drugsController;
-        Drugs drug;
+        MedicineController medicinesController;
+        Medicines drug;
+        Storage storage;
         RoomController roomController;
-        BindingList<Equipment> allEquipment;
-        public BindingList<QuantifiedEquipment> EquipmentList { get; set; }
+        public BindingList<Medicines> AllMedicines { get; set; }
+        public BindingList<QuantifiedMedicine> MedicinesList { get; set; }
         public StorageDrugsView()
         {
             InitializeComponent();
+            var app = Application.Current as App;
+            MedicinesList = new BindingList<QuantifiedMedicine>();
+            medicinesController = app.medicinesController;
+            roomController = app.roomController;
+            AllMedicines = medicinesController.GetAllMedicines();
+            storage = (Storage)roomController.GetRoom("storage");
+            RefreshMedicines();
+
+            this.DataContext = this;
         }
 
         private void AddDrugs_Click(object sender, RoutedEventArgs e)
         {
-            AddDrugsWindow addDrugsWindow = new AddDrugsWindow();
+            AddDrugsWindow addDrugsWindow = new AddDrugsWindow(this);
             addDrugsWindow.Show();
         }
 
         private void ChangeDrugs_Click(object sender, RoutedEventArgs e)
         {
-            ChangeDrugsWindow changeDrugsWindow = new ChangeDrugsWindow();
-            changeDrugsWindow.Show();
+            QuantifiedMedicine? quantifiedMedicine = (QuantifiedMedicine?)DrugsListGrid.SelectedItem;
+            if (quantifiedMedicine != null)
+            {
+                if (quantifiedMedicine.Medicines.Status.Equals("Odobren"))
+                {
+                    ChangeDrugsWindow changeDrugsWindow = new ChangeDrugsWindow(quantifiedMedicine, this);
+                    changeDrugsWindow.Show();
+                }else
+                {
+                    ChangeRejectedDrugsWindow changeRejectedDrugsWindow = new ChangeRejectedDrugsWindow(quantifiedMedicine, this);
+                    changeRejectedDrugsWindow.Show();
+                }
+            }
+            else
+            {
+                Warning warning = new Warning();
+                warning.Show();
+            }
         }
 
         private void DeleteDrugs_Click(object sender, RoutedEventArgs e)
         {
-            DeleteDrugsWindow deleteDrugsWindow = new DeleteDrugsWindow();
-            deleteDrugsWindow.Show();
+            QuantifiedMedicine? quantifiedMedicine = (QuantifiedMedicine?)DrugsListGrid.SelectedItem;
+            if (quantifiedMedicine != null)
+            {
+                DeleteDrugsWindow deleteDrugsWindow = new DeleteDrugsWindow(quantifiedMedicine, this);
+                deleteDrugsWindow.Show();
+            }
+            else
+            {
+                Warning warning = new Warning();
+                warning.Show();
+            }
+        }
+
+        public void RefreshMedicines()
+        {
+            MedicinesList.Clear();
+            foreach (var binding in storage.MedicineList)
+            {
+                foreach (var medicine in AllMedicines)
+                {
+                    if (medicine.ID == binding.MedicineID)
+                    {
+                        MedicinesList.Add(new QuantifiedMedicine(medicine, binding.Quantity));
+                    }
+                }
+            }
+        }
+
+        private void OnOpenComponents_Click(object sender, RoutedEventArgs e)
+        {
+            QuantifiedMedicine? quantifiedMedicine = (QuantifiedMedicine?)DrugsListGrid.SelectedItem;
+            MedicineComponentsWindow medicineComponents = new MedicineComponentsWindow(quantifiedMedicine);
+            medicineComponents.Show();
         }
     }
 }

@@ -16,65 +16,54 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ClassDijagramV1._0.Helpers;
 
 namespace ClassDijagramV1._0.Views
 {
     /// <summary>
-    /// Interaction logic for StorageEquip.xaml
+    /// Interaction logic for RenovatingSplit.xaml
     /// </summary>
-    public partial class StorageEquip : Window
+    public partial class RenovatingSplit : Window
     {
         readonly private String format = "dd/MM/yyyyTHH:mm";
-        readonly private String timeFormat = "HH:mm";
         readonly private String fullFormat = "dd/MM/yyyy HH:mm";
 
-        public EquipmentController equipmentController;
-        public EquipmentAppointmentController equipmentAppointmentController;
-        public RoomAppointmentController roomAppointmentController;
-        public AppointmentController appointmentController;
-        public RoomController roomController;
-
-        public BindingList<Room> Rooms { get; set; }
-        public Room selectedToRoom { get; set; }
-        public Storage storage;
-        public Equipment selectedEquipment;
-        public QuantifiedEquipment QEquipment { get; set; }
-        public int quantity;
-
-        public BindingList<String> RoomsAvailable { get; set; }
         public String FromDate { get; set; } = DateTime.Now.ToString("dd/MM/yyyy");
         public String FromTime { get; set; } = DateTime.Now.ToString("HH:mm");
         public String ToDate { get; set; } = DateTime.Now.ToString("dd/MM/yyyy");
         public String ToTime { get; set; } = DateTime.Now.ToString("HH:mm");
+
+        public RoomController roomController;
+        public EquipmentAppointmentController equipmentAppointmentController;
+        public RoomAppointmentController roomAppointmentController;
+        public AppointmentController appointmentController;
+
+        public BindingList<String> RoomsAvailable { get; set; }
         private BindingList<Availability> availabilities { get; set; }
 
-        public StorageEquip(QuantifiedEquipment qEquipment)
+        public Room selectedRoom { get; set; }
+        public Room newRoom;
+
+        private readonly Random _random = new Random();
+
+        public RenovatingSplit(Room selectedRoom)
         {
             InitializeComponent();
-            DataContext = this;
+            this.DataContext = this;
 
             var app = Application.Current as App;
+            roomController = app.roomController;
             equipmentAppointmentController = app.equipmentAppointmentController;
-            equipmentController = app.equipmentController;
             roomAppointmentController = app.roomAppointmentController;
             appointmentController = app.AppointmentController;
-            roomController = app.roomController;
 
-            Rooms = roomController.GetAllRooms();
-            storage = (Storage)roomController.GetRoom("storage");
-            this.QEquipment = qEquipment;
-            this.selectedEquipment = QEquipment.Equipment;
+            this.selectedRoom = selectedRoom;
 
             RoomsAvailable = new BindingList<String>();
             availabilities = new BindingList<Availability>();
         }
 
-        private void SaveStorageEquip_Click(object sender, RoutedEventArgs e)
+        private void SaveRenovatingSplit_Click(object sender, RoutedEventArgs e)
         {
-            selectedToRoom = (Room)MovingTo.SelectedItem;
-            quantity = Convert.ToInt32(Quantity.Text);
-
             DateTime fromDatetime = DateTime.ParseExact(FromDateField.Text + "T" + FromTimeField.Text, format, null);
             DateTime toDatetime = DateTime.ParseExact(ToDateField.Text + "T" + ToTimeField.Text, format, null);
 
@@ -85,15 +74,35 @@ namespace ClassDijagramV1._0.Views
                 return;
             }
 
-            var equipmentAppointment = new EquipmentAppointment(storage.RoomID, selectedToRoom.RoomID, selectedEquipment, quantity, fromDatetime, toDatetime);
-            equipmentAppointmentController.AddEquipmentAppointment(equipmentAppointment);
+            var appointmentId = RandomId();
+
+            newRoom = RoomFromTextboxes();
+
+            var roomAppointment = new RoomAppointment(appointmentId, selectedRoom.RoomID, fromDatetime, toDatetime - fromDatetime, newRoom);
+            roomAppointmentController.AddRoomAppointment(roomAppointment);
 
             this.Close();
         }
 
-        private void QuitStorageEquip_Click(object sender, RoutedEventArgs e)
+        private void QuitRenovatingSplit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void DateField_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            ListsHandler();
+        }
+
+        private Room RoomFromTextboxes()
+        {
+            return new Room(
+                AddId.Text,
+                AddName.Text,
+                selectedRoom.Floor,
+                Int32.Parse(AddNumber.Text),
+                "Aktivna"
+            );
         }
 
         private bool checkTimeSpansOverlap(DateTime fromDatetimeA, DateTime toDatetimeA, DateTime fromDatetimeB, DateTime toDatetimeB)
@@ -113,46 +122,11 @@ namespace ClassDijagramV1._0.Views
             return true;
         }
 
-        private void Quantity_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            UpdateAvailabilityOfEquipment();
-        }
-
-        private void FromDateField_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            ListsHandler();
-        }
-
-        private void MovingTo_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ListsHandler();
-        }
-
         private String formatAvailableTime(DateTime start, DateTime end)
         {
             availabilities.Add(new Availability(start, end));
 
             return start.ToString(fullFormat) + " - " + end.ToString(fullFormat);
-        }
-
-        public void UpdateAvailabilityOfEquipment()
-        {
-            try
-            {
-                quantity = Convert.ToInt32(Quantity.Text);
-            }
-            catch (FormatException ex)
-            {
-                quantity = 0;
-                return;
-            }
-            if (!(QEquipment.Quantity >= quantity))
-            {
-                WarningQuantity warningQuantity = new WarningQuantity();
-                warningQuantity.Show();
-                Quantity.Clear();
-                return;
-            }
         }
 
         public void ListsHandler()
@@ -163,11 +137,6 @@ namespace ClassDijagramV1._0.Views
             var appointments = appointmentController.GetListOfAppointments();
             var equipmentAppointments = equipmentAppointmentController.GetAllEquipmentAppointment();
 
-            Room? selectedToRoom = (Room?)MovingTo.SelectedItem;
-            if (selectedToRoom == null)
-            {
-                return;
-            }
             DateTime selectedFrom, selectedTo;
             try
             {
@@ -185,7 +154,7 @@ namespace ClassDijagramV1._0.Views
                 var aptTo = equipmentAppointment.ToDateTime.Date;
                 if (checkTimeSpansOverlap(aptFrom, aptTo, selectedFrom, selectedTo))
                 {
-                    if (selectedToRoom != null && (equipmentAppointment.RoomFrom == selectedToRoom.RoomID || equipmentAppointment.RoomTo == selectedToRoom.RoomID))
+                    if (selectedRoom != null && (equipmentAppointment.RoomFrom == selectedRoom.RoomID || equipmentAppointment.RoomTo == selectedRoom.RoomID))
                     {
                         RoomsAvailable.Add(formatAvailableTime(equipmentAppointment.FromDateTime, equipmentAppointment.ToDateTime));
                     }
@@ -197,7 +166,7 @@ namespace ClassDijagramV1._0.Views
                 var aptTo = (roomAppointment.startDate + roomAppointment.duration).Date;
                 if (checkTimeSpansOverlap(aptFrom, aptTo, selectedFrom, selectedTo))
                 {
-                    if (roomAppointment.roomId == selectedToRoom.RoomID)
+                    if (roomAppointment.roomId == selectedRoom.RoomID)
                     {
                         RoomsAvailable.Add(formatAvailableTime(roomAppointment.startDate, roomAppointment.startDate + roomAppointment.duration));
                     }
@@ -209,12 +178,47 @@ namespace ClassDijagramV1._0.Views
                 var aptTo = (appointment.AppointmentDate + appointment.Duration).Date;
                 if (checkTimeSpansOverlap(aptFrom, aptTo, selectedFrom, selectedTo))
                 {
-                    if (appointment.RoomId == selectedToRoom.RoomID)
+                    if (appointment.RoomId == selectedRoom.RoomID)
                     {
                         RoomsAvailable.Add(formatAvailableTime(appointment.AppointmentDate, appointment.AppointmentDate + appointment.Duration));
                     }
                 }
             }
+        }
+
+        public int RandomNumber(int min, int max)
+        {
+            return _random.Next(min, max);
+        }
+
+        public string RandomString(int size, bool lowerCase = false)
+        {
+            var builder = new StringBuilder(size);
+
+
+            char offset = lowerCase ? 'a' : 'A';
+            const int lettersOffset = 26; // A...Z or a..z: length = 26  
+
+            for (var i = 0; i < size; i++)
+            {
+                var @char = (char)_random.Next(offset, offset + lettersOffset);
+                builder.Append(@char);
+            }
+
+            return lowerCase ? builder.ToString().ToLower() : builder.ToString();
+        }
+
+        public string RandomId()
+        {
+            var passwordBuilder = new StringBuilder();
+
+            // 4-Letters lower case   
+            passwordBuilder.Append(RandomString(4, true));
+
+            // 4-Digits between 10 and 99
+            passwordBuilder.Append(RandomNumber(10, 99));
+
+            return passwordBuilder.ToString();
         }
     }
 }
