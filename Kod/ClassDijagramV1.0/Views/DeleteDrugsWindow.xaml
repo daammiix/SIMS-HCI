@@ -11,10 +11,11 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
-        Background="#B07E86"
+        Foreground="#1F1313"
+        Background="#B0C69D"
+        FontFamily="Berlin Sans FB Demi"
         BorderThickness="4"
-        BorderBrush="#8E4D58"
-        FontFamily="Comic Sans MS">
+        BorderBrush="#455736">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -33,10 +34,10 @@
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    FontSize="34"
-                   Foreground="Black">
+                   Foreground="#1F1313">
         </TextBlock>
         <TextBlock Grid.Row="1"
-                   Text="Da li ste sigurni da želite &#x0a;      da obrišete lek?"
+                   Text="Da li ste sigurni da želite &#x0a;       da obrišete lek?"
                    VerticalAlignment="Top"
                    Margin="0,15,0,0"
                    HorizontalAlignment="Center"

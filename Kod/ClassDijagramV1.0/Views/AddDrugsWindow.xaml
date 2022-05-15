@@ -12,10 +12,10 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
-        Background="#B07E86"
+        Background="#B0C69D"
+        FontFamily="Berlin Sans FB Demi"
         BorderThickness="4"
-        BorderBrush="#8E4D58"
-        FontFamily="Comic Sans MS">
+        BorderBrush="#455736">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -32,8 +32,8 @@
                    Text="Dodavanje leka"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
-                   FontSize="34"
-                   Foreground="Black">
+                   FontSize="36"
+                   Foreground="#1F1313">
         </TextBlock>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -42,21 +42,21 @@
                 <ColumnDefinition Width="400"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right">
-                <Label Content="Šifra:" FontSize="25" Height="55" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
-                <Label Content="Naziv:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
-                <Label Content="Količina:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
-                <Label Content="Sastav:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
+                <Label Content="Šifra:" FontSize="24" Height="50" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
+                <Label Content="Naziv:" FontSize="24" Height="50" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
+                <Label Content="Količina:" FontSize="24" Height="50" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
+                <Label Content="Sastav:" FontSize="24" Height="50" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">
-                <TextBox x:Name="AddDrugsId" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                <TextBox x:Name="AddDrugsName" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                <TextBox x:Name="AddDrugsQuantity" Width="120" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
+                <TextBox x:Name="AddDrugsId" Width="320" Background="#E7E7E7" Height="50" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                <TextBox x:Name="AddDrugsName" Width="320" Background="#E7E7E7" Height="50" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                <TextBox x:Name="AddDrugsQuantity" Width="120" Background="#E7E7E7" Height="50" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
                 <TextBox x:Name="AddComponents" Width="320" AcceptsReturn="True" Background="#E7E7E7" Height="100" Margin="0,5,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"/>
             </StackPanel>
             <StackPanel Grid.Column="2">
-                <Label Content="Zamenski lekovi:" FontSize="22" Margin="15,0,0,5"/>
+                <Label Content="Zamenski lekovi:" FontSize="24" Margin="20,0,0,5"/>
                 <StackPanel Orientation="Horizontal">
-                    <ComboBox x:Name="SuggestedMedicinesComboBox" Width="230" Height="40" Margin="10,0,0,5" FontSize="22"
+                    <ComboBox x:Name="SuggestedMedicinesComboBox" Width="230" Height="40" Margin="20,0,0,5" FontSize="22"
                           VerticalContentAlignment="Center" IsReadOnly="True" HorizontalAlignment="Left"
                           ItemsSource="{Binding MedicinesList}">
                         <ComboBox.ItemTemplate>
@@ -67,9 +67,10 @@
                     </ComboBox>
                     <Button x:Name="AddSuggestedMedicine" HorizontalAlignment="Right" Height="32" Width="80" Content="Dodaj" Margin="5,10,10,0" Style="{StaticResource CRUDButton}" Click="AddSuggestedMedicine_Click"/>
                 </StackPanel>
-                <DataGrid  Height="200" Width="250" x:Name="SuggestedMedicinesGrid" 
+                <DataGrid  Height="200" Width="250" x:Name="SuggestedMedicinesGrid" FontSize="18"
                       CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left"
-                      CanUserDeleteRows="False" AutoGenerateColumns="False"
+                      RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
+                      CanUserDeleteRows="False" AutoGenerateColumns="False" Margin="20,10,0,0"
                       ItemsSource="{Binding Path=SelectedMedicines}" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Odabrani lekovi" Width="*" Binding="{Binding Path=.}"/>

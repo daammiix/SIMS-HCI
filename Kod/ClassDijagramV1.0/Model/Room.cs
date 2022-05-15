@@ -6,10 +6,11 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
+using ClassDijagramV1._0.Util;
 
 namespace Model
 {
-    public class Room
+    public class Room : ObservableObject
     {
         public String RoomID { get; set; }
         public String RoomName { get; set; }

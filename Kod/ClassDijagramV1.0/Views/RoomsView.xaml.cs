@@ -98,5 +98,6 @@ namespace ClassDijagramV1._0.Views
             ReservationOfRoom reservationOfRoom = new ReservationOfRoom(selected);
             reservationOfRoom.Show();
         }
+
     }
 }
