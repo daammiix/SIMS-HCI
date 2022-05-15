@@ -11,10 +11,11 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
-        Background="#B07E86"
+        Foreground="#1F1313"
+        Background="#B0C69D"
+        FontFamily="Berlin Sans FB Demi"
         BorderThickness="4"
-        BorderBrush="#8E4D58"
-        FontFamily="Comic Sans MS">
+        BorderBrush="#455736">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
@@ -25,8 +26,8 @@
                    Text="Izmena leka"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
-                   FontSize="34"
-                   Foreground="Black">
+                   FontSize="36"
+                   Foreground="#1F1313">
         </TextBlock>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -34,16 +35,16 @@
                 <ColumnDefinition Width="440"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right">
-                <Label Content="Šifra:" FontSize="25" Height="55" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
-                <Label Content="Naziv:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
-                <Label Content="Status:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
-                <Label Content="Količina:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
+                <Label Content="Šifra:" FontSize="24" Height="55" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
+                <Label Content="Naziv:" FontSize="24" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
+                <Label Content="Status:" FontSize="24" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
+                <Label Content="Količina:" FontSize="24" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">
-                <TextBox x:Name="ChangedDrugsId" Width="320" Background="#E7E7E7" IsReadOnly="True" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=Medicines.ID,Mode=OneWay}"/>
-                <TextBox x:Name="ChangedDrugsName" Width="320" Background="#E7E7E7" IsReadOnly="True" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=Medicines.Name,Mode=OneWay}"/>
-                <TextBox x:Name="ChangeDrugsStatus"  Width="320" Background="#E7E7E7" IsReadOnly="True" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=Medicines.Status,Mode=OneWay}"/>
-                <TextBox x:Name="ChangedDrugsQuantity" Width="120" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=Quantity,Mode=OneWay}"/>
+                <TextBox x:Name="ChangedDrugsId" Width="320" Background="#E7E7E7" IsReadOnly="True" Height="50" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=Medicines.ID,Mode=OneWay}"/>
+                <TextBox x:Name="ChangedDrugsName" Width="320" Background="#E7E7E7" IsReadOnly="True" Height="50" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=Medicines.Name,Mode=OneWay}"/>
+                <TextBox x:Name="ChangeDrugsStatus"  Width="320" Background="#E7E7E7" IsReadOnly="True" Height="50" Margin="0,10,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=Medicines.Status,Mode=OneWay}"/>
+                <TextBox x:Name="ChangedDrugsQuantity" Width="120" Background="#E7E7E7" Height="50" Margin="0,10,0,5" FontSize="25" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=Quantity,Mode=OneWay}"/>
             </StackPanel>
         </Grid>
         <StackPanel Grid.Row="2">

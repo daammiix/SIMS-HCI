@@ -12,9 +12,11 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
-        Background="#8BCDD3"
+        Foreground="#1F1313"
+        Background="#B0C69D"
+        FontFamily="Berlin Sans FB Demi"
         BorderThickness="4"
-        BorderBrush="#234A4D">
+        BorderBrush="#455736">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -36,7 +38,7 @@
                    Text="Renoviranje - razdvajanje sale"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
-                   FontSize="34"
+                   FontSize="36"
                    Foreground="Black">
         </TextBlock>
         <Grid Grid.Row="1">
@@ -47,11 +49,12 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Row="1"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
-                <Label Content="Sala koja se razdvaja:" FontSize="22" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
+                <Label Content="Sala koja se razdvaja:" FontSize="24" Margin="20,0,0,5" HorizontalContentAlignment="Left"/>
                 <TextBox x:Name="MovingTo" IsReadOnly="True" Width="230" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedRoom,Converter={StaticResource RoomToStringConverter}}" />
-                <Label Content="Dostupnost sale:" FontSize="22" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
-                <DataGrid Grid.Column="1" Height="200" Width="250" x:Name="BusyRooms" Margin="15, 5, 10,0"
-                      CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left"
+                <Label Content="Dostupnost sale:" FontSize="24" Margin="20,0,0,5" HorizontalContentAlignment="Left"/>
+                <DataGrid Grid.Column="1" Height="200" Width="250" x:Name="BusyRooms" Margin="20, 5, 10,0"
+                      CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left" FontSize="18"
+                      RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
                       CanUserDeleteRows="False" AutoGenerateColumns="False"
                       ItemsSource="{Binding Path=RoomsAvailable}" IsReadOnly="True">
                     <DataGrid.Columns>
@@ -61,15 +64,15 @@
             </StackPanel>
 
             <StackPanel Grid.Row="1"  Grid.Column="1" Orientation="Vertical">
-                <Label Content="Nova sala:" FontSize="22" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
-                <Label Content="Šifra:" FontSize="22" Height="55" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
-                <Label Content="Naziv:" FontSize="22" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
-                <Label Content="Broj sobe:" FontSize="22" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
+                <Label Content="Nova sala:" FontSize="24" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
+                <Label Content="Šifra:" FontSize="24" Height="55" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
+                <Label Content="Naziv:" FontSize="24" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
+                <Label Content="Broj sobe:" FontSize="24" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
             </StackPanel>
 
             <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left">
-                <TextBox x:Name="AddId" Width="320" Background="#E7E7E7" Height="55" Margin="0,45,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                <ComboBox x:Name="AddName" Width="320" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" 
+                <TextBox x:Name="AddId" Width="320" Background="#E7E7E7" Height="55" Margin="0,40,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                <ComboBox x:Name="AddName" Width="320" Height="55" Margin="0,5,0,5" FontSize="24" HorizontalContentAlignment="Left" 
                           VerticalContentAlignment="Center" IsReadOnly="True">
                     <ComboBoxItem Margin="5,0,0,0" Content="Operaciona Sala"/>
                     <ComboBoxItem Margin="5,0,0,0" Content="Sala za preglede"/>
@@ -88,17 +91,17 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
-                <Label Content="Zakaži opremanje:" FontSize="22" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
+                <Label Content="Zakaži opremanje:" FontSize="24" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Label Content="Od:" FontSize="22" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
-                    <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromDate}" Style="{StaticResource DateTextBox}" TextChanged="DateField_TextChanged"/>
+                    <Label Content="Od:" FontSize="24" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
+                    <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="40" Margin="4,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromDate}" Style="{StaticResource DateTextBox}" TextChanged="DateField_TextChanged"/>
                     <TextBox x:Name="FromTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromTime}"  Style="{StaticResource TimeTextBox}"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Label Content="Do:" FontSize="22" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
-                    <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToDate}"  Style="{StaticResource DateTextBox}" TextChanged="DateField_TextChanged"/>
+                    <Label Content="Do:" FontSize="24" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
+                    <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="40" Margin="5,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToDate}"  Style="{StaticResource DateTextBox}" TextChanged="DateField_TextChanged"/>
                     <TextBox x:Name="ToTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToTime}"  Style="{StaticResource TimeTextBox}"/>
                 </StackPanel>
 
@@ -106,7 +109,7 @@
 
             <WrapPanel Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right">
                 <Button x:Name="SaveRenovatingSplit" HorizontalAlignment="Right" Height="32" Width="90" Content="Sačuvaj" Margin="5,10,10,25" Style="{StaticResource CRUDButton}" Click="SaveRenovatingSplit_Click"/>
-                <Button x:Name="QuitRenovatingSplit" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,25,25" Style="{StaticResource CRUDButton}" Click="QuitRenovatingSplit_Click"/>
+                <Button x:Name="QuitRenovatingSplit" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,35,25" Style="{StaticResource CRUDButton}" Click="QuitRenovatingSplit_Click"/>
             </WrapPanel>
         </Grid>
     </Grid>

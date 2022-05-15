@@ -23,9 +23,13 @@
     </UserControl.Resources>
 
     <StackPanel Grid.Column="1" Height="655">
-        <TextBox Width="250"
+            <TextBlock Text="Inventar"
+                   Foreground="#1F1313"
+                   FontSize="36"
+                   HorizontalAlignment="Left"
+                   Margin="5,10,0,0"/>
+            <TextBox Width="250"
                  Height="35"
-                     Margin="0,40,0,0"
                  VerticalContentAlignment="Center"
                  HorizontalAlignment="Right"
                  Style="{StaticResource FancySearchBox}"/>

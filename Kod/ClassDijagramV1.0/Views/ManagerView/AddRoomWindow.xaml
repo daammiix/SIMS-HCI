@@ -11,9 +11,10 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
-        Background="#B07E86"
+        Background="#B0C69D"
+        FontFamily="Berlin Sans FB Demi"
         BorderThickness="4"
-        BorderBrush="#8E4D58">
+        BorderBrush="#455736">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>

@@ -79,15 +79,26 @@ namespace ClassDijagramV1._0.Service
             for (int i = 0; i < roomAppointments.Count; i++)
             {
                 var appointment = roomAppointments[i];
+                if (DateTime.Now < appointment.startDate)
+                {
+                    continue;
+                }
                 if (DateTime.Now < appointment.startDate + appointment.duration)
                 {
+                    foreach (var currentRoom in roomsList)
+                    {
+                        if (currentRoom.RoomID == appointment.roomId || currentRoom.RoomID == appointment.RoomIDToMerge)
+                        {
+                            currentRoom.RoomStatus = "Renoviranje";
+                        }
+                    }
                     continue;
                 }
                 foreach (var currentRoom in roomsList)
                 {
                     if (currentRoom.RoomID == appointment.roomId)
                     {
-                        currentRoom.RoomStatus = "Renoviranje";
+                        currentRoom.RoomStatus = "Aktivna";
                     }
                 }
                 if (appointment.newRoomName != null)

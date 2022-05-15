@@ -12,6 +12,8 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="#B0C69D"
+        Foreground="#1F1313"
+        FontWeight="Light"
         FontFamily="Berlin Sans FB Demi"
         BorderThickness="4"
         BorderBrush="#455736">
@@ -67,7 +69,7 @@
 
             </StackPanel>
             <WrapPanel Grid.Row="2" HorizontalAlignment="Right">
-                <Button x:Name="CloseReservationOfRoom" Height="32" Width="95" Content="Zatvori" Margin="0,0,15,5" Style="{StaticResource CRUDButton}" Click="CloseReservationOfRoom_Click"/>
+                <Button x:Name="CloseReservationOfRoom" Height="32" Width="95" Content="Zatvori" Margin="0,0,15,10" Style="{StaticResource CRUDButton}" Click="CloseReservationOfRoom_Click"/>
             </WrapPanel>
         </Grid>
     </Grid>
