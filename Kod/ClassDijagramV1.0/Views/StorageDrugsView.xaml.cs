@@ -111,5 +111,6 @@ namespace ClassDijagramV1._0.Views
             MedicineComponentsWindow medicineComponents = new MedicineComponentsWindow(quantifiedMedicine);
             medicineComponents.Show();
         }
+
     }
 }

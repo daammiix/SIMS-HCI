@@ -40,7 +40,7 @@
                 <Grid Width="980" Height="468">
 
                     <DataGrid x:Name="RoomList" CanUserAddRows="True" SelectionMode="Single"
-                          CanUserResizeColumns="False"  CanUserResizeRows="False"
+                          CanUserResizeColumns="False"  CanUserResizeRows="False" 
                           RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
                           FontSize="20" BorderThickness="4" CanUserReorderColumns="False"
                           CanUserDeleteRows="False" AutoGenerateColumns="False"

@@ -8,8 +8,8 @@
              xmlns:converters="clr-namespace:ClassDijagramV1._0.Converters" xmlns:accountviewmodels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels" d:DataContext="{d:DesignInstance Type=accountviewmodels:AccountViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="655"
-             d:DesignWidth="930"
-             Background="#8BCDD3">
+             Background="#D9D4CC"
+             FontFamily="Berlin Sans FB Demi">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -20,46 +20,52 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <StackPanel Grid.Column="1" Height="655">
-        <TextBox Width="250"
+    <Grid Height="655">
+        <StackPanel Orientation="Vertical">
+                <TextBlock Text="Lekovi"
+                   Foreground="#1F1313"
+                   FontSize="36"
+                   HorizontalAlignment="Left"
+                   Margin="5,10,0,0"/>
+                <TextBox Width="250"
                  Height="35"
-                     Margin="0,40,0,0"
                  VerticalContentAlignment="Center"
                  HorizontalAlignment="Right"
                  Style="{StaticResource FancySearchBox}"/>
-        <StackPanel>
-            <Grid Width="930" Height="468">
+            <StackPanel>
+                <Grid Width="930" Height="468">
 
-                <DataGrid x:Name="DrugsListGrid" CanUserAddRows="True" SelectionMode="Single"
+                    <DataGrid x:Name="DrugsListGrid" CanUserAddRows="True" SelectionMode="Single"
                           CanUserResizeColumns="False"  CanUserResizeRows="False"
-                          RowBackground="#ECCB8D" Background="#EDE1CC" BorderBrush="#EEA61A"
+                          RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
                           FontSize="18" BorderThickness="4" CanUserReorderColumns="False"
                           CanUserDeleteRows="False" AutoGenerateColumns="False"
                           ItemsSource="{Binding Path=MedicinesList}" IsReadOnly="True">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Šifra" Width="100" Binding="{Binding Path=Medicines.ID}"/>
-                        <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=Medicines.Name}"/>
-                        <DataGridTextColumn Header="Količina" Width="200" Binding="{Binding Path=Quantity}"/>
-                        <DataGridTextColumn Header="Status" Width="150" Binding="{Binding Path=Medicines.Status}"/>
-                        <DataGridTemplateColumn Header="Sastav" Width="*">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Šifra" Width="100" Binding="{Binding Path=Medicines.ID}"/>
+                            <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=Medicines.Name}"/>
+                            <DataGridTextColumn Header="Količina" Width="200" Binding="{Binding Path=Quantity}"/>
+                            <DataGridTextColumn Header="Status" Width="150" Binding="{Binding Path=Medicines.Status}"/>
+                            <DataGridTemplateColumn Header="Sastav" Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock>
                                         <Hyperlink Foreground="Black" Click="OnOpenComponents_Click">Otvori sastav</Hyperlink>
-                                    </TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </StackPanel>
+            <StackPanel Height="98" Width="930">
+                <WrapPanel HorizontalAlignment="Right">
+                    <Button x:Name="AddDrugs" HorizontalAlignment="Right" Height="32" Width="70" Content="Dodaj" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" Click="AddDrugs_Click"/>
+                    <Button x:Name="ChangeDrugs" HorizontalAlignment="Right" Height="32" Width="75" Content="Izmeni" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" Click="ChangeDrugs_Click"/>
+                    <Button x:Name="DeleteDrugs" HorizontalAlignment="Right" Height="32" Width="75" Content="Obriši" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" Click="DeleteDrugs_Click"/>
+                </WrapPanel>
+            </StackPanel>
         </StackPanel>
-        <StackPanel Height="98" Width="930">
-            <WrapPanel HorizontalAlignment="Right">
-                <Button x:Name="AddDrugs" HorizontalAlignment="Right" Height="32" Width="70" Content="Dodaj" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" Click="AddDrugs_Click"/>
-                <Button x:Name="ChangeDrugs" HorizontalAlignment="Right" Height="32" Width="75" Content="Izmeni" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" Click="ChangeDrugs_Click"/>
-                <Button x:Name="DeleteDrugs" HorizontalAlignment="Right" Height="32" Width="75" Content="Obriši" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" Click="DeleteDrugs_Click"/>
-            </WrapPanel>
-        </StackPanel>
-    </StackPanel>
+    </Grid>
 </UserControl>

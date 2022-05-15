@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClassDijagramV1._0.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="655" d:DesignWidth="980"
-             Background="White">
+             d:DesignHeight="655" d:DesignWidth="1280"
+             Background="#D9D4CC"
+             FontFamily="Berlin Sans FB Demi">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="750"/>
@@ -22,11 +23,7 @@
 
             
 
-            <WrapPanel Grid.Row="1" HorizontalAlignment="Right">
-                <Button x:Name="AddRoom" HorizontalAlignment="Right" Height="32" Width="70" Content="Dodaj" Margin="5,10,5,0" Style="{StaticResource CRUDButton}"/>
-                <Button x:Name="ChangeRoom" HorizontalAlignment="Right" Height="32" Width="75" Content="Izmeni" Margin="5,10,5,0" Style="{StaticResource CRUDButton}"/>
-                <Button x:Name="DeleteRoom" HorizontalAlignment="Right" Height="32" Width="75" Content="Obriši" Margin="5,10,5,0" Style="{StaticResource CRUDButton}"/>
-            </WrapPanel>
+           
         </Grid>
 
         <StackPanel Grid.Column="1" Orientation="Vertical">
