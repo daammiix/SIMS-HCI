@@ -42,7 +42,7 @@ namespace ClassDijagramV1._0.Views
             equipmentController = app.equipmentController;
             roomController = app.roomController;
             allEquipment = equipmentController.GetAllEquipments();
-            storage = (Storage)roomController.GetARoom("storage");
+            storage = (Storage)roomController.GetRoom("storage");
             RefreshEquipment();
             
             this.DataContext = this;

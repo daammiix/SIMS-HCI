@@ -56,6 +56,11 @@ namespace Service
             repo.ChangeStorageQuantity(equipmentId, quantity);
         }
 
+        public void ChangeStorageMedicineQuantity(string meidicineId, int quantity)
+        {
+            repo.ChangeStorageMedicineQuantity(meidicineId, quantity);
+        }
+
         public Boolean CheckIfUniq(Room room, bool existingRoom)
         {
             var rooms = repo.GetAllRooms();
@@ -79,6 +84,8 @@ namespace Service
             }
             return true;
         }
+
+        //public Boolean Validation()
 
         public void SaveRooms()
         {

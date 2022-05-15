@@ -11,7 +11,7 @@ namespace ClassDijagramV1._0.Model
         public TimeSpan duration { get; set; }
         public String? newRoomName = null;
         public String? RoomIDToMerge = null;
-        public String? RoomToSplitId = null;
+        public Room? RoomToSplit = null;
 
         public RoomAppointment(String appointmentID, String roomId, DateTime startDate, TimeSpan duration)
         {
@@ -20,6 +20,23 @@ namespace ClassDijagramV1._0.Model
             this.startDate = startDate;
             this.duration = duration;
         }
-        
+
+        public RoomAppointment(String appointmentID, String roomId, DateTime startDate, TimeSpan duration, String RoomIDToMerge)
+        {
+            this.appointmentID = appointmentID;
+            this.roomId = roomId;
+            this.startDate = startDate;
+            this.duration = duration;
+            this.RoomIDToMerge = RoomIDToMerge;
+        }
+
+        public RoomAppointment(String appointmentID, String roomId, DateTime startDate, TimeSpan duration, Room RoomToSplit)
+        {
+            this.appointmentID = appointmentID;
+            this.roomId = roomId;
+            this.startDate = startDate;
+            this.duration = duration;
+            this.RoomToSplit = RoomToSplit;
+        }
     }
 }

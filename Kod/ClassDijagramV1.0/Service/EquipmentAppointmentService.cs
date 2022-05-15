@@ -49,18 +49,25 @@ namespace ClassDijagramV1._0.Service
                 {
                     continue;
                 }
-                if (DateTime.Now > equipmentAppointment.FromDateTime)
-                {
-                    Room room = roomController.GetARoom(equipmentAppointment.RoomFrom);
-                    room.removeEquipment(equipmentAppointment.SelectedEquipment, equipmentAppointment.Quantity);
-                    equipmentAppointment.Started = true;
-                }
+                ScheduledAppointmentStart(equipmentAppointment);
+
+
                 if (DateTime.Now > equipmentAppointment.ToDateTime)
                 {
-                    Room room = roomController.GetARoom(equipmentAppointment.RoomTo);
+                    Room room = roomController.GetRoom(equipmentAppointment.RoomTo);
                     room.addEquipment(equipmentAppointment.SelectedEquipment, equipmentAppointment.Quantity);
                     equipmentAppointmentRepository.DeleteEquipmentAppointment(i--);
                 }
+            }
+        }
+
+        public void ScheduledAppointmentStart(EquipmentAppointment equipmentAppointment)
+        {
+            if (DateTime.Now > equipmentAppointment.FromDateTime)
+            {
+                Room room = roomController.GetRoom(equipmentAppointment.RoomFrom);
+                room.removeEquipment(equipmentAppointment.SelectedEquipment, equipmentAppointment.Quantity);
+                equipmentAppointment.Started = true;
             }
         }
 
