@@ -1,5 +1,6 @@
 ﻿using ClassDijagramV1._0.Controller;
 using ClassDijagramV1._0.Model;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,12 +25,14 @@ namespace ClassDijagramV1._0.Views.PatientView
     public partial class RatingHospital : Page
     {
         private PatientMainWindow parent { get; set; }
+        private Patient _logedPatient;
         private RatingController _ratingController;
         public ObservableCollection<HospitalRating> HospitalRatings { get; set; }
-        public RatingHospital(PatientMainWindow patientMain)
+        public RatingHospital(PatientMainWindow patientMain, Patient logedPatient)
         {
             InitializeComponent();
             parent = patientMain;
+            _logedPatient = logedPatient;
             this.DataContext = this;
 
             App app = Application.Current as App;
@@ -45,6 +48,7 @@ namespace ClassDijagramV1._0.Views.PatientView
             HospitalRating hr = new HospitalRating(ocjene, ocjene.Average(), comment);
 
             _ratingController.AddRatingHospital(hr);
+            parent.startWindow.Content = new PatientMainPage(parent, _logedPatient);
 
         }
 

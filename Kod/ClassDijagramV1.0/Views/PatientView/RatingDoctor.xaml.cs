@@ -29,6 +29,7 @@ namespace ClassDijagramV1._0.Views.PatientView
         private PatientMainWindow parent { get; set; }
         // pacijentovi appointmenti, lista appointmentViewModela prosledjena konstruktoru
         private ObservableCollection<AppointmentViewModel> _patientAppointments;
+        //public ObservableCollection<AppointmentViewModel> Appointments;
         // kontroleri
         public AppointmentController _appointmentController;
         public DoctorController _doctorController;
@@ -37,7 +38,7 @@ namespace ClassDijagramV1._0.Views.PatientView
         public ObservableCollection<Doctor> Doctors { get; set; }
         private RatingController _ratingController;
         public ObservableCollection<DoctorRating> DoctorRatings { get; set; }
-        public RatingDoctor(PatientMainWindow patientMain, Patient logedPatient)
+        public RatingDoctor(ObservableCollection<AppointmentViewModel> appointments,PatientMainWindow patientMain, Patient logedPatient)
         {
             InitializeComponent();
             parent = patientMain;
@@ -48,8 +49,22 @@ namespace ClassDijagramV1._0.Views.PatientView
             _doctorController = app.DoctorController;
             _ratingController = app.RatingController;
 
+            //Appointments = appointments;
             Appointments = _appointmentController.GetAppointments();
-            Doctors = _doctorController.GetAllDoctors();
+            Doctors = new ObservableCollection<Doctor>();
+            foreach (Appointment a in Appointments)
+            {
+                if ((a.PatientId == _logedPatient.Id))
+                {
+                    if (!Doctors.Contains(_doctorController.GetDoctorById(a.DoctorId)))
+                    {
+                        Doctors.Add(_doctorController.GetDoctorById(a.DoctorId));
+                    }
+                    
+                }
+                
+            }
+            //Doctors = _doctorController.GetAllDoctors();
 
             DoctorRatings = _ratingController.GetAllDoctorRatings();
 
@@ -65,6 +80,7 @@ namespace ClassDijagramV1._0.Views.PatientView
             DoctorRating dr = new DoctorRating(d1.Id,ocjene, ocjene.Average(), comment);
 
             _ratingController.AddRatingDoctor(dr);
+            parent.startWindow.Content = new PatientMainPage(parent, _logedPatient);
         }
         private void EverythingRated(object sender, RoutedPropertyChangedEventArgs<int> e)
         {

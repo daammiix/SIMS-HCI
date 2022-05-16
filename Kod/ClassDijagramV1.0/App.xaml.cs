@@ -181,6 +181,7 @@ namespace ClassDijagramV1._0
             MedicalRecordController.SaveMedicalRecords();
             roomAppointmentController.SaveRoomAppointment();
             RatingController.SaveHospitalRatings();
+            RatingController.SaveDoctorRatings();
         }
 
         private void MakeTestData()
