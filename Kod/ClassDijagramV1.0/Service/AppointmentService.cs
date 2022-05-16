@@ -31,6 +31,7 @@ namespace Service
         public void UpdateAppointment(int oldAppointmentID, Appointment updatedAppointment)
         {
             _appointmentRepo.UpdateAppointment(oldAppointmentID, updatedAppointment);
+            //_appointmentRepo.AddNewAppointment(updatedAppointment);
         }
 
         public void SaveAppointments()

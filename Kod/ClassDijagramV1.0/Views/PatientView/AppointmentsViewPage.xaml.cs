@@ -42,9 +42,6 @@ namespace ClassDijagramV1._0.Views.PatientView
         #region Properties
 
         public static AppointmentViewModel? SelectedAppointment { get; set; }
-
-        //public AppointmentViewModel SelectedAppointment { get; set; }
-
         public ObservableCollection<AppointmentViewModel> Appointments
         {
             get;
@@ -98,6 +95,7 @@ namespace ClassDijagramV1._0.Views.PatientView
             {
                 parent.startWindow.Content = new AppointmentUpdatePage(parent, Appointments, _logedPatient);
                 //tabelaPregledi.ItemsSource = _appointmentController.GetAllAppointmentsByPatient(parent.patientID);
+                //SelectedAppointmentPatient1 = (Appointment)tabelaPregledi.SelectedItem;
             }
         }
 
