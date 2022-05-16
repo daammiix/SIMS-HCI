@@ -48,7 +48,7 @@ namespace ClassDijagramV1._0.Views.PatientView
 
         private void openNotificationClick(object sender, RoutedEventArgs e)
         {
-            startWindow.Content = new NotificationPage(this);
+            startWindow.Content = new NotificationPage(this, Patient);
         }
 
         private void pocetnaClick(object sender, RoutedEventArgs e)

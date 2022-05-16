@@ -85,7 +85,6 @@ namespace ClassDijagramV1._0.Views.PatientView
         {
             // Prosledimo listu AppointmentViewModela jer tu dodajemo novi appointment kako bi se view azurirao
             parent.startWindow.Content = new AppointmentAddPage(parent, Appointments, _logedPatient);
-            // tabelaPregledi.ItemsSource = _appointmentController.GetAllAppointmentsByPatient(parent.Patient.Id);
         }
 
         private void UpdateAppontment_Click(object sender, RoutedEventArgs e)
@@ -94,8 +93,6 @@ namespace ClassDijagramV1._0.Views.PatientView
             if (tabelaPregledi.SelectedIndex != -1)
             {
                 parent.startWindow.Content = new AppointmentUpdatePage(parent, Appointments, _logedPatient);
-                //tabelaPregledi.ItemsSource = _appointmentController.GetAllAppointmentsByPatient(parent.patientID);
-                //SelectedAppointmentPatient1 = (Appointment)tabelaPregledi.SelectedItem;
             }
         }
 

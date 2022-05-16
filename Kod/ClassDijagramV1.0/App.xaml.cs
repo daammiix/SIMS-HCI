@@ -41,6 +41,8 @@ namespace ClassDijagramV1._0
         public static string _medicalRecordFilePath = "../../../Data/medicalRecords.json";
         public string _storageFilePath = "../../../Data/storage.json";
         public string _roomAppointmentsFilePath = "../../../Data/roomAppointments.json";
+        public static string _hospitalRatingsFilePath = "../../../Data/hospitalratings.json";
+        public static string _doctorRatingsFilePath = "../../../Data/doctorratings.json";
 
 
         #endregion
@@ -68,11 +70,13 @@ namespace ClassDijagramV1._0
         public RoomAppointmentController roomAppointmentController { get; set; }
 
         public MedicalRecordController MedicalRecordController { get; set; }
+        public RatingController RatingController { get; set; }
 
         #endregion
 
         public App()
         {
+            // Appointments
             var appointmentRepository = new AppointmentRepo(new FileHandler<Appointment>(_appointmentsFilePath));
             var appointmentService = new AppointmentService(appointmentRepository);
             AppointmentController = new AppointmentController(appointmentService);
@@ -132,6 +136,11 @@ namespace ClassDijagramV1._0
             var roomAppointmentService = new RoomAppointmentService(roomAppointmentRepo);
             roomAppointmentController = new RoomAppointmentController(roomAppointmentService);
 
+            // HospitalRating
+            var ratingRepository = new RatingRepo(new FileHandler<HospitalRating>(_hospitalRatingsFilePath), new FileHandler<DoctorRating>(_doctorRatingsFilePath));
+            var ratingService = new RatingService(ratingRepository);
+            RatingController = new RatingController(ratingService);
+
             var dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 10);
@@ -171,6 +180,7 @@ namespace ClassDijagramV1._0
             roomController.SaveRooms();
             MedicalRecordController.SaveMedicalRecords();
             roomAppointmentController.SaveRoomAppointment();
+            RatingController.SaveHospitalRatings();
         }
 
         private void MakeTestData()

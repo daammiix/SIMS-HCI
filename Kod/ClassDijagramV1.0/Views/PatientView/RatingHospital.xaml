@@ -53,7 +53,8 @@
                 <materialDesign:RatingBar
                     x:Name="pitanje1"
                     Margin="32 0 0 0"
-                    Cursor="Hand"/>
+                    Cursor="Hand"
+                    ValueChanged="EverythingRated"/>
             </StackPanel>
             <StackPanel>
                 <TextBlock
@@ -63,7 +64,8 @@
                 <materialDesign:RatingBar
                     x:Name="pitanje2"
                     Margin="32 0 0 0"
-                    Cursor="Hand"/>
+                    Cursor="Hand"
+                    ValueChanged="EverythingRated"/>
             </StackPanel>
             <StackPanel>
                 <TextBlock
@@ -73,7 +75,8 @@
                 <materialDesign:RatingBar
                     x:Name="pitanje3"
                     Margin="32 0 0 0"
-                    Cursor="Hand"/>
+                    Cursor="Hand"
+                    ValueChanged="EverythingRated"/>
             </StackPanel>
             <StackPanel>
                 <TextBlock
@@ -83,13 +86,15 @@
                 <materialDesign:RatingBar
                     x:Name="pitanje4"
                     Margin="32 0 0 0"
-                    Cursor="Hand"/>
+                    Cursor="Hand"
+                    ValueChanged="EverythingRated"/>
             </StackPanel>
 
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="2">
             <TextBox
+                x:Name="komentar"
                 Background="{StaticResource MaterialDesignLightBackground}"
                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                 Margin="20 50 60 0"
@@ -102,9 +107,11 @@
         </StackPanel>
 
         <Button Grid.Row="1" Grid.Column="2"
-                x:Name="addAppBtn"
+                x:Name="ratingBtn"
                 Style="{StaticResource MaterialDesignFlatAccentBgButton}"
                 Content="Pošalji ocjenu"
-                Width="176" Height="42"/>
+                Width="176" Height="42"
+                IsEnabled="False"
+                Click="SendRatingHospitalResult"/>
     </Grid>
 </Page>
