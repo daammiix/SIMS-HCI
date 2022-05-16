@@ -26,8 +26,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="390"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="380"/>
             <RowDefinition Height="65"/>
         </Grid.RowDefinitions>
 
@@ -39,11 +39,12 @@
                    Foreground="#1F1313">
         </TextBlock>
         <TextBox Grid.Row="1"
-                 Margin="0,0,95,0"
+                 Margin="0,0,95,5"
                  Width="220"
                  Height="30"
                  VerticalContentAlignment="Center"
                  HorizontalAlignment="Right"
+                 TextChanged="TextBox_TextChanged"
                  Style="{StaticResource FancySearchBox}"/>
 
         <Grid Grid.Row="2">
@@ -53,7 +54,7 @@
                 <ColumnDefinition Width="90"/>
             </Grid.ColumnDefinitions>
 
-            <DataGrid Grid.Column="1" Height="390" Width="500" x:Name="Equipment" 
+            <DataGrid Grid.Column="1" Height="380" Width="500" x:Name="Equipment" 
                       CanUserAddRows="False" SelectionMode="Single" CanUserResizeColumns="False" CanUserResizeRows="False"
                       RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"  FontWeight="Light"
                       CanUserDeleteRows="False" AutoGenerateColumns="False" FontSize="17" Foreground="#1F1313"

@@ -10,12 +10,12 @@
                             Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
                         <Grid>
                             <Rectangle StrokeThickness="1"/>
-                            <TextBox Margin="1"
-                                     Text="{TemplateBinding Text}"
+                            <TextBox 
+                                Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
                                      BorderThickness="0"
                                      Background="Transparent"
                                      VerticalContentAlignment="Center"
-                                     Padding="5"
+                                     Padding="10,0,0,0"
                                      FontSize="18"
                                      Foreground="#1F1313"
                                      x:Name="SearchBox"/>
