@@ -61,5 +61,15 @@ namespace ClassDijagramV1._0.Views.PatientView
         {
             parent.startWindow.Content = new RatingPage(parent, _logedPatient);
         }
+
+        private void uvidUTerapijuClick(object sender, RoutedEventArgs e)
+        {
+            parent.startWindow.Content = new TerapyPage(parent, _logedPatient);
+        }
+
+        private void zdravstveniKartonClick(object sender, RoutedEventArgs e)
+        {
+            parent.startWindow.Content = new MedicalRecordPage(parent, _logedPatient);
+        }
     }
 }

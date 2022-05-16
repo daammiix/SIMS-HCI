@@ -1,0 +1,110 @@
+﻿<Page x:Class="ClassDijagramV1._0.Views.PatientView.RatingHospital"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ClassDijagramV1._0.Views.PatientView"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="1000"
+      Title="RatingHospital">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Orange.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.LightBlue.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    
+    <Grid Background="{StaticResource MaterialDesignToolBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="40"/>
+        </Grid.ColumnDefinitions>
+
+        <!--<Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+        -->
+        <StackPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                    Margin="0 40 0 0">
+            <StackPanel>
+                <TextBlock
+                    Text="Kako ste zadovoljni pruženom uslugom u bolnici?"
+                    FontSize="22"
+                    Margin="0 0 0 12"/>
+                <materialDesign:RatingBar
+                    x:Name="pitanje1"
+                    Margin="32 0 0 0"
+                    Cursor="Hand"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock
+                    Text="Kako ste zadovoljni ljubažnošću osoblja?"
+                    FontSize="22"
+                    Margin="0 18 0 12"/>
+                <materialDesign:RatingBar
+                    x:Name="pitanje2"
+                    Margin="32 0 0 0"
+                    Cursor="Hand"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock
+                    Text="Kako ste zadovoljni higijenom bolnice?"
+                    FontSize="22"
+                    Margin="0 18 0 12"/>
+                <materialDesign:RatingBar
+                    x:Name="pitanje3"
+                    Margin="32 0 0 0"
+                    Cursor="Hand"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock
+                    Text="Kako ste zadovoljni aplikacijom bolnice?"
+                    FontSize="22"
+                    Margin="0 18 0 12"/>
+                <materialDesign:RatingBar
+                    x:Name="pitanje4"
+                    Margin="32 0 0 0"
+                    Cursor="Hand"/>
+            </StackPanel>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="2">
+            <TextBox
+                Background="{StaticResource MaterialDesignLightBackground}"
+                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                Margin="20 50 60 0"
+                Height="150"
+                AcceptsReturn="True"
+                TextWrapping="Wrap"
+                BorderBrush="LightBlue"
+                VerticalScrollBarVisibility="Auto"
+                materialDesign:HintAssist.Hint="Unesite Vaš komentar. "/>
+        </StackPanel>
+
+        <Button Grid.Row="1" Grid.Column="2"
+                x:Name="addAppBtn"
+                Style="{StaticResource MaterialDesignFlatAccentBgButton}"
+                Content="Pošalji ocjenu"
+                Width="176" Height="42"/>
+    </Grid>
+</Page>

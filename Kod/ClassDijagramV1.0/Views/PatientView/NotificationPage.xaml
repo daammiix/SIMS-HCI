@@ -29,7 +29,8 @@
         <DataGrid Height="300" Margin="20"  
                           AutoGenerateColumns="False"
                           ItemsSource="{Binding Notifications}"
-                          SelectionMode="Single">
+                          SelectionMode="Single"
+                  CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Opis" Binding="{Binding Content}" Width="auto" IsReadOnly="True"/>
 

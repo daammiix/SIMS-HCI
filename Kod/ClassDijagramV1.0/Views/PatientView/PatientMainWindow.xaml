@@ -10,12 +10,12 @@
         ResizeMode="NoResize"
         WindowStyle="None" WindowStartupLocation="CenterScreen"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-     TextElement.FontWeight="Regular"
-     TextElement.FontSize="13"
-     TextOptions.TextFormattingMode="Ideal"
-     TextOptions.TextRenderingMode="Auto"
-     Background="{DynamicResource MaterialDesignPaper}"
-     FontFamily="{DynamicResource MaterialDesignFont}">
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
     
     <Window.Resources>
         <ResourceDictionary>
@@ -74,8 +74,7 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center" 
                         BorderBrush="{x:Null}"
-                        Click="openNotificationClick"
-                        ToolTip="Obavještenja">
+                        ToolTip="Početna" Click="pocetnaClick">
                         <Image Source="Resources/Images/doctor.png"
                                 Width="42" Height="42"/>
                     </Button>

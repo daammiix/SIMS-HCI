@@ -51,13 +51,9 @@ namespace ClassDijagramV1._0.Views.PatientView
             startWindow.Content = new NotificationPage(this);
         }
 
-        private void goBack(object sender, RoutedEventArgs e)
+        private void pocetnaClick(object sender, RoutedEventArgs e)
         {
-            switch (startWindow.Content)
-            {
-
-            }
-            Window.GetWindow(this).Close();
+            startWindow.Content = new PatientMainPage(this, Patient);
         }
     }
 }
