@@ -16,11 +16,13 @@ namespace ClassDijagramV1._0.Service
     {
         private EquipmentAppointmentRepo equipmentAppointmentRepository;
         private RoomController roomController;
+        BindingList<EquipmentAppointment> equipmentAppointments;
         public EquipmentAppointmentService(EquipmentAppointmentRepo equipmentAppointmentServiceRepository)
         {
             this.equipmentAppointmentRepository = equipmentAppointmentServiceRepository;
             var app = Application.Current as App;
             roomController = app.roomController;
+            equipmentAppointments = GetAllEquipmentAppointment();
         }
 
         public void AddEquipmentAppointment(EquipmentAppointment equipmentAppointment)
@@ -40,8 +42,6 @@ namespace ClassDijagramV1._0.Service
 
         public void ScheduledAppointment()
         {
-            BindingList<EquipmentAppointment> equipmentAppointments = GetAllEquipmentAppointment();
-
             for (int i = 0; i < equipmentAppointments.Count; i++)
             {
                 var equipmentAppointment = equipmentAppointments[i];
@@ -49,8 +49,6 @@ namespace ClassDijagramV1._0.Service
                 {
                     continue;
                 }
-                ScheduledAppointmentStart(equipmentAppointment);
-
 
                 if (DateTime.Now > equipmentAppointment.ToDateTime)
                 {
@@ -58,16 +56,6 @@ namespace ClassDijagramV1._0.Service
                     room.addEquipment(equipmentAppointment.SelectedEquipment, equipmentAppointment.Quantity);
                     equipmentAppointmentRepository.DeleteEquipmentAppointment(i--);
                 }
-            }
-        }
-
-        public void ScheduledAppointmentStart(EquipmentAppointment equipmentAppointment)
-        {
-            if (DateTime.Now > equipmentAppointment.FromDateTime)
-            {
-                Room room = roomController.GetRoom(equipmentAppointment.RoomFrom);
-                room.removeEquipment(equipmentAppointment.SelectedEquipment, equipmentAppointment.Quantity);
-                equipmentAppointment.Started = true;
             }
         }
 
