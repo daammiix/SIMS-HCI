@@ -54,21 +54,15 @@ namespace ClassDijagramV1._0.Views.PatientView
             Doctors = new ObservableCollection<Doctor>();
             foreach (Appointment a in Appointments)
             {
-                if ((a.PatientId == _logedPatient.Id))
+                if ( (a.PatientId == _logedPatient.Id)
+                    && (a.AppointmentDate < DateTime.Now)
+                    && (!Doctors.Contains(_doctorController.GetDoctorById(a.DoctorId))) )
                 {
-                    if (!Doctors.Contains(_doctorController.GetDoctorById(a.DoctorId)))
-                    {
-                        Doctors.Add(_doctorController.GetDoctorById(a.DoctorId));
-                    }
-                    
+                    Doctors.Add(_doctorController.GetDoctorById(a.DoctorId));
                 }
                 
             }
-            //Doctors = _doctorController.GetAllDoctors();
-
             DoctorRatings = _ratingController.GetAllDoctorRatings();
-
-
         }
 
         private void SendRatingDoctorResult(object sender, RoutedEventArgs e)
@@ -80,6 +74,7 @@ namespace ClassDijagramV1._0.Views.PatientView
             DoctorRating dr = new DoctorRating(d1.Id,ocjene, ocjene.Average(), comment);
 
             _ratingController.AddRatingDoctor(dr);
+
             parent.startWindow.Content = new PatientMainPage(parent, _logedPatient);
         }
         private void EverythingRated(object sender, RoutedPropertyChangedEventArgs<int> e)
