@@ -75,7 +75,7 @@ namespace ClassDijagramV1._0.Views.PatientView
 
             _ratingController.AddRatingDoctor(dr);
 
-            parent.startWindow.Content = new PatientMainPage(parent, _logedPatient);
+            parent.startWindow.Content = new PatientMainPage(parent, _logedPatient, parent.Account);
         }
         private void EverythingRated(object sender, RoutedPropertyChangedEventArgs<int> e)
         {

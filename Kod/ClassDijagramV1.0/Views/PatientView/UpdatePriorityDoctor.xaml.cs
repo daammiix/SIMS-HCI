@@ -1,4 +1,5 @@
 ﻿using ClassDijagramV1._0.Controller;
+using ClassDijagramV1._0.Model;
 using Controller;
 using Model;
 using System;
@@ -41,6 +42,7 @@ namespace ClassDijagramV1._0.Views.PatientView
         public RoomController _roomController;
         public DoctorController _doctorController;
         public RoomAppointmentController _roomAppointmentController;
+        public ActivityController _activityController;
 
         private PatientMainWindow parent { get; set; }
         public ObservableCollection<Appointment> Appointments { get; set; }
@@ -61,6 +63,7 @@ namespace ClassDijagramV1._0.Views.PatientView
             _roomController = app.roomController;
             _doctorController = app.DoctorController;
             _roomAppointmentController = app.roomAppointmentController;
+            _activityController = app.ActivityController;
 
             Rooms = _roomController.GetAllRooms();
             Appointments = _appointmentController.GetAppointments();
@@ -112,7 +115,10 @@ namespace ClassDijagramV1._0.Views.PatientView
             updatedAppointment.AppointmentDate = date;
 
             _appointmentController.UpdateAppointment(oldAppointment.Id, updatedAppointment);
-            parent.startWindow.Content = new AppointmentsViewPage(_appointmentViewModels, parent, _logedPatient);
+            //activity
+            ActivityLog activity = new ActivityLog(DateTime.Now, _logedPatient.Id, TypeOfActivity.editAppointment);
+            _activityController.AddActivity(activity);
+            parent.startWindow.Content = new AppointmentsViewPage(_appointmentViewModels, parent, _logedPatient, parent.Account);
         }
 
         private Room getFreeRoom(DateTime start, TimeSpan interval)

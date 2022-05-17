@@ -48,7 +48,7 @@ namespace ClassDijagramV1._0.Views.PatientView
             HospitalRating hr = new HospitalRating(ocjene, ocjene.Average(), comment);
 
             _ratingController.AddRatingHospital(hr);
-            parent.startWindow.Content = new PatientMainPage(parent, _logedPatient);
+            parent.startWindow.Content = new PatientMainPage(parent, _logedPatient, parent.Account);
 
         }
 

@@ -45,6 +45,7 @@ namespace ClassDijagramV1._0.Views.PatientView
         public RoomController _roomController;
         public DoctorController _doctorController;
         public RoomAppointmentController _roomAppointmentController;
+        public ActivityController _activityController;
 
         private PatientMainWindow parent { get; set; }
 
@@ -67,6 +68,7 @@ namespace ClassDijagramV1._0.Views.PatientView
             _roomController = app.roomController;
             _doctorController = app.DoctorController;
             _roomAppointmentController = app.roomAppointmentController;
+            _activityController = app.ActivityController;
 
             Rooms = _roomController.GetAllRooms();
             Appointments = _appointmentController.GetAppointments();
@@ -108,7 +110,10 @@ namespace ClassDijagramV1._0.Views.PatientView
             // Da bi se updatovao i view
             _patientAppointments.Add(new AppointmentViewModel(a1));
             _appointmentController.AddNotification(a1, r1, NotificationType.addingAppointment);
-            parent.startWindow.Content = new AppointmentsViewPage(_patientAppointments, parent, _logedPatient);
+            //activity
+            ActivityLog activity = new ActivityLog(DateTime.Now, _logedPatient.Id, TypeOfActivity.makeAppointment);
+            _activityController.AddActivity(activity);
+            parent.startWindow.Content = new AppointmentsViewPage(_patientAppointments, parent, _logedPatient, parent.Account);
         }
 
         private Room getFreeRoom(DateTime start, TimeSpan interval)

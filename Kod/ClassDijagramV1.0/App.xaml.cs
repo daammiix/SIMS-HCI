@@ -43,6 +43,7 @@ namespace ClassDijagramV1._0
         public string _roomAppointmentsFilePath = "../../../Data/roomAppointments.json";
         public static string _hospitalRatingsFilePath = "../../../Data/hospitalratings.json";
         public static string _doctorRatingsFilePath = "../../../Data/doctorratings.json";
+        public static string _activityFilePath = "../../../Data/activity.json";
 
 
         #endregion
@@ -67,10 +68,17 @@ namespace ClassDijagramV1._0
         public EquipmentController equipmentController { get; set; }
 
         public EquipmentAppointmentController equipmentAppointmentController { get; set; }
+
         public RoomAppointmentController roomAppointmentController { get; set; }
 
         public MedicalRecordController MedicalRecordController { get; set; }
+
         public RatingController RatingController { get; set; }
+
+        public ActivityController ActivityController { get; set; }
+
+        public BanningPatientController BanningPatientController { get; set; }
+
 
         #endregion
 
@@ -141,6 +149,16 @@ namespace ClassDijagramV1._0
             var ratingService = new RatingService(ratingRepository);
             RatingController = new RatingController(ratingService);
 
+            // Activity Log
+            var activityRepository = new ActivityRepo(new FileHandler<ActivityLog>(_activityFilePath));
+            var activityService = new ActivityService(activityRepository);
+            ActivityController = new ActivityController(activityService);
+
+            // Banning Patient
+            //var activityRepository = new ActivityRepo(new FileHandler<ActivityLog>(_activityFilePath));
+            var banningPatientService = new BanningPatientService(activityService, patientRepo, accountRepo);
+            BanningPatientController = new BanningPatientController(banningPatientService);
+
             var dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 10);
@@ -182,6 +200,7 @@ namespace ClassDijagramV1._0
             roomAppointmentController.SaveRoomAppointment();
             RatingController.SaveHospitalRatings();
             RatingController.SaveDoctorRatings();
+            ActivityController.SaveActivity();
         }
 
         private void MakeTestData()

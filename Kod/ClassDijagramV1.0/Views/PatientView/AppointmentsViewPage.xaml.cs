@@ -1,3 +1,5 @@
+﻿using ClassDijagramV1._0.Controller;
+using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Util;
 using Controller;
 using Model;
@@ -31,10 +33,13 @@ namespace ClassDijagramV1._0.Views.PatientView
         private RoomController _roomController;
 
         private PatientController _patientController;
+        public ActivityController _activityController;
+        public BanningPatientController _banningPatientController;
         private PatientMainWindow parent { get; set; }
 
         // Ulogovan pacijent
         private Patient _logedPatient;
+        private Account _account;
 
         #endregion
 
@@ -61,11 +66,12 @@ namespace ClassDijagramV1._0.Views.PatientView
         /// </summary>
         /// <param name="p"></param>
         public AppointmentsViewPage(ObservableCollection<AppointmentViewModel> appointments,
-            PatientMainWindow patientMain, Patient logedPatient)
+            PatientMainWindow patientMain, Patient logedPatient, Account account)
         {
             InitializeComponent();
 
             _logedPatient = logedPatient;
+            _account = account;
 
             this.DataContext = this;
             parent = patientMain;
@@ -74,6 +80,8 @@ namespace ClassDijagramV1._0.Views.PatientView
 
             _roomController = app.roomController;
             _patientController = app.PatientController;
+            _activityController = app.ActivityController;
+            _banningPatientController = app.BanningPatientController;
 
             Appointments = appointments;
 
@@ -83,31 +91,56 @@ namespace ClassDijagramV1._0.Views.PatientView
         }
         private void AddAppontment_Click(object sender, RoutedEventArgs e)
         {
-            // Prosledimo listu AppointmentViewModela jer tu dodajemo novi appointment kako bi se view azurirao
-            parent.startWindow.Content = new AppointmentAddPage(parent, Appointments, _logedPatient);
+            if (_banningPatientController.CheckStatusOfPatient(_logedPatient.Id, _account) == true)
+            {
+                MessageBox.Show("Otkazivanje Vam je trenutno onemogućeno,obratite se sekretaru!", "Greška");
+            }
+            else
+            {
+                // Prosledimo listu AppointmentViewModela jer tu dodajemo novi appointment kako bi se view azurirao
+                parent.startWindow.Content = new AppointmentAddPage(parent, Appointments, _logedPatient);
+            }  
         }
 
         private void UpdateAppontment_Click(object sender, RoutedEventArgs e)
         {
-
-            if (tabelaPregledi.SelectedIndex != -1)
+            if (_banningPatientController.CheckStatusOfPatient(_logedPatient.Id, _account) == true)
             {
-                parent.startWindow.Content = new AppointmentUpdatePage(parent, Appointments, _logedPatient);
+                MessageBox.Show("Otkazivanje Vam je trenutno onemogućeno,obratite se sekretaru!", "Greška");
             }
+            else
+            {
+                if (tabelaPregledi.SelectedIndex != -1)
+                {
+                    parent.startWindow.Content = new AppointmentUpdatePage(parent, Appointments, _logedPatient);
+                }
+            }
+            
         }
 
         private void RemoveAppontment_Click(object sender, RoutedEventArgs e)
         {
-            if (tabelaPregledi.SelectedIndex != -1)
+            if (_banningPatientController.CheckStatusOfPatient(_logedPatient.Id, _account) == true)
             {
-                //_appointmentController.AddNotification((Appointment)tabelaPregledi.SelectedItem, NotificationType.deletingAppointment);
-                //tabelaPregledi.ItemsSource = _appointmentController.GetAllAppointmentsByPatient(parent.patientID);
-                //Appointments.Remove((Appointment)tabelaPregledi.SelectedItem);
-                AppointmentViewModel selectedAppointment = (AppointmentViewModel)tabelaPregledi.SelectedItem;
-                // Izbrisemo i iz view-a i iz baze
-                Appointments.Remove(selectedAppointment);
-                _appointmentController.RemoveAppointment(selectedAppointment.Id);
+                MessageBox.Show("Otkazivanje Vam je trenutno onemogućeno,obratite se sekretaru!", "Greška");
             }
+            else
+            {
+                if (tabelaPregledi.SelectedIndex != -1)
+                {
+                    //_appointmentController.AddNotification((Appointment)tabelaPregledi.SelectedItem, NotificationType.deletingAppointment);
+                    //tabelaPregledi.ItemsSource = _appointmentController.GetAllAppointmentsByPatient(parent.patientID);
+                    //Appointments.Remove((Appointment)tabelaPregledi.SelectedItem);
+                    AppointmentViewModel selectedAppointment = (AppointmentViewModel)tabelaPregledi.SelectedItem;
+                    // Izbrisemo i iz view-a i iz baze
+                    Appointments.Remove(selectedAppointment);
+                    _appointmentController.RemoveAppointment(selectedAppointment.Id);
+                    //activity
+                    ActivityLog activity = new ActivityLog(DateTime.Now, _logedPatient.Id, TypeOfActivity.cancelAppointment);
+                    _activityController.AddActivity(activity);
+                }
+            }
+            
 
         }
     }
