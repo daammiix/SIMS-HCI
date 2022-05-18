@@ -11,10 +11,20 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
-        Background="#B07E86"
+        Background="#B0C69D"
+        FontFamily="Berlin Sans FB Demi"
         BorderThickness="4"
-        BorderBrush="#8E4D58"
-        FontFamily="Comic Sans MS">
+        BorderBrush="#455736">
+
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Theme/TextBoxes.xaml"/>
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
@@ -26,7 +36,7 @@
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    FontSize="34"
-                   Foreground="Black">
+                   Foreground="#1F1313">
         </TextBlock>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -40,11 +50,10 @@
                 <Label Content="Količina:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">
-                <TextBox x:Name="ChangeEquipmentId" IsReadOnly="True" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Text="{Binding Path=Equipment.EquipmentID,Mode=OneWay}"/>
+                <TextBox x:Name="ChangeEquipmentId" IsReadOnly="True" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Text="{Binding Path=Equipment.EquipmentID,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBox x:Name="ChangeEquipmentName" IsReadOnly="True" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Text="{Binding Path=Equipment.Name,Mode=OneWay}" />
                 <TextBox x:Name="ChangeType" IsReadOnly="True"  Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=Equipment.EquipmentType,Mode=OneWay}"/>
-                <TextBox x:Name="ChangeEquipmentQuantity" Width="120" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Text="{Binding Path=Quantity,Mode=OneWay}" />
-
+                <TextBox x:Name="ChangeEquipmentQuantity" Width="120" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Text="{Binding Path=Quantity,Mode=OneWay }" />
             </StackPanel>
         </Grid>
         <StackPanel Grid.Row="2">

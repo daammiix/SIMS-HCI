@@ -32,7 +32,7 @@ namespace Controller
             roomService.ChangeRoom(room);
         }
 
-        public Room? GetARoom(String roomID)
+        public Room? GetRoom(String roomID)
         {
             return roomService.GetARoom(roomID);
         }
@@ -45,6 +45,11 @@ namespace Controller
         public void ChangeStorageQuantity(string equipmentId, int quantity)
         {
             roomService.ChangeStorageQuantity(equipmentId, quantity);
+        }
+
+        public void ChangeStorageMedicineQuantity(string meidicineId, int quantity)
+        {
+            roomService.ChangeStorageMedicineQuantity(meidicineId, quantity);
         }
 
         public void SaveRooms()

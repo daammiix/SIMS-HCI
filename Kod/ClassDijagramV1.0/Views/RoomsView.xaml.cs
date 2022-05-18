@@ -98,5 +98,21 @@ namespace ClassDijagramV1._0.Views
             ReservationOfRoom reservationOfRoom = new ReservationOfRoom(selected);
             reservationOfRoom.Show();
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var txb = sender as TextBox;
+            if (txb.Text != "")
+            {
+                var filteredList = Rooms.Where(r => (r.RoomID.ToLower().Contains(txb.Text.ToLower()) || r.RoomName.ToLower().Contains(txb.Text.ToLower()) || r.Floor.ToString().Contains(txb.Text) || r.RoomNumber.ToString().Contains(txb.Text) || r.RoomStatus.ToLower().Contains(txb.Text.ToLower())));
+                RoomList.ItemsSource = null;
+                RoomList.ItemsSource = filteredList;
+            }
+            else
+            {
+                RoomList.ItemsSource = Rooms;
+            }
+
+        }
     }
 }

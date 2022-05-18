@@ -62,7 +62,7 @@ namespace ClassDijagramV1._0.Views
             roomController = app.roomController;
 
             Rooms = roomController.GetAllRooms();
-            storage = (Storage)roomController.GetARoom("storage");
+            storage = (Storage)roomController.GetRoom("storage");
             this.QEquipment = qEquipment;
             this.selectedEquipment = QEquipment.Equipment;
 

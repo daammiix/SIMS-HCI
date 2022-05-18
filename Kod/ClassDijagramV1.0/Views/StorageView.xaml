@@ -8,7 +8,8 @@
              mc:Ignorable="d"
              d:DesignHeight="655"
              d:DesignWidth="1280"
-             Background="#8BCDD3"
+             Background="#D9D4CC"
+             FontFamily="Berlin Sans FB Demi"
              xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
     <UserControl.Resources>
@@ -33,7 +34,7 @@
             <RadioButton Content="Medicinska oprema"
                          Height="65"
                          Width="200"
-                         Foreground="Black"
+                         Foreground="#1F1313"
                          FontSize="22"
                          Style="{StaticResource StorageMenuButton}"
                          Command="{Binding StorageMedicalEquipmentViewCommand}"
@@ -42,7 +43,7 @@
             <RadioButton Content="Potrošni materijal"
                          Height="65"
                          Width="200"
-                         Foreground="Black"
+                         Foreground="#1F1313"
                          FontSize="22"
                          Style="{StaticResource StorageMenuButton}"
                          Command="{Binding StorageSuppliesViewCommand}"/>
@@ -50,7 +51,7 @@
             <RadioButton Content="Inventar"
                          Height="65"
                          Width="200"
-                         Foreground="Black"
+                         Foreground="#1F1313"
                          FontSize="22"
                          Style="{StaticResource StorageMenuButton}"
                          Command="{Binding StorageInventoryViewCommand}"/>
@@ -58,7 +59,7 @@
             <RadioButton Content="Lekovi"
                          Height="65"
                          Width="200"
-                         Foreground="Black"
+                         Foreground="#1F1313"
                          FontSize="22"
                          Style="{StaticResource StorageMenuButton}"
                          Command="{Binding StorageDrugsViewCommand}"/>

@@ -11,9 +11,10 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
-        Background="#8BCDD3"
+        Background="#B0C69D"
+        FontFamily="Berlin Sans FB Demi"
         BorderThickness="4"
-        BorderBrush="#234A4D">
+        BorderBrush="#455736">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -25,8 +26,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="390"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="380"/>
             <RowDefinition Height="65"/>
         </Grid.RowDefinitions>
 
@@ -35,37 +36,39 @@
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    FontSize="34"
-                   Foreground="Black">
+                   Foreground="#1F1313">
         </TextBlock>
         <TextBox Grid.Row="1"
-                 Margin="0,0,95,0"
+                 Margin="0,0,95,5"
                  Width="220"
                  Height="30"
                  VerticalContentAlignment="Center"
                  HorizontalAlignment="Right"
+                 TextChanged="TextBox_TextChanged"
                  Style="{StaticResource FancySearchBox}"/>
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="500"/>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="520"/>
+                <ColumnDefinition Width="90"/>
             </Grid.ColumnDefinitions>
 
-            <DataGrid Grid.Column="1" Height="390" Width="500" x:Name="Equipment" 
-                      CanUserAddRows="False" SelectionMode="Single"
-                      CanUserDeleteRows="False" AutoGenerateColumns="False"
+            <DataGrid Grid.Column="1" Height="380" Width="500" x:Name="Equipment" 
+                      CanUserAddRows="False" SelectionMode="Single" CanUserResizeColumns="False" CanUserResizeRows="False"
+                      RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"  FontWeight="Light"
+                      CanUserDeleteRows="False" AutoGenerateColumns="False" FontSize="17" Foreground="#1F1313"
                       ItemsSource="{Binding Path=EquipmentList}" IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Šifra" Width="120" Binding="{Binding Path=Equipment.EquipmentID}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Šifra" Width="85" Binding="{Binding Path=Equipment.EquipmentID}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=Equipment.Name}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Tip" Width="*" Binding="{Binding Path=Equipment.EquipmentType}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Količina" Width="*" Binding="{Binding Path=Quantity}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Količina" Width="85" Binding="{Binding Path=Quantity}"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
         <WrapPanel Grid.Row="3" HorizontalAlignment="Right">
-            <Button x:Name="CloseListOfEquipment" Height="32" Width="95" Content="Zatvori" Margin="0,15,25,0" Style="{StaticResource CRUDButton}" Click="CloseListOfEquipment_Click"/>
+            <Button x:Name="CloseListOfEquipment" Height="32" Width="95" Content="Zatvori" Margin="0,15,25,5" Style="{StaticResource CRUDButton}" Click="CloseListOfEquipment_Click"/>
         </WrapPanel>
     </Grid>
 </Window>

@@ -40,10 +40,24 @@ namespace ClassDijagramV1._0.Views
             this.Close();
         }
 
-        private void Renovating_Click(object sender, RoutedEventArgs e)
+        private void RenovatingWallPainting_Click(object sender, RoutedEventArgs e)
         {
             RenovaitingWindow renovating = new RenovaitingWindow(selectedRoom);
             renovating.Show();
+            this.Close();
+        }
+
+        private void RenovatingMerge_Click(object sender, RoutedEventArgs e)
+        {
+            RenovatingMerge renovatingMerge = new RenovatingMerge(selectedRoom);
+            renovatingMerge.Show();
+            this.Close();
+        }
+
+        private void RenovatingSplit_Click(object sender, RoutedEventArgs e)
+        {
+            RenovatingSplit renovatingSplit = new RenovatingSplit(selectedRoom);
+            renovatingSplit.Show();
             this.Close();
         }
 
@@ -53,5 +67,6 @@ namespace ClassDijagramV1._0.Views
             changingPurpose.Show();
             this.Close();
         }
+
     }
 }

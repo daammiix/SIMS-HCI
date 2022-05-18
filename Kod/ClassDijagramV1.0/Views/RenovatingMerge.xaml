@@ -1,0 +1,119 @@
+﻿<Window x:Class="ClassDijagramV1._0.Views.RenovatingMerge"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClassDijagramV1._0.Views"
+        xmlns:converters="clr-namespace:ClassDijagramV1._0.Converters"
+        mc:Ignorable="d"
+        Title="RenovatingMerge"
+        Height="650"
+        Width="800"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Foreground="#1F1313"
+        Background="#B0C69D"
+        FontFamily="Berlin Sans FB Demi"
+        BorderThickness="4"
+        BorderBrush="#455736">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Theme/DateTextBoxTheme.xaml"/>
+                <ResourceDictionary Source="../Theme/TimeTextBoxTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converters:RoomToStringConverter x:Key="RoomToStringConverter"/>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65"/>
+            <RowDefinition Height="395"/>
+            <RowDefinition Height="185"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+                   Text="Renoviranje - spajanje sala"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   FontSize="36"
+                   Foreground="Black">
+        </TextBlock>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="400"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Row="1"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+                <Label Content="Sala u koju se spaja:" FontSize="24" Margin="20,5,0,5" HorizontalContentAlignment="Left"/>
+                <TextBox x:Name="MergingTo" IsReadOnly="True" Width="230" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedRoom,Converter={StaticResource RoomToStringConverter}}" />
+                <Label Content="Dostupnost sale:" FontSize="24" Margin="20,0,0,5" HorizontalContentAlignment="Left"/>
+                <DataGrid Grid.Column="1" Height="200" Width="250" x:Name="MergingToRoom" Margin="20, 5, 10,0"
+                      CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left" FontSize="18"
+                      RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
+                      CanUserDeleteRows="False" AutoGenerateColumns="False"
+                      ItemsSource="{Binding Path=MergingToRoomAvailable}" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Zauzetost sale:" Width="*" Binding="{Binding Path=.}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+                <Label Content="Sala koja se spaja:" FontSize="24" Margin="15,5,0,5"/>
+                <ComboBox x:Name="MergingRoom" Width="230" Height="40" Margin="18,0,0,5" FontSize="22"
+                          VerticalContentAlignment="Center" IsReadOnly="True" HorizontalAlignment="Left"
+                          ItemsSource="{Binding Rooms}" SelectionChanged="MergingRoom_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource RoomToStringConverter}}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Label Content="Dostupnost sale:" FontSize="24" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
+                <DataGrid  Height="200" Width="250" x:Name="MergingRoomGrid" Margin="20, 5, 10,0"
+                      CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left"
+                      RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
+                      CanUserDeleteRows="False" AutoGenerateColumns="False" FontSize="18"
+                      ItemsSource="{Binding Path=MergingRoomAvailable}" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Zauzetost sale" Width="*" Binding="{Binding Path=.}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="525"/>
+                <ColumnDefinition Width="275"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+                <Label Content="Zakaži opremanje:" FontSize="24" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Label Content="Od:" FontSize="24" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
+                    <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromDate}" Style="{StaticResource DateTextBox}" TextChanged="DateField_TextChanged"/>
+                    <TextBox x:Name="FromTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromTime}"  Style="{StaticResource TimeTextBox}"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Label Content="Do:" FontSize="24" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
+                    <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="40" Margin="3,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToDate}"  Style="{StaticResource DateTextBox}" TextChanged="DateField_TextChanged"/>
+                    <TextBox x:Name="ToTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToTime}"  Style="{StaticResource TimeTextBox}"/>
+                </StackPanel>
+
+            </StackPanel>
+
+            <WrapPanel Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                <Button x:Name="SaveRenovatingMerge" HorizontalAlignment="Right" Height="32" Width="90" Content="Sačuvaj" Margin="5,10,10,25" Style="{StaticResource CRUDButton}" Click="SaveRenovatingMerge_Click"/>
+                <Button x:Name="QuitRenovatingMerge" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,35,25" Style="{StaticResource CRUDButton}" Click="QuitRenovatingMerge_Click"/>
+            </WrapPanel>
+        </Grid>
+    </Grid>
+</Window>

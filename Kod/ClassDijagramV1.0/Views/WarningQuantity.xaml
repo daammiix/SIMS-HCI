@@ -11,10 +11,10 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
-         Background="#B07E86"
+        Background="#B0C69D"
+        FontFamily="Berlin Sans FB Demi"
         BorderThickness="4"
-        BorderBrush="#8E4D58"
-        FontFamily="Comic Sans MS">
+        BorderBrush="#455736">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="55"/>
@@ -26,7 +26,7 @@
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    FontSize="28"
-                   Foreground="Black">
+                   Foreground="#1F1313">
         </TextBlock>
         <TextBlock Grid.Row="1"
                    Text="Nedovoljna količina entiteta!"
@@ -34,7 +34,7 @@
                    Margin="0,15,0,0"
                    HorizontalAlignment="Center"
                    FontSize="26"
-                   Foreground="Black">
+                   Foreground="#1F1313">
         </TextBlock>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="WarningOk" Margin="0,0,0,10" Height="45" Width="200" Content="OK" FontSize="22" Style="{StaticResource CRUDButton}" Click="WarningOk_Click"/>

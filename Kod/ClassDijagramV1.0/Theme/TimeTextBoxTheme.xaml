@@ -18,7 +18,7 @@
                                      Background="Transparent"
                                      VerticalContentAlignment="Center"
                                      Padding="5"
-                                     Foreground="Black"
+                                     Foreground="#1F1313"
                                      FontSize="18"
                                      x:Name="TimeTextBox"/>
                         </Grid>-->

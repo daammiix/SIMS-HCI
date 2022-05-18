@@ -307,7 +307,7 @@ namespace ClassDijagramV1._0.Views.PatientView
 
             // Ucitamo reference vezane za appointment
             _patient = _patientController.GetPatientById(_appointment.PatientId);
-            _room = _roomController.GetARoom(_appointment.RoomId);
+            _room = _roomController.GetRoom(_appointment.RoomId);
             _doctor = _doctorController.GetDoctorById(_appointment.DoctorId);
 
         }
