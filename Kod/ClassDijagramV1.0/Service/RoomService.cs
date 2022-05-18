@@ -70,6 +70,10 @@ namespace Service
                 {
                     return false;
                 }
+                if ((room.Floor > 4) || (room.RoomNumber > 499))
+                {
+                    return false;
+                }
                 if (!existingRoom && room.Floor == r.Floor)
                 {
                     if ((room.RoomNumber == r.RoomNumber))

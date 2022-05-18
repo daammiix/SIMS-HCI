@@ -1,6 +1,7 @@
 ﻿using ClassDijagramV1._0.Util;
 using ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels;
 using ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModels;
+using ClassDijagramV1._0.ViewModel.SecretaryViewModels.EquipmentViewModels;
 using ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewModels;
 using Model;
 using System;
@@ -27,11 +28,14 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels
 
         MedicalRecordsMainViewModel _medicalRecordsMainViewModel;
 
+        EquipmentMainViewModel _equipmentMainViewModel;
+
         // Commands
 
         RelayCommand _appointmentsViewCommand;
         RelayCommand _accountsViewCommand;
         RelayCommand _medicalRecordsViewCommand;
+        RelayCommand _equipmentViewCommand;
 
         #endregion
 
@@ -85,6 +89,22 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels
             }
         }
 
+        public RelayCommand EquipmentViewCommand
+        {
+            get
+            {
+                if (_equipmentViewCommand == null)
+                {
+                    _equipmentViewCommand = new RelayCommand(o =>
+                    {
+                        CurrentView = _equipmentMainViewModel;
+                    });
+                }
+
+                return _equipmentViewCommand;
+            }
+        }
+
         #endregion
 
         #region Properties
@@ -132,6 +152,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels
             _appointmentsViewModel = new AppointmentsMainViewModel();
             _accountsMainViewModel = new AccountsMainViewModel();
             _medicalRecordsMainViewModel = new MedicalRecordsMainViewModel();
+            _equipmentMainViewModel = new EquipmentMainViewModel();
 
             // Na pocetku stavimo currentView na preglediOperacije(to je prvi menu item)
             _currentView = _appointmentsViewModel;

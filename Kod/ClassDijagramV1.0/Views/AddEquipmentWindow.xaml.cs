@@ -1,6 +1,7 @@
 ﻿using ClassDijagramV1._0.Controller;
 using ClassDijagramV1._0.Helpers;
 using ClassDijagramV1._0.Model;
+using ClassDijagramV1._0.Model.Enums;
 using Controller;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,7 @@ namespace ClassDijagramV1._0.Views
 
         private Equipment EquipmentFromTextBoxes()
         {
-            return new Equipment(AddEquipmentId.Text, AddEquipmentNAme.Text, AddType.Text );
+            return new Equipment(AddEquipmentId.Text, AddEquipmentNAme.Text, AddType.Text, 100, UnitsType.Units);
         }
 
         private void SaveAddedEquipment_Click(object sender, RoutedEventArgs e)
