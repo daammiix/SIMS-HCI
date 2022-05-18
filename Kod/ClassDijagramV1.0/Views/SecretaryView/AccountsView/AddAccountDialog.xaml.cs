@@ -21,38 +21,64 @@ namespace ClassDijagramV1._0.Views.SecretaryView.AccountsView
     /// </summary>
     public partial class AddAccountDialog : Window
     {
-        AddAccountDialogViewModel _viewModel;
+
+        #region Constructor
 
         public AddAccountDialog(ObservableCollection<AccountViewModel> accountViewModels)
         {
             InitializeComponent();
 
             this.DataContext = new AddAccountDialogViewModel(accountViewModels);
-
-            _viewModel = (AddAccountDialogViewModel)this.DataContext;
         }
 
+        #endregion
+
+        #region Application State Event Handlers
+
         /// <summary>
-        /// Stavlja username i password na random string(Guset + 0 <= broj < 10001)
+        /// Minimizes application
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        private void ButtonMinimize_Click(object sender, RoutedEventArgs e)
         {
-            string username = "Guest" + new Random().Next(10001);
-            _viewModel.Username = username;
-            _viewModel.Password = username;
+            this.WindowState = WindowState.Minimized;
         }
 
         /// <summary>
-        /// Brise username i password
+        /// Maximizes application or change it back to normal
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        private void WindowStateButton_Click(object sender, RoutedEventArgs e)
         {
-            _viewModel.Username = "";
-            _viewModel.Password = "";
+            if (this.WindowState == WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Normal;
+            }
+            else
+            {
+                this.WindowState = WindowState.Maximized;
+            }
         }
+
+        /// <summary>
+        /// Closes applications main window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            this?.Close();
+        }
+
+
+        private void Header_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
+
+        #endregion
     }
 }

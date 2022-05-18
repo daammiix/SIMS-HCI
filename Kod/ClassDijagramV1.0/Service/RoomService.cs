@@ -65,7 +65,7 @@ namespace Service
                 {
                     return false;
                 }
-                if((room.Floor > 4) || (room.RoomNumber > 499))
+                if ((room.Floor > 4) || (room.RoomNumber > 499))
                 {
                     return false;
                 }

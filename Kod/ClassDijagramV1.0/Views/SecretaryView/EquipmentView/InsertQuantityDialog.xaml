@@ -1,0 +1,64 @@
+﻿<Window x:Class="ClassDijagramV1._0.Views.SecretaryView.EquipmentView.InsertQuantityDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.EquipmentView"
+        xmlns:converters="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.EquipmentView.Converters"
+        mc:Ignorable="d"
+        Background="{StaticResource SBackground}"
+        FontFamily="#Poppins"
+        FontSize="20"
+        WindowStyle="None"
+        BorderBrush="{StaticResource SLightGrayShade}"
+        BorderThickness="0.5"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterOwner"
+        Foreground="{StaticResource SLightGrayShade}"
+        Title="InsertQuantityDialog" Height="250" Width="400">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../../Styles/TextBox.xaml"/>
+                <ResourceDictionary Source="../../../Styles/Button.xaml"/>
+                <ResourceDictionary Source="../../../Styles/Slider.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Border CornerRadius="20">
+        <Grid VerticalAlignment="Center"
+          HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Row 1 -->
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Quantity:"
+                   Margin="0,0,10,0"
+                   VerticalAlignment="Center"/>
+                <Slider Style="{DynamicResource MySliderStyle}" 
+                        Minimum="1" Maximum="5000"
+                        x:Name="slider"
+                        VerticalAlignment="Center"
+                        Value="{Binding Quantity, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                        Width="200"
+                        MinHeight="25"
+                        Background="Transparent"/>
+                <TextBox Style="{StaticResource TextBoxStyleAccount}"
+                 Text="{Binding ElementName=slider, Path=Value, UpdateSourceTrigger=PropertyChanged,
+            Converter={converters:RoundNumberConverter}}"/>
+            </StackPanel>
+
+            <!-- Row 2 -->
+            <Button Grid.Row="1"
+                Margin="0,15,0,0"
+                Content="Ok"
+                Command="{Binding OkCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}"
+                Style="{StaticResource AccountButtonsStyle}"/>
+        </Grid>
+    </Border>
+</Window>

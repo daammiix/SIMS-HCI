@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ClassDijagramV1._0.Helpers;
 using Controller;
+using ClassDijagramV1._0.Model.Enums;
 
 namespace ClassDijagramV1._0.Views
 {
@@ -44,7 +45,7 @@ namespace ClassDijagramV1._0.Views
 
         private Equipment EquipmentFromTextBoxes()
         {
-            return new Equipment(ChangeEquipmentId.Text, ChangeEquipmentName.Text, ChangeType.Text);
+            return new Equipment(ChangeEquipmentId.Text, ChangeEquipmentName.Text, ChangeType.Text, 100, UnitsType.Units);
         }
 
         public int findEquipment(String equipmentId)

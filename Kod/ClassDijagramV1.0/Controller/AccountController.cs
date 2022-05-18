@@ -137,6 +137,16 @@ namespace ClassDijagramV1._0.Controller
             return _accountService.GetPatientsAccounts();
         }
 
+        /// <summary>
+        /// Vraca acc osobe za prosledjenim id-em
+        /// </summary>
+        /// <param name="id">Id osobe ciji acc trazimo</param>
+        /// <returns>Account osobe ili null ako osoba nema acc</returns>
+        public Account? GetAccountByPersonId(int id)
+        {
+            return _accountService.GetAccountByPersonId(id);
+        }
+
         #endregion
     }
 }

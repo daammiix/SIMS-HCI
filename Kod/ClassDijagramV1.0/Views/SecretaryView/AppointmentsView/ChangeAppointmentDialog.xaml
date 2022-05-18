@@ -7,11 +7,13 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        AllowsTransparency="True"
         Background="{StaticResource SBackground}"
         Foreground="{StaticResource SCyan}"
         FontFamily="#Poppins"
         FontSize="24"
-        Title="ChangeAppointmentDialog" Height="570" Width="600">
+        Title="ChangeAppointmentDialog" Height="600" Width="600">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -26,28 +28,76 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid HorizontalAlignment="Center"
-          Margin="0,50,0,0">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Row 1 -->
-        <TextBlock Grid.Column="0" 
+        <!-- Header -->
+        <Grid Grid.Row="0"
+              MouseDown="Header_MouseDown"
+              Background="{StaticResource SBackground}">
+            <!-- Title -->
+            <TextBlock Text="Change Appointment"
+                       Margin="0,7,0,3"
+                       FontSize="24"
+                       Foreground="{StaticResource SLightGrayShade}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+
+            <!-- Window Buttons -->
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,2,3">
+                <Button Content="&#x1f5d5;"
+                        Background="Transparent"
+                        Foreground="{StaticResource SLightGrayShade}"
+                        BorderThickness="0"
+                        Padding="0,0,0,3"
+                        Click="ButtonMinimize_Click"/>
+                <Button Content="&#x1F5D6;"
+                        Background="Transparent"
+                        Foreground="{StaticResource SLightGrayShade}"
+                        BorderThickness="0"
+                        Padding="5 0"
+                        Margin="0,5,0,0"
+                        FontSize="14"
+                        Click="WindowStateButton_Click"/>
+                <Button Content="&#10006;"
+                        FontSize="10"
+                        Background="Transparent"
+                        Foreground="{StaticResource SLightGrayShade}"
+                        BorderThickness="0"
+                        Padding="5 0"
+                        Margin="0,6,0,0"
+                        Click="ExitButton_Click"/>
+            </StackPanel>
+        </Grid>
+        <Grid HorizontalAlignment="Center"
+              Grid.Row="1"
+              Margin="0,50,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Row 1 -->
+            <TextBlock Grid.Column="0" 
                    Grid.Row="0"
                    VerticalAlignment="Center"
                    Margin="0,0,15,15"
                    Text="Date:"/>
-        <DatePicker Grid.Column="1" 
+            <DatePicker Grid.Column="1" 
                     Grid.Row="0"
                     Width="300"
                     CalendarStyle="{StaticResource SecretaryCalendarStyle}" 
@@ -59,22 +109,22 @@
                     Margin="0,0,0,15"
                     SelectedDate="{Binding SelectedDate, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <!-- Row 2 -->
-        <TextBlock Grid.Column="0"
+            <!-- Row 2 -->
+            <TextBlock Grid.Column="0"
                    Grid.Row="1"
                    Text="Time:"
                    VerticalAlignment="Center"
                    Margin="0,0,15,15"/>
 
-        <Grid Grid.Column="1" 
+            <Grid Grid.Column="1" 
               Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <ComboBox Grid.Column="0"
+                <ComboBox Grid.Column="0"
                       Margin="0,0,7.5,15"
                       Padding="15,8,0,5"
                       Foreground="{StaticResource SLightGrayShade}"
@@ -82,14 +132,14 @@
                       SelectedItem="{Binding Hour, UpdateSourceTrigger=PropertyChanged}"
                       Style="{StaticResource ComboBoxStyleAccounts}"
                       ItemContainerStyle="{StaticResource ItemContainerStyle}">
-            </ComboBox>
+                </ComboBox>
 
-            <TextBlock Grid.Column="1"
+                <TextBlock Grid.Column="1"
                        VerticalAlignment="Center"
                        Margin="0,0,0,15"
                        Text=":"/>
 
-            <ComboBox Grid.Column="2"
+                <ComboBox Grid.Column="2"
                       Margin="5.7,0,0,15"
                       Padding="15,8,0,5"
                       Foreground="{StaticResource SLightGrayShade}"
@@ -97,28 +147,28 @@
                       SelectedItem="{Binding Minute, UpdateSourceTrigger=PropertyChanged}"
                       Style="{StaticResource ComboBoxStyleAccounts}"
                       ItemContainerStyle="{StaticResource ItemContainerStyle}">
-            </ComboBox>
-        </Grid>
+                </ComboBox>
+            </Grid>
 
-        <!-- Row 3-->
-        <TextBlock Grid.Column="0" 
+            <!-- Row 3-->
+            <TextBlock Grid.Column="0" 
                    Grid.Row="2"
                    Text="Duration:"
                    Margin="0,0,15,15"
                    VerticalAlignment="Center"/>
-        <TextBox Grid.Column="1"
+            <TextBox Grid.Column="1"
                  Grid.Row="2"
                  Margin="0,0,0,15"
                  Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}"
                  Style="{StaticResource TextBoxStyleAccount}"/>
 
-        <!-- Row 4 -->
-        <TextBlock Grid.Column="0" 
+            <!-- Row 4 -->
+            <TextBlock Grid.Column="0" 
                    Grid.Row="3"
                    VerticalAlignment="Center"
                    Margin="0,0,15,15"
                    Text="Doctor:"/>
-        <ComboBox Grid.Column="1"
+            <ComboBox Grid.Column="1"
                   Grid.Row="3"
                   Margin="0,0,0,15"
                   Width="300"
@@ -128,15 +178,15 @@
                   Style="{StaticResource ComboBoxStyleAccounts}"
                   ItemTemplate="{StaticResource ItemTemplateDoctor}"
                   ItemContainerStyle="{StaticResource ItemContainerStyle}">
-        </ComboBox>
+            </ComboBox>
 
-        <!-- Row 5 -->
-        <TextBlock Grid.Column="0" 
+            <!-- Row 5 -->
+            <TextBlock Grid.Column="0" 
                    Grid.Row="4"
                    VerticalAlignment="Center"
                    Margin="0,0,15,15"
                    Text="Room:"/>
-        <ComboBox Grid.Column="1"
+            <ComboBox Grid.Column="1"
                   Grid.Row="4"
                   Margin="0,0,0,15"
                   Width="300"
@@ -146,17 +196,17 @@
                   Style="{StaticResource ComboBoxStyleAccounts}"
                   ItemTemplate="{StaticResource ItemTemplatRoom}"
                   ItemContainerStyle="{StaticResource ItemContainerStyle}">
-        </ComboBox>
+            </ComboBox>
 
-        <!-- Buttons -->
-        <StackPanel Grid.Column="0" 
+            <!-- Buttons -->
+            <StackPanel Grid.Column="0" 
                     Grid.Row="5"
                     Grid.ColumnSpan="2"
                     Orientation="Horizontal"
                     VerticalAlignment="Top"
                     HorizontalAlignment="Center"
                     Margin="0,40,0,0">
-            <Button Grid.ColumnSpan="2"
+                <Button Grid.ColumnSpan="2"
                     VerticalAlignment="Center"
                     Content="Save"
                     Margin="0,0,40,0"
@@ -164,13 +214,14 @@
                     CommandParameter="{Binding RelativeSource={RelativeSource 
                 Mode=FindAncestor, AncestorType=Window}}"
                     Style="{StaticResource AccountButtonsStyle}"/>
-            <Button Grid.ColumnSpan="2"
+                <Button Grid.ColumnSpan="2"
                     VerticalAlignment="Center"
                     Content="Delete"
                     Command="{Binding DeleteCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource 
                 Mode=FindAncestor, AncestorType=Window}}"
                     Style="{StaticResource AccountButtonsStyle}"/>
-        </StackPanel>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
