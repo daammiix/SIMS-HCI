@@ -52,7 +52,7 @@ namespace ClassDijagramV1._0.Views.PatientView
         private void AppointmentsViewOpen(object sender, RoutedEventArgs e)
         {
             // Proslledimo appointmentViewModels da bi mogli da prikazemo appointmente i ulogovanog pacijenta
-            parent.startWindow.Content = new AppointmentsViewPage(_appointmentViewModels, parent, _logedPatient, _account);
+            parent.startWindow.Content = new AppointmentsViewPage(_appointmentViewModels, parent, parent.Patient, _account);
         }
 
         private void AddAppointmetClick(object sender, RoutedEventArgs e)

@@ -79,7 +79,7 @@ namespace ClassDijagramV1._0.Views.PatientView
         }
         private void EverythingRated(object sender, RoutedPropertyChangedEventArgs<int> e)
         {
-            if (pitanje1.Value != 0 && pitanje2.Value != 0 && pitanje2.Value != 0 && pitanje4.Value != 0)
+            if (pitanje1.Value != 0 && pitanje2.Value != 0 && pitanje2.Value != 0 && pitanje4.Value != 0 && doktoriSaPregleda.SelectedItem != null)
             {
                 ratingBtn.IsEnabled = true;
             }

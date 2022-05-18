@@ -156,7 +156,7 @@ namespace ClassDijagramV1._0
 
             // Banning Patient
             //var activityRepository = new ActivityRepo(new FileHandler<ActivityLog>(_activityFilePath));
-            var banningPatientService = new BanningPatientService(activityService, patientRepo, accountRepo);
+            var banningPatientService = new BanningPatientService(activityService, accountRepo);
             BanningPatientController = new BanningPatientController(banningPatientService);
 
             var dispatcherTimer = new System.Windows.Threading.DispatcherTimer();

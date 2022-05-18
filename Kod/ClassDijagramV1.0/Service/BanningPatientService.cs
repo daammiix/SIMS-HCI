@@ -12,13 +12,11 @@ namespace ClassDijagramV1._0.Service
     public class BanningPatientService
     {
         private ActivityService _activityService;
-        private PatientRepo _patientRepository;
         private AccountRepo _accountRepository;
 
-        public BanningPatientService(ActivityService activityService, PatientRepo patientRepository, AccountRepo accountRepository)
+        public BanningPatientService(ActivityService activityService, AccountRepo accountRepository)
         {
             _activityService = activityService;
-            _patientRepository = patientRepository;
             _accountRepository = accountRepository;
         }
 
@@ -31,30 +29,17 @@ namespace ClassDijagramV1._0.Service
 
             if (numberMake > 5 || numberEdit > 5 || numberCancel > 5)
             {
-                BanPatient(patientID, account);
+                BanPatient(account);
                 IsBanned = true;
             }
-
             return IsBanned;
 
         }
 
-        private void BanPatient(int patientID, Account account)
-        {
-            foreach (Patient p in _patientRepository.GetPatients())
-            {
-                if (p.Id == patientID)
-                {
-                    SetInformationsAboutBanning(patientID, account);
-                }
-            }
-        }
-
-        private void SetInformationsAboutBanning(int patientID, Account account)
+        private void BanPatient(Account account)
         {
             account.Banned = true;
             _accountRepository.UpdateAccount(account);
         }
-
     }
 }

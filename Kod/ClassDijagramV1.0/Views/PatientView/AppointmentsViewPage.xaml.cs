@@ -93,7 +93,7 @@ namespace ClassDijagramV1._0.Views.PatientView
         {
             if (_banningPatientController.CheckStatusOfPatient(_logedPatient.Id, _account) == true)
             {
-                MessageBox.Show("Otkazivanje Vam je trenutno onemogućeno,obratite se sekretaru!", "Greška");
+                errorBan.Content = "Banovani ste!";
             }
             else
             {
@@ -106,7 +106,7 @@ namespace ClassDijagramV1._0.Views.PatientView
         {
             if (_banningPatientController.CheckStatusOfPatient(_logedPatient.Id, _account) == true)
             {
-                MessageBox.Show("Otkazivanje Vam je trenutno onemogućeno,obratite se sekretaru!", "Greška");
+                errorBan.Content = "Banovani ste!";
             }
             else
             {
@@ -122,7 +122,7 @@ namespace ClassDijagramV1._0.Views.PatientView
         {
             if (_banningPatientController.CheckStatusOfPatient(_logedPatient.Id, _account) == true)
             {
-                MessageBox.Show("Otkazivanje Vam je trenutno onemogućeno,obratite se sekretaru!", "Greška");
+                errorBan.Content = "Banovani ste!";
             }
             else
             {
