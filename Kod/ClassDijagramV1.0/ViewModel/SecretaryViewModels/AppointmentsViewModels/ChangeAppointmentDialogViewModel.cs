@@ -135,6 +135,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModel
                 if (appointment.Id == appointmentToChangeId)
                 {
                     _appointmentToChange = appointment;
+                    break;
                 }
             }
 
