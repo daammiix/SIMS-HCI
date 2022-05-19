@@ -7,6 +7,7 @@ using ClassDijagramV1._0.FileHandlers;
 using ClassDijagramV1._0.Model;
 using Model;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -91,6 +92,16 @@ namespace Repository
             return null;
         }
 
+        /// <summary>
+        /// Vraca sve doktore za zadatu specijalizaciju
+        /// </summary>
+        /// <param name="specialization"></param>
+        /// <returns> Sve doktore za zadatu specijalizaciju  </returns>
+        public List<Doctor> GetDoctorsForSpecialization(DoctorType specialization)
+        {
+            // Filtriramo sve doktore tako da uzmemo samo one sa prosledjenom specijalizacijom
+            return Doctors.Where(doctor => doctor.Type == specialization).ToList();
+        }
 
     }
 }

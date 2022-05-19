@@ -320,9 +320,9 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModel
             Window win = o as Window;
 
             // Ako je nalog banovan prikazemo gresku 
-            if (SelectedPatientAccount.Banned == true)
+            if (SelectedPatientAccount.Banned)
             {
-                MessageBox.Show("Akaunt banovan!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowBannedAccountMessage(SelectedPatientAccount.Banned);
                 return;
             }
 
@@ -371,7 +371,11 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModel
             Window win = o as Window;
 
             // Ako je nalog banovan prikazemo gresku 
-            ShowBannedAccountMessage(SelectedPatientAccountUrgent.Banned);
+            if (SelectedPatientAccountUrgent.Banned)
+            {
+                ShowBannedAccountMessage(SelectedPatientAccountUrgent.Banned);
+                return;
+            }
             // Uzmemo vreme
             DateTime start = GetAppointmentDate(SelectedHourUrgent, SelectedMinuteUrgent);
             // Nece duration da bude null nikad ovde jer ne moze da se pritisne dugme ako je null

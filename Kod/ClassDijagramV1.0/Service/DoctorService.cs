@@ -72,13 +72,7 @@ namespace Service
         /// <returns> Sve doktore za zadatu specijalizaciju ako nema doktora onda vraca praznu listu </returns>
         public List<Doctor> GetDoctorsForSpecialization(DoctorType specialization)
         {
-            // Ret val
-            List<Doctor> ret = new List<Doctor>();
-
-            // Filtriramo sve doktore tako da uzmemo samo one sa prosledjenom specijalizacijom
-            ret = _doctorRepo.GetDoctors().Where(doctor => doctor.Type == specialization).ToList();
-
-            return ret;
+            return _doctorRepo.GetDoctorsForSpecialization(specialization);
         }
 
     }
