@@ -135,6 +135,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModel
                 if (appointment.Id == appointmentToChangeId)
                 {
                     _appointmentToChange = appointment;
+                    break;
                 }
             }
 
@@ -145,6 +146,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModel
             _doctorController = app.DoctorController;
             _appointmentController = app.AppointmentController;
             _equipmentAppointmentController = app.equipmentAppointmentController;
+            _roomAppointmentController = app.roomAppointmentController;
 
             // Popunimo liste
             Rooms = new ObservableCollection<Room>(_roomController.GetAllRooms());

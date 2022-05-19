@@ -6,7 +6,9 @@
 using Model;
 using Repository;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Service
 {
@@ -18,7 +20,7 @@ namespace Service
         {
             _doctorRepo = repo;
         }
-        public void AddDoctor(Model.Doctor doctor)
+        public void AddDoctor(Doctor doctor)
         {
             _doctorRepo.AddDoctor(doctor);
         }
@@ -28,7 +30,7 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public void UpdateDoctor(Model.Doctor doctor)
+        public void UpdateDoctor(Doctor doctor)
         {
             throw new NotImplementedException();
         }
@@ -61,6 +63,16 @@ namespace Service
             }
 
             return ret;
+        }
+
+        /// <summary>
+        /// Vraca sve doktore za zadatu specijalizaciju
+        /// </summary>
+        /// <param name="specialization"></param>
+        /// <returns> Sve doktore za zadatu specijalizaciju ako nema doktora onda vraca praznu listu </returns>
+        public List<Doctor> GetDoctorsForSpecialization(DoctorType specialization)
+        {
+            return _doctorRepo.GetDoctorsForSpecialization(specialization);
         }
 
     }

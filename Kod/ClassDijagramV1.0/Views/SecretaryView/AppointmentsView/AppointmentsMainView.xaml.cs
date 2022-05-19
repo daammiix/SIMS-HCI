@@ -63,10 +63,15 @@ namespace ClassDijagramV1._0.Views.SecretaryView.AppointmentsView
                 // Prikazemo custom window za dodavanje appointmenta i prosledimo mu listu
                 // AppointmentViewModela da bi tu dodali novi Appointment kako bi se prikazao u scheduleru
                 // MessageBox.Show("dodavanje");
-                AddAppointmentDialog addAppointmentDialog = new AddAppointmentDialog(_viewModel.ScheduleViewModel.Appointments,
-                    selectedDate);
-                addAppointmentDialog.Owner = Application.Current.MainWindow;
-                addAppointmentDialog.ShowDialog();
+
+                // Ako je selektovani dan pre danasnjeg ne otvorimo dialog
+                if (selectedDate.Day >= DateTime.Now.Day)
+                {
+                    AddAppointmentDialog addAppointmentDialog = new AddAppointmentDialog(_viewModel.ScheduleViewModel.Appointments,
+                                selectedDate);
+                    addAppointmentDialog.Owner = Application.Current.MainWindow;
+                    addAppointmentDialog.ShowDialog();
+                }
             }
         }
 

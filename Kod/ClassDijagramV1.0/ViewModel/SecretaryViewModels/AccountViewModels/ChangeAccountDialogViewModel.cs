@@ -46,7 +46,6 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
 
         public string Username { get; set; }
         public string Password { get; set; }
-        public bool IsGuest { get; set; }
 
         #endregion
 
@@ -67,7 +66,6 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
             // Inicijalizujemo propertije na propertije iz accounta
             Username = _accountViewModel.Username;
             Password = _accountViewModel.Password;
-            IsGuest = _accountViewModel.IsGuest;
         }
 
         #endregion
@@ -86,7 +84,8 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
             {
                 _accountViewModel.Username = Username;
                 _accountViewModel.Password = Password;
-                _accountViewModel.IsGuest = IsGuest;
+                // Uvek kad napravimo acc on je guest dok pacijentu ne dodamo medicinski karton
+                _accountViewModel.IsGuest = true;
                 win.Close();
             }
         }
@@ -109,5 +108,6 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
         }
 
         #endregion
+
     }
 }

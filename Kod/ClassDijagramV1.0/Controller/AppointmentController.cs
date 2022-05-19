@@ -1,4 +1,5 @@
 using ClassDijagramV1._0.Model;
+using ClassDijagramV1._0.Model.DTO;
 using Model;
 using Service;
 using System;
@@ -84,5 +85,16 @@ namespace Controller
             return _appointmentService.GetListOfAppointments();
         }
 
+        /// <summary>
+        /// Pronalazi najblizi slobodan termin za bilo kog doktora sa prosledjenom specijalizacijom
+        /// </summary>
+        /// <param name="doctorType">Specijalizacija</param>
+        /// <param name="duration">Trajanje</param>
+        /// <param name="from">Odakle trazimo</param>
+        /// <returns></returns>
+        public DoctorWithTerminAndRoomDTO? FindClosestFreeTerminForSpecialization(DoctorType doctorType, DateTime from, int duration)
+        {
+            return _appointmentService.FindClosestFreeTerminForSpecialization(doctorType, from, duration);
+        }
     }
 }

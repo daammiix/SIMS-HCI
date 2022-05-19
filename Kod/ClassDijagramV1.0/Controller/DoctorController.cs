@@ -19,12 +19,12 @@ namespace Controller
         {
             _doctorService = service;
         }
-        public void AddDoctor(Model.Doctor doctor)
+        public void AddDoctor(Doctor doctor)
         {
             _doctorService.AddDoctor(doctor);
         }
 
-        public void RemoveDoctor(Model.Doctor doctor)
+        public void RemoveDoctor(Doctor doctor)
         {
             throw new NotImplementedException();
         }

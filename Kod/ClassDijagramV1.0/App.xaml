@@ -8,7 +8,9 @@
              xmlns:secretaryView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView"
              xmlns:accountsView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.AccountsView"
              xmlns:medicalRecordsView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.MedicalRecordsView"
-             xmlns:medicalRecourdsViewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewModels"
+             xmlns:medicalRecordsViewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewModels"
+             xmlns:equipmentView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.EquipmentView"
+             xmlns:equipmentViewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.EquipmentViewModels"
              xmlns:appointmentsViewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModels"
              xmlns:appointmentsView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.AppointmentsView"
              xmlns:viewModel="clr-namespace:ClassDijagramV1._0.ViewModel"
@@ -33,8 +35,12 @@
                 <accountsView:AccountsMainView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type medicalRecourdsViewModels:MedicalRecordsMainViewModel}">
+            <DataTemplate DataType="{x:Type medicalRecordsViewModels:MedicalRecordsMainViewModel}">
                 <medicalRecordsView:MedicalRecordsMainView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type equipmentViewModels:EquipmentMainViewModel}">
+                <equipmentView:EquipmentMainView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:RoomsViewModel}">
@@ -64,6 +70,7 @@
             <DataTemplate DataType="{x:Type viewModel:StorageDrugsViewModel}">
                 <view:StorageDrugsView/>
             </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

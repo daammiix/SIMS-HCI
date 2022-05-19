@@ -7,11 +7,13 @@
         xmlns:converters="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewModels.Converters"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        AllowsTransparency="True"
         Foreground="{StaticResource SCyan}"
         FontSize="24"
         FontFamily="#Poppins"
         Background="{StaticResource SBackground}"
-        Title="ChangeMedicalRecordDialog" Height="580" Width="1000">
+        Height="580" Width="1000">
 
     <Window.InputBindings>
         <KeyBinding Key="Return"
@@ -31,84 +33,132 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid Margin="10,50,10,10">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
+    <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Left -->
-        <Grid Grid.Column="0" 
-              HorizontalAlignment="Center">
+        <!-- Header -->
+        <Grid Grid.Row="0"
+              MouseDown="Header_MouseDown"
+              Background="{StaticResource SBackground}">
+            <!-- Title -->
+            <TextBlock Text="Change Medical Record"
+                       Margin="0,5,0,1"
+                       FontSize="24"
+                       Foreground="{StaticResource SLightGrayShade}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+
+            <!-- Window Buttons -->
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,2,3">
+                <Button Content="&#x1f5d5;"
+                        Background="Transparent"
+                        Foreground="{StaticResource SLightGrayShade}"
+                        BorderThickness="0"
+                        Padding="0,1,0,3"
+                        Click="ButtonMinimize_Click"/>
+                <Button Content="&#x1F5D6;"
+                        Background="Transparent"
+                        Foreground="{StaticResource SLightGrayShade}"
+                        BorderThickness="0"
+                        Padding="5 0"
+                        Margin="0,7,0,0"
+                        FontSize="14"
+                        Click="WindowStateButton_Click"/>
+                <Button Content="&#10006;"
+                        FontSize="10"
+                        Background="Transparent"
+                        Foreground="{StaticResource SLightGrayShade}"
+                        BorderThickness="0"
+                        Padding="5 0"
+                        Margin="0,8,0,0"
+                        Click="ExitButton_Click"/>
+            </StackPanel>
+        </Grid>
+        <Grid Margin="10,30,10,10"
+              Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <!-- Row 1 -->
-            <TextBlock Grid.Row="0" Grid.Column="0"
+            <!-- Left -->
+            <Grid Grid.Column="0" 
+              HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Row 1 -->
+                <TextBlock Grid.Row="0" Grid.Column="0"
                    Text="Number:"
                    VerticalAlignment="Center"
                    Margin="0,0,15,15"/>
-            <TextBox Grid.Row="0" Grid.Column="1"
+                <TextBox Grid.Row="0" Grid.Column="1"
                      MaxHeight="65"
                      Width="300"
                      Margin="0,0,0,15"
                      Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}"
                      Style="{StaticResource TextBoxStyleAccount}"/>
 
-            <!-- Row 2-->
-            <TextBlock Grid.Row="1" Grid.Column="0"
+                <!-- Row 2-->
+                <TextBlock Grid.Row="1" Grid.Column="0"
                    Text="Parent Name:"
                    VerticalAlignment="Center"
                    Margin="0,0,15,15"/>
-            <TextBox Grid.Row="1" Grid.Column="1"
+                <TextBox Grid.Row="1" Grid.Column="1"
                      MaxHeight="65"
                      Width="300"
                      Margin="0,0,0,15"
                      Text="{Binding ParentName, UpdateSourceTrigger=PropertyChanged}"
                      Style="{StaticResource TextBoxStyleAccount}"/>
 
-            <!-- Row 3 -->
-            <TextBlock Grid.Row="2" Grid.Column="0"
+                <!-- Row 3 -->
+                <TextBlock Grid.Row="2" Grid.Column="0"
                    Text="Health Card Number:"
                    VerticalAlignment="Center"
                    Margin="0,0,15,15"/>
-            <TextBox Grid.Row="2" Grid.Column="1"
+                <TextBox Grid.Row="2" Grid.Column="1"
                      MaxHeight="65"
                      Margin="0,0,0,15"
                      Text="{Binding HealthCardNumber, UpdateSourceTrigger=PropertyChanged}"
                      Style="{StaticResource TextBoxStyleAccount}"/>
 
-            <!-- Row 4 -->
-            <TextBlock Grid.Row="3" Grid.Column="0"
+                <!-- Row 4 -->
+                <TextBlock Grid.Row="3" Grid.Column="0"
                    Text="Marital Status:"
                    Margin="0,0,15,15"/>
-            <Grid Grid.Row="3" Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="3" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                <!-- Row 1-->
-                <RadioButton Grid.Row="0" Grid.Column="0"
+                    <!-- Row 1-->
+                    <RadioButton Grid.Row="0" Grid.Column="0"
                          x:Name="Single"
                          GroupName="Marital Status"
                          IsChecked="{Binding IsSingle}"
@@ -116,7 +166,7 @@
                          Checked="RadioButtonMaritalStatus_Checked"
                          Style="{StaticResource SecretaryRadioButton}"/>
 
-                <RadioButton Grid.Row="0" Grid.Column="1"
+                    <RadioButton Grid.Row="0" Grid.Column="1"
                              x:Name="Divorced"
                              Content="Divorced"
                              IsChecked="{Binding IsDivorced}"
@@ -124,8 +174,8 @@
                              GroupName="Marital Status"
                              Style="{StaticResource SecretaryRadioButton}"/>
 
-                <!-- Row 2-->
-                <RadioButton Grid.Row="1" Grid.Column="0"
+                    <!-- Row 2-->
+                    <RadioButton Grid.Row="1" Grid.Column="0"
                              x:Name="Widow"
                          GroupName="Marital Status"
                          IsChecked="{Binding IsWidow}"
@@ -133,7 +183,7 @@
                          Checked="RadioButtonMaritalStatus_Checked"
                          Style="{StaticResource SecretaryRadioButton}"/>
 
-                <RadioButton Grid.Row="1" Grid.Column="1"
+                    <RadioButton Grid.Row="1" Grid.Column="1"
                              x:Name="Married"
                              Content="Married"
                              IsChecked="{Binding IsMarried}"
@@ -141,94 +191,95 @@
                              GroupName="Marital Status"
                              Style="{StaticResource SecretaryRadioButton}"/>
 
-            </Grid>
+                </Grid>
 
-            <!-- Row 6 -->
-            <TextBlock Grid.Row="4" Grid.Column="0"
+                <!-- Row 6 -->
+                <TextBlock Grid.Row="4" Grid.Column="0"
                    Text="Blood Type:"
                    Margin="0,0,15,15"/>
-            <Grid Grid.Row="4" Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="4" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
 
-                <!-- Row 1-->
-                <RadioButton Grid.Row="0" Grid.Column="0"
+                    <!-- Row 1-->
+                    <RadioButton Grid.Row="0" Grid.Column="0"
                              Content="0"
                              GroupName="Blood Type"
                              IsChecked="{Binding Is0}"
                              Checked="RadioButtonBloodType_Checked"
                              Style="{StaticResource SecretaryRadioButton}"/>
 
-                <RadioButton Grid.Row="0" Grid.Column="1"
+                    <RadioButton Grid.Row="0" Grid.Column="1"
                              Content="B"
                              Checked="RadioButtonBloodType_Checked"
                              IsChecked="{Binding IsB}"
                              GroupName="Blood Type"
                              Style="{StaticResource SecretaryRadioButton}"/>
 
-                <!-- Row 2 -->
-                <RadioButton Grid.Row="1" Grid.Column="0"
+                    <!-- Row 2 -->
+                    <RadioButton Grid.Row="1" Grid.Column="0"
                              Content="A"
                              Checked="RadioButtonBloodType_Checked"
                              IsChecked="{Binding IsA}"
                              GroupName="Blood Type"
                              Style="{StaticResource SecretaryRadioButton}"/>
 
-                <RadioButton Grid.Row="1" Grid.Column="1"
+                    <RadioButton Grid.Row="1" Grid.Column="1"
                              Content="AB"
                              Checked="RadioButtonBloodType_Checked"
                              IsChecked="{Binding IsAB}"
                              GroupName="Blood Type"
                              Style="{StaticResource SecretaryRadioButton}"/>
+                </Grid>
             </Grid>
-        </Grid>
 
-        <!-- Right -->
-        <Grid Grid.Column="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <!-- Alergeni i bolesti -->
-            <!-- Row 1 -->
-            <TextBlock Grid.Row="0" Grid.Column="1"
+            <!-- Right -->
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!-- Alergeni i bolesti -->
+                <!-- Row 1 -->
+                <TextBlock Grid.Row="0" Grid.Column="1"
                        Text="Allergens:"
                        Margin="0,0,15,0"/>
-            <TextBox Grid.Row="0" Grid.Column="2"
+                <TextBox Grid.Row="0" Grid.Column="2"
                      Text="{Binding Allergens, UpdateSourceTrigger=LostFocus, 
                 Converter={converters:AllergensDiseasesToStringConverter}}"
                      Style="{StaticResource TextBoxStyleAccountMultiLine}"/>
-            <!-- Row 2 -->
-            <TextBlock Grid.Row="2" Grid.Column="1"
+                <!-- Row 2 -->
+                <TextBlock Grid.Row="2" Grid.Column="1"
                        Text="Diseases:"
                        Margin="0,0,15,0"/>
-            <TextBox Grid.Row="2" Grid.Column="2"
+                <TextBox Grid.Row="2" Grid.Column="2"
                      Text="{Binding Diseases, UpdateSourceTrigger=LostFocus,
                 Converter={converters:AllergensDiseasesToStringConverter}}"
                      Style="{StaticResource TextBoxStyleAccountMultiLine}"/>
-        </Grid>
+            </Grid>
 
-        <!-- Add Button -->
-        <Button Grid.Row="1" Grid.Column="0" 
+            <!-- Add Button -->
+            <Button Grid.Row="1" Grid.Column="0" 
                 Grid.ColumnSpan="2"
                 Content="Save"
                 Margin="0,30,0,15"
                 Command="{Binding Save}"
                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
                 Style="{StaticResource AccountButtonsStyle}"/>
+        </Grid>
     </Grid>
 </Window>

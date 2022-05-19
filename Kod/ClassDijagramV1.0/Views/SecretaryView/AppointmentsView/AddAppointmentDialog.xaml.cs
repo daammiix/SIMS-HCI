@@ -50,25 +50,96 @@ namespace ClassDijagramV1._0.Views.SecretaryView.AppointmentsView
             RadioButton rb = sender as RadioButton;
             if (rb != null)
             {
-                switch (rb.Content.ToString())
-                {
-                    case "general checkup":
-                        {
-                            _viewModel.SelectedAppointmentType = AppointmentType.generalPractitionerCheckup;
-                            break;
-                        }
-                    case "specialist checkup":
-                        {
-                            _viewModel.SelectedAppointmentType = AppointmentType.specialistCheckup;
-                            break;
-                        }
-                    case "operation":
-                        {
-                            _viewModel.SelectedAppointmentType = AppointmentType.operation;
-                            break;
-                        }
-                }
+                SetAppropriateAppointmentType(rb, _viewModel.SelectedAppointmentType);
             }
+        }
+
+        private void RadioButtonAppointmentTypeUrgent_Checked(object sender, RoutedEventArgs e)
+        {
+            // Castujemo object u RadioButton
+            RadioButton rb = sender as RadioButton;
+            if (rb != null)
+            {
+                SetAppropriateAppointmentType(rb, _viewModel.SelectedAppointmentTypeUrgent);
+            }
+        }
+
+        #endregion
+
+        #region Private Helpres
+
+        /// <summary>
+        /// Stavlja odgovarajuci appointmentType u viewModelu na osnovu selektovanog radioButtona
+        /// </summary>
+        /// <param name="appointmentType">Referenca na odgovarajuci appointmentType u ViewModelu </param>
+        private void SetAppropriateAppointmentType(RadioButton rb, AppointmentType appointmentType)
+        {
+            switch (rb.Content.ToString())
+            {
+                case "general checkup":
+                    {
+                        appointmentType = AppointmentType.generalPractitionerCheckup;
+                        break;
+                    }
+                case "specialist checkup":
+                    {
+                        appointmentType = AppointmentType.specialistCheckup;
+                        break;
+                    }
+                case "operation":
+                    {
+                        appointmentType = AppointmentType.operation;
+                        break;
+                    }
+            }
+        }
+
+        #endregion
+
+        #region Application State Event Handlers
+
+        /// <summary>
+        /// Minimizes application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        /// <summary>
+        /// Maximizes application or change it back to normal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void WindowStateButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Normal;
+            }
+            else
+            {
+                this.WindowState = WindowState.Maximized;
+            }
+        }
+
+        /// <summary>
+        /// Closes applications main window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            this?.Close();
+        }
+
+
+        private void Header_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
         }
 
         #endregion
