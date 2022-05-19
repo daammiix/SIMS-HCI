@@ -11,10 +11,10 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
-        Background="#B07E86"
+        Background="#B0C69D"
+        FontFamily="Berlin Sans FB Demi"
         BorderThickness="4"
-        BorderBrush="#8E4D58"
-        FontFamily="Comic Sans MS">
+        BorderBrush="#455736">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -33,7 +33,7 @@
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    FontSize="34"
-                   Foreground="Black">
+                   Foreground="#1F1313">
         </TextBlock>
         <TextBlock Grid.Row="1"
                    Text="Da li ste sigurni da želite &#x0a;    da obrišete opremu?"
@@ -41,7 +41,7 @@
                    Margin="0,15,0,0"
                    HorizontalAlignment="Center"
                    FontSize="28"
-                   Foreground="Black">
+                   Foreground="#1F1313">
         </TextBlock>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <Button x:Name="DeleteYesEquipment"  Height="45" Width="300" Content="Da" Style="{StaticResource YesNoButton}" Click="DeleteYesEquipment_Click"/>

@@ -103,7 +103,7 @@ namespace ClassDijagramV1._0.ViewModel
                         // Uzmemo pacijenta koji se loguje
                         Patient logedPatient = _pattientController.GetPatientById(a.PersonId);
                         // Prosledimo mainWindowu pacijenta koji se ulogovao kako bi mogle da se prikazuju informacije
-                        PatientMainWindow patientMainWindow = new PatientMainWindow(logedPatient);
+                        PatientMainWindow patientMainWindow = new PatientMainWindow(logedPatient, a);
                         patientMainWindow.Show();
                         //datacontex pma 
                         break;

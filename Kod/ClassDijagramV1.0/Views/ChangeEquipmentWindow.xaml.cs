@@ -39,7 +39,7 @@ namespace ClassDijagramV1._0.Views
             equipmentController = app.equipmentController;
             this.equipmentView = equipmentView;
             this.quantifiedEquipment = (QuantifiedEquipment)quantifiedEquipment;
-            storage = (Storage)roomController.GetARoom("storage");
+            storage = (Storage)roomController.GetRoom("storage");
             this.DataContext = quantifiedEquipment;
         }
 
@@ -51,7 +51,7 @@ namespace ClassDijagramV1._0.Views
         public int findEquipment(String equipmentId)
         {
             int i = 0;
-            var equipmentList = ((Storage)roomController.GetARoom("storage")).EquipmentList;
+            var equipmentList = ((Storage)roomController.GetRoom("storage")).EquipmentList;
             foreach (var e in equipmentList)
             {
                 if (e.EquipmentID == equipmentId)

@@ -42,7 +42,7 @@ namespace ClassDijagramV1._0.Views
             equipmentController = app.equipmentController;
             roomController = app.roomController;
             allEquipment = equipmentController.GetAllEquipments();
-            storage = (Storage)roomController.GetARoom("storage");
+            storage = (Storage)roomController.GetRoom("storage");
             RefreshEquipment();
             
             this.DataContext = this;
@@ -113,6 +113,21 @@ namespace ClassDijagramV1._0.Views
                 warning.Show();
             }
 
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var txb = sender as TextBox;
+            if (txb.Text != "")
+            {
+                var filteredList = EquipmentList.Where(r => (r.Equipment.EquipmentID.ToLower().Contains(txb.Text.ToLower()) || r.Equipment.Name.ToLower().Contains(txb.Text.ToLower()) || r.Quantity.ToString().Contains(txb.Text)));
+                EquipmentListGrid.ItemsSource = null;
+                EquipmentListGrid.ItemsSource = filteredList;
+            }
+            else
+            {
+                EquipmentListGrid.ItemsSource = EquipmentList;
+            }
         }
     }
 }

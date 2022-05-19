@@ -35,7 +35,7 @@ namespace ClassDijagramV1._0.Views
             {
                 throw new Exception();
             }
-            ((Storage)roomController.GetARoom("storage")).EquipmentList.RemoveAt(i);
+            ((Storage)roomController.GetRoom("storage")).EquipmentList.RemoveAt(i);
             equipmentView.RefreshEquipment();
             this.Close();
         }
@@ -43,7 +43,7 @@ namespace ClassDijagramV1._0.Views
         public int findEquipment(String equipmentId)
         {
             int i = 0;
-            var equipmentList = ((Storage)roomController.GetARoom("storage")).EquipmentList;
+            var equipmentList = ((Storage)roomController.GetRoom("storage")).EquipmentList;
             foreach (var e in equipmentList)
             {
                 if (e.EquipmentID == equipmentId)

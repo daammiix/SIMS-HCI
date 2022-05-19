@@ -1,4 +1,6 @@
-﻿using Controller;
+﻿using ClassDijagramV1._0.Controller;
+using ClassDijagramV1._0.Model;
+using Controller;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -24,60 +26,59 @@ namespace ClassDijagramV1._0.Views.PatientView
     /// </summary>
     public partial class UpdatePriorityDoctor : Page, INotifyPropertyChanged
     {
-        // lista pacijentovi appointmentViewModela
-        private ObservableCollection<AppointmentViewModel> _appointmentViewModels;
-
-        // ulogovan pacijent
-        private Patient _logedPatient;
-
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged(String propertyName)
         {
             PropertyChangedEventArgs e = new PropertyChangedEventArgs(propertyName);
             PropertyChanged(this, e);
         }
+
+        // lista pacijentovi appointmentViewModela
+        private ObservableCollection<AppointmentViewModel> _appointmentViewModels;
+        // ulogovan pacijent
+        private Patient _logedPatient;
+        //
         public AppointmentController _appointmentController;
         public RoomController _roomController;
         public DoctorController _doctorController;
+        public RoomAppointmentController _roomAppointmentController;
+        public ActivityController _activityController;
+
         private PatientMainWindow parent { get; set; }
         public ObservableCollection<Appointment> Appointments { get; set; }
-        //public ObservableCollection<Room> Rooms { get; set; }
         public BindingList<Room> Rooms { get; set; }
         public ObservableCollection<Doctor> Doctors { get; set; }
         public ObservableCollection<String> DoctorsAppointmentsTime { get; set; }
+
         public UpdatePriorityDoctor(PatientMainWindow patientMain,
             ObservableCollection<AppointmentViewModel> appointmentViewModels, Patient logedPatient)
         {
             InitializeComponent();
-
+            parent = patientMain;
             _appointmentViewModels = appointmentViewModels;
-
             _logedPatient = logedPatient;
 
-            parent = patientMain;
             App app = Application.Current as App;
             _appointmentController = app.AppointmentController;
             _roomController = app.roomController;
             _doctorController = app.DoctorController;
+            _roomAppointmentController = app.roomAppointmentController;
+            _activityController = app.ActivityController;
 
             Rooms = _roomController.GetAllRooms();
-            Appointments = _appointmentController.GetAppointments(); // ulgovani korisnik ali ovo je za doktora
+            Appointments = _appointmentController.GetAppointments();
             Doctors = _doctorController.GetAllDoctors();
             DoctorsAppointmentsTime = new ObservableCollection<String>();
-            dodavanjPregledaDoktor.ItemsSource = Doctors;
+
             BlackoutDates();
-            dodavanjPregledaDoktor.SelectedItem = (Doctor)AppointmentsViewPage.SelectedAppointment.Doctor;
+            izmjenaPregledaDoktor.ItemsSource = Doctors;
+            izmjenaPregledaDoktor.SelectedItem = (Doctor)AppointmentsViewPage.SelectedAppointment.Doctor;
             promjenaKalendar.SelectedDate = AppointmentsViewPage.SelectedAppointment.AppointmentDate;
-            timeCB.SelectedItem = AppointmentsViewPage.SelectedAppointment.AppointmentDate.ToString("HH:mm");
-            /*dr.Text = AppointmentsViewPage.SelectedAppointment.Doctor.Name + " " + AppointmentsViewPage.SelectedAppointment.Doctor.Surname;
-            date.Text = AppointmentsViewPage.SelectedAppointment.AppointmentDate.ToString("HH:mm dd.MM.yyyy.");
-            room.Text = AppointmentsViewPage.SelectedAppointment.Room.RoomName.ToString();*/
+            //timeCB.SelectedItem = AppointmentsViewPage.SelectedAppointment.AppointmentDate.ToString("HH:mm");
         }
         private void BlackoutDates()
         {
             var oldDate = AppointmentsViewPage.SelectedAppointment.AppointmentDate;
-            var firstDate = DateTime.MinValue;
-            var lastDate = DateTime.MaxValue;
             double NDays = 5;
             DateTime NDaysBefore = oldDate.AddDays(-NDays);
             DateTime NDaysAfter = oldDate.AddDays(NDays);
@@ -88,58 +89,62 @@ namespace ClassDijagramV1._0.Views.PatientView
         private void UpdateAppointmentClick(object sender, RoutedEventArgs e)
         {
             var oldAppointment = AppointmentsViewPage.SelectedAppointment;
-            var updatedAppointment = oldAppointment;
+            Appointment updatedAppointment = _appointmentController.GetAppointmentById(oldAppointment.Id);
 
-            //DateTime date1 = promjenaKalendar.SelectedDate.Value;
-            Doctor d1 = (Doctor)dodavanjPregledaDoktor.SelectedItem;
+            Doctor d1 = (Doctor)izmjenaPregledaDoktor.SelectedItem;
 
             int year = promjenaKalendar.SelectedDate.Value.Year;
             int month = promjenaKalendar.SelectedDate.Value.Month;
             int day = promjenaKalendar.SelectedDate.Value.Day;
-            string[] getTimeCB = ((timeCB.SelectedItem).ToString()).Split(":");
+
+            string[] getTimeCB = timeCB.SelectedItem.ToString().Split(":");
             int hour = Int32.Parse(getTimeCB[0]);
             int minutes = Int32.Parse(getTimeCB[1]);
-            DateTime date1 = new DateTime(year, month, day, hour, minutes, 0);
 
-            Room r1 = getFreeRoom(date1, date1.AddMinutes(15));
+            DateTime date = new DateTime(year, month, day, hour, minutes, 0);
+            TimeSpan interval = date.AddMinutes(30) - date;
 
-            updatedAppointment.Doctor = d1;
-            updatedAppointment.Room = r1;
-            updatedAppointment.AppointmentDate = date1;
+            Room r1 = getFreeRoom(date, interval);
 
+            oldAppointment.Doctor = d1;
+            oldAppointment.Room = r1;
+            oldAppointment.AppointmentDate = date;
 
-            _appointmentController.UpdateAppointment(oldAppointment.Appointment.Id, updatedAppointment.Appointment);
-            parent.startWindow.Content = new AppointmentsViewPage(_appointmentViewModels, parent, _logedPatient);
+            updatedAppointment.DoctorId = d1.Id;
+            updatedAppointment.RoomId = r1.RoomID;
+            updatedAppointment.AppointmentDate = date;
 
+            _appointmentController.UpdateAppointment(oldAppointment.Id, updatedAppointment);
+            //activity
+            ActivityLog activity = new ActivityLog(DateTime.Now, _logedPatient.Id, TypeOfActivity.editAppointment);
+            _activityController.AddActivity(activity);
+            parent.startWindow.Content = new AppointmentsViewPage(_appointmentViewModels, parent, _logedPatient, parent.Account);
         }
 
-        private Room getFreeRoom(DateTime start, DateTime end) //FJA ZA DODJELU PRVE PRAZNE SOBE
+        private Room getFreeRoom(DateTime start, TimeSpan interval)
         {
-            //var freeRooms = new List<Room>;
-            foreach (Room r in Rooms)
+            foreach (Room room in Rooms)
             {
-                if (r.isFree(start, end)) // dodaj sebi polje isFree
+                if (_roomAppointmentController.GetFreeRoom(room, start, start + interval))
                 {
-                    //freeRooms.Add(r);
-                    return r;
+                    return room;
                 }
-
             }
             return null;
         }
         private void dodavanjPregledaDoktor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            Doctor l = (Doctor)dodavanjPregledaDoktor.SelectedItem;
+            Doctor l = (Doctor)izmjenaPregledaDoktor.SelectedItem;
 
             DoctorsAppointmentsTime = new ObservableCollection<string>();
             List<Appointment> termini = new List<Appointment>();
-            if (dodavanjPregledaDoktor.SelectedItem != null && promjenaKalendar.SelectedDate != null)
+            if (izmjenaPregledaDoktor.SelectedItem != null && promjenaKalendar.SelectedDate != null)
             {
                 foreach (Appointment termin in Appointments)
                 {
                     Doctor d = _doctorController.GetDoctorById(termin.DoctorId);
-                    if (l.Name == d.Name)
+                    if (l.Id == d.Id)
                     {
                         if (termin.AppointmentDate.Date.Equals(promjenaKalendar.SelectedDate))
                         {
@@ -171,7 +176,7 @@ namespace ClassDijagramV1._0.Views.PatientView
 
             timeCB.ItemsSource = DoctorsAppointmentsTime;
 
-            if (dodavanjPregledaDoktor.SelectedItem != null && promjenaKalendar.SelectedDate != null && timeCB.SelectedItem != null)
+            if (izmjenaPregledaDoktor.SelectedItem != null && promjenaKalendar.SelectedDate != null && timeCB.SelectedItem != null)
             {
                 addAppBtn.IsEnabled = true;
             }

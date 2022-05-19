@@ -24,7 +24,7 @@ namespace ClassDijagramV1._0.Views.PatientView
     /// <summary>
     /// Interaction logic for AppointmentAddPage.xaml
     /// </summary>
-    public partial class AppointmentAddPage : Page//, INotifyPropertyChanged
+    public partial class AppointmentAddPage : Page
     {
         #region Fields
 
@@ -37,39 +37,7 @@ namespace ClassDijagramV1._0.Views.PatientView
         #endregion
 
 
-        /*public AppointmentController _appointmentController;
-        public RoomController _roomController;
-        public DoctorController _doctorController;
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged(String propertyName)
-        {
-            PropertyChangedEventArgs e = new PropertyChangedEventArgs(propertyName);
-            PropertyChanged(this, e);
-        }*/
         private PatientMainWindow parent { get; set; }
-        /*public ObservableCollection<Appointment> Appointments
-        {
-            get;
-            set;
-        }
-        public BindingList<Room> Rooms
-        {
-            get;
-            set;
-        }
-        public ObservableCollection<Doctor> Doctors
-        {
-            get;
-            set;
-        }
-        public ObservableCollection<String> DoctorsAppointmentsTime
-        {
-            get;
-            set;
-        }*/
-        //private List<string> availableTimes;
 
         public AppointmentAddPage(PatientMainWindow patientMain,
             ObservableCollection<AppointmentViewModel> appointmentViewModels, Patient logedPatient)

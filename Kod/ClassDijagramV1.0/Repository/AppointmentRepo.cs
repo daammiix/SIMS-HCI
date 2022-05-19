@@ -53,7 +53,7 @@ namespace Repository
 
         public void UpdateAppointment(int oldAppointmentID, Appointment updatedAppointment)
         {
-            var oldAppointment = FindAppointmentById(oldAppointmentID);
+            Appointment oldAppointment = FindAppointmentById(oldAppointmentID);
             oldAppointment = updatedAppointment;
         }
 

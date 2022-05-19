@@ -19,6 +19,7 @@ using Controller;
 using Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using ClassDijagramV1._0.Controller;
 
 namespace ClassDijagramV1._0.Views.PatientView
 {
@@ -27,16 +28,6 @@ namespace ClassDijagramV1._0.Views.PatientView
     /// </summary>
     public partial class PriorityTime : Page, INotifyPropertyChanged
     {
-        // pacijentovi appointmenti, lista appointmentViewModela prosledjena konstruktoru
-        private ObservableCollection<AppointmentViewModel> _patientAppointments;
-
-        // ulogovan pacijent
-        private Patient _logedPatient;
-
-        public AppointmentController _appointmentController;
-        public RoomController _roomController;
-        public DoctorController _doctorController;
-
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged(String propertyName)
@@ -44,46 +35,43 @@ namespace ClassDijagramV1._0.Views.PatientView
             PropertyChangedEventArgs e = new PropertyChangedEventArgs(propertyName);
             PropertyChanged(this, e);
         }
+
+        // pacijentovi appointmenti, lista appointmentViewModela prosledjena konstruktoru
+        private ObservableCollection<AppointmentViewModel> _patientAppointments;
+        // ulogovan pacijent
+        private Patient _logedPatient;
+        // kontroleri
+        public AppointmentController _appointmentController;
+        public RoomController _roomController;
+        public DoctorController _doctorController;
+        public RoomAppointmentController _roomAppointmentController;
+        public ActivityController _activityController;
+
         private PatientMainWindow parent { get; set; }
 
-        public ObservableCollection<Appointment> Appointments
-        {
-            get;
-            private set;
-        }
-        public BindingList<Room> Rooms
-        {
-            get;
-            set;
-        }
-        public ObservableCollection<Doctor> Doctors
-        {
-            get;
-            set;
-        }
-        public ObservableCollection<Doctor> DoctorsAppointmentsTime
-        {
-            get;
-            set;
-        }
+        public ObservableCollection<Appointment> Appointments { get; private set; }
+        public BindingList<Room> Rooms { get; set; }
+        public ObservableCollection<Doctor> Doctors { get; set; }
+        public ObservableCollection<Doctor> DoctorsAppointmentsTime { get; set; }
+
         public PriorityTime(PatientMainWindow patientMain, ObservableCollection<AppointmentViewModel> patientAppointments,
             Patient logedPatient)
         {
             InitializeComponent();
             this.DataContext = this;
             parent = patientMain;
-
             _patientAppointments = patientAppointments;
-
             _logedPatient = logedPatient;
 
             App app = Application.Current as App;
             _appointmentController = app.AppointmentController;
             _roomController = app.roomController;
             _doctorController = app.DoctorController;
+            _roomAppointmentController = app.roomAppointmentController;
+            _activityController = app.ActivityController;
 
             Rooms = _roomController.GetAllRooms();
-            Appointments = _appointmentController.GetAppointments(); // ulgovani korisnik ali ovo je za doktora OVDE TReBAJU SVI TERMINI
+            Appointments = _appointmentController.GetAppointments();
             Doctors = _doctorController.GetAllDoctors();
             DoctorsAppointmentsTime = new ObservableCollection<Doctor>();
 
@@ -93,9 +81,7 @@ namespace ClassDijagramV1._0.Views.PatientView
         private void fillTime()
         {
             List<String> allTime = new List<string>();
-            DateTime danas = DateTime.Today;
-
-            for (DateTime tm = danas.AddHours(7); tm < danas.AddHours(15); tm = tm.AddMinutes(30))
+            for (DateTime tm = DateTime.Today.AddHours(7); tm < DateTime.Today.AddHours(15); tm = tm.AddMinutes(30))
             {
                 allTime.Add(tm.ToString("HH:mm"));
             }
@@ -104,48 +90,40 @@ namespace ClassDijagramV1._0.Views.PatientView
 
         private void AddAppointmentClick(object sender, RoutedEventArgs e)
         {
-
-            Random rnd = new Random();
-            int card = rnd.Next(50);
-
-            //String appointmentID = (_appointmentController.GetAllAppointments("djordje").Count + 1).ToString();
-            String appointmentID = rnd.Next(1000).ToString();
             int year = kalendar.SelectedDate.Value.Year;
             int month = kalendar.SelectedDate.Value.Month;
             int day = kalendar.SelectedDate.Value.Day;
-            string[] getTimeCB = ((timeCB.SelectedItem).ToString()).Split(":");
+
+            string[] getTimeCB = timeCB.SelectedItem.ToString().Split(":");
             int hour = Int32.Parse(getTimeCB[0]);
             int minutes = Int32.Parse(getTimeCB[1]);
-            DateTime date1 = new DateTime(year, month, day, hour, minutes, 0);
 
-            DateTime date2 = date1.AddMinutes(30);
-            TimeSpan interval = date2 - date1;
+            DateTime date = new DateTime(year, month, day, hour, minutes, 0);
+            TimeSpan interval = date.AddMinutes(30) - date;
 
-            Room r1 = getFreeRoom(date1, date2);
+            Room r1 = getFreeRoom(date, interval);
             Doctor d1 = (Doctor)dodavanjPregledaDoktor.SelectedItem;
-            // Patient p1 = new Patient("djordje", "djordje", "123", "musko", "3875432", "the292200", date1, new Address("Srbija", "Novi Sad", "Marije Kalas", "320"), "1234");
 
-            Appointment a1 = new Appointment(_logedPatient.Id, d1.Id, r1.RoomID, date1, interval, AppointmentType.generalPractitionerCheckup);
+            Appointment a1 = new Appointment(_logedPatient.Id, d1.Id, r1.RoomID, date, interval, AppointmentType.generalPractitionerCheckup);
 
             _appointmentController.AddAppointment(a1);
             // Da bi se updatovao i view
             _patientAppointments.Add(new AppointmentViewModel(a1));
             _appointmentController.AddNotification(a1, r1, NotificationType.addingAppointment);
-            parent.startWindow.Content = new AppointmentsViewPage(_patientAppointments, parent, _logedPatient);
-
+            //activity
+            ActivityLog activity = new ActivityLog(DateTime.Now, _logedPatient.Id, TypeOfActivity.makeAppointment);
+            _activityController.AddActivity(activity);
+            parent.startWindow.Content = new AppointmentsViewPage(_patientAppointments, parent, _logedPatient, parent.Account);
         }
 
-        private Room getFreeRoom(DateTime start, DateTime end) //FJA ZA DODJELU PRVE PRAZNE SOBE
+        private Room getFreeRoom(DateTime start, TimeSpan interval)
         {
-            //var freeRooms = new List<Room>;
-            foreach (Room r in Rooms)
+            foreach (Room room in Rooms)
             {
-                if (r.isFree(start, end)) // dodaj sebi polje isFree
+                if (_roomAppointmentController.GetFreeRoom(room, start, start + interval))
                 {
-                    //freeRooms.Add(r);
-                    return r;
+                    return room;
                 }
-
             }
             return null;
         }

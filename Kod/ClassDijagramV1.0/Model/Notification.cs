@@ -10,14 +10,15 @@ namespace ClassDijagramV1._0.Model
 {
     public class Notification : ObservableObject
     {
-        private String id;
+        public static int idCounter = 0;
+        private int id;
         private String content;
-        private String patientID;
+        private int patientID;
         private Boolean isRead;
         private DateTime created;
         private NotificationType notificationType;
 
-        public String NotificationID
+        public int NotificationID
         {
             get
             {
@@ -47,7 +48,7 @@ namespace ClassDijagramV1._0.Model
                 }
             }
         }
-        public String PatientID
+        public int PatientID
         {
             get
             {
@@ -108,10 +109,10 @@ namespace ClassDijagramV1._0.Model
             }
         }
 
-        public Notification(string notificationID, string content, string patientID, bool isRead, DateTime created, NotificationType notificationType)
+        public Notification(string content, int patientID, bool isRead, DateTime created, NotificationType notificationType)
         {
             
-            NotificationID = notificationID;
+            NotificationID = ++idCounter;
             Content = content;
             PatientID = patientID;
             IsRead = isRead;

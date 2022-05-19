@@ -11,8 +11,7 @@
         Height="720" Width="1280"
         WindowStyle="SingleBorderWindow"
         ResizeMode="NoResize"
-        Background="#8BCDD3"
-        FontFamily="Comic Sans MS">
+        Background="#D9D4CC" FontFamily="Berlin Sans FB">
 
     <Window.DataContext>
         <viewModel:MainViewModel/>
@@ -30,6 +29,7 @@
                 <ResourceDictionary Source="../Theme/TimeTextBoxTheme.xaml"/>
                 <ResourceDictionary Source="../Theme/CalendarTheme.xaml"/>
                 <ResourceDictionary Source="../Theme/StorageMenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="../Theme/TextBoxes.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -45,7 +45,6 @@
             <RadioButton Content="Kalendar"
                          Height="65"
                          Width="200"
-                         Foreground="Black"
                          FontSize="26"
                          Style="{StaticResource MenuButtonTheme}" 
                          IsChecked="True"
@@ -54,21 +53,18 @@
             <RadioButton Content="Izveštaji"
                          Height="65"
                          Width="200"
-                         Foreground="Black"
                          FontSize="26"
                          Style="{StaticResource MenuButtonTheme}" />
 
             <RadioButton Content="Radno osoblje"
                          Height="65"
                          Width="200"
-                         Foreground="Black"
                          FontSize="26"
                          Style="{StaticResource MenuButtonTheme}" />
 
             <RadioButton Content="Sale"
                          Height="65"
                          Width="200"
-                         Foreground="Black"
                          FontSize="26"
                          Style="{StaticResource MenuButtonTheme}"
                          Command="{Binding RoomsViewCommand}"/>
@@ -76,7 +72,6 @@
             <RadioButton Content="Magacin"
                          Height="65"
                          Width="200"
-                         Foreground="Black"
                          FontSize="26"
                          Style="{StaticResource MenuButtonTheme}"
                          Command="{Binding StorageViewCommand}"/>

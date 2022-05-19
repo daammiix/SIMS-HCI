@@ -6,14 +6,16 @@
         xmlns:local="clr-namespace:ClassDijagramV1._0.Views"
         mc:Ignorable="d"
         Title="RenovatingAndChangingPurpose"
-        Height="650"
-        Width="800"
-         WindowStartupLocation="CenterScreen"
+        Height="500"
+        Width="700"
+        WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
-        Background="#8BCDD3"
+        Foreground="#1F1313"
+        Background="#B0C69D"
+        FontFamily="Berlin Sans FB Demi"
         BorderThickness="4"
-        BorderBrush="#234A4D">
+        BorderBrush="#455736">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -27,25 +29,26 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
-            <RowDefinition Height="585"/>
+            <RowDefinition Height="435"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
                    Text="Renoviranje sale"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
-                   FontSize="34"
-                   Foreground="Black">
+                   FontSize="36"
+                   Foreground="#1F1313">
         </TextBlock>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="350"/>
-                <ColumnDefinition Width="450"/>
+                <ColumnDefinition Width="3500"/>
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Row="1"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
 
-                <DataGrid Grid.Column="1" Height="200" Width="250" x:Name="BusyRooms" Margin="15, 10, 10,0"
-                      CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left"
+                <DataGrid Grid.Column="1" Height="200" Width="250" x:Name="BusyRooms" Margin="20, 10, 10,0"
+                      CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left" FontSize="18"
+                      RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
                       CanUserDeleteRows="False" AutoGenerateColumns="False"
                       ItemsSource="{Binding Path=RoomsAvailable}" IsReadOnly="True">
                     <DataGrid.Columns>
@@ -54,7 +57,7 @@
                 </DataGrid>
             </StackPanel>
 
-            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left" Width="450">
+            <StackPanel Grid.Row="1"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
                 <Label Content="Zakaži salu od:" FontSize="26" Margin="0,0,0,5" HorizontalContentAlignment="Left"/>
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
@@ -62,8 +65,8 @@
                         <Label Content="Vreme:" FontSize="26" Height="40" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromDate,Mode=TwoWay}" Style="{StaticResource DateTextBox}" TextChanged="FromDateField_TextChanged"/>
-                        <TextBox x:Name="FromTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromTime,Mode=TwoWay}"  Style="{StaticResource TimeTextBox}"/>
+                        <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="40" Margin="0,5,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromDate,Mode=TwoWay}" Style="{StaticResource DateTextBox}" TextChanged="FromDateField_TextChanged"/>
+                        <TextBox x:Name="FromTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="0,5,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromTime,Mode=TwoWay}"  Style="{StaticResource TimeTextBox}"/>
                     </StackPanel>
                 </StackPanel>
 
@@ -74,11 +77,10 @@
                         <Label Content="Vreme:" FontSize="26" Height="40" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToDate,Mode=TwoWay}"  Style="{StaticResource DateTextBox}" TextChanged="FromDateField_TextChanged"/>
-                        <TextBox x:Name="ToTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToTime,Mode=TwoWay}"  Style="{StaticResource TimeTextBox}"/>
+                        <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="40" Margin="0,5,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToDate,Mode=TwoWay}"  Style="{StaticResource DateTextBox}" TextChanged="FromDateField_TextChanged"/>
+                        <TextBox x:Name="ToTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="0,5,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToTime,Mode=TwoWay}"  Style="{StaticResource TimeTextBox}"/>
                     </StackPanel>
                 </StackPanel>
-
             </StackPanel>
         </Grid>
 

@@ -54,5 +54,20 @@ namespace ClassDijagramV1._0.Views
         {
             this.Close();
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var txb = sender as TextBox;
+            if (txb.Text != "")
+            {
+                var filteredList = EquipmentList.Where(r => (r.Equipment.EquipmentID.ToLower().Contains(txb.Text.ToLower()) || r.Equipment.Name.ToLower().Contains(txb.Text.ToLower()) || r.Equipment.EquipmentType.ToLower().Contains(txb.Text.ToLower()) || r.Quantity.ToString().Contains(txb.Text)));
+                Equipment.ItemsSource = null;
+                Equipment.ItemsSource = filteredList;
+            }
+            else
+            {
+                Equipment.ItemsSource = EquipmentList;
+            }
+        }
     } 
 }

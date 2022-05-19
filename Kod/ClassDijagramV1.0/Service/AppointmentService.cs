@@ -53,6 +53,7 @@ namespace Service
         public void UpdateAppointment(int oldAppointmentID, Appointment updatedAppointment)
         {
             _appointmentRepo.UpdateAppointment(oldAppointmentID, updatedAppointment);
+            //_appointmentRepo.AddNewAppointment(updatedAppointment);
         }
 
         public void SaveAppointments()
@@ -103,7 +104,7 @@ namespace Service
                 var notificationID = "1";
                 var content = "Imate zakazan pregled u " + appointment.AppointmentDate + " u sobi " + r1.RoomName;
                 DateTime created = appointment.AppointmentDate;
-                Notification n = new Notification(notificationID, content, "djordje", false, created, NotificationType.addingAppointment);
+                Notification n = new Notification(content, appointment.PatientId, false, created, NotificationType.addingAppointment);
                 _appointmentRepo.AddNotification(n);
             }
             else if (NotificationType.deletingAppointment.Equals(notificationType))

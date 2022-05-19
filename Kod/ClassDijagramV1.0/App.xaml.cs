@@ -1,4 +1,5 @@
 ﻿using ClassDijagramV1._0.Controller;
+using ClassDijagramV1._0.Converters;
 using ClassDijagramV1._0.FileHandlers;
 using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Model.Enums;
@@ -42,6 +43,10 @@ namespace ClassDijagramV1._0
         public static string _storageFilePath = "../../../Data/storage.json";
         public static string _roomAppointmentsFilePath = "../../../Data/roomAppointments.json";
         public static string _purchaseOrdersFilePath = "../../../Data/purchaseOrders.json";
+        public static string _hospitalRatingsFilePath = "../../../Data/hospitalratings.json";
+        public static string _doctorRatingsFilePath = "../../../Data/doctorratings.json";
+        public static string _activityFilePath = "../../../Data/activity.json";
+        public string _medicinesFilePath = "../../../Data/medicines.json";
 
         #endregion
 
@@ -65,9 +70,18 @@ namespace ClassDijagramV1._0
         public EquipmentController equipmentController { get; set; }
 
         public EquipmentAppointmentController equipmentAppointmentController { get; set; }
+
         public RoomAppointmentController roomAppointmentController { get; set; }
 
         public MedicalRecordController MedicalRecordController { get; set; }
+        public MedicineController medicinesController { get; set; }
+
+        public RatingController RatingController { get; set; }
+
+        public ActivityController ActivityController { get; set; }
+
+        public BanningPatientController BanningPatientController { get; set; }
+
 
         public PurchaseOrderController PurchaseOrderController { get; set; }
 
@@ -75,7 +89,6 @@ namespace ClassDijagramV1._0
 
         public App()
         {
-
             // Rooms-Storage
             var roomRepo = new RoomRepoJson(new FileHandler<BindingList<Room>>(_roomsFilePath), new FileHandler<BindingList<Storage>>(_storageFilePath));
             var roomService = new RoomService(roomRepo);
@@ -137,6 +150,26 @@ namespace ClassDijagramV1._0
             var medicalRecordService = new MedicalRecordService(medicalRecordRepo, patientService);
             MedicalRecordController = new MedicalRecordController(medicalRecordService);
 
+            // HospitalRating
+            var ratingRepository = new RatingRepo(new FileHandler<HospitalRating>(_hospitalRatingsFilePath), new FileHandler<DoctorRating>(_doctorRatingsFilePath));
+            var ratingService = new RatingService(ratingRepository);
+            RatingController = new RatingController(ratingService);
+
+            // Activity Log
+            var activityRepository = new ActivityRepo(new FileHandler<ActivityLog>(_activityFilePath));
+            var activityService = new ActivityService(activityRepository);
+            ActivityController = new ActivityController(activityService);
+
+            // Banning Patient
+            //var activityRepository = new ActivityRepo(new FileHandler<ActivityLog>(_activityFilePath));
+            var banningPatientService = new BanningPatientService(activityService, accountRepo);
+            BanningPatientController = new BanningPatientController(banningPatientService);
+
+            //Medicines
+            var medicinesRepo = new MedicinesRepo();
+            var medicinesService = new MedicinesService(medicinesRepo);
+            medicinesController = new MedicineController(medicinesService);
+
             var dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 10);
@@ -183,6 +216,10 @@ namespace ClassDijagramV1._0
             MedicalRecordController.SaveMedicalRecords();
             roomAppointmentController.SaveRoomAppointment();
             PurchaseOrderController.SavePurchaseOrders();
+            RatingController.SaveHospitalRatings();
+            RatingController.SaveDoctorRatings();
+            ActivityController.SaveActivity();
+
         }
 
         private void MakeTestData()
@@ -221,8 +258,8 @@ namespace ClassDijagramV1._0
             MedicalRecord mr3 = new MedicalRecord(p3.Id, "Miodrag", MaritalStatus.Widow, "565659", BloodType.A);
 
 
-            Room r1 = roomController.GetARoom("id");
-            Room r2 = roomController.GetARoom("id5");
+            Room r1 = roomController.GetRoom("id");
+            Room r2 = roomController.GetRoom("id5");
 
             Appointment? a1 = null;
             Appointment? a2 = null;
