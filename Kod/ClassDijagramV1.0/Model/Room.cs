@@ -1,5 +1,6 @@
 using ClassDijagramV1._0;
 using ClassDijagramV1._0.Model;
+using ClassDijagramV1._0.Views.ManagerView;
 using Controller;
 using ClassDijagramV1._0.Views;
 using System;
