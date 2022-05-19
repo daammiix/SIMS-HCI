@@ -56,7 +56,7 @@
 
             <ComboBox Grid.Row="0" Grid.Column="1"
                       HorizontalAlignment="Left"
-                      x:Name="dodavanjPregledaDoktor" ItemsSource="{Binding Doctors}"
+                      x:Name="izmjenaPregledaDoktor" ItemsSource="{Binding Doctors}"
                       SelectionChanged="dodavanjPregledaDoktor_SelectionChanged"
                       Width="200" Height="28">
                 <ComboBox.ItemTemplate>

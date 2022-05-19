@@ -46,6 +46,7 @@
                     Margin="8 0 8 16"/>
             <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}" Content="Otkazi pregled" Click="RemoveAppontment_Click"
                     Margin="8 0 8 16"/>
+            <Label x:Name="errorBan" Foreground="Red" />
         </StackPanel>
 
         <DataGrid x:Name="tabelaPregledi" 

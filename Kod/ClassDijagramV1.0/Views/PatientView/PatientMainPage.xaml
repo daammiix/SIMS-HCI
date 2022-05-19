@@ -269,7 +269,7 @@
                     Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
-                    Margin="0 -35 16 -20" Click="AddAppointmetClick"
+                    Margin="0 -35 16 -20" Click="uvidUTerapijuClick"
                         >
                         <materialDesign:PackIcon Kind="Medicine" />
                     </Button>
@@ -322,9 +322,8 @@
         </materialDesign:Card>
 
 
-        <!--zakazivanje-->
-        <materialDesign:Card Grid.Row="1" Grid.Column="5" UniformCornerRadius="6" 
-                             Grid.RowSpan="3">
+        <!--zdravstveni karton-->
+        <materialDesign:Card Grid.Row="1" Grid.Column="5" UniformCornerRadius="6">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="120" />
@@ -341,7 +340,79 @@
                     Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
-                    Margin="0 -35 16 -20" Click="AddAppointmetClick"
+                    Margin="0 -35 16 -20" Click="zdravstveniKartonClick" 
+                        >
+                        <materialDesign:PackIcon Kind="Medicine" />
+                    </Button>
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Row="1"
+                      Margin="8 16 8 0">
+                    <TextBlock FontWeight="Bold">Zdravstveni karton</TextBlock>
+
+                    <TextBlock
+                        TextWrapping="Wrap"
+                        VerticalAlignment="Center"
+                        Margin="4,8,0,0"
+                        Text="Uvid u sve vase" />
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Row="2"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Bottom"
+                     Orientation="Horizontal"
+                     Margin="8">
+                    <Button
+                        Style="{StaticResource MaterialDesignToolButton}"
+                        Width="30"
+                        Padding="2 0 2 0"
+                        materialDesign:RippleAssist.IsCentered="True">
+                        <materialDesign:PackIcon Kind="ShareVariant" />
+                    </Button>
+                    <Button
+                        Style="{StaticResource MaterialDesignToolButton}"
+                        Width="30"
+                        Padding="2 0 2 0"
+                        materialDesign:RippleAssist.IsCentered="True">
+                        <materialDesign:PackIcon Kind="Heart" />
+                    </Button>
+                    <materialDesign:PopupBox
+                         Padding="2 0 2 0">
+                        <StackPanel>
+                            <Button
+                                Content="More" />
+                            <Button
+                                Content="Options" />
+                        </StackPanel>
+                    </materialDesign:PopupBox>
+
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+
+        <!--nesto deseto-->
+        <materialDesign:Card Grid.Row="3" Grid.Column="5" UniformCornerRadius="6">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="120" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel
+                    Grid.Row="0"
+                    Margin="8 8 8 0">
+                    <!--<Image
+                    Source="Resources/Images/zakazivanjeTermina.jpg"
+                    Height="100"/>
+                    -->
+                    
+                    <Button
+                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Margin="0 -35 16 -20" Click="zdravstveniKartonClick" 
                         >
                         <materialDesign:PackIcon Kind="Medicine" />
                     </Button>

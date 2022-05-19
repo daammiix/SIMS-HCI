@@ -156,6 +156,7 @@ namespace ClassDijagramV1._0.Service
             }
         }
 
+
         /// <summary>
         /// Proverava da li je soba u datom terminu slobodna odnosno nema nikakvi roomAppointmenta
         /// </summary>
@@ -187,6 +188,35 @@ namespace ClassDijagramV1._0.Service
             }
 
             return free;
+        }
+
+        /// <summary>
+        /// Vraca prvu praznu sobu
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <param name="room"></param>
+        /// <returns></returns>
+        public bool GetFreeRoom(Room room, DateTime start, DateTime end)
+        {
+            bool retVal = true;
+            App app = Application.Current as App;
+            AppointmentController appointmentController = app.AppointmentController;
+
+            foreach (Appointment termin in appointmentController.GetAppointments())
+            {
+                if (termin.RoomId.Equals(room.RoomID) && room.RoomStatus.Equals("Aktivna"))
+                {
+                    if ( (start >= termin.AppointmentDate && start <= termin.AppointmentDate.Add(termin.Duration))
+                         || (end >= termin.AppointmentDate && end <= termin.AppointmentDate.Add(termin.Duration)) 
+                         || (start <= termin.AppointmentDate && end >= termin.AppointmentDate.Add(termin.Duration)) )
+                    {
+                        retVal = false;
+                        break;
+                    }
+                }
+            }
+            return retVal;
         }
     }
 }

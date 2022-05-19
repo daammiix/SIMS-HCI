@@ -163,37 +163,6 @@ namespace Model
             }
         }
 
-        public bool isFree(DateTime start, DateTime end)
-        {
-            bool retVal = true;
-            // AppointmentFileHandler ap = new AppointmentFileHandler("../../../Data/appointments.json");
-
-            App app = Application.Current as App;
-            AppointmentController appointmentController = app.AppointmentController;
-
-            foreach (Appointment termin in appointmentController.GetAppointments())
-            {
-                if (termin.RoomId.Equals(this.RoomID)/* && termin.AppointmentStatus == AppointmentStatus.scheduled*/)
-                {
-                    if (start >= termin.AppointmentDate && start <= termin.AppointmentDate.Add(termin.Duration))
-                    {
-                        retVal = false;
-                        break;
-                    }
-                    if (end >= termin.AppointmentDate && end <= termin.AppointmentDate.Add(termin.Duration))
-                    {
-                        retVal = false;
-                        break;
-                    }
-                    if (start <= termin.AppointmentDate && end >= termin.AppointmentDate.Add(termin.Duration))
-                    {
-                        retVal = false;
-                        break;
-                    }
-                }
-            }
-            return retVal;
-        }
     }
 
     public class RoomEquipmentBinding

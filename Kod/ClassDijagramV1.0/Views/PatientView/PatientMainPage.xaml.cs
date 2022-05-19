@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using ClassDijagramV1._0.Model;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,17 +26,19 @@ namespace ClassDijagramV1._0.Views.PatientView
         #region Fields
 
         private Patient _logedPatient;
+        private Account _account;
 
         private ObservableCollection<AppointmentViewModel> _appointmentViewModels;
 
         #endregion
 
         private PatientMainWindow parent { get; set; }
-        public PatientMainPage(PatientMainWindow patientMain, Patient logedPatient)
+        public PatientMainPage(PatientMainWindow patientMain, Patient logedPatient, Account account)
         {
             InitializeComponent();
             parent = patientMain;
             _logedPatient = logedPatient;
+            _account = account;
 
             // napravimo listu appointmentViewModela od svakog appointmenta pacijenta
             _appointmentViewModels = new ObservableCollection<AppointmentViewModel>();
@@ -49,7 +52,7 @@ namespace ClassDijagramV1._0.Views.PatientView
         private void AppointmentsViewOpen(object sender, RoutedEventArgs e)
         {
             // Proslledimo appointmentViewModels da bi mogli da prikazemo appointmente i ulogovanog pacijenta
-            parent.startWindow.Content = new AppointmentsViewPage(_appointmentViewModels, parent, _logedPatient);
+            parent.startWindow.Content = new AppointmentsViewPage(_appointmentViewModels, parent, parent.Patient, _account);
         }
 
         private void AddAppointmetClick(object sender, RoutedEventArgs e)
@@ -59,7 +62,17 @@ namespace ClassDijagramV1._0.Views.PatientView
 
         private void RatingOpen(object sender, RoutedEventArgs e)
         {
-            parent.startWindow.Content = new RatingPage(parent, _logedPatient);
+            parent.startWindow.Content = new RatingPage(parent, _appointmentViewModels, _logedPatient);
+        }
+
+        private void uvidUTerapijuClick(object sender, RoutedEventArgs e)
+        {
+            parent.startWindow.Content = new TerapyPage(parent, _logedPatient);
+        }
+
+        private void zdravstveniKartonClick(object sender, RoutedEventArgs e)
+        {
+            parent.startWindow.Content = new MedicalRecordPage(parent, _logedPatient);
         }
     }
 }
