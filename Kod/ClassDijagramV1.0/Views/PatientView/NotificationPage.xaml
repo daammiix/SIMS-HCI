@@ -37,7 +37,7 @@
                 <DataGridCheckBoxColumn Header="Pregledana" Binding="{Binding IsRead}" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Dodaj zabilješku" Width="176" Height="42" HorizontalAlignment="Right" Margin="0, 20,100,0" Command="NavigationCommands.BrowseBack"/>
+        <Button Content="Dodaj zabilješku" Width="176" Height="42" HorizontalAlignment="Right" Margin="0, 20,100,0" Click="addAlarmClick" />
         <Button Content="Dodaj lijek od doktora" Width="176" Height="42" HorizontalAlignment="Right" Margin="0, 20,100,0" Click="addDrug"/>
     </StackPanel>
 </Page>
