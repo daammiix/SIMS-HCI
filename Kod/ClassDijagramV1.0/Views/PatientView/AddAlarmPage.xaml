@@ -1,0 +1,136 @@
+﻿<Page x:Class="ClassDijagramV1._0.Views.PatientView.AddAlarmPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:ClassDijagramV1._0.Views.PatientView"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1024"
+      Title="AddAlarmPage"
+      >
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Grey.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Orange.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <StackPanel Background="{StaticResource MaterialDesignBackground}">
+        <TextBlock Text="Kreiraj podsjetnik" Margin="40,20,0,20" FontSize="64"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="400"/>
+            </Grid.ColumnDefinitions>
+
+
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                       VerticalAlignment="Center"
+                       Text="Naziv :" Margin="20" FontSize="20"/>
+            <TextBlock Grid.Row="1" Grid.Column="0"
+                       VerticalAlignment="Center"
+                       Text="Datum :" Margin="20" FontSize="20"/>
+            <TextBlock Grid.Row="2" Grid.Column="0"
+                       VerticalAlignment="Center"
+                       Text="Vrijeme :" Margin="20" FontSize="20"/>
+            <TextBlock Grid.Row="3" Grid.Column="0"
+                       VerticalAlignment="Center"
+                       Text="Dani :" Margin="20" FontSize="20"/>
+
+            <TextBox Grid.Row="0" Grid.Column="1"
+                     HorizontalAlignment="Left"
+                     Width="200" Height="28"/>
+            <!--
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="3" Grid.Column="1"
+                        HorizontalAlignment="left">
+
+                <Button Content="P"/>
+                <Button Content="U"/>
+                <Button Content="S"/>
+                <Button Content="Č"/>
+                <Button Content="P"/>
+                <Button Content="S"/>
+                <Button Content="N"/>
+
+            </StackPanel>
+            -->
+            
+
+            <ListBox Grid.Row="3" Grid.Column="1"
+                     HorizontalAlignment="left"
+                     VerticalAlignment="Center"
+                     Style="{StaticResource MaterialDesignFilterChipPrimaryListBox}" >
+                <ListBoxItem Content="P" />
+                <ListBoxItem Content="U" />
+                <ListBoxItem Content="S" />
+                <ListBoxItem Content="Č" />
+                <ListBoxItem Content="P" />
+                <ListBoxItem Content="S" />
+                <ListBoxItem Content="N" />
+            </ListBox>
+
+            <StackPanel Grid.Row="1" Grid.Column="1"
+                        Orientation="Horizontal">
+                <DatePicker 
+                        HorizontalAlignment="Left"
+                        x:Name="kalendarOD" FirstDayOfWeek="Monday"
+                        Width="95" Height="28">
+
+                </DatePicker>
+
+                <DatePicker
+                        HorizontalAlignment="Left"
+                        x:Name="kalendarDO" FirstDayOfWeek="Monday"
+                        Width="95" Height="28" Margin="10 0 0 0">
+
+                </DatePicker>
+            </StackPanel>
+
+
+            <StackPanel Grid.Row="2" Grid.Column="1"
+                        Orientation="Horizontal">
+                <ComboBox Grid.Row="2" Grid.Column="1"
+                      HorizontalAlignment="Left"
+                      x:Name="hourCB" ItemsSource="{Binding hour}"
+                      IsEditable="True"
+                      Width="95" Height="28"/>
+                <ComboBox Grid.Row="2" Grid.Column="1"
+                      HorizontalAlignment="Left"
+                      x:Name="minutesCB" ItemsSource="{Binding minutes}"
+                      IsEditable="True"
+                      Width="95" Height="28" Margin="10 0 0 0"/>
+            </StackPanel>
+
+                <TextBox Grid.Row="4" Grid.ColumnSpan="2"
+                x:Name="komentar"
+                Background="{StaticResource MaterialDesignLightBackground}"
+                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                Margin="50 0 0 0"
+                Height="150"
+                Width="500"
+                HorizontalAlignment="Left"
+                AcceptsReturn="True"
+                TextWrapping="Wrap"
+                BorderBrush="LightBlue"
+                VerticalScrollBarVisibility="Auto"
+                materialDesign:HintAssist.Hint="Unesite Vaš komentar. "/>
+
+
+        </Grid>
+
+        <Button Content="Kreiraj podsjetnik" Width="176" Height="42" HorizontalAlignment="Right" Margin="0, 20,100,0" />
+    </StackPanel>
+</Page>

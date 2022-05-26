@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.AppointmentsView"
              xmlns:viewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModels"
              xmlns:syncfusionskin ="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
-             syncfusionskin:SfSkinManager.Theme="{syncfusionskin:SkinManagerExtension ThemeName=MaterialLight}"
+             syncfusionskin:SfSkinManager.Theme="{syncfusionskin:SkinManagerExtension ThemeName=MaterialDark}"
              mc:Ignorable="d"
              FontSize="20"
              Foreground="{StaticResource SLightGrayShade}"

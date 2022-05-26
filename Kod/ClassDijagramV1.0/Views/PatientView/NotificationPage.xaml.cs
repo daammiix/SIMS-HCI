@@ -108,5 +108,10 @@ namespace ClassDijagramV1._0.Views.PatientView
             timer.Start();
 
         }
+
+        private void addAlarmClick(object sender, RoutedEventArgs e)
+        {
+            parent.startWindow.Content = new AddAlarmPage(parent);
+        }
     }
 }
