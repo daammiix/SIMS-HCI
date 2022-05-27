@@ -58,8 +58,8 @@
         </Grid>
         <StackPanel Grid.Row="2">
             <WrapPanel HorizontalAlignment="Right">
-                <Button x:Name="SaveAddedEquipment" HorizontalAlignment="Right" Height="32" Width="90" Content="Sačuvaj" Margin="5,10,10,0" Style="{StaticResource CRUDButton}" Click="SaveAddedEquipment_Click"/>
-                <Button x:Name="QuitAddedEquipment" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,15,0" Style="{StaticResource CRUDButton}" Click="QuitAddedEquipment_Click"/>
+                <Button x:Name="SaveAddedEquipment" HorizontalAlignment="Right" Height="32" Width="90" Content="Sačuvaj" Margin="5,10,10,0" Style="{StaticResource CRUDButton}" Command="{Binding SaveNewEquipment}"/>
+                <Button x:Name="QuitAddedEquipment" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,15,0" Style="{StaticResource CRUDButton}" Command="{Binding CancelNewEquipment}"/>
             </WrapPanel>
         </StackPanel>
     </Grid>

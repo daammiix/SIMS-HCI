@@ -1,81 +1,99 @@
 ﻿using ClassDijagramV1._0.Controller;
 using ClassDijagramV1._0.Model;
-using ClassDijagramV1._0.ViewModel;
+using ClassDijagramV1._0.Util;
 using ClassDijagramV1._0.Views.ManagerView;
 using Controller;
 using Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace ClassDijagramV1._0.Views.ManagerView
+namespace ClassDijagramV1._0.ViewModel
 {
-    /// <summary>
-    /// Interaction logic for RenovatingAndChangingPurpose.xaml
-    /// </summary>
-    public partial class RenovaitingWindow : Window
+    public class RenovatingMergeViewModel
     {
         readonly private String format = "dd/MM/yyyyTHH:mm";
-        readonly private String timeFormat = "HH:mm";
-        readonly private String dateFormat = "dd/MM/yyyy";
         readonly private String fullFormat = "dd/MM/yyyy HH:mm";
 
-        public RoomController roomController;
+        public String FromDate;
+        public String FromTime { get; set; }
+        public String ToDate;
+        public String ToTime { get; set; }
 
+        public RoomController roomController;
         public EquipmentAppointmentController equipmentAppointmentController;
         public RoomAppointmentController roomAppointmentController;
         public AppointmentController appointmentController;
 
-        public Room selectedRoom { get; set; }
-
-        public BindingList<String> RoomsAvailable { get; set; }
+        public BindingList<Room> Rooms { get; set; }
+        public BindingList<String> MergingToRoomAvailable { get; set; }
+        public BindingList<String> MergingRoomAvailable { get; set; }
         private BindingList<Availability> availabilities { get; set; }
 
-        public String FromDate { get; set; } = DateTime.Now.ToString("dd/MM/yyyy");
-        public String FromTime { get; set; } = DateTime.Now.ToString("HH:mm");
-        public String ToDate { get; set; } = DateTime.Now.ToString("dd/MM/yyyy");
-        public String ToTime { get; set; } = DateTime.Now.ToString("HH:mm");
-
-        public DateTime selectedDate { get; set; }
-
         private readonly Random _random = new Random();
-        public RenovaitingWindow(Room selectedRoom)
-        {
-            InitializeComponent();
-            DataContext = this;
 
+        public Room? selectedRoom { get; set; }
+        public Room mergingRoom;
+
+        private RelayCommand _saveRenovatingMerge;
+        private RelayCommand _cancelRenovatingMerge;
+        public RenovatingMergeViewModel()
+        {
             var app = Application.Current as App;
             roomController = app.roomController;
+
             equipmentAppointmentController = app.equipmentAppointmentController;
             roomAppointmentController = app.roomAppointmentController;
             appointmentController = app.AppointmentController;
 
-            this.selectedRoom = selectedRoom;
+            this.selectedRoom = null;
 
-            RoomsAvailable = new BindingList<String>();
+            FromDate = DateTime.Now.ToString("dd/MM/yyyy");
+            FromTime = DateTime.Now.ToString("HH:mm");
+            ToDate = DateTime.Now.ToString("dd/MM/yyyy");
+            ToTime = DateTime.Now.ToString("HH:mm");
+
+            Rooms = new BindingList<Room>();
+            MergingToRoomAvailable = new BindingList<String>();
+            MergingRoomAvailable = new BindingList<String>();
             availabilities = new BindingList<Availability>();
-
-            selectedDate = DateTime.Now.Date;
 
         }
 
-        private void SaveRenovating_Click(object sender, RoutedEventArgs e)
+        public RelayCommand SaveRenovatingMerge
         {
-            DateTime fromDatetime = DateTime.ParseExact(FromDateField.Text + "T" + FromTimeField.Text, format, null);
-            DateTime toDatetime = DateTime.ParseExact(ToDateField.Text + "T" + ToTimeField.Text, format, null);
+            get
+            {
+                _saveRenovatingMerge = new RelayCommand(o =>
+                {
+                    SaveRenovatingMergeAction();
+                });
+
+                return _saveRenovatingMerge;
+            }
+        }
+
+        public RelayCommand CancelRenovatingMerge
+        {
+            get
+            {
+                _cancelRenovatingMerge = new RelayCommand(o =>
+                {
+
+                });
+
+                return _cancelRenovatingMerge;
+            }
+        }
+
+        private void SaveRenovatingMergeAction()
+        {
+            DateTime fromDatetime = DateTime.ParseExact(FromDate + "T" + FromTime, format, null);
+            DateTime toDatetime = DateTime.ParseExact(ToDate + "T" + ToTime, format, null);
 
             if (!checkDateTimeAvailable(fromDatetime, toDatetime))
             {
@@ -84,22 +102,55 @@ namespace ClassDijagramV1._0.Views.ManagerView
                 return;
             }
 
-            var appointmentId = RandomPassword();
+            var appointmentId = RandomId();
 
-            var roomAppointment = new RoomAppointment(appointmentId, selectedRoom.RoomID, fromDatetime, toDatetime - fromDatetime);
+            var roomAppointment = new RoomAppointment(appointmentId, selectedRoom.RoomID, fromDatetime, toDatetime - fromDatetime, selectedMergingRoom.RoomID);
             roomAppointmentController.AddRoomAppointment(roomAppointment);
-
-            this.Close();
         }
 
-        private void QuitRenovating_Click(object sender, RoutedEventArgs e)
+        public String selectedFromDate
         {
-            this.Close();
+            get
+            {
+                return FromDate;
+            }
+            set
+            {
+                if (FromDate == value)
+                    return;
+                FromDate = value;
+                ListsHandler();
+            }
         }
 
-        private void FromDateField_TextChanged(object sender, TextChangedEventArgs e)
+        public String selectedToDate
         {
-            ListsHandler();
+            get
+            {
+                return ToDate;
+            }
+            set
+            {
+                if (ToDate == value)
+                    return;
+                ToDate = value;
+                ListsHandler();
+            }
+        }
+
+        public Room selectedMergingRoom
+        {
+            get
+            {
+                return mergingRoom;
+            }
+            set
+            {
+                if (mergingRoom == value)
+                    return;
+                mergingRoom = value;
+                ListsHandler();
+            }
         }
 
         private bool checkTimeSpansOverlap(DateTime fromDatetimeA, DateTime toDatetimeA, DateTime fromDatetimeB, DateTime toDatetimeB)
@@ -119,26 +170,47 @@ namespace ClassDijagramV1._0.Views.ManagerView
             return true;
         }
 
+        public void UpdateAvailableRooms()
+        {
+
+            BindingList<Room> rooms = roomController.GetAllRooms();
+            foreach (Room room in rooms)
+            {
+                if (room == selectedRoom)
+                {
+                    continue;
+                }
+                if (room.Floor == selectedRoom.Floor)
+                {
+                    Rooms.Add(room);
+                }
+            }
+        }
         private String formatAvailableTime(DateTime start, DateTime end)
         {
             availabilities.Add(new Availability(start, end));
-
             return start.ToString(fullFormat) + " - " + end.ToString(fullFormat);
         }
 
         public void ListsHandler()
         {
-            RoomsAvailable.Clear();
+            MergingToRoomAvailable.Clear();
+            MergingRoomAvailable.Clear();
 
             var roomAppointments = roomAppointmentController.GetAllRoomAppointments();
             var appointments = appointmentController.GetListOfAppointments();
             var equipmentAppointments = equipmentAppointmentController.GetAllEquipmentAppointment();
 
+            if (selectedMergingRoom == null)
+            {
+                return;
+            }
+
             DateTime selectedFrom, selectedTo;
             try
             {
-                selectedFrom = DateTime.ParseExact(FromDateField.Text, "dd/MM/yyyy", null);
-                selectedTo = DateTime.ParseExact(ToDateField.Text, "dd/MM/yyyy", null);
+                selectedFrom = DateTime.ParseExact(FromDate, "dd/MM/yyyy", null);
+                selectedTo = DateTime.ParseExact(ToDate, "dd/MM/yyyy", null);
             }
             catch (FormatException)
             {
@@ -151,9 +223,13 @@ namespace ClassDijagramV1._0.Views.ManagerView
                 var aptTo = equipmentAppointment.ToDateTime.Date;
                 if (checkTimeSpansOverlap(aptFrom, aptTo, selectedFrom, selectedTo))
                 {
+                    if (equipmentAppointment.RoomFrom == selectedMergingRoom.RoomID || equipmentAppointment.RoomTo == selectedMergingRoom.RoomID)
+                    {
+                        MergingRoomAvailable.Add(formatAvailableTime(equipmentAppointment.FromDateTime, equipmentAppointment.ToDateTime));
+                    }
                     if (selectedRoom != null && (equipmentAppointment.RoomFrom == selectedRoom.RoomID || equipmentAppointment.RoomTo == selectedRoom.RoomID))
                     {
-                        RoomsAvailable.Add(formatAvailableTime(equipmentAppointment.FromDateTime, equipmentAppointment.ToDateTime));
+                        MergingToRoomAvailable.Add(formatAvailableTime(equipmentAppointment.FromDateTime, equipmentAppointment.ToDateTime));
                     }
                 }
             }
@@ -163,9 +239,13 @@ namespace ClassDijagramV1._0.Views.ManagerView
                 var aptTo = (roomAppointment.startDate + roomAppointment.duration).Date;
                 if (checkTimeSpansOverlap(aptFrom, aptTo, selectedFrom, selectedTo))
                 {
+                    if (roomAppointment.roomId == selectedMergingRoom.RoomID)
+                    {
+                        MergingRoomAvailable.Add(formatAvailableTime(roomAppointment.startDate, roomAppointment.startDate + roomAppointment.duration));
+                    }
                     if (roomAppointment.roomId == selectedRoom.RoomID)
                     {
-                        RoomsAvailable.Add(formatAvailableTime(roomAppointment.startDate, roomAppointment.startDate + roomAppointment.duration));
+                        MergingToRoomAvailable.Add(formatAvailableTime(roomAppointment.startDate, roomAppointment.startDate + roomAppointment.duration));
                     }
                 }
             }
@@ -175,9 +255,13 @@ namespace ClassDijagramV1._0.Views.ManagerView
                 var aptTo = (appointment.AppointmentDate + appointment.Duration).Date;
                 if (checkTimeSpansOverlap(aptFrom, aptTo, selectedFrom, selectedTo))
                 {
+                    if (appointment.RoomId == selectedMergingRoom.RoomID)
+                    {
+                        MergingRoomAvailable.Add(formatAvailableTime(appointment.AppointmentDate, appointment.AppointmentDate + appointment.Duration));
+                    }
                     if (appointment.RoomId == selectedRoom.RoomID)
                     {
-                        RoomsAvailable.Add(formatAvailableTime(appointment.AppointmentDate, appointment.AppointmentDate + appointment.Duration));
+                        MergingToRoomAvailable.Add(formatAvailableTime(appointment.AppointmentDate, appointment.AppointmentDate + appointment.Duration));
                     }
                 }
             }
@@ -205,7 +289,7 @@ namespace ClassDijagramV1._0.Views.ManagerView
             return lowerCase ? builder.ToString().ToLower() : builder.ToString();
         }
 
-        public string RandomPassword()
+        public string RandomId()
         {
             var passwordBuilder = new StringBuilder();
 
@@ -217,7 +301,5 @@ namespace ClassDijagramV1._0.Views.ManagerView
 
             return passwordBuilder.ToString();
         }
-
-
     }
 }

@@ -45,31 +45,31 @@
                 <RadioButton x:Name="Equip"
                              Content="Opremanje"
                              Style="{StaticResource ReservationButton}"
-                             Click="Equip_Click"/>
+                             Command="{Binding Equip}"/>
 
                 <RadioButton x:Name="RenovatingWallPainting"
                              Content="Renoviranje - krečenje"
                              Style="{StaticResource ReservationButton}"
-                             Click="RenovatingWallPainting_Click"/>
+                             Command="{Binding RenovatingWallPainting}"/>
 
                 <RadioButton x:Name="RenovatingMerge"
                              Content="Renoviranje - spajanje soba"
                              Style="{StaticResource ReservationButton}"
-                             Click="RenovatingMerge_Click"/>
+                             Command="{Binding RenovatingMerge}"/>
                 
                 <RadioButton x:Name="RenovatingSplit"
                              Content="Renoviranje - razdvajanje soba "
                              Style="{StaticResource ReservationButton}"
-                             Click="RenovatingSplit_Click"/>
+                             Command="{Binding RenovatingSplit}"/>
 
                 <RadioButton x:Name="ChangingPurpose"
                              Content="Promena namene sale"
                              Style="{StaticResource ReservationButton}"
-                             Click="ChangingPurpose_Click"/>
+                             Command="{Binding ChangingPurpose}"/>
 
             </StackPanel>
             <WrapPanel Grid.Row="2" HorizontalAlignment="Right">
-                <Button x:Name="CloseReservationOfRoom" Height="32" Width="95" Content="Zatvori" Margin="0,0,15,10" Style="{StaticResource CRUDButton}" Click="CloseReservationOfRoom_Click"/>
+                <Button x:Name="CloseReservationOfRoom" Height="32" Width="95" Content="Zatvori" Margin="0,0,15,10" Style="{StaticResource CRUDButton}" Command="{Binding CloseReservationOfRoom}"/>
             </WrapPanel>
         </Grid>
     </Grid>

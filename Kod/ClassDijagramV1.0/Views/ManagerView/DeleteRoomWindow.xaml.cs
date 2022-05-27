@@ -1,4 +1,5 @@
-﻿using Controller;
+﻿using ClassDijagramV1._0.ViewModel;
+using Controller;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -21,26 +22,12 @@ namespace ClassDijagramV1._0.Views.ManagerView
     /// </summary>
     public partial class DeleteRoomWindow : Window
     {
-        public RoomController roomController;
-
-        public String roomID;
+        private DeleteRoomViewModel _deleteRoomViewModel;
         public DeleteRoomWindow(String roomID)
         {
             InitializeComponent();
-            var app = Application.Current as App;
-            roomController = app.roomController;
-            this.roomID = roomID;
-        }
-
-        private void DeleteYesRoom_Click(object sender, RoutedEventArgs e)
-        {
-            roomController.DeleteRoom(roomID);
-            this.Close();
-        }
-
-        private void DeleteNoRoom_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
+            _deleteRoomViewModel = new DeleteRoomViewModel(this, roomID);
+            this.DataContext = _deleteRoomViewModel;
         }
     }
 }

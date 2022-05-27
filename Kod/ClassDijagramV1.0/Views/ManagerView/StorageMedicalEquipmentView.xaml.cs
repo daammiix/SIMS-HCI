@@ -20,115 +20,55 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ClassDijagramV1._0.Helpers;
+using ClassDijagramV1._0.ViewModel;
 
 namespace ClassDijagramV1._0.Views.ManagerView
 {
     /// <summary>
     /// Interaction logic for StorageMedicalEquipmentView.xaml
     /// </summary>
-    public partial class StorageMedicalEquipmentView : UserControl, IRefreshableEquipmentView
+    public partial class StorageMedicalEquipmentView : UserControl
     {
 
-        EquipmentController equipmentController;
-        RoomController roomController;
-        Storage storage;
-        BindingList<Equipment> allEquipment;
-        public BindingList<QuantifiedEquipment> EquipmentList { get; set; }
+        private StorageMedicalEquipmentViewModel _storageMedicalEquipment;
 
         public StorageMedicalEquipmentView()
         {
             InitializeComponent();
-            var app = Application.Current as App;
-            EquipmentList = new BindingList<QuantifiedEquipment>();
-            equipmentController = app.equipmentController;
-            roomController = app.roomController;
-            allEquipment = equipmentController.GetAllEquipments();
-            storage = (Storage)roomController.GetRoom("storage");
-            RefreshEquipment();
             
-            this.DataContext = this;
+            _storageMedicalEquipment = new StorageMedicalEquipmentViewModel();
+            this.DataContext = _storageMedicalEquipment;
         }
 
-        private void AddEquipment_Click(object sender, RoutedEventArgs e)
-        {
-            AddEquipmentWindow addEquipmentWindow = new AddEquipmentWindow(this, "Medicinska oprema");
-            addEquipmentWindow.Show();
-        }
+        //private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var quantifiedEquipment = (QuantifiedEquipment?)EquipmentListGrid.SelectedItem;
+        //    if (quantifiedEquipment != null)
+        //    {
+        //        StorageEquip storageEquip = new StorageEquip(quantifiedEquipment);
+        //        storageEquip.Show();
+        //    }
+        //    else
+        //    {
+        //        Warning warning = new Warning();
+        //        warning.Show();
+        //    }
 
-        private void ChangeEquipment_Click(object sender, RoutedEventArgs e)
-        {
-            QuantifiedEquipment? quantifiedEquipment = (QuantifiedEquipment?)EquipmentListGrid.SelectedItem;
-            if (quantifiedEquipment != null)
-            {
-                ChangeEquipmentWindow changeEquipmentWindow = new ChangeEquipmentWindow(quantifiedEquipment, this);
-                changeEquipmentWindow.Show();
-            }
-            else
-            {
-                Warning warning = new Warning();
-                warning.Show();
-            }
-        }
-        private void DeleteEquipment_Click(object sender, RoutedEventArgs e)
-        {
-            QuantifiedEquipment? quantifiedEquipment = (QuantifiedEquipment?)EquipmentListGrid.SelectedItem;
-            if (quantifiedEquipment != null)
-            {
-                var equipmentId = quantifiedEquipment;
-                DeleteEquipmentWindow deleteEquipmentWindow = new DeleteEquipmentWindow(equipmentId, this);
-                deleteEquipmentWindow.Show();
-            }
-            else
-            {
-                Warning warning = new Warning();
-                warning.Show();
-            }
-        }
+        //}
 
-        public void RefreshEquipment()
-        {
-            EquipmentList.Clear();
-            foreach (var binding in storage.EquipmentList)
-            {
-                foreach (var e in allEquipment)
-                {
-                    if (e.EquipmentID == binding.EquipmentID)
-                    {
-                        EquipmentList.Add(new QuantifiedEquipment(e, binding.Quantity));
-                    }
-                }
-            }
-        }
-
-        private void Hyperlink_Click(object sender, RoutedEventArgs e)
-        {
-            var quantifiedEquipment = (QuantifiedEquipment?)EquipmentListGrid.SelectedItem;
-            if (quantifiedEquipment != null)
-            {
-                StorageEquip storageEquip = new StorageEquip(quantifiedEquipment);
-                storageEquip.Show();
-            }
-            else
-            {
-                Warning warning = new Warning();
-                warning.Show();
-            }
-
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var txb = sender as TextBox;
-            if (txb.Text != "")
-            {
-                var filteredList = EquipmentList.Where(r => (r.Equipment.EquipmentID.ToLower().Contains(txb.Text.ToLower()) || r.Equipment.Name.ToLower().Contains(txb.Text.ToLower()) || r.Quantity.ToString().Contains(txb.Text)));
-                EquipmentListGrid.ItemsSource = null;
-                EquipmentListGrid.ItemsSource = filteredList;
-            }
-            else
-            {
-                EquipmentListGrid.ItemsSource = EquipmentList;
-            }
-        }
+        //private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    var txb = sender as TextBox;
+        //    if (txb.Text != "")
+        //    {
+        //        var filteredList = EquipmentList.Where(r => (r.Equipment.EquipmentID.ToLower().Contains(txb.Text.ToLower()) || r.Equipment.Name.ToLower().Contains(txb.Text.ToLower()) || r.Quantity.ToString().Contains(txb.Text)));
+        //        EquipmentListGrid.ItemsSource = null;
+        //        EquipmentListGrid.ItemsSource = filteredList;
+        //    }
+        //    else
+        //    {
+        //        EquipmentListGrid.ItemsSource = EquipmentList;
+        //    }
+        //}
     }
 }

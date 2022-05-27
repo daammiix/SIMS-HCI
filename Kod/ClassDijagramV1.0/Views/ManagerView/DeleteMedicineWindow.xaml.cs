@@ -1,7 +1,7 @@
 ﻿using ClassDijagramV1._0.Controller;
 using ClassDijagramV1._0.Helpers;
 using ClassDijagramV1._0.Model;
-using ClassDijagramV1._0.Model.Enums;
+using ClassDijagramV1._0.Util;
 using ClassDijagramV1._0.ViewModel;
 using Controller;
 using System;
@@ -21,18 +21,17 @@ using System.Windows.Shapes;
 namespace ClassDijagramV1._0.Views.ManagerView
 {
     /// <summary>
-    /// Interaction logic for AddEquipmentWindow.xaml
+    /// Interaction logic for DeleteDrugs.xaml
     /// </summary>
-    public partial class AddEquipmentWindow : Window
+    public partial class DeleteMedicineWindow : Window
     {
-        private AddEquipmentViewModel _addEquipment;
-        public AddEquipmentWindow(IRefreshableEquipmentView equipmentView, String type)
+        private DeleteMedicineViewModel _deleteMedicine;
+        public DeleteMedicineWindow(QuantifiedMedicine? quantifiedMedicine, IRefreshableMedicineView medicineView)
         {
             InitializeComponent();
 
-            _addEquipment = new AddEquipmentViewModel(this, equipmentView, type);
-            this.DataContext = _addEquipment;
+            _deleteMedicine = new DeleteMedicineViewModel(this, quantifiedMedicine, medicineView);
+            this.DataContext = _deleteMedicine;
         }
-
     }
 }

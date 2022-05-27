@@ -5,6 +5,7 @@ using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Model.Enums;
 using ClassDijagramV1._0.Repository;
 using ClassDijagramV1._0.Service;
+using ClassDijagramV1._0.ViewModel;
 using Controller;
 using Model;
 using Repository;
@@ -256,7 +257,6 @@ namespace ClassDijagramV1._0
             MedicalRecord mr1 = new MedicalRecord(p1.Id, "Dragan", MaritalStatus.Single, "377899", BloodType.O);
             MedicalRecord mr2 = new MedicalRecord(p2.Id, "Slavisa", MaritalStatus.Divorced, "223223", BloodType.AB);
             MedicalRecord mr3 = new MedicalRecord(p3.Id, "Miodrag", MaritalStatus.Widow, "565659", BloodType.A);
-
 
             Room r1 = roomController.GetRoom("id");
             Room r2 = roomController.GetRoom("id5");

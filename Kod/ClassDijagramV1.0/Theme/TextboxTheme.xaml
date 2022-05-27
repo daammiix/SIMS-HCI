@@ -12,13 +12,13 @@
                             <Rectangle StrokeThickness="1"/>
                             <TextBox 
                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
-                                     BorderThickness="0"
-                                     Background="Transparent"
-                                     VerticalContentAlignment="Center"
-                                     Padding="10,0,0,0"
-                                     FontSize="18"
-                                     Foreground="#1F1313"
-                                     x:Name="SearchBox"/>
+                                BorderThickness="0"
+                                Background="Transparent"
+                                VerticalContentAlignment="Center"
+                                Padding="10,0,0,0"
+                                FontSize="18"
+                                Foreground="#1F1313"
+                                x:Name="SearchBox"/>
 
                             <TextBlock IsHitTestVisible="False"
                                        Text="Pretraži..."
