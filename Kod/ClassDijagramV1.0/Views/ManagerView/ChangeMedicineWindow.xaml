@@ -1,11 +1,11 @@
-﻿<Window x:Class="ClassDijagramV1._0.Views.ManagerView.ChangeDrugsWindow"
+﻿<Window x:Class="ClassDijagramV1._0.Views.ManagerView.ChangeMedicineWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClassDijagramV1._0.Views.ManagerView"
         mc:Ignorable="d"
-        Title="ChangeDrugsWindow"
+        Title="ChangeMedicineWindow"
         Height="500"
         Width="640"
         WindowStartupLocation="CenterScreen"
@@ -41,16 +41,16 @@
                 <Label Content="Količina:" FontSize="24" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">
-                <TextBox x:Name="ChangedDrugsId" Width="320" Background="#E7E7E7" IsReadOnly="True" Height="50" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=Medicines.ID,Mode=OneWay}"/>
-                <TextBox x:Name="ChangedDrugsName" Width="320" Background="#E7E7E7" IsReadOnly="True" Height="50" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=Medicines.Name,Mode=OneWay}"/>
-                <TextBox x:Name="ChangeDrugsStatus"  Width="320" Background="#E7E7E7" IsReadOnly="True" Height="50" Margin="0,10,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=Medicines.Status,Mode=OneWay}"/>
-                <TextBox x:Name="ChangedDrugsQuantity" Width="120" Background="#E7E7E7" Height="50" Margin="0,10,0,5" FontSize="25" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=Quantity,Mode=OneWay}"/>
+                <TextBox x:Name="ChangedDrugsId" Width="320" Background="#E7E7E7" IsReadOnly="True" Height="50" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=quantifiedMedicine.Medicines.ID,Mode=OneWay}"/>
+                <TextBox x:Name="ChangedDrugsName" Width="320" Background="#E7E7E7" IsReadOnly="True" Height="50" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=quantifiedMedicine.Medicines.Name,Mode=OneWay}"/>
+                <TextBox x:Name="ChangeDrugsStatus"  Width="320" Background="#E7E7E7" IsReadOnly="True" Height="50" Margin="0,10,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=quantifiedMedicine.Medicines.Status,Mode=OneWay}"/>
+                <TextBox x:Name="ChangedDrugsQuantity" Width="120" Background="#E7E7E7" Height="50" Margin="0,10,0,5" FontSize="25" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=quantifiedMedicine.Quantity,Mode=OneWay}"/>
             </StackPanel>
         </Grid>
         <StackPanel Grid.Row="2">
             <WrapPanel HorizontalAlignment="Right">
-                <Button x:Name="SaveChangedDrugs" HorizontalAlignment="Right" Height="32" Width="90" Content="Sačuvaj" Margin="5,10,10,0" Style="{StaticResource CRUDButton}" Click="SaveChangedDrugs_Click"/>
-                <Button x:Name="QuitChangedDrugs" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,15,0" Style="{StaticResource CRUDButton}" Click="QuitChangedDrugs_Click"/>
+                <Button x:Name="SaveChangedMedicine" HorizontalAlignment="Right" Height="32" Width="90" Content="Sačuvaj" Margin="5,10,10,0" Style="{StaticResource CRUDButton}" Command="{Binding SaveChangedMedicine}"/>
+                <Button x:Name="QuitChangedMedicine" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,15,0" Style="{StaticResource CRUDButton}" Command="{Binding QuitChangededMedicine}"/>
             </WrapPanel>
         </StackPanel>
     </Grid>

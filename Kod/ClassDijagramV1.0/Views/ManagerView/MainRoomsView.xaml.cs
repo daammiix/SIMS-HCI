@@ -1,6 +1,4 @@
 ﻿using ClassDijagramV1._0.ViewModel;
-using ClassDijagramV1._0.Views.ManagerView;
-using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,20 +11,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ClassDijagramV1._0.Views.ManagerView
 {
     /// <summary>
-    /// Interaction logic for ReservationOfRoom.xaml
+    /// Interaction logic for MainRoomsView.xaml
     /// </summary>
-    public partial class ReservationOfRoom : Window
+    public partial class MainRoomsView : UserControl
     {
-        public ReservationOfRoom(MainRoomsViewModel _mainRooms, Room selectedRoom)
+        // private MainRoomsViewModel mainRooms;
+        public MainRoomsView()
         {
             InitializeComponent();
-            _mainRooms.SetReservationWindowState(this, selectedRoom);
-            this.DataContext = _mainRooms;
+            // mainRooms = new MainRoomsViewModel();
+            // this.DataContext = mainRooms;
         }
     }
 }

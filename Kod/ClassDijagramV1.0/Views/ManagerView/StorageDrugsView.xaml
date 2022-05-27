@@ -32,8 +32,8 @@
                  Margin="0,0,0,5"
                  VerticalContentAlignment="Center"
                  HorizontalAlignment="Right"
-                 TextChanged="TextBox_TextChanged"
-                 Style="{StaticResource FancySearchBox}"/>
+                 Style="{StaticResource FancySearchBox}"
+                 Text="{Binding Path=SearchText, UpdateSourceTrigger=PropertyChanged}"/>
             <StackPanel>
                 <Grid Width="930" Height="468">
 
@@ -42,7 +42,7 @@
                           RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
                           FontSize="18" BorderThickness="4" CanUserReorderColumns="False"
                           CanUserDeleteRows="False" AutoGenerateColumns="False"
-                          ItemsSource="{Binding Path=MedicinesList}" IsReadOnly="True">
+                          ItemsSource="{Binding Path=MedicinesList}" SelectedItem="{Binding selectedMedicine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Šifra" Width="100" Binding="{Binding Path=Medicines.ID}"/>
                             <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=Medicines.Name}"/>
@@ -52,7 +52,8 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock>
-                                        <Hyperlink Foreground="Black" Click="OnOpenComponents_Click">Otvori sastav</Hyperlink>
+                                        <Button Content="Otvori sastav"  Command="{Binding Path=DataContext.OpenComponents,
+                                            RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"/>
                                         </TextBlock>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -63,9 +64,9 @@
             </StackPanel>
             <StackPanel Height="98" Width="930">
                 <WrapPanel HorizontalAlignment="Right">
-                    <Button x:Name="AddDrugs" HorizontalAlignment="Right" Height="32" Width="70" Content="Dodaj" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" Click="AddDrugs_Click"/>
-                    <Button x:Name="ChangeDrugs" HorizontalAlignment="Right" Height="32" Width="75" Content="Izmeni" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" Click="ChangeDrugs_Click"/>
-                    <Button x:Name="DeleteDrugs" HorizontalAlignment="Right" Height="32" Width="75" Content="Obriši" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" Click="DeleteDrugs_Click"/>
+                    <Button x:Name="AddMedicine" HorizontalAlignment="Right" Height="32" Width="70" Content="Dodaj" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" Command="{Binding AddMedicine}"/>
+                    <Button x:Name="ChangeMedicine" HorizontalAlignment="Right" Height="32" Width="75" Content="Izmeni" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" Command="{Binding ChangeMedicine}"/>
+                    <Button x:Name="DeleteMedicine" HorizontalAlignment="Right" Height="32" Width="75" Content="Obriši" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" Command="{Binding DeleteMedicine}"/>
                 </WrapPanel>
             </StackPanel>
         </StackPanel>

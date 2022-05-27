@@ -16,7 +16,7 @@
              xmlns:appointmentsView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.AppointmentsView"
              xmlns:viewModel="clr-namespace:ClassDijagramV1._0.ViewModel"
              xmlns:view="clr-namespace:ClassDijagramV1._0.Views"
-             StartupUri="Views/MainWindow.xaml"
+             StartupUri="Views/ManagerView/WindowUpravnik.xaml"
              xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
              Exit="Application_Exit">
 
@@ -44,12 +44,28 @@
                 <equipmentView:EquipmentMainView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModel:MainRoomsViewModel}">
+                <managerView:MainRoomsView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewModel:RoomsViewModel}">
                 <managerView:RoomsView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:CalendarViewModel}">
                 <managerView:CalendarView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:EquipViewModel}">
+                <managerView:Equip/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:RenovatingMergeViewModel}">
+                <managerView:RenovatingMerge/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:RenovatingSplitViewModel}">
+                <managerView:RenovatingSplit/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:StorageViewModel}">

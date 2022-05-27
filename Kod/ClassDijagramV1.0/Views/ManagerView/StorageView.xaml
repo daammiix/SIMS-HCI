@@ -20,10 +20,6 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <UserControl.DataContext>
-        <viewModel:StorageViewModel/>
-    </UserControl.DataContext>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
