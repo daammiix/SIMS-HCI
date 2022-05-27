@@ -55,8 +55,107 @@
             </Style>
         </ResourceDictionary>
     </Window.Resources>
+    
+    
+    
+    <materialDesign:DrawerHost
+        x:Name="DrawerHost">
+        <materialDesign:DrawerHost.Style>
+            <Style
+                TargetType="materialDesign:DrawerHost"
+                BasedOn="{StaticResource {x:Type materialDesign:DrawerHost}}">
+                <Style.Triggers>
+                    <DataTrigger
+                        Binding="{Binding IsChecked, ElementName=BackgroundToggle}"
+                        Value="True">
+                        <Setter
+                            Property="OverlayBackground"
+                            Value="{DynamicResource PrimaryHueMidBrush}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </materialDesign:DrawerHost.Style>
 
-    <Grid>
+        <materialDesign:DrawerHost.RightDrawerContent>
+            <StackPanel
+                        Margin="16">
+                <StackPanel Orientation="Horizontal"
+                            Margin="-25 0 0 0">
+                    <Button
+                          Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                          CommandParameter="{x:Static Dock.Right}"
+                          Margin="4 0 4 0"
+                          
+                          Content="{materialDesign:PackIcon Kind=ArrowBack}" Background="{x:Null}" BorderBrush="{x:Null}" />
+                    <TextBlock
+                            Margin="4 10 4 0"
+                            HorizontalAlignment="Center"
+                            Text="BOLNICA ZDRAVO" />
+                </StackPanel>
+                
+                <Button
+                            
+                            Margin="4"
+                            HorizontalAlignment="Center"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            Content="CLOSE THIS" />
+                <Button
+                            
+                            Margin="4"
+                            HorizontalAlignment="Center"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            Content="CLOSE ALL" />
+
+                <TreeView >
+                    <TreeViewItem Header="Pregled termina" Style="{StaticResource MaterialDesignTreeViewItem}"/>
+                    
+                    <TreeViewItem Header="Zakazivanje pregleda">
+                        
+                        <TreeViewItem>
+                            <TreeViewItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <Viewbox Width="16" Height="16">
+                                        <Canvas Width="24" Height="24">
+                                            <Path
+                                               Data="M20,10C22,13 17,22 15,22C13,22 13,21 12,21C11,21 11,22 9,22C7,22 2,13 4,10C6,7 9,7 11,8V5C5.38,8.07 4.11,3.78 4.11,3.78C4.11,3.78 6.77,0.19 11,5V3H13V8C15,7 18,7 20,10Z"
+                                               Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=Foreground}" />
+                                        </Canvas>
+                                    </Viewbox>
+                                    <TextBlock Margin="8 0 0 0" Text="Prioritet doktor" />
+                                </StackPanel>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                        
+                        <TreeViewItem>
+                            <TreeViewItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <Viewbox Width="16" Height="16">
+                                        <Canvas Width="24" Height="24">
+                                            <Path
+                                               Data="M20,10C22,13 17,22 15,22C13,22 13,21 12,21C11,21 11,22 9,22C7,22 2,13 4,10C6,7 9,7 11,8V5C5.38,8.07 4.11,3.78 4.11,3.78C4.11,3.78 6.77,0.19 11,5V3H13V8C15,7 18,7 20,10Z"
+                                               Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=Foreground}" />
+                                        </Canvas>
+                                    </Viewbox>
+                                    <TextBlock Margin="8 0 0 0" Text="Prioritet doktor" />
+                                </StackPanel>
+                            </TreeViewItem.Header>
+                        </TreeViewItem>
+                        
+                        <TreeViewItem Header="Grape">
+                            <TextBlock>
+                                <Run Text="Grapes for us" />
+                            </TextBlock>
+                        </TreeViewItem>
+                        
+                    </TreeViewItem>
+                    
+                    
+                    <TreeViewItem Header="Uvid u terapiju" />
+                    
+                </TreeView>
+            </StackPanel>
+        </materialDesign:DrawerHost.RightDrawerContent>
+        <Grid>
         <Border Width="1024" Height="68" VerticalAlignment="Top" Background="#FFBBBABD"/>
         <!--meni na vrhu-->
         <StackPanel>
@@ -84,7 +183,14 @@
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
                             Height="68" >
-                            <Button x:Name="notificationBtn" Style="{StaticResource ResourceKey=noBackBlue}"
+
+                        <Button
+                          Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                          CommandParameter="{x:Static Dock.Right}"
+                          Margin="4"
+                          Content="{materialDesign:PackIcon Kind=ArrowRight}" />
+                    
+                        <Button x:Name="notificationBtn" Style="{StaticResource ResourceKey=noBackBlue}"
                                     Cursor="Hand"
                                     Width="68" Height="68"
                                     HorizontalAlignment="Right"
@@ -110,7 +216,13 @@
                 
             </DockPanel>
 
+            <!---->
 
+            
+
+            
+
+            <!---->
             <Frame Background="{StaticResource MaterialDesignToolBackground}" x:Name="startWindow" NavigationUIVisibility="Hidden" Height="650"/>
 
             <StackPanel x:Name="backStack" Orientation="Horizontal" VerticalAlignment="Bottom"
@@ -131,4 +243,5 @@
             </StackPanel>
         </StackPanel>
     </Grid>
+    </materialDesign:DrawerHost>
 </Window>

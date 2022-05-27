@@ -29,5 +29,15 @@ namespace ClassDijagramV1._0.Views.PatientView
             parent = patientMain;
             _logedPatient = logedPatient;
         }
+
+        private void personalDataClick(object sender, RoutedEventArgs e)
+        {
+            parent.startWindow.Content = new PatientDataPage(parent);
+        }
+
+        private void oldAppointmentsClick(object sender, RoutedEventArgs e)
+        {
+            parent.startWindow.Content = new OldAppointmentsPage(parent);
+        }
     }
 }
