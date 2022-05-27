@@ -18,6 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ClassDijagramV1._0.Helpers;
 using ClassDijagramV1._0.Views.ManagerView;
+using ClassDijagramV1._0.ViewModel;
 
 namespace ClassDijagramV1._0.Views.ManagerView
 {

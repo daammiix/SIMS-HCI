@@ -33,8 +33,8 @@
                  Margin="0,0,0,5"
                  VerticalContentAlignment="Center"
                  HorizontalAlignment="Right"
-                 TextChanged="TextBox_TextChanged"
-                 Style="{StaticResource FancySearchBox}"/>
+                 Style="{StaticResource FancySearchBox}"
+                 Text="{Binding Path=SearchText, UpdateSourceTrigger=PropertyChanged}"/>
         <StackPanel>
             <Grid Width="930" Height="468">
 
@@ -43,7 +43,7 @@
                           RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
                           FontSize="18" BorderThickness="4" CanUserReorderColumns="False"
                           CanUserDeleteRows="False" AutoGenerateColumns="False"
-                          ItemsSource="{Binding Path=EquipmentList}" IsReadOnly="True">
+                          ItemsSource="{Binding Path=EquipmentList}" SelectedItem="{Binding selectedEquipment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Šifra" Width="100" Binding="{Binding Path=Equipment.EquipmentID}"/>
                         <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=Equipment.Name}"/>
@@ -52,7 +52,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock>
-                                        <Hyperlink Foreground="#1F1313" Click="Hyperlink_Click">Zakazivanje</Hyperlink>
+                                        <Hyperlink Foreground="#1F1313">Zakazivanje</Hyperlink>
                                     </TextBlock>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -72,9 +72,9 @@
         </StackPanel>
         <StackPanel Height="98" Width="930">
             <WrapPanel HorizontalAlignment="Right">
-                <Button x:Name="AddInventory" HorizontalAlignment="Right" Height="32" Width="70" Content="Dodaj" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" Click="AddInventory_Click"/>
-                <Button x:Name="ChangeInventory" HorizontalAlignment="Right" Height="32" Width="75" Content="Izmeni" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" Click="ChangeInventory_Click"/>
-                <Button x:Name="DeleteInventory" HorizontalAlignment="Right" Height="32" Width="75" Content="Obriši" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" IsEnabled="{Binding SelectedItems.Count, ElementName=lv}" Click="DeleteInventory_Click"/>
+                <Button x:Name="AddInventory" HorizontalAlignment="Right" Height="32" Width="70" Content="Dodaj" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" Command="{Binding AddEquipment}"/>
+                <Button x:Name="ChangeInventory" HorizontalAlignment="Right" Height="32" Width="75" Content="Izmeni" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" Command="{Binding ChangeEquipment}"/>
+                <Button x:Name="DeleteInventory" HorizontalAlignment="Right" Height="32" Width="75" Content="Obriši" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" Command="{Binding DeleteEquipment}"/>
             </WrapPanel>
         </StackPanel>
     </StackPanel>

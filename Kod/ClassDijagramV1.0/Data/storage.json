@@ -8,7 +8,7 @@
     "EquipmentList": [
       {
         "EquipmentID": "OL36",
-        "Quantity": 7
+        "Quantity": 11
       },
       {
         "EquipmentID": "OUL5",
@@ -47,10 +47,6 @@
         "Quantity": 8
       },
       {
-        "EquipmentID": "mnbfd",
-        "Quantity": 10
-      },
-      {
         "EquipmentID": "INL56",
         "Quantity": 60
       }
@@ -82,7 +78,7 @@
       },
       {
         "MedicineID": "LPG40",
-        "Quantity": 66
+        "Quantity": 68
       },
       {
         "MedicineID": "LF200",

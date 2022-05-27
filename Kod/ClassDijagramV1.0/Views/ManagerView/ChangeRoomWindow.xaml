@@ -41,19 +41,19 @@
                 <Label Content="Status:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">
-                <TextBox x:Name="ChangeId" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" IsReadOnly="True" Text="{Binding Path=RoomID,Mode=OneWay}" />
+                <TextBox x:Name="ChangeId" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" IsReadOnly="True" Text="{Binding Path=room.RoomID,Mode=OneWay}" />
                 <ComboBox x:Name="ChangeName" Width="320" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" 
-                          VerticalContentAlignment="Center" IsReadOnly="True" Text="{Binding Path=RoomName,Mode=OneWay}">
+                          VerticalContentAlignment="Center" IsReadOnly="True" Text="{Binding Path=room.RoomName,Mode=OneWay}">
                     <ComboBoxItem Margin="5,0,0,0" Content="Operaciona Sala"/>
                     <ComboBoxItem Margin="5,0,0,0" Content="Sala za preglede"/>
                     <ComboBoxItem Margin="5,0,0,0" Content="Bolnička soba"/>
                     <ComboBoxItem Margin="5,0,0,0" Content="Intezivna nega"/>
                     <ComboBoxItem Margin="5,0,0,0" Content="Sala za sastanke"/>
                 </ComboBox>
-                <TextBox x:Name="ChangeFloor" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Text="{Binding Path=Floor,Mode=OneWay}" />
-                <TextBox x:Name="ChangeNumber" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Text="{Binding Path=RoomNumber,Mode=OneWay}" />
+                <TextBox x:Name="ChangeFloor" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Text="{Binding Path=room.Floor,Mode=OneWay}" />
+                <TextBox x:Name="ChangeNumber" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Text="{Binding Path=room.RoomNumber,Mode=OneWay}" />
                 <ComboBox x:Name="ChangeStatus" Width="320" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" 
-                          VerticalContentAlignment="Center" IsReadOnly="True" Text="{Binding Path=RoomStatus,Mode=OneWay}">
+                          VerticalContentAlignment="Center" IsReadOnly="True" Text="{Binding Path=room.RoomStatus,Mode=OneWay}">
                     <ComboBoxItem Margin="5,0,0,0" Content="Aktivna"/>
                     <ComboBoxItem Margin="5,0,0,0" Content="Renoviranje"/>
                     <ComboBoxItem Margin="5,0,0,0" Content="Promena namene"/>
@@ -62,8 +62,8 @@
         </Grid>
         <StackPanel Grid.Row="2">
             <WrapPanel HorizontalAlignment="Right">
-                <Button x:Name="SaveChangedRoom" HorizontalAlignment="Right" Height="32" Width="90" Content="Sačuvaj" Margin="5,10,10,0" Style="{StaticResource CRUDButton}" Click="SaveChangedRoom_Click"/>
-                <Button x:Name="QuitChangededRoom" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,15,0" Style="{StaticResource CRUDButton}" Click="QuitChangededRoom_Click"/>
+                <Button x:Name="SaveChangedRoom" HorizontalAlignment="Right" Height="32" Width="90" Content="Sačuvaj" Margin="5,10,10,0" Style="{StaticResource CRUDButton}" Command="{Binding SaveChangedRoom}"/>
+                <Button x:Name="QuitChangededRoom" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,15,0" Style="{StaticResource CRUDButton}" Command="{Binding QuitChangededRoom}"/>
             </WrapPanel>
         </StackPanel>
     </Grid>

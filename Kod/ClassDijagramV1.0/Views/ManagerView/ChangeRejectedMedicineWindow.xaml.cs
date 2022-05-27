@@ -1,11 +1,11 @@
 ﻿using ClassDijagramV1._0.Controller;
 using ClassDijagramV1._0.Helpers;
 using ClassDijagramV1._0.Model;
-using ClassDijagramV1._0.Model.Enums;
 using ClassDijagramV1._0.ViewModel;
 using Controller;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,18 +21,17 @@ using System.Windows.Shapes;
 namespace ClassDijagramV1._0.Views.ManagerView
 {
     /// <summary>
-    /// Interaction logic for AddEquipmentWindow.xaml
+    /// Interaction logic for ChangeRejectedDrugsWindow.xaml
     /// </summary>
-    public partial class AddEquipmentWindow : Window
+    public partial class ChangeRejectedMedicineWindow : Window
     {
-        private AddEquipmentViewModel _addEquipment;
-        public AddEquipmentWindow(IRefreshableEquipmentView equipmentView, String type)
+        private ChangeRejectedMedicineViewModel _changeRejectedMedicine;
+        public ChangeRejectedMedicineWindow(QuantifiedMedicine? quantifiedMedicine, IRefreshableMedicineView medicineView)
         {
             InitializeComponent();
 
-            _addEquipment = new AddEquipmentViewModel(this, equipmentView, type);
-            this.DataContext = _addEquipment;
+            _changeRejectedMedicine = new ChangeRejectedMedicineViewModel(this, quantifiedMedicine, medicineView);
+            this.DataContext = _changeRejectedMedicine;
         }
-
     }
 }

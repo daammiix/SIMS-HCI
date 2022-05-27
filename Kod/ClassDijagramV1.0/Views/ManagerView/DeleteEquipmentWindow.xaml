@@ -44,8 +44,8 @@
                    Foreground="#1F1313">
         </TextBlock>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <Button x:Name="DeleteYesEquipment"  Height="45" Width="300" Content="Da" Style="{StaticResource YesNoButton}" Click="DeleteYesEquipment_Click"/>
-            <Button x:Name="DeleteNoEquipment"  Height="45" Width="300" Content="Ne" Style="{StaticResource YesNoButton}" Click="DeleteNoEquipment_Click"/>
+            <Button x:Name="DeleteYesEquipment"  Height="45" Width="300" Content="Da" Style="{StaticResource YesNoButton}" Command="{Binding DeleteYesEquipment}"/>
+            <Button x:Name="DeleteNoEquipment"  Height="45" Width="300" Content="Ne" Style="{StaticResource YesNoButton}" Command="{Binding DeleteNoEquipment}"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -1,81 +1,174 @@
 ﻿using ClassDijagramV1._0.Controller;
 using ClassDijagramV1._0.Model;
-using ClassDijagramV1._0.ViewModel;
+using ClassDijagramV1._0.Util;
 using ClassDijagramV1._0.Views.ManagerView;
 using Controller;
 using Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace ClassDijagramV1._0.Views.ManagerView
+namespace ClassDijagramV1._0.ViewModel
 {
-    /// <summary>
-    /// Interaction logic for RenovatingAndChangingPurpose.xaml
-    /// </summary>
-    public partial class RenovaitingWindow : Window
+    public class RenovatingSplitViewModel
     {
         readonly private String format = "dd/MM/yyyyTHH:mm";
-        readonly private String timeFormat = "HH:mm";
-        readonly private String dateFormat = "dd/MM/yyyy";
         readonly private String fullFormat = "dd/MM/yyyy HH:mm";
 
-        public RoomController roomController;
+        public String FromDate;
+        public String FromTime { get; set; }
+        public String ToDate;
+        public String ToTime { get; set; }
 
+        public RoomController roomController;
         public EquipmentAppointmentController equipmentAppointmentController;
         public RoomAppointmentController roomAppointmentController;
         public AppointmentController appointmentController;
 
-        public Room selectedRoom { get; set; }
-
         public BindingList<String> RoomsAvailable { get; set; }
         private BindingList<Availability> availabilities { get; set; }
 
-        public String FromDate { get; set; } = DateTime.Now.ToString("dd/MM/yyyy");
-        public String FromTime { get; set; } = DateTime.Now.ToString("HH:mm");
-        public String ToDate { get; set; } = DateTime.Now.ToString("dd/MM/yyyy");
-        public String ToTime { get; set; } = DateTime.Now.ToString("HH:mm");
+        public Room? selectedRoom { get; set; }
+        public Room newRoom;
 
-        public DateTime selectedDate { get; set; }
+        private String _newRoomID;
+        private String _newRoomName;
+        private String _newRoomNumber;
 
         private readonly Random _random = new Random();
-        public RenovaitingWindow(Room selectedRoom)
-        {
-            InitializeComponent();
-            DataContext = this;
 
+        private RelayCommand _saveRenovatingSplit;
+        private RelayCommand _cancelRenovatingSplit;
+
+        public RenovatingSplitViewModel()
+        {
             var app = Application.Current as App;
             roomController = app.roomController;
             equipmentAppointmentController = app.equipmentAppointmentController;
             roomAppointmentController = app.roomAppointmentController;
             appointmentController = app.AppointmentController;
 
-            this.selectedRoom = selectedRoom;
+            this.selectedRoom = null;
+
+            FromDate = DateTime.Now.ToString("dd/MM/yyyy");
+            FromTime = DateTime.Now.ToString("HH:mm");
+            ToDate = DateTime.Now.ToString("dd/MM/yyyy");
+            ToTime = DateTime.Now.ToString("HH:mm");
 
             RoomsAvailable = new BindingList<String>();
             availabilities = new BindingList<Availability>();
-
-            selectedDate = DateTime.Now.Date;
-
         }
 
-        private void SaveRenovating_Click(object sender, RoutedEventArgs e)
+        public RelayCommand SaveRenovatingSplit
         {
-            DateTime fromDatetime = DateTime.ParseExact(FromDateField.Text + "T" + FromTimeField.Text, format, null);
-            DateTime toDatetime = DateTime.ParseExact(ToDateField.Text + "T" + ToTimeField.Text, format, null);
+            get
+            {
+                _saveRenovatingSplit = new RelayCommand(o =>
+                {
+                    SaveRenovatingSplitAction();
+                });
+
+                return _saveRenovatingSplit;
+            }
+        }
+
+        public RelayCommand CancelRenovatingSplit
+        {
+            get
+            {
+                _cancelRenovatingSplit = new RelayCommand(o =>
+                {
+
+                });
+
+                return _cancelRenovatingSplit;
+            }
+        }
+
+        public String selectedFromDate
+        {
+            get
+            {
+                return FromDate;
+            }
+            set
+            {
+                if (FromDate == value)
+                    return;
+                FromDate = value;
+                ListsHandler();
+            }
+        }
+
+        public String selectedToDate
+        {
+            get
+            {
+                return ToDate;
+            }
+            set
+            {
+                if (ToDate == value)
+                    return;
+                ToDate = value;
+                ListsHandler();
+            }
+        }
+
+        public String selectedNewRoomID
+        {
+            get
+            {
+                return _newRoomID;
+            }
+            set
+            {
+                if (_newRoomID == value)
+                    return;
+                _newRoomID = value;
+                ListsHandler();
+            }
+        }
+
+        public String selectedNewRoomName
+        {
+            get
+            {
+                return _newRoomName;
+            }
+            set
+            {
+                value = value.Substring(38);
+                if (_newRoomName == value)
+                    return;
+                _newRoomName = value;
+                ListsHandler();
+            }
+        }
+
+        public String selectedNewRoomNumber
+        {
+            get
+            {
+                return _newRoomNumber;
+            }
+            set
+            {
+                if (_newRoomNumber == value)
+                    return;
+                _newRoomNumber = value;
+                ListsHandler();
+            }
+        }
+
+        private void SaveRenovatingSplitAction()
+        {
+            DateTime fromDatetime = DateTime.ParseExact(FromDate + "T" + FromTime, format, null);
+            DateTime toDatetime = DateTime.ParseExact(ToDate + "T" + ToTime, format, null);
 
             if (!checkDateTimeAvailable(fromDatetime, toDatetime))
             {
@@ -84,22 +177,23 @@ namespace ClassDijagramV1._0.Views.ManagerView
                 return;
             }
 
-            var appointmentId = RandomPassword();
+            var appointmentId = RandomId();
 
-            var roomAppointment = new RoomAppointment(appointmentId, selectedRoom.RoomID, fromDatetime, toDatetime - fromDatetime);
+            newRoom = RoomFromTextboxes();
+
+            var roomAppointment = new RoomAppointment(appointmentId, selectedRoom.RoomID, fromDatetime, toDatetime - fromDatetime, newRoom);
             roomAppointmentController.AddRoomAppointment(roomAppointment);
-
-            this.Close();
         }
 
-        private void QuitRenovating_Click(object sender, RoutedEventArgs e)
+        private Room RoomFromTextboxes()
         {
-            this.Close();
-        }
-
-        private void FromDateField_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            ListsHandler();
+            return new Room(
+                selectedNewRoomID,
+                selectedNewRoomName,
+                selectedRoom.Floor,
+                Int32.Parse(selectedNewRoomNumber),
+                "Aktivna"
+            );
         }
 
         private bool checkTimeSpansOverlap(DateTime fromDatetimeA, DateTime toDatetimeA, DateTime fromDatetimeB, DateTime toDatetimeB)
@@ -137,8 +231,8 @@ namespace ClassDijagramV1._0.Views.ManagerView
             DateTime selectedFrom, selectedTo;
             try
             {
-                selectedFrom = DateTime.ParseExact(FromDateField.Text, "dd/MM/yyyy", null);
-                selectedTo = DateTime.ParseExact(ToDateField.Text, "dd/MM/yyyy", null);
+                selectedFrom = DateTime.ParseExact(FromDate, "dd/MM/yyyy", null);
+                selectedTo = DateTime.ParseExact(ToDate, "dd/MM/yyyy", null);
             }
             catch (FormatException)
             {
@@ -205,7 +299,7 @@ namespace ClassDijagramV1._0.Views.ManagerView
             return lowerCase ? builder.ToString().ToLower() : builder.ToString();
         }
 
-        public string RandomPassword()
+        public string RandomId()
         {
             var passwordBuilder = new StringBuilder();
 
@@ -217,7 +311,5 @@ namespace ClassDijagramV1._0.Views.ManagerView
 
             return passwordBuilder.ToString();
         }
-
-
     }
 }

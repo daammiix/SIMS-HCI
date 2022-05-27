@@ -1,4 +1,4 @@
-﻿<Window x:Class="ClassDijagramV1._0.Views.ManagerView.AddDrugsWindow"
+﻿<Window x:Class="ClassDijagramV1._0.Views.ManagerView.AddMedicineWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ClassDijagramV1._0.Views.ManagerView"
         xmlns:converters="clr-namespace:ClassDijagramV1._0.Converters"
         mc:Ignorable="d"
-        Title="AddDrugsWindow"
+        Title="AddMEdicineWindow"
         Height="500"
         Width="950"
         WindowStartupLocation="CenterScreen"
@@ -65,7 +65,7 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <Button x:Name="AddSuggestedMedicine" HorizontalAlignment="Right" Height="32" Width="80" Content="Dodaj" Margin="5,10,10,0" Style="{StaticResource CRUDButton}" Click="AddSuggestedMedicine_Click"/>
+                    <Button x:Name="AddSuggestedMedicine" HorizontalAlignment="Right" Height="32" Width="80" Content="Dodaj" Margin="5,10,10,0" Style="{StaticResource CRUDButton}" Command="{Binding AddSuggestedMedicine}"/>
                 </StackPanel>
                 <DataGrid  Height="200" Width="250" x:Name="SuggestedMedicinesGrid" FontSize="18"
                       CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left"
@@ -81,8 +81,8 @@
         </Grid>
         <StackPanel Grid.Row="2">
             <WrapPanel HorizontalAlignment="Right">
-                <Button x:Name="SaveAddedDrugs" HorizontalAlignment="Right" Height="32" Width="90" Content="Sačuvaj" Margin="5,10,10,0" Style="{StaticResource CRUDButton}" Click="SaveAddedDrugs_Click"/>
-                <Button x:Name="QuitAddedDrugs" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,15,0" Style="{StaticResource CRUDButton}" Click="QuitAddedDrugs_Click"/>
+                <Button x:Name="SaveAddedMedicine" HorizontalAlignment="Right" Height="32" Width="90" Content="Sačuvaj" Margin="5,10,10,0" Style="{StaticResource CRUDButton}" Command="{Binding SaveNewMedicine}"/>
+                <Button x:Name="QuitAddedMedicine" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,15,0" Style="{StaticResource CRUDButton}" Command="{Binding CancelNewMedicine}"/>
             </WrapPanel>
         </StackPanel>
     </Grid>

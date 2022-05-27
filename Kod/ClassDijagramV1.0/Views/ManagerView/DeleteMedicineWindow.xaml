@@ -1,11 +1,11 @@
-﻿<Window x:Class="ClassDijagramV1._0.Views.ManagerView.DeleteDrugsWindow"
+﻿<Window x:Class="ClassDijagramV1._0.Views.ManagerView.DeleteMedicineWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClassDijagramV1._0.Views.ManagerView"
         mc:Ignorable="d"
-        Title="DeleteDrugs"
+        Title="DeleteMedicine"
         Height="300"
         Width="600"
         WindowStartupLocation="CenterScreen"
@@ -45,8 +45,8 @@
                    Foreground="Black">
         </TextBlock>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <Button x:Name="DeleteYesDrugs"  Height="45" Width="300" Content="Da" Style="{StaticResource YesNoButton}" Click="DeleteYesDrugs_Click"/>
-            <Button x:Name="DeleteNoDrugs"  Height="45" Width="300" Content="Ne" Style="{StaticResource YesNoButton}" Click="DeleteNoDrugs_Click"/>
+            <Button x:Name="DeleteYesMedicine"  Height="45" Width="300" Content="Da" Style="{StaticResource YesNoButton}" Command="{Binding DeleteYesMedicine}"/>
+            <Button x:Name="DeleteNoMedicine"  Height="45" Width="300" Content="Ne" Style="{StaticResource YesNoButton}" Command="{Binding DeleteNoMedicine}"/>
         </StackPanel>
     </Grid>
 </Window>

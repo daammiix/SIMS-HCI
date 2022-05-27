@@ -1,4 +1,5 @@
-﻿using Controller;
+﻿using ClassDijagramV1._0.ViewModel;
+using Controller;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -21,35 +22,13 @@ namespace ClassDijagramV1._0.Views.ManagerView
     /// </summary>
     public partial class AddRoomWindow : Window
     {
-        public RoomController roomController;
-
+        private AddRoomViewModel _addRoomViewModel;
         public AddRoomWindow()
         {
             InitializeComponent();
-            var app = Application.Current as App;
-            roomController = app.roomController;
+            _addRoomViewModel = new AddRoomViewModel(this);
+            this.DataContext = _addRoomViewModel;
         }
 
-        private Room RoomFromTextboxes()
-        {
-            return new Room(
-                AddId.Text,
-                AddName.Text,
-                Int32.Parse(AddFloor.Text),
-                Int32.Parse(AddNumber.Text),
-                AddStatus.Text
-            );
-        }
-
-        private void SaveAddedRoom_Click(object sender, RoutedEventArgs e)
-        {
-            roomController.AddRoom(RoomFromTextboxes());
-            this.Close();
-        }
-
-        private void QuitAddedRoom_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
     }
 }
