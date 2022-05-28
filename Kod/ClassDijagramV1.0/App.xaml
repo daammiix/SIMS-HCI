@@ -16,7 +16,7 @@
              xmlns:appointmentsView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.AppointmentsView"
              xmlns:viewModel="clr-namespace:ClassDijagramV1._0.ViewModel"
              xmlns:view="clr-namespace:ClassDijagramV1._0.Views"
-             StartupUri="Views/ManagerView/WindowUpravnik.xaml"
+             StartupUri="Views/MainWindow.xaml"
              xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
              Exit="Application_Exit">
 
