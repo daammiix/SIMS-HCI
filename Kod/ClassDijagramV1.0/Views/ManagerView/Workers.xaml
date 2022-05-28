@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="ClassDijagramV1._0.Views.ManagerView.Workers"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClassDijagramV1._0.Views.ManagerView"
+             xmlns:converters="clr-namespace:ClassDijagramV1._0.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="655" d:DesignWidth="1280"
+             Background="#D9D4CC"
+             FontFamily="Berlin Sans FB Demi">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Theme/TextboxTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converters:AdressToStringConverter x:Key="AdressToStringConverter"/>
+            <converters:FullNameConverter x:Key="FullNameConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="980"/>
+            <ColumnDefinition Width="150"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1" Height="655">
+            <TextBlock Text="Pregled radnog osoblja"
+                   Foreground="#1F1313"
+                   FontSize="32"
+                   HorizontalAlignment="Left"
+                   Margin="5,10,0,0"/>
+            <TextBox Width="250"
+                 Height="35"
+                 Margin="0,0,0,5"
+                 VerticalContentAlignment="Center"
+                 HorizontalAlignment="Right"
+                 Style="{StaticResource FancySearchBox}"
+                 Text="{Binding Path=SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+            <StackPanel>
+                <Grid Width="980" Height="500">
+
+                    <DataGrid x:Name="RoomList" CanUserAddRows="True" SelectionMode="Single"
+                          CanUserResizeColumns="False"  CanUserResizeRows="False" 
+                          RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
+                          FontSize="20" BorderThickness="4" CanUserReorderColumns="False"
+                          CanUserDeleteRows="False" AutoGenerateColumns="False"
+                          ItemsSource="{Binding Path=Workers}" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Ime i prezime" Width="auto" Binding="{Binding Converter={StaticResource FullNameConverter}}"/>
+                            <DataGridTextColumn Header="Datum rođenja" Width="auto" Binding="{Binding Path=DateOfBirth, StringFormat=dd/MM/yyyy}"/>
+                            <DataGridTextColumn Header="Adresa" Width="auto" Binding="{Binding Path=Address, Converter={StaticResource AdressToStringConverter}}"/>
+                            <DataGridTextColumn Header="Email" Width="auto" Binding="{Binding Path=Email}"/>
+                            <DataGridTextColumn Header="Broj telefona" Width="*" Binding="{Binding Path=PhoneNumber}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
