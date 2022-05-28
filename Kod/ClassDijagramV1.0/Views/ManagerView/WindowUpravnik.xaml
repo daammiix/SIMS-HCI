@@ -60,7 +60,8 @@
                          Height="65"
                          Width="200"
                          FontSize="26"
-                         Style="{StaticResource MenuButtonTheme}" />
+                         Style="{StaticResource MenuButtonTheme}"
+                         Command="{Binding WorkersViewCommand}"/>
 
             <RadioButton Content="Sale"
                          Height="65"

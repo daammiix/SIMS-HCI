@@ -52,6 +52,10 @@
                 <managerView:RoomsView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModel:WorkersViewModel}">
+                <managerView:Workers/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewModel:CalendarViewModel}">
                 <managerView:CalendarView/>
             </DataTemplate>
