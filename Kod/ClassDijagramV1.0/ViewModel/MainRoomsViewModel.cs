@@ -26,6 +26,8 @@ namespace ClassDijagramV1._0.ViewModel
         public EquipViewModel EquipVM { get; set; }
         public RenovatingMergeViewModel RenovatingVM { get; set; }
         public RenovatingSplitViewModel RenovatingSplitVM { get; set; }
+        public RenovatingRoomViewModel RenovatingRoomVM { get; set; }
+        public ChangingPurposeViewModel ChangingPurposeVM { get; set; }
 
         private object _currentRoomView;
 
@@ -43,8 +45,10 @@ namespace ClassDijagramV1._0.ViewModel
         {
             RoomsVM = new RoomsViewModel(this);
             EquipVM = new EquipViewModel(this);
-            RenovatingVM = new RenovatingMergeViewModel();
-            RenovatingSplitVM = new RenovatingSplitViewModel();
+            RenovatingRoomVM = new RenovatingRoomViewModel(this);
+            RenovatingVM = new RenovatingMergeViewModel(this);
+            RenovatingSplitVM = new RenovatingSplitViewModel(this);
+            ChangingPurposeVM = new ChangingPurposeViewModel(this);
 
             ResetView();
         }
@@ -67,7 +71,7 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _renovatingWallPainting = new RelayCommand(o =>
                 {
-                    reservationOfRoom.Close();
+                    RenovatingRoomAction();
                 });
 
                 return _renovatingWallPainting;
@@ -103,7 +107,7 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _changingPurpose = new RelayCommand(o =>
                 {
-                    //SaveNewEquipmentAction();
+                    ChangingPurposeAction();
                 });
 
                 return _changingPurpose;
@@ -129,6 +133,13 @@ namespace ClassDijagramV1._0.ViewModel
             EquipVM.destinationRoom = selectedRoom;
             this.CurrentRoomView = EquipVM;
         }
+        public void RenovatingRoomAction()
+        {
+            reservationOfRoom.Close();
+            RenovatingRoomVM.selectedRoom = selectedRoom;
+            RenovatingRoomVM.ListsHandler();
+            this.CurrentRoomView = RenovatingRoomVM;
+        }
 
         public void ReservationMergeAction()
         {
@@ -142,7 +153,16 @@ namespace ClassDijagramV1._0.ViewModel
         {
             reservationOfRoom.Close();
             RenovatingSplitVM.selectedRoom = selectedRoom;
+            RenovatingSplitVM.ListsHandler();
             this.CurrentRoomView = RenovatingSplitVM;
+        }
+
+        public void ChangingPurposeAction()
+        {
+            reservationOfRoom.Close();
+            ChangingPurposeVM.selectedRoom = selectedRoom;
+            ChangingPurposeVM.ListsHandler();
+            this.CurrentRoomView = ChangingPurposeVM;
         }
 
         public void SetReservationWindowState(ReservationOfRoom reservationOfRoom, Room selectedRoom)

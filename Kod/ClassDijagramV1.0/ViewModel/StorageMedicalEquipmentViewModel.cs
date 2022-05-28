@@ -20,6 +20,8 @@ namespace ClassDijagramV1._0.ViewModel
         RoomController roomController;
         Storage storage;
         BindingList<Equipment> allEquipment;
+        StorageViewModel storageViewModel;
+
         public BindingList<QuantifiedEquipment> EquipmentList { get; set; }
 
         public QuantifiedEquipment selectedEquipment { get; set; }
@@ -45,17 +47,23 @@ namespace ClassDijagramV1._0.ViewModel
         private RelayCommand _addEquipment;
         private RelayCommand _changeEquipment;
         private RelayCommand _deleteEquipment;
+        private RelayCommand _equipmentReservation;
 
-        public StorageMedicalEquipmentViewModel()
+        public StorageMedicalEquipmentViewModel(StorageViewModel storageViewModel)
         {
             var app = Application.Current as App;
             EquipmentList = new BindingList<QuantifiedEquipment>();
             equipmentController = app.equipmentController;
             roomController = app.roomController;
+            this.storageViewModel = storageViewModel;
             allEquipment = equipmentController.GetAllEquipments();
             storage = (Storage)roomController.GetRoom("storage");
             _searchText = "";
             RefreshEquipment();
+            foreach (var eq in storage.EquipmentList)
+            {
+                eq.PropertyChanged += new PropertyChangedEventHandler((object? o, PropertyChangedEventArgs e) => RefreshEquipment());
+            }
         }
 
         public RelayCommand AddEquipment
@@ -95,6 +103,21 @@ namespace ClassDijagramV1._0.ViewModel
                 });
 
                 return _deleteEquipment;
+            }
+        }
+
+        public RelayCommand EquipmentReservation
+        {
+            get
+            {
+                _equipmentReservation = new RelayCommand(o =>
+                {
+                    storageViewModel.StorageEquipVM.PreviousView = this;
+                    storageViewModel.StorageEquipVM.QEquipment = selectedEquipment;
+                    storageViewModel.CurrentStorageView = storageViewModel.StorageEquipVM;
+                });
+
+                return _equipmentReservation;
             }
         }
 

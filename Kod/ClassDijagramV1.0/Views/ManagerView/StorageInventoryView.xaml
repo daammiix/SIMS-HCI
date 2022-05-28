@@ -52,7 +52,8 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock>
-                                        <Hyperlink Foreground="#1F1313">Zakazivanje</Hyperlink>
+                                        <Button Content="Zakazivanje"  Command="{Binding Path=DataContext.EquipmentReservation,
+                                            RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"/>
                                     </TextBlock>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

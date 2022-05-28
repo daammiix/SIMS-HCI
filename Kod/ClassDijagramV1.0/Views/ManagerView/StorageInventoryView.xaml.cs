@@ -16,28 +16,9 @@ namespace ClassDijagramV1._0.Views.ManagerView
     /// </summary>
     public partial class StorageInventoryView : UserControl
     {
-        private StorageInventoryViewModel _storageInventory;
         public StorageInventoryView()
         {
             InitializeComponent();
-
-            _storageInventory = new StorageInventoryViewModel();
-            this.DataContext = _storageInventory;
         }
-
-        //private void Hyperlink_Click(object sender, RoutedEventArgs e)
-        //{
-        //    var quantifiedEquipment = (QuantifiedEquipment?)EquipmentListGrid.SelectedItem;
-        //    if (quantifiedEquipment != null)
-        //    {
-        //        StorageEquip storageEquip = new StorageEquip(quantifiedEquipment);
-        //        storageEquip.Show();
-        //    }
-        //    else
-        //    {
-        //        Warning warning = new Warning();
-        //        warning.Show();
-        //    }
-        //}
     }
 }

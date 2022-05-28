@@ -1,23 +1,16 @@
-﻿<Window x:Class="ClassDijagramV1._0.Views.ManagerView.StorageEquip"
+﻿<UserControl x:Class="ClassDijagramV1._0.Views.ManagerView.StorageEquip"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClassDijagramV1._0.Views.ManagerView"
         xmlns:converters="clr-namespace:ClassDijagramV1._0.Converters"
-        mc:Ignorable="d"
-        Title="StorageEquip"
-        Height="650"
-        Width="800"
-         WindowStartupLocation="CenterScreen"
-        WindowStyle="None"
-        ResizeMode="NoResize"
-        Background="#B0C69D"
-        FontFamily="Berlin Sans FB Demi"
-        BorderThickness="4"
-        BorderBrush="#455736">
+        mc:Ignorable="d" 
+             d:DesignHeight="655" d:DesignWidth="980"
+             Background="#D9D4CC"
+             FontFamily="Berlin Sans FB Demi">
 
-    <Window.Resources>
+    <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../Theme/DateTextBoxTheme.xaml"/>
@@ -26,11 +19,11 @@
             <converters:EquipmentToStringConverter x:Key="EquipmentToStringConverter"/>
             <converters:RoomToStringConverter x:Key="RoomToStringConverter"/>
         </ResourceDictionary>
-    </Window.Resources>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
-            <RowDefinition Height="585"/>
+            <RowDefinition Height="590"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
                    Text="Zakazivanje premeštanja"
@@ -41,20 +34,20 @@
         </TextBlock>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="350"/>
                 <ColumnDefinition Width="450"/>
+                <ColumnDefinition Width="530"/>
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Row="1"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
                 <Label Content="Odabrana oprema:" FontSize="24" Margin="20,0,0,0" Height="40" Width="250" HorizontalAlignment="Left"/>
                 <TextBox x:Name="EquipmentTextBox" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" HorizontalAlignment="Left" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="True" Text="{Binding Path=QEquipment.Equipment,Converter={StaticResource EquipmentToStringConverter}}"/>
                 <Label Content="Odaberite količinu" FontSize="24" Margin="20,0,0,0" Height="40" Width="250" HorizontalAlignment="Left"/>
-                <TextBox x:Name="Quantity" Width="100" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" TextChanged="Quantity_TextChanged" HorizontalAlignment="Left"/>
+                <TextBox x:Name="Quantity" Width="100" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" Text="{Binding selectedQuantity}"/>
 
                 <Label Content="Sala u koju se premešta:" FontSize="24" Margin="20,0,0,5" HorizontalAlignment="Left"/>
                 <ComboBox x:Name="MovingTo" Width="230" Height="40" Margin="20,0,0,5" FontSize="22"
                           VerticalContentAlignment="Center" IsReadOnly="True" HorizontalAlignment="Left"
-                          ItemsSource="{Binding Rooms}" SelectionChanged="MovingTo_SelectionChanged">
+                          ItemsSource="{Binding Rooms}" SelectedItem="{Binding selectedSourceRoom}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Converter={StaticResource RoomToStringConverter}}"/>
@@ -81,7 +74,7 @@
                         <Label Content="Vreme:" FontSize="24" Height="40" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromDate,Mode=TwoWay}" Style="{StaticResource DateTextBox}" TextChanged="FromDateField_TextChanged"/>
+                        <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedFromDate,Mode=TwoWay}" Style="{StaticResource DateTextBox}"/>
                         <TextBox x:Name="FromTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromTime,Mode=TwoWay}"  Style="{StaticResource TimeTextBox}"/>
                     </StackPanel>
                 </StackPanel>
@@ -93,7 +86,7 @@
                         <Label Content="Vreme:" FontSize="24" Height="40" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToDate,Mode=TwoWay}"  Style="{StaticResource DateTextBox}" TextChanged="FromDateField_TextChanged"/>
+                        <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedToDate,Mode=TwoWay}"  Style="{StaticResource DateTextBox}"/>
                         <TextBox x:Name="ToTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToTime,Mode=TwoWay}"  Style="{StaticResource TimeTextBox}"/>
                     </StackPanel>
                 </StackPanel>
@@ -102,8 +95,8 @@
         </Grid>
 
         <WrapPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-            <Button x:Name="SaveStorageEquip" HorizontalAlignment="Right" Height="32" Width="90" Content="Sačuvaj" Margin="5,10,10,25" Style="{StaticResource CRUDButton}" Click="SaveStorageEquip_Click"/>
-            <Button x:Name="QuitStorageEquip" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,25,25" Style="{StaticResource CRUDButton}" Click="QuitStorageEquip_Click"/>
+            <Button x:Name="SaveStorageEquip" HorizontalAlignment="Right" Height="32" Width="90" Content="Sačuvaj" Margin="5,10,10,25" Style="{StaticResource CRUDButton}" Command="{Binding SaveStorageEquip}"/>
+            <Button x:Name="QuitStorageEquip" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,25,25" Style="{StaticResource CRUDButton}" Command="{Binding CancelStorageEquip}"/>
         </WrapPanel>
     </Grid>
-</Window>
+</UserControl>

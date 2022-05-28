@@ -68,8 +68,20 @@
                 <managerView:RenovatingSplit/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModel:RenovatingRoomViewModel}">
+                <managerView:RenovaitingWindow/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:ChangingPurposeViewModel}">
+                <managerView:ChangingPurposeWindow/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewModel:StorageViewModel}">
                 <managerView:StorageView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:StorageEquipViewModel}">
+                <managerView:StorageEquip/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:StorageMedicalEquipmentViewModel}">

@@ -18,6 +18,7 @@ using ClassDijagramV1._0.Controller;
 using System.ComponentModel;
 using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Helpers;
+using ClassDijagramV1._0.ViewModel;
 
 namespace ClassDijagramV1._0.Views.ManagerView
 {
@@ -26,33 +27,13 @@ namespace ClassDijagramV1._0.Views.ManagerView
     /// </summary>
     public partial class ListOfEquipment : Window
     {
-
-        EquipmentController equipmentController;
-        public BindingList<QuantifiedEquipment> EquipmentList { get; set; }
+        private ListOfEquipmentViewModel _listOfEquipmentViewModel;
 
         public ListOfEquipment(Room room)
         {
             InitializeComponent();
-            var app = Application.Current as App;
-            EquipmentList = new BindingList<QuantifiedEquipment>();
-
-            equipmentController = app.equipmentController;
-            BindingList<Equipment> allEquipment = equipmentController.GetAllEquipments();
-            foreach (var binding in room.EquipmentList)
-            {
-                foreach (var e in allEquipment)
-                {
-                    if (e.EquipmentID == binding.EquipmentID)
-                    {
-                        EquipmentList.Add(new QuantifiedEquipment(e, binding.Quantity));
-                    }
-                }
-            }
-            this.DataContext = this;
-        }
-        public void CloseListOfEquipment_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
+            _listOfEquipmentViewModel = new ListOfEquipmentViewModel(this, room);
+            this.DataContext = _listOfEquipmentViewModel;
         }
 
     } 

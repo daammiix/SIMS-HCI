@@ -45,17 +45,24 @@ namespace ClassDijagramV1._0.Service
             for (int i = 0; i < equipmentAppointments.Count; i++)
             {
                 var equipmentAppointment = equipmentAppointments[i];
+                if (DateTime.Now >= equipmentAppointment.ToDateTime)
+                {
+                    Room roomTo = roomController.GetRoom(equipmentAppointment.RoomTo);
+                    roomTo.addEquipment(equipmentAppointment.SelectedEquipment, equipmentAppointment.Quantity);
+                    equipmentAppointmentRepository.DeleteEquipmentAppointment(i--);
+                }
                 if (equipmentAppointment.Started)
                 {
                     continue;
                 }
-
-                if (DateTime.Now > equipmentAppointment.ToDateTime)
+                if (DateTime.Now >= equipmentAppointment.FromDateTime)
                 {
-                    Room room = roomController.GetRoom(equipmentAppointment.RoomTo);
-                    room.addEquipment(equipmentAppointment.SelectedEquipment, equipmentAppointment.Quantity);
-                    equipmentAppointmentRepository.DeleteEquipmentAppointment(i--);
+                    equipmentAppointment.Started = true;
+
+                    Room roomFrom = roomController.GetRoom(equipmentAppointment.RoomFrom);
+                    roomFrom.removeEquipment(equipmentAppointment.SelectedEquipment, equipmentAppointment.Quantity);
                 }
+
             }
         }
 

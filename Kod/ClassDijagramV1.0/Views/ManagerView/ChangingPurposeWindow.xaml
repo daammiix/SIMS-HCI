@@ -1,29 +1,23 @@
-﻿<Window x:Class="ClassDijagramV1._0.Views.ManagerView.ChangingPurposeWindow"
+﻿<UserControl x:Class="ClassDijagramV1._0.Views.ManagerView.ChangingPurposeWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClassDijagramV1._0.Views.ManagerView"
-        mc:Ignorable="d"
-        Title="ChangingPurposeWindow"
-        Height="650"
-        Width="800"
-         WindowStartupLocation="CenterScreen"
-        WindowStyle="None"
-        ResizeMode="NoResize"
-        Background="#B0C69D"
+        mc:Ignorable="d" 
+        d:DesignHeight="655" d:DesignWidth="980"
+        Background="#D9D4CC"
         FontFamily="Berlin Sans FB Demi"
-        BorderThickness="4"
-        BorderBrush="#455736">
+        Foreground="#1F1313">
 
-    <Window.Resources>
+    <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../Theme/DateTextBoxTheme.xaml"/>
                 <ResourceDictionary Source="../../Theme/TimeTextBoxTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </Window.Resources>
+    </UserControl.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -58,7 +52,7 @@
                 </DataGrid>
                 <Label Content="Namena u koju se menja:" FontSize="24" Height="50" Margin="20,5,0,5" HorizontalContentAlignment="Left" HorizontalAlignment="Left"/>
                 <ComboBox x:Name="ChangeName" Width="320" Height="55" Margin="20,5,0,5" FontSize="24" HorizontalContentAlignment="Left" 
-                          VerticalContentAlignment="Center" IsReadOnly="True">
+                          VerticalContentAlignment="Center" IsReadOnly="True" SelectedItem="{Binding selectedNewNameRoom}">
                     <ComboBoxItem Margin="5,0,0,0" Content="Operaciona Sala"/>
                     <ComboBoxItem Margin="5,0,0,0" Content="Sala za preglede"/>
                     <ComboBoxItem Margin="5,0,0,0" Content="Bolnička soba"/>
@@ -75,8 +69,8 @@
                         <Label Content="Vreme:" FontSize="24" Height="40" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <TextBox x:Name="FromDate" Margin="0,5,0,5" Width="200" Style="{StaticResource DateTextBox}"/>
-                        <TextBox x:Name="FromTime" Margin="0,5,0,5" Width="200" Style="{StaticResource TimeTextBox}"/>
+                        <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="40" Margin="0,5,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedFromDate,Mode=TwoWay}" Style="{StaticResource DateTextBox}"/>
+                        <TextBox x:Name="FromTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="0,5,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromTime,Mode=TwoWay}"  Style="{StaticResource TimeTextBox}"/>
                     </StackPanel>
                 </StackPanel>
 
@@ -87,8 +81,8 @@
                         <Label Content="Vreme:" FontSize="24" Height="40" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <TextBox x:Name="ToDate" Margin="0,5,0,5" Width="200" Style="{StaticResource DateTextBox}"/>
-                        <TextBox x:Name="ToTime" Margin="0,5,0,5" Width="200" Style="{StaticResource TimeTextBox}"/>
+                        <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="40" Margin="0,5,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedToDate,Mode=TwoWay}"  Style="{StaticResource DateTextBox}"/>
+                        <TextBox x:Name="ToTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="0,5,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToTime,Mode=TwoWay}"  Style="{StaticResource TimeTextBox}"/>
                     </StackPanel>
                 </StackPanel>
 
@@ -96,8 +90,8 @@
         </Grid>
 
         <WrapPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-            <Button x:Name="SaveChangingPurpose" HorizontalAlignment="Right" Height="32" Width="90" Content="Sačuvaj" Margin="5,10,10,25" Style="{StaticResource CRUDButton}" Click="SaveChangingPurpose_Click"/>
-            <Button x:Name="QuitChangingPurpose" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,35,25" Style="{StaticResource CRUDButton}" Click="QuitChangingPurpose_Click"/>
+            <Button x:Name="SaveChangingPurpose" HorizontalAlignment="Right" Height="32" Width="90" Content="Sačuvaj" Margin="5,10,10,25" Style="{StaticResource CRUDButton}" Command="{Binding SaveRenovatingRoom}"/>
+            <Button x:Name="QuitChangingPurpose" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,35,25" Style="{StaticResource CRUDButton}" Command="{Binding CancelRenovatingRoom}"/>
         </WrapPanel>
     </Grid>
-</Window>
+</UserControl>
