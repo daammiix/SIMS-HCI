@@ -34,6 +34,7 @@ namespace ClassDijagramV1._0.ViewModel
         public EquipmentAppointmentController equipmentAppointmentController;
         public RoomAppointmentController roomAppointmentController;
         public AppointmentController appointmentController;
+
         private MainRoomsViewModel mainRoomsViewModel;
 
         public BindingList<Room> Rooms { get; set; }

@@ -46,7 +46,7 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Šifra" Width="100" Binding="{Binding Path=Medicines.ID}"/>
                             <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=Medicines.Name}"/>
-                            <DataGridTextColumn Header="Količina" Width="200" Binding="{Binding Path=Quantity}"/>
+                            <DataGridTextColumn Header="Količina" Width="200" Binding="{Binding Path=Quantity, UpdateSourceTrigger=PropertyChanged}"/>
                             <DataGridTextColumn Header="Status" Width="150" Binding="{Binding Path=Medicines.Status}"/>
                             <DataGridTemplateColumn Header="Sastav" Width="*">
                                 <DataGridTemplateColumn.CellTemplate>

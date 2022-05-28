@@ -42,7 +42,7 @@
             <TextBox x:Name="Components" Grid.Column="1" Width="400" AcceptsReturn="True" Background="#E7E7E7" Height="140" Margin="0,5,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" />
         </Grid>
         <WrapPanel Grid.Row="3" HorizontalAlignment="Right">
-            <Button x:Name="CloseMedicineComponents" Height="32" Width="95" Content="Zatvori" Margin="0,15,25,0" Style="{StaticResource CRUDButton}" Click="CloseMedicineComponents_Click"/>
+            <Button x:Name="CloseMedicineComponents" Height="32" Width="95" Content="Zatvori" Margin="0,15,25,0" Style="{StaticResource CRUDButton}" Command="{Binding CloseListOfEquipment}"/>
         </WrapPanel>
     </Grid>
 </Window>

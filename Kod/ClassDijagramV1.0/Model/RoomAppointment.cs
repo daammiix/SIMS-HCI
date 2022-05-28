@@ -22,24 +22,9 @@ namespace ClassDijagramV1._0.Model
             this.roomId = roomId;
             this.startDate = startDate;
             this.duration = duration;
-        }
-
-        public RoomAppointment(String appointmentID, String roomId, DateTime startDate, TimeSpan duration, String RoomIDToMerge)
-        {
-            this.appointmentID = appointmentID;
-            this.roomId = roomId;
-            this.startDate = startDate;
-            this.duration = duration;
-            this.RoomIDToMerge = RoomIDToMerge;
-        }
-
-        public RoomAppointment(String appointmentID, String roomId, DateTime startDate, TimeSpan duration, Room RoomToSplit)
-        {
-            this.appointmentID = appointmentID;
-            this.roomId = roomId;
-            this.startDate = startDate;
-            this.duration = duration;
-            this.RoomToSplit = RoomToSplit;
+            this.newRoomName = null;
+            this.RoomIDToMerge = null;
+            this.RoomToSplit = null;
         }
     }
 }

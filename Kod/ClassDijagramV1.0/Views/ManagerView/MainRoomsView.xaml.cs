@@ -21,12 +21,9 @@ namespace ClassDijagramV1._0.Views.ManagerView
     /// </summary>
     public partial class MainRoomsView : UserControl
     {
-        // private MainRoomsViewModel mainRooms;
         public MainRoomsView()
         {
             InitializeComponent();
-            // mainRooms = new MainRoomsViewModel();
-            // this.DataContext = mainRooms;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ClassDijagramV1._0.Controller;
+using ClassDijagramV1._0.Helpers;
 using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Util;
 using ClassDijagramV1._0.Views.ManagerView;
@@ -14,49 +15,48 @@ using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel
 {
-    public class RenovatingSplitViewModel
+    public class StorageEquipViewModel
     {
         readonly private String format = "dd/MM/yyyyTHH:mm";
+        readonly private String timeFormat = "HH:mm";
         readonly private String fullFormat = "dd/MM/yyyy HH:mm";
 
+        public EquipmentController equipmentController;
+        public EquipmentAppointmentController equipmentAppointmentController;
+        public RoomAppointmentController roomAppointmentController;
+        public AppointmentController appointmentController;
+        public RoomController roomController;
+
+        public BindingList<Room> Rooms { get; set; }
+        private Room _sourceRoom;
+        public Storage storage;
+        public QuantifiedEquipment QEquipment { get; set; }
+        private String _quantity;
+
+        public BindingList<String> RoomsAvailable { get; set; }
         public String FromDate;
         public String FromTime { get; set; }
         public String ToDate;
         public String ToTime { get; set; }
-
-        public RoomController roomController;
-        public EquipmentAppointmentController equipmentAppointmentController;
-        public RoomAppointmentController roomAppointmentController;
-        public AppointmentController appointmentController;
-
-        private MainRoomsViewModel mainRoomsViewModel;
-
-        public BindingList<String> RoomsAvailable { get; set; }
         private BindingList<Availability> availabilities { get; set; }
 
-        public Room? selectedRoom { get; set; }
-        public Room newRoom;
+        private RelayCommand _saveStorageEquip;
+        private RelayCommand _cancelStorageEquip;
+        public object PreviousView { get; set; }
+        private StorageViewModel storageViewModel;
 
-        private String _newRoomID;
-        private String _newRoomName;
-        private String _newRoomNumber;
-
-        private readonly Random _random = new Random();
-
-        private RelayCommand _saveRenovatingSplit;
-        private RelayCommand _cancelRenovatingSplit;
-
-        public RenovatingSplitViewModel(MainRoomsViewModel mainRoomsViewModel)
+        public StorageEquipViewModel(StorageViewModel storageViewModel)
         {
             var app = Application.Current as App;
-            roomController = app.roomController;
             equipmentAppointmentController = app.equipmentAppointmentController;
+            equipmentController = app.equipmentController;
             roomAppointmentController = app.roomAppointmentController;
             appointmentController = app.AppointmentController;
+            roomController = app.roomController;
+            this.storageViewModel = storageViewModel;
 
-            this.mainRoomsViewModel = mainRoomsViewModel;
-
-            this.selectedRoom = null;
+            Rooms = roomController.GetAllRooms();
+            storage = (Storage)roomController.GetRoom("storage");
 
             FromDate = DateTime.Now.ToString("dd/MM/yyyy");
             FromTime = DateTime.Now.ToString("HH:mm");
@@ -65,32 +65,31 @@ namespace ClassDijagramV1._0.ViewModel
 
             RoomsAvailable = new BindingList<String>();
             availabilities = new BindingList<Availability>();
-
         }
 
-        public RelayCommand SaveRenovatingSplit
+        public RelayCommand SaveStorageEquip
         {
             get
             {
-                _saveRenovatingSplit = new RelayCommand(o =>
+                _saveStorageEquip = new RelayCommand(o =>
                 {
-                    SaveRenovatingSplitAction();
+                    SaveStorageEquipAction();
                 });
 
-                return _saveRenovatingSplit;
+                return _saveStorageEquip;
             }
         }
 
-        public RelayCommand CancelRenovatingSplit
+        public RelayCommand CancelStorageEquip
         {
             get
             {
-                _cancelRenovatingSplit = new RelayCommand(o =>
+                _cancelStorageEquip = new RelayCommand(o =>
                 {
-                    this.mainRoomsViewModel.ResetView();
+                    storageViewModel.CurrentStorageView = PreviousView;
                 });
 
-                return _cancelRenovatingSplit;
+                return _cancelStorageEquip;
             }
         }
 
@@ -124,53 +123,37 @@ namespace ClassDijagramV1._0.ViewModel
             }
         }
 
-        public String selectedNewRoomID
+        public String selectedQuantity
         {
             get
             {
-                return _newRoomID;
+                return _quantity;
             }
             set
             {
-                if (_newRoomID == value)
+                if (_quantity == value)
                     return;
-                _newRoomID = value;
+                _quantity = value;
+                UpdateAvailabilityOfEquipment();
+            }
+        }
+
+        public Room selectedSourceRoom
+        {
+            get
+            {
+                return _sourceRoom;
+            }
+            set
+            {
+                if (_sourceRoom == value)
+                    return;
+                _sourceRoom = value;
                 ListsHandler();
             }
         }
 
-        public String selectedNewRoomName
-        {
-            get
-            {
-                return _newRoomName;
-            }
-            set
-            {
-                value = value.Substring(38);
-                if (_newRoomName == value)
-                    return;
-                _newRoomName = value;
-                ListsHandler();
-            }
-        }
-
-        public String selectedNewRoomNumber
-        {
-            get
-            {
-                return _newRoomNumber;
-            }
-            set
-            {
-                if (_newRoomNumber == value)
-                    return;
-                _newRoomNumber = value;
-                ListsHandler();
-            }
-        }
-
-        private void SaveRenovatingSplitAction()
+        private void SaveStorageEquipAction()
         {
             DateTime fromDatetime = DateTime.ParseExact(FromDate + "T" + FromTime, format, null);
             DateTime toDatetime = DateTime.ParseExact(ToDate + "T" + ToTime, format, null);
@@ -182,28 +165,12 @@ namespace ClassDijagramV1._0.ViewModel
                 return;
             }
 
-            var appointmentId = RandomId();
-
-            newRoom = RoomFromTextboxes();
-
-            var roomAppointment = new RoomAppointment(appointmentId, selectedRoom.RoomID, fromDatetime, toDatetime - fromDatetime);
-            roomAppointment.RoomToSplit = newRoom;
-            roomAppointmentController.AddRoomAppointment(roomAppointment);
-
-            this.mainRoomsViewModel.ResetView();
+            var equipmentAppointment = new EquipmentAppointment(storage.RoomID, selectedSourceRoom.RoomID, QEquipment.Equipment, Int32.Parse(_quantity), fromDatetime, toDatetime);
+            equipmentAppointmentController.AddEquipmentAppointment(equipmentAppointment);
+            selectedQuantity = "";
+            selectedSourceRoom = null;
+            storageViewModel.CurrentStorageView = PreviousView;
         }
-
-        private Room RoomFromTextboxes()
-        {
-            return new Room(
-                selectedNewRoomID,
-                selectedNewRoomName,
-                selectedRoom.Floor,
-                Int32.Parse(selectedNewRoomNumber),
-                "Aktivna"
-            );
-        }
-
         private bool checkTimeSpansOverlap(DateTime fromDatetimeA, DateTime toDatetimeA, DateTime fromDatetimeB, DateTime toDatetimeB)
         {
             return fromDatetimeA <= toDatetimeB && fromDatetimeB <= toDatetimeA;
@@ -220,12 +187,28 @@ namespace ClassDijagramV1._0.ViewModel
             }
             return true;
         }
-
         private String formatAvailableTime(DateTime start, DateTime end)
         {
             availabilities.Add(new Availability(start, end));
 
             return start.ToString(fullFormat) + " - " + end.ToString(fullFormat);
+        }
+
+        public void UpdateAvailabilityOfEquipment()
+        {
+            if(selectedQuantity != "")
+            {
+                var newselecteQuantity = Int32.Parse(selectedQuantity);
+                var quantity = Int32.Parse(_quantity);
+                if (!(newselecteQuantity >= quantity))
+                {
+                    WarningQuantity warningQuantity = new WarningQuantity();
+                    warningQuantity.Show();
+                    _quantity = "";
+                    return;
+                }
+            }
+            
         }
 
         public void ListsHandler()
@@ -236,6 +219,10 @@ namespace ClassDijagramV1._0.ViewModel
             var appointments = appointmentController.GetListOfAppointments();
             var equipmentAppointments = equipmentAppointmentController.GetAllEquipmentAppointment();
 
+            if (selectedSourceRoom == null)
+            {
+                return;
+            }
             DateTime selectedFrom, selectedTo;
             try
             {
@@ -253,7 +240,7 @@ namespace ClassDijagramV1._0.ViewModel
                 var aptTo = equipmentAppointment.ToDateTime.Date;
                 if (checkTimeSpansOverlap(aptFrom, aptTo, selectedFrom, selectedTo))
                 {
-                    if (selectedRoom != null && (equipmentAppointment.RoomFrom == selectedRoom.RoomID || equipmentAppointment.RoomTo == selectedRoom.RoomID))
+                    if (selectedSourceRoom != null && (equipmentAppointment.RoomFrom == selectedSourceRoom.RoomID || equipmentAppointment.RoomTo == selectedSourceRoom.RoomID))
                     {
                         RoomsAvailable.Add(formatAvailableTime(equipmentAppointment.FromDateTime, equipmentAppointment.ToDateTime));
                     }
@@ -265,7 +252,7 @@ namespace ClassDijagramV1._0.ViewModel
                 var aptTo = (roomAppointment.startDate + roomAppointment.duration).Date;
                 if (checkTimeSpansOverlap(aptFrom, aptTo, selectedFrom, selectedTo))
                 {
-                    if (roomAppointment.roomId == selectedRoom.RoomID)
+                    if (roomAppointment.roomId == selectedSourceRoom.RoomID)
                     {
                         RoomsAvailable.Add(formatAvailableTime(roomAppointment.startDate, roomAppointment.startDate + roomAppointment.duration));
                     }
@@ -277,47 +264,12 @@ namespace ClassDijagramV1._0.ViewModel
                 var aptTo = (appointment.AppointmentDate + appointment.Duration).Date;
                 if (checkTimeSpansOverlap(aptFrom, aptTo, selectedFrom, selectedTo))
                 {
-                    if (appointment.RoomId == selectedRoom.RoomID)
+                    if (appointment.RoomId == selectedSourceRoom.RoomID)
                     {
                         RoomsAvailable.Add(formatAvailableTime(appointment.AppointmentDate, appointment.AppointmentDate + appointment.Duration));
                     }
                 }
             }
-        }
-
-        public int RandomNumber(int min, int max)
-        {
-            return _random.Next(min, max);
-        }
-
-        public string RandomString(int size, bool lowerCase = false)
-        {
-            var builder = new StringBuilder(size);
-
-
-            char offset = lowerCase ? 'a' : 'A';
-            const int lettersOffset = 26; // A...Z or a..z: length = 26  
-
-            for (var i = 0; i < size; i++)
-            {
-                var @char = (char)_random.Next(offset, offset + lettersOffset);
-                builder.Append(@char);
-            }
-
-            return lowerCase ? builder.ToString().ToLower() : builder.ToString();
-        }
-
-        public string RandomId()
-        {
-            var passwordBuilder = new StringBuilder();
-
-            // 4-Letters lower case   
-            passwordBuilder.Append(RandomString(4, true));
-
-            // 4-Digits between 10 and 99
-            passwordBuilder.Append(RandomNumber(10, 99));
-
-            return passwordBuilder.ToString();
         }
     }
 }

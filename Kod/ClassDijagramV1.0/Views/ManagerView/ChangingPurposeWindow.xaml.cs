@@ -17,21 +17,11 @@ namespace ClassDijagramV1._0.Views.ManagerView
     /// <summary>
     /// Interaction logic for ChangingPurposeWindow.xaml
     /// </summary>
-    public partial class ChangingPurposeWindow : Window
+    public partial class ChangingPurposeWindow : UserControl
     {
         public ChangingPurposeWindow()
         {
             InitializeComponent();
-        }
-
-        private void SaveChangingPurpose_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void QuitChangingPurpose_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }

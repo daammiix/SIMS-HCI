@@ -33,7 +33,7 @@
                          Foreground="#1F1313"
                          FontSize="22"
                          Style="{StaticResource StorageMenuButton}"
-                         Command="{Binding StorageMedicalEquipmentViewCommand}"
+                         Command="{Binding StorageMedicalEquipment}"
                          IsChecked="True"/>
 
             <RadioButton Content="Potrošni materijal"
@@ -42,7 +42,7 @@
                          Foreground="#1F1313"
                          FontSize="22"
                          Style="{StaticResource StorageMenuButton}"
-                         Command="{Binding StorageSuppliesViewCommand}"/>
+                         Command="{Binding StorageSupplies}"/>
 
             <RadioButton Content="Inventar"
                          Height="65"
@@ -50,7 +50,7 @@
                          Foreground="#1F1313"
                          FontSize="22"
                          Style="{StaticResource StorageMenuButton}"
-                         Command="{Binding StorageInventoryViewCommand}"/>
+                         Command="{Binding StorageInventory}"/>
 
             <RadioButton Content="Lekovi"
                          Height="65"
@@ -58,7 +58,7 @@
                          Foreground="#1F1313"
                          FontSize="22"
                          Style="{StaticResource StorageMenuButton}"
-                         Command="{Binding StorageDrugsViewCommand}"/>
+                         Command="{Binding StorageDrugs}"/>
         </StackPanel>
 
         <DockPanel Grid.Column="1">

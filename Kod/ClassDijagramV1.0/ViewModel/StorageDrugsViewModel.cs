@@ -58,7 +58,6 @@ namespace ClassDijagramV1._0.ViewModel
             storage = (Storage)roomController.GetRoom("storage");
             _searchText = "";
             RefreshMedicines();
-
         }
 
         public RelayCommand AddMedicine

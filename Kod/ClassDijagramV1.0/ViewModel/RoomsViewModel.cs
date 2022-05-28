@@ -3,44 +3,21 @@ using ClassDijagramV1._0.Views.ManagerView;
 using Controller;
 using Model;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel
 {
-    public class RoomsViewModel
+    public class RoomsViewModel : ObservableObject
     {
         private RoomController roomController;
-        public BindingList<Room> Rooms
-        {
-            get;
-            set;
-        }
+        private BindingList<Room> _rooms = new BindingList<Room>();
+        private BindingList<Room> _allRooms;
 
         public Room selectedRoom { get; set; }
         private MainRoomsViewModel mainRoomsViewModel;
 
-        String _searchText;
-        public String SearchText
-        {
-            get
-            {
-                return _searchText;
-            }
-            set
-            {
-                if (_searchText == value)
-                {
-                    return;
-                }
-                _searchText = value;
-                RefreshRooms();
-            }
-        }
+        String _searchText = "";
 
         private RelayCommand _generateReport;
         private RelayCommand _addRoom;
@@ -54,8 +31,8 @@ namespace ClassDijagramV1._0.ViewModel
             var app = Application.Current as App;
             roomController = app.roomController;
             this.mainRoomsViewModel = mainRoomsViewModel;
-            _searchText = "";
-            Rooms =  new BindingList<Room>();
+            _allRooms = roomController.GetAllRooms();
+            _allRooms.ListChanged += _allRoomsChanged;
             RefreshRooms();
         }
 
@@ -138,6 +115,39 @@ namespace ClassDijagramV1._0.ViewModel
             }
         }
 
+        public String SearchText
+        {
+            get
+            {
+                return _searchText;
+            }
+            set
+            {
+                if (_searchText == value)
+                {
+                    return;
+                }
+                _searchText = value;
+                RefreshRooms();
+            }
+        }
+
+        public BindingList<Room> Rooms
+        {
+            get
+            {
+                return _rooms;
+            }
+            set
+            {
+                if (_rooms == value)
+                {
+                    return;
+                }
+                _rooms = value;
+            }
+        }
+
         private void ShowAddRoomDialog()
         {
             AddRoomWindow addRoom = new AddRoomWindow();
@@ -188,21 +198,25 @@ namespace ClassDijagramV1._0.ViewModel
         public void RefreshRooms()
         {
             Rooms.Clear();
-            BindingList<Room> allRooms = roomController.GetAllRooms();
-            foreach (Room room in allRooms)
+            foreach (Room room in _allRooms)
             {
                 String search = _searchText.ToLower();
                 if (
                     !room.RoomID.ToLower().Contains(search) &&
                     !room.RoomName.ToLower().Contains(search) &&
                     !room.Floor.ToString().Contains(search) &&
-                    !room.RoomNumber.ToString().Contains(search) && 
+                    !room.RoomNumber.ToString().Contains(search) &&
                     !room.RoomStatus.ToLower().Contains(search))
                 {
                     continue;
                 }
                 Rooms.Add(room);
             }
+        }
+
+        public void _allRoomsChanged(object? sender, ListChangedEventArgs e)
+        {
+            RefreshRooms();
         }
     }
 }

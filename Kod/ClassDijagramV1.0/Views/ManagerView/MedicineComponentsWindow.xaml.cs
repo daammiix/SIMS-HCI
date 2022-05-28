@@ -1,4 +1,5 @@
 ﻿using ClassDijagramV1._0.Helpers;
+using ClassDijagramV1._0.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,23 +22,13 @@ namespace ClassDijagramV1._0.Views.ManagerView
     /// </summary>
     public partial class MedicineComponentsWindow : Window
     {
-        public BindingList<String> MedicineComponents { get; set; }
+        private MedicineComponentsViewModel _medicineComponentsViewModel;
         public MedicineComponentsWindow(QuantifiedMedicine? quantifiedMedicine)
         {
             InitializeComponent();
-            this.MedicineComponents = quantifiedMedicine.Medicines.MedicineComponents;
-            Components.Clear();
 
-            foreach (var component in MedicineComponents)
-            {
-                Components.AppendText(component + Environment.NewLine);
-            }
-
-        }
-
-        private void CloseMedicineComponents_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
+            _medicineComponentsViewModel = new MedicineComponentsViewModel(this, quantifiedMedicine);
+            this.DataContext = _medicineComponentsViewModel;
         }
     }
 }

@@ -30,6 +30,5 @@ namespace ClassDijagramV1._0.Views.ManagerView
         {
             InitializeComponent();
         }
-
     }
 }
