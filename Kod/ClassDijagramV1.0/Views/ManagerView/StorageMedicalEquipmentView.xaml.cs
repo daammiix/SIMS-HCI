@@ -29,46 +29,9 @@ namespace ClassDijagramV1._0.Views.ManagerView
     /// </summary>
     public partial class StorageMedicalEquipmentView : UserControl
     {
-
-        private StorageMedicalEquipmentViewModel _storageMedicalEquipment;
-
         public StorageMedicalEquipmentView()
         {
             InitializeComponent();
-            
-            _storageMedicalEquipment = new StorageMedicalEquipmentViewModel();
-            this.DataContext = _storageMedicalEquipment;
         }
-
-        //private void Hyperlink_Click(object sender, RoutedEventArgs e)
-        //{
-        //    var quantifiedEquipment = (QuantifiedEquipment?)EquipmentListGrid.SelectedItem;
-        //    if (quantifiedEquipment != null)
-        //    {
-        //        StorageEquip storageEquip = new StorageEquip(quantifiedEquipment);
-        //        storageEquip.Show();
-        //    }
-        //    else
-        //    {
-        //        Warning warning = new Warning();
-        //        warning.Show();
-        //    }
-
-        //}
-
-        //private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    var txb = sender as TextBox;
-        //    if (txb.Text != "")
-        //    {
-        //        var filteredList = EquipmentList.Where(r => (r.Equipment.EquipmentID.ToLower().Contains(txb.Text.ToLower()) || r.Equipment.Name.ToLower().Contains(txb.Text.ToLower()) || r.Quantity.ToString().Contains(txb.Text)));
-        //        EquipmentListGrid.ItemsSource = null;
-        //        EquipmentListGrid.ItemsSource = filteredList;
-        //    }
-        //    else
-        //    {
-        //        EquipmentListGrid.ItemsSource = EquipmentList;
-        //    }
-        //}
     }
 }

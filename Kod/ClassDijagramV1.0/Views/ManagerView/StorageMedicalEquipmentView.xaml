@@ -48,12 +48,13 @@
                     <DataGrid.Columns>
                             <DataGridTextColumn Header="Šifra" Width="100" Binding="{Binding Path=Equipment.EquipmentID}"/>
                             <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=Equipment.Name}"/>
-                            <DataGridTextColumn Header="Količina" Width="100" Binding="{Binding Path=Quantity}"/>
+                            <DataGridTextColumn Header="Količina" Width="100" Binding="{Binding Path=Quantity, UpdateSourceTrigger=PropertyChanged}"/>
                                 <DataGridTemplateColumn Header="Premeštanje" Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBlock>
-                                        <Hyperlink Foreground="#1F1313">Zakazivanje</Hyperlink>
+                                            <Button Content="Zakazivanje"  Command="{Binding Path=DataContext.EquipmentReservation,
+                                                RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"/>
                                             </TextBlock>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>

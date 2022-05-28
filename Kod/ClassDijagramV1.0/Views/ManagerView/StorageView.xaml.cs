@@ -25,13 +25,9 @@ namespace ClassDijagramV1._0.Views.ManagerView
     /// </summary>
     public partial class StorageView : UserControl
     {
-        private StorageViewModel _storageViewModel;
         public StorageView()
         {
             InitializeComponent();
-
-            _storageViewModel = new StorageViewModel();
-            this.DataContext = _storageViewModel;
         }
     }
 }
