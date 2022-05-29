@@ -18,30 +18,30 @@ using System.Windows.Shapes;
 namespace ClassDijagramV1._0.Views.PatientView
 {
     /// <summary>
-    /// Interaction logic for AppointmentReportPage.xaml
+    /// Interaction logic for AddNotePage.xaml
     /// </summary>
-    public partial class AppointmentReportPage : Page
+    public partial class AddNotePage : Page
     {
         private PatientMainWindow parent { get; set; }
         private Appointment _appointment { get; set; }
         public DoctorController _doctorController;
-        public AppointmentReportPage(PatientMainWindow patientMain, Appointment appointment)
+        public AddNotePage(PatientMainWindow patientMain, Appointment appointment)
         {
             InitializeComponent();
             parent = patientMain;
             _appointment = appointment;
+            biljeska.Text = _appointment.MedicalReport.Note;
             App app = Application.Current as App;
             _doctorController = app.DoctorController;
             Doctor doctor = _doctorController.GetDoctorById(_appointment.DoctorId);
             datum.Content = _appointment.AppointmentDate;
             doktor.Content = doctor.Name + " " + doctor.Surname;
-            doctorReport.Text = _appointment.MedicalReport.Description;
-            note.Text = _appointment.MedicalReport.Note;
         }
 
         private void addNoteClick(object sender, RoutedEventArgs e)
         {
-            parent.startWindow.Content = new AddNotePage(parent, _appointment);
+            _appointment.MedicalReport.Note = biljeska.Text;
+            parent.startWindow.Content = new AppointmentReportPage(parent, _appointment);
         }
     }
 }

@@ -68,7 +68,7 @@ namespace ClassDijagramV1._0.Model
             }
         }
 
-        public MedicalReport(string description, List<String> medicine, string note)
+        public MedicalReport(string description, List<String> medicine, string note = null)
         {
             Id = ++idCounter;
             Description = description;
