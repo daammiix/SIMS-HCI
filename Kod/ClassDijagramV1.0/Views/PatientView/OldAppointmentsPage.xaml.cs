@@ -48,7 +48,7 @@ namespace ClassDijagramV1._0.Views.PatientView
         {
             AppointmentViewModel selectedAppointment = (AppointmentViewModel)tabelaStariPregledi.SelectedItem;
            
-            parent.startWindow.Content = new AppointmentReportPage(selectedAppointment.Appointment);
+            parent.startWindow.Content = new AppointmentReportPage(parent, selectedAppointment.Appointment);
         }
     }
 }
