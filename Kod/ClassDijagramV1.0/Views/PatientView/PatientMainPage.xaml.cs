@@ -1,4 +1,5 @@
-﻿using ClassDijagramV1._0.Model;
+﻿using ClassDijagramV1._0.Controller;
+using ClassDijagramV1._0.Model;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,9 @@ namespace ClassDijagramV1._0.Views.PatientView
         private Account _account;
 
         private ObservableCollection<AppointmentViewModel> _appointmentViewModels;
+        private ObservableCollection<AppointmentViewModel> _oldAppointmentViewModels;
+
+        public MedicineController _medicineController;
 
         #endregion
 
@@ -40,11 +44,23 @@ namespace ClassDijagramV1._0.Views.PatientView
             _logedPatient = logedPatient;
             _account = account;
 
+            App app = Application.Current as App;
+            _medicineController = app.medicinesController;
+
             // napravimo listu appointmentViewModela od svakog appointmenta pacijenta
             _appointmentViewModels = new ObservableCollection<AppointmentViewModel>();
+            _oldAppointmentViewModels = new ObservableCollection<AppointmentViewModel>();
             foreach (Appointment a in _logedPatient.Appointments)
             {
-                _appointmentViewModels.Add(new AppointmentViewModel(a));
+                if (a.AppointmentDate < DateTime.Now)
+                {
+                    _oldAppointmentViewModels.Add(new AppointmentViewModel(a));
+                    addMedicalReportToAllAppointmnts(a);
+                }
+                else
+                {
+                    _appointmentViewModels.Add(new AppointmentViewModel(a));
+                }
             }
 
         }
@@ -72,7 +88,19 @@ namespace ClassDijagramV1._0.Views.PatientView
 
         private void zdravstveniKartonClick(object sender, RoutedEventArgs e)
         {
-            parent.startWindow.Content = new MedicalRecordPage(parent, _logedPatient);
+            parent.startWindow.Content = new MedicalRecordPage(parent, _logedPatient, _oldAppointmentViewModels);
+        }
+
+        private void addMedicalReportToAllAppointmnts(Appointment appointment)
+        {
+            Random rnd = new Random();     
+            var medicines = _medicineController.GetAllMedicines();
+            List<String> dvaLijeka = new List<String>() { medicines[rnd.Next(0, medicines.Count - 1)].ID , medicines[rnd.Next(0, medicines.Count - 1)].ID };
+            MedicalReport mr = new MedicalReport("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet purus a ligula tempus porttitor. Ut urna orci, fermentum eget nibh quis, commodo convallis eros. Maecenas ut efficitur nisi, ac hendrerit dolor. Nullam non pretium lectus. Nulla facilisi. Praesent euismod mi nunc, ut commodo felis efficitur a. Cras quis arcu tortor. Nam congue ultrices metus eget eleifend. In hac habitasse platea dictumst. Nunc bibendum ante nec iaculis aliquet. In vel odio auctor, molestie risus at, faucibus orci. Etiam feugiat neque mauris, ut ultrices lectus porttitor eu. Nullam in sodales elit, sit amet auctor odio." +
+                                                    "Donec placerat pretium velit ac eleifend.Suspendisse vel vehicula lacus, et mollis orci.Vestibulum dictum dolor a cursus laoreet.Nunc vel ex at leo egestas malesuada sed accumsan eros.Vestibulum auctor, massa ut viverra vulputate, dui lectus accumsan urna, non pharetra risus nunc eu felis.Nulla eu accumsan metus.Vestibulum tempor convallis quam, at ornare felis molestie vitae.Fusce vel ante sed felis pharetra pharetra at quis neque.Ut eleifend pellentesque mauris quis feugiat.Phasellus et orci urna",
+                                                    dvaLijeka,null);
+
+            appointment.MedicalReport = mr;
         }
     }
 }

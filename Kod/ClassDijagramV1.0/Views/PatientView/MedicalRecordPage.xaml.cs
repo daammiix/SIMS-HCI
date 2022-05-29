@@ -1,6 +1,7 @@
 ﻿using Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,11 +24,17 @@ namespace ClassDijagramV1._0.Views.PatientView
     {
         private Patient _logedPatient;
         private PatientMainWindow parent { get; set; }
-        public MedicalRecordPage(PatientMainWindow patientMain, Patient logedPatient)
+        public ObservableCollection<AppointmentViewModel> OldAppointments
+        {
+            get;
+            set;
+        }
+        public MedicalRecordPage(PatientMainWindow patientMain, Patient logedPatient, ObservableCollection<AppointmentViewModel> oldAppointmentViewModels)
         {
             InitializeComponent();
             parent = patientMain;
             _logedPatient = logedPatient;
+            OldAppointments = oldAppointmentViewModels;
         }
 
         private void personalDataClick(object sender, RoutedEventArgs e)
@@ -37,7 +44,7 @@ namespace ClassDijagramV1._0.Views.PatientView
 
         private void oldAppointmentsClick(object sender, RoutedEventArgs e)
         {
-            parent.startWindow.Content = new OldAppointmentsPage(parent);
+            parent.startWindow.Content = new OldAppointmentsPage(parent, OldAppointments);
         }
     }
 }

@@ -114,8 +114,4 @@
 	  <Resource Include="Views\PatientView\zdravstveniKarton.jpg" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="ViewModel\PatientViewModels\" />
-	</ItemGroup>
-
 </Project>

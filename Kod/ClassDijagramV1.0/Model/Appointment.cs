@@ -1,3 +1,4 @@
+using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Util;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace Model
         private DateTime _apointmentDate;
         private TimeSpan _duration;
         private AppointmentType _type;
+        private MedicalReport medicalReport;
 
         #endregion
 
@@ -130,11 +132,27 @@ namespace Model
             }
         }
 
+        public MedicalReport MedicalReport
+        {
+            get
+            {
+                return medicalReport;
+            }
+            set
+            {
+                if (value != medicalReport)
+                {
+                    medicalReport = value;
+                    OnPropertyChanged("MedicalReport");
+                }
+            }
+        }
+
         #endregion
 
         #region Constructor
 
-        public Appointment(int patientId, int doctorId, string roomId, DateTime _apointmentDate, TimeSpan _duration, AppointmentType appointmentType)
+        public Appointment(int patientId, int doctorId, string roomId, DateTime _apointmentDate, TimeSpan _duration, AppointmentType appointmentType, MedicalReport medicalReport = null)
         {
             Id = ++idCounter;
             PatientId = patientId;
@@ -143,6 +161,7 @@ namespace Model
             AppointmentDate = _apointmentDate;
             Duration = _duration;
             AppointmentType = appointmentType;
+            MedicalReport = medicalReport;
         }
         public Appointment()
         {
