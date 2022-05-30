@@ -16,12 +16,12 @@ namespace ClassDijagramV1._0.Service
         {
             this.reportsRepo = reportsRepo;
         }
-        internal Reports? GetReport(string reportID)
+        public Reports? GetReport(string reportID)
         {
             return reportsRepo.GetReport(reportID);
         }
 
-        internal BindingList<Reports> GetAllReports()
+        public BindingList<Reports> GetAllReports()
         {
             return reportsRepo.GetAllReports();
         }

@@ -25,8 +25,9 @@ namespace ClassDijagramV1._0.Views.ManagerView
         {
             InitializeComponent();
 
-            _pollsViewModel = new PollsViewModel();
+            _pollsViewModel = new PollsViewModel(this);
             this.DataContext = _pollsViewModel;
         }
+
     }
 }

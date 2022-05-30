@@ -17,18 +17,17 @@ using System.Windows.Shapes;
 namespace ClassDijagramV1._0.Views.ManagerView
 {
     /// <summary>
-    /// Interaction logic for QuarterlyReports.xaml
+    /// Interaction logic for Reports.xaml
     /// </summary>
-    public partial class QuarterlyReports : UserControl
+    public partial class ReportsView : UserControl
     {
-        private QuarterlyReportsViewModel _quarterlyReportsViewModel;
-        public QuarterlyReports()
+        private ReportsViewModel _reportsViewModel;
+        public ReportsView()
         {
             InitializeComponent();
 
-            Window window = new Window();
-            _quarterlyReportsViewModel = new QuarterlyReportsViewModel(window = null);
-            this.DataContext = _quarterlyReportsViewModel;
+            _reportsViewModel = new ReportsViewModel();
+            this.DataContext = _reportsViewModel;
         }
     }
 }
