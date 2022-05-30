@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="ClassDijagramV1._0.Views.ManagerView.QuarterlyReports"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClassDijagramV1._0.Views.ManagerView"
+             mc:Ignorable="d" 
+             d:DesignHeight="655"
+             d:DesignWidth="930"
+             Background="#D9D4CC"
+             FontFamily="Berlin Sans FB Demi">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Theme/TextboxTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <StackPanel Grid.Column="1" Height="655">
+        <TextBlock Text="Kvartalni izveštaji"
+                   Foreground="#1F1313"
+                   FontSize="36"
+                   HorizontalAlignment="Left"
+                   Margin="5,10,0,0"/>
+        <TextBox Width="250"
+                 Height="35"
+                 Margin="0,0,0,5"
+                 VerticalContentAlignment="Center"
+                 HorizontalAlignment="Right"
+                 Style="{StaticResource FancySearchBox}"
+                 Text="{Binding Path=SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+        <StackPanel>
+            <Grid Width="930" Height="468">
+
+                <DataGrid x:Name="EquipmentListGrid" CanUserAddRows="True" SelectionMode="Single"
+                          CanUserResizeColumns="False"  CanUserResizeRows="False"
+                          RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
+                          FontSize="18" BorderThickness="4" CanUserReorderColumns="False"
+                          CanUserDeleteRows="False" AutoGenerateColumns="False"
+                          ItemsSource="{Binding Path=EquipmentList}" SelectedItem="{Binding selectedEquipment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Naziv ankete" Width="*" Binding="{Binding Path=Equipment.EquipmentID}"/>
+                        <DataGridTemplateColumn Header="Rezultati" Width="200">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <Button Content="Zakazivanje"  Command="{Binding Path=DataContext.EquipmentReservation,
+                                            RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"/>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Datum" Width="200" Binding="{Binding Path=Quantity}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=.}" Value="True">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+                </DataGrid>
+            </Grid>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

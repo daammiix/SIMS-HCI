@@ -41,19 +41,14 @@ namespace ClassDijagramV1._0
         public static string _roomsFilePath = "../../../Data/rooms.json";
         public static string _equipmentFilePath = "../../../Data/equipment.json";
         public static string _medicalRecordFilePath = "../../../Data/medicalRecords.json";
-<<<<<<< HEAD
         public string _storageFilePath = "../../../Data/storage.json";
         public string _roomAppointmentsFilePath = "../../../Data/roomAppointments.json";
         public static string _hospitalRatingsFilePath = "../../../Data/hospitalratings.json";
         public static string _doctorRatingsFilePath = "../../../Data/doctorratings.json";
         public static string _activityFilePath = "../../../Data/activity.json";
         public string _medicinesFilePath = "../../../Data/medicines.json";
+        public string _reportsFilePath = "../../../Data/reports.json";
 
-=======
-        public static string _storageFilePath = "../../../Data/storage.json";
-        public static string _roomAppointmentsFilePath = "../../../Data/roomAppointments.json";
-        public static string _purchaseOrdersFilePath = "../../../Data/purchaseOrders.json";
->>>>>>> 9223556 (Funkcionalnosti 4.10 i 4.11)
 
         #endregion
 
@@ -82,6 +77,7 @@ namespace ClassDijagramV1._0
 
         public MedicalRecordController MedicalRecordController { get; set; }
         public MedicineController medicinesController { get; set; }
+        public ReportsController reportsController { get; set; }
 
         public RatingController RatingController { get; set; }
 
@@ -159,11 +155,6 @@ namespace ClassDijagramV1._0
             var medicalRecordService = new MedicalRecordService(medicalRecordRepo, patientService);
             MedicalRecordController = new MedicalRecordController(medicalRecordService);
 
-<<<<<<< HEAD
-            var roomAppointmentRepo = new RoomAppointmentRepo(new FileHandler<BindingList<RoomAppointment>>(_roomAppointmentsFilePath));
-            var roomAppointmentService = new RoomAppointmentService(roomAppointmentRepo);
-            roomAppointmentController = new RoomAppointmentController(roomAppointmentService);
-
             // HospitalRating
             var ratingRepository = new RatingRepo(new FileHandler<HospitalRating>(_hospitalRatingsFilePath), new FileHandler<DoctorRating>(_doctorRatingsFilePath));
             var ratingService = new RatingService(ratingRepository);
@@ -184,8 +175,11 @@ namespace ClassDijagramV1._0
             var medicinesService = new MedicinesService(medicinesRepo);
             medicinesController = new MedicineController(medicinesService);
 
-=======
->>>>>>> 9223556 (Funkcionalnosti 4.10 i 4.11)
+            //Reports
+            var reportsRepo = new ReportsRepo();
+            var reportsService = new ReportsService(reportsRepo);
+            reportsController = new ReportsController(reportsService);
+
             var dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 10);
@@ -231,13 +225,9 @@ namespace ClassDijagramV1._0
             roomController.SaveRooms();
             MedicalRecordController.SaveMedicalRecords();
             roomAppointmentController.SaveRoomAppointment();
-<<<<<<< HEAD
             RatingController.SaveHospitalRatings();
             RatingController.SaveDoctorRatings();
             ActivityController.SaveActivity();
-=======
-            PurchaseOrderController.SavePurchaseOrders();
->>>>>>> 9223556 (Funkcionalnosti 4.10 i 4.11)
         }
 
         private void MakeTestData()

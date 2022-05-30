@@ -49,6 +49,10 @@
       {
         "EquipmentID": "INL56",
         "Quantity": 55
+      },
+      {
+        "EquipmentID": "OMN3",
+        "Quantity": 28
       }
     ],
     "MedicineList": [

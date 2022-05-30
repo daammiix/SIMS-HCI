@@ -26,6 +26,8 @@ namespace ClassDijagramV1._0.ViewModel
 
         public RelayCommand _workersViewCommand;
 
+        public RelayCommand _reportsViewCommand;
+
         public MainRoomsViewModel MainRoomsVM { get; set; }
 
         public CalendarViewModel CalendarVM { get; set; }
@@ -33,6 +35,7 @@ namespace ClassDijagramV1._0.ViewModel
         public StorageViewModel StorageVM { get; set; }
 
         public WorkersViewModel WorkersVM { get; set; }
+        public ReportsViewModel ReportsVM { get; set; }
 
 
         private object _currentView;
@@ -101,6 +104,22 @@ namespace ClassDijagramV1._0.ViewModel
             }
         }
 
+        public RelayCommand ReportsViewCommand
+        {
+            get
+            {
+                if (_reportsViewCommand == null)
+                {
+                    _reportsViewCommand = new RelayCommand(o =>
+                    {
+                        CurrentView = ReportsVM;
+                    });
+                }
+
+                return _reportsViewCommand;
+            }
+        }
+
         public object CurrentView
         {
             get { return _currentView; }
@@ -122,6 +141,7 @@ namespace ClassDijagramV1._0.ViewModel
             CalendarVM = new CalendarViewModel();
             StorageVM = new StorageViewModel();
             WorkersVM = new WorkersViewModel();
+            ReportsVM = new ReportsViewModel();
 
             CurrentView = CalendarVM;
         }
