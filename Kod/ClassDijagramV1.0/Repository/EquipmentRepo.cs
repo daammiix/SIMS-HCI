@@ -26,14 +26,14 @@ namespace ClassDijagramV1._0.Repository
 
         private int findEquipment(String equipmentId)
         {
-            int i = 0;
+            int index = 0;
             foreach (Equipment equipment in equipments)
             {
                 if (equipment.EquipmentID == equipmentId)
                 {
-                    return i;
+                    return index;
                 }
-                i++;
+                index++;
             }
             return -1;
         }
@@ -57,13 +57,13 @@ namespace ClassDijagramV1._0.Repository
 
         public Equipment? SetEquipment(Equipment equipment)
         {
-            int i = findEquipment(equipment.EquipmentID);
-            if (i == -1)
+            int index = findEquipment(equipment.EquipmentID);
+            if (index == -1)
             {
                 return null;
             }
-            equipments.RemoveAt(i);
-            equipments.Insert(i, equipment);
+            equipments.RemoveAt(index);
+            equipments.Insert(index, equipment);
             writeEquipments();
             return equipment;
         }
@@ -87,7 +87,7 @@ namespace ClassDijagramV1._0.Repository
             }
             this.writeEquipments();
         }
-        private void writeEquipments()  // TODO: Add to class diagram
+        private void writeEquipments()
         {
             String jsonString = JsonSerializer.Serialize(equipments);
             System.IO.File.WriteAllText(path, jsonString);

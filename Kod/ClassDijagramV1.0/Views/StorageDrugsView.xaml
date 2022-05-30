@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClassDijagramV1._0.Views"
              xmlns:viewModel="clr-namespace:ClassDijagramV1._0.ViewModel"
-             xmlns:converters="clr-namespace:ClassDijagramV1._0.Converters"
+             xmlns:converters="clr-namespace:ClassDijagramV1._0.Converters" xmlns:accountviewmodels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels" d:DataContext="{d:DesignInstance Type=accountviewmodels:AccountViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="655"
              d:DesignWidth="930"
@@ -30,45 +30,27 @@
         <StackPanel>
             <Grid Width="930" Height="468">
 
-                <DataGrid x:Name="EquipmentListGrid" CanUserAddRows="True" SelectionMode="Single"
+                <DataGrid x:Name="DrugsListGrid" CanUserAddRows="True" SelectionMode="Single"
                           CanUserResizeColumns="False"  CanUserResizeRows="False"
                           RowBackground="#ECCB8D" Background="#EDE1CC" BorderBrush="#EEA61A"
                           FontSize="18" BorderThickness="4" CanUserReorderColumns="False"
                           CanUserDeleteRows="False" AutoGenerateColumns="False"
-                          ItemsSource="{Binding Path=EquipmentList}" IsReadOnly="True">
+                          ItemsSource="{Binding Path=MedicinesList}" IsReadOnly="True">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Šifra" Width="100" Binding="{Binding Path=Equipment.EquipmentID}"/>
-                        <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=Equipment.Name}"/>
-                        <DataGridTextColumn Header="Količina" Width="150" Binding="{Binding Path=Quantity}"/>
-                        <DataGridTextColumn Header="Status" Width="150" Binding="{Binding Path=Quantity}"/>
+                        <DataGridTextColumn Header="Šifra" Width="100" Binding="{Binding Path=Medicines.ID}"/>
+                        <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=Medicines.Name}"/>
+                        <DataGridTextColumn Header="Količina" Width="200" Binding="{Binding Path=Quantity}"/>
+                        <DataGridTextColumn Header="Status" Width="150" Binding="{Binding Path=Medicines.Status}"/>
                         <DataGridTemplateColumn Header="Sastav" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock>
-                                        <Hyperlink Foreground="Black">Otvori sastav</Hyperlink>
-                                    </TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Premeštanje" Width="*">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock>
-                                        <Hyperlink Foreground="Black">Zakazivanje</Hyperlink>
+                                        <Hyperlink Foreground="Black" Click="OnOpenComponents_Click">Otvori sastav</Hyperlink>
                                     </TextBlock>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
-                    <DataGrid.RowStyle>
-                        <Style TargetType="DataGridRow">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=., Converter={StaticResource InventoryConverter}}" Value="True">
-                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGrid.RowStyle>
                 </DataGrid>
             </Grid>
         </StackPanel>

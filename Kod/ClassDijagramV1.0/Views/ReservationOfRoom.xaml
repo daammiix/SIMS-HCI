@@ -43,11 +43,21 @@
                              Style="{StaticResource ReservationButton}"
                              Click="Equip_Click"/>
 
-                <RadioButton x:Name="Renovating"
-                             Content="Renoviranje"
+                <RadioButton x:Name="RenovatingWallPainting"
+                             Content="Renoviranje - krečenje"
                              Style="{StaticResource ReservationButton}"
-                             Click="Renovating_Click"/>
+                             Click="RenovatingWallPainting_Click"/>
+
+                <RadioButton x:Name="RenovatingMerge"
+                             Content="Renoviranje - spajanje soba"
+                             Style="{StaticResource ReservationButton}"
+                             Click="RenovatingMerge_Click"/>
                 
+                <RadioButton x:Name="RenovatingSplit"
+                             Content="Renoviranje - razdvajanje soba "
+                             Style="{StaticResource ReservationButton}"
+                             Click="RenovatingSplit_Click"/>
+
                 <RadioButton x:Name="ChangingPurpose"
                              Content="Promena namene sale"
                              Style="{StaticResource ReservationButton}"

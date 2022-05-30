@@ -57,9 +57,9 @@ namespace ClassDijagramV1._0.Service
         public Boolean CheckIfUniq(RoomAppointment roomAppointment, bool existingRoomAppointment)
         {
             var roomAppointments = roomAppointmentRepo.GetAllRoomAppointments();
-            foreach (var r in roomAppointments)
+            foreach (var appointment in roomAppointments)
             {
-                if (!existingRoomAppointment && roomAppointment.appointmentID == r.appointmentID)
+                if (!existingRoomAppointment && roomAppointment.appointmentID == appointment.appointmentID)
                 {
                     return false;
                 }
@@ -75,6 +75,7 @@ namespace ClassDijagramV1._0.Service
         public void ScheduledAppointments()
         {
             BindingList<RoomAppointment> roomAppointments = roomAppointmentRepo.GetAllRoomAppointments();
+            BindingList<Room> roomsList = roomController.GetAllRooms();
             for (int i = 0; i < roomAppointments.Count; i++)
             {
                 var appointment = roomAppointments[i];
@@ -82,10 +83,33 @@ namespace ClassDijagramV1._0.Service
                 {
                     continue;
                 }
+                foreach (var currentRoom in roomsList)
+                {
+                    if (currentRoom.RoomID == appointment.roomId)
+                    {
+                        currentRoom.RoomStatus = "Renoviranje";
+                    }
+                }
                 if (appointment.newRoomName != null)
                 {
-                    Room room = roomController.GetARoom(appointment.roomId);
+                    Room room = roomController.GetRoom(appointment.roomId);
                     room.RoomName = appointment.newRoomName;
+                }
+                if (appointment.RoomIDToMerge != null)
+                {
+                    for(int j = 0; j < roomsList.Count; j++)
+                    {
+                        var currentRoom = roomsList[j];
+                        if (currentRoom.RoomID == appointment.RoomIDToMerge)
+                        {
+                            roomController.DeleteRoom(currentRoom.RoomID);
+                        }
+                    }
+
+                }
+                if (appointment.RoomToSplit != null)
+                {
+                    roomController.AddRoom(appointment.RoomToSplit);
                 }
                 roomAppointmentRepo.DeleteRoomAppointmentAt(i--);
             }

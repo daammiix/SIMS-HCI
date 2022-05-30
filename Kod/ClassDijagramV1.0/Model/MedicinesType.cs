@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Model
 {
-    public class DrugsStatus
+    public class MedicinesType
     {
         public const string approved= "Odobren";
         public const string rejected = "Odbijen";

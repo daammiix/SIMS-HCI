@@ -50,6 +50,48 @@
         "EquipmentID": "mnbfd",
         "Quantity": 10
       }
+    ],
+    "MedicineList": [
+      {
+        "MedicineID": "LB400",
+        "Quantity": 30
+      },
+      {
+        "MedicineID": "LA40",
+        "Quantity": 28
+      },
+      {
+        "MedicineID": "LM300",
+        "Quantity": 32
+      },
+      {
+        "MedicineID": "LC300",
+        "Quantity": 18
+      },
+      {
+        "MedicineID": "LMI15",
+        "Quantity": 25
+      },
+      {
+        "MedicineID": "MLS15",
+        "Quantity": 35
+      },
+      {
+        "MedicineID": "LPG40",
+        "Quantity": 66
+      },
+      {
+        "MedicineID": "LF200",
+        "Quantity": 42
+      },
+      {
+        "MedicineID": "LDR800",
+        "Quantity": 16
+      },
+      {
+        "MedicineID": "kg7",
+        "Quantity": 16
+      }
     ]
   }
 ]

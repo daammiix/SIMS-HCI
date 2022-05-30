@@ -46,7 +46,7 @@ namespace ClassDijagramV1._0.Views
             var equipment = EquipmentFromTextBoxes();
             var quantity = Int32.Parse(AddEquipmentQuantity.Text);
             equipmentController.AddEquipment(equipment);
-            ((Storage)roomController.GetARoom("storage")).addNewEquipment(equipment, quantity);
+            ((Storage)roomController.GetRoom("storage")).addNewEquipment(equipment, quantity);
             equipmentView.RefreshEquipment();
             this.Close();
         }
