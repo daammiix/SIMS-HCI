@@ -78,6 +78,7 @@ namespace ClassDijagramV1._0
         public MedicalRecordController MedicalRecordController { get; set; }
         public MedicineController medicinesController { get; set; }
         public ReportsController reportsController { get; set; }
+        public QuarterlyReportsController QuarterlyReportsController { get; set; }
 
         public RatingController RatingController { get; set; }
 
@@ -177,6 +178,11 @@ namespace ClassDijagramV1._0
             var reportsRepo = new ReportsRepo();
             var reportsService = new ReportsService(reportsRepo);
             reportsController = new ReportsController(reportsService);
+
+            //QuarterlyReports
+            var quarterlyReportsRepo = new QuarterlyReportsRepo();
+            var quarterlyReportsService = new QuarterlyReportsService(quarterlyReportsRepo);
+            QuarterlyReportsController = new QuarterlyReportsController(quarterlyReportsService);
 
             var dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);

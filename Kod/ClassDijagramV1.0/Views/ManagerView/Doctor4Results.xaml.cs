@@ -24,7 +24,7 @@ namespace ClassDijagramV1._0.Views.ManagerView
         public Doctor4Results()
         {
             InitializeComponent();
-            _pollsViewModel = new PollsViewModel();
+            _pollsViewModel = new PollsViewModel(this);
             this.DataContext = _pollsViewModel;
         }
     }

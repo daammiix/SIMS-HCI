@@ -11,23 +11,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ClassDijagramV1._0.Views.ManagerView
 {
     /// <summary>
-    /// Interaction logic for Reports.xaml
+    /// Interaction logic for QuarterlyReport1View.xaml
     /// </summary>
-    public partial class Reports : UserControl
+    public partial class QuarterlyReport1View : Window
     {
-        private ReportsViewModel _reportsViewModel;
-        public Reports()
+        private QuarterlyReportsViewModel _quarterlyReportsViewModel;
+        public QuarterlyReport1View()
         {
             InitializeComponent();
 
-            _reportsViewModel = new ReportsViewModel();
-            this.DataContext = _reportsViewModel;
+            _quarterlyReportsViewModel = new QuarterlyReportsViewModel(this);
+            this.DataContext = _quarterlyReportsViewModel;
         }
     }
 }

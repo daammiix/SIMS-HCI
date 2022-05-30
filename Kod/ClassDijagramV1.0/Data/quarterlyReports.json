@@ -1,0 +1,86 @@
+[
+    {
+        "ID": "id1",
+        "Name": "Javne nabavke",
+        "Type": "Javne nabavke",
+        "MoneySpent": 400000,
+        "Date": "Prvi kvartal 2018"
+    },
+    {
+        "ID": "id2",
+        "Name": "Javne nabavke",
+        "Type": "Javne nabavke",
+        "MoneySpent": 450000,
+        "Date": "Treći kvartal 2018"
+    },
+    {
+        "ID": "id3",
+        "Name": "Javne nabavke",
+        "Type": "Javne nabavke",
+        "MoneySpent": 350000,
+        "Date": "Prvi kvartal 2019"
+    },
+    {
+        "ID": "id4",
+        "Name": "Javne nabavke",
+        "Type": "Javne nabavke",
+        "MoneySpent": 400000,
+        "Date": "Prvi kvartal 2020"
+    },
+    {
+        "ID": "id5",
+        "Name": "Javne nabavke",
+        "Type": "Javne nabavke",
+        "MoneySpent": 500000,
+        "Date": "Prvi kvartal 2021"
+    },
+    {
+        "ID": "id6",
+        "Name": "Javne nabavke",
+        "Type": "Javne nabavke",
+        "MoneySpent": 700000,
+        "Date": "Prvi kvartal 2022"
+    },
+    {
+        "ID": "id7",
+        "Name": "Javne nabavke",
+        "Type": "Lekovi",
+        "MoneySpent": 90000,
+        "Date": "Drugi kvartal 2018"
+    },
+    {
+        "ID": "id8",
+        "Name": "Javne nabavke",
+        "Type": "Lekovi",
+        "MoneySpent": 115000,
+        "Date": "Četvrti kvartal 2018"
+    },
+    {
+        "ID": "id9",
+        "Name": "Javne nabavke",
+        "Type": "Lekovi",
+        "MoneySpent": 120000,
+        "Date": "Drugi kvartal 2019"
+    },
+    {
+        "ID": "id10",
+        "Name": "Javne nabavke",
+        "Type": "Lekovi",
+        "MoneySpent": 160000,
+        "Date": "Drugi kvartal 2020"
+    },
+    {
+        "ID": "id11",
+        "Name": "Javne nabavke",
+        "Type": "Lekovi",
+        "MoneySpent": 210000,
+        "Date": "Drugi kvartal 2021"
+    },
+    {
+        "ID": "id12",
+        "Name": "Javne nabavke",
+        "Type": "Lekovi",
+        "MoneySpent": 300000,
+        "Date": "Drugi kvartal 2022"
+    }
+]

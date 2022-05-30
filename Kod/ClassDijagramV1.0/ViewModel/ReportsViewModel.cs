@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel
 {
@@ -29,8 +30,10 @@ namespace ClassDijagramV1._0.ViewModel
 
         public ReportsViewModel()
         {
-            PollsVM = new PollsViewModel();
-            QuarterlyReportsVM = new QuarterlyReportsViewModel();
+            Window window = new Window();
+            window = null;
+            PollsVM = new PollsViewModel(window);
+            QuarterlyReportsVM = new QuarterlyReportsViewModel(window);
 
             CurrentView = PollsVM;
         }

@@ -1,5 +1,7 @@
 ﻿using ClassDijagramV1._0.Controller;
 using ClassDijagramV1._0.Model;
+using ClassDijagramV1._0.Util;
+using ClassDijagramV1._0.Views.ManagerView;
 using Controller;
 using Model;
 using System;
@@ -10,13 +12,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace ClassDijagramV1._0.ViewModel
 {
-    public class PollsViewModel
+    public class PollsViewModel : ObservableObject
     {
         RatingController ratingController;
-        DoctorController doctorController;
         ReportsController reportsController;
 
         ObservableCollection<DoctorRating> doctorRatings;
@@ -25,19 +27,20 @@ namespace ClassDijagramV1._0.ViewModel
         private BindingList<Reports> _allReports;
 
         String _searchText = "";
+        public Reports selectedReport { get; set; }
+        Window window;
 
         public ObservableCollection<DoctorRating> doctor4Results { get; set; }
         public ObservableCollection<DoctorRating> doctor5Results { get; set; }
 
-        Doctor doctor4;
-        Doctor doctor5;
+        private RelayCommand _openReport;
+        private RelayCommand _closeReport;
 
-        public PollsViewModel()
+        public PollsViewModel(Window window)
         {
             var app = Application.Current as App;
 
             ratingController = app.RatingController;
-            doctorController = app.DoctorController;
             reportsController = app.reportsController;
 
             doctorRatings = ratingController.GetAllDoctorRatings();
@@ -46,13 +49,39 @@ namespace ClassDijagramV1._0.ViewModel
             doctor4Results = new ObservableCollection<DoctorRating>();
             doctor5Results = new ObservableCollection<DoctorRating>();
 
-            doctor4 = doctorController.GetDoctorById(4);
-            doctor5 = doctorController.GetDoctorById(5);
-
             _allReports = reportsController.GetAllReports();
             _allReports.ListChanged += _allReportsChanged;
 
+            this.window = window;
+
+            RefreshReports();
             doctorRatingResults();
+        }
+
+        public RelayCommand OpenReport
+        {
+            get
+            {
+                _openReport = new RelayCommand(o =>
+                {
+                    OpenReportsAction();
+                });
+
+                return _openReport;
+            }
+        }
+
+        public RelayCommand CloseReport
+        {
+            get
+            {
+                _closeReport = new RelayCommand(o =>
+                {
+                    window.Close();
+                });
+
+                return _closeReport;
+            }
         }
 
         public BindingList<Reports> AllReports
@@ -123,5 +152,26 @@ namespace ClassDijagramV1._0.ViewModel
         {
             RefreshReports();
         }
+
+
+        public void OpenReportsAction()
+        {
+            if (selectedReport.ID.Equals("id4"))
+            {
+                Doctor4Results doctor4Results = new Doctor4Results();
+                doctor4Results.Show();
+            }
+            if (selectedReport.ID.Equals("id5"))
+            {
+                Doctor5Results doctor5Results = new Doctor5Results();
+                doctor5Results.Show();
+            }
+            if (selectedReport.ID.Equals("id8"))
+            {
+                HospitalResults hospitalResults = new HospitalResults();
+                hospitalResults.Show();
+            }
+        }
+
     }
 }

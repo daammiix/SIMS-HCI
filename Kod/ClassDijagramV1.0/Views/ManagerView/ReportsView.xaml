@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ClassDijagramV1._0.Views.ManagerView.Reports"
+﻿<UserControl x:Class="ClassDijagramV1._0.Views.ManagerView.ReportsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

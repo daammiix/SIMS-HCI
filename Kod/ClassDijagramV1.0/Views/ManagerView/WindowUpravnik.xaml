@@ -79,7 +79,7 @@
                          Command="{Binding StorageViewCommand}"/>
 
             <ComboBox Height="65" Width="280" Background="White"
-                      VerticalContentAlignment="Center" IsReadOnly="True" FontSize="26">
+                      VerticalContentAlignment="Center" IsReadOnly="True" FontSize="26" OverridesDefaultStyle="True">
                 <ComboBoxItem Margin="5,0,0,0" Visibility="Visible">Izmeni</ComboBoxItem>
                 <ComboBoxItem Margin="5,0,0,0">Odjavi se</ComboBoxItem>
                 <ComboBoxItem Margin="5,0,0,0">Tutorijal</ComboBoxItem>

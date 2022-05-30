@@ -32,10 +32,10 @@
                 </chart:SfChart.SecondaryAxis>
 
                 <chart:SfChart.Legend>
-                    <chart:ChartLegend/>
+                    <chart:ChartLegend FontSize="13"/>
                 </chart:SfChart.Legend>
 
-                <chart:ColumnSeries Palette="AutumnBrights" Label="Prosečna ocena doktora" ItemsSource="{Binding doctor5Results}" XBindingPath="DoctorId" YBindingPath="AverageGrade">
+                <chart:ColumnSeries Palette="SandyBeach" Label="Prosečna ocena doktora" ItemsSource="{Binding doctor5Results}" XBindingPath="DoctorId" YBindingPath="AverageGrade">
                     <chart:ColumnSeries.AdornmentsInfo>
                         <chart:ChartAdornmentInfo ShowLabel="True"/>
                     </chart:ColumnSeries.AdornmentsInfo>
@@ -44,7 +44,7 @@
             </chart:SfChart>
         </Grid>
         <StackPanel Grid.Row="1">
-            <Button x:Name="CloseDoctor2Results" HorizontalAlignment="Right" Height="26" Width="90" Content="Zatvori" Margin="5,10,10,10" Style="{StaticResource CRUDButton}"/>
+            <Button x:Name="CloseDoctor2Results" HorizontalAlignment="Right" Height="26" Width="90" Content="Zatvori" Margin="5,10,10,10" Style="{StaticResource CRUDButton}" Command="{Binding CloseReport}"/>
         </StackPanel>
     </Grid>
 </Window>
