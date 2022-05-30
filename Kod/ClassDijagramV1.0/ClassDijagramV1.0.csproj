@@ -30,7 +30,10 @@
 	  <None Remove="Views\PatientView\Resources\Images\ocjeni.jpg" />
 	  <None Remove="Views\PatientView\Resources\Images\pdf.png" />
 	  <None Remove="Views\PatientView\Resources\Images\pregledTermina.jpg" />
+	  <None Remove="Views\PatientView\Resources\Images\terapija.jpg" />
 	  <None Remove="Views\PatientView\Resources\Images\zakazivanjeTermina.jpg" />
+	  <None Remove="Views\PatientView\Resources\Images\zdravstveniKarton.jpg" />
+	  <None Remove="Views\PatientView\zdravstveniKarton.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -107,13 +110,16 @@
 	  <Resource Include="Views\PatientView\Resources\Images\pregledTermina.jpg">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
+	  <Resource Include="Views\PatientView\Resources\Images\terapija.jpg">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
 	  <Resource Include="Views\PatientView\Resources\Images\zakazivanjeTermina.jpg">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="ViewModel\PatientViewModels\" />
+	  <Resource Include="Views\PatientView\Resources\Images\zdravstveniKarton.jpg">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Views\PatientView\zdravstveniKarton.jpg" />
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
