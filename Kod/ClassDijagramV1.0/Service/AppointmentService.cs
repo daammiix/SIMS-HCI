@@ -92,33 +92,6 @@ namespace Service
 
         }
 
-        public void AddNotification(Appointment appointment, Room r1, NotificationType notificationType)
-        {
-
-            Notification note;
-
-
-
-            if (NotificationType.addingAppointment.Equals(notificationType))
-            {
-                var notificationID = "1";
-                var content = "Imate zakazan pregled u " + appointment.AppointmentDate + " u sobi " + r1.RoomName;
-                DateTime created = appointment.AppointmentDate;
-                Notification n = new Notification(content, appointment.PatientId, false, created, NotificationType.addingAppointment);
-                _appointmentRepo.AddNotification(n);
-            }
-            else if (NotificationType.deletingAppointment.Equals(notificationType))
-            {
-                // _appointmentRepo.RemoveNotification()
-                // mora se povezati apojntment sa notifikacijom
-            }
-        }
-
-        public ObservableCollection<Notification> GetAllNotifications()
-        {
-            return _appointmentRepo.GetAllNotifications();
-        }
-
         /// <summary>
         /// Proverava da li je termin zauzet odnosno da li vec postoji neki appointment u istoj sobi za dato vreme
         /// ili da li neki lekar vec ima appointment u to vreme

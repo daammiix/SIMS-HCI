@@ -38,16 +38,6 @@ namespace Controller
             _appointmentService.SaveAppointments();
         }
 
-        internal void AddNotification(Appointment appointment, Room r1, NotificationType notificationType)
-        {
-            _appointmentService.AddNotification(appointment, r1, notificationType);
-        }
-
-        internal ObservableCollection<Notification> GetAllNotifications()
-        {
-            return _appointmentService.GetAllNotifications();
-        }
-
         /// <summary>
         /// Vraca sve appointmente
         /// </summary>

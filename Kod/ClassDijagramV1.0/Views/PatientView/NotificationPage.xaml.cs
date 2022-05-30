@@ -1,4 +1,5 @@
-﻿using ClassDijagramV1._0.Model;
+﻿using ClassDijagramV1._0.Controller;
+using ClassDijagramV1._0.Model;
 using Controller;
 using Model;
 using System;
@@ -30,6 +31,7 @@ namespace ClassDijagramV1._0.Views.PatientView
 
         private MedicineDrug drug1;
         public AppointmentController _appointmentController;
+        public NotificationController _notificationController; 
 
         private ObservableCollection<MedicineDrug> _drugs;
         private ObservableCollection<Notification> _notification;
@@ -66,9 +68,10 @@ namespace ClassDijagramV1._0.Views.PatientView
 
             App app = Application.Current as App;
             _appointmentController = app.AppointmentController;
+            _notificationController = app.NotificationController;
 
             Drugs = new ObservableCollection<MedicineDrug>();
-            Notifications = _appointmentController.GetAllNotifications();
+            Notifications = _notificationController.GetAllNotifications();
             
         }
 

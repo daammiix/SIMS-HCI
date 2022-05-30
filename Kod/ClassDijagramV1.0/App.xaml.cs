@@ -49,6 +49,7 @@ namespace ClassDijagramV1._0
         public static string _activityFilePath = "../../../Data/activity.json";
         public string _medicinesFilePath = "../../../Data/medicines.json";
         public string _reportsFilePath = "../../../Data/reports.json";
+        public static string _notificationsFilePath = "../../../Data/notifications.json";
 
 
         #endregion
@@ -77,8 +78,11 @@ namespace ClassDijagramV1._0
         public RoomAppointmentController roomAppointmentController { get; set; }
 
         public MedicalRecordController MedicalRecordController { get; set; }
+
         public MedicineController medicinesController { get; set; }
+
         public ReportsController reportsController { get; set; }
+
         public QuarterlyReportsController QuarterlyReportsController { get; set; }
 
         public RatingController RatingController { get; set; }
@@ -87,8 +91,11 @@ namespace ClassDijagramV1._0
 
         public BanningPatientController BanningPatientController { get; set; }
 
-
         public PurchaseOrderController PurchaseOrderController { get; set; }
+
+        public NotificationController NotificationController { get; set; }
+
+
 
         #endregion
 
@@ -111,6 +118,7 @@ namespace ClassDijagramV1._0
             var doctorService = new DoctorService(doctorRepository);
             DoctorController = new DoctorController(doctorService);
 
+            // Appointment
             var appointmentRepository = new AppointmentRepo(new FileHandler<Appointment>(_appointmentsFilePath));
             var appointmentService = new AppointmentService(appointmentRepository, doctorService,
                 roomAppointmentService, roomService);
@@ -197,6 +205,11 @@ namespace ClassDijagramV1._0
             var purchaseOrderService = new PurchaseOrderService(purchaseOrderRepo, roomService, equipmentService);
             PurchaseOrderController = new PurchaseOrderController(purchaseOrderService);
 
+            // Appointment
+            var notificationRepository = new NotificationRepo(new FileHandler<Notification>(_notificationsFilePath));
+            var notificationService = new NotificationService(notificationRepository);
+            NotificationController = new NotificationController(notificationService);
+
             MakeTestData();
 
             // Namestimo brojace 
@@ -236,6 +249,7 @@ namespace ClassDijagramV1._0
             RatingController.SaveHospitalRatings();
             RatingController.SaveDoctorRatings();
             ActivityController.SaveActivity();
+            NotificationController.SaveNotifications();
         }
 
         private void MakeTestData()
