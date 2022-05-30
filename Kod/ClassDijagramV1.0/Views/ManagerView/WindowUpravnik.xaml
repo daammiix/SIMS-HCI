@@ -11,11 +11,8 @@
         Height="720" Width="1280"
         WindowStyle="SingleBorderWindow"
         ResizeMode="NoResize"
-        Background="#D9D4CC" FontFamily="Berlin Sans FB">
-
-    <Window.DataContext>
-        <viewModel:MainViewModel/>
-    </Window.DataContext>
+        Background="#D9D4CC" FontFamily="Berlin Sans FB"
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -30,6 +27,7 @@
                 <ResourceDictionary Source="../../Theme/CalendarTheme.xaml"/>
                 <ResourceDictionary Source="../../Theme/StorageMenuButtonTheme.xaml"/>
                 <ResourceDictionary Source="../../Theme/TextBoxes.xaml"/>
+                <ResourceDictionary Source="../../Theme/ComboBoxTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -78,8 +76,8 @@
                          Style="{StaticResource MenuButtonTheme}"
                          Command="{Binding StorageViewCommand}"/>
 
-            <ComboBox Height="65" Width="280" Background="White"
-                      VerticalContentAlignment="Center" IsReadOnly="True" FontSize="26" OverridesDefaultStyle="True">
+            <ComboBox Height="65" Width="280"
+                      VerticalContentAlignment="Center" IsReadOnly="True" FontSize="26">
                 <ComboBoxItem Margin="5,0,0,0" Visibility="Visible">Izmeni</ComboBoxItem>
                 <ComboBoxItem Margin="5,0,0,0">Odjavi se</ComboBoxItem>
                 <ComboBoxItem Margin="5,0,0,0">Tutorijal</ComboBoxItem>
