@@ -48,6 +48,7 @@ namespace ClassDijagramV1._0
         public static string _doctorRatingsFilePath = "../../../Data/doctorratings.json";
         public static string _activityFilePath = "../../../Data/activity.json";
         public string _medicinesFilePath = "../../../Data/medicines.json";
+        public string _reportsFilePath = "../../../Data/reports.json";
 
         #endregion
 
@@ -76,6 +77,7 @@ namespace ClassDijagramV1._0
 
         public MedicalRecordController MedicalRecordController { get; set; }
         public MedicineController medicinesController { get; set; }
+        public ReportsController reportsController { get; set; }
 
         public RatingController RatingController { get; set; }
 
@@ -170,6 +172,11 @@ namespace ClassDijagramV1._0
             var medicinesRepo = new MedicinesRepo();
             var medicinesService = new MedicinesService(medicinesRepo);
             medicinesController = new MedicineController(medicinesService);
+
+            //Reports
+            var reportsRepo = new ReportsRepo();
+            var reportsService = new ReportsService(reportsRepo);
+            reportsController = new ReportsController(reportsService);
 
             var dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);

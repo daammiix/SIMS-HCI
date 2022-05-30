@@ -42,7 +42,8 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _generateReport = new RelayCommand(o =>
                 {
-                    //TODO
+                    HospitalResults doctor4 = new HospitalResults();
+                    doctor4.Show();
                 });
 
                 return _generateReport;

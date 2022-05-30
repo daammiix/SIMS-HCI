@@ -21,9 +21,8 @@
                 <RowDefinition Height="65"/>
             </Grid.RowDefinitions>
 
-            
 
-           
+
         </Grid>
 
         <StackPanel Grid.Column="1" Orientation="Vertical">

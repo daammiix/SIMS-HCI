@@ -16,7 +16,7 @@
              xmlns:appointmentsView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.AppointmentsView"
              xmlns:viewModel="clr-namespace:ClassDijagramV1._0.ViewModel"
              xmlns:view="clr-namespace:ClassDijagramV1._0.Views"
-             StartupUri="Views/MainWindow.xaml"
+             StartupUri="Views/ManagerView/WindowUpravnik.xaml"
              xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
              Exit="Application_Exit">
 
@@ -56,6 +56,10 @@
                 <managerView:Workers/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModel:ReportsViewModel}">
+                <managerView:Reports/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewModel:CalendarViewModel}">
                 <managerView:CalendarView/>
             </DataTemplate>
@@ -78,6 +82,14 @@
 
             <DataTemplate DataType="{x:Type viewModel:ChangingPurposeViewModel}">
                 <managerView:ChangingPurposeWindow/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:PollsViewModel}">
+                <managerView:Polls/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:QuarterlyReportsViewModel}">
+                <managerView:QuarterlyReports/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:StorageViewModel}">
