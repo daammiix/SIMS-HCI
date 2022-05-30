@@ -13,24 +13,24 @@
                             <TextBlock Text="{TemplateBinding Property=Content}"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
-                                       Height="63"
+                                       Height="38"
                                        Width="450"
-                                       Foreground="Black"
+                                       Foreground="#1F1313"
                                        FontSize="26"
-                                       Margin="10,0,0,0"
+                                       Margin="15,0,0,0"
                                        Padding="5"/>
 
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Background" Value="#8BCDD3"/>
+            <Setter Property="Background" Value="#B0C69D"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style.Setters>
 
         <Style.Triggers>
-            <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background" Value="#234A4D"/>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#C0937C"/>
             </Trigger>
         </Style.Triggers>
     </Style>

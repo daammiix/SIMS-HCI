@@ -18,13 +18,13 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Background" Value="white"/>
+            <Setter Property="Background" Value="#D9D4CC"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style.Setters>
 
         <Style.Triggers>
-            <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background" Value="Beige"/>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#C0937C"/>
             </Trigger>
         </Style.Triggers>
     </Style>

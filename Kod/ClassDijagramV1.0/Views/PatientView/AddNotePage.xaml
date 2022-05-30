@@ -1,0 +1,80 @@
+﻿<Page x:Class="ClassDijagramV1._0.Views.PatientView.AddNotePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ClassDijagramV1._0.Views.PatientView"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="1024"
+      Title="ReportPage">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Grey.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.LightBlue.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource MaterialDesignToolBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="12"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="12"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="1" Grid.Column="1"
+                   Foreground="{StaticResource PrimaryHueLightForegroundBrush}"
+            Text="Dodaj zabilješku" FontSize="64"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" 
+            Margin="42 0 0 0"/>
+        <StackPanel Margin="10" Grid.Row="2" Grid.Column="1" 
+                    Orientation="Horizontal">
+            <Label FontWeight="Bold" Content="Datum :"
+                   Margin="0 0 20 0"
+                   VerticalAlignment="Center"/>
+            <Label x:Name="datum"
+                   VerticalAlignment="Center"/>
+            <Label FontWeight="Bold" Content="Doktor :"
+                   Margin="20 0 20 0"
+                   VerticalAlignment="Center"/>
+            <Label x:Name="doktor"
+                   VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <Grid Grid.Row="3" Grid.Column="1" x:Name="ocjeniteFrame">
+            <StackPanel>
+                <TextBox
+                    x:Name="biljeska"
+                    Background="{StaticResource MaterialDesignLightBackground}"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    Margin="40 20 60 0"
+                    Height="200"
+                    AcceptsReturn="True"
+                    TextWrapping="Wrap"
+                    BorderBrush="LightBlue"
+                    VerticalScrollBarVisibility="Auto"
+                    materialDesign:HintAssist.Hint="Unesite Vašu zabilješku. "/>
+
+                <Button x:Name="addNote"
+                        Content="Dodaj zabilješku"
+                        Style="{StaticResource MaterialDesignFlatAccentBgButton}"
+                        Width="176" Height="42"
+                        HorizontalAlignment="Right"
+                        Margin="0 100 134 0"
+                        Click="addNoteClick"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

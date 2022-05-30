@@ -9,9 +9,12 @@ namespace ClassDijagramV1._0.Model
         public String roomId { get; set; }
         public DateTime startDate { get; set; }
         public TimeSpan duration { get; set; }
-        public String? newRoomName = null;
-        public String? RoomIDToMerge = null;
-        public String? RoomToSplitId = null;
+        public String? newRoomName { get; set; } = null;
+        public String? RoomIDToMerge { get; set; } = null;
+        public Room? RoomToSplit { get; set; } = null;
+
+        public RoomAppointment()
+        { }
 
         public RoomAppointment(String appointmentID, String roomId, DateTime startDate, TimeSpan duration)
         {
@@ -19,7 +22,9 @@ namespace ClassDijagramV1._0.Model
             this.roomId = roomId;
             this.startDate = startDate;
             this.duration = duration;
+            this.newRoomName = null;
+            this.RoomIDToMerge = null;
+            this.RoomToSplit = null;
         }
-        
     }
 }

@@ -54,7 +54,7 @@ namespace ClassDijagramV1._0.Repository
                 equipmentAppointments.RemoveAt(index);
                 this.writeEquipmentAppointments();
             }
-            private void writeEquipmentAppointments()  // TODO: Add to class diagram
+            private void writeEquipmentAppointments()
             {
                 String jsonString = JsonSerializer.Serialize(equipmentAppointments);
                 System.IO.File.WriteAllText(path, jsonString);

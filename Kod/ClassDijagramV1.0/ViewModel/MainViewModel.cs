@@ -18,28 +18,118 @@ namespace ClassDijagramV1._0.ViewModel
     class MainViewModel : ObservableObject
     {
 
-        public RelayCommand RoomsViewCommand { get; set; }
+        public RelayCommand _roomsViewCommand;
 
-        public RelayCommand CalendarViewCommand { get; set; }
+        public RelayCommand _calendarViewCommand;
 
-        public RelayCommand StorageViewCommand { get; set; }
+        public RelayCommand _storageViewCommand;
 
-        public RoomsViewModel RoomsVM { get; set; }
+        public RelayCommand _workersViewCommand;
+
+        public RelayCommand _reportsViewCommand;
+
+        public MainRoomsViewModel MainRoomsVM { get; set; }
 
         public CalendarViewModel CalendarVM { get; set; }
 
         public StorageViewModel StorageVM { get; set; }
 
+        public WorkersViewModel WorkersVM { get; set; }
+        public ReportsViewModel ReportsVM { get; set; }
+
 
         private object _currentView;
+
+        public RelayCommand RoomsViewCommand
+        {
+            get
+            {
+                if (_roomsViewCommand == null)
+                {
+                    _roomsViewCommand = new RelayCommand(o =>
+                    {
+                        CurrentView = MainRoomsVM;
+                    });
+                }
+
+                return _roomsViewCommand;
+            }
+        }
+
+        public RelayCommand CalendarViewCommand
+        {
+            get
+            {
+                if (_calendarViewCommand == null)
+                {
+                    _calendarViewCommand = new RelayCommand(o =>
+                    {
+                        CurrentView = CalendarVM;
+                    });
+                }
+
+                return _calendarViewCommand;
+            }
+        }
+
+        public RelayCommand StorageViewCommand
+        {
+            get
+            {
+                if (_storageViewCommand == null)
+                {
+                    _storageViewCommand = new RelayCommand(o =>
+                    {
+                        CurrentView = StorageVM;
+                    });
+                }
+
+                return _storageViewCommand;
+            }
+        }
+
+        public RelayCommand WorkersViewCommand
+        {
+            get
+            {
+                if (_workersViewCommand == null)
+                {
+                    _workersViewCommand = new RelayCommand(o =>
+                    {
+                        CurrentView = WorkersVM;
+                    });
+                }
+
+                return _workersViewCommand;
+            }
+        }
+
+        public RelayCommand ReportsViewCommand
+        {
+            get
+            {
+                if (_reportsViewCommand == null)
+                {
+                    _reportsViewCommand = new RelayCommand(o =>
+                    {
+                        CurrentView = ReportsVM;
+                    });
+                }
+
+                return _reportsViewCommand;
+            }
+        }
 
         public object CurrentView
         {
             get { return _currentView; }
             set
             {
-                _currentView = value;
-                OnPropertyChanged("CurrentView");
+                if (_currentView != value)
+                {
+                    _currentView = value;
+                    OnPropertyChanged("CurrentView");
+                }
             }
 
         }
@@ -47,28 +137,13 @@ namespace ClassDijagramV1._0.ViewModel
 
         public MainViewModel()
         {
-            RoomsVM = new RoomsViewModel();
+            MainRoomsVM = new MainRoomsViewModel();
             CalendarVM = new CalendarViewModel();
             StorageVM = new StorageViewModel();
-
+            WorkersVM = new WorkersViewModel();
+            ReportsVM = new ReportsViewModel();
 
             CurrentView = CalendarVM;
-
-            RoomsViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = RoomsVM;
-            });
-
-            CalendarViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = CalendarVM;
-            });
-
-            StorageViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = StorageVM;
-            });
-
         }
     }
 }

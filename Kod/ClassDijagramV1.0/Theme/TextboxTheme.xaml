@@ -6,19 +6,19 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
                     <Border CornerRadius="10"
-                            Background="#3E898F"
+                            Background="#C0937C"
                             Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
                         <Grid>
                             <Rectangle StrokeThickness="1"/>
-                            <TextBox Margin="1"
-                                     Text="{TemplateBinding Text}"
-                                     BorderThickness="0"
-                                     Background="Transparent"
-                                     VerticalContentAlignment="Center"
-                                     Padding="5"
-                                     FontSize="18"
-                                     Foreground="Black"
-                                     x:Name="SearchBox"/>
+                            <TextBox 
+                                Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
+                                BorderThickness="0"
+                                Background="Transparent"
+                                VerticalContentAlignment="Center"
+                                Padding="10,0,0,0"
+                                FontSize="18"
+                                Foreground="#1F1313"
+                                x:Name="SearchBox"/>
 
                             <TextBlock IsHitTestVisible="False"
                                        Text="Pretraži..."
@@ -26,7 +26,7 @@
                                        HorizontalAlignment="Left"
                                        Margin="10,0,0,0"
                                        FontSize="18"
-                                       Foreground="Black">
+                                       Foreground="#1F1313">
 
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}">

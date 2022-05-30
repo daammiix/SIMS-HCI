@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ClassDijagramV1._0.Views.PatientView"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1000"
@@ -53,14 +54,15 @@
                        Text="Izaberite slobodan termin :" Margin="20" FontSize="20"/>
             <TextBlock Grid.Row="2" Grid.Column="0"
                        VerticalAlignment="Center"
-                       Text="Izaberite ljekara :" Margin="20" FontSize="20"/>
+                       Text="Izaberite doktora :" Margin="20" FontSize="20"/>
 
             
             <DatePicker Grid.Row="0" Grid.Column="1"
                         HorizontalAlignment="Left"
                         x:Name="kalendar" FirstDayOfWeek="Monday"
                         SelectedDateChanged="dodavanjPregledaDoktor_SelectionChanged"
-                        Width="200" Height="28">
+                        Width="200" Height="28"
+                        materialDesign:HintAssist.Hint="Datum">
                 <DatePicker.BlackoutDates>
                     <CalendarDateRange Start="{x:Static sys:DateTime.MinValue}" End="{x:Static sys:DateTime.Today}"/>
                 </DatePicker.BlackoutDates>
@@ -71,12 +73,14 @@
                       HorizontalAlignment="Left"
                       x:Name="timeCB"
                       SelectionChanged="dodavanjPregledaDoktor_SelectionChanged"
-                      Width="200" Height="28"/>
+                      Width="200" Height="28"
+                      materialDesign:HintAssist.Hint="Vrijeme"/>
             <ComboBox Grid.Row="2" Grid.Column="1"
                       HorizontalAlignment="Left"
                       x:Name="dodavanjPregledaDoktor" ItemsSource="{Binding DoctorsAppointmentsTime}"
                       SelectionChanged="dodavanjPregledaDoktor_SelectionChanged"
-                      Width="200" Height="28">
+                      Width="200" Height="28"
+                      materialDesign:HintAssist.Hint="Doktor">
                 <!---->
                 <ComboBox.ItemTemplate>
                     <DataTemplate>

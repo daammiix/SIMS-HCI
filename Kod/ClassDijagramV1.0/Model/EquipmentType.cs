@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Model
 {
-    internal class EquipmentType
+    public class EquipmentType
     {
         public const string medicalEquipment = "Medicinska oprema";
         public const string supplies = "Potrošna roba";

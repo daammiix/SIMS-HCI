@@ -27,6 +27,7 @@ namespace Repository
         public void DeleteRoom(String roomID);
 
         public void ChangeStorageQuantity(string equipmentId, int quantity);
+        public void ChangeStorageMedicineQuantity(string medicineId, int quantity);
 
         public void SaveRooms();
 
@@ -90,13 +91,13 @@ namespace Repository
 
         public Room? SetRoom(Room room)
         {
-            int i = findRoom(room.RoomID);
-            if (i == -1)
+            int index = findRoom(room.RoomID);
+            if (index == -1)
             {
                 return null;
             }
-            rooms.RemoveAt(i);
-            rooms.Insert(i, room);
+            rooms.RemoveAt(index);
+            rooms.Insert(index, room);
             return room;
         }
 
@@ -126,6 +127,18 @@ namespace Repository
                 if (e.EquipmentID == equipmentId)
                 {
                     e.Quantity = quantity;
+                }
+            }
+        }
+
+        public void ChangeStorageMedicineQuantity(string medicineId, int quantity)
+        {
+            var medicineList = storage.MedicineList;
+            foreach (var medicine in medicineList)
+            {
+                if (medicine.MedicineID == medicineId)
+                {
+                    medicine.Quantity = quantity;
                 }
             }
         }

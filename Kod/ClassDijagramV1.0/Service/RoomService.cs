@@ -22,7 +22,7 @@ namespace Service
 
         public void AddRoom(Room room)
         {
-            if (this.CheckIfUniq(room, false))
+            if (this.CheckIfUniq(room, false) && this.CheckIfValid(room))
             {
                 repo.CreateNewRoom(room);
             }
@@ -35,7 +35,7 @@ namespace Service
 
         public void ChangeRoom(Room room)
         {
-            if (this.CheckIfUniq(room, true))
+            if (this.CheckIfUniq(room, true) && this.CheckIfValid(room))
             {
                 repo.SetRoom(room);
             }
@@ -56,6 +56,11 @@ namespace Service
             repo.ChangeStorageQuantity(equipmentId, quantity);
         }
 
+        public void ChangeStorageMedicineQuantity(string meidicineId, int quantity)
+        {
+            repo.ChangeStorageMedicineQuantity(meidicineId, quantity);
+        }
+
         public Boolean CheckIfUniq(Room room, bool existingRoom)
         {
             var rooms = repo.GetAllRooms();
@@ -65,7 +70,7 @@ namespace Service
                 {
                     return false;
                 }
-                if((room.Floor > 4) || (room.RoomNumber > 499))
+                if ((room.Floor > 4) || (room.RoomNumber > 499))
                 {
                     return false;
                 }
@@ -76,6 +81,15 @@ namespace Service
                         return false;
                     }
                 }
+            }
+            return true;
+        }
+
+        public Boolean CheckIfValid(Room room)
+        {
+            if ((room.Floor > 4) || (room.RoomNumber > 499))
+            {
+                return false;
             }
             return true;
         }

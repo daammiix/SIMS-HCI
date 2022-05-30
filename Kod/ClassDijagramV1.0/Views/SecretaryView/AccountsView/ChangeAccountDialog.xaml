@@ -6,11 +6,13 @@
         xmlns:local="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.AccountsView"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        AllowsTransparency="True"
         Background="{StaticResource SBackground}"
         Foreground="{StaticResource SCyan}"
         FontSize="24"
         FontFamily="#Poppins"
-        Title="ChangeAccount" Height="360" Width="500">
+        Height="360" Width="500">
 
     <Window.InputBindings>
         <KeyBinding Key="Return"
@@ -28,26 +30,73 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid VerticalAlignment="Top"
-          HorizontalAlignment="Center"
-          Margin="0,70,0,0">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Row 1 -->
-        <TextBlock Grid.Row="0" Grid.Column="0"
+        <!-- Header -->
+        <Grid Grid.Row="0"
+              MouseDown="Header_MouseDown"
+              Background="{StaticResource SBackground}">
+            <!-- Title -->
+            <TextBlock Text="Change Account"
+                       Margin="0,5,0,1"
+                       FontSize="24"
+                       Foreground="{StaticResource SLightGrayShade}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+
+            <!-- Window Buttons -->
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,2,3">
+                <Button Content="&#x1f5d5;"
+                        Background="Transparent"
+                        Foreground="{StaticResource SLightGrayShade}"
+                        BorderThickness="0"
+                        Padding="0,1,0,3"
+                        Click="ButtonMinimize_Click"/>
+                <Button Content="&#x1F5D6;"
+                        Background="Transparent"
+                        Foreground="{StaticResource SLightGrayShade}"
+                        BorderThickness="0"
+                        Padding="5 0"
+                        Margin="0,7,0,0"
+                        FontSize="14"
+                        Click="WindowStateButton_Click"/>
+                <Button Content="&#10006;"
+                        FontSize="10"
+                        Background="Transparent"
+                        Foreground="{StaticResource SLightGrayShade}"
+                        BorderThickness="0"
+                        Padding="5 0"
+                        Margin="0,8,0,0"
+                        Click="ExitButton_Click"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" 
+              VerticalAlignment="Top"
+              HorizontalAlignment="Center"
+              Margin="0,40,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Row 1 -->
+            <TextBlock Grid.Row="0" Grid.Column="0"
                    Text="Username:"
                    VerticalAlignment="Center"
                    Margin="0,0,15,15"/>
-        <TextBox Grid.Row="0" Grid.Column="1"
+            <TextBox Grid.Row="0" Grid.Column="1"
                  VerticalAlignment="Center"
                  Padding="5"
                  Width="180"
@@ -55,40 +104,26 @@
                  Style="{StaticResource TextBoxStyleAccount}"
                  Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <!-- Row 2 -->
-        <TextBlock Grid.Row="1" Grid.Column="0"
+            <!-- Row 2 -->
+            <TextBlock Grid.Row="1" Grid.Column="0"
                    Text="Password:"
                    VerticalAlignment="Center"
                    Margin="0,0,15,15"/>
-        <TextBox Grid.Row="1" Grid.Column="1"
+            <TextBox Grid.Row="1" Grid.Column="1"
                  VerticalAlignment="Center"
                  Padding="5"
                  Margin="0,0,0,15"
                  Style="{StaticResource TextBoxStyleAccount}"
                  Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <!-- Row 3 -->
-        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" 
-                    Grid.ColumnSpan="2"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center">
-            <TextBlock Text="Guest"
-                       Margin="0,0,10,0"
-                       VerticalAlignment="Center"/>
-            <CheckBox VerticalContentAlignment="Center"
-                      HorizontalAlignment="Center"
-                      Style="{StaticResource CircleCheckBox}"
-                      Foreground="{StaticResource SCyan}"
-                      IsChecked="{Binding IsGuest, UpdateSourceTrigger=PropertyChanged}"/>
-        </StackPanel>
-
-        <!-- Row 4 -->
-        <Button Grid.Row="3" Grid.Column="0"
+            <!-- Row 3 -->
+            <Button Grid.Row="2" Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Content="Save"
                 Margin="0,25,0,0"
                 Style="{StaticResource AccountButtonsStyle}"
                 Command="{Binding ChangeAccountCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
+        </Grid>
     </Grid>
 </Window>

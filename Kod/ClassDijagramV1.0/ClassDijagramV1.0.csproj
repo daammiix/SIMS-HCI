@@ -15,9 +15,11 @@
 	  <None Remove="Images\doctor.png" />
 	  <None Remove="Images\key.png" />
 	  <None Remove="Images\manager.png" />
+	  <None Remove="Images\medical-equipment.png" />
 	  <None Remove="Images\medical-record.png" />
 	  <None Remove="Images\medicine.png" />
 	  <None Remove="Images\patient.png" />
+	  <None Remove="Images\purchaseOrder.png" />
 	  <None Remove="Images\roomDoor.png" />
 	  <None Remove="Images\secretary.png" />
 	  <None Remove="Images\user.png" />
@@ -28,7 +30,10 @@
 	  <None Remove="Views\PatientView\Resources\Images\ocjeni.jpg" />
 	  <None Remove="Views\PatientView\Resources\Images\pdf.png" />
 	  <None Remove="Views\PatientView\Resources\Images\pregledTermina.jpg" />
+	  <None Remove="Views\PatientView\Resources\Images\terapija.jpg" />
 	  <None Remove="Views\PatientView\Resources\Images\zakazivanjeTermina.jpg" />
+	  <None Remove="Views\PatientView\Resources\Images\zdravstveniKarton.jpg" />
+	  <None Remove="Views\PatientView\zdravstveniKarton.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -47,6 +52,9 @@
 	  <Content Include="Images\manager.png">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
+	  <Content Include="Images\medical-equipment.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	  <Content Include="Images\medical-record.png">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
@@ -54,6 +62,9 @@
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="Images\patient.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Images\purchaseOrder.png">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="Images\roomDoor.png">
@@ -72,6 +83,7 @@
 		<PackageReference Include="MaterialDesignColors" Version="2.0.6" />
 		<PackageReference Include="MaterialDesignThemes" Version="4.4.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="Syncfusion.SfChart.WPF" Version="20.1.0.57" />
 		<PackageReference Include="Syncfusion.SfScheduler.WPF" Version="20.1.0.52" />
 		<PackageReference Include="Syncfusion.SfSkinManager.WPF" Version="20.1.0.52" />
 		<PackageReference Include="Syncfusion.Themes.MaterialDark.WPF" Version="20.1.0.52" />
@@ -99,13 +111,18 @@
 	  <Resource Include="Views\PatientView\Resources\Images\pregledTermina.jpg">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
+	  <Resource Include="Views\PatientView\Resources\Images\terapija.jpg">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
 	  <Resource Include="Views\PatientView\Resources\Images\zakazivanjeTermina.jpg">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
+	  <Resource Include="Views\PatientView\Resources\Images\zdravstveniKarton.jpg">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Views\PatientView\zdravstveniKarton.jpg" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="ViewModel\PatientViewModels\" />
-	</ItemGroup>
+	<ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>

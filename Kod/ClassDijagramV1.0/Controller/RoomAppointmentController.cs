@@ -65,5 +65,17 @@ namespace ClassDijagramV1._0.Controller
         {
             return roomAppointmentService.CheckIsTerminFree(from, duration, room);
         }
+
+        /// <summary>
+        /// Vraca nam prvu slobodnu sobu
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <param name="room"></param>
+        /// <returns></returns>
+        public bool GetFreeRoom(Room room, DateTime start, DateTime end)
+        {
+            return roomAppointmentService.GetFreeRoom(room, start, end);
+        }
     }
 }

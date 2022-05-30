@@ -53,13 +53,8 @@ namespace Repository
 
         public void UpdateAppointment(int oldAppointmentID, Appointment updatedAppointment)
         {
-            var oldAppointment = FindAppointmentById(oldAppointmentID);
+            Appointment oldAppointment = FindAppointmentById(oldAppointmentID);
             oldAppointment = updatedAppointment;
-        }
-
-        internal Appointment GetOneAppointment(int appointmentID)
-        {
-            return FindAppointmentById(appointmentID);
         }
 
         internal void AddNotification(Notification n)
@@ -76,12 +71,6 @@ namespace Repository
         {
             return Notifications;
         }
-
-        /*public void SetAppointment(List<Appointment> appointments)
-        {
-            // TODO: implement
-            _appointmentFileHandler.SaveAppointments(Appointments.ToList());
-        }*/
 
         public void SaveAppointments()
         {

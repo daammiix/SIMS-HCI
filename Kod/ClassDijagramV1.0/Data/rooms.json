@@ -1,23 +1,6 @@
 [
   {
-    "RoomID": "id",
-    "RoomName": "Operaciona Sala",
-    "Floor": 2,
-    "RoomNumber": 23,
-    "RoomStatus": "Aktivna",
-    "EquipmentList": [
-      {
-        "EquipmentID": "OMR5",
-        "Quantity": 1
-      },
-      {
-        "EquipmentID": "OL36",
-        "Quantity": 1
-      }
-    ]
-  },
-  {
-    "RoomID": "id5",
+    "RoomID": "id10",
     "RoomName": "Operaciona Sala",
     "Floor": 3,
     "RoomNumber": 27,
@@ -29,25 +12,10 @@
       },
       {
         "EquipmentID": "PRG5",
-        "Quantity": 3
+        "Quantity": 4
       }
-    ]
-  },
-  {
-    "RoomID": "id10",
-    "RoomName": "Sala za sastanke",
-    "Floor": 3,
-    "RoomNumber": 30,
-    "RoomStatus": "Renoviranje",
-    "EquipmentList": []
-  },
-  {
-    "RoomID": "id8",
-    "RoomName": "Operaciona Sala",
-    "Floor": 12,
-    "RoomNumber": 3,
-    "RoomStatus": "Aktivna",
-    "EquipmentList": []
+    ],
+    "MedicineList": []
   },
   {
     "RoomID": "id7",
@@ -55,22 +23,92 @@
     "Floor": 1,
     "RoomNumber": 103,
     "RoomStatus": "Aktivna",
-    "EquipmentList": []
+    "EquipmentList": [
+      {
+        "EquipmentID": "INST6",
+        "Quantity": 1
+      },
+      {
+        "EquipmentID": "OL36",
+        "Quantity": 2
+      },
+      {
+        "EquipmentID": "PRZ42",
+        "Quantity": 2
+      }
+    ],
+    "MedicineList": []
   },
   {
-    "RoomID": "id66",
-    "RoomName": "Operaciona Sala",
-    "Floor": 25,
-    "RoomNumber": 4,
+    "RoomID": "id8",
+    "RoomName": "Bolni\u010Dka soba",
+    "Floor": 3,
+    "RoomNumber": 22,
     "RoomStatus": "Aktivna",
-    "EquipmentList": []
+    "EquipmentList": [
+      {
+        "EquipmentID": "OUL5",
+        "Quantity": 2
+      },
+      {
+        "EquipmentID": "OL36",
+        "Quantity": 1
+      },
+      {
+        "EquipmentID": "PRG5",
+        "Quantity": 5
+      },
+      {
+        "EquipmentID": "INL56",
+        "Quantity": 3
+      }
+    ],
+    "MedicineList": []
   },
   {
-    "RoomID": "id2",
-    "RoomName": "Operaciona Sala",
-    "Floor": 2,
-    "RoomNumber": 276,
+    "RoomID": "id12",
+    "RoomName": "Sala za preglede",
+    "Floor": 1,
+    "RoomNumber": 64,
     "RoomStatus": "Aktivna",
-    "EquipmentList": []
+    "EquipmentList": [],
+    "MedicineList": []
+  },
+  {
+    "RoomID": "id11",
+    "RoomName": "Sala za preglede",
+    "Floor": 3,
+    "RoomNumber": 18,
+    "RoomStatus": "Aktivna",
+    "EquipmentList": [
+      {
+        "EquipmentID": "INL56",
+        "Quantity": 1
+      }
+    ],
+    "MedicineList": []
+  },
+  {
+    "RoomID": "id14",
+    "RoomName": "Intezivna nega",
+    "Floor": 3,
+    "RoomNumber": 17,
+    "RoomStatus": "Aktivna",
+    "EquipmentList": [
+      {
+        "EquipmentID": "PRG5",
+        "Quantity": 2
+      }
+    ],
+    "MedicineList": []
+  },
+  {
+    "RoomID": "id77",
+    "RoomName": "Operaciona Sala",
+    "Floor": 1,
+    "RoomNumber": 54,
+    "RoomStatus": "Aktivna",
+    "EquipmentList": [],
+    "MedicineList": []
   }
 ]

@@ -1,0 +1,50 @@
+﻿<Window x:Class="ClassDijagramV1._0.Views.ManagerView.QuarterlyReport1View"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClassDijagramV1._0.Views.ManagerView"
+        xmlns:chart="clr-namespace:Syncfusion.UI.Xaml.Charts;assembly=Syncfusion.SfChart.WPF"
+        mc:Ignorable="d"
+        Title="QuarterlyReport2Results"
+        Height="410"
+        Width="650"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="White"
+        FontFamily="Berlin Sans FB Demi"
+        BorderThickness="4"
+        BorderBrush="#455736">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="360"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <chart:SfChart Header="Javne nabavke" FontSize="18">
+                <chart:SfChart.PrimaryAxis>
+                    <chart:CategoryAxis/>
+                </chart:SfChart.PrimaryAxis>
+
+                <chart:SfChart.SecondaryAxis>
+                    <chart:NumericalAxis Maximum="750000" LabelFormat="######"/>
+                </chart:SfChart.SecondaryAxis>
+
+                <chart:SfChart.Legend>
+                    <chart:ChartLegend FontSize="13"/>
+                </chart:SfChart.Legend>
+
+                <chart:ColumnSeries Palette="SandyBeach" Label="Troškovi po kvartalima" FontSize="13" ItemsSource="{Binding report1}" XBindingPath="Date" YBindingPath="MoneySpent">
+                    <chart:ColumnSeries.AdornmentsInfo>
+                        <chart:ChartAdornmentInfo ShowLabel="True"/>
+                    </chart:ColumnSeries.AdornmentsInfo>
+                </chart:ColumnSeries>
+
+            </chart:SfChart>
+        </Grid>
+        <StackPanel Grid.Row="1">
+            <Button x:Name="CloseDoctor1Results" HorizontalAlignment="Right" Height="26" Width="90" Content="Zatvori" Margin="5,10,10,10" Style="{StaticResource CRUDButton}" Command="{Binding CloseReport}"/>
+        </StackPanel>
+    </Grid>
+</Window>

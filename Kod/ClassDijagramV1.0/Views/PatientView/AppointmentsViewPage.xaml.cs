@@ -1,3 +1,5 @@
+﻿using ClassDijagramV1._0.Controller;
+using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Util;
 using Controller;
 using Model;
@@ -31,10 +33,13 @@ namespace ClassDijagramV1._0.Views.PatientView
         private RoomController _roomController;
 
         private PatientController _patientController;
+        public ActivityController _activityController;
+        public BanningPatientController _banningPatientController;
         private PatientMainWindow parent { get; set; }
 
         // Ulogovan pacijent
         private Patient _logedPatient;
+        private Account _account;
 
         #endregion
 
@@ -42,9 +47,6 @@ namespace ClassDijagramV1._0.Views.PatientView
         #region Properties
 
         public static AppointmentViewModel? SelectedAppointment { get; set; }
-
-        //public AppointmentViewModel SelectedAppointment { get; set; }
-
         public ObservableCollection<AppointmentViewModel> Appointments
         {
             get;
@@ -64,11 +66,12 @@ namespace ClassDijagramV1._0.Views.PatientView
         /// </summary>
         /// <param name="p"></param>
         public AppointmentsViewPage(ObservableCollection<AppointmentViewModel> appointments,
-            PatientMainWindow patientMain, Patient logedPatient)
+            PatientMainWindow patientMain, Patient logedPatient, Account account)
         {
             InitializeComponent();
 
             _logedPatient = logedPatient;
+            _account = account;
 
             this.DataContext = this;
             parent = patientMain;
@@ -77,6 +80,8 @@ namespace ClassDijagramV1._0.Views.PatientView
 
             _roomController = app.roomController;
             _patientController = app.PatientController;
+            _activityController = app.ActivityController;
+            _banningPatientController = app.BanningPatientController;
 
             Appointments = appointments;
 
@@ -86,33 +91,56 @@ namespace ClassDijagramV1._0.Views.PatientView
         }
         private void AddAppontment_Click(object sender, RoutedEventArgs e)
         {
-            // Prosledimo listu AppointmentViewModela jer tu dodajemo novi appointment kako bi se view azurirao
-            parent.startWindow.Content = new AppointmentAddPage(parent, Appointments, _logedPatient);
-            // tabelaPregledi.ItemsSource = _appointmentController.GetAllAppointmentsByPatient(parent.Patient.Id);
+            if (_banningPatientController.CheckStatusOfPatient(_logedPatient.Id, _account) == true)
+            {
+                errorBan.Content = "Banovani ste!";
+            }
+            else
+            {
+                // Prosledimo listu AppointmentViewModela jer tu dodajemo novi appointment kako bi se view azurirao
+                parent.startWindow.Content = new AppointmentAddPage(parent, Appointments, _logedPatient);
+            }  
         }
 
         private void UpdateAppontment_Click(object sender, RoutedEventArgs e)
         {
-
-            if (tabelaPregledi.SelectedIndex != -1)
+            if (_banningPatientController.CheckStatusOfPatient(_logedPatient.Id, _account) == true)
             {
-                parent.startWindow.Content = new AppointmentUpdatePage(parent, Appointments, _logedPatient);
-                //tabelaPregledi.ItemsSource = _appointmentController.GetAllAppointmentsByPatient(parent.patientID);
+                errorBan.Content = "Banovani ste!";
             }
+            else
+            {
+                if (tabelaPregledi.SelectedIndex != -1)
+                {
+                    parent.startWindow.Content = new AppointmentUpdatePage(parent, Appointments, _logedPatient);
+                }
+            }
+            
         }
 
         private void RemoveAppontment_Click(object sender, RoutedEventArgs e)
         {
-            if (tabelaPregledi.SelectedIndex != -1)
+            if (_banningPatientController.CheckStatusOfPatient(_logedPatient.Id, _account) == true)
             {
-                //_appointmentController.AddNotification((Appointment)tabelaPregledi.SelectedItem, NotificationType.deletingAppointment);
-                //tabelaPregledi.ItemsSource = _appointmentController.GetAllAppointmentsByPatient(parent.patientID);
-                //Appointments.Remove((Appointment)tabelaPregledi.SelectedItem);
-                AppointmentViewModel selectedAppointment = (AppointmentViewModel)tabelaPregledi.SelectedItem;
-                // Izbrisemo i iz view-a i iz baze
-                Appointments.Remove(selectedAppointment);
-                _appointmentController.RemoveAppointment(selectedAppointment.Id);
+                errorBan.Content = "Banovani ste!";
             }
+            else
+            {
+                if (tabelaPregledi.SelectedIndex != -1)
+                {
+                    //_appointmentController.AddNotification((Appointment)tabelaPregledi.SelectedItem, NotificationType.deletingAppointment);
+                    //tabelaPregledi.ItemsSource = _appointmentController.GetAllAppointmentsByPatient(parent.patientID);
+                    //Appointments.Remove((Appointment)tabelaPregledi.SelectedItem);
+                    AppointmentViewModel selectedAppointment = (AppointmentViewModel)tabelaPregledi.SelectedItem;
+                    // Izbrisemo i iz view-a i iz baze
+                    Appointments.Remove(selectedAppointment);
+                    _appointmentController.RemoveAppointment(selectedAppointment.Id);
+                    //activity
+                    ActivityLog activity = new ActivityLog(DateTime.Now, _logedPatient.Id, TypeOfActivity.cancelAppointment);
+                    _activityController.AddActivity(activity);
+                }
+            }
+            
 
         }
     }
@@ -279,7 +307,7 @@ namespace ClassDijagramV1._0.Views.PatientView
 
             // Ucitamo reference vezane za appointment
             _patient = _patientController.GetPatientById(_appointment.PatientId);
-            _room = _roomController.GetARoom(_appointment.RoomId);
+            _room = _roomController.GetRoom(_appointment.RoomId);
             _doctor = _doctorController.GetDoctorById(_appointment.DoctorId);
 
         }

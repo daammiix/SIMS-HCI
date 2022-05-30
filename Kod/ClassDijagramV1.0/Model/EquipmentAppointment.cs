@@ -17,7 +17,7 @@ namespace ClassDijagramV1._0.Model
         public DateTime ToDateTime { get; set; }
         public bool Started { get; set; }
 
-        public EquipmentAppointment(String RoomFrom, String RoomTo, Equipment SelectedEquipment, int Quantity, DateTime FromDateTime, DateTime ToDateTime, bool Started = false)
+        public EquipmentAppointment(String RoomFrom, String RoomTo, Equipment SelectedEquipment, int Quantity, DateTime FromDateTime, DateTime ToDateTime)
         {
             this.RoomFrom = RoomFrom;
             this.RoomTo = RoomTo;
@@ -25,7 +25,7 @@ namespace ClassDijagramV1._0.Model
             this.Quantity = Quantity;
             this.FromDateTime = FromDateTime;
             this.ToDateTime = ToDateTime;
-            this.Started = Started;
+            this.Started = false;
         }
     }
 }

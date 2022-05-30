@@ -28,29 +28,29 @@ namespace ClassDijagramV1._0.Repository
 
         public void DeleteRoomAppointment(string roomAppointmentID)
         {
-            foreach (var r in roomAppointments)
+            foreach (var roomAppointment in roomAppointments)
             {
-                if (r.appointmentID == roomAppointmentID)
+                if (roomAppointment.appointmentID == roomAppointmentID)
                 {
-                    roomAppointments.Remove(r);
+                    roomAppointments.Remove(roomAppointment);
                     break;
                 }
             }
         }
-        public void DeleteRoomAppointmentAt(int i)
+        public void DeleteRoomAppointmentAt(int index)
         {
-            roomAppointments.RemoveAt(i);
+            roomAppointments.RemoveAt(index);
         }
 
         public RoomAppointment ChangeRoomAppointment(RoomAppointment roomAppointment)
         {
-            int i = findRoomAppointment(roomAppointment.appointmentID);
-            if (i == -1)
+            int index = findRoomAppointment(roomAppointment.appointmentID);
+            if (index == -1)
             {
                 return null;
             }
-            roomAppointments.RemoveAt(i);
-            roomAppointments.Insert(i, roomAppointment);
+            roomAppointments.RemoveAt(index);
+            roomAppointments.Insert(index, roomAppointment);
             return roomAppointment;
         }
 
@@ -61,11 +61,11 @@ namespace ClassDijagramV1._0.Repository
 
         public RoomAppointment? GetRoomAppointmentByID(string roomAppointmentID)
         {
-            foreach (var r in roomAppointments)
+            foreach (var roomAppointment in roomAppointments)
             {
-                if (r.appointmentID == roomAppointmentID)
+                if (roomAppointment.appointmentID == roomAppointmentID)
                 {
-                    return r;
+                    return roomAppointment;
                 }
             }
             return null;
@@ -78,14 +78,14 @@ namespace ClassDijagramV1._0.Repository
 
         private int findRoomAppointment(String roomAppointmentID)
         {
-            int i = 0;
-            foreach (RoomAppointment r in roomAppointments)
+            int index = 0;
+            foreach (RoomAppointment roomAppointment in roomAppointments)
             {
-                if (r.appointmentID == roomAppointmentID)
+                if (roomAppointment.appointmentID == roomAppointmentID)
                 {
-                    return i;
+                    return index;
                 }
-                i++;
+                index++;
             }
             return -1;
         }

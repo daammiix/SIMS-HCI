@@ -1,9 +1,11 @@
 ﻿using ClassDijagramV1._0.Controller;
+using ClassDijagramV1._0.Converters;
 using ClassDijagramV1._0.FileHandlers;
 using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Model.Enums;
 using ClassDijagramV1._0.Repository;
 using ClassDijagramV1._0.Service;
+using ClassDijagramV1._0.ViewModel;
 using Controller;
 using Model;
 using Repository;
@@ -41,6 +43,11 @@ namespace ClassDijagramV1._0
         public static string _medicalRecordFilePath = "../../../Data/medicalRecords.json";
         public string _storageFilePath = "../../../Data/storage.json";
         public string _roomAppointmentsFilePath = "../../../Data/roomAppointments.json";
+        public static string _hospitalRatingsFilePath = "../../../Data/hospitalratings.json";
+        public static string _doctorRatingsFilePath = "../../../Data/doctorratings.json";
+        public static string _activityFilePath = "../../../Data/activity.json";
+        public string _medicinesFilePath = "../../../Data/medicines.json";
+        public string _reportsFilePath = "../../../Data/reports.json";
 
 
         #endregion
@@ -65,16 +72,47 @@ namespace ClassDijagramV1._0
         public EquipmentController equipmentController { get; set; }
 
         public EquipmentAppointmentController equipmentAppointmentController { get; set; }
+
         public RoomAppointmentController roomAppointmentController { get; set; }
 
         public MedicalRecordController MedicalRecordController { get; set; }
+        public MedicineController medicinesController { get; set; }
+        public ReportsController reportsController { get; set; }
+        public QuarterlyReportsController QuarterlyReportsController { get; set; }
+
+        public RatingController RatingController { get; set; }
+
+        public ActivityController ActivityController { get; set; }
+
+        public BanningPatientController BanningPatientController { get; set; }
+
+
+        public PurchaseOrderController PurchaseOrderController { get; set; }
 
         #endregion
 
         public App()
         {
+            // Appointments
+
+            // Rooms-Storage
+            var roomRepo = new RoomRepoJson(new FileHandler<BindingList<Room>>(_roomsFilePath), new FileHandler<BindingList<Storage>>(_storageFilePath));
+            var roomService = new RoomService(roomRepo);
+            roomController = new RoomController(roomService);
+
+            // Room Appointment
+            var roomAppointmentRepo = new RoomAppointmentRepo(new FileHandler<BindingList<RoomAppointment>>(_roomAppointmentsFilePath));
+            var roomAppointmentService = new RoomAppointmentService(roomAppointmentRepo);
+            roomAppointmentController = new RoomAppointmentController(roomAppointmentService);
+
+            // Doctor
+            var doctorRepository = new DoctorRepo(new DoctorFileHandler(_doctorsFilePath));
+            var doctorService = new DoctorService(doctorRepository);
+            DoctorController = new DoctorController(doctorService);
+
             var appointmentRepository = new AppointmentRepo(new FileHandler<Appointment>(_appointmentsFilePath));
-            var appointmentService = new AppointmentService(appointmentRepository);
+            var appointmentService = new AppointmentService(appointmentRepository, doctorService,
+                roomAppointmentService, roomService);
             AppointmentController = new AppointmentController(appointmentService);
 
             // Patients
@@ -92,11 +130,6 @@ namespace ClassDijagramV1._0
             var surgeryService = new SurgeryService(surgeryRepository);
             surgeryController = new SurgeryController(surgeryService);
 
-            //
-            var doctorRepository = new DoctorRepo(new DoctorFileHandler(_doctorsFilePath));
-            var doctorService = new DoctorService(doctorRepository);
-            DoctorController = new DoctorController(doctorService);
-
             // Secretary
             var secretaryRepo = new SecretaryRepo(new FileHandler<Secretary>(_secretaryFilePath));
             var secretaryService = new SecretaryService(secretaryRepo);
@@ -107,11 +140,6 @@ namespace ClassDijagramV1._0
             var managerRepo = new ManagerRepo(new FileHandler<Manager>(_managerFilePath));
             var managerService = new ManagerService(managerRepo);
             ManagerController = new ManagerController(managerService);
-
-            // Rooms-Storage
-            var roomRepo = new RoomRepoJson(new FileHandler<BindingList<Room>>(_roomsFilePath), new FileHandler<BindingList<Storage>>(_storageFilePath));
-            var roomService = new RoomService(roomRepo);
-            roomController = new RoomController(roomService);
 
             // Equipment
             var equipmentRepo = new EquipmentRepo();
@@ -128,14 +156,45 @@ namespace ClassDijagramV1._0
             var medicalRecordService = new MedicalRecordService(medicalRecordRepo, patientService);
             MedicalRecordController = new MedicalRecordController(medicalRecordService);
 
-            var roomAppointmentRepo = new RoomAppointmentRepo(new FileHandler<BindingList<RoomAppointment>>(_roomAppointmentsFilePath));
-            var roomAppointmentService = new RoomAppointmentService(roomAppointmentRepo);
-            roomAppointmentController = new RoomAppointmentController(roomAppointmentService);
+            // HospitalRating
+            var ratingRepository = new RatingRepo(new FileHandler<HospitalRating>(_hospitalRatingsFilePath), new FileHandler<DoctorRating>(_doctorRatingsFilePath));
+            var ratingService = new RatingService(ratingRepository);
+            RatingController = new RatingController(ratingService);
+
+            // Activity Log
+            var activityRepository = new ActivityRepo(new FileHandler<ActivityLog>(_activityFilePath));
+            var activityService = new ActivityService(activityRepository);
+            ActivityController = new ActivityController(activityService);
+
+            // Banning Patient
+            //var activityRepository = new ActivityRepo(new FileHandler<ActivityLog>(_activityFilePath));
+            var banningPatientService = new BanningPatientService(activityService, accountRepo);
+            BanningPatientController = new BanningPatientController(banningPatientService);
+
+            //Medicines
+            var medicinesRepo = new MedicinesRepo();
+            var medicinesService = new MedicinesService(medicinesRepo);
+            medicinesController = new MedicineController(medicinesService);
+
+            //Reports
+            var reportsRepo = new ReportsRepo();
+            var reportsService = new ReportsService(reportsRepo);
+            reportsController = new ReportsController(reportsService);
+
+            //QuarterlyReports
+            var quarterlyReportsRepo = new QuarterlyReportsRepo();
+            var quarterlyReportsService = new QuarterlyReportsService(quarterlyReportsRepo);
+            QuarterlyReportsController = new QuarterlyReportsController(quarterlyReportsService);
 
             var dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 10);
             dispatcherTimer.Start();
+
+            // PurchaseOrders
+            var purchaseOrderRepo = new PurchaseOrderRepo();
+            var purchaseOrderService = new PurchaseOrderService(purchaseOrderRepo, roomService, equipmentService);
+            PurchaseOrderController = new PurchaseOrderController(purchaseOrderService);
 
             MakeTestData();
 
@@ -147,6 +206,7 @@ namespace ClassDijagramV1._0
             // tako da u trenutku formiranja ovi podaci ne postoje trebalo bi ovde ispod povezati sve
             // da bi se i ovi podaci lepo povezali
             ConnectData();
+
         }
 
         private void dispatcherTimer_Tick(object? sender, EventArgs e)
@@ -158,6 +218,7 @@ namespace ClassDijagramV1._0
         private void Application_Exit(object sender, ExitEventArgs e)
         {
             SaveAll();
+           
         }
 
         private void SaveAll()
@@ -171,41 +232,48 @@ namespace ClassDijagramV1._0
             roomController.SaveRooms();
             MedicalRecordController.SaveMedicalRecords();
             roomAppointmentController.SaveRoomAppointment();
+            RatingController.SaveHospitalRatings();
+            RatingController.SaveDoctorRatings();
+            ActivityController.SaveActivity();
         }
 
         private void MakeTestData()
         {
 
-            Patient p1 = new Patient("Pera", "Peric", "1595959565626", "M", "0655986598", "perap123@gmail.com",
+            Patient p1 = new Patient("Pera", "Peric", "1595959565626", Gender.Male, "0655986598", "perap123@gmail.com",
                 new DateTime(1992, 5, 25), new Address("Srbija", "Novi Sad", "Dimitrija Tucovica", "12"), "2222");
 
-            Secretary s1 = new Secretary("Mika", "Lazic", "8921154845568", "M", "0696523145", "mikal123@gmail.com",
+            Secretary s1 = new Secretary("Mika", "Lazic", "8921154845568", Gender.Male, "0696523145", "mikal123@gmail.com",
                 new DateTime(1994, 3, 15), new Address("Srbija", "Beograd", "Vojvode Putnika", "100/A"));
 
-            Manager m1 = new Manager("Svetlana", "Gogalovic", "265959595959", "Z", "65959895956", "svetlanagogo@gmail.com",
+            Manager m1 = new Manager("Svetlana", "Gogalovic", "265959595959", Gender.Female, "65959895956", "svetlanagogo@gmail.com",
                 new DateTime(1987, 11, 12), new Address("Srbija", "Novi Sad", "Dalmatinska", "123"));
 
-            Doctor d1 = new Doctor("Dragana", "Cvetkovic", "54815181818", "Z", "061235236237", "dcetvkovic49@gmail.com",
-                new DateTime(1991, 7, 17), new Address("Srbija", "Beograd", "Karposeva", "56"), DoctorType.dermatology);
+            Doctor d1 = new Doctor("Dragana", "Cvetkovic", "54815181818", Gender.Female, "061235236237", "dcetvkovic49@gmail.com",
+                new DateTime(1991, 7, 17), new Address("Srbija", "Beograd", "Karposeva", "56"), DoctorType.Dermatology);
 
-            Doctor d2 = new Doctor("Milica", "Jovanovic", "5959884823", "musko", "3875432", "the292200@gmail.com",
-                new DateTime(1989, 5, 20), new Address("Srbija", "Novi Sad", "Bulevar Oslobodjenja", "100"), DoctorType.general);
+            Doctor d2 = new Doctor("Milica", "Jovanovic", "5959884823", Gender.Male, "3875432", "the292200@gmail.com",
+                new DateTime(1989, 5, 20), new Address("Srbija", "Novi Sad", "Bulevar Oslobodjenja", "100"), DoctorType.GeneralSurgery);
 
-            Doctor d3 = new Doctor("Dragisa", "Perovic", "9897112156", "musko", "3875432", "the292200@gmail.com",
-                new DateTime(1985, 2, 22), new Address("Srbija", "Novi Sad", "Strazilovska", "33"), DoctorType.general);
+            Doctor d3 = new Doctor("Dragisa", "Perovic", "9897112156", Gender.Male, "3875432", "the292200@gmail.com",
+                new DateTime(1985, 2, 22), new Address("Srbija", "Novi Sad", "Strazilovska", "33"), DoctorType.General);
 
-            Patient p2 = new Patient("Mira", "Mirkovic", "1659599494", "Z", "065594959", "miram@gmail.com",
+            Doctor d4 = new Doctor("Dragan", "Draskovic", "559885556225", Gender.Male, "569856", "drasko@gmail.com",
+                new DateTime(1968, 4, 12), new Address("Srbija", "Novi Sad", "Strazilovska", "92"), DoctorType.Dermatology);
+
+            Patient p2 = new Patient("Mira", "Mirkovic", "1659599494", Gender.Female, "065594959", "miram@gmail.com",
                 new DateTime(1998, 7, 20), new Address("Srbija", "Subotica", "Bulevar Cara Lazara", "167"), "2525");
 
-            Patient p3 = new Patient("Jovan", "Peric", "959899959885", "M", "069985658", "jovvaann@gmail.com",
+            Patient p3 = new Patient("Jovan", "Peric", "959899959885", Gender.Female, "069985658", "jovvaann@gmail.com",
                 new DateTime(1993, 3, 17), new Address("Srbija", "Smederevo", "Uzicka", "222/A"), "3993");
 
 
             MedicalRecord mr1 = new MedicalRecord(p1.Id, "Dragan", MaritalStatus.Single, "377899", BloodType.O);
+            MedicalRecord mr2 = new MedicalRecord(p2.Id, "Slavisa", MaritalStatus.Divorced, "223223", BloodType.AB);
+            MedicalRecord mr3 = new MedicalRecord(p3.Id, "Miodrag", MaritalStatus.Widow, "565659", BloodType.A);
 
-
-            Room r1 = roomController.GetARoom("id");
-            Room r2 = roomController.GetARoom("id5");
+            Room r1 = roomController.GetRoom("id");
+            Room r2 = roomController.GetRoom("id5");
 
             Appointment? a1 = null;
             Appointment? a2 = null;
@@ -229,8 +297,11 @@ namespace ClassDijagramV1._0
             DoctorController.AddDoctor(d1);
             DoctorController.AddDoctor(d2);
             DoctorController.AddDoctor(d3);
+            DoctorController.AddDoctor(d4);
 
             MedicalRecordController.AddMedicalRecord(mr1);
+            MedicalRecordController.AddMedicalRecord(mr2);
+            MedicalRecordController.AddMedicalRecord(mr3);
 
             if (a1 != null)
             {
@@ -246,14 +317,21 @@ namespace ClassDijagramV1._0
             Account ac2 = new Account(s1.Id, Role.Secretary, "sekretar123", "sekretar123");
             Account ac3 = new Account(m1.Id, Role.Manager, "upravnik123", "upravnik123");
             Account ac4 = new Account(d1.Id, Role.Doctor, "doktor123", "doktor123");
+            Account ac5 = new Account(p3.Id, Role.Patient, "jovan222", "jova123");
+            Account ac6 = new Account(d2.Id, Role.Doctor, "milicaaa", "milicaaa");
+            Account ac7 = new Account(d3.Id, Role.Doctor, "dragisa76", "ddd");
+            Account ac8 = new Account(p2.Id, Role.Patient, "miraa1", "12345678");
+            Account ac9 = new Account(d4.Id, Role.Doctor, "draskoo", "drasko68");
 
             AccountController.AddAccount(ac1);
             AccountController.AddAccount(ac2);
             AccountController.AddAccount(ac3);
             AccountController.AddAccount(ac4);
-
-            // Cuvamo i ovde odmah u fajl (sad posto se povezuju podaci dole ne mora ovo)
-            // SaveAll();
+            AccountController.AddAccount(ac5);
+            AccountController.AddAccount(ac6);
+            AccountController.AddAccount(ac7);
+            AccountController.AddAccount(ac8);
+            AccountController.AddAccount(ac9);
 
         }
 
@@ -355,6 +433,19 @@ namespace ClassDijagramV1._0
 
             // Updatujemo brojac
             Appointment.idCounter = maxId;
+
+            // Narudzbine
+            List<PurchaseOrder> purchaseOrders = PurchaseOrderController.GetPurchaseOrders();
+            if (purchaseOrders.Count > 0)
+            {
+                maxId = purchaseOrders.Max(order => order.Id);
+                PurchaseOrder.idCounter = maxId;
+            }
+        }
+
+        private void Application_Deactivated(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }

@@ -1,4 +1,5 @@
 using ClassDijagramV1._0.Model;
+using ClassDijagramV1._0.Model.DTO;
 using Model;
 using Service;
 using System;
@@ -30,22 +31,6 @@ namespace Controller
         public void UpdateAppointment(int oldAppointmentID, Appointment updatedAppointment)
         {
             _appointmentService.UpdateAppointment(oldAppointmentID, updatedAppointment);
-        }
-
-        public ObservableCollection<Appointment> GetAllAppointmentsByPatient(int patientID)
-        {
-            return _appointmentService.GetAllAppointmentsByPatient(patientID);
-        }
-
-        public ObservableCollection<Appointment> GetAllAppointments()
-        {
-            return _appointmentService.GetAllAppointments();
-        }
-
-        public Appointment GetOneAppointment(Appointment appointment)
-        {
-            // TODO: implement
-            return null;
         }
 
         public void SaveAppointments()
@@ -100,5 +85,16 @@ namespace Controller
             return _appointmentService.GetListOfAppointments();
         }
 
+        /// <summary>
+        /// Pronalazi najblizi slobodan termin za bilo kog doktora sa prosledjenom specijalizacijom
+        /// </summary>
+        /// <param name="doctorType">Specijalizacija</param>
+        /// <param name="duration">Trajanje</param>
+        /// <param name="from">Odakle trazimo</param>
+        /// <returns></returns>
+        public DoctorWithTerminAndRoomDTO? FindClosestFreeTerminForSpecialization(DoctorType doctorType, DateTime from, int duration)
+        {
+            return _appointmentService.FindClosestFreeTerminForSpecialization(doctorType, from, duration);
+        }
     }
 }

@@ -8,11 +8,13 @@
         xmlns:converters="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels.Converters"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        AllowsTransparency="True"
         Background="{StaticResource SBackground}"
         Foreground="{StaticResource SCyan}"
         FontFamily="#Poppins"
         FontSize="24"
-        Title="AddAccount" Height="470" Width="500">
+        Height="570" Width="500">
 
     <Window.InputBindings>
         <KeyBinding Key="Return"
@@ -31,86 +33,142 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid VerticalAlignment="Top"
-          HorizontalAlignment="Center"
-          Margin="0,75,0,0">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Row 1 -->
-        <TextBlock Grid.Row="0" Grid.Column="0"
-                   Text="Person:"
+        <!-- Header -->
+        <Grid Grid.Row="0"
+              MouseDown="Header_MouseDown"
+              Background="{StaticResource SBackground}">
+            <!-- Title -->
+            <TextBlock Text="Add Account"
+                       Margin="0,5,0,1"
+                       FontSize="24"
+                       Foreground="{StaticResource SLightGrayShade}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+
+            <!-- Window Buttons -->
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,2,3">
+                <Button Content="&#x1f5d5;"
+                        Background="Transparent"
+                        Foreground="{StaticResource SLightGrayShade}"
+                        BorderThickness="0"
+                        Padding="0,1,0,3"
+                        Click="ButtonMinimize_Click"/>
+                <Button Content="&#x1F5D6;"
+                        Background="Transparent"
+                        Foreground="{StaticResource SLightGrayShade}"
+                        BorderThickness="0"
+                        Padding="5 0"
+                        Margin="0,7,0,0"
+                        FontSize="14"
+                        Click="WindowStateButton_Click"/>
+                <Button Content="&#10006;"
+                        FontSize="10"
+                        Background="Transparent"
+                        Foreground="{StaticResource SLightGrayShade}"
+                        BorderThickness="0"
+                        Padding="5 0"
+                        Margin="0,8,0,0"
+                        Click="ExitButton_Click"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" 
+              VerticalAlignment="Top"
+              HorizontalAlignment="Center"
+              Margin="0,45,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Row 1 -->
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                   Text="Name:"
                    VerticalAlignment="Center"
                    Margin="0,0,15,15"/>
-        <ComboBox Grid.Row="0" Grid.Column="1"
-                  Width="300"
-                  Height="65"
-                  Padding="5"
-                  Margin="0,0,0,15"
-                  ItemsSource="{Binding Persons}"
-                  SelectedItem="{Binding Person, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                  Style="{StaticResource ComboBoxStyleAccounts}"
-                  ItemTemplate="{StaticResource ItemTemplatePerson}"
-                  ItemContainerStyle="{StaticResource ItemContainerStyle}">
-        </ComboBox>
+            <TextBox Grid.Row="0" Grid.Column="1"
+                 VerticalAlignment="Center"
+                 Padding="5"
+                 Width="300"
+                 Margin="0,0,0,15"
+                 Style="{StaticResource TextBoxStyleAccount}"
+                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <!-- Row 2 -->
-        <TextBlock Grid.Row="1" Grid.Column="0"
+            <!-- Row 2 -->
+            <TextBlock Grid.Row="1" Grid.Column="0"
+                   Text="Surname:"
+                   VerticalAlignment="Center"
+                   Margin="0,0,15,15"/>
+            <TextBox Grid.Row="1" Grid.Column="1"
+                 VerticalAlignment="Center"
+                 Padding="5"
+                 Width="300"
+                 Margin="0,0,0,15"
+                 Style="{StaticResource TextBoxStyleAccount}"
+                 Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <!-- Row 3 -->
+            <TextBlock Grid.Row="2" Grid.Column="0"
+                   Text="Jmbg:"
+                   VerticalAlignment="Center"
+                   Margin="0,0,15,15"/>
+            <TextBox Grid.Row="2" Grid.Column="1"
+                 VerticalAlignment="Center"
+                 Padding="5"
+                 Width="300"
+                 Margin="0,0,0,15"
+                 Style="{StaticResource TextBoxStyleAccount}"
+                 Text="{Binding Jmbg, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <!-- Row 4 -->
+            <TextBlock Grid.Row="3" Grid.Column="0"
                    Text="Username:"
                    VerticalAlignment="Center"
                    Margin="0,0,15,15"/>
-        <TextBox Grid.Row="1" Grid.Column="1"
+            <TextBox Grid.Row="3" Grid.Column="1"
                  VerticalAlignment="Center"
                  Padding="5"
+                 Width="300"
                  Margin="0,0,0,15"
                  Style="{StaticResource TextBoxStyleAccount}"
-                 Text="{Binding Username}"/>
+                 Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <!-- Row 3 -->
-        <TextBlock Grid.Row="2" Grid.Column="0"
+            <!-- Row 5 -->
+            <TextBlock Grid.Row="4" Grid.Column="0"
                    Text="Password:"
                    VerticalAlignment="Center"
                    Margin="0,0,15,15"/>
-        <TextBox Grid.Row="2" Grid.Column="1"
+            <TextBox Grid.Row="4" Grid.Column="1"
                  VerticalAlignment="Center"
                  Padding="5"
                  Margin="0,0,0,15"
                  Style="{StaticResource TextBoxStyleAccount}"
-                 Text="{Binding Password}"/>
+                 Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <!-- Row 4 -->
-        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" 
-                    Grid.ColumnSpan="2"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center">
-            <TextBlock Text="Guest"
-                       Margin="0,0,10,0"
-                       VerticalAlignment="Center"/>
-            <CheckBox VerticalContentAlignment="Center"
-                      HorizontalAlignment="Center"
-                      Style="{StaticResource CircleCheckBox}"
-                      Foreground="{StaticResource SCyan}"
-                      Checked="CheckBox_Checked"
-                      Unchecked="CheckBox_Unchecked">
-            </CheckBox>
-        </StackPanel>
-
-        <!-- Row 5 -->
-        <Button Grid.Row="4" Grid.Column="0"
+            <!-- Row 6 -->
+            <Button Grid.Row="5" Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Content="Add"
                 Margin="0,40,0,0"
                 Style="{StaticResource AccountButtonsStyle}"
                 Command="{Binding AddAccountCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
+        </Grid>
     </Grid>
 </Window>

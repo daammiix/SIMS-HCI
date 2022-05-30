@@ -4,6 +4,8 @@
 // Purpose: Definition of Class Doctor
 
 using ClassDijagramV1._0.Model;
+using ClassDijagramV1._0.Model.Enums;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,10 +17,11 @@ namespace Model
     {
         #region Properties
 
-        public DoctorType Type;
-
         [JsonIgnore]
-        public List<Surgery> Surgery { get; set; }
+        public List<Appointment> Appointments { get; set; }
+
+        public DoctorType Type { get; set; }
+
 
         #endregion
 
@@ -30,18 +33,19 @@ namespace Model
 
         }
 
-        public Doctor(string name, string surname, string jmbg, string gender, string phoneNumber, string email,
-            DateTime dateOfBirth, Address adr, DoctorType type, List<Surgery> surgery = null) : base(name, surname, jmbg,
+        public Doctor(string name, string surname, string jmbg, Gender gender, string phoneNumber, string email,
+            DateTime dateOfBirth, Address adr, DoctorType type, List<Appointment> appointments = null) : base(name, surname, jmbg,
                 gender, phoneNumber, email, dateOfBirth, adr)
         {
-            if (surgery == null)
+            if (appointments == null)
             {
-                Surgery = new List<Surgery>();
+                Appointments = new List<Appointment>();
             }
             else
             {
-                Surgery = surgery;
+                Appointments = appointments;
             }
+
             Type = type;
         }
 
