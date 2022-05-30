@@ -16,12 +16,17 @@ namespace ClassDijagramV1._0.Service
     {
         private RoomAppointmentRepo roomAppointmentRepo;
         private RoomController roomController;
+        public BindingList<RoomAppointment> roomAppointments;
+        public BindingList<Room> roomsList;
 
         public RoomAppointmentService(RoomAppointmentRepo roomAppointmentRepo)
         {
             this.roomAppointmentRepo = roomAppointmentRepo;
             var app = Application.Current as App;
             roomController = app.roomController;
+            roomAppointments = roomAppointmentRepo.GetAllRoomAppointments();
+            roomsList = roomController.GetAllRooms();
+
         }
         public void AddRoomAppointment(RoomAppointment roomAppointment)
         {
@@ -74,8 +79,6 @@ namespace ClassDijagramV1._0.Service
 
         public void ScheduledAppointments()
         {
-            BindingList<RoomAppointment> roomAppointments = roomAppointmentRepo.GetAllRoomAppointments();
-            BindingList<Room> roomsList = roomController.GetAllRooms();
             for (int i = 0; i < roomAppointments.Count; i++)
             {
                 var appointment = roomAppointments[i];
@@ -85,48 +88,74 @@ namespace ClassDijagramV1._0.Service
                 }
                 if (DateTime.Now < appointment.startDate + appointment.duration)
                 {
-                    foreach (var currentRoom in roomsList)
-                    {
-                        if (currentRoom.RoomID == appointment.roomId || currentRoom.RoomID == appointment.RoomIDToMerge)
-                        {
-                            currentRoom.RoomStatus = "Renoviranje";
-                        }
-                    }
+                    ChangingStatusRenovating(appointment);
                     continue;
                 }
-                foreach (var currentRoom in roomsList)
-                {
-                    if (currentRoom.RoomID == appointment.roomId)
-                    {
-                        currentRoom.RoomStatus = "Aktivna";
-                    }
-                }
-                if (appointment.newRoomName != null)
-                {
-                    Room room = roomController.GetRoom(appointment.roomId);
-                    room.RoomName = appointment.newRoomName;
-                }
-                if (appointment.RoomIDToMerge != null)
-                {
-                    for(int j = 0; j < roomsList.Count; j++)
-                    {
-                        var currentRoom = roomsList[j];
-                        if (currentRoom.RoomID == appointment.RoomIDToMerge)
-                        {
-                            roomController.DeleteRoom(currentRoom.RoomID);
-                        }
-                    }
 
-                }
-                if (appointment.RoomToSplit != null)
-                {
-                    roomController.AddRoom(appointment.RoomToSplit);
-                }
+                ChangingStatusActive(appointment);
+
+                ChangePurpose(appointment);
+                MergeRoom(appointment);
+                SplitRoom(appointment);
+
                 roomAppointmentRepo.DeleteRoomAppointmentAt(i--);
             }
         }
 
        
+        public void SplitRoom(RoomAppointment appointment)
+        {
+            if (appointment.RoomToSplit != null)
+            {
+                roomController.AddRoom(appointment.RoomToSplit);
+            }
+        }
+
+        public void ChangePurpose(RoomAppointment appointment)
+        {
+            if (appointment.newRoomName != null)
+            {
+                Room room = roomController.GetRoom(appointment.roomId);
+                room.RoomName = appointment.newRoomName;
+            }
+        }
+
+        public void MergeRoom(RoomAppointment appointment)
+        {
+            if (appointment.RoomIDToMerge != null)
+            {
+                for (int j = 0; j < roomsList.Count; j++)
+                {
+                    var currentRoom = roomsList[j];
+                    if (currentRoom.RoomID == appointment.RoomIDToMerge)
+                    {
+                        roomController.DeleteRoom(currentRoom.RoomID);
+                    }
+                }
+            }
+        }
+
+        public void ChangingStatusActive(RoomAppointment appointment)
+        {
+            foreach (var currentRoom in roomsList)
+            {
+                if (currentRoom.RoomID == appointment.roomId)
+                {
+                    currentRoom.RoomStatus = "Aktivna";
+                }
+            }
+        }
+
+        public void ChangingStatusRenovating(RoomAppointment appointment)
+        {
+            foreach (var currentRoom in roomsList)
+            {
+                if (currentRoom.RoomID == appointment.roomId || currentRoom.RoomID == appointment.RoomIDToMerge)
+                {
+                    currentRoom.RoomStatus = "Renoviranje";
+                }
+            }
+        }
 
         /// <summary>
         /// Proverava da li je soba u datom terminu slobodna odnosno nema nikakvi roomAppointmenta

@@ -22,7 +22,7 @@ namespace Service
 
         public void AddRoom(Room room)
         {
-            if (this.CheckIfUniq(room, false))
+            if (this.CheckIfUniq(room, false) && this.CheckIfValid(room))
             {
                 repo.CreateNewRoom(room);
             }
@@ -35,7 +35,7 @@ namespace Service
 
         public void ChangeRoom(Room room)
         {
-            if (this.CheckIfUniq(room, true))
+            if (this.CheckIfUniq(room, true) && this.CheckIfValid(room))
             {
                 repo.SetRoom(room);
             }
@@ -70,10 +70,6 @@ namespace Service
                 {
                     return false;
                 }
-                if((room.Floor > 4) || (room.RoomNumber > 499))
-                {
-                    return false;
-                }
                 if (!existingRoom && room.Floor == r.Floor)
                 {
                     if ((room.RoomNumber == r.RoomNumber))
@@ -85,7 +81,14 @@ namespace Service
             return true;
         }
 
-        //public Boolean Validation()
+        public Boolean CheckIfValid(Room room)
+        {
+            if ((room.Floor > 4) || (room.RoomNumber > 499))
+            {
+                return false;
+            }
+            return true;
+        }
 
         public void SaveRooms()
         {

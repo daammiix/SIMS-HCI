@@ -33,7 +33,9 @@
                    Margin="5,10,0,0"/>
             <TextBox Width="250"
                  Height="35"
+                 Margin="0,0,0,5"
                  VerticalContentAlignment="Center"
+                 TextChanged="TextBox_TextChanged"
                  HorizontalAlignment="Right"
                  Style="{StaticResource FancySearchBox}"/>
             <StackPanel>

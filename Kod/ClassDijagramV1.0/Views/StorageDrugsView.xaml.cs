@@ -112,5 +112,19 @@ namespace ClassDijagramV1._0.Views
             medicineComponents.Show();
         }
 
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var txb = sender as TextBox;
+            if (txb.Text != "")
+            {
+                var filteredList = MedicinesList.Where(r => (r.Medicines.ID.ToLower().Contains(txb.Text.ToLower()) || r.Medicines.Name.ToLower().Contains(txb.Text.ToLower()) || r.Medicines.Status.ToLower().Contains(txb.Text.ToLower()) || r.Quantity.ToString().Contains(txb.Text)));
+                DrugsListGrid.ItemsSource = null;
+                DrugsListGrid.ItemsSource = filteredList;
+            }
+            else
+            {
+                DrugsListGrid.ItemsSource = MedicinesList;
+            }
+        }
     }
 }

@@ -4,7 +4,7 @@
     "RoomName": "Operaciona Sala",
     "Floor": 2,
     "RoomNumber": 23,
-    "RoomStatus": "Renoviranje",
+    "RoomStatus": "Aktivna",
     "EquipmentList": [
       {
         "EquipmentID": "OMR5",
@@ -40,7 +40,7 @@
     "RoomName": "Operaciona Sala",
     "Floor": 3,
     "RoomNumber": 3,
-    "RoomStatus": "Renoviranje",
+    "RoomStatus": "Aktivna",
     "EquipmentList": [],
     "MedicineList": []
   },
