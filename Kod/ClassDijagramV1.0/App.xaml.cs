@@ -219,7 +219,7 @@ namespace ClassDijagramV1._0
         private void Application_Exit(object sender, ExitEventArgs e)
         {
             SaveAll();
-           
+
         }
 
         private void SaveAll()
@@ -446,6 +446,7 @@ namespace ClassDijagramV1._0
 
         private void Application_Deactivated(object sender, EventArgs e)
         {
+            SaveAll();
             Environment.Exit(0);
         }
     }
