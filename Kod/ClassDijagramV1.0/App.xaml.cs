@@ -43,6 +43,7 @@ namespace ClassDijagramV1._0
         public static string _medicalRecordFilePath = "../../../Data/medicalRecords.json";
         public string _storageFilePath = "../../../Data/storage.json";
         public string _roomAppointmentsFilePath = "../../../Data/roomAppointments.json";
+        public static string _purchaseOrdersFilePath = "../../../Data/purchaseOrders.json";
         public static string _hospitalRatingsFilePath = "../../../Data/hospitalratings.json";
         public static string _doctorRatingsFilePath = "../../../Data/doctorratings.json";
         public static string _activityFilePath = "../../../Data/activity.json";
