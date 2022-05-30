@@ -14,7 +14,7 @@
                                     OverridesDefaultStyle="True"
                                     Padding="5"
                                     Foreground="#1F1313"
-                                    x:Name="CRUDButton"/>
+                                    x:Name="YesNoButton"/>
                             <TextBlock IsHitTestVisible="False"
                                        Text="{TemplateBinding Property=Content}"
                                        VerticalAlignment="Center"

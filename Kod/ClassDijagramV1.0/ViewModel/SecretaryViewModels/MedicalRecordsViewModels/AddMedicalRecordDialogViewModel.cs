@@ -24,9 +24,29 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewMod
 
         private RelayCommand _addMedicalRecord;
 
+        // Kad napravimo medicinski karton acc vise nije guest
+        private AccountController _accountController;
+
         #endregion
 
         #region Properties
+
+        // Za combo boxove
+        public Array MaritalStatuses
+        {
+            get
+            {
+                return Enum.GetValues(typeof(MaritalStatus));
+            }
+        }
+
+        public Array BloodTypes
+        {
+            get
+            {
+                return Enum.GetValues(typeof(BloodType));
+            }
+        }
 
         public ObservableCollection<Patient> Patients { get; set; }
 
@@ -34,11 +54,29 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewMod
 
         public string ParentName { get; set; }
 
+        public string Phone { get; set; }
+
+        public string Email { get; set; }
+
+        public string Country { get; set; }
+
+        public string City { get; set; }
+
+        public string Street { get; set; }
+
+        public string StreetNumber { get; set; }
+
         public string HealthCardNumber { get; set; }
 
-        public MaritalStatus MaritalStatus { get; set; }
+        public string SocialSecurityNumber { get; set; }
 
-        public BloodType BloodType { get; set; }
+        public DateTime DateOfBirth { get; set; }
+
+        public MaritalStatus? MaritalStatus { get; set; }
+
+        public BloodType? BloodType { get; set; }
+
+        public Gender Gender { get; set; }
 
         public List<string> Allergens { get; set; }
 
@@ -74,6 +112,8 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewMod
 
             _medicalRecordController = app.MedicalRecordController;
 
+            _accountController = app.AccountController;
+
             Patients = new ObservableCollection<Patient>();
 
             // Dodamo sve pacijente koji nemaju karton u Patients
@@ -99,14 +139,20 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewMod
             // Kastujemo object u Window
             Window window = o as Window;
 
+            // Popunimo informacije pacijenta
+            FillPatientInfo();
+
             // Napravi medical record i njegov view model
-            MedicalRecord newMedicalRecord = new MedicalRecord(SelectedPatient.Id, ParentName, MaritalStatus, HealthCardNumber,
-                BloodType, Allergens, Diseases);
+            MedicalRecord newMedicalRecord = new MedicalRecord(SelectedPatient.Id, ParentName, MaritalStatus.Value, HealthCardNumber,
+                BloodType.Value, Allergens, Diseases);
             MedicalRecordViewModel newMedicalRecordViewModel = new MedicalRecordViewModel(newMedicalRecord);
 
             // Dodamo medical Record u bazu i njegov ViewModel u tabelu
             _medicalRecordController.AddMedicalRecord(newMedicalRecord);
             MedicalRecords.Add(newMedicalRecordViewModel);
+
+            // Stavimo pacijentov acc da ne bude vise guest
+            ChangeAccountIsGuest();
 
             // Izbacimo pacijenta iz liste pacijenata koji nemaju karton
             Patients.Remove(SelectedPatient);
@@ -116,10 +162,48 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewMod
                 window.Close();
         }
 
+        /// <summary>
+        /// Popunjava informacije vezane za pacijenta iz inputa
+        /// </summary>
+        private void FillPatientInfo()
+        {
+            SelectedPatient.Email = Email;
+            SelectedPatient.Gender = Gender;
+            SelectedPatient.PhoneNumber = Phone;
+            SelectedPatient.SocialSecurityNumber = SocialSecurityNumber;
+            SelectedPatient.DateOfBirth = DateOfBirth;
+            SelectedPatient.Address = new Address(Country, City, Street, StreetNumber);
+        }
+
+        /// <summary>
+        /// Stavlja acc da ne bude guest, pozove nakon pravljenja kartona
+        /// </summary>
+        private void ChangeAccountIsGuest()
+        {
+            // Stavimo pacijentov acc da ne bude vise guest
+            Account? acc = _accountController.GetAccountByPersonId(SelectedPatient.Id);
+            if (acc != null)
+            {
+                acc.IsGuest = false;
+            }
+        }
+
         private bool AddMedicalRecordCanExecute()
         {
-            if (SelectedPatient != null && ParentName != "" && HealthCardNumber != "")
+            if (SelectedPatient != null &&
+                ParentName != "" &&
+                HealthCardNumber != "" &&
+                Phone != "" &&
+                City != "" &&
+                Country != "" &&
+                Street != "" &&
+                StreetNumber != "" &&
+                MaritalStatus != null &&
+                BloodType != null &&
+                DateOfBirth != DateTime.MinValue)
+            {
                 return true;
+            }
 
             return false;
         }

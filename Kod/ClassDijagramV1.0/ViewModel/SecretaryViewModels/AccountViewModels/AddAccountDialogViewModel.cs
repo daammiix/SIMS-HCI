@@ -20,8 +20,10 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
 
         private string _username = "";
         private string _password = "";
+        private string _name = "";
+        private string _surname = "";
+        private string _jmbg = "";
         // Izabrana osoba ciji acc pravimo
-        private Person? _person = null;
         private ObservableCollection<Person> _persons;
         private ObservableCollection<Account> _accounts;
 
@@ -63,10 +65,22 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
             }
         }
 
-        public Person Person
+        public string Name
         {
-            get { return _person; }
-            set { _person = value; }
+            get { return _name; }
+            set { _name = value; }
+        }
+
+        public string Surname
+        {
+            get { return _surname; }
+            set { _surname = value; }
+        }
+
+        public string Jmbg
+        {
+            get { return _jmbg; }
+            set { _jmbg = value; }
         }
 
         public ObservableCollection<Person> Persons
@@ -170,24 +184,23 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
         private void AddAccount(object o)
         {
             Window window = o as Window;
+            // Napravimo novog pacijena od inputa
+            Patient p = CreatePatientFromInput();
             // napravimo novi account od inputa
-            Account newAccount = new Account(_person.Id, DetermineRole(_person), Username, Password, Username.StartsWith("Guest"));
-            // proverimo da li account sa tim id-em postoji, jedna osoba moze da ima samo jedan account
+            Account newAccount = new Account(p.Id, Role.Patient, Username, Password, true);
             // proverimo da li account sa istim username-om postoji, jedan username moze da bude vezan samo za jedan acc
-            if (_accountController.DoesAccountWithSameIdExist(_person.Id)
-                || _accountController.DoesAccountWithSameUsernameExist(Username))
+            if (_accountController.DoesAccountWithSameUsernameExist(Username))
             {
                 // Priakzemo samo error dialog
                 MessageBox.Show("Username already in use or person already has account!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
+                // Dodamo pacijenta u bazu
+                _patientController.AddPatient(p);
                 // Dodamo account i u bazu i u tabelu preko AccountViewModela i zatvorimo window
                 _accountController.AddAccount(newAccount);
                 AccountsViewModels.Add(new AccountViewModel(newAccount));
-
-                // Izbacimo osobu iz liste osoba koje nemaju acc
-                Persons.Remove(_person);
 
                 window.Close();
             }
@@ -195,32 +208,21 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
         }
 
         /// <summary>
-        /// Odredjuje role za account na osnovu prosledjene osobe
+        /// Pravi pacijenta na osnovu inputa
         /// </summary>
-        /// <param name="p"></param>
-        /// <returns></returns>
-        private Role DetermineRole(Person p)
+        private Patient CreatePatientFromInput()
         {
-            Role? ret = null;
-            if (p is Patient)
+            Patient p = new Patient()
             {
-                ret = Role.Patient;
-            }
-            else if (p is Secretary)
-            {
-                ret = Role.Secretary;
-            }
-            else if (p is Doctor)
-            {
-                ret = Role.Doctor;
-            }
-            else
-            {
-                ret = Role.Manager;
-            }
+                Id = ++Patient.idCounter,
+                Name = this.Name,
+                Surname = this.Surname,
+                Jmbg = this.Jmbg,
+                Appointments = new List<Appointment>(),
+                MedicalRecordNumber = null
+            };
 
-            // Ako se desi da je ret = null sto je nemoguce vrati pacijenta
-            return ret ?? Role.Patient;
+            return p;
         }
 
         /// <summary>
@@ -230,7 +232,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
         private bool CanAddAccount()
         {
             // Moze ako polja nisu prazna
-            if (Username.Equals("") || Password.Equals("") || _person == null)
+            if (Username.Equals("") || Password.Equals("") || Name.Equals("") || Surname.Equals(""))
             {
                 return false;
             }

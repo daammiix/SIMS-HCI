@@ -7,10 +7,17 @@ using System;
 
 namespace Model
 {
-   public enum DoctorType
-   {
-      general,
-      neurology,
-      dermatology
-   }
+    public enum DoctorType
+    {
+        General,
+        Neurology,
+        Dermatology,
+        Ophthalmology,
+        Pediatrics,
+        PlasticSurgery,
+        Psychiatry,
+        Rheumatology,
+        Urology,
+        GeneralSurgery
+    }
 }

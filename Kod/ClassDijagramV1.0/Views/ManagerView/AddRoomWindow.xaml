@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ClassDijagramV1._0.Views"
+        xmlns:local="clr-namespace:ClassDijagramV1._0.Views.ManagerView"
+        xmlns:viewModel="clr-namespace:ClassDijagramV1._0.ViewModel"
         mc:Ignorable="d"
         Title="AddRoomWindow"
         Height="500"
@@ -15,6 +16,7 @@
         FontFamily="Berlin Sans FB Demi"
         BorderThickness="4"
         BorderBrush="#455736">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
@@ -62,8 +64,8 @@
         </Grid>
         <StackPanel Grid.Row="2">
             <WrapPanel HorizontalAlignment="Right">
-                <Button x:Name="SaveAddedRoom" HorizontalAlignment="Right" Height="32" Width="90" Content="Sačuvaj" Margin="5,10,10,0" Style="{StaticResource CRUDButton}" Click="SaveAddedRoom_Click"/>
-                <Button x:Name="QuitAddedRoom" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,15,0" Style="{StaticResource CRUDButton}" Click="QuitAddedRoom_Click"/>
+                <Button x:Name="SaveAddedRoom" HorizontalAlignment="Right" Height="32" Width="90" Content="Sačuvaj" Margin="5,10,10,0" Style="{StaticResource CRUDButton}" Command="{Binding SaveNewRoom}"/>
+                <Button x:Name="QuitAddedRoom" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,15,0" Style="{StaticResource CRUDButton}" Command="{Binding CancelNewRoom}"/>
             </WrapPanel>
         </StackPanel>
     </Grid>

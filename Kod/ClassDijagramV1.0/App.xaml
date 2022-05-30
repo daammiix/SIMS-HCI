@@ -5,10 +5,13 @@
              xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
              xmlns:secretaryViewModel="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels"
              xmlns:accountViewModel="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels"
+             xmlns:managerView="clr-namespace:ClassDijagramV1._0.Views.ManagerView"
              xmlns:secretaryView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView"
              xmlns:accountsView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.AccountsView"
              xmlns:medicalRecordsView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.MedicalRecordsView"
-             xmlns:medicalRecourdsViewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewModels"
+             xmlns:medicalRecordsViewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewModels"
+             xmlns:equipmentView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.EquipmentView"
+             xmlns:equipmentViewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.EquipmentViewModels"
              xmlns:appointmentsViewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModels"
              xmlns:appointmentsView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.AppointmentsView"
              xmlns:viewModel="clr-namespace:ClassDijagramV1._0.ViewModel"
@@ -33,37 +36,74 @@
                 <accountsView:AccountsMainView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type medicalRecourdsViewModels:MedicalRecordsMainViewModel}">
+            <DataTemplate DataType="{x:Type medicalRecordsViewModels:MedicalRecordsMainViewModel}">
                 <medicalRecordsView:MedicalRecordsMainView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type equipmentViewModels:EquipmentMainViewModel}">
+                <equipmentView:EquipmentMainView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:MainRoomsViewModel}">
+                <managerView:MainRoomsView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewModel:RoomsViewModel}">
-                <view:RoomsView/>
+                <managerView:RoomsView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:WorkersViewModel}">
+                <managerView:Workers/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:CalendarViewModel}">
-                <view:CalendarView/>
+                <managerView:CalendarView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:EquipViewModel}">
+                <managerView:Equip/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:RenovatingMergeViewModel}">
+                <managerView:RenovatingMerge/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:RenovatingSplitViewModel}">
+                <managerView:RenovatingSplit/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:RenovatingRoomViewModel}">
+                <managerView:RenovaitingWindow/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:ChangingPurposeViewModel}">
+                <managerView:ChangingPurposeWindow/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:StorageViewModel}">
-                <view:StorageView/>
+                <managerView:StorageView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:StorageEquipViewModel}">
+                <managerView:StorageEquip/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:StorageMedicalEquipmentViewModel}">
-                <view:StorageMedicalEquipmentView/>
+                <managerView:StorageMedicalEquipmentView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:StorageSuppliesViewModel}">
-                <view:StorageSuppliesView/>
+                <managerView:StorageSuppliesView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:StorageInventoryViewModel}">
-                <view:StorageInventoryView/>
+                <managerView:StorageInventoryView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:StorageDrugsViewModel}">
-                <view:StorageDrugsView/>
+                <managerView:StorageDrugsView/>
             </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

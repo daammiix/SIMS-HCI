@@ -2,6 +2,7 @@
 using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Util;
 using ClassDijagramV1._0.Views.SecretaryView.AccountsView;
+using Controller;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,6 +19,8 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
 
         private AccountController _accountController;
 
+        private PatientController _patientController;
+
         private RelayCommand _addAccountCommand;
 
         // Selectovan AccountViewModel iz tabele, na pocetku je null
@@ -30,7 +33,6 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
         private RelayCommand _changeAccountCommand;
 
         #endregion
-
 
         #region Properties
 
@@ -111,6 +113,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
             var app = Application.Current as App;
 
             _accountController = app.AccountController;
+            _patientController = app.PatientController;
 
             Accounts = new ObservableCollection<AccountViewModel>();
 
@@ -137,9 +140,22 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
         /// </summary>
         private void RemoveAccount()
         {
+            // izbrisemo pacijenta koji je bio vezan za acc
+            RemoveAccountsPatient(_accountViewModel.PersonId);
+
             // izbrisemo ga i iz observable kolekcije accountViewModela i sam acc iz repozitorijuma
             _accountController.DeleteAccount(_accountViewModel.Username);
             Accounts.Remove(_accountViewModel);
+
+        }
+
+        /// <summary>
+        /// Izbrisemo pacijenta koji je vezan za acc
+        /// </summary>
+        /// <param name="patientId">Id pacijenta kojeg brisemo</param>
+        private void RemoveAccountsPatient(int patientId)
+        {
+            _patientController.RemovePatient(patientId);
         }
 
         /// <summary>

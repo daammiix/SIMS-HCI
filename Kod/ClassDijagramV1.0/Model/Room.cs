@@ -1,5 +1,6 @@
 using ClassDijagramV1._0;
 using ClassDijagramV1._0.Model;
+using ClassDijagramV1._0.Views.ManagerView;
 using Controller;
 using ClassDijagramV1._0.Views;
 using System;
@@ -12,15 +13,85 @@ namespace Model
 {
     public class Room : ObservableObject
     {
-        public String RoomID { get; set; }
-        public String RoomName { get; set; }
-        public int Floor { get; set; }
-        public int RoomNumber { get; set; }
-        public String RoomStatus { get; set; }
-        public BindingList<RoomEquipmentBinding> EquipmentList { get; set; } = new BindingList<RoomEquipmentBinding>();
+        private String _roomID;
+        private String _roomName;
+        private int _floor;
+        private int _roomNumber;
+        private String _roomStatus;
+        private BindingList<RoomEquipmentBinding> _equipmentList = new BindingList<RoomEquipmentBinding>();
+        private BindingList<RoomMedicineBinding> _medicineList = new BindingList<RoomMedicineBinding>();
 
-        public BindingList<RoomMedicineBinding> MedicineList { get; set; } = new BindingList<RoomMedicineBinding>();
+        public String RoomID
+        {
+            get { return _roomID; }
+            set
+            {
+                if (_roomID == value) { return; }
+                _roomID = value;
+                OnPropertyChanged("RoomID");
+            }
+        }
+        public String RoomName
+        {
+            get { return _roomName; }
+            set
+            {
+                if (_roomName == value) { return; }
+                _roomName = value;
+                OnPropertyChanged("RoomName");
+            }
+        }
+        public int Floor
+        {
+            get { return _floor; }
+            set
+            {
+                if (_floor == value) { return; }
+                _floor = value;
+                OnPropertyChanged("Floor");
+            }
+        }
+        public int RoomNumber
+        {
+            get { return _roomNumber; }
+            set
+            {
+                if (_roomNumber == value) { return; }
+                _roomNumber = value;
+                OnPropertyChanged("RoomNumber");
+            }
+        }
+        public String RoomStatus
+        {
+            get { return _roomStatus; }
+            set
+            {
+                if (_roomStatus == value) { return; }
+                _roomStatus = value;
+                OnPropertyChanged("RoomStatus");
+            }
+        }
+        public BindingList<RoomEquipmentBinding> EquipmentList
+        {
+            get { return _equipmentList; }
+            set
+            {
+                if (_equipmentList == value) { return; }
+                _equipmentList = value;
+                OnPropertyChanged("EquipmentList");
+            }
+        }
 
+        public BindingList<RoomMedicineBinding> MedicineList
+        {
+            get { return _medicineList; }
+            set
+            {
+                if (_medicineList == value) { return; }
+                _medicineList = value;
+                OnPropertyChanged("MedicineList");
+            }
+        }
         public Room()
         {
 
@@ -165,22 +236,61 @@ namespace Model
 
     }
 
-    public class RoomEquipmentBinding
+    public class RoomEquipmentBinding : ObservableObject
     {
-        public String EquipmentID { get; set; }
-        public int Quantity { get; set; }
+        String _equipmentID;
+        int _quantity;
+
+        public String EquipmentID {
+            get { return _equipmentID; }
+            set
+            {
+                if (_equipmentID == value) { return; }
+                _equipmentID = value;
+                OnPropertyChanged("EquipmentID");
+            }
+        }
+        public int Quantity {
+            get { return _quantity; }
+            set
+            {
+                if (_quantity == value) { return; }
+                _quantity = value;
+                OnPropertyChanged("Quantity");
+            }
+        }
 
         public RoomEquipmentBinding(String equipmentID, int quantity)
         {
-            this.EquipmentID = equipmentID;
-            this.Quantity = quantity;
+            _equipmentID = equipmentID;
+            _quantity = quantity;
         }
     }
 
-    public class RoomMedicineBinding
+    public class RoomMedicineBinding : ObservableObject
     {
-        public String MedicineID { get; set; }
-        public int Quantity { get; set; }
+        private String _medicineID;
+        private int _quantity;
+        public String MedicineID
+        {
+            get { return _medicineID; }
+            set
+            {
+                if (_medicineID == value) { return; }
+                _medicineID = value;
+                OnPropertyChanged("MedicineID");
+            }
+        }
+        public int Quantity
+        {
+            get { return _quantity; }
+            set
+            {
+                if (_quantity == value) { return; }
+                _quantity = value;
+                OnPropertyChanged("Quantity");
+            }
+        }
 
         public RoomMedicineBinding(string medicineID, int quantity)
         {

@@ -172,6 +172,28 @@ namespace ClassDijagramV1._0.Service
         }
 
         /// <summary>
+        /// Vraca acc osobe za prosledjenim id-em
+        /// </summary>
+        /// <param name="id">Id osobe ciji acc trazimo</param>
+        /// <returns>Account osobe ili null ako osoba nema acc</returns>
+        public Account? GetAccountByPersonId(int id)
+        {
+            // ret val
+            Account? ret = null;
+
+            foreach (Account a in _accountRepo.GetAccounts())
+            {
+                if (a.PersonId == id)
+                {
+                    ret = a;
+                    break;
+                }
+            }
+
+            return ret;
+        }
+
+        /// <summary>
         /// Vraca observable collection svih akaunta pacijenata
         /// </summary>
         /// <returns></returns>

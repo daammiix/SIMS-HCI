@@ -1,23 +1,30 @@
-﻿using ClassDijagramV1._0.Util;
+﻿using ClassDijagramV1._0.Helpers;
+using ClassDijagramV1._0.Util;
+using Controller;
+using Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel
 {
-    class StorageViewModel : ObservableObject
+    public class StorageViewModel : ObservableObject
     {
-        public RelayCommand StorageMedicalEquipmentViewCommand { get; set; }
-        public RelayCommand StorageSuppliesViewCommand { get; set; }
-        public RelayCommand StorageInventoryViewCommand { get; set; }
-        public RelayCommand StorageDrugsViewCommand { get; set; }
+        private RelayCommand _storageMedicalEquipment;
+        private RelayCommand _storageSupplies;
+        private RelayCommand _storageInventory;
+        private RelayCommand _storageDrugs;
+        private RelayCommand _equipmentReservation;
 
         public StorageMedicalEquipmentViewModel StorageMedicalEquipmentVM { get; set; }
         public StorageSuppliesViewModel StorageSuppliesVM { get; set; }
         public StorageInventoryViewModel StorageInventoryVM { get; set; }
         public StorageDrugsViewModel StorageDrugsVM { get; set; }
+        public StorageEquipViewModel StorageEquipVM { get; set; }
 
         private object _currentStorageView;
 
@@ -33,33 +40,79 @@ namespace ClassDijagramV1._0.ViewModel
 
         public StorageViewModel()
         {
-            StorageMedicalEquipmentVM = new StorageMedicalEquipmentViewModel();
-            StorageSuppliesVM = new StorageSuppliesViewModel();
-            StorageInventoryVM = new StorageInventoryViewModel();
+
+            StorageMedicalEquipmentVM = new StorageMedicalEquipmentViewModel(this);
+            StorageSuppliesVM = new StorageSuppliesViewModel(this);
+            StorageInventoryVM = new StorageInventoryViewModel(this);
             StorageDrugsVM = new StorageDrugsViewModel();
+            StorageEquipVM = new StorageEquipViewModel(this);
 
             CurrentStorageView = StorageMedicalEquipmentVM;
+        }
 
-
-            StorageMedicalEquipmentViewCommand = new RelayCommand(o =>
+        public RelayCommand StorageMedicalEquipment
+        {
+            get
             {
-                CurrentStorageView = StorageMedicalEquipmentVM;
-            });
+                _storageMedicalEquipment = new RelayCommand(o =>
+                {
+                    CurrentStorageView = StorageMedicalEquipmentVM;
+                });
 
-            StorageSuppliesViewCommand = new RelayCommand(o =>
-            {
-                CurrentStorageView = StorageSuppliesVM;
-            });
+                return _storageMedicalEquipment;
+            }
+        }
 
-            StorageInventoryViewCommand = new RelayCommand(o =>
+        public RelayCommand StorageSupplies
+        {
+            get
             {
-                CurrentStorageView = StorageInventoryVM;
-            });
+                _storageSupplies = new RelayCommand(o =>
+                {
+                    CurrentStorageView = StorageSuppliesVM;
+                });
 
-            StorageDrugsViewCommand = new RelayCommand(o =>
+                return _storageSupplies;
+            }
+        }
+
+        public RelayCommand StorageInventory
+        {
+            get
             {
-                CurrentStorageView = StorageDrugsVM;
-            });
+                _storageInventory = new RelayCommand(o =>
+                {
+                    CurrentStorageView = StorageInventoryVM;
+                });
+
+                return _storageInventory;
+            }
+        }
+
+        public RelayCommand StorageDrugs
+        {
+            get
+            {
+                _storageDrugs = new RelayCommand(o =>
+                {
+                    CurrentStorageView = StorageDrugsVM;
+                });
+
+                return _storageDrugs;
+            }
+        }
+
+        public RelayCommand EquipmentReservation
+        {
+            get
+            {
+                _equipmentReservation = new RelayCommand(o =>
+                {
+                    CurrentStorageView = StorageEquipVM;
+                });
+
+                return _equipmentReservation;
+            }
         }
     }
 }

@@ -1,8 +1,9 @@
 [
   {
-    "Id": 14,
+    "Type": 2,
+    "Id": 4,
     "Jmbg": "54815181818",
-    "Gender": "Z",
+    "Gender": 1,
     "PhoneNumber": "061235236237",
     "Email": "dcetvkovic49@gmail.com",
     "DateOfBirth": "1991-07-17T00:00:00",
@@ -16,9 +17,10 @@
     "Surname": "Cvetkovic"
   },
   {
-    "Id": 12,
+    "Type": 9,
+    "Id": 5,
     "Jmbg": "5959884823",
-    "Gender": "musko",
+    "Gender": 0,
     "PhoneNumber": "3875432",
     "Email": "the292200@gmail.com",
     "DateOfBirth": "1989-05-20T00:00:00",
@@ -32,9 +34,10 @@
     "Surname": "Jovanovic"
   },
   {
-    "Id": 13,
+    "Type": 0,
+    "Id": 6,
     "Jmbg": "9897112156",
-    "Gender": "musko",
+    "Gender": 0,
     "PhoneNumber": "3875432",
     "Email": "the292200@gmail.com",
     "DateOfBirth": "1985-02-22T00:00:00",
@@ -46,5 +49,22 @@
     },
     "Name": "Dragisa",
     "Surname": "Perovic"
+  },
+  {
+    "Type": 2,
+    "Id": 11,
+    "Jmbg": "559885556225",
+    "Gender": 0,
+    "PhoneNumber": "569856",
+    "Email": "drasko@gmail.com",
+    "DateOfBirth": "1968-04-12T00:00:00",
+    "Address": {
+      "Country": "Srbija",
+      "City": "Novi Sad",
+      "StreetName": "Strazilovska",
+      "StreetNumber": "92"
+    },
+    "Name": "Dragan",
+    "Surname": "Draskovic"
   }
 ]
