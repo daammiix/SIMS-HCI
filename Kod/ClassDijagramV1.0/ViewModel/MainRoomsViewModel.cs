@@ -20,6 +20,7 @@ namespace ClassDijagramV1._0.ViewModel
         public RelayCommand _renovatingMerge;
         public RelayCommand _renovatingSplit;
         public RelayCommand _changingPurpose;
+        public RelayCommand _generateReport;
         public RelayCommand _closeReservatioOfRoom;
 
         public RoomsViewModel RoomsVM { get; set; }
@@ -27,6 +28,7 @@ namespace ClassDijagramV1._0.ViewModel
         public RenovatingMergeViewModel RenovatingVM { get; set; }
         public RenovatingSplitViewModel RenovatingSplitVM { get; set; }
         public RenovatingRoomViewModel RenovatingRoomVM { get; set; }
+        public GenerateReportViewModel GenerateReportVM { get; set; }
         public ChangingPurposeViewModel ChangingPurposeVM { get; set; }
 
         private object _currentRoomView;
@@ -49,6 +51,7 @@ namespace ClassDijagramV1._0.ViewModel
             RenovatingVM = new RenovatingMergeViewModel(this);
             RenovatingSplitVM = new RenovatingSplitViewModel(this);
             ChangingPurposeVM = new ChangingPurposeViewModel(this);
+            GenerateReportVM = new GenerateReportViewModel(this);
 
             ResetView();
         }
@@ -113,7 +116,6 @@ namespace ClassDijagramV1._0.ViewModel
                 return _changingPurpose;
             }
         }
-
         public RelayCommand CloseReservationOfRoom
         {
             get
@@ -174,6 +176,11 @@ namespace ClassDijagramV1._0.ViewModel
         public void ResetView()
         {
             CurrentRoomView = RoomsVM;
+        }
+
+        public void GenerateView()
+        {
+            CurrentRoomView = GenerateReportVM;
         }
     }
 }
