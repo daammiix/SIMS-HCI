@@ -4,7 +4,6 @@
 // Purpose: Definition of Class DoctorRepo
 
 using ClassDijagramV1._0.FileHandlers;
-using ClassDijagramV1._0.Model;
 using Model;
 using System;
 using System.Collections.Generic;

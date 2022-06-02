@@ -1,5 +1,4 @@
 ﻿using ClassDijagramV1._0.Model;
-using ClassDijagramV1._0.ViewModel;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using System.ComponentModel;
@@ -27,11 +26,11 @@ namespace ClassDijagramV1._0.Helpers
             XGraphics graphics = XGraphics.FromPdfPage(page);
 
             //title
-            graphics.DrawString("Zauzetost sala", new XFont("Arial", 40, XFontStyle.BoldItalic), XBrushes.Salmon, new XPoint(170,70));
-            graphics.DrawLine(new XPen(XColor.FromKnownColor(XKnownColor.Gray)), new XPoint(100,90), new XPoint(500,90));
+            graphics.DrawString("Zauzetost sala", new XFont("Arial", 40, XFontStyle.BoldItalic), XBrushes.Salmon, new XPoint(170, 70));
+            graphics.DrawLine(new XPen(XColor.FromKnownColor(XKnownColor.Gray)), new XPoint(100, 90), new XPoint(500, 90));
 
             //table
-            graphics.DrawString("Šifra", new XFont("Arial", 15), XBrushes.Black, new XPoint(80,200));
+            graphics.DrawString("Šifra", new XFont("Arial", 15), XBrushes.Black, new XPoint(80, 200));
             graphics.DrawString("Naziv", new XFont("Arial", 15), XBrushes.Black, new XPoint(145, 200));
             graphics.DrawString("Početak", new XFont("Arial", 15), XBrushes.Black, new XPoint(275, 200));
             graphics.DrawString("Kraj", new XFont("Arial", 15), XBrushes.Black, new XPoint(410, 200));
@@ -55,7 +54,7 @@ namespace ClassDijagramV1._0.Helpers
             }
 
             pdfDocument.Save("C:\\Users\\milan\\Desktop\\faks\\SIMS-HCI\\Kod\\ClassDijagramV1.0\\Data\\TestPdf.pdf");
-        
+
         }
     }
 }

@@ -1,11 +1,9 @@
 ﻿using ClassDijagramV1._0.Controller;
-using ClassDijagramV1._0.Converters;
 using ClassDijagramV1._0.FileHandlers;
 using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Model.Enums;
 using ClassDijagramV1._0.Repository;
 using ClassDijagramV1._0.Service;
-using ClassDijagramV1._0.ViewModel;
 using Controller;
 using Model;
 using Repository;
@@ -13,10 +11,7 @@ using Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
-using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ClassDijagramV1._0
@@ -220,7 +215,6 @@ namespace ClassDijagramV1._0
             // tako da u trenutku formiranja ovi podaci ne postoje trebalo bi ovde ispod povezati sve
             // da bi se i ovi podaci lepo povezali
             ConnectData();
-
         }
 
         private void dispatcherTimer_Tick(object? sender, EventArgs e)

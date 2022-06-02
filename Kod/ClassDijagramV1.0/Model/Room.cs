@@ -1,13 +1,11 @@
 using ClassDijagramV1._0;
 using ClassDijagramV1._0.Model;
+using ClassDijagramV1._0.Util;
 using ClassDijagramV1._0.Views.ManagerView;
 using Controller;
-using ClassDijagramV1._0.Views;
 using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
-using ClassDijagramV1._0.Util;
 
 namespace Model
 {
@@ -272,7 +270,8 @@ namespace Model
         String _equipmentID;
         int _quantity;
 
-        public String EquipmentID {
+        public String EquipmentID
+        {
             get { return _equipmentID; }
             set
             {
@@ -281,7 +280,8 @@ namespace Model
                 OnPropertyChanged("EquipmentID");
             }
         }
-        public int Quantity {
+        public int Quantity
+        {
             get { return _quantity; }
             set
             {

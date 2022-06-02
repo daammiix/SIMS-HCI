@@ -1,11 +1,8 @@
-using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Model.DTO;
 using Model;
 using Service;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows;
 
 namespace Controller
 {
