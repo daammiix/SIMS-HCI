@@ -120,6 +120,27 @@ namespace ClassDijagramV1._0.Repository
             return ret;
         }
 
+        /// <summary>
+        /// Vraca zdravstveni karton od zadatok pacijenta
+        /// </summary>
+        /// <param name="patientID"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public MedicalRecord GetPatientsMedicalRecord(int patientID)
+        {
+            MedicalRecord? ret = null;
+            foreach (var mr in MedicalRecords)
+            {
+                if (mr.PatientId == patientID)
+                {
+                    ret = mr;
+                    break;
+                }
+            }
+
+            return ret;
+        }
+
         #endregion
     }
 }

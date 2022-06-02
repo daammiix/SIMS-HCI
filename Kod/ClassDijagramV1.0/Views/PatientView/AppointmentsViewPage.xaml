@@ -69,7 +69,7 @@
                         Margin="8" VerticalAlignment="Top"/>
             <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
                     VerticalAlignment="Center" HorizontalAlignment="Right"
-                    Margin="8">
+                    Margin="8" Click="generatePDFClick">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock>Generisi</TextBlock>
                     <Image Source="Resources/Images/pdf.png"/>

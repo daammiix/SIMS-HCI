@@ -142,6 +142,17 @@ namespace ClassDijagramV1._0.Service
         }
 
         /// <summary>
+        /// Vraca zdravstveni karton od zadatok pacijenta
+        /// </summary>
+        /// <param name="patientID"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public MedicalRecord GetPatientsMedicalRecord(int patientID)
+        {
+            return _medicalRecordRepo.GetPatientsMedicalRecord(patientID);
+        }
+
+        /// <summary>
         /// Proverava da li postoji medical Record sa zadatim brojem preskacuci zadati medicalRecord
         /// </summary>
         /// <param name="number"></param>

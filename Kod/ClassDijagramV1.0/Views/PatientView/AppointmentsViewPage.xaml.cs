@@ -41,6 +41,8 @@ namespace ClassDijagramV1._0.Views.PatientView
         private Patient _logedPatient;
         private Account _account;
 
+        private PrintDialog _printDialog = new PrintDialog();
+
         #endregion
 
 
@@ -142,6 +144,13 @@ namespace ClassDijagramV1._0.Views.PatientView
             }
             
 
+        }
+
+        private void generatePDFClick(object sender, RoutedEventArgs e)
+        {
+            //generateReport.Visibility = Visibility.Hidden;
+            _printDialog.PrintVisual(this, "izvjestaj");
+            //generateReport.Visibility = Visibility.Visible;
         }
     }
 
