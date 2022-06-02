@@ -27,14 +27,8 @@
                    Foreground="#1F1313"
                    FontSize="32"
                    HorizontalAlignment="Left"
-                   Margin="20,10,0,0"/>
-            <TextBox Width="210"
-                 Height="35"
-                 Margin="0,0,0,5"
-                 VerticalContentAlignment="Center"
-                 HorizontalAlignment="Right"
-                 Style="{StaticResource FancySearchBox}"
-                 Text="{Binding Path=SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+                   Margin="20,10,0,40"/>
+            
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="350"/>
@@ -46,32 +40,32 @@
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                             <Label Content="Od:" FontSize="24" Margin="20,0,0,5" HorizontalContentAlignment="Left"/>
-                            <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="40" Margin="10,0,0,10" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedFromDate}" Style="{StaticResource DateTextBox}"/>
+                            <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="40" Margin="10,0,0,10" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedFromDate, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DateTextBox}"/>
                         </StackPanel>
-                        <TextBox x:Name="FromTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,25" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromTime}"  Style="{StaticResource TimeTextBox}"/>
+                        <TextBox x:Name="FromTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,25" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedFromTime, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource TimeTextBox}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                         <Label Content="Do:" FontSize="24" Margin="20,0,0,5" HorizontalContentAlignment="Left"/>
-                        <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="40" Margin="11,0,0,10" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedToDate}"  Style="{StaticResource DateTextBox}"/>
+                            <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="40" Margin="11,0,0,10" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedToDate, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource DateTextBox}"/>
                     </StackPanel>
-                    <TextBox x:Name="ToTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToTime}"  Style="{StaticResource TimeTextBox}"/>
+                        <TextBox x:Name="ToTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedToTime, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource TimeTextBox}"/>
                     </StackPanel>
                 </StackPanel>
                 <Grid Grid.Column="1" Width="630" Height="468" HorizontalAlignment="Right" Margin="0,0,0,0">
 
                     <DataGrid x:Name="RoomList" CanUserAddRows="True" SelectionMode="Single"
-                          CanUserResizeColumns="False"  CanUserResizeRows="False" 
+                          CanUserResizeColumns="False"  CanUserResizeRows="False" Margin="0,10,0,0"
                           RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
                           FontSize="20" BorderThickness="4" CanUserReorderColumns="False"
                           CanUserDeleteRows="False" AutoGenerateColumns="False"
-                          ItemsSource="{Binding Path=Rooms, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding selectedRoom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True">
+                          ItemsSource="{Binding Path=RoomsAvailable, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Šifra" Width="65" Binding="{Binding Path=RoomID}"/>
-                            <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=RoomName}"/>
-                            <DataGridTextColumn Header="Broj sprata" Width="120" Binding="{Binding Path=Floor}"/>
-                            <DataGridTextColumn Header="Broj sobe" Width="90" Binding="{Binding Path=RoomNumber}"/>
+                            <DataGridTextColumn Header="Šifra" Width="65" Binding="{Binding Path=ID}"/>
+                            <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=Name}"/>
+                            <DataGridTextColumn Header="Početak" Width="160" Binding="{Binding Path=Start}"/>
+                            <DataGridTextColumn Header="Kraj" Width="160" Binding="{Binding Path=End}"/>
                             
                         </DataGrid.Columns>
                     </DataGrid>
@@ -79,8 +73,8 @@
             </Grid>
             <StackPanel Height="98" Width="980">
                 <WrapPanel HorizontalAlignment="Right">
-                    <Button x:Name="Generate" HorizontalAlignment="Right" Height="32" Width="100" Content="Generiši" Margin="5,10,5,0" Style="{StaticResource CRUDButton}" Command="{Binding GenerateReport}"/>
-                    <Button x:Name="CloseGenerate" HorizontalAlignment="Right" Height="32" Width="100" Content="Odustani" Margin="5,10,0,0" Style="{StaticResource CRUDButton}" Command="{Binding AddRoom}"/>
+                    <Button x:Name="Generate" HorizontalAlignment="Right" Height="32" Width="100" Content="Generiši" Margin="5,15,5,0" Style="{StaticResource CRUDButton}" Command="{Binding GenerateReport}"/>
+                    <Button x:Name="CancelGenerate" HorizontalAlignment="Right" Height="32" Width="100" Content="Odustani" Margin="5,15,0,0" Style="{StaticResource CRUDButton}" Command="{Binding CancelReport}"/>
                 </WrapPanel>
             </StackPanel>
         </StackPanel>
