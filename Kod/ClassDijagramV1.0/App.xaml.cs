@@ -232,7 +232,6 @@ namespace ClassDijagramV1._0
         private void Application_Exit(object sender, ExitEventArgs e)
         {
             SaveAll();
-
         }
 
         private void SaveAll()
@@ -347,7 +346,6 @@ namespace ClassDijagramV1._0
             AccountController.AddAccount(ac7);
             AccountController.AddAccount(ac8);
             AccountController.AddAccount(ac9);
-
         }
 
         private void ConnectData()

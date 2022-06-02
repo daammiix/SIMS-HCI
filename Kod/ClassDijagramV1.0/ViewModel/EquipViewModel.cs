@@ -38,7 +38,20 @@ namespace ClassDijagramV1._0.ViewModel
         private MainRoomsViewModel mainRoomsViewModel;
 
         public BindingList<Room> Rooms { get; set; }
-        public BindingList<Equipment> Equipments { get; set; }
+        public BindingList<Equipment> Equipments
+        {
+            get
+            {
+                return _equipments;
+            }
+            set
+            {
+                if (_equipments == value)
+                    return;
+
+                _equipments = value;
+            }
+        }
 
         public Room? destinationRoom { get; set; }
         public Room _sourceRoom;
@@ -58,6 +71,20 @@ namespace ClassDijagramV1._0.ViewModel
 
         private RelayCommand _saveEquipmentAppointment;
         private RelayCommand _cancelEquipmentAppointment;
+        private BindingList<Equipment> _equipments;
+
+        private BindingList<EquipmentAppointment> fakeAppointments
+        {
+            get
+            {
+                var now = DateTime.Now;
+                return new BindingList<EquipmentAppointment>
+                {
+                    new EquipmentAppointment("", "", _equipments[0], 0, now + TimeSpan.FromHours(1), now + TimeSpan.FromHours(2)),
+                    new EquipmentAppointment("", "", _equipments[0], 0, now - TimeSpan.FromMinutes(15), now + TimeSpan.FromMinutes(15)),
+                };
+            }
+        }
 
         public EquipViewModel(MainRoomsViewModel mainRoomsViewModel)
         {
@@ -253,16 +280,6 @@ namespace ClassDijagramV1._0.ViewModel
             }
         }
 
-        private void DateField_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-            ListsHandler();
-        }
-
-        private void MovingFrom_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            ListsHandler();
-        }
-
         private String formatAvailableTime(DateTime start, DateTime end)
         {
             availabilities.Add(new Availability(start, end));
@@ -279,10 +296,7 @@ namespace ClassDijagramV1._0.ViewModel
             var appointments = appointmentController.GetListOfAppointments();
             var equipmentAppointments = equipmentAppointmentController.GetAllEquipmentAppointment();
 
-            if (selectedSourceRoom == null)
-            {
-                return;
-            }
+            
             DateTime selectedFrom, selectedTo;
             try
             {
@@ -294,7 +308,20 @@ namespace ClassDijagramV1._0.ViewModel
                 return;
             }
 
+            foreach (var appointment in fakeAppointments)
+            {
+                var aptFrom = appointment.FromDateTime.Date;
+                var aptTo = appointment.ToDateTime.Date;
+                if (checkTimeSpansOverlap(aptFrom, aptTo, selectedFrom, selectedTo))
+                {
+                    EquipmentAvailable.Add(formatAvailableTime(aptFrom, aptTo));
+                }
+            }
 
+            if (selectedSourceRoom == null)
+            {
+                return;
+            }
             foreach (var equipmentAppointment in equipmentAppointments)
             {
                 var aptFrom = equipmentAppointment.FromDateTime.Date;
@@ -343,10 +370,6 @@ namespace ClassDijagramV1._0.ViewModel
                     }
                 }
             }
-
-            var now = DateTime.Now;
-            EquipmentAvailable.Add(formatAvailableTime(now + TimeSpan.FromHours(1), now + TimeSpan.FromHours(2)));
-            EquipmentAvailable.Add(formatAvailableTime(now - TimeSpan.FromMinutes(15), now + TimeSpan.FromMinutes(15)));
         }
     }
 }
