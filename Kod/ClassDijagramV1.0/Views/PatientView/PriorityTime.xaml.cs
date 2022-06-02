@@ -1,25 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using ClassDijagramV1._0.Controller;
 using ClassDijagramV1._0.Model;
-using ClassDijagramV1._0.Util;
-using ClassDijagramV1._0.Views.PatientView;
 using Controller;
 using Model;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using ClassDijagramV1._0.Controller;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace ClassDijagramV1._0.Views.PatientView
 {
@@ -135,7 +123,7 @@ namespace ClassDijagramV1._0.Views.PatientView
 
             DateTime danas = DateTime.Today;
 
-            
+
 
 
             DoctorsAppointmentsTime = new ObservableCollection<Doctor>();
@@ -149,11 +137,11 @@ namespace ClassDijagramV1._0.Views.PatientView
                 int minutes = Int32.Parse(getTimeCB[1]);
                 foreach (Appointment termin in Appointments)
                 {
-                        if (termin.AppointmentDate.Date.Equals(kalendar.SelectedDate) && termin.AppointmentDate.Hour.Equals(hour) && termin.AppointmentDate.Minute.Equals(minutes))
-                        {
-                            Doctor doktor = _doctorController.GetDoctorById(termin.DoctorId);
-                            termini.Add(doktor);
-                        } 
+                    if (termin.AppointmentDate.Date.Equals(kalendar.SelectedDate) && termin.AppointmentDate.Hour.Equals(hour) && termin.AppointmentDate.Minute.Equals(minutes))
+                    {
+                        Doctor doktor = _doctorController.GetDoctorById(termin.DoctorId);
+                        termini.Add(doktor);
+                    }
                 }
                 foreach (Doctor dr1 in Doctors)
                 {
@@ -171,8 +159,8 @@ namespace ClassDijagramV1._0.Views.PatientView
                 }
             }
 
-                dodavanjPregledaDoktor.ItemsSource = DoctorsAppointmentsTime;
-            
+            dodavanjPregledaDoktor.ItemsSource = DoctorsAppointmentsTime;
+
 
             if (dodavanjPregledaDoktor.SelectedItem != null && kalendar.SelectedDate != null && timeCB.SelectedItem != null)
             {
@@ -186,4 +174,4 @@ namespace ClassDijagramV1._0.Views.PatientView
         }
     }
 }
-        
+

@@ -6,13 +6,12 @@
 using Model;
 using Repository;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Service
 {
-   public class SurgeryService
-   {
+    public class SurgeryService
+    {
         private SurgeryRepo _surgeryRepo;
 
         public SurgeryService(SurgeryRepo surgeryRepo)
@@ -21,29 +20,29 @@ namespace Service
         }
 
         public void AddSurgery(Model.Surgery surgery)
-      {
-         throw new NotImplementedException();
-      }
-      
-      public void RemoveSurgery(String surgeryID)
-      {
-         throw new NotImplementedException();
-      }
-      
-      public void UpdateSurgery(Model.Surgery surgery)
-      {
-         throw new NotImplementedException();
-      }
-      
-      public ObservableCollection<Surgery> GetAllSurgeries()
-      {
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveSurgery(String surgeryID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateSurgery(Model.Surgery surgery)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ObservableCollection<Surgery> GetAllSurgeries()
+        {
             return _surgeryRepo.GetAllSurgeries();
-      }
-      
-      public Model.Surgery GetOneSurgery(String surgeryID)
-      {
-         throw new NotImplementedException();
-      }
-   
-   }
+        }
+
+        public Model.Surgery GetOneSurgery(String surgeryID)
+        {
+            throw new NotImplementedException();
+        }
+
+    }
 }

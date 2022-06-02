@@ -3,11 +3,7 @@ using ClassDijagramV1._0.Repository;
 using Controller;
 using Model;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ClassDijagramV1._0.Service
@@ -102,7 +98,7 @@ namespace ClassDijagramV1._0.Service
             }
         }
 
-       
+
         public void SplitRoom(RoomAppointment appointment)
         {
             if (appointment.RoomToSplit != null)
@@ -207,9 +203,9 @@ namespace ClassDijagramV1._0.Service
             {
                 if (termin.RoomId.Equals(room.RoomID) && room.RoomStatus.Equals("Aktivna"))
                 {
-                    if ( (start >= termin.AppointmentDate && start <= termin.AppointmentDate.Add(termin.Duration))
-                         || (end >= termin.AppointmentDate && end <= termin.AppointmentDate.Add(termin.Duration)) 
-                         || (start <= termin.AppointmentDate && end >= termin.AppointmentDate.Add(termin.Duration)) )
+                    if ((start >= termin.AppointmentDate && start <= termin.AppointmentDate.Add(termin.Duration))
+                         || (end >= termin.AppointmentDate && end <= termin.AppointmentDate.Add(termin.Duration))
+                         || (start <= termin.AppointmentDate && end >= termin.AppointmentDate.Add(termin.Duration)))
                     {
                         retVal = false;
                         break;

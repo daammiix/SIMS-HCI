@@ -1,9 +1,4 @@
-﻿using Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace ClassDijagramV1._0.Model
 {

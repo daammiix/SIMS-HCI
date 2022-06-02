@@ -6,11 +6,7 @@ using ClassDijagramV1._0.Views.ManagerView;
 using Controller;
 using Model;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel
@@ -196,7 +192,7 @@ namespace ClassDijagramV1._0.ViewModel
 
         public void UpdateAvailabilityOfEquipment()
         {
-            if(selectedQuantity != "")
+            if (selectedQuantity != "")
             {
                 var newselecteQuantity = Int32.Parse(selectedQuantity);
                 var quantity = Int32.Parse(_quantity);
@@ -208,7 +204,7 @@ namespace ClassDijagramV1._0.ViewModel
                     return;
                 }
             }
-            
+
         }
 
         public void ListsHandler()

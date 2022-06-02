@@ -7,10 +7,7 @@ using ClassDijagramV1._0.FileHandlers;
 using ClassDijagramV1._0.Model;
 using Model;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Text.Json;
 
 namespace Repository
 {
