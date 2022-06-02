@@ -21,5 +21,10 @@ namespace ClassDijagramV1._0.Service
         {
             return quarterlyReportsRepo.GetAllQuarterlyReports();
         }
+
+        public void SaveQuarterlyReports()
+        {
+            quarterlyReportsRepo.writeReports();
+        }
     }
 }

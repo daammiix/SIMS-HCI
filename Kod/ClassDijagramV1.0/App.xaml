@@ -18,8 +18,7 @@
              xmlns:view="clr-namespace:ClassDijagramV1._0.Views"
              StartupUri="Views/MainWindow.xaml"
              xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
-             Exit="Application_Exit"
-             Deactivated="Application_Deactivated">
+             Exit="Application_Exit">
 
     <Application.Resources>
         <ResourceDictionary>

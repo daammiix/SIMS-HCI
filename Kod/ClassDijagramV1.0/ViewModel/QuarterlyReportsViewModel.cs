@@ -19,7 +19,7 @@ namespace ClassDijagramV1._0.ViewModel
 
         String _searchText = "";
         public Reports selectedReport { get; set; }
-        Window window;
+        Window? window;
 
         public BindingList<QuarterlyReport> report1 { get; set; }
         public BindingList<QuarterlyReport> report2 { get; set; }
@@ -27,7 +27,7 @@ namespace ClassDijagramV1._0.ViewModel
         private RelayCommand _openReport;
         private RelayCommand _closeReport;
 
-        public QuarterlyReportsViewModel(Window window)
+        public QuarterlyReportsViewModel(Window? window)
         {
             var app = Application.Current as App;
 
@@ -66,7 +66,10 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _closeReport = new RelayCommand(o =>
                 {
-                    window.Close();
+                    if (window != null)
+                    {
+                        window.Close();
+                    }
                 });
 
                 return _closeReport;
@@ -152,6 +155,5 @@ namespace ClassDijagramV1._0.ViewModel
                 quarterlyReport2View.Show();
             }
         }
-
     }
 }
