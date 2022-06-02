@@ -3,29 +3,81 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ClassDijagramV1._0.Views.ManagerView"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
              mc:Ignorable="d" 
              d:DesignHeight="655" d:DesignWidth="1280"
              Background="#D9D4CC"
              FontFamily="Berlin Sans FB Demi">
+
     <Grid>
+        <Grid.Resources>
+            <Style TargetType="syncfusion:MonthAgendaView">
+                <Setter Property="Foreground" Value="#1F1313"/>
+                <Setter Property="BorderBrush" Value="#1F1313"/>
+                <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+                <!--<Setter Property="ItemContainerStyle">
+                    <Setter.Value>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                            <Setter Property="BorderBrush" Value="#1F1313"/>
+                            <Setter Property="BorderThickness" Value="4"/>
+                            <EventSetter Event="MouseDoubleClick"/>
+                        </Style>
+                    </Setter.Value>
+                </Setter>-->
+            </Style>
+        </Grid.Resources>
+
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="750"/>
-            <ColumnDefinition Width="230"/>
+            <ColumnDefinition Width="350"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
+        <Grid Grid.Column="1">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="590"/>
                 <RowDefinition Height="65"/>
             </Grid.RowDefinitions>
 
+            <syncfusion:SfScheduler Grid.Row="0" 
+                                x:Name="Schedule"
+                                ItemsSource="{Binding managerAppointments}"
+                                ViewType="Month"
+                                FontSize="20"
+                                Height="500"
+                                VerticalAlignment="Top"
+                                Margin="0,30,0,0"
+                                FirstDayOfWeek="Monday"
+                                AppointmentEditorOpening="Schedule_AppointmentEditorOpening">
 
+                <syncfusion:SfScheduler.DaysViewSettings>
+                    <syncfusion:DaysViewSettings TimeIntervalHeight="100"/>
+                </syncfusion:SfScheduler.DaysViewSettings>
+
+                <syncfusion:SfScheduler.AppointmentMapping>
+                    <syncfusion:AppointmentMapping
+                    Subject="IdStr"
+                    StartTime="From"
+                    AppointmentBackground="Color"
+                    Location="RoomName"
+                    EndTime="To"/>
+                </syncfusion:SfScheduler.AppointmentMapping>
+                <syncfusion:SfScheduler.MonthViewSettings>
+                    <syncfusion:MonthViewSettings MonthNavigationDirection="Vertical"
+                                              ShowAgendaView="False"
+                                              AppointmentDisplayCount="5"
+                                              AgendaViewHeight="280"
+                                              AppointmentDisplayMode="Indicator">
+                    </syncfusion:MonthViewSettings>
+                </syncfusion:SfScheduler.MonthViewSettings>
+            </syncfusion:SfScheduler>
 
         </Grid>
 
-        <StackPanel Grid.Column="1" Orientation="Vertical">
+        <StackPanel Grid.Column="2" Orientation="Vertical">
             <Label Content="Današnje obaveze:" FontSize="20" HorizontalContentAlignment="Left" Margin="10,30,0,0"/>
             <DataGrid x:Name="DazEvents" CanUserAddRows="False"
                           CanUserDeleteRows="False" AutoGenerateColumns="False"

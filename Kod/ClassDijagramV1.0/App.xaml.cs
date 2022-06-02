@@ -78,6 +78,8 @@ namespace ClassDijagramV1._0
 
         public ReportsController reportsController { get; set; }
 
+        public ManagerAppointmentController managerAppointmentController { get; set; }
+
         public QuarterlyReportsController QuarterlyReportsController { get; set; }
 
         public RatingController RatingController { get; set; }
@@ -184,6 +186,11 @@ namespace ClassDijagramV1._0
             var reportsRepo = new ReportsRepo();
             var reportsService = new ReportsService(reportsRepo);
             reportsController = new ReportsController(reportsService);
+
+            //Manager appointment
+            var managerAppointmentRepo = new ManagerAppointmentRepo();
+            var managerAppointmentService = new ManagerAppointmentService(managerAppointmentRepo);
+            managerAppointmentController = new ManagerAppointmentController(managerAppointmentService);
 
             //QuarterlyReports
             var quarterlyReportsFileHander = new FileHandler<BindingList<QuarterlyReport>>(_quarterlyReportsFilePath);
