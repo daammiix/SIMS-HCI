@@ -25,10 +25,8 @@ namespace ClassDijagramV1._0.ViewModel
 
         public ReportsViewModel()
         {
-            Window window = new Window();
-            window = null;
-            PollsVM = new PollsViewModel(window);
-            QuarterlyReportsVM = new QuarterlyReportsViewModel(window);
+            PollsVM = new PollsViewModel(null);
+            QuarterlyReportsVM = new QuarterlyReportsViewModel(null);
 
             CurrentView = PollsVM;
         }

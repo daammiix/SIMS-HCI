@@ -38,14 +38,14 @@ namespace ClassDijagramV1._0
         public static string _medicalRecordFilePath = "../../../Data/medicalRecords.json";
         public string _storageFilePath = "../../../Data/storage.json";
         public string _roomAppointmentsFilePath = "../../../Data/roomAppointments.json";
-        public static string _purchaseOrdersFilePath = "../../../Data/purchaseOrders.json";
         public static string _hospitalRatingsFilePath = "../../../Data/hospitalratings.json";
         public static string _doctorRatingsFilePath = "../../../Data/doctorratings.json";
         public static string _activityFilePath = "../../../Data/activity.json";
         public string _medicinesFilePath = "../../../Data/medicines.json";
         public string _reportsFilePath = "../../../Data/reports.json";
         public static string _notificationsFilePath = "../../../Data/notifications.json";
-
+        public static string _purchaseOrdersFilePath = "../../../Data/purchaseOrders.json";
+        private static string _quarterlyReportsFilePath = "..\\..\\..\\Data\\quarterlyReports.json";
 
         #endregion
 
@@ -186,7 +186,8 @@ namespace ClassDijagramV1._0
             reportsController = new ReportsController(reportsService);
 
             //QuarterlyReports
-            var quarterlyReportsRepo = new QuarterlyReportsRepo();
+            var quarterlyReportsFileHander = new FileHandler<BindingList<QuarterlyReport>>(_quarterlyReportsFilePath);
+            var quarterlyReportsRepo = new QuarterlyReportsRepo(quarterlyReportsFileHander);
             var quarterlyReportsService = new QuarterlyReportsService(quarterlyReportsRepo);
             QuarterlyReportsController = new QuarterlyReportsController(quarterlyReportsService);
 
@@ -242,6 +243,7 @@ namespace ClassDijagramV1._0
             RatingController.SaveHospitalRatings();
             RatingController.SaveDoctorRatings();
             ActivityController.SaveActivity();
+            QuarterlyReportsController.SaveQuarterlyReports();
             NotificationController.SaveNotifications();
         }
 
@@ -448,12 +450,6 @@ namespace ClassDijagramV1._0
                 maxId = purchaseOrders.Max(order => order.Id);
                 PurchaseOrder.idCounter = maxId;
             }
-        }
-
-        private void Application_Deactivated(object sender, EventArgs e)
-        {
-            SaveAll();
-            Environment.Exit(0);
         }
     }
 }

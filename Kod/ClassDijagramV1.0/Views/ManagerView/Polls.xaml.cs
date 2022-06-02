@@ -9,15 +9,9 @@ namespace ClassDijagramV1._0.Views.ManagerView
     /// </summary>
     public partial class Polls : UserControl
     {
-        private PollsViewModel _pollsViewModel;
         public Polls()
         {
             InitializeComponent();
-
-            Window window = new Window();
-            _pollsViewModel = new PollsViewModel(window = null);
-            this.DataContext = _pollsViewModel;
         }
-
     }
 }

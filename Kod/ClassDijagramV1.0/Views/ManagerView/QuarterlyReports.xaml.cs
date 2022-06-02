@@ -9,14 +9,9 @@ namespace ClassDijagramV1._0.Views.ManagerView
     /// </summary>
     public partial class QuarterlyReports : UserControl
     {
-        private QuarterlyReportsViewModel _quarterlyReportsViewModel;
         public QuarterlyReports()
         {
             InitializeComponent();
-
-            Window window = new Window();
-            _quarterlyReportsViewModel = new QuarterlyReportsViewModel(window = null);
-            this.DataContext = _quarterlyReportsViewModel;
         }
     }
 }
