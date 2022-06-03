@@ -11,10 +11,10 @@ namespace ClassDijagramV1._0.Model
 {
     public class ManagerAppointment : ObservableObject
     {
-        private String _id;
-        private String _name;
-        private DateTime _start;
-        private DateTime _end;
+        public String _id;
+        public String _name;
+        public DateTime _start;
+        public DateTime _end;
 
         public String ID
         {

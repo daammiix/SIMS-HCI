@@ -8,28 +8,9 @@
              d:DesignHeight="655" d:DesignWidth="1280"
              Background="#D9D4CC"
              FontFamily="Sylfaen"
-        FontWeight="Bold">
+             FontWeight="Bold">
 
     <Grid>
-        <Grid.Resources>
-            <Style TargetType="syncfusion:MonthAgendaView">
-                <Setter Property="Foreground" Value="#1F1313"/>
-                <Setter Property="BorderBrush" Value="#1F1313"/>
-                <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
-                <!--<Setter Property="ItemContainerStyle">
-                    <Setter.Value>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                            <Setter Property="BorderBrush" Value="#1F1313"/>
-                            <Setter Property="BorderThickness" Value="4"/>
-                            <EventSetter Event="MouseDoubleClick"/>
-                        </Style>
-                    </Setter.Value>
-                </Setter>-->
-            </Style>
-        </Grid.Resources>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="750"/>
@@ -43,44 +24,36 @@
                 <RowDefinition Height="65"/>
             </Grid.RowDefinitions>
 
-            <syncfusion:SfScheduler Grid.Row="0" 
+            <syncfusion:SfScheduler Grid.Row="0"
                                     x:Name="Schedule"
-                                    ItemsSource="{Binding meeting}"
+                                    ItemsSource="{Binding ScheduleViewModel.ManagerAppointments}"
                                     ViewType="Month"
                                     FontSize="20"
                                     Height="500"
-                                    VerticalAlignment="Top"
-                                    Margin="0,30,0,0"
+                                    SelectedDate="{Binding selectedDate}"
+                                    Margin="0,20,0,40"
                                     FirstDayOfWeek="Monday"
-                                    AppointmentEditorOpening="Schedule_AppointmentEditorOpening"
-                                    CellTapped="Schedule_CellTapped">
-
-                <syncfusion:SfScheduler.DaysViewSettings>
-                    <syncfusion:DaysViewSettings TimeIntervalHeight="100"/>
-                </syncfusion:SfScheduler.DaysViewSettings>
-
+                                    CellTapped="Schedule_CellTapped"
+                                    AppointmentEditorOpening="Schedule_AppointmentEditorOpening">
                 <syncfusion:SfScheduler.AppointmentMapping>
-                    <syncfusion:AppointmentMapping
+                    <syncfusion:AppointmentMapping 
                         Subject="ID"
-                        Location="Name"
                         StartTime="Start"
                         EndTime="End"
-                        AppointmentBackground="Color"/>
+                        AppointmentBackground="Color"
+                        Location="Name" />
                 </syncfusion:SfScheduler.AppointmentMapping>
                 <syncfusion:SfScheduler.MonthViewSettings>
                     <syncfusion:MonthViewSettings MonthNavigationDirection="Vertical"
-                                                  ShowAgendaView="False"
-                                                  AppointmentDisplayCount="5"
-                                                  AgendaViewHeight="280"
-                                                  AppointmentDisplayMode="Indicator">
-                    </syncfusion:MonthViewSettings>
+                                                  AppointmentDisplayMode="Indicator"/>
                 </syncfusion:SfScheduler.MonthViewSettings>
             </syncfusion:SfScheduler>
 
-            <StackPanel Grid.Column="1" Grid.Row="1">
+
+                <StackPanel Grid.Column="1" Grid.Row="1">
                 <WrapPanel HorizontalAlignment="Right">
                     <Button x:Name="SaveAddedRoom" HorizontalAlignment="Right" Height="32" Width="90" Content="Dodaj" Margin="5,10,10,0" Style="{StaticResource CRUDButton}" Command="{Binding AddManagerAppointment}"/>
-                    <Button x:Name="QuitAddedRoom" HorizontalAlignment="Right" Height="32" Width="90" Content="Izmeni" Margin="5,10,15,0" Style="{StaticResource CRUDButton}" Command="{Binding AddManagerAppointment}"/>
+                    <Button x:Name="QuitAddedRoom" HorizontalAlignment="Right" Height="32" Width="90" Content="Izmeni" Margin="5,10,15,0" Style="{StaticResource CRUDButton}" Command="{Binding ChangeManagerAppointment}"/>
                 </WrapPanel>
             </StackPanel>
         </Grid>
@@ -89,10 +62,15 @@
 
         <StackPanel Grid.Column="2" Orientation="Vertical">
             <Label Content="Današnje obaveze:" FontSize="20" HorizontalContentAlignment="Left" Margin="10,30,0,0"/>
-            <DataGrid x:Name="DazEvents" CanUserAddRows="False"
+            <DataGrid x:Name="DayEvents" CanUserAddRows="False" SelectionMode="Single"
+                          CanUserResizeColumns="False"  CanUserResizeRows="False" 
+                          RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
+                          FontSize="20" BorderThickness="4" CanUserReorderColumns="False"
                           CanUserDeleteRows="False" AutoGenerateColumns="False"
-                          BorderThickness="0" Background="Beige" OverridesDefaultStyle="True"
-                          IsReadOnly="True">
+                          IsReadOnly="True" ItemsSource="{Binding Path=ManagerAppointmentsOfDay, UpdateSourceTrigger=PropertyChanged}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Obaveze" Width="*" Binding="{Binding Path=Name}"/>
+                </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
         
