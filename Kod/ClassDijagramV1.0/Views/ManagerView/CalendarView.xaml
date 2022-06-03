@@ -7,7 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="655" d:DesignWidth="1280"
              Background="#D9D4CC"
-             FontFamily="Berlin Sans FB Demi">
+             FontFamily="Sylfaen"
+        FontWeight="Bold">
 
     <Grid>
         <Grid.Resources>
@@ -43,15 +44,16 @@
             </Grid.RowDefinitions>
 
             <syncfusion:SfScheduler Grid.Row="0" 
-                                x:Name="Schedule"
-                                ItemsSource="{Binding managerAppointments}"
-                                ViewType="Month"
-                                FontSize="20"
-                                Height="500"
-                                VerticalAlignment="Top"
-                                Margin="0,30,0,0"
-                                FirstDayOfWeek="Monday"
-                                AppointmentEditorOpening="Schedule_AppointmentEditorOpening">
+                                    x:Name="Schedule"
+                                    ItemsSource="{Binding meeting}"
+                                    ViewType="Month"
+                                    FontSize="20"
+                                    Height="500"
+                                    VerticalAlignment="Top"
+                                    Margin="0,30,0,0"
+                                    FirstDayOfWeek="Monday"
+                                    AppointmentEditorOpening="Schedule_AppointmentEditorOpening"
+                                    CellTapped="Schedule_CellTapped">
 
                 <syncfusion:SfScheduler.DaysViewSettings>
                     <syncfusion:DaysViewSettings TimeIntervalHeight="100"/>
@@ -59,23 +61,31 @@
 
                 <syncfusion:SfScheduler.AppointmentMapping>
                     <syncfusion:AppointmentMapping
-                    Subject="IdStr"
-                    StartTime="From"
-                    AppointmentBackground="Color"
-                    Location="RoomName"
-                    EndTime="To"/>
+                        Subject="ID"
+                        Location="Name"
+                        StartTime="Start"
+                        EndTime="End"
+                        AppointmentBackground="Color"/>
                 </syncfusion:SfScheduler.AppointmentMapping>
                 <syncfusion:SfScheduler.MonthViewSettings>
                     <syncfusion:MonthViewSettings MonthNavigationDirection="Vertical"
-                                              ShowAgendaView="False"
-                                              AppointmentDisplayCount="5"
-                                              AgendaViewHeight="280"
-                                              AppointmentDisplayMode="Indicator">
+                                                  ShowAgendaView="False"
+                                                  AppointmentDisplayCount="5"
+                                                  AgendaViewHeight="280"
+                                                  AppointmentDisplayMode="Indicator">
                     </syncfusion:MonthViewSettings>
                 </syncfusion:SfScheduler.MonthViewSettings>
             </syncfusion:SfScheduler>
 
+            <StackPanel Grid.Column="1" Grid.Row="1">
+                <WrapPanel HorizontalAlignment="Right">
+                    <Button x:Name="SaveAddedRoom" HorizontalAlignment="Right" Height="32" Width="90" Content="Dodaj" Margin="5,10,10,0" Style="{StaticResource CRUDButton}" Command="{Binding AddManagerAppointment}"/>
+                    <Button x:Name="QuitAddedRoom" HorizontalAlignment="Right" Height="32" Width="90" Content="Izmeni" Margin="5,10,15,0" Style="{StaticResource CRUDButton}" Command="{Binding AddManagerAppointment}"/>
+                </WrapPanel>
+            </StackPanel>
         </Grid>
+
+
 
         <StackPanel Grid.Column="2" Orientation="Vertical">
             <Label Content="Današnje obaveze:" FontSize="20" HorizontalContentAlignment="Left" Margin="10,30,0,0"/>

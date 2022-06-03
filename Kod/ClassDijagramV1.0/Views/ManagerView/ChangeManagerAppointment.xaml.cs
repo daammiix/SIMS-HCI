@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassDijagramV1._0.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,10 +8,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using ClassDijagramV1._0.ViewModel;
+using System.Windows;
 
 namespace ClassDijagramV1._0.Views.ManagerView
 {
@@ -19,9 +18,13 @@ namespace ClassDijagramV1._0.Views.ManagerView
     /// </summary>
     public partial class ChangeManagerAppointment : Window
     {
+        private CalendarViewModel _calendarViewModel;
         public ChangeManagerAppointment()
         {
             InitializeComponent();
+
+            _calendarViewModel = new CalendarViewModel(this);
+            this.DataContext = _calendarViewModel;
         }
     }
 }

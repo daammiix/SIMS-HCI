@@ -8,7 +8,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="655" d:DesignWidth="1280"
              Background="#D9D4CC"
-             FontFamily="Berlin Sans FB Demi">
+             FontFamily="Sylfaen"
+        FontWeight="Bold">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>

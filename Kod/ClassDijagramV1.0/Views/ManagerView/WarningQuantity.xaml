@@ -12,7 +12,8 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="#B0C69D"
-        FontFamily="Berlin Sans FB Demi"
+        FontFamily="Sylfaen"
+        FontWeight="Bold"
         BorderThickness="4"
         BorderBrush="#455736">
     <Grid>
