@@ -126,7 +126,7 @@ namespace ClassDijagramV1._0.ViewModel
         public MainViewModel()
         {
             MainRoomsVM = new MainRoomsViewModel();
-            CalendarVM = new CalendarViewModel();
+            CalendarVM = new CalendarViewModel(null);
             StorageVM = new StorageViewModel();
             WorkersVM = new WorkersViewModel();
             ReportsVM = new ReportsViewModel();

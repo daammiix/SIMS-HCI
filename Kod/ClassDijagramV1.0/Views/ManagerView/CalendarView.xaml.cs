@@ -14,14 +14,20 @@ namespace ClassDijagramV1._0.Views.ManagerView
             InitializeComponent();
         }
 
-        private void Schedule_AppointmentEditorOpening(object sender, AppointmentEditorOpeningEventArgs e)
-        {
-            
-        }
-
         private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
            
+        }
+
+        private void Schedule_CellTapped(object sender, CellTappedEventArgs e)
+        {
+            AddManagerAppointment addManagerAppointment = new AddManagerAppointment();
+            addManagerAppointment.Show();
+        }
+
+        private void Schedule_AppointmentEditorOpening(object sender, AppointmentEditorOpeningEventArgs e)
+        {
+            e.Cancel = true;
         }
     }
 }

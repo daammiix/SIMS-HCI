@@ -9,7 +9,8 @@
              d:DesignHeight="655"
              d:DesignWidth="930"
              Background="#D9D4CC"
-             FontFamily="Berlin Sans FB Demi">
+             FontFamily="Sylfaen"
+        FontWeight="Bold">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
@@ -14,7 +15,6 @@ namespace ClassDijagramV1._0.Model
         private String _name;
         private DateTime _start;
         private DateTime _end;
-        private Brush _color;
 
         public String ID
         {
@@ -38,7 +38,9 @@ namespace ClassDijagramV1._0.Model
         }
         public DateTime Start
         {
-            get { return _start; }
+            get {
+                return _start;
+            }
             set
             {
                 if (_start == value) { return; }
@@ -55,17 +57,23 @@ namespace ClassDijagramV1._0.Model
                 _end = value;
                 OnPropertyChanged("End");
             }
-
         }
+
+        [JsonIgnore]
         public Brush Color
         {
-            get { return _color; }
-            set
-            {
-                if (_color == value) { return; }
-                _color = value;
-                OnPropertyChanged("Color");
-            }
+            get { return new SolidColorBrush(System.Windows.Media.Color.FromRgb(0, 30, 50)); }
         }
+
+        public ManagerAppointment(String ID, String Name, DateTime Start, DateTime End)
+        {
+            _id = ID;
+            _name = Name;
+            _start = Start;
+            _end = End;
+        }
+
+        public ManagerAppointment()
+        { }
     }
 }
