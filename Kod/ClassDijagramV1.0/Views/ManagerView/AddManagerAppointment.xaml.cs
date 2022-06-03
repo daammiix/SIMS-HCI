@@ -8,13 +8,13 @@ namespace ClassDijagramV1._0.Views.ManagerView
     /// </summary>
     public partial class AddManagerAppointment : Window
     {
-        private CalendarViewModel _calendarViewModel;
+        private AddManagerAppointmentViewModel _addManagerAppointmentViewModel;
         public AddManagerAppointment()
         {
             InitializeComponent();
 
-            _calendarViewModel = new CalendarViewModel(this);
-            this.DataContext = _calendarViewModel;
+            _addManagerAppointmentViewModel = new AddManagerAppointmentViewModel(this);
+            this.DataContext = _addManagerAppointmentViewModel;
         }
     }
 }

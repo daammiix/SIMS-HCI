@@ -18,13 +18,13 @@ namespace ClassDijagramV1._0.Views.ManagerView
     /// </summary>
     public partial class ChangeManagerAppointment : Window
     {
-        private CalendarViewModel _calendarViewModel;
-        public ChangeManagerAppointment()
+        private ChangeManagerAppointmentViewModel _changeManagerAppointmentViewModel;
+        public ChangeManagerAppointment(DateTime selectedDate)
         {
             InitializeComponent();
 
-            _calendarViewModel = new CalendarViewModel(this);
-            this.DataContext = _calendarViewModel;
+            _changeManagerAppointmentViewModel = new ChangeManagerAppointmentViewModel(this, selectedDate);
+            this.DataContext = _changeManagerAppointmentViewModel;
         }
     }
 }
