@@ -101,7 +101,11 @@ namespace ClassDijagramV1._0
 
         public App()
         {
-            // Appointments
+            // Syncfusion License
+            Syncfusion.Licensing.SyncfusionLicenseProvider
+                .RegisterLicense("NjQ5ODAwQDMyMzAyZTMxMmUzMEs5Q29xeG4yNlZaZGRVaUpEMHhpRzFWNXNZQlVMWmcxOUdlL25UNWo0UUU9");
+
+
 
             // Rooms-Storage
             var roomRepo = new RoomRepoJson(new FileHandler<BindingList<Room>>(_roomsFilePath), new FileHandler<BindingList<Storage>>(_storageFilePath));
@@ -232,7 +236,6 @@ namespace ClassDijagramV1._0
         private void Application_Exit(object sender, ExitEventArgs e)
         {
             SaveAll();
-
         }
 
         private void SaveAll()
@@ -461,7 +464,6 @@ namespace ClassDijagramV1._0
         private void Application_Deactivated(object sender, EventArgs e)
         {
             SaveAll();
-            Environment.Exit(0);
         }
     }
 }

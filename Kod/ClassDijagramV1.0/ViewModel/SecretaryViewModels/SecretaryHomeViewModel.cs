@@ -2,7 +2,9 @@
 using ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels;
 using ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModels;
 using ClassDijagramV1._0.ViewModel.SecretaryViewModels.EquipmentViewModels;
+using ClassDijagramV1._0.ViewModel.SecretaryViewModels.FreeDaysViewModels;
 using ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewModels;
+using ClassDijagramV1._0.ViewModel.SecretaryViewModels.MeetingsViewModels;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -30,12 +32,18 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels
 
         EquipmentMainViewModel _equipmentMainViewModel;
 
+        MeetingsMainViewModel _meetingsMainViewModel;
+
+        FreeDaysMainViewModel _freeDaysMainViewModel;
+
         // Commands
 
         RelayCommand _appointmentsViewCommand;
         RelayCommand _accountsViewCommand;
         RelayCommand _medicalRecordsViewCommand;
         RelayCommand _equipmentViewCommand;
+        RelayCommand _meetingsViewCommand;
+        RelayCommand _freeDaysViewCommand;
 
         #endregion
 
@@ -105,6 +113,38 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels
             }
         }
 
+        public RelayCommand MeetingsViewCommand
+        {
+            get
+            {
+                if (_meetingsViewCommand == null)
+                {
+                    _meetingsViewCommand = new RelayCommand(o =>
+                    {
+                        CurrentView = _meetingsMainViewModel;
+                    });
+                }
+
+                return _meetingsViewCommand;
+            }
+        }
+
+        public RelayCommand FreeDaysViewCommand
+        {
+            get
+            {
+                if (_freeDaysViewCommand == null)
+                {
+                    _freeDaysViewCommand = new RelayCommand(o =>
+                    {
+                        CurrentView = _freeDaysMainViewModel;
+                    });
+                }
+
+                return _freeDaysViewCommand;
+            }
+        }
+
         #endregion
 
         #region Properties
@@ -153,6 +193,8 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels
             _accountsMainViewModel = new AccountsMainViewModel();
             _medicalRecordsMainViewModel = new MedicalRecordsMainViewModel();
             _equipmentMainViewModel = new EquipmentMainViewModel();
+            _meetingsMainViewModel = new MeetingsMainViewModel();
+            _freeDaysMainViewModel = new FreeDaysMainViewModel();
 
             // Na pocetku stavimo currentView na preglediOperacije(to je prvi menu item)
             _currentView = _appointmentsViewModel;

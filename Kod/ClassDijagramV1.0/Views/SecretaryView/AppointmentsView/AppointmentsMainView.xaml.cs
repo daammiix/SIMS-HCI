@@ -65,7 +65,7 @@ namespace ClassDijagramV1._0.Views.SecretaryView.AppointmentsView
                 // MessageBox.Show("dodavanje");
 
                 // Ako je selektovani dan pre danasnjeg ne otvorimo dialog
-                if (selectedDate.Day >= DateTime.Now.Day)
+                if (selectedDate.Ticks > DateTime.Now.Subtract(TimeSpan.FromDays(1)).Ticks)
                 {
                     AddAppointmentDialog addAppointmentDialog = new AddAppointmentDialog(_viewModel.ScheduleViewModel.Appointments,
                                 selectedDate);

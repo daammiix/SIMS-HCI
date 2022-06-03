@@ -49,7 +49,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.EquipmentViewModels
 
         #region Private Helpers
 
-        // Sacuvamo quantity i ugasio dialog
+        // Sacuvamo quantity i ugasimo dialog
         private void Finish(Window dialog)
         {
             // updatujemo quantity

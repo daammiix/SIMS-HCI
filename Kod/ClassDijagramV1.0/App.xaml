@@ -14,6 +14,10 @@
              xmlns:equipmentViewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.EquipmentViewModels"
              xmlns:appointmentsViewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModels"
              xmlns:appointmentsView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.AppointmentsView"
+             xmlns:meetingsViewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.MeetingsViewModels"
+             xmlns:meetingsView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.MeetingsView"
+             xmlns:freeDaysViewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.FreeDaysViewModels"
+             xmlns:freeDaysView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.FreeDaysView"
              xmlns:viewModel="clr-namespace:ClassDijagramV1._0.ViewModel"
              xmlns:view="clr-namespace:ClassDijagramV1._0.Views"
              StartupUri="Views/MainWindow.xaml"
@@ -29,6 +33,14 @@
             </ResourceDictionary.MergedDictionaries>
 
             <!-- Secretary -->
+            <DataTemplate DataType="{x:Type freeDaysViewModels:FreeDaysMainViewModel}">
+                <freeDaysView:FreeDaysMainView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type meetingsViewModels:MeetingsMainViewModel}">
+                <meetingsView:MeetingsMainView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type appointmentsViewModels:AppointmentsMainViewModel}">
                 <appointmentsView:AppointmentsMainView/>
             </DataTemplate>

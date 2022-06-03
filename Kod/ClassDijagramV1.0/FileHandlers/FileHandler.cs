@@ -54,18 +54,33 @@ namespace ClassDijagramV1._0.FileHandlers
         /// Dobavlja listu itema iz fajla
         /// </summary>
         /// <returns></returns>
-        public List<T> GetItems()
+        public List<T>? GetItems()
         {
-            List<T>? ret = new List<T>();
+            List<T>? items = new List<T>();
             if (File.Exists(_path))
             {
                 FileStream fs = new FileStream(_path, FileMode.Open, FileAccess.Read);
-                ret = JsonSerializer.Deserialize<List<T>>(fs);
+                items = JsonSerializer.Deserialize<List<T>>(fs);
 
                 fs.Close();
             }
 
-            return ret;
+            return items;
+        }
+
+        /// <summary>
+        /// Dodaje item u fajl
+        /// </summary>
+        /// <param name="item"></param>
+        public void AppendItem(T item)
+        {
+            List<T> items = GetItems();
+            if (items != null)
+            {
+                items.Add(item);
+            }
+
+            SaveItems(items);
         }
 
         public void Write(T obj)
