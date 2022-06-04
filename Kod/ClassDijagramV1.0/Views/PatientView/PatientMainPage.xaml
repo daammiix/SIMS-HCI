@@ -334,7 +334,7 @@
                     Grid.Row="0"
                     Margin="8 8 8 0">
                     <Image
-                    Source="/Views/PatientView/zdravstveniKarton.jpg"
+                    Source="Resources/Images/zdravstveniKarton.jpg"
                     Height="100"/>
                     <Button
                     Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
