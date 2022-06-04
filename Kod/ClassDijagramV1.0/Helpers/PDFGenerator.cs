@@ -53,7 +53,8 @@ namespace ClassDijagramV1._0.Helpers
                 currentYposition_line += 23;
             }
 
-            pdfDocument.Save("C:\\Users\\milan\\Desktop\\faks\\SIMS-HCI\\Kod\\ClassDijagramV1.0\\Data\\TestPdf.pdf");
+            pdfDocument.Save("D:\\Fax\\SIMS\\SIMSProjekat\\SIMS - HCI\\Kod\\TestPdf.pdf");
+        
 
         }
     }

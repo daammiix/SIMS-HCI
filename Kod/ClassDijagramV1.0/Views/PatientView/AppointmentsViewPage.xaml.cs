@@ -110,8 +110,9 @@ namespace ClassDijagramV1._0.Views.PatientView
 
         private void generatePDFClick(object sender, RoutedEventArgs e)
         {
+            parent.startWindow.Content = new GenerateReportPage(parent ,Appointments);
             //generateReport.Visibility = Visibility.Hidden;
-            _printDialog.PrintVisual(this, "izvjestaj");
+            //_printDialog.PrintVisual(this, "izvjestaj");
             //generateReport.Visibility = Visibility.Visible;
         }
     }
