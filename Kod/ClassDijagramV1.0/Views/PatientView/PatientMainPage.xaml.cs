@@ -1,10 +1,12 @@
 ﻿using ClassDijagramV1._0.Controller;
 using ClassDijagramV1._0.Model;
+using Controller;
 using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
@@ -22,11 +24,13 @@ namespace ClassDijagramV1._0.Views.PatientView
         #region Fields
         private PatientMainWindow parent { get; set; }
 
-        private ObservableCollection<AppointmentViewModel> _appointmentViewModels;
-        private ObservableCollection<AppointmentViewModel> _oldAppointmentViewModels;
+        public ObservableCollection<AppointmentViewModel> _appointmentViewModels;
+        public ObservableCollection<AppointmentViewModel> _oldAppointmentViewModels;
 
-        public MedicineController _medicineController;
+        private MedicineController _medicineController;
         private BanningPatientController _banningPatientController;
+        private DoctorController _doctorController;
+        private RoomController _roomController;
 
         #endregion
 
@@ -38,6 +42,8 @@ namespace ClassDijagramV1._0.Views.PatientView
             App app = Application.Current as App;
             _medicineController = app.medicinesController;
             _banningPatientController = app.BanningPatientController;
+            _doctorController = app.DoctorController;
+            _roomController = app.roomController;
 
             _appointmentViewModels = new ObservableCollection<AppointmentViewModel>();
             _oldAppointmentViewModels = new ObservableCollection<AppointmentViewModel>();
@@ -87,12 +93,72 @@ namespace ClassDijagramV1._0.Views.PatientView
 
         private async void demoClick(object sender, RoutedEventArgs e)
         {
+            await Task.Delay(500);
+            AppointmentAddPage adp = new AppointmentAddPage(parent, _appointmentViewModels);
+            parent.startWindow.Content = adp;
+            adp.doctorRB.IsChecked = true;
+            PriorityDoctor prioritetDoktor = new PriorityDoctor(parent, _appointmentViewModels);
+            adp.prioritetFrame.Content = prioritetDoktor;
+
+            await Task.Delay(2000);
+            prioritetDoktor.dodavanjPregledaDoktor.SelectedItem = _doctorController.GetAllDoctors()[0];
             await Task.Delay(1000);
-            parent.startWindow.Content = new AppointmentAddPage(parent, _appointmentViewModels);
-            await Task.Delay(3000);
-            parent.startWindow.Content = new RatingPage(parent, _appointmentViewModels);
+            prioritetDoktor.kalendar.SelectedDate = new DateTime(2222, 10, 10, 10, 0, 0);
             await Task.Delay(1000);
-            parent.startWindow.Content = new MedicalRecordPage(parent, _oldAppointmentViewModels);
+            prioritetDoktor.timeCB.SelectedItem = "10:00";
+            await Task.Delay(2000);
+            prioritetDoktor.addAppBtn.Background = new SolidColorBrush(Colors.Orange);
+
+
+            await Task.Delay(100);
+            DateTime deset = new DateTime(2222,10,10,10,0,0);
+            TimeSpan interval = new TimeSpan(0, 0, 30, 0);
+            Appointment simulacijaPregled = new Appointment(parent.Patient.Id,
+                                            _doctorController.GetAllDoctors()[0].Id,_roomController.GetAllRooms()[0].RoomID,
+                                            deset,interval,AppointmentType.generalPractitionerCheckup);
+            AppointmentViewModel avm = new AppointmentViewModel(simulacijaPregled);
+            _appointmentViewModels.Add(avm);
+
+            AppointmentsViewPage avp = new AppointmentsViewPage(parent, _appointmentViewModels);
+            parent.startWindow.Content = avp;
+            await Task.Delay(2000);
+            avp.tabelaPregledi.SelectedItem = avm;
+            avp.izmijeni.Background = new SolidColorBrush(Colors.Orange);
+            await Task.Delay(1000);
+
+            AppointmentUpdatePage aup = new AppointmentUpdatePage(parent, _appointmentViewModels);
+            parent.startWindow.Content = aup;
+            aup.doctorRB.IsChecked = true;
+            UpdatePriorityDoctor prioritetUpdateDoktor = new UpdatePriorityDoctor(parent, _appointmentViewModels);
+            aup.prioritetFrame.Content = prioritetUpdateDoktor;
+
+            prioritetUpdateDoktor.izmjenaPregledaDoktor.SelectedItem = _doctorController.GetAllDoctors()[0];
+            prioritetUpdateDoktor.promjenaKalendar.SelectedDate = new DateTime(2222, 10, 10, 10, 0, 0);
+
+            await Task.Delay(4000);
+            prioritetUpdateDoktor.promjenaKalendar.SelectedDate = new DateTime(2222, 10, 11, 11, 0, 0);
+            await Task.Delay(2000);
+            prioritetUpdateDoktor.timeCB.SelectedItem = "11:00";
+            await Task.Delay(2000);
+            prioritetUpdateDoktor.addAppBtn.BorderThickness = new Thickness(5);
+
+            
+            DateTime jedanaest = new DateTime(2222, 11, 11, 11, 0, 0);
+            Appointment simulacijaUpdatePregled = new Appointment(parent.Patient.Id,
+                                            _doctorController.GetAllDoctors()[0].Id, _roomController.GetAllRooms()[0].RoomID,
+                                            jedanaest, interval, AppointmentType.generalPractitionerCheckup);
+            AppointmentViewModel auvm = new AppointmentViewModel(simulacijaUpdatePregled);
+            _appointmentViewModels.Remove(avm);
+            _appointmentViewModels.Add(auvm);
+
+            parent.startWindow.Content = avp;
+            await Task.Delay(4000);
+            avp.tabelaPregledi.SelectedItem = auvm;
+            await Task.Delay(4000);
+            avp.otkazi.Background = new SolidColorBrush(Colors.Orange);
+            _appointmentViewModels.Remove(auvm);
+
+
         }
 
         /// <summary>
@@ -101,6 +167,7 @@ namespace ClassDijagramV1._0.Views.PatientView
         /// <returns></returns>
         private void SplitAppointments()
         {
+
             foreach (Appointment a in parent.Patient.Appointments)
             {
                 if (a.AppointmentDate < DateTime.Now)

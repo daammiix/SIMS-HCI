@@ -98,6 +98,7 @@ namespace ClassDijagramV1._0.Views.PatientView
                     AppointmentViewModel selectedAppointment = (AppointmentViewModel)tabelaPregledi.SelectedItem;
                     _notificationController.RemoveNotificationByAppointment(selectedAppointment.Id);
                     Appointments.Remove(selectedAppointment);
+                    parent.Patient.Appointments.Remove(selectedAppointment.Appointment);
                     _appointmentController.RemoveAppointment(selectedAppointment.Id);
                     ActivityLog activity = new ActivityLog(DateTime.Now, parent.Patient.Id, TypeOfActivity.cancelAppointment);
                     _activityController.AddActivity(activity);
@@ -109,8 +110,9 @@ namespace ClassDijagramV1._0.Views.PatientView
 
         private void generatePDFClick(object sender, RoutedEventArgs e)
         {
+            parent.startWindow.Content = new GenerateReportPage(parent ,Appointments);
             //generateReport.Visibility = Visibility.Hidden;
-            _printDialog.PrintVisual(this, "izvjestaj");
+            //_printDialog.PrintVisual(this, "izvjestaj");
             //generateReport.Visibility = Visibility.Visible;
         }
     }

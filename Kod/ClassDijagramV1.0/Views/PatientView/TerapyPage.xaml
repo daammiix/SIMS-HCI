@@ -45,29 +45,6 @@
                                 Grid.Row="2" Grid.Column="1"
                                 AppointmentEditorOpening="click"
                                 >
-
-                <syncfusion:SfScheduler.AppointmentMapping>
-                    <syncfusion:AppointmentMapping
-                    Subject="IdStr"
-                    StartTime="From"
-                    EndTime="To"/>
-                </syncfusion:SfScheduler.AppointmentMapping>
-                
-              
-                            </syncfusion:SfScheduler>
-            <!--
-            <syncfusion:SfScheduler x:Name="appointmentCalendar"
-                                AppointmentEditFlag="None"
-                                ViewType="Week"
-                                AllowedViewTypes="Week">
-                <syncfusion:SfScheduler.MonthViewSettings>
-                    <syncfusion:MonthViewSettings AppointmentDisplayMode="Appointment"  
-                                      AppointmentDisplayCount="5"/>
-                </syncfusion:SfScheduler.MonthViewSettings>
-            </syncfusion:SfScheduler>
-                -->
-
-        
-        
+        </syncfusion:SfScheduler>
     </Grid>
 </Page>
