@@ -3,7 +3,7 @@ using ClassDijagramV1._0.Util;
 
 namespace ClassDijagramV1._0.ViewModel
 {
-    class MainViewModel : ObservableObject
+    public class MainViewModel : ObservableObject
     {
 
         public RelayCommand _roomsViewCommand;
@@ -24,6 +24,7 @@ namespace ClassDijagramV1._0.ViewModel
 
         public WorkersViewModel WorkersVM { get; set; }
         public ReportsViewModel ReportsVM { get; set; }
+        public AccountViewModel AccountVM { get; set; }
 
 
         private object _currentView;
@@ -122,7 +123,6 @@ namespace ClassDijagramV1._0.ViewModel
 
         }
 
-
         public MainViewModel()
         {
             MainRoomsVM = new MainRoomsViewModel();
@@ -130,8 +130,14 @@ namespace ClassDijagramV1._0.ViewModel
             StorageVM = new StorageViewModel();
             WorkersVM = new WorkersViewModel();
             ReportsVM = new ReportsViewModel();
+            AccountVM = new AccountViewModel();
 
             CurrentView = CalendarVM;
+        }
+
+        public void ChangeToAccountView()
+        {
+            CurrentView = AccountVM;
         }
     }
 }

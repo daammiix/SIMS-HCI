@@ -7,8 +7,8 @@
         xmlns:viewModel="clr-namespace:ClassDijagramV1._0.ViewModel"
         mc:Ignorable="d"
         Title="AddRoomWindow"
-        Height="500"
-        Width="640"
+        Height="440"
+        Width="600"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
@@ -18,10 +18,19 @@
         BorderThickness="4"
         BorderBrush="#455736">
 
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Theme/BasicTextBoxTheme.xaml"/>
+                <ResourceDictionary Source="../../Theme/BasicComboBoxTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
-            <RowDefinition Height="360"/>
+            <RowDefinition Height="300"/>
             <RowDefinition Height="75"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
@@ -33,7 +42,7 @@
         </TextBlock>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="210"/>
                 <ColumnDefinition Width="390"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right">
@@ -41,26 +50,19 @@
                 <Label Content="Naziv:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
                 <Label Content="Broj sprata:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
                 <Label Content="Broj sobe:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
-                <Label Content="Status:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">
-                <TextBox x:Name="AddId" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                <TextBox x:Name="AddId" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding RoomID}" Style="{StaticResource BasicTextBox}"/>
                 <ComboBox x:Name="AddName" Width="320" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" 
-                          VerticalContentAlignment="Center" IsReadOnly="True">
+                          VerticalContentAlignment="Center" IsReadOnly="True" SelectedItem="{Binding RoomName}" Style="{StaticResource BasicComboBox}">
                     <ComboBoxItem Margin="5,0,0,0" Content="Operaciona Sala"/>
                     <ComboBoxItem Margin="5,0,0,0" Content="Sala za preglede"/>
                     <ComboBoxItem Margin="5,0,0,0" Content="Bolnička soba"/>
                     <ComboBoxItem Margin="5,0,0,0" Content="Intezivna nega"/>
                     <ComboBoxItem Margin="5,0,0,0" Content="Sala za sastanke"/>
                 </ComboBox>
-                <TextBox x:Name="AddFloor" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                <TextBox x:Name="AddNumber" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                <ComboBox x:Name="AddStatus" Width="320" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" 
-                          VerticalContentAlignment="Center" IsReadOnly="True" >
-                    <ComboBoxItem Margin="5,0,0,0" Content="Aktivna"/>
-                    <ComboBoxItem Margin="5,0,0,0" Content="Renoviranje"/>
-                    <ComboBoxItem Margin="5,0,0,0" Content="Promena namene sale"/>
-                </ComboBox>
+                <TextBox x:Name="AddFloor" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Floor}" Style="{StaticResource BasicTextBox}"/>
+                <TextBox x:Name="AddNumber" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding RoomNumber}" Style="{StaticResource BasicTextBox}"/>
             </StackPanel>
         </Grid>
         <StackPanel Grid.Row="2">

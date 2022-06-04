@@ -1,14 +1,11 @@
 ﻿using ClassDijagramV1._0.Controller;
+using ClassDijagramV1._0.Helpers;
 using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Util;
 using ClassDijagramV1._0.Views.ManagerView;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel
@@ -24,22 +21,24 @@ namespace ClassDijagramV1._0.ViewModel
 
         private readonly Random _random = new Random();
 
-        readonly private String format = "dd/MM/yyyyTHH:mm";
+        readonly private String format = "dd/MM/yyyyTHH:mm:ss";
+
+        private IRefreshableManagerAppointmentView managerAppointmentView;
 
         ChangeManagerAppointment changeManagerAppointment;
 
-        public String Name { get; set; }
-        public String FromDate { get; set; }
-        public String FromTime { get; set; }
-        public String ToDate { get; set; }
-        public String ToTime { get; set; }
+        private String _name { get; set; }
+        private String FromDate { get; set; }
+        private String FromTime { get; set; }
+        private String ToDate { get; set; }
+        private String ToTime { get; set; }
 
         ManagerAppointment managerAppointment;
 
         private RelayCommand _saveChandegManagerAppointment;
         private RelayCommand _cancelManagerAppointment;
 
-        public ChangeManagerAppointmentViewModel(ChangeManagerAppointment changeManagerAppointment, DateTime selectedDate)
+        public ChangeManagerAppointmentViewModel(ChangeManagerAppointment changeManagerAppointment, ManagerAppointment managerAppointment, IRefreshableManagerAppointmentView managerAppointmentView)
         {
             var app = Application.Current as App;
 
@@ -49,23 +48,89 @@ namespace ClassDijagramV1._0.ViewModel
             ToTime = DateTime.Now.ToString("HH:mm");
 
             this.changeManagerAppointment = changeManagerAppointment;
+            this.managerAppointment = managerAppointment;
 
             managerAppointmentController = app.managerAppointmentController;
             ManagerAppointments = managerAppointmentController.GetAllManagerAppointments();
 
-            foreach (var managerAppointment in ManagerAppointments)
+            this.managerAppointmentView = managerAppointmentView;
+
+            this.Name = managerAppointment.Name;
+            this.FromDate = managerAppointment.Start.ToShortDateString();
+            this.FromTime = managerAppointment.Start.TimeOfDay.ToString();
+            this.ToDate = managerAppointment.End.Date.ToShortDateString();
+            this.ToTime = managerAppointment.End.TimeOfDay.ToString();
+        }
+
+        public String Name
+        {
+            get
             {
-                if (managerAppointment.Start.Day == selectedDate.Day)
-                {
-                    this.Name = managerAppointment.Name;
-                    this.FromDate = managerAppointment.Start.ToShortDateString();
-                    this.FromTime = managerAppointment.Start.TimeOfDay.ToString();
-                    this.ToDate = managerAppointment.End.Date.ToShortDateString();
-                    this.ToTime = managerAppointment.End.TimeOfDay.ToString();
-                }
+                return _name;
+            }
+            set
+            {
+                if (_name == value)
+                    return;
+                _name = value;
             }
         }
 
+        public String selectedFromDate
+        {
+            get
+            {
+                return FromDate;
+            }
+            set
+            {
+                if (FromDate == value)
+                    return;
+                FromDate = value;
+            }
+        }
+
+        public String selectedFromTime
+        {
+            get
+            {
+                return FromTime;
+            }
+            set
+            {
+                if (FromTime == value)
+                    return;
+                FromTime = value;
+            }
+        }
+
+        public String selectedToDate
+        {
+            get
+            {
+                return ToDate;
+            }
+            set
+            {
+                if (ToDate == value)
+                    return;
+                ToDate = value;
+            }
+        }
+
+        public String selectedToTime
+        {
+            get
+            {
+                return ToTime;
+            }
+            set
+            {
+                if (ToTime == value)
+                    return;
+                ToTime = value;
+            }
+        }
         public RelayCommand SaveChangedManagerAppointment
         {
             get
@@ -97,10 +162,10 @@ namespace ClassDijagramV1._0.ViewModel
             DateTime fromDatetime = DateTime.ParseExact(FromDate + "T" + FromTime, format, null);
             DateTime toDatetime = DateTime.ParseExact(ToDate + "T" + ToTime, format, null);
 
-            var appointmentId = RandomId();
-            var newManagerAppointment = new ManagerAppointment(appointmentId, Name, fromDatetime, toDatetime);
+            var newManagerAppointment = new ManagerAppointment(managerAppointment.ID, Name, fromDatetime, toDatetime);
             managerAppointmentController.ChangeManagerAppointment(newManagerAppointment);
 
+            managerAppointmentView.RefreshManagerAppointment();
             changeManagerAppointment.Close();
         }
 
@@ -113,7 +178,7 @@ namespace ClassDijagramV1._0.ViewModel
         {
             var builder = new StringBuilder(size);
             char offset = lowerCase ? 'a' : 'A';
-            const int lettersOffset = 26; // A...Z or a..z: length = 26  
+            const int lettersOffset = 26;
 
             for (var i = 0; i < size; i++)
             {

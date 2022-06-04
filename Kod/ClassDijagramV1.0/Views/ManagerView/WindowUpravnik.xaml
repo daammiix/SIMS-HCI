@@ -22,12 +22,13 @@
                 <ResourceDictionary Source="../../Theme/CRUDButtonTheme.xaml"/>
                 <ResourceDictionary Source="../../Theme/YesNoButtonTheme.xaml"/>
                 <ResourceDictionary Source="../../Theme/ReservationButtonTheme.xaml"/>
-                <ResourceDictionary Source="../../Theme/DateTextBoxTheme.xaml"/>
-                <ResourceDictionary Source="../../Theme/TimeTextBoxTheme.xaml"/>
+                <ResourceDictionary Source="../../Theme/BasicTextBoxTheme.xaml"/>
+                <ResourceDictionary Source="../../Theme/BasicTextBoxTheme.xaml"/>
                 <ResourceDictionary Source="../../Theme/CalendarTheme.xaml"/>
                 <ResourceDictionary Source="../../Theme/StorageMenuButtonTheme.xaml"/>
                 <ResourceDictionary Source="../../Theme/TextBoxes.xaml"/>
                 <ResourceDictionary Source="../../Theme/ComboBoxTheme.xaml"/>
+                <ResourceDictionary Source="../../Theme/BasicComboBoxTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -41,6 +42,7 @@
         <StackPanel Orientation="Horizontal" Grid.Row="0">
 
             <RadioButton Content="Kalendar"
+                         x:Name="kalendar"
                          Height="65"
                          Width="200"
                          FontSize="26"
@@ -49,6 +51,7 @@
                          Command="{Binding CalendarViewCommand}"/>
 
             <RadioButton Content="Izveštaji"
+                         x:Name="izvestaji"
                          Height="65"
                          Width="200"
                          FontSize="26"
@@ -56,6 +59,7 @@
                          Command="{Binding ReportsViewCommand}"/>
 
             <RadioButton Content="Radno osoblje"
+                         x:Name="radnoOsoblje"
                          Height="65"
                          Width="200"
                          FontSize="26"
@@ -63,6 +67,7 @@
                          Command="{Binding WorkersViewCommand}"/>
 
             <RadioButton Content="Sale"
+                         x:Name="sale"
                          Height="65"
                          Width="200"
                          FontSize="26"
@@ -70,18 +75,20 @@
                          Command="{Binding RoomsViewCommand}"/>
 
             <RadioButton Content="Magacin"
+                         x:Name="magacin"
                          Height="65"
                          Width="200"
                          FontSize="26"
                          Style="{StaticResource MenuButtonTheme}"
                          Command="{Binding StorageViewCommand}"/>
-
-            <ComboBox Height="65" Width="280"
-                      VerticalContentAlignment="Center" IsReadOnly="True" FontSize="26">
-                <ComboBoxItem Margin="5,0,0,0" Visibility="Visible">Izmeni</ComboBoxItem>
-                <ComboBoxItem Margin="5,0,0,0">Odjavi se</ComboBoxItem>
-                <ComboBoxItem Margin="5,0,0,0">Tutorijal</ComboBoxItem>
-            </ComboBox>
+            <StackPanel Orientation="Horizontal" Width="280">
+                <ComboBox Height="65" Width="265" HorizontalAlignment="Left" Style="{StaticResource ComboBoxTest2}"
+                VerticalContentAlignment="Center" IsReadOnly="True" FontSize="24">
+                    <ComboBoxItem Margin="5,0,0,0" Selected="ComboBoxItem_Selected">Izmeni</ComboBoxItem>
+                    <ComboBoxItem Margin="5,0,0,0" Selected="ComboBoxItem_Selected_1">Odjavi se</ComboBoxItem>
+                    <ComboBoxItem Margin="5,0,0,0" Selected="ComboBoxItem_Selected_2">Tutorijal</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
         </StackPanel>
 
         <DockPanel Grid.Row="1">

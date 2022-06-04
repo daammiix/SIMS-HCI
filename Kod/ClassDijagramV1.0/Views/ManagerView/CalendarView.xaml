@@ -4,11 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             xmlns:converters="clr-namespace:ClassDijagramV1._0.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="655" d:DesignWidth="1280"
              Background="#D9D4CC"
              FontFamily="Sylfaen"
              FontWeight="Bold">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:ManagerAppointmentConverter x:Key="ManagerAppointmentConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -62,16 +69,18 @@
 
         <StackPanel Grid.Column="2" Orientation="Vertical">
             <Label Content="Današnje obaveze:" FontSize="20" HorizontalContentAlignment="Left" Margin="10,30,0,0"/>
-            <DataGrid x:Name="DayEvents" CanUserAddRows="False" SelectionMode="Single"
+            <Grid Height="300">
+                <DataGrid x:Name="DayEvents" CanUserAddRows="False" SelectionMode="Single"
                           CanUserResizeColumns="False"  CanUserResizeRows="False" 
                           RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
-                          FontSize="20" BorderThickness="4" CanUserReorderColumns="False"
+                          FontSize="18" BorderThickness="4" CanUserReorderColumns="False"
                           CanUserDeleteRows="False" AutoGenerateColumns="False"
-                          IsReadOnly="True" ItemsSource="{Binding Path=ManagerAppointmentsOfDay, UpdateSourceTrigger=PropertyChanged}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Obaveze" Width="*" Binding="{Binding Path=Name}"/>
-                </DataGrid.Columns>
-            </DataGrid>
+                          IsReadOnly="True" ItemsSource="{Binding Path=ManagerAppointmentsOfDay}" SelectedItem="{Binding selectedManagerAppointment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Obaveze" Width="*" Binding="{Binding Path=., Converter={StaticResource ManagerAppointmentConverter}}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
         </StackPanel>
         
     </Grid>
