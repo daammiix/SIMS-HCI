@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 ﻿using Model;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace ClassDijagramV1._0.Views.PatientView
 {
@@ -26,6 +27,7 @@ namespace ClassDijagramV1._0.Views.PatientView
         public ObservableCollection<Appointment> Appointments { get; set; }
         public AppointmentController _appointmentController;
         private ScheduleAppointmentCollection sac;
+        List<SolidColorBrush> boje;
         #endregion
         public TerapyPage(PatientMainWindow patientMain, ObservableCollection<AppointmentViewModel> appointmentViewModels)
         {
@@ -37,6 +39,14 @@ namespace ClassDijagramV1._0.Views.PatientView
             _appointmentController = app.AppointmentController;
 
             sac = new ScheduleAppointmentCollection();
+            boje = new List<SolidColorBrush>();
+            boje.Add(new SolidColorBrush(Colors.Red));
+            boje.Add(new SolidColorBrush(Colors.Orange));
+            boje.Add(new SolidColorBrush(Colors.Yellow));
+            boje.Add(new SolidColorBrush(Colors.Green));
+            boje.Add(new SolidColorBrush(Colors.Blue));
+            boje.Add(new SolidColorBrush(Colors.Purple));
+            boje.Add(new SolidColorBrush(Colors.DeepPink));
             FillCalendar();
         }
 
@@ -49,11 +59,13 @@ namespace ClassDijagramV1._0.Views.PatientView
         {
             foreach (TherapyDTO t in FindCurrentTherapies())
             {
+                Random rnd = new Random();
                 ScheduleAppointment sa = new ScheduleAppointment();
                 sa.StartTime = t.Date;
                 sa.Subject = t.Name;
                 sa.EndTime = t.Date.AddMinutes(10);
                 sa.IsAllDay = false;
+                sa.AppointmentBackground = boje[rnd.Next(0,7)];
                 sac.Add(sa);
             }
 

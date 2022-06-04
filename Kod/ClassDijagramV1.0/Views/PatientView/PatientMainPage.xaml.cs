@@ -24,8 +24,8 @@ namespace ClassDijagramV1._0.Views.PatientView
         #region Fields
         private PatientMainWindow parent { get; set; }
 
-        private ObservableCollection<AppointmentViewModel> _appointmentViewModels;
-        private ObservableCollection<AppointmentViewModel> _oldAppointmentViewModels;
+        public ObservableCollection<AppointmentViewModel> _appointmentViewModels;
+        public ObservableCollection<AppointmentViewModel> _oldAppointmentViewModels;
 
         private MedicineController _medicineController;
         private BanningPatientController _banningPatientController;
