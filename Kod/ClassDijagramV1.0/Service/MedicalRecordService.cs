@@ -3,11 +3,7 @@ using ClassDijagramV1._0.Repository;
 using Model;
 using Service;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Service
 {

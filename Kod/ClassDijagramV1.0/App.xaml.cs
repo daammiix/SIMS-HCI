@@ -1,11 +1,9 @@
 ﻿using ClassDijagramV1._0.Controller;
-using ClassDijagramV1._0.Converters;
 using ClassDijagramV1._0.FileHandlers;
 using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Model.Enums;
 using ClassDijagramV1._0.Repository;
 using ClassDijagramV1._0.Service;
-using ClassDijagramV1._0.ViewModel;
 using Controller;
 using Model;
 using Repository;
@@ -13,10 +11,7 @@ using Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
-using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ClassDijagramV1._0
@@ -43,14 +38,14 @@ namespace ClassDijagramV1._0
         public static string _medicalRecordFilePath = "../../../Data/medicalRecords.json";
         public string _storageFilePath = "../../../Data/storage.json";
         public string _roomAppointmentsFilePath = "../../../Data/roomAppointments.json";
-        public static string _purchaseOrdersFilePath = "../../../Data/purchaseOrders.json";
         public static string _hospitalRatingsFilePath = "../../../Data/hospitalratings.json";
         public static string _doctorRatingsFilePath = "../../../Data/doctorratings.json";
         public static string _activityFilePath = "../../../Data/activity.json";
         public string _medicinesFilePath = "../../../Data/medicines.json";
         public string _reportsFilePath = "../../../Data/reports.json";
         public static string _notificationsFilePath = "../../../Data/notifications.json";
-
+        public static string _purchaseOrdersFilePath = "../../../Data/purchaseOrders.json";
+        private static string _quarterlyReportsFilePath = "..\\..\\..\\Data\\quarterlyReports.json";
 
         #endregion
 
@@ -82,6 +77,8 @@ namespace ClassDijagramV1._0
         public MedicineController medicinesController { get; set; }
 
         public ReportsController reportsController { get; set; }
+
+        public ManagerAppointmentController managerAppointmentController { get; set; }
 
         public QuarterlyReportsController QuarterlyReportsController { get; set; }
 
@@ -190,8 +187,14 @@ namespace ClassDijagramV1._0
             var reportsService = new ReportsService(reportsRepo);
             reportsController = new ReportsController(reportsService);
 
+            //Manager appointment
+            var managerAppointmentRepo = new ManagerAppointmentRepo();
+            var managerAppointmentService = new ManagerAppointmentService(managerAppointmentRepo);
+            managerAppointmentController = new ManagerAppointmentController(managerAppointmentService);
+
             //QuarterlyReports
-            var quarterlyReportsRepo = new QuarterlyReportsRepo();
+            var quarterlyReportsFileHander = new FileHandler<BindingList<QuarterlyReport>>(_quarterlyReportsFilePath);
+            var quarterlyReportsRepo = new QuarterlyReportsRepo(quarterlyReportsFileHander);
             var quarterlyReportsService = new QuarterlyReportsService(quarterlyReportsRepo);
             QuarterlyReportsController = new QuarterlyReportsController(quarterlyReportsService);
 
@@ -220,7 +223,6 @@ namespace ClassDijagramV1._0
             // tako da u trenutku formiranja ovi podaci ne postoje trebalo bi ovde ispod povezati sve
             // da bi se i ovi podaci lepo povezali
             ConnectData();
-
         }
 
         private void dispatcherTimer_Tick(object? sender, EventArgs e)
@@ -232,7 +234,6 @@ namespace ClassDijagramV1._0
         private void Application_Exit(object sender, ExitEventArgs e)
         {
             SaveAll();
-
         }
 
         private void SaveAll()
@@ -249,6 +250,7 @@ namespace ClassDijagramV1._0
             RatingController.SaveHospitalRatings();
             RatingController.SaveDoctorRatings();
             ActivityController.SaveActivity();
+            QuarterlyReportsController.SaveQuarterlyReports();
             NotificationController.SaveNotifications();
         }
 
@@ -347,7 +349,6 @@ namespace ClassDijagramV1._0
             AccountController.AddAccount(ac7);
             AccountController.AddAccount(ac8);
             AccountController.AddAccount(ac9);
-
         }
 
         private void ConnectData()
@@ -456,12 +457,6 @@ namespace ClassDijagramV1._0
                 maxId = purchaseOrders.Max(order => order.Id);
                 PurchaseOrder.idCounter = maxId;
             }
-        }
-
-        private void Application_Deactivated(object sender, EventArgs e)
-        {
-            SaveAll();
-            Environment.Exit(0);
         }
     }
 }

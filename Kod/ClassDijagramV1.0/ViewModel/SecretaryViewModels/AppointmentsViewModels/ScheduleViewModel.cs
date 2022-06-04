@@ -1,12 +1,8 @@
-﻿using ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModels;
-using Controller;
+﻿using Controller;
 using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 

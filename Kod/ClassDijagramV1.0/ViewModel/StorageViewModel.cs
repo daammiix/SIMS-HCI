@@ -1,14 +1,4 @@
-﻿using ClassDijagramV1._0.Helpers;
-using ClassDijagramV1._0.Util;
-using Controller;
-using Model;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using ClassDijagramV1._0.Util;
 
 namespace ClassDijagramV1._0.ViewModel
 {

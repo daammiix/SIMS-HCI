@@ -1,25 +1,13 @@
 using ClassDijagramV1._0.Controller;
 using ClassDijagramV1._0.Model;
-using ClassDijagramV1._0.Util;
-using ClassDijagramV1._0.Views.PatientView;
 using Controller;
 using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ClassDijagramV1._0.Views.PatientView
 {
@@ -49,7 +37,7 @@ namespace ClassDijagramV1._0.Views.PatientView
         public NotificationController _notificationController;
 
         private PatientMainWindow parent { get; set; }
-        public ObservableCollection<Appointment> Appointments{ get; private set; }
+        public ObservableCollection<Appointment> Appointments { get; private set; }
         public BindingList<Room> Rooms { get; set; }
         public ObservableCollection<Doctor> Doctors { get; set; }
         public ObservableCollection<String> DoctorsAppointmentsTime { get; set; }
@@ -90,7 +78,7 @@ namespace ClassDijagramV1._0.Views.PatientView
             DateTime date = new DateTime(year, month, day, hour, minutes, 0);
             TimeSpan interval = date.AddMinutes(30) - date;
 
-            Room r1 = getFreeRoom(date,interval);
+            Room r1 = getFreeRoom(date, interval);
             Doctor d1 = (Doctor)dodavanjPregledaDoktor.SelectedItem;
 
             Appointment a1 = new Appointment(_logedPatient.Id, d1.Id, r1.RoomID, date, interval, AppointmentType.generalPractitionerCheckup);
@@ -115,7 +103,7 @@ namespace ClassDijagramV1._0.Views.PatientView
                 if (_roomAppointmentController.GetFreeRoom(room, start, start + interval))
                 {
                     return room;
-                }             
+                }
             }
             return null;
         }

@@ -7,7 +7,8 @@
                 <ControlTemplate TargetType="{x:Type TextBoxBase}">
                     <Border CornerRadius="10"
                             Background="White"
-                            Width="{TemplateBinding Property=Width}" Height="40">
+                            Width="{TemplateBinding Property=Width}" 
+                            Height="{TemplateBinding Property=Height}">
                         <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
                     </Border>
                 </ControlTemplate>

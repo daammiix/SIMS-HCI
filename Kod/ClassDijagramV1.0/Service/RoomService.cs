@@ -3,12 +3,10 @@
 // Created: 08 April 2022 14:44:24
 // Purpose: Definition of Class RoomService
 
-using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using ClassDijagramV1._0.Model;
 using Model;
 using Repository;
+using System;
+using System.ComponentModel;
 
 namespace Service
 {

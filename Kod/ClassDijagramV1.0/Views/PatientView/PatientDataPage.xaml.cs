@@ -1,4 +1,4 @@
-﻿using ClassDijagramV1._0.Controller;
+using ClassDijagramV1._0.Controller;
 using ClassDijagramV1._0.Model;
 using Model;
 using System;
@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+﻿using System.Windows.Controls;
 
 namespace ClassDijagramV1._0.Views.PatientView
 {

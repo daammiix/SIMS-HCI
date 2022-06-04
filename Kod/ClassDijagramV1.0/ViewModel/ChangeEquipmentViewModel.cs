@@ -6,10 +6,6 @@ using ClassDijagramV1._0.Util;
 using ClassDijagramV1._0.Views.ManagerView;
 using Controller;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel
@@ -97,5 +93,5 @@ namespace ClassDijagramV1._0.ViewModel
             changeEquipment.Close();
         }
     }
-    
+
 }

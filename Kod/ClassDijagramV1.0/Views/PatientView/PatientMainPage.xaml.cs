@@ -10,13 +10,6 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ClassDijagramV1._0.Views.PatientView
 {
@@ -96,7 +89,7 @@ namespace ClassDijagramV1._0.Views.PatientView
 
         private void addMedicalReportToAllAppointmnts(Appointment appointment)
         {
-            Random rnd = new Random();     
+            Random rnd = new Random();
             var medicines = _medicineController.GetAllMedicines();
             List<String> dvaLijeka = new List<String>() { medicines[rnd.Next(0, medicines.Count - 1)].ID ,
                                                           medicines[rnd.Next(0, medicines.Count - 1)].ID

@@ -1,11 +1,7 @@
 ﻿using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Repository;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Service
 {
@@ -24,6 +20,11 @@ namespace ClassDijagramV1._0.Service
         public BindingList<QuarterlyReport> GetAllQuarterlyReports()
         {
             return quarterlyReportsRepo.GetAllQuarterlyReports();
+        }
+
+        public void SaveQuarterlyReports()
+        {
+            quarterlyReportsRepo.writeReports();
         }
     }
 }

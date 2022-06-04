@@ -4,11 +4,6 @@ using ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModels;
 using ClassDijagramV1._0.ViewModel.SecretaryViewModels.EquipmentViewModels;
 using ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewModels;
 using Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels
 {

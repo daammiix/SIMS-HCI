@@ -1,11 +1,4 @@
-﻿using ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModels
+﻿namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModels
 {
     public class AppointmentsMainViewModel
     {

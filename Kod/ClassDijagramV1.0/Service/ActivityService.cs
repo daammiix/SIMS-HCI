@@ -2,9 +2,6 @@
 using ClassDijagramV1._0.Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Service
 {
@@ -22,10 +19,10 @@ namespace ClassDijagramV1._0.Service
             List<ActivityLog> activities = _activityRepo.GetAllActivity();
             foreach (ActivityLog activity in activities)
             {
-                if ( (activity.PatientID == PatientID)
+                if ((activity.PatientID == PatientID)
                     && activity.Type.Equals(type)
                     && activity.Date > DateTime.Now.AddDays(-10))
-                { 
+                {
                     ++counterOfActivity;
                 }
             }

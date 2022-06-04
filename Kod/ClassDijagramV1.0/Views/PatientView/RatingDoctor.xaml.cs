@@ -6,17 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ClassDijagramV1._0.Views.PatientView
 {
@@ -38,7 +29,7 @@ namespace ClassDijagramV1._0.Views.PatientView
         public ObservableCollection<Doctor> Doctors { get; set; }
         private RatingController _ratingController;
         public ObservableCollection<DoctorRating> DoctorRatings { get; set; }
-        public RatingDoctor(ObservableCollection<AppointmentViewModel> appointments,PatientMainWindow patientMain, Patient logedPatient)
+        public RatingDoctor(ObservableCollection<AppointmentViewModel> appointments, PatientMainWindow patientMain, Patient logedPatient)
         {
             InitializeComponent();
             parent = patientMain;
@@ -54,13 +45,13 @@ namespace ClassDijagramV1._0.Views.PatientView
             Doctors = new ObservableCollection<Doctor>();
             foreach (Appointment a in Appointments)
             {
-                if ( (a.PatientId == _logedPatient.Id)
+                if ((a.PatientId == _logedPatient.Id)
                     && (a.AppointmentDate < DateTime.Now)
-                    && (!Doctors.Contains(_doctorController.GetDoctorById(a.DoctorId))) )
+                    && (!Doctors.Contains(_doctorController.GetDoctorById(a.DoctorId))))
                 {
                     Doctors.Add(_doctorController.GetDoctorById(a.DoctorId));
                 }
-                
+
             }
             DoctorRatings = _ratingController.GetAllDoctorRatings();
         }
@@ -71,7 +62,7 @@ namespace ClassDijagramV1._0.Views.PatientView
             string comment = komentar.Text;
             Doctor d1 = (Doctor)doktoriSaPregleda.SelectedItem;
 
-            DoctorRating dr = new DoctorRating(d1.Id,ocjene, ocjene.Average(), comment);
+            DoctorRating dr = new DoctorRating(d1.Id, ocjene, ocjene.Average(), comment);
 
             _ratingController.AddRatingDoctor(dr);
 
