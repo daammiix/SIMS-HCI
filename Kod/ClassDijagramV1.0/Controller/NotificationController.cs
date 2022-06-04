@@ -14,9 +14,19 @@ namespace ClassDijagramV1._0.Controller
             _notificationService = notificationService;
         }
 
-        public void AddNotification(Appointment appointment, Room r1, NotificationType notificationType)
+        public void AddManualNotification(Notification notification)
         {
-            _notificationService.AddNotification(appointment, r1, notificationType);
+            _notificationService.AddManualNotification(notification);
+        }
+
+        public void AddNotificationForAppointment(Appointment appointment)
+        {
+            _notificationService.AddNotificationForAppointment(appointment);
+        }
+
+        public void RemoveNotificationByAppointment(int appointmentID)
+        {
+            _notificationService.RemoveNotificationByAppointment(appointmentID);
         }
 
         public ObservableCollection<Notification> GetAllNotifications()

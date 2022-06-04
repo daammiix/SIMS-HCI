@@ -99,7 +99,9 @@ namespace ClassDijagramV1._0.Views.PatientView
             _appointmentController.AddAppointment(a1);
             // Da bi se updatovao i view
             _patientAppointments.Add(new AppointmentViewModel(a1));
-            _notificationController.AddNotification(a1, r1, NotificationType.addingAppointment);
+            // ispravka buga
+            _logedPatient.Appointments.Add(a1);
+            _notificationController.AddNotificationForAppointment(a1);
             //activity
             ActivityLog activity = new ActivityLog(DateTime.Now, _logedPatient.Id, TypeOfActivity.makeAppointment);
             _activityController.AddActivity(activity);

@@ -334,7 +334,7 @@
                     Grid.Row="0"
                     Margin="8 8 8 0">
                     <Image
-                    Source="/Views/PatientView/zdravstveniKarton.jpg"
+                    Source="Resources/Images/zdravstveniKarton.jpg"
                     Height="100"/>
                     <Button
                     Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
@@ -412,7 +412,7 @@
                     Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
-                    Margin="0 -35 16 -20" Click="zdravstveniKartonClick" 
+                    Margin="0 -35 16 -20" Click="demoClick" 
                         >
                         <materialDesign:PackIcon Kind="Medicine" />
                     </Button>

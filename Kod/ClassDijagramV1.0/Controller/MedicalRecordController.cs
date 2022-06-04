@@ -85,6 +85,18 @@ namespace ClassDijagramV1._0.Controller
             return _medicalRecordService.GetMedicalRecord(medicalRecordNumber);
         }
 
+
+        /// <summary>
+        /// Vraca zdravstveni karton od zadatok pacijenta
+        /// </summary>
+        /// <param name="patientID"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public MedicalRecord GetPatientsMedicalRecord(int patientID)
+        {
+            return _medicalRecordService.GetPatientsMedicalRecord(patientID);
+        }
+
         /// <summary>
         /// Proverava da li postoji medical Record sa zadatim brojem preskacuci zadati medicalRecord
         /// </summary>

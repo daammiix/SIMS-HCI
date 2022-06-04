@@ -1,1 +1,93 @@
-[{"ID":"LB400","Name":"Brufen 400","Status":"Odobren","MedicineComponents":[],"SuggestedMedicines":[]},{"ID":"LA40","Name":"Anadol","Status":"Odobren","MedicineComponents":[],"SuggestedMedicines":[]},{"ID":"LM300","Name":"Magnezijum 300","Status":"Na \u010Dekanju","MedicineComponents":[],"SuggestedMedicines":[]},{"ID":"LC300","Name":"Cink 300","Status":"Odbijen","MedicineComponents":[],"SuggestedMedicines":[]},{"ID":"LMI15","Name":"Marisol Isotomic","Status":"Na \u010Dekanju","MedicineComponents":[],"SuggestedMedicines":[]},{"ID":"MLS15","Name":"Marisol Standard","Status":"Odbijen","MedicineComponents":[],"SuggestedMedicines":[]},{"ID":"LPG40","Name":"Pernaton gel","Status":"Odobren","MedicineComponents":[],"SuggestedMedicines":[]},{"ID":"LF200","Name":"Fastum gel","Status":"Odobren","MedicineComponents":[],"SuggestedMedicines":[]},{"ID":"LDR800","Name":"Deep relief gel","Status":"Odobren","MedicineComponents":[],"SuggestedMedicines":[]},{"ID":"kg7","Name":"desno","Status":"Odbijen","MedicineComponents":["magnezijum\r\ncink\r\nnesto\r\nnesto drugo"],"SuggestedMedicines":[]}]
+[
+  {
+    "ID": "LB400",
+    "Name": "Brufen 400",
+    "Status": "Odobren",
+    "MedicineComponents": [
+    ],
+    "SuggestedMedicines": [
+    ]
+  },
+  {
+    "ID": "LA40",
+    "Name": "Anadol",
+    "Status": "Odobren",
+    "MedicineComponents": [
+    ],
+    "SuggestedMedicines": [
+    ]
+  },
+  {
+    "ID": "LM300",
+    "Name": "Magnezijum 300",
+    "Status": "Na \u010Dekanju",
+    "MedicineComponents": [
+    ],
+    "SuggestedMedicines": [
+    ]
+  },
+  {
+    "ID": "LC300",
+    "Name": "Cink 300",
+    "Status": "Odbijen",
+    "MedicineComponents": [
+    ],
+    "SuggestedMedicines": [
+    ]
+  },
+  {
+    "ID": "LMI15",
+    "Name": "Marisol Isotomic",
+    "Status": "Na \u010Dekanju",
+    "MedicineComponents": [
+    ],
+    "SuggestedMedicines": [
+    ]
+  },
+  {
+    "ID": "MLS15",
+    "Name": "Marisol Standard",
+    "Status": "Odbijen",
+    "MedicineComponents": [
+    ],
+    "SuggestedMedicines": [
+    ]
+  },
+  {
+    "ID": "LPG40",
+    "Name": "Pernaton gel",
+    "Status": "Odobren",
+    "MedicineComponents": [
+    ],
+    "SuggestedMedicines": [
+    ]
+  },
+  {
+    "ID": "LF200",
+    "Name": "Fastum gel",
+    "Status": "Odobren",
+    "MedicineComponents": [
+    ],
+    "SuggestedMedicines": [
+    ]
+  },
+  {
+    "ID": "LDR800",
+    "Name": "Deep relief gel",
+    "Status": "Odobren",
+    "MedicineComponents": [
+    ],
+    "SuggestedMedicines": [
+    ]
+  },
+  {
+    "ID": "kg7",
+    "Name": "desno",
+    "Status": "Odbijen",
+    "MedicineComponents": [
+      "magnezijum\r\ncink\r\nnesto\r\nnesto drugo"
+    ],
+    "SuggestedMedicines": [
+    ]
+  }
+]

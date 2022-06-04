@@ -82,11 +82,14 @@ namespace ClassDijagramV1._0.Views.PatientView
             Doctor d1 = (Doctor)dodavanjPregledaDoktor.SelectedItem;
 
             Appointment a1 = new Appointment(_logedPatient.Id, d1.Id, r1.RoomID, date, interval, AppointmentType.generalPractitionerCheckup);
+            
 
             _appointmentController.AddAppointment(a1);
             // Da bi se updatovao i view
             _patientAppointments.Add(new AppointmentViewModel(a1));
-            _notificationController.AddNotification(a1, r1, NotificationType.addingAppointment);
+            // ispravka buga
+            _logedPatient.Appointments.Add(a1);
+            _notificationController.AddNotificationForAppointment(a1);
             //activity
             ActivityLog activity = new ActivityLog(DateTime.Now, _logedPatient.Id, TypeOfActivity.makeAppointment);
             _activityController.AddActivity(activity);

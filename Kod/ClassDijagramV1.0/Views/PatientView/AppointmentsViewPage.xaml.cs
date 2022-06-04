@@ -24,11 +24,14 @@ namespace ClassDijagramV1._0.Views.PatientView
         private PatientController _patientController;
         public ActivityController _activityController;
         public BanningPatientController _banningPatientController;
+        public NotificationController _notificationController;
         private PatientMainWindow parent { get; set; }
 
         // Ulogovan pacijent
         private Patient _logedPatient;
         private Account _account;
+
+        private PrintDialog _printDialog = new PrintDialog();
 
         #endregion
 
@@ -71,9 +74,9 @@ namespace ClassDijagramV1._0.Views.PatientView
             _patientController = app.PatientController;
             _activityController = app.ActivityController;
             _banningPatientController = app.BanningPatientController;
+            _notificationController = app.NotificationController;
 
             Appointments = appointments;
-
             // Pokupimo sve sobe
             Rooms = _roomController.GetAllRooms();
 
@@ -121,6 +124,7 @@ namespace ClassDijagramV1._0.Views.PatientView
                     //tabelaPregledi.ItemsSource = _appointmentController.GetAllAppointmentsByPatient(parent.patientID);
                     //Appointments.Remove((Appointment)tabelaPregledi.SelectedItem);
                     AppointmentViewModel selectedAppointment = (AppointmentViewModel)tabelaPregledi.SelectedItem;
+                    _notificationController.RemoveNotificationByAppointment(selectedAppointment.Id);
                     // Izbrisemo i iz view-a i iz baze
                     Appointments.Remove(selectedAppointment);
                     _appointmentController.RemoveAppointment(selectedAppointment.Id);
@@ -131,6 +135,13 @@ namespace ClassDijagramV1._0.Views.PatientView
             }
 
 
+        }
+
+        private void generatePDFClick(object sender, RoutedEventArgs e)
+        {
+            //generateReport.Visibility = Visibility.Hidden;
+            _printDialog.PrintVisual(this, "izvjestaj");
+            //generateReport.Visibility = Visibility.Visible;
         }
     }
 
