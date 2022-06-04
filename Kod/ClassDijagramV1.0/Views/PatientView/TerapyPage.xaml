@@ -54,7 +54,7 @@
                 </syncfusion:SfScheduler.AppointmentMapping>
                 
               
-                            </syncfusion:SfScheduler>
+        </syncfusion:SfScheduler>
             <!--
             <syncfusion:SfScheduler x:Name="appointmentCalendar"
                                 AppointmentEditFlag="None"

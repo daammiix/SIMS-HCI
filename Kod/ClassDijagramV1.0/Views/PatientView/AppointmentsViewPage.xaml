@@ -40,11 +40,11 @@
             VerticalAlignment="Top" 
             Margin="42 0 0 0"/>
         <StackPanel Grid.Row="2" Grid.Column="2">
-            <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}" Content="Zakazi pregled" Click="AddAppontment_Click"
+            <Button x:Name="zakazi" Style="{StaticResource MaterialDesignFlatAccentBgButton}" Content="Zakazi pregled" Click="AddAppontment_Click"
                     Margin="8 8 8 16"/>
-            <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}" Content="Izmijeni pregled" Click="UpdateAppontment_Click"
+            <Button x:Name="izmijeni" Style="{StaticResource MaterialDesignFlatAccentBgButton}" Content="Izmijeni pregled" Click="UpdateAppontment_Click"
                     Margin="8 0 8 16"/>
-            <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}" Content="Otkazi pregled" Click="RemoveAppontment_Click"
+            <Button x:Name="otkazi" Style="{StaticResource MaterialDesignFlatAccentBgButton}" Content="Otkazi pregled" Click="RemoveAppontment_Click"
                     Margin="8 0 8 16"/>
             <Label x:Name="errorBan" Foreground="Red" />
         </StackPanel>
