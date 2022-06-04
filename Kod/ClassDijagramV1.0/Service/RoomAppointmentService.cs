@@ -18,7 +18,7 @@ namespace ClassDijagramV1._0.Service
         public RoomAppointmentService(RoomAppointmentRepo roomAppointmentRepo)
         {
             this.roomAppointmentRepo = roomAppointmentRepo;
-            var app = Application.Current as App;
+            App app = Application.Current as App;
             roomController = app.roomController;
             roomAppointments = roomAppointmentRepo.GetAllRoomAppointments();
             roomsList = roomController.GetAllRooms();
@@ -191,14 +191,31 @@ namespace ClassDijagramV1._0.Service
         /// </summary>
         /// <param name="start"></param>
         /// <param name="end"></param>
+        /// <returns></returns>
+        public Room GetFreeRoom(DateTime start, DateTime end)
+        {
+            foreach (Room room in roomsList)
+            {
+                if (IsRoomFree(room, start, end))
+                {
+                    return room;
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Provjerava da li je soba prazna
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
         /// <param name="room"></param>
         /// <returns></returns>
-        public bool GetFreeRoom(Room room, DateTime start, DateTime end)
+        public bool IsRoomFree(Room room, DateTime start, DateTime end)
         {
-            bool retVal = true;
+            bool roomFree = true;
             App app = Application.Current as App;
             AppointmentController appointmentController = app.AppointmentController;
-
             foreach (Appointment termin in appointmentController.GetAppointments())
             {
                 if (termin.RoomId.Equals(room.RoomID) && room.RoomStatus.Equals("Aktivna"))
@@ -207,12 +224,12 @@ namespace ClassDijagramV1._0.Service
                          || (end >= termin.AppointmentDate && end <= termin.AppointmentDate.Add(termin.Duration))
                          || (start <= termin.AppointmentDate && end >= termin.AppointmentDate.Add(termin.Duration)))
                     {
-                        retVal = false;
+                        roomFree = false;
                         break;
                     }
                 }
             }
-            return retVal;
+            return roomFree;
         }
     }
 }

@@ -26,31 +26,26 @@ namespace ClassDijagramV1._0.Views.PatientView
 
         // pacijentovi appointmenti, lista appointmentViewModela prosledjena konstruktoru
         private ObservableCollection<AppointmentViewModel> _patientAppointments;
-        // ulogovan pacijent
-        private Patient _logedPatient;
         // kontroleri
-        public AppointmentController _appointmentController;
-        public RoomController _roomController;
-        public DoctorController _doctorController;
-        public RoomAppointmentController _roomAppointmentController;
-        public ActivityController _activityController;
-        public NotificationController _notificationController;
+        private AppointmentController _appointmentController;
+        private RoomController _roomController;
+        private DoctorController _doctorController;
+        private RoomAppointmentController _roomAppointmentController;
+        private ActivityController _activityController;
+        private NotificationController _notificationController;
 
         private PatientMainWindow parent { get; set; }
-
         public ObservableCollection<Appointment> Appointments { get; private set; }
         public BindingList<Room> Rooms { get; set; }
         public ObservableCollection<Doctor> Doctors { get; set; }
         public ObservableCollection<Doctor> DoctorsAppointmentsTime { get; set; }
 
-        public PriorityTime(PatientMainWindow patientMain, ObservableCollection<AppointmentViewModel> patientAppointments,
-            Patient logedPatient)
+        public PriorityTime(PatientMainWindow patientMain, ObservableCollection<AppointmentViewModel> patientAppointments)
         {
             InitializeComponent();
             this.DataContext = this;
             parent = patientMain;
             _patientAppointments = patientAppointments;
-            _logedPatient = logedPatient;
 
             App app = Application.Current as App;
             _appointmentController = app.AppointmentController;
@@ -91,43 +86,24 @@ namespace ClassDijagramV1._0.Views.PatientView
             DateTime date = new DateTime(year, month, day, hour, minutes, 0);
             TimeSpan interval = date.AddMinutes(30) - date;
 
-            Room r1 = getFreeRoom(date, interval);
+            Room r1 = _roomAppointmentController.GetFreeRoom(date, date + interval);
             Doctor d1 = (Doctor)dodavanjPregledaDoktor.SelectedItem;
-
-            Appointment a1 = new Appointment(_logedPatient.Id, d1.Id, r1.RoomID, date, interval, AppointmentType.generalPractitionerCheckup);
+            Appointment a1 = new Appointment(parent.Patient.Id, d1.Id, r1.RoomID, date, interval, AppointmentType.generalPractitionerCheckup);
 
             _appointmentController.AddAppointment(a1);
-            // Da bi se updatovao i view
             _patientAppointments.Add(new AppointmentViewModel(a1));
-            // ispravka buga
-            _logedPatient.Appointments.Add(a1);
+            parent.Patient.Appointments.Add(a1);
             _notificationController.AddNotificationForAppointment(a1);
-            //activity
-            ActivityLog activity = new ActivityLog(DateTime.Now, _logedPatient.Id, TypeOfActivity.makeAppointment);
+            ActivityLog activity = new ActivityLog(DateTime.Now, parent.Patient.Id, TypeOfActivity.makeAppointment);
             _activityController.AddActivity(activity);
-            parent.startWindow.Content = new AppointmentsViewPage(_patientAppointments, parent, _logedPatient, parent.Account);
-        }
 
-        private Room getFreeRoom(DateTime start, TimeSpan interval)
-        {
-            foreach (Room room in Rooms)
-            {
-                if (_roomAppointmentController.GetFreeRoom(room, start, start + interval))
-                {
-                    return room;
-                }
-            }
-            return null;
+            parent.startWindow.Content = new AppointmentsViewPage(parent, _patientAppointments);
         }
 
         private void dodavanjPregledaDoktor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
             DateTime danas = DateTime.Today;
-
-
-
-
             DoctorsAppointmentsTime = new ObservableCollection<Doctor>();
             List<Doctor> termini = new List<Doctor>();
 

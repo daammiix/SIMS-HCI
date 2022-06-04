@@ -8,7 +8,6 @@ namespace ClassDijagramV1._0.Repository
 {
     public class RatingRepo
     {
-        private String Path;
         private FileHandler<HospitalRating> _hospitalRatingtFileHandler;
         private FileHandler<DoctorRating> _doctorRatingtFileHandler;
 

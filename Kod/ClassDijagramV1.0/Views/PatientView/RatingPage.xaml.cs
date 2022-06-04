@@ -10,27 +10,26 @@ namespace ClassDijagramV1._0.Views.PatientView
     /// </summary>
     public partial class RatingPage : Page
     {
-        private Patient _logedPatient;
+        #region Fields
         private PatientMainWindow parent { get; set; }
-        private ObservableCollection<AppointmentViewModel> _appointments;
-        public RatingPage(PatientMainWindow patientMain,
-            ObservableCollection<AppointmentViewModel> appointmentViewModels, Patient logedPatient)
+        private ObservableCollection<AppointmentViewModel> _oldAppointmentViewModels;
+        #endregion
+        public RatingPage(PatientMainWindow patientMain, ObservableCollection<AppointmentViewModel> appointmentViewModels)
         {
             InitializeComponent();
             parent = patientMain;
-            _logedPatient = logedPatient;
-            _appointments = appointmentViewModels;
+            _oldAppointmentViewModels = appointmentViewModels;
             doctorRB.IsChecked = true;
         }
 
         private void doctorRB_Checked(object sender, RoutedEventArgs e)
         {
-            ocjeniteFrame.Content = new RatingDoctor(_appointments, parent, _logedPatient);
+            ocjeniteFrame.Content = new RatingDoctor(parent, _oldAppointmentViewModels);
         }
 
         private void hospitalRB_Checked(object sender, RoutedEventArgs e)
         {
-            ocjeniteFrame.Content = new RatingHospital(parent, _logedPatient);
+            ocjeniteFrame.Content = new RatingHospital(parent);
         }
     }
 }

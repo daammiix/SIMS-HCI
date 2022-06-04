@@ -12,6 +12,12 @@ namespace ClassDijagramV1._0.Controller
         {
             _banningPatientService = banningPatientService;
         }
+
+        /// <summary>
+        /// Provjerava status pacijenta, da li je banovan
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Boolean CheckStatusOfPatient(int patientID, Account account)
         {
             return _banningPatientService.CheckStatusOfPatient(patientID, account);

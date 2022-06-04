@@ -13,10 +13,18 @@ namespace ClassDijagramV1._0.Service
         {
             _activityRepo = activityRepo;
         }
+
+        /// <summary>
+        /// Vraca broj aktivnosti odredjenjog tipa
+        /// </summary>
+        /// <param name="PatientID"></param>
+        /// /// <param name="type"></param>
+        /// <returns></returns>
         public int NumberOfActivity(int PatientID, TypeOfActivity type)
         {
             int counterOfActivity = 0;
             List<ActivityLog> activities = _activityRepo.GetAllActivity();
+
             foreach (ActivityLog activity in activities)
             {
                 if ((activity.PatientID == PatientID)

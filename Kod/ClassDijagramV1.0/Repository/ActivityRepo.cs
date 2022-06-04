@@ -15,7 +15,6 @@ namespace ClassDijagramV1._0.Repository
         {
             _activityFileHandler = fileHandler;
             Activities = new ObservableCollection<ActivityLog>(_activityFileHandler.GetItems());
-
         }
 
         public List<ActivityLog> GetAllActivity()

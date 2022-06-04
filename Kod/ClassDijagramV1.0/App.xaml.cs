@@ -208,7 +208,7 @@ namespace ClassDijagramV1._0
             var purchaseOrderService = new PurchaseOrderService(purchaseOrderRepo, roomService, equipmentService);
             PurchaseOrderController = new PurchaseOrderController(purchaseOrderService);
 
-            // Appointment
+            // Notification
             var notificationRepository = new NotificationRepo(new FileHandler<Notification>(_notificationsFilePath));
             var notificationService = new NotificationService(notificationRepository);
             NotificationController = new NotificationController(notificationService);

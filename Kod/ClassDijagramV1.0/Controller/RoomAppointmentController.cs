@@ -69,9 +69,9 @@ namespace ClassDijagramV1._0.Controller
         /// <param name="end"></param>
         /// <param name="room"></param>
         /// <returns></returns>
-        public bool GetFreeRoom(Room room, DateTime start, DateTime end)
+        public Room GetFreeRoom(DateTime start, DateTime end)
         {
-            return roomAppointmentService.GetFreeRoom(room, start, end);
+            return roomAppointmentService.GetFreeRoom(start, end);
         }
     }
 }

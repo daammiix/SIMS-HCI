@@ -24,8 +24,7 @@ namespace ClassDijagramV1._0.Views.PatientView
             Patient = p;
             Account = account;
             this.DataContext = this;
-            // prosledimo i pacijenta koji je ulogovan
-            startWindow.Content = new PatientMainPage(this, Patient, Account);
+            startWindow.Content = new PatientMainPage(this);
         }
 
         private void Logout(object sender, RoutedEventArgs e)
@@ -37,12 +36,12 @@ namespace ClassDijagramV1._0.Views.PatientView
 
         private void openNotificationClick(object sender, RoutedEventArgs e)
         {
-            startWindow.Content = new NotificationPage(this, Patient);
+            startWindow.Content = new NotificationPage(this);
         }
 
         private void pocetnaClick(object sender, RoutedEventArgs e)
         {
-            startWindow.Content = new PatientMainPage(this, Patient, Account);
+            startWindow.Content = new PatientMainPage(this);
         }
     }
 }

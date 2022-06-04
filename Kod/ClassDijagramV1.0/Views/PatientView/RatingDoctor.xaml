@@ -52,7 +52,7 @@
                     x:Name="doktoriSaPregleda"
                     ItemsSource="{Binding Doctors}"
                     Width="150"
-                    Margin="40 0 0 0">
+                    Margin="40 0 0 0" SelectionChanged="DoctorChosen">
                     <!---->
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -77,6 +77,7 @@
                     x:Name="pitanje1"
                     Margin="32 0 0 0"
                     Cursor="Hand"
+                    IsEnabled="False"
                     ValueChanged="EverythingRated"/>
             </StackPanel>
             <StackPanel>
@@ -88,6 +89,7 @@
                     x:Name="pitanje2"
                     Margin="32 0 0 0"
                     Cursor="Hand"
+                    IsEnabled="False"
                     ValueChanged="EverythingRated"/>
             </StackPanel>
             <StackPanel>
@@ -99,6 +101,7 @@
                     x:Name="pitanje3"
                     Margin="32 0 0 0"
                     Cursor="Hand"
+                    IsEnabled="False"
                     ValueChanged="EverythingRated"/>
             </StackPanel>
             <StackPanel>
@@ -110,6 +113,7 @@
                     x:Name="pitanje4"
                     Margin="32 0 0 0"
                     Cursor="Hand"
+                    IsEnabled="False"
                     ValueChanged="EverythingRated"/>
             </StackPanel>
 

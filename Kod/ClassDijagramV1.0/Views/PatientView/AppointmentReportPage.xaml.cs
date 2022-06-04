@@ -10,17 +10,21 @@ namespace ClassDijagramV1._0.Views.PatientView
     /// </summary>
     public partial class AppointmentReportPage : Page
     {
+        #region Fields
         private PatientMainWindow parent { get; set; }
         private Appointment _appointment { get; set; }
-        public DoctorController _doctorController;
+        private DoctorController _doctorController;
+        #endregion
         public AppointmentReportPage(PatientMainWindow patientMain, Appointment appointment)
         {
             InitializeComponent();
             parent = patientMain;
             _appointment = appointment;
+
             App app = Application.Current as App;
             _doctorController = app.DoctorController;
             Doctor doctor = _doctorController.GetDoctorById(_appointment.DoctorId);
+
             datum.Content = _appointment.AppointmentDate;
             doktor.Content = doctor.Name + " " + doctor.Surname;
             doctorReport.Text = _appointment.MedicalReport.Description;

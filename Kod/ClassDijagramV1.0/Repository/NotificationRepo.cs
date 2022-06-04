@@ -28,11 +28,11 @@ namespace ClassDijagramV1._0.Repository
 
         public Notification FindNotificationByAppointmentID(int appointmentID)
         {
-            foreach (Notification a in Notifications)
+            foreach (Notification notification in Notifications)
             {
-                if (a.AppointmentID == appointmentID)
+                if (notification.AppointmentID == appointmentID)
                 {
-                    return a;
+                    return notification;
                 }
             }
             return null;

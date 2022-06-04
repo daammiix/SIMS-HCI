@@ -1,8 +1,10 @@
 ﻿using ClassDijagramV1._0.Controller;
 using ClassDijagramV1._0.Model;
+using ClassDijagramV1._0.Model.DTO;
 using Controller;
 using Model;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Timers;
 using System.Windows;
@@ -16,14 +18,12 @@ namespace ClassDijagramV1._0.Views.PatientView
     public partial class NotificationPage : Page
     {
         private PatientMainWindow parent { get; set; }
-        public Patient Patient { get; set; }
 
         private MedicineDrug drug1;
         public AppointmentController _appointmentController;
         public NotificationController _notificationController;
 
         private ObservableCollection<MedicineDrug> _drugs;
-        private ObservableCollection<Notification> _notification;
         public ObservableCollection<MedicineDrug> Drugs
         {
             get { return _drugs; }
@@ -38,12 +38,11 @@ namespace ClassDijagramV1._0.Views.PatientView
 
         public ObservableCollection<Notification> Notifications { get; set; }
 
-        public NotificationPage(PatientMainWindow patientMain, Patient p)
+        public NotificationPage(PatientMainWindow patientMain)
         {
             InitializeComponent();
             this.DataContext = this;
             parent = patientMain;
-            Patient = p;
 
             App app = Application.Current as App;
             _appointmentController = app.AppointmentController;
@@ -51,6 +50,7 @@ namespace ClassDijagramV1._0.Views.PatientView
 
             Drugs = new ObservableCollection<MedicineDrug>();
             Notifications = _notificationController.GetAllNotifications();
+            //List<TherapyDTO> terapija = FindCurrentTherapies();
 
         }
 
@@ -61,6 +61,7 @@ namespace ClassDijagramV1._0.Views.PatientView
             var start = DateTime.Now.AddSeconds(5);
             drug1 = new MedicineDrug("Lekadol", start, start.AddMinutes(1), 8);    // doktor pravi recept, tj lijek koji se pije tad i tad
             Drugs.Add(drug1);
+
 
             const int interval = 5000;
 
@@ -74,7 +75,7 @@ namespace ClassDijagramV1._0.Views.PatientView
                     aTimer.Enabled = false;
                 }
 
-                Notification n = new Notification("Popijte lijek " + drug1.MedicineName + " u " + DateTime.Now.AddSeconds(30), Patient.Id, false, drug1.StartTaking,0);
+                Notification n = new Notification("Popijte lijek " + drug1.MedicineName + " u " + DateTime.Now.AddSeconds(30), parent.Patient.Id, false, drug1.StartTaking,0);
                 // lijek se dodaje na notifikacije i pije se za 30 sekundi
                 App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
                 {

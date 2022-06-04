@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace ClassDijagramV1._0.Views.PatientView
 {
@@ -19,34 +20,88 @@ namespace ClassDijagramV1._0.Views.PatientView
     public partial class PatientMainPage : Page
     {
         #region Fields
-
-        private Patient _logedPatient;
-        private Account _account;
+        private PatientMainWindow parent { get; set; }
 
         private ObservableCollection<AppointmentViewModel> _appointmentViewModels;
         private ObservableCollection<AppointmentViewModel> _oldAppointmentViewModels;
 
         public MedicineController _medicineController;
+        private BanningPatientController _banningPatientController;
 
         #endregion
 
-        private PatientMainWindow parent { get; set; }
-        public PatientMainPage(PatientMainWindow patientMain, Patient logedPatient, Account account)
+        public PatientMainPage(PatientMainWindow patientMain)
         {
             InitializeComponent();
             parent = patientMain;
-            _logedPatient = logedPatient;
-            _account = account;
 
             App app = Application.Current as App;
             _medicineController = app.medicinesController;
+            _banningPatientController = app.BanningPatientController;
 
-            // napravimo listu appointmentViewModela od svakog appointmenta pacijenta
             _appointmentViewModels = new ObservableCollection<AppointmentViewModel>();
-            
             _oldAppointmentViewModels = new ObservableCollection<AppointmentViewModel>();
 
-            foreach (Appointment a in _logedPatient.Appointments)
+            SplitAppointments();
+        }
+
+        private void AppointmentsViewOpen(object sender, RoutedEventArgs e)
+        {
+            parent.startWindow.Content = new AppointmentsViewPage(parent,_appointmentViewModels);
+        }
+
+        private void AddAppointmetClick(object sender, RoutedEventArgs e)
+        {
+            if (_banningPatientController.CheckStatusOfPatient(parent.Patient.Id, parent.Account) == true)
+            {
+                zakazivanjeRed.Background = new SolidColorBrush(Colors.Red);
+                iks.Kind = MaterialDesignThemes.Wpf.PackIconKind.Close;
+                zakazivenjeTekst.Text = "Banovani ste!";
+                zakazivenjeTekst.Foreground = new SolidColorBrush(Colors.Red);
+                zakazivanjeOpis.Text = "Previse puta ste promjenili svoje preglede";
+                zakazivanjeOpis.Foreground = new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
+                parent.startWindow.Content = new AppointmentAddPage(parent, _appointmentViewModels);
+            }
+            
+            
+            
+        }
+
+        private void RatingOpen(object sender, RoutedEventArgs e)
+        {
+            parent.startWindow.Content = new RatingPage(parent, _oldAppointmentViewModels);
+        }
+
+        private void uvidUTerapijuClick(object sender, RoutedEventArgs e)
+        {
+            parent.startWindow.Content = new TerapyPage(parent, _oldAppointmentViewModels);
+        }
+
+        private void zdravstveniKartonClick(object sender, RoutedEventArgs e)
+        {
+            parent.startWindow.Content = new MedicalRecordPage(parent, _oldAppointmentViewModels);
+        }
+
+        private async void demoClick(object sender, RoutedEventArgs e)
+        {
+            await Task.Delay(1000);
+            parent.startWindow.Content = new AppointmentAddPage(parent, _appointmentViewModels);
+            await Task.Delay(3000);
+            parent.startWindow.Content = new RatingPage(parent, _appointmentViewModels);
+            await Task.Delay(1000);
+            parent.startWindow.Content = new MedicalRecordPage(parent, _oldAppointmentViewModels);
+        }
+
+        /// <summary>
+        /// Podjela pregleda na stare i nove
+        /// </summary>
+        /// <returns></returns>
+        private void SplitAppointments()
+        {
+            foreach (Appointment a in parent.Patient.Appointments)
             {
                 if (a.AppointmentDate < DateTime.Now)
                 {
@@ -58,42 +113,18 @@ namespace ClassDijagramV1._0.Views.PatientView
                     _appointmentViewModels.Add(new AppointmentViewModel(a));
                 }
             }
-
         }
 
-        private void AppointmentsViewOpen(object sender, RoutedEventArgs e)
-        {
-            // Proslledimo appointmentViewModels da bi mogli da prikazemo appointmente i ulogovanog pacijenta
-            parent.startWindow.Content = new AppointmentsViewPage(_appointmentViewModels, parent, parent.Patient, _account);
-        }
-
-        private void AddAppointmetClick(object sender, RoutedEventArgs e)
-        {
-            parent.startWindow.Content = new AppointmentAddPage(parent, _appointmentViewModels, _logedPatient);
-        }
-
-        private void RatingOpen(object sender, RoutedEventArgs e)
-        {
-            parent.startWindow.Content = new RatingPage(parent, _appointmentViewModels, _logedPatient);
-        }
-
-        private void uvidUTerapijuClick(object sender, RoutedEventArgs e)
-        {
-            parent.startWindow.Content = new TerapyPage(parent, _oldAppointmentViewModels);
-        }
-
-        private void zdravstveniKartonClick(object sender, RoutedEventArgs e)
-        {
-            parent.startWindow.Content = new MedicalRecordPage(parent, _logedPatient, _oldAppointmentViewModels);
-        }
-
+        /// <summary>
+        /// Fja dodaje doktorov izvjestaj na pregled, posto nemamo doktora
+        /// </summary>
+        /// <returns></returns>
         private void addMedicalReportToAllAppointmnts(Appointment appointment)
         {
             Random rnd = new Random();
             var medicines = _medicineController.GetAllMedicines();
             List<String> dvaLijeka = new List<String>() { medicines[rnd.Next(0, medicines.Count - 1)].ID ,
-                                                          medicines[rnd.Next(0, medicines.Count - 1)].ID
-                                                        };
+                                                          medicines[rnd.Next(0, medicines.Count - 1)].ID };
             String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet purus a ligula tempus porttitor. Ut urna orci, fermentum eget nibh quis, commodo convallis eros. Maecenas ut efficitur nisi, ac hendrerit dolor. Nullam non pretium lectus. Nulla facilisi. Praesent euismod mi nunc, ut commodo felis efficitur a. Cras quis arcu tortor. Nam congue ultrices metus eget eleifend. In hac habitasse platea dictumst. Nunc bibendum ante nec iaculis aliquet. In vel odio." +
                                 "Donec placerat pretium velit ac eleifend.Suspendisse vel vehicula lacus, et mollis orci.Vestibulum dictum dolor a cursus laoreet.Nunc vel ex at leo egestas malesuada sed accumsan eros.Vestibulum auctor, massa ut viverra vulputate, dui lectus accumsan urna, non pharetra risus nunc eu felis.Nulla eu accumsan metus.Vestibulum tempor convallis quam, at ornare felis molestie vitae.Fusce vel ante sed felis pharetra pharetra at quis neque.Ut eleifend pellentesque mauris," +
                                 " commodo convallis eros. Maecenas ut efficitur nisi, ac hendrerit dolor. Nullam non pretium lectus. Nulla facilisi. Praesent euismod mi nunc, ut commodo felis efficitur a. Cras quis arcu tortor. Nam congue ultrices metus eget eleifend. In hac habitasse platea dictumst. Nunc bibendum ante nec iaculis aliquet. In vel odio auctor, molestie risus at, faucibus orci. Etiam feugiat neque mauris, ut ultrices lectus porttitor eu. Nullam in sodales elit, sit amet auctor odio.";
@@ -104,18 +135,6 @@ namespace ClassDijagramV1._0.Views.PatientView
             {
                 appointment.MedicalReport = new MedicalReport(loremIpsum, medicineTherapy);
             }
-            //appointment.MedicalReport.Description = loremIpsum;
-            //appointment.MedicalReport.Medicine = dvaLijeka;
-        }
-
-        private async void demoClick(object sender, RoutedEventArgs e)
-        {
-
-            parent.startWindow.Content = new MedicalRecordPage(parent, _logedPatient, _oldAppointmentViewModels);
-            await Task.Delay(1000);
-            parent.startWindow.Content = new RatingPage(parent, _appointmentViewModels, _logedPatient);
-            await Task.Delay(1000);
-            parent.startWindow.Content = new MedicalRecordPage(parent, _logedPatient, _oldAppointmentViewModels);
         }
     }
 }

@@ -14,31 +14,29 @@ namespace ClassDijagramV1._0.Views.PatientView
     /// </summary>
     public partial class RatingHospital : Page
     {
+        #region Fields
         private PatientMainWindow parent { get; set; }
-        private Patient _logedPatient;
         private RatingController _ratingController;
-        public ObservableCollection<HospitalRating> HospitalRatings { get; set; }
-        public RatingHospital(PatientMainWindow patientMain, Patient logedPatient)
+        #endregion
+
+        public RatingHospital(PatientMainWindow patientMain)
         {
             InitializeComponent();
             parent = patientMain;
-            _logedPatient = logedPatient;
             this.DataContext = this;
 
             App app = Application.Current as App;
             _ratingController = app.RatingController;
-            HospitalRatings = _ratingController.GetAllHospitalRatings();
         }
 
         private void SendRatingHospitalResult(object sender, RoutedEventArgs e)
         {
             List<int> ocjene = new List<int>() { pitanje1.Value, pitanje2.Value, pitanje3.Value, pitanje4.Value };
             string comment = komentar.Text;
-
             HospitalRating hr = new HospitalRating(ocjene, ocjene.Average(), comment);
-
             _ratingController.AddRatingHospital(hr);
-            parent.startWindow.Content = new PatientMainPage(parent, _logedPatient, parent.Account);
+
+            parent.startWindow.Content = new PatientMainPage(parent);
 
         }
 

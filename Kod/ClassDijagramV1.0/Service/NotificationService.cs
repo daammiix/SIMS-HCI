@@ -22,7 +22,7 @@ namespace ClassDijagramV1._0.Service
 
         public void AddNotificationForAppointment(Appointment appointment)
         {
-                var content = "Imate zakazan pregled u " + appointment.AppointmentDate + " u sobi " + appointment.RoomId;
+                var content = "Imate zakazan pregled " + appointment.AppointmentDate + " u sobi " + appointment.RoomId;
                 Notification n = new Notification(content, appointment.PatientId, false, appointment.AppointmentDate, appointment.Id);
                 _notificationRepo.AddNotification(n);
         }

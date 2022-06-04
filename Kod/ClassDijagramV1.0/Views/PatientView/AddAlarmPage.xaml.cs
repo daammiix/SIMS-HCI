@@ -39,7 +39,7 @@ namespace ClassDijagramV1._0.Views.PatientView
 
             Notification notification = new Notification(name,parent.Patient.Id,false,start,-1);
             _notificationController.AddManualNotification(notification);
-            parent.startWindow.Content = new NotificationPage(parent,parent.Patient);
+            parent.startWindow.Content = new NotificationPage(parent);
         }
     }
 }

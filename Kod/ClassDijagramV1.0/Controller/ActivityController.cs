@@ -16,6 +16,11 @@ namespace ClassDijagramV1._0.Controller
             return _activityService.NumberOfActivity(PatientID, type);
         }
 
+        /// <summary>
+        /// Dodaje aktivnost priliko zakazivanje, izmjene ili otkazivanja pregleda
+        /// </summary>
+        /// <param name="newActivity"></param>
+        /// <returns></returns>
         public void AddActivity(ActivityLog newActivity)
         {
             _activityService.AddActivity(newActivity);

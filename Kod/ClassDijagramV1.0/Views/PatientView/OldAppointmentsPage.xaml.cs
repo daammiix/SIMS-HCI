@@ -10,13 +10,10 @@ namespace ClassDijagramV1._0.Views.PatientView
     /// </summary>
     public partial class OldAppointmentsPage : Page
     {
+        #region Fields
         private PatientMainWindow parent { get; set; }
-        public ObservableCollection<AppointmentViewModel> OldAppointments
-        {
-            get;
-            set;
-        }
-        public MedicineController _medicineController;
+        public ObservableCollection<AppointmentViewModel> OldAppointments { get; set; }
+        #endregion
         public OldAppointmentsPage(PatientMainWindow patientMain, ObservableCollection<AppointmentViewModel> oldAppointmentViewModels)
         {
             InitializeComponent();
@@ -24,14 +21,11 @@ namespace ClassDijagramV1._0.Views.PatientView
             //this.DataContext = new OldAppointmentsViewModel();
             parent = patientMain;
             OldAppointments = oldAppointmentViewModels;
-            App app = Application.Current as App;
-            _medicineController = app.medicinesController;
         }
 
         private void openSpecificAppointmentClick(object sender, RoutedEventArgs e)
         {
             AppointmentViewModel selectedAppointment = (AppointmentViewModel)tabelaStariPregledi.SelectedItem;
-
             parent.startWindow.Content = new AppointmentReportPage(parent, selectedAppointment.Appointment);
         }
     }
