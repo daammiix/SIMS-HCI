@@ -45,21 +45,125 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <DataGrid Grid.Row="0"
-                      RowStyle="{StaticResource DataGridRowStyleAccounts}"
-                      ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyleAccounts}">
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            </DataGrid>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,10"
+                               Text="New Requests"/>
+                    <DataGrid Grid.Row="1"
+                          Margin="0,0,7,0"
+                          FontSize="20"
+                          RowHeight="35"
+                          SelectedItem="{Binding SelectedFreeDayRequest, UpdateSourceTrigger=PropertyChanged}"
+                          ItemsSource="{Binding FreeDayRequests}"
+                          RowStyle="{StaticResource DataGridRowStyleFreeDays}"
+                          ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyleAccounts}">
+
+                        <DataGrid.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#1F2833"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#1F2833"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HotTrackBrushKey}" Color="#1F2833"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="#1F2833"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#1F2833"/>
+                        </DataGrid.Resources>
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name"
+                                                IsReadOnly="True"
+                                                FontSize="16"
+                                                Binding="{Binding Doctor.Name}"
+                                                Width="3*"/>
+                            <DataGridTextColumn Header="Uid"
+                                                IsReadOnly="True"
+                                                FontSize="16"
+                                                Binding="{Binding Doctor.Jmbg}"
+                                                Width="3*"/>
+                            <DataGridTextColumn Header="From"
+                                                IsReadOnly="True"
+                                                FontSize="16"
+                                                Binding="{Binding From, StringFormat=d}"
+                                                Width="2*"/>
+                            <DataGridTextColumn Header="To"
+                                                IsReadOnly="True"
+                                                FontSize="16"
+                                                Binding="{Binding To, StringFormat=d}"
+                                                Width="2*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,10"
+                               Text="Resolved Requests"/>
+                    <DataGrid Grid.Row="1" 
+                          Margin="7,0,0,0"
+                          RowHeight="35"
+                          ItemsSource="{Binding FreeDayRequestsResolved}"
+                          RowStyle="{StaticResource DataGridRowStyleFreeDaysResolved}"
+                          ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyleAccounts}">
+
+                        <DataGrid.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#1F2833"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#1F2833"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HotTrackBrushKey}" Color="#1F2833"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="#1F2833"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#1F2833"/>
+                        </DataGrid.Resources>
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name"
+                                                IsReadOnly="True"
+                                                FontSize="16"
+                                                Binding="{Binding Doctor.Name}"
+                                                Width="3*"/>
+                            <DataGridTextColumn Header="Uid"
+                                                IsReadOnly="True"
+                                                FontSize="16"
+                                                Binding="{Binding Doctor.Jmbg}"
+                                                Width="3*"/>
+                            <DataGridTextColumn Header="From"
+                                                IsReadOnly="True"
+                                                FontSize="16"
+                                                Binding="{Binding From, StringFormat=d}"
+                                                Width="2*"/>
+                            <DataGridTextColumn Header="To"
+                                                IsReadOnly="True"
+                                                FontSize="16"
+                                                Binding="{Binding To, StringFormat=d}"
+                                                Width="2*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+
+            </Grid>
 
             <!-- Buttons -->
             <StackPanel Grid.Row="1"
                         Orientation="Horizontal">
                 <Button Content="Accept"
                         Style="{StaticResource AccountButtonsStyle}"
-                        Margin="30,10,20,0"/>
+                        Margin="25,10,20,0"
+                        Command="{Binding AcceptCommand}"/>
 
                 <Button Content="Refuse"
                         Margin="0,10,0,0"
+                        Command="{Binding RefuseCommand}"
                         Style="{StaticResource AccountButtonsStyle}"/>
             </StackPanel>
         </Grid>

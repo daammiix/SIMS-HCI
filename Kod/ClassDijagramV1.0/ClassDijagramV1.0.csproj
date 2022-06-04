@@ -12,6 +12,7 @@
 	  <None Remove="Images\acc.png" />
 	  <None Remove="Images\account.png" />
 	  <None Remove="Images\appointment.png" />
+	  <None Remove="Images\checked.png" />
 	  <None Remove="Images\doctor.png" />
 	  <None Remove="Images\key.png" />
 	  <None Remove="Images\manager.png" />
@@ -20,6 +21,8 @@
 	  <None Remove="Images\medicine.png" />
 	  <None Remove="Images\patient.png" />
 	  <None Remove="Images\purchaseOrder.png" />
+	  <None Remove="Images\question.png" />
+	  <None Remove="Images\refused.png" />
 	  <None Remove="Images\roomDoor.png" />
 	  <None Remove="Images\secretary.png" />
 	  <None Remove="Images\user.png" />
@@ -41,6 +44,9 @@
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="Images\appointment.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Images\checked.png">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="Images\doctor.png">
@@ -65,6 +71,12 @@
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="Images\purchaseOrder.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Images\question.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Images\refused.png">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="Images\roomDoor.png">
