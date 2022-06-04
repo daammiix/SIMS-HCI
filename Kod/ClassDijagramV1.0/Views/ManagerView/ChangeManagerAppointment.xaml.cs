@@ -1,15 +1,7 @@
 ﻿using ClassDijagramV1._0.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using ClassDijagramV1._0.ViewModel;
-using System.Windows;
+using ClassDijagramV1._0.Model;
+using ClassDijagramV1._0.Helpers;
 
 namespace ClassDijagramV1._0.Views.ManagerView
 {
@@ -19,11 +11,11 @@ namespace ClassDijagramV1._0.Views.ManagerView
     public partial class ChangeManagerAppointment : Window
     {
         private ChangeManagerAppointmentViewModel _changeManagerAppointmentViewModel;
-        public ChangeManagerAppointment(DateTime selectedDate)
+        public ChangeManagerAppointment(ManagerAppointment managerAppointment, IRefreshableManagerAppointmentView managerAppointmentView)
         {
             InitializeComponent();
 
-            _changeManagerAppointmentViewModel = new ChangeManagerAppointmentViewModel(this, selectedDate);
+            _changeManagerAppointmentViewModel = new ChangeManagerAppointmentViewModel(this, managerAppointment, managerAppointmentView);
             this.DataContext = _changeManagerAppointmentViewModel;
         }
     }

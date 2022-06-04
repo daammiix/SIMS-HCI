@@ -1,4 +1,5 @@
 ﻿using ClassDijagramV1._0.Controller;
+using ClassDijagramV1._0.Helpers;
 using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Util;
 using ClassDijagramV1._0.Views.ManagerView;
@@ -28,6 +29,8 @@ namespace ClassDijagramV1._0.ViewModel
 
         AddManagerAppointment addManagerAppointment;
 
+        private IRefreshableManagerAppointmentView managerAppointmentView;
+
         public String Name { get; set; }
         public String FromDate { get; set; }
         public String FromTime { get; set; }
@@ -37,7 +40,7 @@ namespace ClassDijagramV1._0.ViewModel
         private RelayCommand _saveAddedManagerAppointment;
         private RelayCommand _cancelManagerAppointment;
 
-        public AddManagerAppointmentViewModel(AddManagerAppointment addManagerAppointment)
+        public AddManagerAppointmentViewModel(AddManagerAppointment addManagerAppointment, IRefreshableManagerAppointmentView managerAppointmentView)
         {
             var app = Application.Current as App;
 
@@ -47,6 +50,7 @@ namespace ClassDijagramV1._0.ViewModel
             ToTime = DateTime.Now.ToString("HH:mm");
 
             this.addManagerAppointment = addManagerAppointment;
+            this.managerAppointmentView = managerAppointmentView;
 
             managerAppointmentController = app.managerAppointmentController;
             ManagerAppointments = managerAppointmentController.GetAllManagerAppointments();
@@ -87,6 +91,7 @@ namespace ClassDijagramV1._0.ViewModel
             var newManagerAppointment = new ManagerAppointment(appointmentId, Name, fromDatetime, toDatetime);
             managerAppointmentController.AddManagerAppointment(newManagerAppointment);
 
+            managerAppointmentView.RefreshManagerAppointment();
             addManagerAppointment.Close();
         }
 
@@ -99,7 +104,7 @@ namespace ClassDijagramV1._0.ViewModel
         {
             var builder = new StringBuilder(size);
             char offset = lowerCase ? 'a' : 'A';
-            const int lettersOffset = 26; // A...Z or a..z: length = 26  
+            const int lettersOffset = 26;
 
             for (var i = 0; i < size; i++)
             {

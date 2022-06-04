@@ -20,8 +20,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../Theme/DateTextBoxTheme.xaml"/>
-                <ResourceDictionary Source="../../Theme/TimeTextBoxTheme.xaml"/>
+                <ResourceDictionary Source="../../Theme/BasicTextBoxTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -42,24 +41,24 @@
         </TextBlock>
         <StackPanel Grid.Row="1" Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
-                <Label Content="Naziv:" FontSize="25" Height="55" Margin="30,35,0,5"  HorizontalContentAlignment="Right"/>
-                <TextBox x:Name="AddName" Width="320" Background="#E7E7E7" Height="40" Margin="0,30,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource DateTextBox}" Text="{Binding Path=Name}"/>
+                <Label Content="Naziv:" FontSize="25" Height="55" Margin="40,35,0,5"  HorizontalContentAlignment="Right"/>
+                <TextBox x:Name="AddName" Width="320" Background="#E7E7E7" Height="40" Margin="0,30,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource BasicTextBox}" Text="{Binding Path=Name}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Label Content="Od:" FontSize="24" Margin="57,0,0,15" HorizontalContentAlignment="Left"/>
-                <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="40" Margin="4,0,0,15" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="True" Text="{Binding Path=FromDate}" Style="{StaticResource DateTextBox}"/>
-                <TextBox x:Name="FromTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,15" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromTime}"  Style="{StaticResource TimeTextBox}"/>
+                <Label Content="Od:" FontSize="24" Margin="67,0,0,15" HorizontalContentAlignment="Left"/>
+                <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="40" Margin="4,0,0,15" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="True" Text="{Binding Path=FromDate}" Style="{StaticResource BasicTextBox}"/>
+                <TextBox x:Name="FromTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,15" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromTime}"  Style="{StaticResource BasicTextBox}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Label Content="Do:" FontSize="24" Margin="57,0,0,5" HorizontalContentAlignment="Left"/>
-                <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="40" Margin="5,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="True" Text="{Binding Path=ToDate}"  Style="{StaticResource DateTextBox}"/>
-                <TextBox x:Name="ToTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToTime}"  Style="{StaticResource TimeTextBox}"/>
+                <Label Content="Do:" FontSize="24" Margin="67,0,0,5" HorizontalContentAlignment="Left"/>
+                <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="40" Margin="5,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="True" Text="{Binding Path=ToDate}"  Style="{StaticResource BasicTextBox}"/>
+                <TextBox x:Name="ToTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToTime}"  Style="{StaticResource BasicTextBox}"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="2">
             <WrapPanel HorizontalAlignment="Right">
-                <Button x:Name="SaveAddedRoom" HorizontalAlignment="Right" Height="32" Width="90" Content="Sačuvaj" Margin="5,10,10,0" Style="{StaticResource CRUDButton}" Command="{Binding SaveAddedManagerAppointment}"/>
-                <Button x:Name="QuitAddedRoom" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,15,0" Style="{StaticResource CRUDButton}" Command="{Binding CancelManagerAppointment}"/>
+                <Button x:Name="SaveAddedManagerAppointmentRoom" HorizontalAlignment="Right" Height="32" Width="90" Content="Sačuvaj" Margin="5,10,10,0" Style="{StaticResource CRUDButton}" Command="{Binding SaveAddedManagerAppointment}"/>
+                <Button x:Name="CancelManagerAppointmentRoom" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,15,0" Style="{StaticResource CRUDButton}" Command="{Binding CancelManagerAppointment}"/>
             </WrapPanel>
         </StackPanel>
     </Grid>

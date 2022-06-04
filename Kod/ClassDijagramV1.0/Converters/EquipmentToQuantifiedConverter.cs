@@ -4,6 +4,7 @@ using Model;
 using System;
 using System.Windows;
 using System.Windows.Data;
+using static Model.Room;
 
 namespace ClassDijagramV1._0.Converters
 {
