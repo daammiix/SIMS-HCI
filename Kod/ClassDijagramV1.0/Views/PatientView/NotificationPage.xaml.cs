@@ -47,17 +47,7 @@ namespace ClassDijagramV1._0.Views.PatientView
             }
         }
 
-        public ObservableCollection<Notification> Notifications
-        {
-            get { return _notification; }
-            set
-            {
-                if (value != _notification)
-                {
-                    _notification = value;
-                }
-            }
-        }
+        public ObservableCollection<Notification> Notifications { get; set; }
 
         public NotificationPage(PatientMainWindow patientMain, Patient p)
         {
@@ -95,7 +85,7 @@ namespace ClassDijagramV1._0.Views.PatientView
                     aTimer.Enabled = false;
                 }
 
-                Notification n = new Notification("Popijte lijek " + drug1.MedicineName + " u " + DateTime.Now.AddSeconds(30), Patient.Id, false, drug1.StartTaking, NotificationType.doctorPrescription);
+                Notification n = new Notification("Popijte lijek " + drug1.MedicineName + " u " + DateTime.Now.AddSeconds(30), Patient.Id, false, drug1.StartTaking,0);
                 // lijek se dodaje na notifikacije i pije se za 30 sekundi
                 App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
                 {

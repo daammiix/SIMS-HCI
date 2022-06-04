@@ -44,7 +44,7 @@ namespace ClassDijagramV1._0.FileHandlers
 
             FileStream fs = new FileStream(_path, FileMode.Truncate, FileAccess.Write);
             Utf8JsonWriter writer = new Utf8JsonWriter(fs);
-            if (items.Count > 0)
+            if (items.Count >= 0)
                 JsonSerializer.Serialize<List<T>>(writer, items, new JsonSerializerOptions() { WriteIndented = true });
 
             fs.Close();

@@ -19,21 +19,21 @@ namespace ClassDijagramV1._0.Service
             _notificationRepo = notificationRepo;
         }
 
-        public void AddNotification(Appointment appointment, Room r1, NotificationType notificationType)
+        public void AddManualNotification(Notification notification)
         {
-            if (NotificationType.addingAppointment.Equals(notificationType))
-            {
-                var notificationID = "1";
-                var content = "Imate zakazan pregled u " + appointment.AppointmentDate + " u sobi " + r1.RoomName;
-                DateTime created = appointment.AppointmentDate;
-                Notification n = new Notification(content, appointment.PatientId, false, created, NotificationType.addingAppointment);
+            _notificationRepo.AddNotification(notification);
+        }
+
+        public void AddNotificationForAppointment(Appointment appointment)
+        {
+                var content = "Imate zakazan pregled u " + appointment.AppointmentDate + " u sobi " + appointment.RoomId;
+                Notification n = new Notification(content, appointment.PatientId, false, appointment.AppointmentDate, appointment.Id);
                 _notificationRepo.AddNotification(n);
-            }
-            else if (NotificationType.deletingAppointment.Equals(notificationType))
-            {
-                // _appointmentRepo.RemoveNotification()
-                // mora se povezati apojntment sa notifikacijom
-            }
+        }
+
+        public void RemoveNotificationByAppointment(int appointmentID)
+        {
+            _notificationRepo.RemoveNotificationByAppointment(appointmentID);
         }
 
         public ObservableCollection<Notification> GetAllNotifications()
