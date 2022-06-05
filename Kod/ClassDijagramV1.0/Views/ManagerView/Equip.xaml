@@ -16,6 +16,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../Theme/BasicTextBoxTheme.xaml"/>
+                <ResourceDictionary Source="../../Theme/BasicComboBoxTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converters:RoomToStringConverter x:Key="RoomToStringConverter"/>
             <converters:EquipmentToStringConverter x:Key="EquipmentToStringConverter"/>
@@ -46,17 +47,17 @@
                 <Label Content="Odaberite opremu i količinu:" FontSize="24" Margin="20,0,0,5"/>
                 <StackPanel Orientation="Horizontal">
                     <ComboBox x:Name="EquipmentBox" Width="230" Height="45" Margin="20,0,0,5" FontSize="22"
-                          VerticalContentAlignment="Center" IsReadOnly="True" ItemsSource="{Binding Equipments}" SelectedItem="{Binding selectedEquipment}">
+                          VerticalContentAlignment="Center" IsReadOnly="True" ItemsSource="{Binding Equipments}" SelectedItem="{Binding selectedEquipment}" Style="{StaticResource BasicComboBox}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Converter={StaticResource EquipmentToStringConverter}}"/>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <TextBox x:Name="Quantity" Width="60" Background="#E7E7E7" Height="45" Margin="10,0,0,3" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding selectedEquipment}"/>
+                    <TextBox x:Name="Quantity" Width="60" Background="#E7E7E7" Height="45" Margin="10,0,0,3" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding selectedQuantity,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextBox}"/>
 
                 </StackPanel>
-
+                <Label Content="{Binding QuantityValidationError,UpdateSourceTrigger=PropertyChanged}" FontSize="14" Margin="20,0,0,5" Foreground="Red"/>
 
                 <DataGrid  Height="200" Width="300" x:Name="BusyEquipment" FontSize="18"
                       CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left"
@@ -73,7 +74,7 @@
                 <Label Content="Sala iz koje se premešta:" FontSize="24" Margin="0,0,0,5"/>
                 <ComboBox x:Name="MovingFrom" Width="250" Height="45" Margin="3,0,0,5" FontSize="22"
                           VerticalContentAlignment="Center" IsReadOnly="True" HorizontalAlignment="Left"
-                          ItemsSource="{Binding Rooms}" SelectedItem="{Binding selectedSourceRoom}"> 
+                          ItemsSource="{Binding Rooms}" SelectedItem="{Binding selectedSourceRoom}" Style="{StaticResource BasicComboBox}"> 
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Converter={StaticResource RoomToStringConverter}}"/>
@@ -95,7 +96,7 @@
 
                 <Label Content="Sala u koju se premešta:" FontSize="24" Margin="5,0,0,5" HorizontalContentAlignment="Left"/>
                 <TextBox x:Name="MovingTo" IsReadOnly="True" Width="250" Background="#E7E7E7" HorizontalAlignment="Left"
-                         Height="45" Margin="10,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=destinationRoom,Converter={StaticResource RoomToStringConverter}}" />
+                         Height="45" Margin="10,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=destinationRoom,Converter={StaticResource RoomToStringConverter}}" Style="{StaticResource BasicTextBox}"/>
 
                 <DataGrid  Height="200" Width="300" x:Name="BusyRoomTo" FontSize="18"
                       CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left"

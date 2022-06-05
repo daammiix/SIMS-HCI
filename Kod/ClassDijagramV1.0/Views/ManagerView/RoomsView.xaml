@@ -15,6 +15,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../Theme/TextboxTheme.xaml"/>
+                <ResourceDictionary Source="../../Theme/DataGridButtonsTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -55,7 +56,7 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock>
-                                        <Button Content="Opremljenost" Command="{Binding Path=DataContext.RoomEquipment,
+                                        <Button Content="Opremljenost" Width="150" Margin="0,1,0,0" Style="{StaticResource DataGridButton}" Command="{Binding Path=DataContext.RoomEquipment,
                                             RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"/>
                                         </TextBlock>
                                     </DataTemplate>
@@ -65,7 +66,7 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock>
-                                        <Button Content="Zakazivanje"  Command="{Binding Path=DataContext.RoomReservation,
+                                        <Button Content="Zakazivanje" Width="150" Margin="0,1,0,0" Style="{StaticResource DataGridButton}" Command="{Binding Path=DataContext.RoomReservation,
                                             RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"/>
                                         </TextBlock>
                                     </DataTemplate>

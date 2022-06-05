@@ -170,6 +170,7 @@ namespace ClassDijagramV1._0.ViewModel
         public void ResetView()
         {
             CurrentRoomView = RoomsVM;
+            RoomsVM.selectedRoom = null;
         }
 
         public void GenerateView()

@@ -16,6 +16,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../Theme/BasicTextBoxTheme.xaml"/>
+                <ResourceDictionary Source="../../Theme/BasicComboBoxTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -50,7 +51,7 @@
                 </DataGrid>
                 <Label Content="Namena u koju se menja:" FontSize="26" Height="50" Margin="20,5,0,5" HorizontalContentAlignment="Left" HorizontalAlignment="Left"/>
                 <ComboBox x:Name="ChangeName" Width="320" Height="55" Margin="20,5,0,5" FontSize="24" HorizontalContentAlignment="Left" 
-                          VerticalContentAlignment="Center" IsReadOnly="True" SelectedItem="{Binding selectedNewNameRoom}">
+                          VerticalContentAlignment="Center" IsReadOnly="True" SelectedItem="{Binding selectedNewNameRoom}" Style="{StaticResource BasicComboBox}">
                     <ComboBoxItem Margin="5,0,0,0" Content="Operaciona Sala"/>
                     <ComboBoxItem Margin="5,0,0,0" Content="Sala za preglede"/>
                     <ComboBoxItem Margin="5,0,0,0" Content="Bolnička soba"/>

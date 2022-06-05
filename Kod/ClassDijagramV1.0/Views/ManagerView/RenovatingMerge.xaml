@@ -16,6 +16,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../Theme/BasicTextBoxTheme.xaml"/>
+                <ResourceDictionary Source="../../Theme/BasicComboBoxTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converters:RoomToStringConverter x:Key="RoomToStringConverter"/>
         </ResourceDictionary>
@@ -42,7 +43,7 @@
 
             <StackPanel Grid.Row="1"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
                 <Label Content="Sala u koju se spaja:" FontSize="26" Margin="30,5,0,5" HorizontalContentAlignment="Left"/>
-                <TextBox x:Name="MergingTo" IsReadOnly="True" Width="230" Background="#E7E7E7" Height="45" Margin="5,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedRoom,Converter={StaticResource RoomToStringConverter}}" />
+                <TextBox x:Name="MergingTo" IsReadOnly="True" Width="230" Padding="5" Height="45" Margin="5,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedRoom,Converter={StaticResource RoomToStringConverter}}" Style="{StaticResource BasicTextBox}"/>
                 <Label Content="Dostupnost sale:" FontSize="26" Margin="30,0,0,5" HorizontalContentAlignment="Left"/>
                 <DataGrid Grid.Column="1" Height="200" Width="250" x:Name="MergingToRoom" Margin="35,5,10,0"
                       CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left" FontSize="18"
@@ -59,7 +60,7 @@
                 <Label Content="Sala koja se spaja:" FontSize="26" Margin="15,5,0,5"/>
                 <ComboBox x:Name="MergingRoom" Width="230" Height="45" Margin="18,0,0,5" FontSize="22"
                           VerticalContentAlignment="Center" IsReadOnly="True" HorizontalAlignment="Left"
-                          ItemsSource="{Binding Rooms}" SelectedItem="{Binding selectedMergingRoom}">
+                          ItemsSource="{Binding Rooms}" SelectedItem="{Binding selectedMergingRoom}" Style="{StaticResource BasicComboBox}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Converter={StaticResource RoomToStringConverter}}"/>
@@ -91,7 +92,7 @@
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <Label Content="Od:" FontSize="24" Margin="30,0,0,5" HorizontalContentAlignment="Left"/>
-                    <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedFromDate}" Style="{StaticResource BasicTextBox}"/>
+                    <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="40" Margin="3,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedFromDate}" Style="{StaticResource BasicTextBox}"/>
                     <TextBox x:Name="FromTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromTime}"  Style="{StaticResource BasicTextBox}"/>
                 </StackPanel>
 

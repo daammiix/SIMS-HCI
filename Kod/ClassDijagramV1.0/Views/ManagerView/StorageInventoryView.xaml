@@ -17,6 +17,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../Theme/TextboxTheme.xaml"/>
+                <ResourceDictionary Source="../../Theme/DataGridButtonsTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converters:InventoryConverter x:Key="InventoryConverter"/>
 
@@ -53,7 +54,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock>
-                                        <Button Content="Zakazivanje"  Command="{Binding Path=DataContext.EquipmentReservation,
+                                        <Button Content="Zakazivanje" Width="150" Margin="0,1,0,0" Style="{StaticResource DataGridButton}" Command="{Binding Path=DataContext.EquipmentReservation,
                                             RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"/>
                                     </TextBlock>
                                 </DataTemplate>

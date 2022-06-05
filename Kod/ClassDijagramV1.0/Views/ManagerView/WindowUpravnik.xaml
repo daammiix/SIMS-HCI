@@ -29,6 +29,7 @@
                 <ResourceDictionary Source="../../Theme/TextBoxes.xaml"/>
                 <ResourceDictionary Source="../../Theme/ComboBoxTheme.xaml"/>
                 <ResourceDictionary Source="../../Theme/BasicComboBoxTheme.xaml"/>
+                <ResourceDictionary Source="../../Theme/DataGridButtonsTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
