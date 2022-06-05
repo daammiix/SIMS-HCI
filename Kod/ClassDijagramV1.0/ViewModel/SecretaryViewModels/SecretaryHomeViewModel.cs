@@ -5,6 +5,7 @@ using ClassDijagramV1._0.ViewModel.SecretaryViewModels.EquipmentViewModels;
 using ClassDijagramV1._0.ViewModel.SecretaryViewModels.FreeDaysViewModels;
 using ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewModels;
 using ClassDijagramV1._0.ViewModel.SecretaryViewModels.MeetingsViewModels;
+using ClassDijagramV1._0.ViewModel.SecretaryViewModels.StatisticalDataViewModels;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -24,17 +25,21 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels
 
         private object? _currentView;
 
-        AppointmentsMainViewModel _appointmentsViewModel;
+        // View Models
 
-        AccountsMainViewModel _accountsMainViewModel;
+        private readonly AppointmentsMainViewModel _appointmentsViewModel;
 
-        MedicalRecordsMainViewModel _medicalRecordsMainViewModel;
+        private readonly AccountsMainViewModel _accountsMainViewModel;
 
-        EquipmentMainViewModel _equipmentMainViewModel;
+        private readonly MedicalRecordsMainViewModel _medicalRecordsMainViewModel;
 
-        MeetingsMainViewModel _meetingsMainViewModel;
+        private readonly EquipmentMainViewModel _equipmentMainViewModel;
 
-        FreeDaysMainViewModel _freeDaysMainViewModel;
+        private readonly MeetingsMainViewModel _meetingsMainViewModel;
+
+        private readonly FreeDaysMainViewModel _freeDaysMainViewModel;
+
+        private readonly StatisticalDataMainViewModel _statisticalDataMainViewModel;
 
         // Commands
 
@@ -44,6 +49,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels
         RelayCommand _equipmentViewCommand;
         RelayCommand _meetingsViewCommand;
         RelayCommand _freeDaysViewCommand;
+        RelayCommand _statisticalDataViewCommand;
 
         #endregion
 
@@ -145,6 +151,23 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels
             }
         }
 
+        public RelayCommand StatisticalDataViewCommand
+        {
+            get
+            {
+                if (_statisticalDataViewCommand == null)
+                {
+                    _statisticalDataViewCommand = new RelayCommand(o =>
+                    {
+                        CurrentView = _statisticalDataMainViewModel;
+                    });
+
+                }
+
+                return _statisticalDataViewCommand;
+            }
+        }
+
         #endregion
 
         #region Properties
@@ -195,6 +218,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels
             _equipmentMainViewModel = new EquipmentMainViewModel();
             _meetingsMainViewModel = new MeetingsMainViewModel();
             _freeDaysMainViewModel = new FreeDaysMainViewModel();
+            _statisticalDataMainViewModel = new StatisticalDataMainViewModel();
 
             // Na pocetku stavimo currentView na preglediOperacije(to je prvi menu item)
             _currentView = _appointmentsViewModel;

@@ -9,6 +9,7 @@
              xmlns:syncfusionskin ="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
              syncfusionskin:SfSkinManager.Theme="{syncfusionskin:SkinManagerExtension ThemeName=MaterialDark}"
              mc:Ignorable="d" 
+             FontFamily="#Poppins"
              Background="Transparent"
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -17,6 +18,7 @@
     </UserControl.DataContext>
 
     <Grid>
+
         <syncfusion:SfScheduler Grid.Row="0" 
                                 x:Name="Schedule"
                                 ItemsSource="{Binding ScheduleViewModel.Meetings}"
