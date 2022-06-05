@@ -32,10 +32,5 @@ namespace ClassDijagramV1._0.Repository
         {
             return quarterlyReports;
         }
-
-        public void writeReports()
-        {
-            fileHandler.Write(quarterlyReports);
-        }
     }
 }

@@ -12,7 +12,7 @@ namespace ClassDijagramV1._0.Service
     {
         private EquipmentAppointmentRepo equipmentAppointmentRepository;
         private RoomController roomController;
-        BindingList<EquipmentAppointment> equipmentAppointments;
+        private BindingList<EquipmentAppointment> equipmentAppointments;
         public EquipmentAppointmentService(EquipmentAppointmentRepo equipmentAppointmentServiceRepository)
         {
             this.equipmentAppointmentRepository = equipmentAppointmentServiceRepository;
