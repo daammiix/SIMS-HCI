@@ -59,7 +59,7 @@ namespace Service
             repo.ChangeStorageMedicineQuantity(meidicineId, quantity);
         }
 
-        public Boolean CheckIfUniq(Room room, bool existingRoom)
+        private Boolean CheckIfUniq(Room room, bool existingRoom)
         {
             var rooms = repo.GetAllRooms();
             foreach (var r in rooms)
@@ -83,7 +83,7 @@ namespace Service
             return true;
         }
 
-        public Boolean CheckIfValid(Room room)
+        private Boolean CheckIfValid(Room room)
         {
             if ((room.Floor > 4) || (room.RoomNumber > 499))
             {

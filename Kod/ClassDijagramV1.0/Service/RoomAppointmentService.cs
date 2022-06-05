@@ -12,8 +12,8 @@ namespace ClassDijagramV1._0.Service
     {
         private RoomAppointmentRepo roomAppointmentRepo;
         private RoomController roomController;
-        public BindingList<RoomAppointment> roomAppointments;
-        public BindingList<Room> roomsList;
+        private BindingList<RoomAppointment> roomAppointments;
+        private BindingList<Room> roomsList;
 
         public RoomAppointmentService(RoomAppointmentRepo roomAppointmentRepo)
         {
@@ -55,7 +55,7 @@ namespace ClassDijagramV1._0.Service
             return roomAppointmentRepo.GetRoomAppointmentByID(roomAppointmentID);
         }
 
-        public Boolean CheckIfUniq(RoomAppointment roomAppointment, bool existingRoomAppointment)
+        private Boolean CheckIfUniq(RoomAppointment roomAppointment, bool existingRoomAppointment)
         {
             var roomAppointments = roomAppointmentRepo.GetAllRoomAppointments();
             foreach (var appointment in roomAppointments)
@@ -99,7 +99,7 @@ namespace ClassDijagramV1._0.Service
         }
 
 
-        public void SplitRoom(RoomAppointment appointment)
+        private void SplitRoom(RoomAppointment appointment)
         {
             if (appointment.RoomToSplit != null)
             {
@@ -107,7 +107,7 @@ namespace ClassDijagramV1._0.Service
             }
         }
 
-        public void ChangePurpose(RoomAppointment appointment)
+        private void ChangePurpose(RoomAppointment appointment)
         {
             if (appointment.newRoomName != null)
             {
@@ -116,7 +116,7 @@ namespace ClassDijagramV1._0.Service
             }
         }
 
-        public void MergeRoom(RoomAppointment appointment)
+        private void MergeRoom(RoomAppointment appointment)
         {
             if (appointment.RoomIDToMerge != null)
             {
@@ -131,7 +131,7 @@ namespace ClassDijagramV1._0.Service
             }
         }
 
-        public void ChangingStatusActive(RoomAppointment appointment)
+        private void ChangingStatusActive(RoomAppointment appointment)
         {
             foreach (var currentRoom in roomsList)
             {
@@ -142,7 +142,7 @@ namespace ClassDijagramV1._0.Service
             }
         }
 
-        public void ChangingStatusRenovating(RoomAppointment appointment)
+        private void ChangingStatusRenovating(RoomAppointment appointment)
         {
             foreach (var currentRoom in roomsList)
             {
