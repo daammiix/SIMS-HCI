@@ -20,7 +20,7 @@ namespace ClassDijagramV1._0.ViewModel
             From = from; To = to;
         }
     }
-    public class EquipViewModel
+    public class EquipViewModel : ObservableObject
     {
         readonly private String format = "dd/MM/yyyyTHH:mm";
         readonly private String fullFormat = "dd/MM/yyyy HH:mm";
@@ -52,7 +52,9 @@ namespace ClassDijagramV1._0.ViewModel
         public Room? destinationRoom { get; set; }
         public Room _sourceRoom;
         private Equipment _selectedEqipment;
-        public int _quantity;
+        public int _quantity = 1;
+
+        public String QuantityValidationError { get; set; }
 
         public BindingList<String> RoomsFromAvailable { get; set; }
         public BindingList<String> RoomsToAvailable { get; set; }
@@ -93,20 +95,27 @@ namespace ClassDijagramV1._0.ViewModel
             appointmentController = app.AppointmentController;
 
             this.mainRoomsViewModel = mainRoomsViewModel;
+            destinationRoom = null;
 
-            this.destinationRoom = null;
+            resetFields();
 
-            Rooms = new BindingList<Room>();
-            RoomsFromAvailable = new BindingList<String>();
-            RoomsToAvailable = new BindingList<String>();
-            EquipmentAvailable = new BindingList<String>();
+            Equipments = equipmentController.GetAllEquipments();
+        }
+
+        private void resetFields()
+        {
+            _sourceRoom = null;
+            _selectedEqipment = null;
 
             FromDate = DateTime.Now.ToString("dd/MM/yyyy");
             FromTime = DateTime.Now.ToString("HH:mm");
             ToDate = DateTime.Now.ToString("dd/MM/yyyy");
             ToTime = DateTime.Now.ToString("HH:mm");
 
-            Equipments = equipmentController.GetAllEquipments();
+            Rooms = new BindingList<Room>();
+            RoomsFromAvailable = new BindingList<String>();
+            RoomsToAvailable = new BindingList<String>();
+            EquipmentAvailable = new BindingList<String>();
             availabilities = new BindingList<Availability>();
         }
 
@@ -129,6 +138,7 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _cancelEquipmentAppointment = new RelayCommand(o =>
                 {
+                    resetFields();
                     this.mainRoomsViewModel.ResetView();
                 });
 
@@ -161,7 +171,14 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 if (_quantity == value)
                     return;
+
+                //int quantity = Int32.Parse(value); dodam try
+                if (value < 1)
+                {
+                    QuantityValidationError = "Mora biti barem 1";
+                }
                 _quantity = value;
+                OnPropertyChanged("QuantityValidationError");
                 UpdateAvailableRooms();
             }
         }
@@ -226,6 +243,7 @@ namespace ClassDijagramV1._0.ViewModel
             var equipmentAppointment = new EquipmentAppointment(_sourceRoom.RoomID, destinationRoom.RoomID, selectedEquipment, selectedQuantity, fromDatetime, toDatetime);
             equipmentAppointmentController.AddEquipmentAppointment(equipmentAppointment);
 
+            resetFields();
             this.mainRoomsViewModel.ResetView();
         }
 
@@ -250,6 +268,10 @@ namespace ClassDijagramV1._0.ViewModel
         {
             selectedSourceRoom = null; // TODO check
             Rooms.Clear();
+            if (selectedEquipment == null)
+            {
+                return;
+            }
             try
             {
                 _quantity = Convert.ToInt32(selectedQuantity);
