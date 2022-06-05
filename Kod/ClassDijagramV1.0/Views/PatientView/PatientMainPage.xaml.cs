@@ -71,9 +71,6 @@ namespace ClassDijagramV1._0.Views.PatientView
             {
                 parent.startWindow.Content = new AppointmentAddPage(parent, _appointmentViewModels);
             }
-            
-            
-            
         }
 
         private void RatingOpen(object sender, RoutedEventArgs e)
@@ -190,8 +187,8 @@ namespace ClassDijagramV1._0.Views.PatientView
         {
             Random rnd = new Random();
             var medicines = _medicineController.GetAllMedicines();
-            List<String> dvaLijeka = new List<String>() { medicines[rnd.Next(0, medicines.Count - 1)].ID ,
-                                                          medicines[rnd.Next(0, medicines.Count - 1)].ID };
+            List<String> dvaLijeka = new List<String>() { medicines[rnd.Next(0, medicines.Count - 1)].Name ,
+                                                          medicines[rnd.Next(0, medicines.Count - 1)].Name };
             String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet purus a ligula tempus porttitor. Ut urna orci, fermentum eget nibh quis, commodo convallis eros. Maecenas ut efficitur nisi, ac hendrerit dolor. Nullam non pretium lectus. Nulla facilisi. Praesent euismod mi nunc, ut commodo felis efficitur a. Cras quis arcu tortor. Nam congue ultrices metus eget eleifend. In hac habitasse platea dictumst. Nunc bibendum ante nec iaculis aliquet. In vel odio." +
                                 "Donec placerat pretium velit ac eleifend.Suspendisse vel vehicula lacus, et mollis orci.Vestibulum dictum dolor a cursus laoreet.Nunc vel ex at leo egestas malesuada sed accumsan eros.Vestibulum auctor, massa ut viverra vulputate, dui lectus accumsan urna, non pharetra risus nunc eu felis.Nulla eu accumsan metus.Vestibulum tempor convallis quam, at ornare felis molestie vitae.Fusce vel ante sed felis pharetra pharetra at quis neque.Ut eleifend pellentesque mauris," +
                                 " commodo convallis eros. Maecenas ut efficitur nisi, ac hendrerit dolor. Nullam non pretium lectus. Nulla facilisi. Praesent euismod mi nunc, ut commodo felis efficitur a. Cras quis arcu tortor. Nam congue ultrices metus eget eleifend. In hac habitasse platea dictumst. Nunc bibendum ante nec iaculis aliquet. In vel odio auctor, molestie risus at, faucibus orci. Etiam feugiat neque mauris, ut ultrices lectus porttitor eu. Nullam in sodales elit, sit amet auctor odio.";

@@ -45,6 +45,36 @@ namespace ClassDijagramV1._0.Controller
         }
 
         /// <summary>
+        /// Dodaje notifikaciju za terapiju
+        /// </summary>
+        /// <param name="appointment"></param>
+        /// <returns></returns>
+        public void AddNotificationForTherapy(Notification notification)
+        {
+            _notificationService.AddNotificationForTherapy(notification);
+        }
+
+        /// <summary>
+        /// Brise notifikaciju ako je procitana
+        /// </summary>
+        /// <param name="appointmentID"></param>
+        /// <returns></returns>
+        public void RemoveReadNotification(Notification note)
+        {
+            _notificationService.RemoveReadNotification(note);
+        }
+
+        /// <summary>
+        /// Brise notifikaciju kad prodje jer je stara
+        /// </summary>
+        /// <param name="appointmentID"></param>
+        /// <returns></returns>
+        public void RemoveOldNotification(Notification note)
+        {
+            _notificationService.RemoveOldNotification(note);
+        }
+
+        /// <summary>
         /// Vraca sve notifikacije
         /// </summary>
         /// <returns></returns>

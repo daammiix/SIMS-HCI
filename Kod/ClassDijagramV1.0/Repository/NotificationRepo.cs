@@ -21,22 +21,11 @@ namespace ClassDijagramV1._0.Repository
             Notifications.Add(n);
         }
 
-        public void RemoveNotificationByAppointment(int appointmentID)
+        public void RemoveNotification(Notification note)
         {
-            Notifications.Remove(FindNotificationByAppointmentID(appointmentID));
+            Notifications.Remove(note);
         }
 
-        public Notification FindNotificationByAppointmentID(int appointmentID)
-        {
-            foreach (Notification notification in Notifications)
-            {
-                if (notification.AppointmentID == appointmentID)
-                {
-                    return notification;
-                }
-            }
-            return null;
-        }
 
         public ObservableCollection<Notification> GetAllNotifications()
         {

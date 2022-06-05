@@ -29,12 +29,39 @@ namespace ClassDijagramV1._0.Service
 
         public void RemoveNotificationByAppointment(int appointmentID)
         {
-            _notificationRepo.RemoveNotificationByAppointment(appointmentID);
+            _notificationRepo.RemoveNotification(FindNotificationByAppointmentID(appointmentID));
+        }
+
+        public void RemoveReadNotification(Notification note)
+        {
+            _notificationRepo.RemoveNotification(note);
+        }
+
+        public void RemoveOldNotification(Notification note)
+        {
+            _notificationRepo.RemoveNotification(note);
+        }
+
+        public void AddNotificationForTherapy(Notification notification)
+        {
+            _notificationRepo.AddNotification(notification);
         }
 
         public ObservableCollection<Notification> GetAllNotifications()
         {
             return _notificationRepo.GetAllNotifications();
+        }
+
+        public Notification FindNotificationByAppointmentID(int appointmentID)
+        {
+            foreach (Notification notification in _notificationRepo.GetAllNotifications())
+            {
+                if (notification.AppointmentID == appointmentID)
+                {
+                    return notification;
+                }
+            }
+            return null;
         }
 
         public void SaveNotifications()
