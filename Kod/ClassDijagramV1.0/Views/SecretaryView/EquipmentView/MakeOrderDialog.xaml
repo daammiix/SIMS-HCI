@@ -195,7 +195,8 @@
               HorizontalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="131*"/>
+                    <RowDefinition Height="265*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" 
                        Text="Order Equipment"
@@ -208,7 +209,7 @@
                       ScrollViewer.CanContentScroll="False"
                       DragOver="ListView_DragOver"
                       Drop="ListView_Drop"
-                      ItemsSource="{Binding EquipmentInOrder}">
+                      ItemsSource="{Binding EquipmentInOrder}" Grid.RowSpan="2">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>

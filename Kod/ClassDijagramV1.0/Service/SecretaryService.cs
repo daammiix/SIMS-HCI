@@ -60,18 +60,18 @@ namespace ClassDijagramV1._0.Service
         /// <returns></returns>
         public Secretary GetSecretaryById(int id)
         {
-            Secretary? ret = null;
+            Secretary? requiredSecretary = null;
 
             foreach (Secretary sc in _secretaryRepo.GetSecretaries())
             {
                 if (sc.Id == id)
                 {
-                    ret = sc;
+                    requiredSecretary = sc;
                     break;
                 }
             }
 
-            return ret;
+            return requiredSecretary;
         }
 
         #endregion

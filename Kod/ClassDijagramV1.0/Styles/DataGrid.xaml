@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Luna"
                     xmlns:converters="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels.Converters"
                     xmlns:medicalRecordConverters="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewModels.Converters"
+                    xmlns:freeDaysConverters="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.FreeDaysViewModels.Converters"
                     xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
     <Style TargetType="{x:Type DataGridCell}">
@@ -287,8 +288,9 @@
                     <Run Text="Blood Type: "/>
                     <Run Text="{Binding MedicalRecord.BloodType}" Foreground="{StaticResource MyRed}"/>
                 </TextBlock>
-                <TextBlock Margin="25,-50,0,0" Foreground="{StaticResource SLightGrayShade}"
-                       VerticalAlignment="Center">
+                <TextBlock MaxWidth="250" TextWrapping="Wrap" 
+                           Margin="25,-50,0,0" Foreground="{StaticResource SLightGrayShade}"
+                           VerticalAlignment="Center">
                     <Run Text="Allergens: "/>
                     <Run Text="{Binding MedicalRecord.Allergens, Converter={medicalRecordConverters:AllergensDiseasesToStringConverter}}" Foreground="{StaticResource MyRed}"/>
                     <LineBreak/>
@@ -383,4 +385,134 @@
         </Style.Triggers>
     </Style>
 
+    <DataTemplate x:Key="RowDetailsFreeDays">
+        <Border Margin="5"
+                Padding="0 10">
+            <Border.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="Foreground" Value="{StaticResource SLightGrayShade}"/>
+                </Style>
+            </Border.Resources>
+
+            <StackPanel Orientation="Horizontal">
+                <Image Source="../Images/question.png" 
+                       Width="45"
+                       Height="45"
+                       Margin="17,0,20,0"/>
+                <TextBlock MaxWidth="200"
+                           TextWrapping="Wrap">
+                    <Run Text="Description: "/>
+                    <Run Text="{Binding Description}"
+                         Foreground="{StaticResource MyRed}"/>
+                </TextBlock>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+
+    <Style x:Key="DataGridRowStyleFreeDays" TargetType="{x:Type DataGridRow}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="MinHeight" Value="30"/>
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
+        <Setter Property="DetailsVisibility" Value="Visible"/>
+        <Setter Property="ValidationErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <TextBlock Foreground="Red" Margin="2,0,0,0" Text="!" VerticalAlignment="Center"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridRow}">
+                    <Border x:Name="DGR_Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
+                        <SelectiveScrollingGrid>
+                            <SelectiveScrollingGrid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </SelectiveScrollingGrid.ColumnDefinitions>
+                            <SelectiveScrollingGrid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </SelectiveScrollingGrid.RowDefinitions>
+                            <DataGridCellsPresenter Grid.Column="1" ItemsPanel="{TemplateBinding ItemsPanel}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            <DataGridDetailsPresenter Grid.Column="1" Grid.Row="1" SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen, ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}, Converter={x:Static DataGrid.RowDetailsScrollingConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" Visibility="{TemplateBinding DetailsVisibility}" ContentTemplate="{DynamicResource RowDetailsFreeDays}"/>
+                            <DataGridRowHeader Grid.RowSpan="2" SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Row}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                        </SelectiveScrollingGrid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsNewItem" Value="True">
+                <Setter Property="Margin" Value="{Binding NewItemMargin, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <DataTemplate x:Key="RowDetailsFreeDaysResolved">
+        <Border Margin="5"
+                Padding="0 10">
+            <Border.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="Foreground" Value="{StaticResource SLightGrayShade}"/>
+                </Style>
+            </Border.Resources>
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{Binding Accepted, Converter={freeDaysConverters:AcceptedToImageConverter}}" 
+                       Width="45"
+                       Height="45"
+                       Margin="17,0,20,0"/>
+                <TextBlock MaxWidth="250"
+                           TextWrapping="WrapWithOverflow">
+                    <Run Text="Description: "/>
+                    <Run Text="{Binding Description}"
+                         Foreground="{StaticResource MyRed}"/>
+                </TextBlock>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+
+    <Style x:Key="DataGridRowStyleFreeDaysResolved" TargetType="{x:Type DataGridRow}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="MinHeight" Value="30"/>
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
+        <Setter Property="DetailsVisibility" Value="Visible"/>
+        <Setter Property="ValidationErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <TextBlock Foreground="Red" Margin="2,0,0,0" Text="!" VerticalAlignment="Center"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridRow}">
+                    <Border x:Name="DGR_Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
+                        <SelectiveScrollingGrid>
+                            <SelectiveScrollingGrid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </SelectiveScrollingGrid.ColumnDefinitions>
+                            <SelectiveScrollingGrid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </SelectiveScrollingGrid.RowDefinitions>
+                            <DataGridCellsPresenter Grid.Column="1" ItemsPanel="{TemplateBinding ItemsPanel}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            <DataGridDetailsPresenter Grid.Column="1" Grid.Row="1" SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen, ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}, Converter={x:Static DataGrid.RowDetailsScrollingConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" Visibility="{TemplateBinding DetailsVisibility}" ContentTemplate="{DynamicResource RowDetailsFreeDaysResolved}"/>
+                            <DataGridRowHeader Grid.RowSpan="2" SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Row}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                        </SelectiveScrollingGrid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsNewItem" Value="True">
+                <Setter Property="Margin" Value="{Binding NewItemMargin, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

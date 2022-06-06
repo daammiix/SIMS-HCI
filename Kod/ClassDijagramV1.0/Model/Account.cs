@@ -6,6 +6,7 @@ namespace ClassDijagramV1._0.Model
 {
     public class Account : ObservableObject
     {
+
         #region Fields
 
         private string _username;
@@ -18,6 +19,8 @@ namespace ClassDijagramV1._0.Model
         #endregion
 
         #region Properties
+
+        public int Id { get; private set; }
 
         public string Username
         {
