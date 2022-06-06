@@ -12,7 +12,8 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="#B0C69D"
-        FontFamily="Berlin Sans FB Demi"
+        FontFamily="Sylfaen"
+        FontWeight="Bold"
         BorderThickness="4"
         BorderBrush="#455736">
 
@@ -20,7 +21,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../Theme/TextBoxes.xaml"/>
-
+                <ResourceDictionary Source="../../Theme/BasicTextBoxTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -49,17 +50,17 @@
                 <Label Content="Količina:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
             </StackPanel>
                 <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">
-                <TextBox x:Name="AddEquipmentId" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                <TextBox x:Name="AddEquipmentNAme" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                <TextBox x:Name="AddType" IsReadOnly="True"  Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                <TextBox x:Name="AddEquipmentQuantity" Width="120" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
+                <TextBox x:Name="AddEquipmentId" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource BasicTextBox}" Text="{Binding EquipmentID}"/>
+                <TextBox x:Name="AddEquipmentNAme" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource BasicTextBox}" Text="{Binding EquipmentName}"/>
+                <TextBox x:Name="AddType" IsReadOnly="True"  Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource BasicTextBox}" Text="{Binding EquipmentType}"/>
+                <TextBox x:Name="AddEquipmentQuantity" Width="120" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource BasicTextBox}" Text="{Binding Quantity}"/>
             </StackPanel>
 
         </Grid>
         <StackPanel Grid.Row="2">
             <WrapPanel HorizontalAlignment="Right">
                 <Button x:Name="SaveAddedEquipment" HorizontalAlignment="Right" Height="32" Width="90" Content="Sačuvaj" Margin="5,10,10,0" Style="{StaticResource CRUDButton}" Command="{Binding SaveNewEquipment}"/>
-                <Button x:Name="QuitAddedEquipment" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,15,0" Style="{StaticResource CRUDButton}" Command="{Binding CancelNewEquipment}"/>
+                <Button x:Name="CancelAddedEquipment" HorizontalAlignment="Right" Height="32" Width="90" Content="Odustani" Margin="5,10,15,0" Style="{StaticResource CRUDButton}" Command="{Binding CancelNewEquipment}"/>
             </WrapPanel>
         </StackPanel>
     </Grid>

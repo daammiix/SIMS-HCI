@@ -1,10 +1,6 @@
 ﻿using ClassDijagramV1._0.Util;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Model
 {
@@ -13,7 +9,7 @@ namespace ClassDijagramV1._0.Model
         public static int idCounter = 0;
         private int id;
         private string description;
-        private List<String> medicine;
+        private List<MedicineDrug> medicine;
         private string note;
 
         public int Id
@@ -42,7 +38,7 @@ namespace ClassDijagramV1._0.Model
             }
         }
 
-        public List<String> Medicine
+        public List<MedicineDrug> Medicine
         {
             get { return medicine; }
             set
@@ -50,7 +46,7 @@ namespace ClassDijagramV1._0.Model
                 if (medicine != value)
                 {
                     medicine = value;
-                    OnPropertyChanged("Therapy");
+                    OnPropertyChanged("Medicine");
                 }
             }
         }
@@ -68,7 +64,7 @@ namespace ClassDijagramV1._0.Model
             }
         }
 
-        public MedicalReport(string description, List<String> medicine, string note = null)
+        public MedicalReport(string description, List<MedicineDrug> medicine, string note = null)
         {
             Id = ++idCounter;
             Description = description;

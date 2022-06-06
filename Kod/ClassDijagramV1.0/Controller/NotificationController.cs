@@ -1,12 +1,7 @@
 ﻿using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Service;
 using Model;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Controller
 {
@@ -19,11 +14,40 @@ namespace ClassDijagramV1._0.Controller
             _notificationService = notificationService;
         }
 
-        public void AddNotification(Appointment appointment, Room r1, NotificationType notificationType)
+        /// <summary>
+        /// Dodaje manuelno napravljeni podsjetnik
+        /// </summary>
+        /// <param name="notification"></param>
+        /// <returns></returns>
+        public void AddManualNotification(Notification notification)
         {
-            _notificationService.AddNotification(appointment, r1, notificationType);
+            _notificationService.AddManualNotification(notification);
         }
 
+        /// <summary>
+        /// Dodaje notifikaciju kad zakayujemo pregled
+        /// </summary>
+        /// <param name="appointment"></param>
+        /// <returns></returns>
+        public void AddNotificationForAppointment(Appointment appointment)
+        {
+            _notificationService.AddNotificationForAppointment(appointment);
+        }
+
+        /// <summary>
+        /// Brise notifikaciju kad otkayujemo pregled
+        /// </summary>
+        /// <param name="appointmentID"></param>
+        /// <returns></returns>
+        public void RemoveNotificationByAppointment(int appointmentID)
+        {
+            _notificationService.RemoveNotificationByAppointment(appointmentID);
+        }
+
+        /// <summary>
+        /// Vraca sve notifikacije
+        /// </summary>
+        /// <returns></returns>
         public ObservableCollection<Notification> GetAllNotifications()
         {
             return _notificationService.GetAllNotifications();

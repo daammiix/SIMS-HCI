@@ -1,11 +1,7 @@
 ﻿using ClassDijagramV1._0.FileHandlers;
 using ClassDijagramV1._0.Model;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Repository
 {
@@ -23,6 +19,23 @@ namespace ClassDijagramV1._0.Repository
         public void AddNotification(Notification n)
         {
             Notifications.Add(n);
+        }
+
+        public void RemoveNotificationByAppointment(int appointmentID)
+        {
+            Notifications.Remove(FindNotificationByAppointmentID(appointmentID));
+        }
+
+        public Notification FindNotificationByAppointmentID(int appointmentID)
+        {
+            foreach (Notification notification in Notifications)
+            {
+                if (notification.AppointmentID == appointmentID)
+                {
+                    return notification;
+                }
+            }
+            return null;
         }
 
         public ObservableCollection<Notification> GetAllNotifications()

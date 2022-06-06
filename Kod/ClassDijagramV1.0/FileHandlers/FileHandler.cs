@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.FileHandlers
 {
@@ -46,7 +42,6 @@ namespace ClassDijagramV1._0.FileHandlers
             Utf8JsonWriter writer = new Utf8JsonWriter(fs);
 
             JsonSerializer.Serialize<List<T>>(writer, items, new JsonSerializerOptions() { WriteIndented = true });
-
             fs.Close();
         }
 

@@ -196,21 +196,23 @@
                     Source="Resources/Images/zakazivanjeTermina.jpg"
                     Height="100"/>
                     <Button
+                    x:Name="zakazivanjeRed"
                     Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Margin="0 -35 16 -20" Click="AddAppointmetClick"
                         >
-                        <materialDesign:PackIcon Kind="Medicine" />
+                        <materialDesign:PackIcon x:Name="iks" Kind="Medicine" />
                     </Button>
                 </StackPanel>
 
                 <StackPanel
                     Grid.Row="1"
                       Margin="8 16 8 0">
-                    <TextBlock FontWeight="Bold">Zakazivanje pregleda</TextBlock>
+                    <TextBlock x:Name="zakazivenjeTekst" FontWeight="Bold">Zakazivanje pregleda</TextBlock>
 
                     <TextBlock
+                        x:Name="zakazivanjeOpis"
                         TextWrapping="Wrap"
                         VerticalAlignment="Center"
                         Margin="4,8,0,0"
@@ -334,14 +336,13 @@
                     Grid.Row="0"
                     Margin="8 8 8 0">
                     <Image
-                    Source="/Views/PatientView/zdravstveniKarton.jpg"
+                    Source="Resources/Images/zdravstveniKarton.jpg"
                     Height="100"/>
                     <Button
                     Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
-                    Margin="0 -35 16 -20" Click="zdravstveniKartonClick" 
-                        >
+                    Margin="0 -35 16 -20" Click="zdravstveniKartonClick" >
                         <materialDesign:PackIcon Kind="Medicine" />
                     </Button>
                 </StackPanel>
@@ -403,17 +404,15 @@
                 <StackPanel
                     Grid.Row="0"
                     Margin="8 8 8 0">
-                    <!--<Image
+                    <Image
                     Source="Resources/Images/zakazivanjeTermina.jpg"
                     Height="100"/>
-                    -->
-                    
+
                     <Button
                     Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
-                    Margin="0 -35 16 -20" Click="zdravstveniKartonClick" 
-                        >
+                    Margin="0 -35 16 -20" Click="demoClick">
                         <materialDesign:PackIcon Kind="Medicine" />
                     </Button>
                 </StackPanel>

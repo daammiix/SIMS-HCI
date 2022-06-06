@@ -107,7 +107,7 @@
                             Content="CLOSE ALL" />
 
                 <TreeView >
-                    <TreeViewItem Header="Pregled termina" Style="{StaticResource MaterialDesignTreeViewItem}"/>
+                    <TreeViewItem Header="Pregled termina" Style="{StaticResource MaterialDesignTreeViewItem}" MouseLeftButtonUp="appoinmentViewClick"/>
                     
                     <TreeViewItem Header="Zakazivanje pregleda">
                         

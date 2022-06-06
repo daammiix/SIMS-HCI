@@ -1,14 +1,11 @@
-using ClassDijagramV1._0;
-using ClassDijagramV1._0.Model;
+using ClassDijagramV1._0.Model.DTO;
+using ClassDijagramV1._0.Service;
 using Model;
 using Repository;
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows;
-using ClassDijagramV1._0.Model.DTO;
-using ClassDijagramV1._0.Service;
+using System.Linq;
 
 namespace Service
 {

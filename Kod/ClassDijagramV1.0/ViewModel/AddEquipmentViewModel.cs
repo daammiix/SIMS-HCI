@@ -6,16 +6,17 @@ using ClassDijagramV1._0.Util;
 using ClassDijagramV1._0.Views.ManagerView;
 using Controller;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel
 {
     public class AddEquipmentViewModel
     {
+        private String _equipmentID;
+        private String _equipmentName;
+        private String _equipmentType;
+        private String _quantity;
+
         public RoomController roomController;
         public EquipmentController equipmentController;
         private IRefreshableEquipmentView equipmentView;
@@ -31,7 +32,44 @@ namespace ClassDijagramV1._0.ViewModel
             equipmentController = app.equipmentController;
             this.addEquipment = addEquipment;
             this.equipmentView = equipmentView;
-            addEquipment.AddType.Text = type;
+            EquipmentType = type;
+        }
+
+        public String EquipmentID
+        {
+            get { return _equipmentID; }
+            set
+            {
+                if (_equipmentID == value) { return; }
+                _equipmentID = value;
+            }
+        }
+        public String EquipmentName
+        {
+            get { return _equipmentName; }
+            set
+            {
+                if (_equipmentName == value) { return; }
+                _equipmentName = value;
+            }
+        }
+        public String EquipmentType
+        {
+            get { return _equipmentType; }
+            set
+            {
+                if (_equipmentType == value) { return; }
+                _equipmentType = value;
+            }
+        }
+        public String Quantity
+        {
+            get { return _quantity; }
+            set
+            {
+                if (_quantity == value) { return; }
+                _quantity = value;
+            }
         }
 
         public RelayCommand SaveNewEquipment
@@ -62,13 +100,13 @@ namespace ClassDijagramV1._0.ViewModel
 
         private Equipment EquipmentFromTextBoxes()
         {
-            return new Equipment(addEquipment.AddEquipmentId.Text, addEquipment.AddEquipmentNAme.Text, addEquipment.AddType.Text, 100, UnitsType.Units);
+            return new Equipment(EquipmentID, EquipmentName, EquipmentType, 100, UnitsType.Units);
         }
 
         public void SaveNewEquipmentAction()
         {
             var equipment = EquipmentFromTextBoxes();
-            var quantity = Int32.Parse(addEquipment.AddEquipmentQuantity.Text);
+            var quantity = Int32.Parse(Quantity);
             equipmentController.AddEquipment(equipment);
             ((Storage)roomController.GetRoom("storage")).addNewEquipment(equipment, quantity);
             equipmentView.RefreshEquipment();

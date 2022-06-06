@@ -3,11 +3,7 @@ using ClassDijagramV1._0.Repository;
 using Controller;
 using Model;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ClassDijagramV1._0.Service
@@ -16,7 +12,7 @@ namespace ClassDijagramV1._0.Service
     {
         private EquipmentAppointmentRepo equipmentAppointmentRepository;
         private RoomController roomController;
-        BindingList<EquipmentAppointment> equipmentAppointments;
+        private BindingList<EquipmentAppointment> equipmentAppointments;
         public EquipmentAppointmentService(EquipmentAppointmentRepo equipmentAppointmentServiceRepository)
         {
             this.equipmentAppointmentRepository = equipmentAppointmentServiceRepository;

@@ -2,6 +2,8 @@
   {
     "Type": 2,
     "Id": 4,
+    "Name": "Dragana",
+    "Surname": "Cvetkovic",
     "Jmbg": "54815181818",
     "Gender": 1,
     "PhoneNumber": "061235236237",
@@ -12,13 +14,13 @@
       "City": "Beograd",
       "StreetName": "Karposeva",
       "StreetNumber": "56"
-    },
-    "Name": "Dragana",
-    "Surname": "Cvetkovic"
+    }
   },
   {
     "Type": 9,
     "Id": 5,
+    "Name": "Milica",
+    "Surname": "Jovanovic",
     "Jmbg": "5959884823",
     "Gender": 0,
     "PhoneNumber": "3875432",
@@ -29,13 +31,13 @@
       "City": "Novi Sad",
       "StreetName": "Bulevar Oslobodjenja",
       "StreetNumber": "100"
-    },
-    "Name": "Milica",
-    "Surname": "Jovanovic"
+    }
   },
   {
     "Type": 0,
     "Id": 6,
+    "Name": "Dragisa",
+    "Surname": "Perovic",
     "Jmbg": "9897112156",
     "Gender": 0,
     "PhoneNumber": "3875432",
@@ -46,13 +48,13 @@
       "City": "Novi Sad",
       "StreetName": "Strazilovska",
       "StreetNumber": "33"
-    },
-    "Name": "Dragisa",
-    "Surname": "Perovic"
+    }
   },
   {
     "Type": 2,
     "Id": 12,
+    "Name": "Dragan",
+    "Surname": "Draskovic",
     "Jmbg": "559885556225",
     "Gender": 0,
     "PhoneNumber": "569856",
@@ -63,8 +65,6 @@
       "City": "Novi Sad",
       "StreetName": "Strazilovska",
       "StreetNumber": "92"
-    },
-    "Name": "Dragan",
-    "Surname": "Draskovic"
+    }
   }
 ]

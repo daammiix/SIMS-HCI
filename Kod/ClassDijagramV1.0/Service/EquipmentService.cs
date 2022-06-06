@@ -1,11 +1,7 @@
 ﻿using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Repository;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Service
 {
@@ -48,7 +44,7 @@ namespace ClassDijagramV1._0.Service
             return equipmentRepository.GetAllEquipments();
         }
 
-        public Boolean CheckIfUniq(Equipment equipment, bool existingEquipment)
+        private Boolean CheckIfUniq(Equipment equipment, bool existingEquipment)
         {
             var equipments = equipmentRepository.GetAllEquipments();
             foreach (var r in equipments)

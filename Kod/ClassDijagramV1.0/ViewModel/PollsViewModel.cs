@@ -2,17 +2,10 @@
 using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Util;
 using ClassDijagramV1._0.Views.ManagerView;
-using Controller;
-using Model;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 
 namespace ClassDijagramV1._0.ViewModel
 {
@@ -28,7 +21,7 @@ namespace ClassDijagramV1._0.ViewModel
 
         String _searchText = "";
         public Reports selectedReport { get; set; }
-        Window window;
+        Window? window;
 
         public ObservableCollection<DoctorRating> doctor4Results { get; set; }
         public ObservableCollection<DoctorRating> doctor5Results { get; set; }
@@ -36,7 +29,7 @@ namespace ClassDijagramV1._0.ViewModel
         private RelayCommand _openReport;
         private RelayCommand _closeReport;
 
-        public PollsViewModel(Window window)
+        public PollsViewModel(Window? window)
         {
             var app = Application.Current as App;
 
@@ -77,7 +70,10 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _closeReport = new RelayCommand(o =>
                 {
-                    window.Close();
+                    if (window != null)
+                    {
+                        window.Close();
+                    }
                 });
 
                 return _closeReport;
@@ -118,14 +114,14 @@ namespace ClassDijagramV1._0.ViewModel
         }
 
         public void doctorRatingResults()
-        { 
+        {
             foreach (var doctor in doctorRatings)
             {
-                if(doctor.DoctorId == 4)
+                if (doctor.DoctorId == 4)
                 {
                     doctor4Results.Add(doctor);
                 }
-                else if(doctor.DoctorId == 5)
+                else if (doctor.DoctorId == 5)
                 {
                     doctor5Results.Add(doctor);
                 }

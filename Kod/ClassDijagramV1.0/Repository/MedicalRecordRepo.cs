@@ -1,11 +1,8 @@
 ﻿using ClassDijagramV1._0.FileHandlers;
 using ClassDijagramV1._0.Model;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Repository
 {
@@ -118,6 +115,27 @@ namespace ClassDijagramV1._0.Repository
             }
 
             return requiredMedicalRecord;
+        }
+
+        /// <summary>
+        /// Vraca zdravstveni karton od zadatok pacijenta
+        /// </summary>
+        /// <param name="patientID"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public MedicalRecord GetPatientsMedicalRecord(int patientID)
+        {
+            MedicalRecord? ret = null;
+            foreach (var mr in MedicalRecords)
+            {
+                if (mr.PatientId == patientID)
+                {
+                    ret = mr;
+                    break;
+                }
+            }
+
+            return ret;
         }
 
         #endregion

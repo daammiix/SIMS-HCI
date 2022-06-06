@@ -6,16 +6,17 @@ using ClassDijagramV1._0.Util;
 using ClassDijagramV1._0.Views.ManagerView;
 using Controller;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel
 {
     public class ChangeEquipmentViewModel
     {
+        private String _equipmentID;
+        private String _equipmentName;
+        private String _equipmentType;
+        private String _quantity;
+
         public RoomController roomController;
         public EquipmentController equipmentController;
         public Storage storage;
@@ -35,6 +36,47 @@ namespace ClassDijagramV1._0.ViewModel
             this.changeEquipment = changeEquipment;
             this.quantifiedEquipment = (QuantifiedEquipment)quantifiedEquipment;
             storage = (Storage)roomController.GetRoom("storage");
+
+            this.EquipmentID = quantifiedEquipment.Equipment.EquipmentID;
+            this.EquipmentName = quantifiedEquipment.Equipment.Name;
+            this.EquipmentType = quantifiedEquipment.Equipment.EquipmentType;
+            this.Quantity = quantifiedEquipment.Quantity.ToString();
+        }
+        public String EquipmentID
+        {
+            get { return _equipmentID; }
+            set
+            {
+                if (_equipmentID == value) { return; }
+                _equipmentID = value;
+            }
+        }
+        public String EquipmentName
+        {
+            get { return _equipmentName; }
+            set
+            {
+                if (_equipmentName == value) { return; }
+                _equipmentName = value;
+            }
+        }
+        public String EquipmentType
+        {
+            get { return _equipmentType; }
+            set
+            {
+                if (_equipmentType == value) { return; }
+                _equipmentType = value;
+            }
+        }
+        public String Quantity
+        {
+            get { return _quantity; }
+            set
+            {
+                if (_quantity == value) { return; }
+                _quantity = value;
+            }
         }
 
         public RelayCommand SaveEquipmentEquipment
@@ -65,7 +107,7 @@ namespace ClassDijagramV1._0.ViewModel
 
         private Equipment EquipmentFromTextBoxes()
         {
-            return new Equipment(changeEquipment.ChangeEquipmentId.Text, changeEquipment.ChangeEquipmentName.Text, changeEquipment.ChangeType.Text, 100, UnitsType.Units);
+            return new Equipment(EquipmentID, EquipmentName, EquipmentType, 100, UnitsType.Units);
         }
 
         public int findEquipment(String equipmentId)
@@ -86,16 +128,14 @@ namespace ClassDijagramV1._0.ViewModel
         public void SaveChangedEquipmentAction()
         {
             var equipment = EquipmentFromTextBoxes();
-            var quantity = Int32.Parse(changeEquipment.ChangeEquipmentQuantity.Text);
-            String equipmentId = quantifiedEquipment.Equipment.EquipmentID;
-            int index = findEquipment(equipmentId);
+            var quantity = Int32.Parse(Quantity);
 
             equipmentController.ChangeEquipment(equipment);
-            roomController.ChangeStorageQuantity(equipmentId, quantity);
+            roomController.ChangeStorageQuantity(EquipmentID, quantity);
 
             equipmentView.RefreshEquipment();
             changeEquipment.Close();
         }
     }
-    
+
 }

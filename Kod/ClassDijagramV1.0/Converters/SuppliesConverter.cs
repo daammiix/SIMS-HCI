@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ClassDijagramV1._0.Helpers;
+using System;
 using System.Windows.Data;
-using ClassDijagramV1._0.Helpers;
 
 namespace ClassDijagramV1._0.Converters
 {

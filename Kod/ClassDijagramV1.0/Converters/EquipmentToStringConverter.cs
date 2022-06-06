@@ -1,9 +1,5 @@
 ﻿using ClassDijagramV1._0.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace ClassDijagramV1._0.Converters
@@ -12,12 +8,12 @@ namespace ClassDijagramV1._0.Converters
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            Equipment equipment = (Equipment)value;
-            if (equipment != null)
+            if (value == null || value == "")
             {
-                return equipment.EquipmentID + " " + equipment.Name;
+                return "";
             }
-            return "";
+            var equipment = (Equipment)value;
+            return equipment.EquipmentID + " " + equipment.Name;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

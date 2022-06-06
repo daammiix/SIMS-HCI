@@ -18,7 +18,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.MeetingsViewModels
 
         #region Properties
 
-        public AccountViewModel AccountViewModel { get; set; }
+        public ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels.AccountViewModel AccountViewModel { get; set; }
 
         public bool Required
         {
@@ -37,7 +37,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.MeetingsViewModels
 
         #region Constructor
 
-        public MeetingAccountViewModel(AccountViewModel accountViewModel, bool required)
+        public MeetingAccountViewModel(ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels.AccountViewModel accountViewModel, bool required)
         {
             AccountViewModel = accountViewModel;
             _isRequired = required;

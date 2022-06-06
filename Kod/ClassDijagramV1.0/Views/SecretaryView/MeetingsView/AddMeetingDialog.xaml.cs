@@ -126,7 +126,7 @@ namespace ClassDijagramV1._0.Views.SecretaryView.MeetingsView
             if (e.Data.GetDataPresent("myFormat"))
             {
                 // uzmemo accountViewModel to nam je DataObject
-                AccountViewModel accountViewModel = e.Data.GetData("myFormat") as AccountViewModel;
+                ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels.AccountViewModel accountViewModel = e.Data.GetData("myFormat") as AccountViewModel;
                 // Napravimo meeting account view model jer nam je bitno da li je osoba obavezna, stavimo required na false na pocetku
                 // Svakako ga updatujemo preko dijaloga
                 MeetingAccountViewModel meetingAccountViewModel = new MeetingAccountViewModel(accountViewModel, false);

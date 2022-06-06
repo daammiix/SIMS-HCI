@@ -1,10 +1,6 @@
 ﻿using ClassDijagramV1._0.Util;
 using Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Model
 {
@@ -16,7 +12,7 @@ namespace ClassDijagramV1._0.Model
         private int patientID;
         private Boolean isRead;
         private DateTime created;
-        private NotificationType notificationType;
+        private int appointmentID;
 
         public int NotificationID
         {
@@ -93,31 +89,32 @@ namespace ClassDijagramV1._0.Model
                 }
             }
         }
-        public NotificationType NotificationType
+
+        public int AppointmentID
         {
             get
             {
-                return notificationType;
+                return appointmentID;
             }
             set
             {
-                if (value != notificationType)
+                if (value != appointmentID)
                 {
-                    notificationType = value;
-                    OnPropertyChanged("NotificationType");
+                    appointmentID = value;
+                    OnPropertyChanged("AppointmentID");
                 }
             }
         }
 
-        public Notification(string content, int patientID, bool isRead, DateTime created, NotificationType notificationType)
+        public Notification(string content, int patientID, bool isRead, DateTime created, int appointmentID)
         {
-            
+
             NotificationID = ++idCounter;
             Content = content;
             PatientID = patientID;
             IsRead = isRead;
             Created = created;
-            NotificationType = notificationType;
+            AppointmentID = appointmentID;
         }
 
         public Notification()

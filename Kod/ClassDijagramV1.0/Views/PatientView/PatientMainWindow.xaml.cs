@@ -1,20 +1,6 @@
 ﻿using ClassDijagramV1._0.Model;
-using Controller;
 using Model;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ClassDijagramV1._0.Views.PatientView
 {
@@ -29,6 +15,7 @@ namespace ClassDijagramV1._0.Views.PatientView
         // Pacijent koji je ulogovan
         public Patient Patient { get; set; }
         public Account Account { get; set; }
+        public PatientMainPage pmp;
 
         #endregion
 
@@ -38,8 +25,8 @@ namespace ClassDijagramV1._0.Views.PatientView
             Patient = p;
             Account = account;
             this.DataContext = this;
-            // prosledimo i pacijenta koji je ulogovan
-            startWindow.Content = new PatientMainPage(this, Patient, Account);
+            pmp = new PatientMainPage(this);
+            startWindow.Content = pmp;
         }
 
         private void Logout(object sender, RoutedEventArgs e)
@@ -51,12 +38,17 @@ namespace ClassDijagramV1._0.Views.PatientView
 
         private void openNotificationClick(object sender, RoutedEventArgs e)
         {
-            startWindow.Content = new NotificationPage(this, Patient);
+            startWindow.Content = new NotificationPage(this);
         }
 
         private void pocetnaClick(object sender, RoutedEventArgs e)
         {
-            startWindow.Content = new PatientMainPage(this, Patient, Account);
+            startWindow.Content = new PatientMainPage(this);
+        }
+
+        private void appoinmentViewClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            startWindow.Content = new AppointmentsViewPage(this, pmp._appointmentViewModels);
         }
     }
 }

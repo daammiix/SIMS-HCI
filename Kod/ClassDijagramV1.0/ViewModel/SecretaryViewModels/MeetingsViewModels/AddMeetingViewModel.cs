@@ -21,7 +21,6 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.MeetingsViewModels
         #region Fields
 
 
-
         private ObservableCollection<MeetingViewModel> _meetings;
 
         private FileHandler<Meeting> _fileHandler;
@@ -90,7 +89,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.MeetingsViewModels
         public List<Room> Rooms { get; set; }
         public Room? SelectedRoom { get; set; }
         public int? Duration { get; set; }
-        public ObservableCollection<AccountViewModel> Accounts { get; private set; }
+        public ObservableCollection<ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels.AccountViewModel> Accounts { get; private set; }
         public ObservableCollection<MeetingAccountViewModel> AccountsInMeeting
         {
             get
@@ -137,7 +136,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.MeetingsViewModels
             _fileHandler = new FileHandler<Meeting>(MeetingsMainViewModel.path);
 
             // Instanciramo liste
-            Accounts = new ObservableCollection<AccountViewModel>();
+            Accounts = new ObservableCollection<ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels.AccountViewModel>();
             _accountsInMeeting = new ObservableCollection<MeetingAccountViewModel>();
 
             // Ucitamo potrebne kontrolere
@@ -183,7 +182,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.MeetingsViewModels
             {
                 if (account.Role != Role.Patient)
                 {
-                    Accounts.Add(new AccountViewModel(account));
+                    Accounts.Add(new ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels.AccountViewModel(account));
                 }
 
             });
@@ -258,11 +257,11 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.MeetingsViewModels
                 .Where(account => account.Required == true)
                 .ToList();
 
-            List<AccountViewModel> requiredAccounts = requiredMeetingAccounts
-                .Select<MeetingAccountViewModel, AccountViewModel>(meetingAccount => meetingAccount.AccountViewModel)
+            List<ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels.AccountViewModel> requiredAccounts = requiredMeetingAccounts
+                .Select<MeetingAccountViewModel, ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels.AccountViewModel>(meetingAccount => meetingAccount.AccountViewModel)
                 .ToList();
 
-            return requiredAccounts.Select<AccountViewModel, MeetingAccount>(accountVW =>
+            return requiredAccounts.Select<ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels.AccountViewModel, MeetingAccount>(accountVW =>
              new MeetingAccount(accountVW.Account, true)).ToList();
         }
 
@@ -276,11 +275,11 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.MeetingsViewModels
                 .Where(account => account.Required == false)
                 .ToList();
 
-            List<AccountViewModel> optionalAccounts = optionalMeetingAccounts
-                .Select<MeetingAccountViewModel, AccountViewModel>(meetingAccount => meetingAccount.AccountViewModel)
+            List<ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels.AccountViewModel> optionalAccounts = optionalMeetingAccounts
+                .Select<MeetingAccountViewModel, ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels.AccountViewModel>(meetingAccount => meetingAccount.AccountViewModel)
                 .ToList();
 
-            return optionalAccounts.Select<AccountViewModel, MeetingAccount>(accountVW =>
+            return optionalAccounts.Select<ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels.AccountViewModel, MeetingAccount>(accountVW =>
                     new MeetingAccount(accountVW.Account, false)).ToList();
         }
 

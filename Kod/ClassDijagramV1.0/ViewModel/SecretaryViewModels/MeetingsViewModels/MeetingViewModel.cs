@@ -22,7 +22,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.MeetingsViewModels
         private Meeting _meeting;
         private Brush _color;
 
-        private List<AccountViewModel> _accounts;
+        private List<ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels.AccountViewModel> _accounts;
         private List<MeetingAccountViewModel> _accountsInMeeting;
 
         private AccountController _accountController;
@@ -92,7 +92,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.MeetingsViewModels
             }
         }
 
-        public List<AccountViewModel> Accounts
+        public List<ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels.AccountViewModel> Accounts
         {
             get
             {
@@ -180,12 +180,12 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.MeetingsViewModels
             _accountsInMeeting = new List<MeetingAccountViewModel>();
             _meeting.OptionalAccounts.ForEach(meetingAccount =>
             {
-                _accountsInMeeting.Add(new MeetingAccountViewModel(new AccountViewModel(meetingAccount.Account), false));
+                _accountsInMeeting.Add(new MeetingAccountViewModel(new ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels.AccountViewModel(meetingAccount.Account), false));
             });
 
             _meeting.RequiredAccounts.ForEach(meetingAccount =>
             {
-                _accountsInMeeting.Add(new MeetingAccountViewModel(new AccountViewModel(meetingAccount.Account), true));
+                _accountsInMeeting.Add(new MeetingAccountViewModel(new ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels.AccountViewModel(meetingAccount.Account), true));
             });
         }
 
@@ -194,21 +194,21 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.MeetingsViewModels
         /// </summary>
         private void LoadAccounts()
         {
-            _accounts = new List<AccountViewModel>();
+            _accounts = new List<ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels.AccountViewModel>();
 
             _accountController.GetAccounts().ToList().ForEach(account =>
             {
                 if (account.Role != Role.Patient)
                 {
-                    _accounts.Add(new AccountViewModel(account));
+                    _accounts.Add(new ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels.AccountViewModel(account));
                 }
             });
 
             _accountsInMeeting.ForEach(accountMVM =>
             {
-                foreach (AccountViewModel accountVM in _accounts)
+                foreach (ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels.AccountViewModel accountVM in _accounts)
                 {
-                    AccountViewModel accToRemove = null;
+                    ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels.AccountViewModel accToRemove = null;
                     if (accountVM.Username.Equals(accountMVM.AccountViewModel.Username))
                     {
                         accToRemove = accountVM;

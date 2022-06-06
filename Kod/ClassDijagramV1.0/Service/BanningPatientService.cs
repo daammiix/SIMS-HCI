@@ -1,11 +1,6 @@
 ﻿using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Repository;
-using Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Service
 {
@@ -20,6 +15,12 @@ namespace ClassDijagramV1._0.Service
             _accountRepository = accountRepository;
         }
 
+        /// <summary>
+        /// Provjerava status pacijenta i banuje ga po potrebi
+        /// </summary>
+        /// <param name="patientID></param>
+        /// <param name="account"></param>
+        /// <returns></returns>
         public Boolean CheckStatusOfPatient(int patientID, Account account)
         {
             Boolean IsBanned = false;
