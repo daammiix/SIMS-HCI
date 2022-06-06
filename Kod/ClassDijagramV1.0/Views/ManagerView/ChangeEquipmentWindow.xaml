@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:ClassDijagramV1._0.Views.ManagerView"
         mc:Ignorable="d"
         Title="ChangeEquipmentWindow"
-        Height="500"
-        Width="640"
+        Height="440"
+        Width="600"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
@@ -22,14 +22,14 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../Theme/TextBoxes.xaml"/>
-
+                <ResourceDictionary Source="../../Theme/BasicTextBoxTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
-            <RowDefinition Height="360"/>
+            <RowDefinition Height="300"/>
             <RowDefinition Height="75"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
@@ -41,8 +41,8 @@
         </TextBlock>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="440"/>
+                <ColumnDefinition Width="190"/>
+                <ColumnDefinition Width="410"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right">
                 <Label Content="Šifra:" FontSize="25" Height="55" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
@@ -51,10 +51,10 @@
                 <Label Content="Količina:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">
-                <TextBox x:Name="ChangeEquipmentId" IsReadOnly="True" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Text="{Binding Path=quantifiedEquipment.Equipment.EquipmentID,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox x:Name="ChangeEquipmentName" IsReadOnly="True" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Text="{Binding Path=quantifiedEquipment.Equipment.Name,Mode=OneWay}" />
-                <TextBox x:Name="ChangeType" IsReadOnly="True"  Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=quantifiedEquipment.Equipment.EquipmentType,Mode=OneWay}"/>
-                <TextBox x:Name="ChangeEquipmentQuantity" Width="120" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Text="{Binding Path=quantifiedEquipment.Quantity,Mode=OneWay }" />
+                <TextBox x:Name="ChangeEquipmentId" IsReadOnly="True" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Text="{Binding Path=EquipmentID, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextBox}"/>
+                <TextBox x:Name="ChangeEquipmentName" IsReadOnly="True" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Text="{Binding Path=EquipmentName}" Style="{StaticResource BasicTextBox}"/>
+                <TextBox x:Name="ChangeType" IsReadOnly="True"  Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=EquipmentType}" Style="{StaticResource BasicTextBox}"/>
+                <TextBox x:Name="ChangeEquipmentQuantity" Width="120" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Text="{Binding Path=Quantity}"  Style="{StaticResource BasicTextBox}"/>
             </StackPanel>
         </Grid>
         <StackPanel Grid.Row="2">

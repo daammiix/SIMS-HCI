@@ -21,10 +21,5 @@ namespace ClassDijagramV1._0.Controller
         {
             return quarterlyReportsService.GetAllQuarterlyReports();
         }
-
-        public void SaveQuarterlyReports()
-        {
-            quarterlyReportsService.SaveQuarterlyReports();
-        }
     }
 }

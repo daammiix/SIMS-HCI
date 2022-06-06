@@ -54,7 +54,7 @@ namespace Repository
         public void AddNewAppointment(Appointment newAppointment)
         {
             bool exists = false;
-            Appointment toUpdate = null;
+            Appointment? toUpdate = null;
             foreach (Appointment appointment in Appointments)
             {
                 if (appointment.Id == newAppointment.Id)
@@ -81,7 +81,7 @@ namespace Repository
         }
 
 
-        public Appointment FindAppointmentById(int appointmentID)
+        public Appointment? FindAppointmentById(int appointmentID)
         {
             foreach (Appointment a in Appointments)
             {

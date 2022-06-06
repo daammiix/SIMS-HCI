@@ -44,7 +44,7 @@ namespace ClassDijagramV1._0.Service
             return medicinesRepo.GetAllMedicines();
         }
 
-        public Boolean CheckIfUniq(Medicines medicines, bool existingMedicines)
+        private Boolean CheckIfUniq(Medicines medicines, bool existingMedicines)
         {
             var medicinesList = medicinesRepo.GetAllMedicines();
             foreach (var medicine in medicinesList)

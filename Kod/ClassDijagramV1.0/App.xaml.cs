@@ -44,6 +44,8 @@ namespace ClassDijagramV1._0
         public string _medicinesFilePath = "../../../Data/medicines.json";
         public string _reportsFilePath = "../../../Data/reports.json";
         public static string _notificationsFilePath = "../../../Data/notifications.json";
+        public static string _freeDayRequestsResolvedPath = "../../../Data/freeDayRequestsResolved.json";
+        public static string _freeDayRequestsPath = "../../../Data/freeDayRequests.json";
         public static string _purchaseOrdersFilePath = "../../../Data/purchaseOrders.json";
         private static string _quarterlyReportsFilePath = "..\\..\\..\\Data\\quarterlyReports.json";
 
@@ -92,13 +94,29 @@ namespace ClassDijagramV1._0
 
         public NotificationController NotificationController { get; set; }
 
+        public FreeDaysRequestResolvedController FreeDaysRequestResolvedController { get; set; }
 
+        public FreeDaysRequestController FreeDaysRequestController { get; set; }
 
         #endregion
 
         public App()
         {
-            // Appointments
+            // Syncfusion License
+            Syncfusion.Licensing.SyncfusionLicenseProvider
+                .RegisterLicense("NjQ5ODAwQDMyMzAyZTMxMmUzMEs5Q29xeG4yNlZaZGRVaUpEMHhpRzFWNXNZQlVMWmcxOUdlL25UNWo0UUU9");
+
+            // FreeDaysRequests
+            var freeDaysRequestsRepo = new FreeDaysRequestRepo
+                (new FileHandler<FreeDayRequest>(_freeDayRequestsPath));
+            var freeDaysRequestsService = new FreeDaysRequestService(freeDaysRequestsRepo);
+            FreeDaysRequestController = new FreeDaysRequestController(freeDaysRequestsService);
+
+            // FreeDaysRequestsResolved
+            var freeDaysRequestsResolvedRepo = new FreeDaysRequestResolvedRepo
+                (new FileHandler<FreeDayRequestResolved>(_freeDayRequestsResolvedPath));
+            var freeDaysRequestsResolvedService = new FreeDaysRequestResolvedService(freeDaysRequestsResolvedRepo);
+            FreeDaysRequestResolvedController = new FreeDaysRequestResolvedController(freeDaysRequestsResolvedService);
 
             // Rooms-Storage
             var roomRepo = new RoomRepoJson(new FileHandler<BindingList<Room>>(_roomsFilePath), new FileHandler<BindingList<Storage>>(_storageFilePath));
@@ -250,8 +268,9 @@ namespace ClassDijagramV1._0
             RatingController.SaveHospitalRatings();
             RatingController.SaveDoctorRatings();
             ActivityController.SaveActivity();
-            QuarterlyReportsController.SaveQuarterlyReports();
             NotificationController.SaveNotifications();
+            FreeDaysRequestController.SaveFreeDayRequests();
+            FreeDaysRequestResolvedController.SaveFreeDayRequests();
         }
 
         private void MakeTestData()
@@ -458,5 +477,6 @@ namespace ClassDijagramV1._0
                 PurchaseOrder.idCounter = maxId;
             }
         }
+
     }
 }

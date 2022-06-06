@@ -1,0 +1,52 @@
+﻿<Window x:Class="ClassDijagramV1._0.Views.ManagerView.WarningExit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClassDijagramV1._0.Views.ManagerView"
+        mc:Ignorable="d"
+        Title="ExitWindow"
+        Height="300"
+        Width="600"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="#B0C69D"
+        FontFamily="Sylfaen"
+        FontWeight="Bold"
+        BorderThickness="4"
+        BorderBrush="#455736">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Theme/YesNoButtonTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65"/>
+            <RowDefinition Height="190"/>
+            <RowDefinition Height="45"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+                   Text="Odjavljivanje"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   FontSize="34"
+                   Foreground="#1F1313">
+        </TextBlock>
+        <TextBlock Grid.Row="1"
+                   Text="Da li ste sigurni da želite &#x0a;         da se odjavite?"
+                   VerticalAlignment="Top"
+                   Margin="0,15,0,0"
+                   HorizontalAlignment="Center"
+                   FontSize="28"
+                   Foreground="#1F1313">
+        </TextBlock>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button x:Name="ExitManagerWindow"  Height="45" Width="300" Content="Da" Style="{StaticResource YesNoButton}" Click="ExitManagerWindow_Click"/>
+            <Button x:Name="CancelExitManagerWindow"  Height="45" Width="300" Content="Ne" Style="{StaticResource YesNoButton}" Click="CancelExitManagerWindow_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

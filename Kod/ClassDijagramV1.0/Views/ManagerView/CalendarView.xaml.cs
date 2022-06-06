@@ -18,11 +18,6 @@ namespace ClassDijagramV1._0.Views.ManagerView
     {
         private CalendarViewModel calendarViewModel;
         DateTime selectedDate;
-        public BindingList<ManagerAppointment> ManagerAppointmentsOfDay
-        {
-            get;
-            set;
-        }
         ManagerAppointmentController managerAppointmentController;
         public BindingList<ManagerAppointment> ManagerAppointments
         {
@@ -35,7 +30,6 @@ namespace ClassDijagramV1._0.Views.ManagerView
             calendarViewModel = new CalendarViewModel();
             this.DataContext = calendarViewModel;
             var app = Application.Current as App;
-            ManagerAppointmentsOfDay = new BindingList<ManagerAppointment>();
 
             managerAppointmentController = app.managerAppointmentController;
             ManagerAppointments = managerAppointmentController.GetAllManagerAppointments();
@@ -44,18 +38,22 @@ namespace ClassDijagramV1._0.Views.ManagerView
         private void Schedule_CellTapped(object sender, CellTappedEventArgs e)
         {
             this.selectedDate = e.DateTime;
+            calendarViewModel.ManagerAppointmentsOfDay.Clear();
             if (selectedDate.Day >= DateTime.Now.Day)
             {
                 foreach (var managerAppointment in ManagerAppointments)
                 {
                     if (managerAppointment.Start.Day == selectedDate.Day)
                     {
-                        this.ManagerAppointmentsOfDay.Add(managerAppointment);
+                        calendarViewModel.ManagerAppointmentsOfDay.Add(managerAppointment);
 
                         calendarViewModel.selectedDate = e.DateTime;
-                        break;
                     }
-                    calendarViewModel.selectedDate = DateTime.MinValue;
+                    if(managerAppointment.Start.Day != selectedDate.Day)
+                    {
+                        calendarViewModel.selectedDate = DateTime.MinValue;
+
+                    }
                 }
             }
         }

@@ -35,11 +35,5 @@ namespace ClassDijagramV1._0.Repository
         {
             return reports;
         }
-
-        private void writeReports()
-        {
-            String jsonString = JsonSerializer.Serialize(reports);
-            System.IO.File.WriteAllText(path, jsonString);
-        }
     }
 }

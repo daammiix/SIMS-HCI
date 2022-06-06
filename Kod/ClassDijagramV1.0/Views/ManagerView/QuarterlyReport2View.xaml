@@ -45,7 +45,7 @@
             </chart:SfChart>
         </Grid>
         <StackPanel Grid.Row="1">
-            <Button x:Name="CloseDoctor1Results" HorizontalAlignment="Right" Height="26" Width="90" Content="Zatvori" Margin="5,10,10,10" Style="{StaticResource CRUDButton}" Command="{Binding CloseReport}"/>
+            <Button x:Name="CloseDoctor2Results" HorizontalAlignment="Right" Height="26" Width="90" Content="Zatvori" Margin="5,10,10,10" Style="{StaticResource CRUDButton}" Command="{Binding CloseReport}"/>
         </StackPanel>
     </Grid>
 </Window>
