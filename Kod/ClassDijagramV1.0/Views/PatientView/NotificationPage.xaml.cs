@@ -50,8 +50,6 @@ namespace ClassDijagramV1._0.Views.PatientView
 
             Drugs = new ObservableCollection<MedicineDrug>();
             Notifications = _notificationController.GetAllNotifications();
-            //List<TherapyDTO> terapija = FindCurrentTherapies();
-
         }
 
         private void addDrug(object sender, RoutedEventArgs e)
@@ -96,5 +94,9 @@ namespace ClassDijagramV1._0.Views.PatientView
         {
             parent.startWindow.Content = new AddAlarmPage(parent);
         }
+
+
+        
+
     }
 }
