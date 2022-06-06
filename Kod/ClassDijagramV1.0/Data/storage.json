@@ -8,11 +8,11 @@
     "EquipmentList": [
       {
         "EquipmentID": "OL36",
-        "Quantity": 33766
+        "Quantity": 35512
       },
       {
         "EquipmentID": "OUL5",
-        "Quantity": 59118
+        "Quantity": 62175
       },
       {
         "EquipmentID": "PRZ42",
@@ -52,11 +52,11 @@
       },
       {
         "EquipmentID": "OMN3",
-        "Quantity": 144
+        "Quantity": 150
       },
       {
         "EquipmentID": "OMR5",
-        "Quantity": 127948
+        "Quantity": 134566
       }
     ],
     "MedicineList": [

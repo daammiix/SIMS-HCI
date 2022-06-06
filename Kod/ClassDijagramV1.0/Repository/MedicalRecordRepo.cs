@@ -105,19 +105,19 @@ namespace ClassDijagramV1._0.Repository
         /// <param name="medicalRecordNumber"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public MedicalRecord GetMedicalRecord(int medicalRecordNumber)
+        public MedicalRecord? GetMedicalRecord(int medicalRecordNumber)
         {
-            MedicalRecord? ret = null;
+            MedicalRecord? requiredMedicalRecord = null;
             foreach (var mr in MedicalRecords)
             {
                 if (mr.Number == medicalRecordNumber)
                 {
-                    ret = mr;
+                    requiredMedicalRecord = mr;
                     break;
                 }
             }
 
-            return ret;
+            return requiredMedicalRecord;
         }
 
         #endregion

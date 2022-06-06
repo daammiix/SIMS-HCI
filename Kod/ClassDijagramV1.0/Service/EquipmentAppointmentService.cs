@@ -80,8 +80,6 @@ namespace ClassDijagramV1._0.Service
 
             foreach (EquipmentAppointment equipmentAppointment in GetAllEquipmentAppointment())
             {
-
-
                 string roomFromId = equipmentAppointment.RoomFrom;
                 string roomToId = equipmentAppointment.RoomTo;
 
@@ -91,8 +89,7 @@ namespace ClassDijagramV1._0.Service
                     // Sad proveravamo da li se vremena poklapaju
                     // 1. da li pocinje pre i zavrsava se posle pocetka termina premestaja
                     // 2. da li pocinje izmedju
-                    if ((from < equipmentAppointment.FromDateTime && (from + duration) > equipmentAppointment.FromDateTime)
-                        || (from >= equipmentAppointment.FromDateTime && from <= equipmentAppointment.ToDateTime))
+                    if (DoesTerminsOverlaps(from, equipmentAppointment, duration))
                     {
                         // Ako se poklapaju i sobe i vreme vratimo false
                         free = false;
@@ -104,5 +101,27 @@ namespace ClassDijagramV1._0.Service
 
             return free;
         }
+
+        #region Private Helpers
+
+        /// <summary>
+        /// Proverava da li se termin appointmenta poklapa sa from i duration
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="equipmentAppointment"></param>
+        /// <param name="duration"></param>
+        /// <returns></returns>
+        private bool DoesTerminsOverlaps(DateTime from, EquipmentAppointment equipmentAppointment, TimeSpan duration)
+        {
+            if ((from < equipmentAppointment.FromDateTime && (from + duration) > equipmentAppointment.FromDateTime)
+                        || (from >= equipmentAppointment.FromDateTime && from <= equipmentAppointment.ToDateTime))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        #endregion
     }
 }

@@ -30,13 +30,6 @@ namespace ClassDijagramV1._0.Repository
 
             FreeDayRequests = _fileHandler.GetItems();
 
-            // TODO: test podaci
-            // FreeDayRequest test1 = new FreeDayRequest(4, DateTime.Now, DateTime.Now.AddDays(3), "Putovanje");
-            // FreeDayRequest test2 = new FreeDayRequest(5, DateTime.Now.AddDays(10), DateTime.Now.AddDays(20), "Bolovanje");
-            // FreeDayRequest test3 = new FreeDayRequest(6, DateTime.Now.AddDays(30), DateTime.Now.AddDays(31), "Slavim slavu");
-            // FreeDayRequests.Add(test1);
-            // FreeDayRequests.Add(test2);
-            // FreeDayRequests.Add(test3);
         }
 
         #endregion
@@ -54,7 +47,7 @@ namespace ClassDijagramV1._0.Repository
         }
 
         /// <summary>
-        /// Brise freeDayRequest iz liste i vraca ga ako postoji, u suprotnom vraca false
+        /// Brise freeDayRequest iz liste i vraca ga ako postoji, u suprotnom vraca null
         /// </summary>
         /// <param name="freeDayRequest"></param>
         /// <returns></returns>

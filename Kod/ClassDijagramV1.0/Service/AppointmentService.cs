@@ -78,17 +78,17 @@ namespace Service
         /// <returns></returns>
         public Appointment GetAppointmentById(int id)
         {
-            Appointment ret = null;
+            Appointment requiredAppointment = null;
             foreach (Appointment a in _appointmentRepo.GetAppointments())
             {
                 if (a.Id == id)
                 {
-                    ret = a;
+                    requiredAppointment = a;
                     break;
                 }
             }
 
-            return ret;
+            return requiredAppointment;
 
         }
 
