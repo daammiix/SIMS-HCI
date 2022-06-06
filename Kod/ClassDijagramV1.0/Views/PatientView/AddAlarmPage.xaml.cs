@@ -39,15 +39,17 @@ namespace ClassDijagramV1._0.Views.PatientView
             Boolean pet = petak.IsSelected;
             Boolean sub = subota.IsSelected;
             Boolean ned = nedelja.IsSelected;
-            List<Boolean> daysSelecected = new List<Boolean>() { pon, uto, sri, cet, pet, sub, ned };
+            List<Boolean> daysSelected = new List<Boolean>() { pon, uto, sri, cet, pet, sub, ned };
             Notification notification = new Notification(name + " u " + start1, parent.Patient.Id, false, start1, 0);
 
-            addNotifications(notification, end1, daysSelecected);
+            List<Boolean> DaysSelected = NoDaysSelected(daysSelected);
+
+            addNotifications(notification, end1, DaysSelected);
             //_notificationController.AddManualNotification(notification);
             parent.startWindow.Content = new NotificationPage(parent);
         }
 
-        private void addNotifications(Notification notification, DateTime end1, List<Boolean> daysSelecected)
+        private void addNotifications(Notification notification, DateTime end1, List<Boolean> DaysSelected)
         {
             var aTimer = new Timer();   // tajmer notifikacija
             aTimer.Elapsed += (sender, e) =>
@@ -57,7 +59,8 @@ namespace ClassDijagramV1._0.Views.PatientView
                 {
                     aTimer.Enabled = false;
                 }
-                DaySelected(notification, daysSelecected);
+
+                DaySelected(notification, DaysSelected);
             };
 
             // prvo se okida ovaj tajmer, 
@@ -67,36 +70,54 @@ namespace ClassDijagramV1._0.Views.PatientView
             timer.Start();
         }
 
-        private void DaySelected(Notification notification, List<Boolean> daysSelecected)
+        private List<Boolean> NoDaysSelected(List<Boolean> DaysSelected)
         {
-            if (System.DateTime.Now.DayOfWeek.ToString().Equals("Monday") && daysSelecected[0])
+            int brojac = 0;
+            foreach (Boolean day in DaysSelected)
+            {
+                if (day)
+                {
+                    brojac++;
+                }
+            }
+            if (brojac == 0)
+            {
+                List<Boolean> newDaysSelected = new List<Boolean>() { true,true,true,true,true,true,true};
+                return newDaysSelected;
+            }
+            return DaysSelected;
+        }
+        private void DaySelected(Notification notification, List<Boolean> daysSelected)
+        {
+            if (System.DateTime.Now.DayOfWeek.ToString().Equals("Monday") && daysSelected[0])
             {
                 PushNotification(notification);
             }
-            if (System.DateTime.Now.DayOfWeek.ToString().Equals("Tuesday") && daysSelecected[1])
+            if (System.DateTime.Now.DayOfWeek.ToString().Equals("Tuesday") && daysSelected[1])
             {
                 PushNotification(notification);
             }
-            if (System.DateTime.Now.DayOfWeek.ToString().Equals("Wednesday") && daysSelecected[2])
+            if (System.DateTime.Now.DayOfWeek.ToString().Equals("Wednesday") && daysSelected[2])
             {
                 PushNotification(notification);
             }
-            if (System.DateTime.Now.DayOfWeek.ToString().Equals("Thursday") && daysSelecected[3])
+            if (System.DateTime.Now.DayOfWeek.ToString().Equals("Thursday") && daysSelected[3])
             {
                 PushNotification(notification);
             }
-            if (System.DateTime.Now.DayOfWeek.ToString().Equals("Friday") && daysSelecected[4])
+            if (System.DateTime.Now.DayOfWeek.ToString().Equals("Friday") && daysSelected[4])
             {
                 PushNotification(notification);
             }
-            if (System.DateTime.Now.DayOfWeek.ToString().Equals("Saturday") && daysSelecected[5])
+            if (System.DateTime.Now.DayOfWeek.ToString().Equals("Saturday") && daysSelected[5])
             {
                 PushNotification(notification);
             }
-            if (System.DateTime.Now.DayOfWeek.ToString().Equals("Sunday") && daysSelecected[6])
+            if (System.DateTime.Now.DayOfWeek.ToString().Equals("Sunday") && daysSelected[6])
             {
                 PushNotification(notification);
             }
+
         }
 
         private void PushNotification(Notification notification)
