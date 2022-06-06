@@ -59,9 +59,9 @@ namespace ClassDijagramV1._0.Controller
         /// </summary>
         /// <param name="appointmentID"></param>
         /// <returns></returns>
-        public void RemoveReadNotification(Notification note)
+        public void RemoveReadNotification()
         {
-            _notificationService.RemoveReadNotification(note);
+            _notificationService.RemoveReadNotification();
         }
 
         /// <summary>
@@ -69,9 +69,9 @@ namespace ClassDijagramV1._0.Controller
         /// </summary>
         /// <param name="appointmentID"></param>
         /// <returns></returns>
-        public void RemoveOldNotification(Notification note)
+        public void RemoveOldNotification()
         {
-            _notificationService.RemoveOldNotification(note);
+            _notificationService.RemoveOldNotification();
         }
 
         /// <summary>

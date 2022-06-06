@@ -2,7 +2,9 @@
 using ClassDijagramV1._0.Repository;
 using Model;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace ClassDijagramV1._0.Service
 {
@@ -32,14 +34,28 @@ namespace ClassDijagramV1._0.Service
             _notificationRepo.RemoveNotification(FindNotificationByAppointmentID(appointmentID));
         }
 
-        public void RemoveReadNotification(Notification note)
+        public void RemoveReadNotification()
         {
-            _notificationRepo.RemoveNotification(note);
+            List<Notification> notes = _notificationRepo.GetAllNotifications().ToList();
+            foreach (Notification note in notes)
+            {
+                if (note.IsRead)
+                {
+                    _notificationRepo.RemoveNotification(note);
+                }
+            }
         }
 
-        public void RemoveOldNotification(Notification note)
+        public void RemoveOldNotification()
         {
-            _notificationRepo.RemoveNotification(note);
+            List<Notification> notes = _notificationRepo.GetAllNotifications().ToList();
+            foreach (Notification note in notes)
+            {
+                if (note.Created < DateTime.Now)
+                {
+                    _notificationRepo.RemoveNotification(note);
+                }
+            }
         }
 
         public void AddNotificationForTherapy(Notification notification)

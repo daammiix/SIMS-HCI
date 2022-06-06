@@ -57,10 +57,7 @@ namespace ClassDijagramV1._0.Views.PatientView
                 {
                     aTimer.Enabled = false;
                 }
-
                 DaySelected(notification, daysSelecected);
-
-               
             };
 
             // prvo se okida ovaj tajmer, 

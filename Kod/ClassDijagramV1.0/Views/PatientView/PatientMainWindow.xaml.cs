@@ -37,8 +37,8 @@ namespace ClassDijagramV1._0.Views.PatientView
             _notificationController = app.NotificationController;
             pmp = new PatientMainPage(this);
             startWindow.Content = pmp;
-            RemoveOldNotifications();
-            RemoveReadNotifications();
+            _notificationController.RemoveOldNotification();
+            _notificationController.RemoveReadNotification();
             StartNotifications();
         }
 
@@ -64,29 +64,6 @@ namespace ClassDijagramV1._0.Views.PatientView
             startWindow.Content = new AppointmentsViewPage(this, pmp._appointmentViewModels);
         }
 
-        public void RemoveOldNotifications()
-        {
-            List<Notification> notes = _notificationController.GetAllNotifications().ToList();
-            foreach (Notification note in notes)
-            {
-                if(note.Created < DateTime.Now)
-                {
-                    _notificationController.RemoveOldNotification(note);
-                }
-            }
-        }
-
-        public void RemoveReadNotifications()
-        {
-            List<Notification> notes = _notificationController.GetAllNotifications().ToList();
-            foreach (Notification note in notes)
-            {
-                if (note.IsRead)
-                {
-                    _notificationController.RemoveReadNotification(note);
-                }
-            }
-        }
         public void StartNotifications()
         {
             foreach (AppointmentViewModel app in pmp._oldAppointmentViewModels)
@@ -104,7 +81,7 @@ namespace ClassDijagramV1._0.Views.PatientView
         }
 
 
-        private void addNotifications(MedicineDrug medicine, DateTime newStart)
+        private void addNotifications(MedicineDrug medicine, DateTime newStart) // za terapije
         {
             //drug1 = new MedicineDrug("Lekadol", DateTime.Now.AddSeconds(10), DateTime.Now.AddSeconds(40), 8);
             //var start = new DateTime(2022, 4, 25, 20, 46 , 0)
