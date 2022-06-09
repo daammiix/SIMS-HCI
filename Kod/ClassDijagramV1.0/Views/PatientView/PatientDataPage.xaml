@@ -81,15 +81,6 @@
                          FontWeight="Bold"
                          TextAlignment="Center"
                          Margin="20"/>
-                <TextBox x:Name="mjestoRodjenja"
-                         Text="{Binding Path=DateOfBirth}"
-                         Width="200"
-                         IsEnabled="False"                  
-                         materialDesign:HintAssist.HelperText="Mjesto rođenja"
-                         materialDesign:HintAssist.HelperTextFontSize="16"
-                         FontWeight="Bold"
-                         TextAlignment="Center"
-                         Margin="20"/>
                 <TextBox x:Name="pol"
                          Text="{Binding Path=Gender}"
                          Width="200"
@@ -100,10 +91,19 @@
                          TextAlignment="Center"
                          Margin="20"/>
                 <TextBox x:Name="socialSecurityNumbet"
-                         Text="{Binding Path=Jmbg}"
+                         Text="{Binding Path=MedicalRecordNumber}"
                          Width="200"
                          IsEnabled="False"                  
                          materialDesign:HintAssist.HelperText="Broj zdravstvenog kartona"
+                         materialDesign:HintAssist.HelperTextFontSize="16"
+                         FontWeight="Bold"
+                         TextAlignment="Center"
+                         Margin="20"/>
+                <TextBox x:Name="krvnaGrupa"
+                         Text="{Binding Path=Blood}"
+                         Width="200"
+                         IsEnabled="False"                  
+                         materialDesign:HintAssist.HelperText="Krvna grupa"
                          materialDesign:HintAssist.HelperTextFontSize="16"
                          FontWeight="Bold"
                          TextAlignment="Center"
@@ -120,7 +120,7 @@
                          TextAlignment="Center"
                          Margin="20"/>
                 <TextBox x:Name="brojTelefona"
-                         Text="{Binding Path=Phoonenumber}"
+                         Text="{Binding Path=PhoneNumber}"
                          Width="200"                
                          materialDesign:HintAssist.HelperText="Broj telefona"
                          materialDesign:HintAssist.HelperTextFontSize="16"
@@ -152,12 +152,6 @@
                                  />
                     </StackPanel>
                 </Expander>
-
-                <ComboBox x:Name="doktor"
-                          Width="200"
-                          Margin="20"
-                          />
-
             </StackPanel>
 
         </Grid>
