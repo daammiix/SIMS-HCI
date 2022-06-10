@@ -11,7 +11,7 @@ using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel
 {
-    public class RenovatingMergeViewModel
+    public class RenovatingMergeViewModel : ObservableObject
     {
         readonly private String format = "dd/MM/yyyyTHH:mm";
         readonly private String fullFormat = "dd/MM/yyyy HH:mm";
@@ -35,6 +35,8 @@ namespace ClassDijagramV1._0.ViewModel
 
         private readonly Random _random = new Random();
 
+        public String ErrorFormatMessage { get; set; }
+
         public Room? selectedRoom { get; set; }
         public Room mergingRoom;
 
@@ -51,7 +53,13 @@ namespace ClassDijagramV1._0.ViewModel
 
             this.mainRoomsViewModel = mainRoomsViewModel;
 
+            resetFields();
+        }
+
+        private void resetFields()
+        {
             this.selectedRoom = null;
+            this.mergingRoom = null;
 
             FromDate = DateTime.Now.ToString("dd/MM/yyyy");
             FromTime = DateTime.Now.ToString("HH:mm");
@@ -62,7 +70,6 @@ namespace ClassDijagramV1._0.ViewModel
             MergingToRoomAvailable = new BindingList<String>();
             MergingRoomAvailable = new BindingList<String>();
             availabilities = new BindingList<Availability>();
-
         }
 
         public RelayCommand SaveRenovatingMerge
@@ -71,6 +78,12 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _saveRenovatingMerge = new RelayCommand(o =>
                 {
+                    if (selectedFromDate == "" || selectedFromTime == "" || selectedToDate == "" || selectedToTime == "" || mergingRoom == null)
+                    {
+                        ErrorFormatMessage = "Polja nisu popunjena";
+                        OnPropertyChanged("ErrorFormatMessage");
+                        return;
+                    }
                     SaveRenovatingMergeAction();
                 });
 
@@ -84,6 +97,7 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _cancelRenovatingMerge = new RelayCommand(o =>
                 {
+                    resetFields();
                     this.mainRoomsViewModel.ResetView();
                 });
 
@@ -109,6 +123,7 @@ namespace ClassDijagramV1._0.ViewModel
             roomAppointment.RoomIDToMerge = selectedMergingRoom.RoomID;
             roomAppointmentController.AddRoomAppointment(roomAppointment);
 
+            resetFields();
             this.mainRoomsViewModel.ResetView();
         }
 
@@ -123,7 +138,48 @@ namespace ClassDijagramV1._0.ViewModel
                 if (FromDate == value)
                     return;
                 FromDate = value;
-                ListsHandler();
+                DateTime date;
+                bool format = DateTime.TryParseExact(value, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out date);
+                if (!format)
+                {
+                    ErrorFormatMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorFormatMessage");
+                }
+                else
+                {
+                    ErrorFormatMessage = "";
+                    OnPropertyChanged("ErrorFormatMessage");
+                    ListsHandler();
+                }
+            }
+        }
+
+        public String selectedFromTime
+        {
+            get
+            {
+                return FromTime;
+            }
+            set
+            {
+                if (FromTime == value)
+                    return;
+                FromTime = value;
+                DateTime time;
+                bool format = DateTime.TryParseExact(value, "HH:mm", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out time);
+                if (!format)
+                {
+                    ErrorFormatMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorFormatMessage");
+                }
+                else
+                {
+                    ErrorFormatMessage = "";
+                    OnPropertyChanged("ErrorFormatMessage");
+                    ListsHandler();
+                }
             }
         }
 
@@ -138,7 +194,48 @@ namespace ClassDijagramV1._0.ViewModel
                 if (ToDate == value)
                     return;
                 ToDate = value;
-                ListsHandler();
+                DateTime date;
+                bool format = DateTime.TryParseExact(value, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out date);
+                if (!format)
+                {
+                    ErrorFormatMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorFormatMessage");
+                }
+                else
+                {
+                    ErrorFormatMessage = "";
+                    OnPropertyChanged("ErrorFormatMessage");
+                    ListsHandler();
+                }
+            }
+        }
+
+        public String selectedToTime
+        {
+            get
+            {
+                return ToTime;
+            }
+            set
+            {
+                if (ToTime == value)
+                    return;
+                ToTime = value;
+                DateTime time;
+                bool format = DateTime.TryParseExact(value, "HH:mm", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out time);
+                if (!format)
+                {
+                    ErrorFormatMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorFormatMessage");
+                }
+                else
+                {
+                    ErrorFormatMessage = "";
+                    OnPropertyChanged("ErrorFormatMessage");
+                    ListsHandler();
+                }
             }
         }
 

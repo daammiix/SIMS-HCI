@@ -57,12 +57,12 @@
                     <TextBox x:Name="Quantity" Width="60" Background="#E7E7E7" Height="45" Margin="10,0,0,3" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding selectedQuantity,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextBox}"/>
 
                 </StackPanel>
-                <Label Content="{Binding QuantityValidationError,UpdateSourceTrigger=PropertyChanged}" FontSize="14" Margin="20,0,0,5" Foreground="Red"/>
+                <Label Content="{Binding ErrorMessage,UpdateSourceTrigger=PropertyChanged}" Height="40" FontSize="16" Margin="20,0,0,0" Foreground="Red"/>
 
                 <DataGrid  Height="200" Width="300" x:Name="BusyEquipment" FontSize="18"
                       CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left"
                       RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
-                      CanUserDeleteRows="False" AutoGenerateColumns="False" Margin="20,10,0,0"
+                      CanUserDeleteRows="False" AutoGenerateColumns="False" Margin="20,5,0,0"
                       ItemsSource="{Binding Path=EquipmentAvailable}" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Zauzetost opreme" Width="*" Binding="{Binding Path=.}"/>
@@ -81,10 +81,11 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
+
                 <DataGrid  Height="200" Width="300" x:Name="BusyRooms" FontSize="18"
                       CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left"
                       RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
-                      CanUserDeleteRows="False" AutoGenerateColumns="False" Margin="5,10,0,0"
+                      CanUserDeleteRows="False" AutoGenerateColumns="False" Margin="5,46,0,0"
                       ItemsSource="{Binding Path=RoomsFromAvailable}" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Zauzetost sale" Width="*" Binding="{Binding Path=.}"/>
@@ -97,11 +98,10 @@
                 <Label Content="Sala u koju se premešta:" FontSize="24" Margin="5,0,0,5" HorizontalContentAlignment="Left"/>
                 <TextBox x:Name="MovingTo" IsReadOnly="True" Width="250" Background="#E7E7E7" HorizontalAlignment="Left"
                          Height="45" Margin="10,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=destinationRoom,Converter={StaticResource RoomToStringConverter}}" Style="{StaticResource BasicTextBox}"/>
-
                 <DataGrid  Height="200" Width="300" x:Name="BusyRoomTo" FontSize="18"
                       CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left"
                       RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
-                      CanUserDeleteRows="False" AutoGenerateColumns="False" Margin="10,10,0,0"
+                      CanUserDeleteRows="False" AutoGenerateColumns="False" Margin="10,46,0,0"
                       ItemsSource="{Binding Path=RoomsToAvailable}" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Zauzetost sale" Width="*" Binding="{Binding Path=.}"/>
@@ -122,14 +122,15 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <Label Content="Od:" FontSize="24" Margin="20,0,0,5" HorizontalContentAlignment="Left"/>
                     <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="40" Margin="4,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedFromDate, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextBox}"/>
-                    <TextBox x:Name="FromTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromTime, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource BasicTextBox}"/>
+                    <TextBox x:Name="FromTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedFromTime, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource BasicTextBox}"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <Label Content="Do:" FontSize="24" Margin="20,0,0,5" HorizontalContentAlignment="Left"/>
                     <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="40" Margin="5,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedToDate, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource BasicTextBox}"/>
-                    <TextBox x:Name="ToTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToTime, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource BasicTextBox}"/>
+                    <TextBox x:Name="ToTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedToTime, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource BasicTextBox}"/>
                 </StackPanel>
+                <Label Width="400" HorizontalAlignment="Left" Content="{Binding ErrorFormatMessage,UpdateSourceTrigger=PropertyChanged}" FontSize="16" Margin="75,10,0,5" Foreground="Red"/>
 
             </StackPanel>
 

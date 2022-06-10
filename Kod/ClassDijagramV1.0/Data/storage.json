@@ -12,7 +12,11 @@
       },
       {
         "EquipmentID": "OUL5",
+<<<<<<< HEAD
         "Quantity": 63194
+=======
+        "Quantity": 14
+>>>>>>> 92fea85 (Validacije, sredjivanje fronta i gresaka)
       },
       {
         "EquipmentID": "PRZ42",
@@ -90,11 +94,11 @@
       },
       {
         "MedicineID": "LF200",
-        "Quantity": 42
+        "Quantity": 44
       },
       {
         "MedicineID": "LDR800",
-        "Quantity": 16
+        "Quantity": 18
       },
       {
         "MedicineID": "kg7",

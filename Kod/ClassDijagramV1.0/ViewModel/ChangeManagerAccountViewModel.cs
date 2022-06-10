@@ -19,6 +19,8 @@ namespace ClassDijagramV1._0.ViewModel
 
         public ManagerAccount manager;
 
+        public String ErrorMessage { get; set; }
+
         private RelayCommand _saveChangedAccount;
         private RelayCommand _cancelChangedAccount;
 
@@ -44,6 +46,13 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _saveChangedAccount = new RelayCommand(o =>
                 {
+                    if(Name == null || Surname == null || Email == null || Phone == null
+                       || Name == "" || Surname == "" || Email == "" || Phone == "")
+                    {
+                        ErrorMessage = "Polje ime ne sme biti prazno";
+                        OnPropertyChanged("ErrorMessage");
+                        return;
+                    }
                     SaveManagerAccountAction();
                 });
 
@@ -75,7 +84,17 @@ namespace ClassDijagramV1._0.ViewModel
                 if (_name == value)
                     return;
                 _name = value;
-                OnPropertyChanged("Name");
+                if (value.Length < 1)
+                {
+                    ErrorMessage = "Polje ime ne sme biti prazno";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                    OnPropertyChanged("Name");
+                }
             }
         }
 
@@ -90,7 +109,17 @@ namespace ClassDijagramV1._0.ViewModel
                 if (_surname == value)
                     return;
                 _surname = value;
-                OnPropertyChanged("Surname");
+                if (value.Length < 1)
+                {
+                    ErrorMessage = "Polje prezime ne sme biti prazno";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                    OnPropertyChanged("Surname");
+                }
             }
         }
 
@@ -105,7 +134,6 @@ namespace ClassDijagramV1._0.ViewModel
                 if (_birthday == value)
                     return;
                 _birthday = value;
-                OnPropertyChanged("Birthday");
             }
         }
 
@@ -120,7 +148,17 @@ namespace ClassDijagramV1._0.ViewModel
                 if (_email == value)
                     return;
                 _email = value;
-                OnPropertyChanged("Email");
+                if (value.Length < 1)
+                {
+                    ErrorMessage = "Polje e-mail ne sme biti prazno";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("Email");
+                    OnPropertyChanged("ErrorMessage");
+                }
             }
         }
 
@@ -135,7 +173,17 @@ namespace ClassDijagramV1._0.ViewModel
                 if (_phone == value)
                     return;
                 _phone = value;
-                OnPropertyChanged("Phone");
+                if (value.Length < 1)
+                {
+                    ErrorMessage = "Polje broj teelfona ne sme biit prazno";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                    OnPropertyChanged("Phone");
+                }
             }
         }
 

@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel
 {
-    public class ChangeMedicineViewModel
+    public class ChangeMedicineViewModel : ObservableObject
     {
         private String _id;
         private String _name;
@@ -21,6 +21,8 @@ namespace ClassDijagramV1._0.ViewModel
         public Storage storage;
         private IRefreshableMedicineView medicineView;
         public QuantifiedMedicine quantifiedMedicine { get; set; }
+
+        public String ErrorMessage { get; set; }
 
         private RelayCommand _saveChangedMedicine;
         private RelayCommand _quitChangededMedicine;
@@ -77,6 +79,23 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 if (_quantity == value) { return; }
                 _quantity = value;
+                int quantity;
+                bool is_number = int.TryParse(value, out quantity);
+                if (!is_number)
+                {
+                    ErrorMessage = "Uneta vrednost mora biti broj";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else if (quantity < 1)
+                {
+                    ErrorMessage = "Broj mora biti veći od 0";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                }
             }
         }
 
@@ -86,6 +105,12 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _saveChangedMedicine = new RelayCommand(o =>
                 {
+                    if(_quantity == "")
+                    {
+                        ErrorMessage = "Polja nisu popunjena";
+                        OnPropertyChanged("ErrorMessage");
+                        return;
+                    }
                     ChangeMedicineAction();
                 });
 

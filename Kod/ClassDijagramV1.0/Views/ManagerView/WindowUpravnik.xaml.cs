@@ -37,5 +37,11 @@ namespace ClassDijagramV1._0.Views.ManagerView
             TutorialWindow tutorialWindow = new TutorialWindow();
             tutorialWindow.Show();
         }
+
+        private void Combo_DropDownClosed(object sender, System.EventArgs e)
+        {
+            Combo.SelectedIndex = -1;
+            Combo.Text = "";
+        }
     }
 }

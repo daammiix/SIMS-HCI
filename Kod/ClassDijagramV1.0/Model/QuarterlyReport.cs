@@ -89,11 +89,11 @@ namespace ClassDijagramV1._0.Model
 
         public QuarterlyReport(String ID, String Name, String Type, int MoneySpent, String Date)
         {
-            this.ID = ID;
-            this.Name = Name;
-            this.Type = Type;
-            this.MoneySpent = MoneySpent;
-            this.Date = Date;
+            this._id = ID;
+            this._name = Name;
+            this._type = Type;
+            this._moneySpent = MoneySpent;
+            this._date = Date;
         }
     }
 }

@@ -65,7 +65,7 @@
             </StackPanel>
 
             <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left">
-                <TextBox x:Name="AddId" Width="320" Background="#E7E7E7" Height="55" Margin="0,60,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedNewRoomID}" Style="{StaticResource BasicTextBox}"/>
+                <TextBox x:Name="AddId" Width="320" Background="#E7E7E7" Height="55" Margin="0,60,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedNewRoomID, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextBox}"/>
                 <ComboBox x:Name="AddName" Width="320" Height="55" Margin="0,5,0,5" FontSize="24" HorizontalContentAlignment="Left" 
                           VerticalContentAlignment="Center" IsReadOnly="True" SelectedItem="{Binding selectedNewRoomName}" Style="{StaticResource BasicComboBox}">
                     <ComboBoxItem Margin="5,0,0,0" Content="Operaciona Sala"/>
@@ -74,7 +74,8 @@
                     <ComboBoxItem Margin="5,0,0,0" Content="Intezivna nega"/>
                     <ComboBoxItem Margin="5,0,0,0" Content="Sala za sastanke"/>
                 </ComboBox>
-                <TextBox x:Name="AddNumber" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedNewRoomNumber}" Style="{StaticResource BasicTextBox}"/>
+                <TextBox x:Name="AddNumber" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedNewRoomNumber, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextBox}"/>
+                <Label Content="{Binding ErrorMessage,UpdateSourceTrigger=PropertyChanged}" FontSize="16" Margin="20,0,0,5" Foreground="Red"/>
             </StackPanel>
         </Grid>
 
@@ -89,16 +90,16 @@
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <Label Content="Od:" FontSize="24" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
-                    <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="40" Margin="4,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedFromDate}" Style="{StaticResource BasicTextBox}"/>
-                    <TextBox x:Name="FromTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromTime}"  Style="{StaticResource BasicTextBox}"/>
+                    <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="40" Margin="4,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedFromDate, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextBox}"/>
+                    <TextBox x:Name="FromTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedFromTime, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource BasicTextBox}"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <Label Content="Do:" FontSize="24" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
-                    <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="40" Margin="5,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedToDate}"  Style="{StaticResource BasicTextBox}"/>
-                    <TextBox x:Name="ToTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToTime}"  Style="{StaticResource BasicTextBox}"/>
+                    <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="40" Margin="5,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedToDate, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource BasicTextBox}"/>
+                    <TextBox x:Name="ToTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedToTime, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource BasicTextBox}"/>
                 </StackPanel>
-
+                <Label Width="400" HorizontalAlignment="Left" Content="{Binding ErrorFormatMessage,UpdateSourceTrigger=PropertyChanged}" FontSize="16" Margin="75,10,0,5" Foreground="Red"/>
             </StackPanel>
 
             <WrapPanel Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right">

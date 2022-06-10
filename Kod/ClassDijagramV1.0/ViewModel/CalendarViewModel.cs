@@ -22,7 +22,7 @@ namespace ClassDijagramV1._0.ViewModel
         public ManagerAppointment selectedManagerAppointment { get; set; }
 
         private BindingList<ManagerAppointment> _managerAppointmentsOfDay;
-        public DateTime selectedDate { get; set; } = DateTime.MinValue;
+        public DateTime selectedDate { get; set; }
 
         private RelayCommand _addManagerAppointment;
         private RelayCommand _changeManagerAppointment;
@@ -62,9 +62,9 @@ namespace ClassDijagramV1._0.ViewModel
 
                 _addManagerAppointment = new RelayCommand(o =>
                 {
-                    if(selectedDate == DateTime.MinValue)
+                    if(selectedDate.Day >= DateTime.Now.Day)
                     {
-                        AddManagerAppointment addManagerAppointment = new AddManagerAppointment(this);
+                        AddManagerAppointment addManagerAppointment = new AddManagerAppointment(this, selectedDate);
                         addManagerAppointment.Show();
                     }
                 });
@@ -79,7 +79,7 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _changeManagerAppointment = new RelayCommand(o =>
                 {
-                    if (selectedDate != DateTime.MinValue && selectedManagerAppointment != null)
+                    if (selectedDate.Day >= DateTime.Now.Day && selectedManagerAppointment != null)
                     {
                         ChangeManagerAppointment changeManagerAppointment = new ChangeManagerAppointment(selectedManagerAppointment, this);
                         changeManagerAppointment.Show();

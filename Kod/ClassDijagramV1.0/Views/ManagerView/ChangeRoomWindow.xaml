@@ -48,14 +48,14 @@
                 <Label Content="Šifra:" FontSize="25" Height="55" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
                 <Label Content="Naziv:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
                 <Label Content="Broj sprata:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
-                <Label Content="Broj sobe:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
+                <Label Content="Broj sale:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">
                 <TextBox x:Name="ChangeId" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" IsReadOnly="True" Text="{Binding Path=RoomID}" Style="{StaticResource BasicTextBox}"/>
                 <TextBox x:Name="ChangeName" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" IsReadOnly="True" Text="{Binding Path=RoomName}" Style="{StaticResource BasicTextBox}"/>
-                <TextBox x:Name="ChangeFloor" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Text="{Binding Path=Floor}" Style="{StaticResource BasicTextBox}"/>
-                <TextBox x:Name="ChangeNumber" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Text="{Binding Path=RoomNumber}" Style="{StaticResource BasicTextBox}"/>
-                
+                <TextBox x:Name="ChangeFloor" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" IsReadOnly="True" Text="{Binding Path=Floor, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextBox}"/>
+                <TextBox x:Name="ChangeNumber" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Text="{Binding Path=RoomNumber, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextBox}"/>
+                <Label Width="300" HorizontalAlignment="Left" Content="{Binding ErrorMessage,UpdateSourceTrigger=PropertyChanged}" FontSize="14" Margin="5,5,0,5" Foreground="Red"/>
             </StackPanel>
         </Grid>
         <StackPanel Grid.Row="2">

@@ -51,11 +51,12 @@
                 <Label Content="Kontakt telefon:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">
-                <TextBox x:Name="Name" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Name}" Style="{StaticResource BasicTextBox}"/>
-                <TextBox x:Name="Surmane" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Surname}" Style="{StaticResource BasicTextBox}"/>
+                <TextBox x:Name="Name" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextBox}"/>
+                <TextBox x:Name="Surmane" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextBox}"/>
                 <TextBox x:Name="Birth" IsReadOnly="True" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Birthday}" Style="{StaticResource BasicTextBox}"/>
-                <TextBox x:Name="Email" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Email}" Style="{StaticResource BasicTextBox}"/>
-                <TextBox x:Name="Phone" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Phone}" Style="{StaticResource BasicTextBox}"/>
+                <TextBox x:Name="Email" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextBox}"/>
+                <TextBox x:Name="Phone" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextBox}"/>
+                <Label Width="300" HorizontalAlignment="Left" Content="{Binding ErrorMessage,UpdateSourceTrigger=PropertyChanged}" FontSize="14" Margin="5,5,0,5" Foreground="Red"/>
             </StackPanel>
         </Grid>
         <StackPanel Grid.Row="2">

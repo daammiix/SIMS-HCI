@@ -49,20 +49,21 @@
                 <Label Content="Šifra:" FontSize="25" Height="55" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
                 <Label Content="Naziv:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
                 <Label Content="Broj sprata:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
-                <Label Content="Broj sobe:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
+                <Label Content="Broj sale:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">
-                <TextBox x:Name="AddId" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding RoomID}" Style="{StaticResource BasicTextBox}"/>
+                <TextBox x:Name="AddId" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding RoomID, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextBox}"/>
                 <ComboBox x:Name="AddName" Width="320" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" 
-                          VerticalContentAlignment="Center" IsReadOnly="True" SelectedItem="{Binding RoomName}" Style="{StaticResource BasicComboBox}">
+                          VerticalContentAlignment="Center" IsReadOnly="True" SelectedItem="{Binding RoomName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicComboBox}">
                     <ComboBoxItem Margin="5,0,0,0" Content="Operaciona Sala"/>
                     <ComboBoxItem Margin="5,0,0,0" Content="Sala za preglede"/>
                     <ComboBoxItem Margin="5,0,0,0" Content="Bolnička soba"/>
                     <ComboBoxItem Margin="5,0,0,0" Content="Intezivna nega"/>
                     <ComboBoxItem Margin="5,0,0,0" Content="Sala za sastanke"/>
                 </ComboBox>
-                <TextBox x:Name="AddFloor" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Floor}" Style="{StaticResource BasicTextBox}"/>
-                <TextBox x:Name="AddNumber" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding RoomNumber}" Style="{StaticResource BasicTextBox}"/>
+                <TextBox x:Name="AddFloor" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Floor, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextBox}"/>
+                <TextBox x:Name="AddNumber" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding RoomNumber, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextBox}"/>
+                <Label Width="300" HorizontalAlignment="Left" Content="{Binding ErrorMessage,UpdateSourceTrigger=PropertyChanged}" FontSize="14" Margin="5,15,0,5" Foreground="Red"/>
             </StackPanel>
         </Grid>
         <StackPanel Grid.Row="2">

@@ -53,12 +53,12 @@
                              Command="{Binding RenovatingWallPainting}"/>
 
                 <RadioButton x:Name="RenovatingMerge"
-                             Content="Renoviranje - spajanje soba"
+                             Content="Renoviranje - spajanje sale"
                              Style="{StaticResource ReservationButton}"
                              Command="{Binding RenovatingMerge}"/>
                 
                 <RadioButton x:Name="RenovatingSplit"
-                             Content="Renoviranje - razdvajanje soba "
+                             Content="Renoviranje - razdvajanje sale "
                              Style="{StaticResource ReservationButton}"
                              Command="{Binding RenovatingSplit}"/>
 

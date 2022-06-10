@@ -56,10 +56,10 @@ namespace ClassDijagramV1._0.Model
 
         public RoomToGenerate(String ID, String Name, String Start, String End)
         {
-            this.ID = ID;
-            this.Name = Name;
-            this.Start = Start;
-            this.End = End;
+            this._id = ID;
+            this._name = Name;
+            this._start = Start;
+            this._end = End;
         }
     }
 }

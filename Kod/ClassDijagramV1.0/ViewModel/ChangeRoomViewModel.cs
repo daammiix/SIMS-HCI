@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel
 {
-    public class ChangeRoomViewModel
+    public class ChangeRoomViewModel : ObservableObject
     {
         private String _roomID;
         private String _roomName;
@@ -20,6 +20,8 @@ namespace ClassDijagramV1._0.ViewModel
 
         public ChangeRoomWindow changeRoom;
         public Room room { get; set; }
+
+        public String ErrorMessage { get; set; }
 
         public BindingList<Room> Rooms
         {
@@ -79,6 +81,23 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 if (_roomNumber == value) { return; }
                 _roomNumber = value;
+                int number;
+                bool is_number = int.TryParse(value, out number);
+                if (!is_number)
+                {
+                    ErrorMessage = "Uneta vrednost mora biti broj";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else if (number < 1)
+                {
+                    ErrorMessage = "Broj mora biti veći od 0";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                }
             }
         }
         public String RoomStatus
@@ -110,6 +129,12 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _saveChangedRoom = new RelayCommand(o =>
                 {
+                    if(_roomNumber == "")
+                    {
+                        ErrorMessage = "Polja nisu popunjena";
+                        OnPropertyChanged("ErrorMessage");
+                        return;
+                    }
                     ChangeRoomAction();
                 });
 

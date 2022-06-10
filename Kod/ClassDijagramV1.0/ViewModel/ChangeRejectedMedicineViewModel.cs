@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel
 {
-    public class ChangeRejectedMedicineViewModel
+    public class ChangeRejectedMedicineViewModel : ObservableObject
     {
         private String _id;
         private String _name;
@@ -24,6 +24,8 @@ namespace ClassDijagramV1._0.ViewModel
         private IRefreshableMedicineView medicineView;
         public QuantifiedMedicine quantifiedMedicine { get; set; }
         public BindingList<String> MedicineComponents { get; set; }
+
+        public String ErrorMessage { get; set; }
 
         private RelayCommand _saveChangedRejectedMedicine;
         private RelayCommand _quitChangededRejectedMedicine;
@@ -103,6 +105,16 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 if (_medicineComponents == value) { return; }
                 _medicineComponents = value;
+                if (value.Length < 1)
+                {
+                    ErrorMessage = "Šifra i naziv ne smeju biti prazni";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                }
             }
         }
 
@@ -112,6 +124,12 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _saveChangedRejectedMedicine = new RelayCommand(o =>
                 {
+                    if(_medicineComponents == "" || _medicineComponents == null)
+                    {
+                        ErrorMessage = "Polja nisu popunjena";
+                        OnPropertyChanged("ErrorMessage");
+                        return;
+                    }
                     ChangeRejectedMedicineAction();
                 });
 

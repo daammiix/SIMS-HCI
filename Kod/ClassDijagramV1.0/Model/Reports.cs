@@ -55,10 +55,10 @@ namespace ClassDijagramV1._0.Model
 
         public Reports(String ID, String Type, String Name, String Date)
         {
-            this.ID = ID;
-            this.Type = Type;
-            this.Name = Name;
-            this.Date = Date;
+            this._id = ID;
+            this._type = Type;
+            this._name = Name;
+            this._date = Date;
         }
     }
 }

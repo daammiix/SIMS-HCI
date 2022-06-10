@@ -26,6 +26,8 @@ namespace ClassDijagramV1._0.ViewModel
 
         private MainRoomsViewModel mainRoomsViewModel;
 
+        public String ErrorFormatMessage { get; set; }
+
         private BindingList<RoomToGenerate> _rooms = new BindingList<RoomToGenerate>();
 
         private RelayCommand _generateReport;
@@ -54,6 +56,12 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _generateReport = new RelayCommand(o =>
                 {
+                    if (selectedFromDate == "" || selectedFromTime == "" || selectedToDate == "" || selectedToTime == "")
+                    {
+                        ErrorFormatMessage = "Polja nisu popunjena";
+                        OnPropertyChanged("ErrorFormatMessage");
+                        return;
+                    }
                     GenerateReportAction();
                 });
 
@@ -86,7 +94,20 @@ namespace ClassDijagramV1._0.ViewModel
                 if (FromDate == value)
                     return;
                 FromDate = value;
-                ListsHandler();
+                DateTime date;
+                bool format = DateTime.TryParseExact(value, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out date);
+                if (!format)
+                {
+                    ErrorFormatMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorFormatMessage");
+                }
+                else
+                {
+                    ErrorFormatMessage = "";
+                    OnPropertyChanged("ErrorFormatMessage");
+                    ListsHandler();
+                }
             }
         }
 
@@ -101,7 +122,20 @@ namespace ClassDijagramV1._0.ViewModel
                 if (FromTime == value)
                     return;
                 FromTime = value;
-                ListsHandler();
+                DateTime time;
+                bool format = DateTime.TryParseExact(value, "HH:mm", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out time);
+                if (!format)
+                {
+                    ErrorFormatMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorFormatMessage");
+                }
+                else
+                {
+                    ErrorFormatMessage = "";
+                    OnPropertyChanged("ErrorFormatMessage");
+                    ListsHandler();
+                }
             }
         }
 
@@ -116,7 +150,20 @@ namespace ClassDijagramV1._0.ViewModel
                 if (ToDate == value)
                     return;
                 ToDate = value;
-                ListsHandler();
+                DateTime date;
+                bool format = DateTime.TryParseExact(value, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out date);
+                if (!format)
+                {
+                    ErrorFormatMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorFormatMessage");
+                }
+                else
+                {
+                    ErrorFormatMessage = "";
+                    OnPropertyChanged("ErrorFormatMessage");
+                    ListsHandler();
+                }
             }
         }
 
@@ -131,7 +178,20 @@ namespace ClassDijagramV1._0.ViewModel
                 if (ToTime == value)
                     return;
                 ToTime = value;
-                ListsHandler();
+                DateTime time;
+                bool format = DateTime.TryParseExact(value, "HH:mm", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out time);
+                if (!format)
+                {
+                    ErrorFormatMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorFormatMessage");
+                }
+                else
+                {
+                    ErrorFormatMessage = "";
+                    OnPropertyChanged("ErrorFormatMessage");
+                    ListsHandler();
+                }
             }
         }
 

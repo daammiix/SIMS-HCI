@@ -53,10 +53,11 @@
                 <Label Content="Sastav:" FontSize="24" Height="50" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">
-                <TextBox x:Name="AddDrugsId" Width="320" Background="#E7E7E7" Height="50" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource BasicTextBox}" Text="{Binding ID}"/>
-                <TextBox x:Name="AddDrugsName" Width="320" Background="#E7E7E7" Height="50" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource BasicTextBox}" Text="{Binding Name}"/>
-                <TextBox x:Name="AddDrugsQuantity" Width="120" Background="#E7E7E7" Height="50" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource BasicTextBox}" Text="{Binding Quantity}"/>
-                <TextBox x:Name="AddComponents" Width="320" AcceptsReturn="True" Background="#E7E7E7" Height="100" Margin="0,5,0,5" Padding="5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Style="{StaticResource BasicTextBox}" Text="{Binding MedicineComponentsTextBox}"/>
+                <TextBox x:Name="AddDrugsId" Width="320" Background="#E7E7E7" Height="50" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource BasicTextBox}" Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox x:Name="AddDrugsName" Width="320" Background="#E7E7E7" Height="50" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource BasicTextBox}" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox x:Name="AddDrugsQuantity" Width="120" Background="#E7E7E7" Height="50" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource BasicTextBox}" Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox x:Name="AddComponents" Width="320" AcceptsReturn="True" Background="#E7E7E7" Height="100" Margin="0,5,0,5" Padding="5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Style="{StaticResource BasicTextBox}" Text="{Binding MedicineComponentsTextBox, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Width="300" HorizontalAlignment="Left" Content="{Binding ErrorMessage,UpdateSourceTrigger=PropertyChanged}" FontSize="14" Margin="10,15,0,5" Foreground="Red"/>
             </StackPanel>
             <StackPanel Grid.Column="2">
                 <Label Content="Zamenski lekovi:" FontSize="24" Margin="20,0,0,5"/>

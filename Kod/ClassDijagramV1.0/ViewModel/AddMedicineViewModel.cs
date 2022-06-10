@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel
 {
-    public class AddMedicineViewModel
+    public class AddMedicineViewModel : ObservableObject
     {
         private String _id;
         private String _name;
@@ -30,6 +30,8 @@ namespace ClassDijagramV1._0.ViewModel
         public BindingList<String> SelectedMedicines { get; set; }
         public BindingList<String> MedicineComponents { get; set; }
 
+        public String ErrorMessage { get; set; }
+
         private RelayCommand _saveNewMedicine;
         private RelayCommand _cancelNewMedicine;
         private RelayCommand _addSuggestedMedicine;
@@ -46,10 +48,21 @@ namespace ClassDijagramV1._0.ViewModel
             this.medicineView = medicineView;
 
             this.MedicinesList = medicineController.GetAllMedicines();
+
+            resetFields();
+        }
+
+        public void resetFields()
+        {
+            _id = null;
+            _name = null;
+            _quantity = null;
+            _medicineComponents = null;
+            _suggestedMedicines = null;
+
             this.SuggestedMedicines = new BindingList<String>();
             this.SelectedMedicines = new BindingList<String>();
             this.MedicineComponents = new BindingList<String>();
-
         }
 
         public String ID
@@ -59,6 +72,16 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 if (_id == value) { return; }
                 _id = value;
+                if (value.Length < 1)
+                {
+                    ErrorMessage = "Šifra i naziv ne smeju biti prazni";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                }
             }
         }
         public String Name
@@ -68,6 +91,16 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 if (_name == value) { return; }
                 _name = value;
+                if (value.Length < 1)
+                {
+                    ErrorMessage = "Šifra i naziv ne smeju biti prazni";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                }
             }
         }
         public String Quantity
@@ -77,6 +110,23 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 if (_quantity == value) { return; }
                 _quantity = value;
+                int quantity;
+                bool is_number = int.TryParse(value, out quantity);
+                if (!is_number)
+                {
+                    ErrorMessage = "Uneta vrednost mora biti broj";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else if (quantity < 1)
+                {
+                    ErrorMessage = "Broj mora biti veći od 0";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                }
             }
         }
         public String MedicineComponentsTextBox
@@ -86,6 +136,16 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 if (_medicineComponents == value) { return; }
                 _medicineComponents = value;
+                if (value.Length < 1)
+                {
+                    ErrorMessage = "Šifra i naziv ne smeju biti prazni";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                }
             }
         }
         public Medicines SuggestedMedicinesTextBox
@@ -104,6 +164,13 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _saveNewMedicine = new RelayCommand(o =>
                 {
+                    if(_name == null || _id == null || _quantity == null || _medicineComponents == null
+                       || _name == "" || _id == "" || _quantity == "" || _medicineComponents == "")
+                    {
+                        ErrorMessage = "Polja nisu popunjena";
+                        OnPropertyChanged("ErrorMessage");
+                        return;
+                    }
                     SaveNewMedicineAction();
                 });
 
@@ -117,6 +184,7 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _cancelNewMedicine = new RelayCommand(o =>
                 {
+                    resetFields();
                     addMedicineWindow.Close();
                 });
 
@@ -156,6 +224,7 @@ namespace ClassDijagramV1._0.ViewModel
             medicineController.AddMedicines(medicine);
             ((Storage)roomController.GetRoom("storage")).addNewMedicine(medicine, quantity);
             medicineView.RefreshMedicines();
+            resetFields();
             addMedicineWindow.Close();
         }
 

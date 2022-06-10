@@ -1,9 +1,5 @@
 ﻿using ClassDijagramV1._0.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace ClassDijagramV1._0.Converters
@@ -17,7 +13,7 @@ namespace ClassDijagramV1._0.Converters
                 return "";
             }
             var managerAppointment = (ManagerAppointment)value;
-            return managerAppointment.Name + ": " + managerAppointment.Start.TimeOfDay + " - " + managerAppointment.End.TimeOfDay;
+            return managerAppointment.Name + ": " + managerAppointment.Start.ToShortTimeString() + " - " + managerAppointment.End.ToShortTimeString();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

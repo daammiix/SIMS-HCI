@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel
 {
-    public class AddEquipmentViewModel
+    public class AddEquipmentViewModel : ObservableObject
     {
         private String _equipmentID;
         private String _equipmentName;
@@ -22,6 +22,8 @@ namespace ClassDijagramV1._0.ViewModel
         private IRefreshableEquipmentView equipmentView;
         public AddEquipmentWindow addEquipment;
 
+        public String ErrorMessage { get; set; }
+
         private RelayCommand _saveNewEquipment;
         private RelayCommand _cancelNewEquipment;
 
@@ -32,7 +34,16 @@ namespace ClassDijagramV1._0.ViewModel
             equipmentController = app.equipmentController;
             this.addEquipment = addEquipment;
             this.equipmentView = equipmentView;
-            EquipmentType = type;
+            _equipmentType = type;
+
+            resetFields();
+        }
+
+        private void resetFields()
+        {
+            _equipmentID = null;
+            _equipmentName = null;
+            _quantity = null;
         }
 
         public String EquipmentID
@@ -42,6 +53,16 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 if (_equipmentID == value) { return; }
                 _equipmentID = value;
+                if (value.Length < 1)
+                {
+                    ErrorMessage = "Šifra i naziv ne smeju biti prazni";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                }
             }
         }
         public String EquipmentName
@@ -51,6 +72,16 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 if (_equipmentName == value) { return; }
                 _equipmentName = value;
+                if (value.Length < 1)
+                {
+                    ErrorMessage = "Šifra i naziv ne smeju biti prazni";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                }
             }
         }
         public String EquipmentType
@@ -69,6 +100,23 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 if (_quantity == value) { return; }
                 _quantity = value;
+                int quantity;
+                bool is_number = int.TryParse(value, out quantity);
+                if (!is_number)
+                {
+                    ErrorMessage = "Uneta vrednost mora biti broj";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else if (quantity < 1)
+                {
+                    ErrorMessage = "Broj mora biti veći od 0";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                }
             }
         }
 
@@ -78,6 +126,13 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _saveNewEquipment = new RelayCommand(o =>
                 {
+                    if(_equipmentID == null || _equipmentName == null || _quantity == null
+                    || _equipmentID == "" || _equipmentName == "" || _quantity == "")
+                    {
+                        ErrorMessage = "Polja nisu popunjena";
+                        OnPropertyChanged("ErrorMessage");
+                        return;
+                    }
                     SaveNewEquipmentAction();
                 });
 
@@ -110,6 +165,7 @@ namespace ClassDijagramV1._0.ViewModel
             equipmentController.AddEquipment(equipment);
             ((Storage)roomController.GetRoom("storage")).addNewEquipment(equipment, quantity);
             equipmentView.RefreshEquipment();
+
             addEquipment.Close();
         }
     }
