@@ -25,9 +25,13 @@ namespace ClassDijagramV1._0.Helpers
 
             XGraphics graphics = XGraphics.FromPdfPage(page);
 
+            //header
+            graphics.DrawString("Bolnica Zdravo", new XFont("Arial", 14, XFontStyle.Italic), XBrushes.DarkGray, new XPoint(50, 30));
+            graphics.DrawLine(new XPen(XColor.FromKnownColor(XKnownColor.Gray)), new XPoint(40, 40), new XPoint(560, 40));
+
             //title
-            graphics.DrawString("Zauzetost sala", new XFont("Arial", 40, XFontStyle.BoldItalic), XBrushes.Salmon, new XPoint(170, 70));
-            graphics.DrawLine(new XPen(XColor.FromKnownColor(XKnownColor.Gray)), new XPoint(100, 90), new XPoint(500, 90));
+            graphics.DrawString("Zauzetost sala", new XFont("Arial", 40, XFontStyle.BoldItalic), XBrushes.Salmon, new XPoint(170, 110));
+            graphics.DrawLine(new XPen(XColor.FromKnownColor(XKnownColor.Gray)), new XPoint(150, 120), new XPoint(460, 120));
 
             //table
             graphics.DrawString("Šifra", new XFont("Arial", 15), XBrushes.Black, new XPoint(80, 200));
@@ -53,7 +57,10 @@ namespace ClassDijagramV1._0.Helpers
                 currentYposition_line += 23;
             }
 
-            pdfDocument.Save("D:\\Fax\\SIMS\\SIMSProjekat\\SIMS - HCI\\Kod\\TestPdf.pdf");
+            graphics.DrawLine(new XPen(XColor.FromKnownColor(XKnownColor.Gray)), new XPoint(30, 800), new XPoint(570, 800));
+            graphics.DrawString("1", new XFont("Arial", 12, XFontStyle.Italic), XBrushes.DarkGray, new XPoint(540, 815));
+
+            pdfDocument.Save("C:\\Users\\milan\\Desktop\\faks\\SIMS-HCI\\Kod\\ClassDijagramV1.0\\Data\\TestPdf.pdf");
         
 
         }

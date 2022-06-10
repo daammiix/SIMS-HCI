@@ -53,7 +53,7 @@
                             <DataGridTextColumn Header="Datum rođenja" Width="auto" Binding="{Binding Path=DateOfBirth, StringFormat=dd/MM/yyyy}"/>
                             <DataGridTextColumn Header="Adresa" Width="auto" Binding="{Binding Path=Address, Converter={StaticResource AdressToStringConverter}}"/>
                             <DataGridTextColumn Header="Email" Width="auto" Binding="{Binding Path=Email}"/>
-                            <DataGridTextColumn Header="Broj telefona" Width="auto" Binding="{Binding Path=PhoneNumber}"/>
+                            <DataGridTextColumn Header="Broj telefona" Width="*" Binding="{Binding Path=PhoneNumber}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

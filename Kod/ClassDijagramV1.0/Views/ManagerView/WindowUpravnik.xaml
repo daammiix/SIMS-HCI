@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterScreen"
         Title="WindowUpravnik" 
         Height="720" Width="1280"
-        WindowStyle="SingleBorderWindow"
+        WindowStyle="None"
         ResizeMode="NoResize"
         Background="#D9D4CC" FontFamily="Berlin Sans FB"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
@@ -83,9 +83,9 @@
                          Style="{StaticResource MenuButtonTheme}"
                          Command="{Binding StorageViewCommand}"/>
             <StackPanel Orientation="Horizontal" Width="280">
-                <ComboBox Height="65" Width="265" HorizontalAlignment="Left" Style="{StaticResource ComboBoxTest2}"
-                VerticalContentAlignment="Center" IsReadOnly="True" FontSize="24">
-                    <ComboBoxItem Margin="5,0,0,0" Selected="ComboBoxItem_Selected">Izmeni</ComboBoxItem>
+                <ComboBox x:Name="Combo" Height="65" Width="280" HorizontalAlignment="Left" Style="{StaticResource ComboBoxTest2}"
+                VerticalContentAlignment="Center" IsReadOnly="True" FontSize="24" DropDownClosed="Combo_DropDownClosed">
+                    <ComboBoxItem x:Name="Item1" Margin="5,0,0,0" Selected="ComboBoxItem_Selected">Izmeni profil</ComboBoxItem>
                     <ComboBoxItem Margin="5,0,0,0" Selected="ComboBoxItem_Selected_1">Odjavi se</ComboBoxItem>
                     <ComboBoxItem Margin="5,0,0,0" Selected="ComboBoxItem_Selected_2">Tutorijal</ComboBoxItem>
                 </ComboBox>

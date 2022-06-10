@@ -52,9 +52,10 @@
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">
                 <TextBox x:Name="ChangeEquipmentId" IsReadOnly="True" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Text="{Binding Path=EquipmentID, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextBox}"/>
-                <TextBox x:Name="ChangeEquipmentName" IsReadOnly="True" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Text="{Binding Path=EquipmentName}" Style="{StaticResource BasicTextBox}"/>
-                <TextBox x:Name="ChangeType" IsReadOnly="True"  Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=EquipmentType}" Style="{StaticResource BasicTextBox}"/>
-                <TextBox x:Name="ChangeEquipmentQuantity" Width="120" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Text="{Binding Path=Quantity}"  Style="{StaticResource BasicTextBox}"/>
+                <TextBox x:Name="ChangeEquipmentName" IsReadOnly="True" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Text="{Binding Path=EquipmentName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextBox}"/>
+                <TextBox x:Name="ChangeType" IsReadOnly="True"  Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=EquipmentType, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextBox}"/>
+                <TextBox x:Name="ChangeEquipmentQuantity" Width="120" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Text="{Binding Path=Quantity, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource BasicTextBox}"/>
+                <Label Content="{Binding ErrorMessage,UpdateSourceTrigger=PropertyChanged}" FontSize="16" Margin="10,15,0,5" Foreground="Red"/>
             </StackPanel>
         </Grid>
         <StackPanel Grid.Row="2">

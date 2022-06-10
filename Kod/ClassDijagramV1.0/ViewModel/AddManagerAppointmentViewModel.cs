@@ -4,17 +4,13 @@ using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Util;
 using ClassDijagramV1._0.Views.ManagerView;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel
 {
-    public class AddManagerAppointmentViewModel
+    public class AddManagerAppointmentViewModel : ObservableObject
     {
         ManagerAppointmentController managerAppointmentController;
         public BindingList<ManagerAppointment> ManagerAppointments
@@ -25,35 +21,150 @@ namespace ClassDijagramV1._0.ViewModel
 
         private readonly Random _random = new Random();
 
+        private DateTime selectedDate;
+
         readonly private String format = "dd/MM/yyyyTHH:mm";
 
         AddManagerAppointment addManagerAppointment;
 
         private IRefreshableManagerAppointmentView managerAppointmentView;
 
-        public String Name { get; set; }
-        public String FromDate { get; set; }
-        public String FromTime { get; set; }
-        public String ToDate { get; set; }
-        public String ToTime { get; set; }
+        public String ErrorMessage { get; set; }
+
+        private String Name;
+        private String FromDate;
+        private String FromTime;
+        private String ToDate;
+        private String ToTime;
 
         private RelayCommand _saveAddedManagerAppointment;
         private RelayCommand _cancelManagerAppointment;
 
-        public AddManagerAppointmentViewModel(AddManagerAppointment addManagerAppointment, IRefreshableManagerAppointmentView managerAppointmentView)
+        public AddManagerAppointmentViewModel(AddManagerAppointment addManagerAppointment, IRefreshableManagerAppointmentView managerAppointmentView, DateTime selectedDate)
         {
             var app = Application.Current as App;
 
-            FromDate = DateTime.Now.ToString("dd/MM/yyyy");
-            FromTime = DateTime.Now.ToString("HH:mm");
-            ToDate = DateTime.Now.ToString("dd/MM/yyyy");
-            ToTime = DateTime.Now.ToString("HH:mm");
-
             this.addManagerAppointment = addManagerAppointment;
             this.managerAppointmentView = managerAppointmentView;
+            this.selectedDate = selectedDate;
 
             managerAppointmentController = app.managerAppointmentController;
             ManagerAppointments = managerAppointmentController.GetAllManagerAppointments();
+
+            resetFields();
+        }
+
+        private void resetFields()
+        {
+            this.Name = null;
+
+            FromDate = selectedDate.Date.ToString("dd/MM/yyyy");
+            FromTime = DateTime.Now.ToString("HH:mm");
+            ToDate = selectedDate.Date.ToString("dd/MM/yyyy");
+            ToTime = DateTime.Now.ToString("HH:mm");
+        }
+
+        public String selectedName
+        {
+            get { return Name; }
+            set
+            {
+                if (Name == value) { return; }
+                Name = value;
+                if (value.Length < 1)
+                {
+                    ErrorMessage = "Polje naziv ne sme da bude prazno";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                }
+            }
+        }
+
+        public String selectedFromDate
+        {
+            get
+            {
+                return FromDate;
+            }
+            set
+            {
+                if (FromDate == value)
+                    return;
+                FromDate = value;
+                DateTime date;
+            }
+        }
+
+        public String selectedFromTime
+        {
+            get
+            {
+                return FromTime;
+            }
+            set
+            {
+                if (FromTime == value)
+                    return;
+                FromTime = value;
+                DateTime time;
+                bool format = DateTime.TryParseExact(value, "HH:mm:TT", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out time);
+                if (!format)
+                {
+                    ErrorMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                }
+            }
+        }
+
+        public String selectedToDate
+        {
+            get
+            {
+                return ToDate;
+            }
+            set
+            {
+                if (ToDate == value)
+                    return;
+                ToDate = value;
+            }
+        }
+
+        public String selectedToTime
+        {
+            get
+            {
+                return ToTime;
+            }
+            set
+            {
+                if (ToTime == value)
+                    return;
+                ToTime = value;
+                DateTime time;
+                bool format = DateTime.TryParseExact(value, "HH:mm", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out time);
+                if (!format)
+                {
+                    ErrorMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                }
+            }
         }
 
         public RelayCommand SaveAddedManagerAppointment
@@ -62,6 +173,12 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _saveAddedManagerAppointment = new RelayCommand(o =>
                 {
+                    if(selectedName == null || selectedFromTime == "" || selectedToTime == "" || selectedName == "")
+                    {
+                        ErrorMessage = "Polje naziv ne sme da bude prazno";
+                        OnPropertyChanged("ErrorMessage");
+                        return;
+                    }
                     AddManagerAppointmentAction();
                 });
 
@@ -75,6 +192,7 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _cancelManagerAppointment = new RelayCommand(o =>
                 {
+                    resetFields();
                     addManagerAppointment.Close();
                 });
 
@@ -84,14 +202,15 @@ namespace ClassDijagramV1._0.ViewModel
 
         public void AddManagerAppointmentAction()
         {
-            DateTime fromDatetime = DateTime.ParseExact(FromDate + "T" + FromTime, format, null);
-            DateTime toDatetime = DateTime.ParseExact(ToDate + "T" + ToTime, format, null);
+            DateTime fromDatetime = DateTime.ParseExact(FromDate + "T" + FromTime, "dd/MM/yyyyTHH:mm", null);
+            DateTime toDatetime = DateTime.ParseExact(ToDate + "T" + ToTime, this.format, null);
 
             var appointmentId = RandomId();
             var newManagerAppointment = new ManagerAppointment(appointmentId, Name, fromDatetime, toDatetime);
             managerAppointmentController.AddManagerAppointment(newManagerAppointment);
 
             managerAppointmentView.RefreshManagerAppointment();
+            resetFields();
             addManagerAppointment.Close();
         }
 

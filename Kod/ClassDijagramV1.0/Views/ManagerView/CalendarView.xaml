@@ -68,10 +68,10 @@
 
 
         <StackPanel Grid.Column="2" Orientation="Vertical">
-            <Label Content="Današnje obaveze:" FontSize="20" HorizontalContentAlignment="Left" Margin="10,30,0,0"/>
+            <Label Content="Današnje obaveze:" FontSize="20" HorizontalContentAlignment="Left" Margin="20,30,0,0"/>
             <Grid Height="300">
                 <DataGrid x:Name="DayEvents" CanUserAddRows="False" SelectionMode="Single"
-                          CanUserResizeColumns="False"  CanUserResizeRows="False" 
+                          CanUserResizeColumns="False"  CanUserResizeRows="False" Margin="20,0,0,0"
                           RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
                           FontSize="18" BorderThickness="4" CanUserReorderColumns="False"
                           CanUserDeleteRows="False" AutoGenerateColumns="False"

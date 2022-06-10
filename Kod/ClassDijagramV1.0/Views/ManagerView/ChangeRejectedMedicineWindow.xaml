@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ClassDijagramV1._0.Views.ManagerView"
         mc:Ignorable="d"
         Title="ChangeRejectedMedicineWindow"
-        Height="520"
+        Height="540"
         Width="600"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -29,7 +29,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
-            <RowDefinition Height="380"/>
+            <RowDefinition Height="400"/>
             <RowDefinition Height="75"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
@@ -56,7 +56,8 @@
                 <TextBox x:Name="ChangedDrugsName" Width="320" Background="#E7E7E7" IsReadOnly="True" Height="50" Margin="0,10,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=Name,Mode=OneWay}" Style="{StaticResource BasicTextBox}"/>
                 <TextBox x:Name="ChangeDrugsStatus"  Width="320" Background="#E7E7E7" IsReadOnly="True" Height="50" Margin="0,8,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=Status,Mode=OneWay}" Style="{StaticResource BasicTextBox}"/>
                 <TextBox x:Name="ChangedDrugsQuantity" Width="120" Background="#E7E7E7" IsReadOnly="True" Height="50" Margin="0,10,0,5" FontSize="25" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=Quantity}" Style="{StaticResource BasicTextBox}"/>
-                <TextBox x:Name="ChangeComponents" Width="320" AcceptsReturn="True" Background="#E7E7E7" Height="100" Margin="0,15,0,5" Padding="5,0,0,0" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Style="{StaticResource BasicTextBox}" Text="{Binding Path=MedicineComponentsTextBox}"/>
+                <TextBox x:Name="ChangeComponents" Width="320" AcceptsReturn="True" Background="#E7E7E7" Height="100" Margin="0,15,0,5" Padding="5,0,0,0" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Style="{StaticResource BasicTextBox}" Text="{Binding Path=MedicineComponentsTextBox, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Width="300" HorizontalAlignment="Left" Content="{Binding ErrorMessage,UpdateSourceTrigger=PropertyChanged}" FontSize="14" Margin="5,5,0,5" Foreground="Red"/>
             </StackPanel>
         </Grid>
         <StackPanel Grid.Row="2">

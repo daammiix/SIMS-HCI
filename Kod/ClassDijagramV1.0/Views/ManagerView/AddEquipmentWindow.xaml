@@ -50,10 +50,11 @@
                 <Label Content="Količina:" FontSize="25" Height="55" Margin="0,5,0,5"  HorizontalContentAlignment="Right"/>
             </StackPanel>
                 <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">
-                <TextBox x:Name="AddEquipmentId" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource BasicTextBox}" Text="{Binding EquipmentID}"/>
-                <TextBox x:Name="AddEquipmentNAme" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource BasicTextBox}" Text="{Binding EquipmentName}"/>
+                <TextBox x:Name="AddEquipmentId" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource BasicTextBox}" Text="{Binding EquipmentID, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox x:Name="AddEquipmentNAme" Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource BasicTextBox}" Text="{Binding EquipmentName, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBox x:Name="AddType" IsReadOnly="True"  Width="320" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource BasicTextBox}" Text="{Binding EquipmentType}"/>
-                <TextBox x:Name="AddEquipmentQuantity" Width="120" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource BasicTextBox}" Text="{Binding Quantity}"/>
+                <TextBox x:Name="AddEquipmentQuantity" Width="120" Background="#E7E7E7" Height="55" Margin="0,5,0,5" FontSize="25" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalContentAlignment="Center" Style="{StaticResource BasicTextBox}" Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="{Binding ErrorMessage,UpdateSourceTrigger=PropertyChanged}" FontSize="16" Margin="10,15,0,5" Foreground="Red"/>
             </StackPanel>
 
         </Grid>

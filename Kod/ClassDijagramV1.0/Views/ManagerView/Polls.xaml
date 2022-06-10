@@ -49,7 +49,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock>
-                                        <Button Content="Zakazivanje" Width="150" Margin="0,1,0,0" Style="{StaticResource DataGridButton}" Command="{Binding Path=DataContext.OpenReport,
+                                        <Button Content="Prikaži" Width="150" Margin="0,1,0,0" Style="{StaticResource DataGridButton}" Command="{Binding Path=DataContext.OpenReport,
                                             RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" />
                                     </TextBlock>
                                 </DataTemplate>

@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel
 {
-    public class AddRoomViewModel
+    public class AddRoomViewModel : ObservableObject
     {
         public RoomController roomController;
 
@@ -16,6 +16,8 @@ namespace ClassDijagramV1._0.ViewModel
         private String _floor;
         private String _roomNumber;
         private String _roomStatus = "Aktivna";
+
+        public String ErrorMessage { get; set; }
 
         private RelayCommand _saveNewRoom;
         private RelayCommand _cancelNewRoom;
@@ -27,6 +29,16 @@ namespace ClassDijagramV1._0.ViewModel
             var app = Application.Current as App;
             roomController = app.roomController;
             this.addRoom = addRoom;
+
+            resetFields();
+        }
+
+        private void resetFields()
+        {
+            _roomID = null;
+            _roomName = null;
+            _floor = null;
+            _roomNumber = null;
         }
 
         public String RoomID
@@ -36,6 +48,16 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 if (_roomID == value) { return; }
                 _roomID = value;
+                if (value.Length < 1)
+                {
+                    ErrorMessage = "Šifra ne sme biti prazna";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                }
             }
         }
         public String RoomName
@@ -55,6 +77,23 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 if (_floor == value) { return; }
                 _floor = value;
+                int floor;
+                bool is_number = int.TryParse(value, out floor);
+                if (!is_number)
+                {
+                    ErrorMessage = "Uneta vrednost mora biti broj";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else if (floor < 1)
+                {
+                    ErrorMessage = "Broj mora biti veći od 0";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                }
             }
         }
         public String RoomNumber
@@ -64,6 +103,23 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 if (_roomNumber == value) { return; }
                 _roomNumber = value;
+                int number;
+                bool is_number = int.TryParse(value, out number);
+                if (!is_number)
+                {
+                    ErrorMessage = "Uneta vrednost mora biti broj";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else if (number < 1)
+                {
+                    ErrorMessage = "Broj mora biti veći od 0";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                }
             }
         }
         public String RoomStatus
@@ -93,6 +149,13 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _saveNewRoom = new RelayCommand(o =>
                 {
+                    if(_roomID == null || _roomName == null || _roomNumber == null || _floor == null
+                    || _roomID == "" || _roomNumber == "" || _floor == "")
+                    {
+                        ErrorMessage = "Polja nisu popunjena";
+                        OnPropertyChanged("ErrorMessage");
+                        return;
+                    }
                     SaveNewRoomAction();
                 });
 
@@ -106,6 +169,7 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _cancelNewRoom = new RelayCommand(o =>
                 {
+                    resetFields();
                     addRoom.Close();
                 });
 
@@ -116,6 +180,7 @@ namespace ClassDijagramV1._0.ViewModel
         private void SaveNewRoomAction()
         {
             roomController.AddRoom(RoomFromTextboxes());
+            resetFields();
             addRoom.Close();
         }
 

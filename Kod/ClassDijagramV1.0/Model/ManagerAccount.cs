@@ -17,11 +17,11 @@ namespace ClassDijagramV1._0.Model
 
         public ManagerAccount(String Name, String Surname, String Birthday, String Email, String Phone)
         {
-            this.Name = Name;
-            this.Surname = Surname;
-            this.Birthday = Birthday;
-            this.Email = Email;
-            this.Phone = Phone;
+            this._name = Name;
+            this._surname = Surname;
+            this._birthday = Birthday;
+            this._email = Email;
+            this._phone = Phone;
         }
 
         public String Name

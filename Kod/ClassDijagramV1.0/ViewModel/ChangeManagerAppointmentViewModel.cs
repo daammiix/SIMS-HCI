@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel
 {
-    public class ChangeManagerAppointmentViewModel
+    public class ChangeManagerAppointmentViewModel : ObservableObject
     {
         ManagerAppointmentController managerAppointmentController;
         public BindingList<ManagerAppointment> ManagerAppointments
@@ -21,7 +21,7 @@ namespace ClassDijagramV1._0.ViewModel
 
         private readonly Random _random = new Random();
 
-        readonly private String format = "dd/MM/yyyyTHH:mm:ss";
+        readonly private String format = "dd/MM/yyyyTHH:mm";
 
         private IRefreshableManagerAppointmentView managerAppointmentView;
 
@@ -35,17 +35,14 @@ namespace ClassDijagramV1._0.ViewModel
 
         ManagerAppointment managerAppointment;
 
+        public String ErrorMessage { get; set; }
+
         private RelayCommand _saveChandegManagerAppointment;
         private RelayCommand _cancelManagerAppointment;
 
         public ChangeManagerAppointmentViewModel(ChangeManagerAppointment changeManagerAppointment, ManagerAppointment managerAppointment, IRefreshableManagerAppointmentView managerAppointmentView)
         {
             var app = Application.Current as App;
-
-            FromDate = DateTime.Now.ToString("dd/MM/yyyy");
-            FromTime = DateTime.Now.ToString("HH:mm");
-            ToDate = DateTime.Now.ToString("dd/MM/yyyy");
-            ToTime = DateTime.Now.ToString("HH:mm");
 
             this.changeManagerAppointment = changeManagerAppointment;
             this.managerAppointment = managerAppointment;
@@ -55,11 +52,23 @@ namespace ClassDijagramV1._0.ViewModel
 
             this.managerAppointmentView = managerAppointmentView;
 
+            resetFields();
+
             this.Name = managerAppointment.Name;
             this.FromDate = managerAppointment.Start.ToShortDateString();
-            this.FromTime = managerAppointment.Start.TimeOfDay.ToString();
+            this.FromTime = managerAppointment.Start.ToShortTimeString();
             this.ToDate = managerAppointment.End.Date.ToShortDateString();
-            this.ToTime = managerAppointment.End.TimeOfDay.ToString();
+            this.ToTime = managerAppointment.End.ToShortTimeString();
+        }
+
+        private void resetFields()
+        {
+            this._name = null;
+
+            FromDate = DateTime.Now.ToString("dd/MM/yyyy");
+            FromTime = DateTime.Now.ToString("HH:mm");
+            ToDate = DateTime.Now.ToString("dd/MM/yyyy");
+            ToTime = DateTime.Now.ToString("HH:mm");
         }
 
         public String Name
@@ -73,6 +82,16 @@ namespace ClassDijagramV1._0.ViewModel
                 if (_name == value)
                     return;
                 _name = value;
+                if (value.Length < 1)
+                {
+                    ErrorMessage = "Polje naziv ne sme da bude prazno";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                }
             }
         }
 
@@ -101,6 +120,19 @@ namespace ClassDijagramV1._0.ViewModel
                 if (FromTime == value)
                     return;
                 FromTime = value;
+                DateTime time;
+                bool format = DateTime.TryParseExact(value, "HH:mm", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out time);
+                if (!format)
+                {
+                    ErrorMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                }
             }
         }
 
@@ -129,6 +161,19 @@ namespace ClassDijagramV1._0.ViewModel
                 if (ToTime == value)
                     return;
                 ToTime = value;
+                DateTime time;
+                bool format = DateTime.TryParseExact(value, "HH:mm", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out time);
+                if (!format)
+                {
+                    ErrorMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                }
             }
         }
         public RelayCommand SaveChangedManagerAppointment
@@ -137,6 +182,12 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _saveChandegManagerAppointment = new RelayCommand(o =>
                 {
+                if (Name == null || FromTime == "" || ToTime == "" || Name == "")
+                    {
+                        ErrorMessage = "Polja nisu popunjena";
+                        OnPropertyChanged("ErrorMessage");
+                        return;
+                    }
                     ChangeManagerAppointmentAction();
                 });
 
@@ -150,6 +201,7 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _cancelManagerAppointment = new RelayCommand(o =>
                 {
+                    resetFields();
                     changeManagerAppointment.Close();
                 });
 
@@ -166,6 +218,7 @@ namespace ClassDijagramV1._0.ViewModel
             managerAppointmentController.ChangeManagerAppointment(newManagerAppointment);
 
             managerAppointmentView.RefreshManagerAppointment();
+            resetFields();
             changeManagerAppointment.Close();
         }
 

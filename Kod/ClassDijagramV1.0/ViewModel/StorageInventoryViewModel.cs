@@ -175,5 +175,10 @@ namespace ClassDijagramV1._0.ViewModel
                 }
             }
         }
+
+        public void ResetSelectedEquipment()
+        {
+            this.selectedEquipment = null;
+        }
     }
 }

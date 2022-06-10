@@ -68,8 +68,8 @@
                         <Label Content="Vreme:" FontSize="26" Height="40" Margin="40,10,0,5" HorizontalContentAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="45" Margin="0,5,0,5" FontSize="20" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedFromDate,Mode=TwoWay}" Style="{StaticResource BasicTextBox}"/>
-                        <TextBox x:Name="FromTimeField" Width="200" Background="#E7E7E7" Height="45" Margin="0,5,0,5" FontSize="20" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromTime,Mode=TwoWay}"  Style="{StaticResource BasicTextBox}"/>
+                        <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="45" Margin="0,5,0,5" FontSize="20" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedFromDate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextBox}"/>
+                        <TextBox x:Name="FromTimeField" Width="200" Background="#E7E7E7" Height="45" Margin="0,5,0,5" FontSize="20" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedFromTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource BasicTextBox}"/>
                     </StackPanel>
                 </StackPanel>
 
@@ -80,11 +80,11 @@
                         <Label Content="Vreme:" FontSize="26" Height="40" Margin="40,10,0,5" HorizontalContentAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="45" Margin="0,5,0,5" FontSize="20" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedToDate,Mode=TwoWay}"  Style="{StaticResource BasicTextBox}"/>
-                        <TextBox x:Name="ToTimeField" Width="200" Background="#E7E7E7" Height="45" Margin="0,5,0,5" FontSize="20" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToTime,Mode=TwoWay}"  Style="{StaticResource BasicTextBox}"/>
+                        <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="45" Margin="0,5,0,5" FontSize="20" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedToDate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource BasicTextBox}"/>
+                        <TextBox x:Name="ToTimeField" Width="200" Background="#E7E7E7" Height="45" Margin="0,5,0,5" FontSize="20" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedToTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource BasicTextBox}"/>
                     </StackPanel>
                 </StackPanel>
-
+                <Label Width="300" HorizontalAlignment="Left" Content="{Binding ErrorMessage,UpdateSourceTrigger=PropertyChanged}" FontSize="14" Margin="50,15,0,5" Foreground="Red"/>
             </StackPanel>
         </Grid>
 

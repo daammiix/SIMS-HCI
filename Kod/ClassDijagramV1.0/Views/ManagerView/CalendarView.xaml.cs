@@ -35,7 +35,7 @@ namespace ClassDijagramV1._0.Views.ManagerView
             ManagerAppointments = managerAppointmentController.GetAllManagerAppointments();
         }
 
-        private void Schedule_CellTapped(object sender, CellTappedEventArgs e)
+        public void Schedule_CellTapped(object sender, CellTappedEventArgs e)
         {
             this.selectedDate = e.DateTime;
             calendarViewModel.ManagerAppointmentsOfDay.Clear();
@@ -49,10 +49,9 @@ namespace ClassDijagramV1._0.Views.ManagerView
 
                         calendarViewModel.selectedDate = e.DateTime;
                     }
-                    if(managerAppointment.Start.Day != selectedDate.Day)
+                    if (managerAppointment.Start.Day != selectedDate.Day)
                     {
-                        calendarViewModel.selectedDate = DateTime.MinValue;
-
+                        calendarViewModel.selectedDate = e.DateTime;
                     }
                 }
             }

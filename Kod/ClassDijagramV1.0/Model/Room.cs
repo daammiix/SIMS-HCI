@@ -97,11 +97,11 @@ namespace Model
 
         public Room(String RoomID, String RoomName, int Floor, int RoomNumber, String RoomStatus, BindingList<RoomEquipmentBinding>? EquipmentList = null, BindingList<RoomMedicineBinding>? MedicineList = null)
         {
-            this.RoomID = RoomID;
-            this.RoomName = RoomName;
-            this.Floor = Floor;
-            this.RoomNumber = RoomNumber;
-            this.RoomStatus = RoomStatus;
+            this._roomID = RoomID;
+            this._roomName = RoomName;
+            this._floor = Floor;
+            this._roomNumber = RoomNumber;
+            this._roomStatus = RoomStatus;
             if (EquipmentList != null) { this.EquipmentList = EquipmentList; }
             if (MedicineList != null) { this.MedicineList = MedicineList; }
         }
