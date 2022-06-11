@@ -228,6 +228,18 @@ namespace Service
             return closestFreeTermin;
         }
 
+        /// <summary>
+        /// Vraca listu appointmenta za odredjeni period
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
+        public List<Appointment> GetAppointmentsForRange(DateTime from, DateTime to)
+        {
+            return _appointmentRepo.GetListOfAppointments().ToList()
+                .Where(appointment => (appointment.AppointmentDate >= from) && (appointment.AppointmentDate <= to)).ToList();
+        }
+
         #endregion
 
 

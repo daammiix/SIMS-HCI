@@ -17,6 +17,8 @@
                 <ResourceDictionary Source="../../../Styles/Button.xaml"/>
                 <ResourceDictionary Source="../../../Styles/CheckBox.xaml"/>
                 <ResourceDictionary Source="../../../Styles/DataGrid.xaml"/>
+                <ResourceDictionary Source="../../../Styles/CheckBox.xaml"/>
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -46,6 +48,7 @@
                   ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyleAccounts}" 
                   Grid.Row="0"
                   Margin="0,15,0,0"
+                  VerticalScrollBarVisibility="Hidden"
                   SelectedItem="{Binding AccountViewModel, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Accounts, UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.Resources>
@@ -78,10 +81,12 @@
                                     Width="3*"/>
                     <DataGridCheckBoxColumn Header="Banned"
                                         Binding="{Binding Banned}"
-                                        Width="*"/>
+                                        Width="*"
+                                        ElementStyle="{StaticResource CircleCheckBox}"/>
                     <DataGridCheckBoxColumn Header="Guest"
                                         Binding="{Binding IsGuest}"
-                                        Width="*"/>
+                                        Width="*"
+                                        ElementStyle="{StaticResource CircleCheckBox}"/>
                 </DataGrid.Columns>
             </DataGrid>
 

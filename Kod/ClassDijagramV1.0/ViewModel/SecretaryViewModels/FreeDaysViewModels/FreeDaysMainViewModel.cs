@@ -188,13 +188,16 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.FreeDaysViewModels
             }
 
             // Brisemo iz view-a mora iz dispatcher threda jer je on napravio
-            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            if (Application.Current.Dispatcher != null)
             {
-                toRemove.ForEach(freeDayRequestViewModel => FreeDayRequests.Remove(freeDayRequestViewModel));
-                toRemoveResolved.ForEach(freeDayRequestResolvedViewModel => FreeDayRequestsResolved.Remove(freeDayRequestResolvedViewModel));
-            }));
-            // Brisemo iz baze
-            DeleteFromBase(toRemove, toRemoveResolved);
+                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    toRemove.ForEach(freeDayRequestViewModel => FreeDayRequests.Remove(freeDayRequestViewModel));
+                    toRemoveResolved.ForEach(freeDayRequestResolvedViewModel => FreeDayRequestsResolved.Remove(freeDayRequestResolvedViewModel));
+                }));
+                // Brisemo iz baze
+                DeleteFromBase(toRemove, toRemoveResolved);
+            }
         }
 
         /// <summary>

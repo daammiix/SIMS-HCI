@@ -4,7 +4,7 @@
     "RoomName": "Operaciona Sala",
     "Floor": 3,
     "RoomNumber": 27,
-    "RoomStatus": "Renoviranje",
+    "RoomStatus": "Aktivna",
     "EquipmentList": [
       {
         "EquipmentID": "OUL5",
@@ -22,7 +22,7 @@
     "RoomName": "Sala za preglede",
     "Floor": 1,
     "RoomNumber": 21,
-    "RoomStatus": "Renoviranje",
+    "RoomStatus": "Aktivna",
     "EquipmentList": [
       {
         "EquipmentID": "INST6",

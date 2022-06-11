@@ -224,7 +224,8 @@
                        Foreground="{StaticResource SLightGrayShade}"/>
                 <Button Content="Generisi" 
                     Style="{StaticResource AccountButtonsStyle}"
-                    Margin="20,0,0,0"/>
+                    Margin="20,0,0,0"
+                    Command="{Binding GenerateCommand}"/>
             </StackPanel>
         </Border>
     </Grid>
