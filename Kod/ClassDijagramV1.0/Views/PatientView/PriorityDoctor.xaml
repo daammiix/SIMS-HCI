@@ -102,7 +102,7 @@
                        VerticalAlignment="Center"
                        Text="Nemate izabranog doktora?" Margin="0 20" FontSize="20"/>
             <Button Style="{StaticResource MaterialDesignPaperSecondaryButton}"
-                    Content="Izaberite doktora opšte prakse" />
+                    Content="Izaberite doktora opšte prakse" Click="addDoctor" />
 
          </StackPanel>
         

@@ -140,6 +140,10 @@
                          FontWeight="Bold"
                          TextAlignment="Center"
                          Margin="20"/>
+                <ComboBox ItemsSource="{Binding Doctors}"
+                          SelectedItem="{Binding SelectedDoctor}"
+                          Width="200"
+                          Margin="20"/>
                 <Expander  Width="200"
                            Margin="20"
                            Header="Alergeni"

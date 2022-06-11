@@ -189,12 +189,8 @@
                             VerticalAlignment="Top"
                             Height="68" >
 
-                        <Button
-                          Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-                          CommandParameter="{x:Static Dock.Right}"
-                          Margin="4"
-                          Content="{materialDesign:PackIcon Kind=ArrowRight}" />
-                    
+                        
+
                         <Button x:Name="notificationBtn" Style="{StaticResource ResourceKey=noBackBlue}"
                                     Cursor="Hand"
                                     Width="68" Height="68"
@@ -205,19 +201,33 @@
                                     ToolTip="Obavještenja">
                                     <Image Source="Resources/Images/notification.png"
                                            Width="42" Height="42"/>
-                            </Button>
-                    
-                            <Button x:Name="logoutBtn" Style="{StaticResource ResourceKey=noBackBlue}"
-                                    Cursor="Hand"
-                                    Width="68" Height="68"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Center" 
-                    BorderBrush="{x:Null}"
-                    Margin="0, 0, 0, 0"
-                    Click="Logout" ToolTip="Odjavi se">
-                        <Image Source="Resources/Images/logout.png" Width="42" Height="42"/>
-                    </Button>
-                </StackPanel>
+                        </Button>
+                        <Button
+                                  Style="{StaticResource ResourceKey=noBackBlue}"
+                                  Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                                  CommandParameter="{x:Static Dock.Right}"
+                                  Cursor="Hand"
+                                  HorizontalAlignment="Right"
+                                  VerticalAlignment="Center" 
+                                  BorderBrush="{x:Null}"
+                                  ToolTip="Meni"
+                                  Width="68" Height="68">
+                            <Image Source="Resources/Images/meni.png"
+                                        Width="42" Height="42"/>
+                        </Button>
+                        <Button x:Name="logoutBtn" Style="{StaticResource ResourceKey=noBackBlue}"
+                                Cursor="Hand"
+                                Width="68" Height="68"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center" 
+                                BorderBrush="{x:Null}"
+                                Margin="0, 0, 0, 0"
+                                Click="Logout"
+                                ToolTip="Odjavi se">
+                                <Image Source="Resources/Images/logout.png" Width="42" Height="42"/>
+                        </Button>
+                        
+                    </StackPanel>
                 
             </DockPanel>
 
