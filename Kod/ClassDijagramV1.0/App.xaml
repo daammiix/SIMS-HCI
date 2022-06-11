@@ -20,6 +20,8 @@
              xmlns:freeDaysView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.FreeDaysView"
              xmlns:statisticalDataViewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.StatisticalDataViewModels"
              xmlns:statisticalDataView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.StatisticalDataView"
+             xmlns:profileViewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.ProfileViewModels"
+             xmlns:profileView="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.ProfileView"
              xmlns:viewModel="clr-namespace:ClassDijagramV1._0.ViewModel"
              xmlns:view="clr-namespace:ClassDijagramV1._0.Views"
              StartupUri="Views/MainWindow.xaml"
@@ -34,6 +36,10 @@
             </ResourceDictionary.MergedDictionaries>
 
             <!-- Secretary -->
+            <DataTemplate DataType="{x:Type profileViewModels:ProfileMainViewModel}">
+                <profileView:ProfileMainView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type statisticalDataViewModels:StatisticalDataMainViewModel}">
                 <statisticalDataView:StatisticalDataMainView/>
             </DataTemplate>

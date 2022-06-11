@@ -6,6 +6,11 @@ namespace ClassDijagramV1._0.Model
 {
     public class Account : ObservableObject
     {
+        #region Static Fields
+
+        public static int idCounter = 0;
+
+        #endregion
 
         #region Fields
 
@@ -118,6 +123,7 @@ namespace ClassDijagramV1._0.Model
 
         public Account(int personId, Role role, string username = "", string password = "", bool isGuest = false, bool banned = false)
         {
+            Id = ++idCounter;
             Role = role;
             Username = username;
             Password = password;

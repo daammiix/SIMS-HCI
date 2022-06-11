@@ -51,7 +51,7 @@ namespace ClassDijagramV1._0.Repository
         }
 
         /// <summary>
-        /// Dodaje novi account u listu account-a ako ne postoji account sa istim username-om
+        /// Dodaje novi account u listu account-a ako ne postoji account sa istim username-om ili id-em
         /// </summary>
         /// <param name="newAccount"></param>
         /// <returns>true ako je novi acc uspesno dodat, u suprotnom false</returns>
@@ -63,7 +63,7 @@ namespace ClassDijagramV1._0.Repository
             // Provera da li postoji account sa istim username-om
             foreach (Account account in Accounts)
             {
-                if (account.Username.Equals(newAccount.Username))
+                if (account.Username.Equals(newAccount.Username) || account.Id == newAccount.Id)
                 {
                     notExists = false;
                     toUpdate = account;
