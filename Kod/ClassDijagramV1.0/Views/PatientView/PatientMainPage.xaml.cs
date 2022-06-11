@@ -185,12 +185,12 @@ namespace ClassDijagramV1._0.Views.PatientView
         /// <returns></returns>
         private void addMedicalReportToAllAppointmnts(Appointment appointment)
         {
-            Random rnd = new Random();
+            Random rnd1 = new Random();
+            Random rnd2 = new Random();
             var medicines = _medicineController.GetAllMedicines();
-            List<String> dvaLijeka = new List<String>() { medicines[rnd.Next(0, medicines.Count - 1)].Name ,
-                                                          medicines[rnd.Next(0, medicines.Count - 1)].Name };
+            List<String> dvaLijeka = new List<String>() { medicines[rnd1.Next(0, medicines.Count - 1)].Name ,
+                                                          medicines[rnd2.Next(0, medicines.Count - 1)].Name };
             String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet purus a ligula tempus porttitor. Ut urna orci, fermentum eget nibh quis, commodo convallis eros. Maecenas ut efficitur nisi, ac hendrerit dolor. Nullam non pretium lectus. Nulla facilisi. Praesent euismod mi nunc, ut commodo felis efficitur a. Cras quis arcu tortor. Nam congue ultrices metus eget eleifend. In hac habitasse platea dictumst. Nunc bibendum ante nec iaculis aliquet. In vel odio." +
-                                "Donec placerat pretium velit ac eleifend.Suspendisse vel vehicula lacus, et mollis orci.Vestibulum dictum dolor a cursus laoreet.Nunc vel ex at leo egestas malesuada sed accumsan eros.Vestibulum auctor, massa ut viverra vulputate, dui lectus accumsan urna, non pharetra risus nunc eu felis.Nulla eu accumsan metus.Vestibulum tempor convallis quam, at ornare felis molestie vitae.Fusce vel ante sed felis pharetra pharetra at quis neque.Ut eleifend pellentesque mauris," +
                                 " commodo convallis eros. Maecenas ut efficitur nisi, ac hendrerit dolor. Nullam non pretium lectus. Nulla facilisi. Praesent euismod mi nunc, ut commodo felis efficitur a. Cras quis arcu tortor. Nam congue ultrices metus eget eleifend. In hac habitasse platea dictumst. Nunc bibendum ante nec iaculis aliquet. In vel odio auctor, molestie risus at, faucibus orci. Etiam feugiat neque mauris, ut ultrices lectus porttitor eu. Nullam in sodales elit, sit amet auctor odio.";
             MedicineDrug medicine1 = new MedicineDrug(dvaLijeka[0],DateTime.Now,DateTime.Now.AddDays(21),8);
             MedicineDrug medicine2 = new MedicineDrug(dvaLijeka[0], DateTime.Now.AddDays(1), DateTime.Now.AddDays(2), 16);

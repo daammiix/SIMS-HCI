@@ -20,12 +20,6 @@
     </Page.Resources>
     <StackPanel>
         <TextBlock Text="Obavještenja" Margin="40,20,0,20" FontSize="64"/>
-        <!--<DataGrid Height="300" Margin="20"  
-                          AutoGenerateColumns="True"
-                          ItemsSource="{Binding Drugs}"
-                          SelectionMode="Single">
-
-        </DataGrid> --> 
         <DataGrid Height="300" Margin="20"  
                           AutoGenerateColumns="False"
                           ItemsSource="{Binding Notifications}"
@@ -37,7 +31,6 @@
                 <DataGridCheckBoxColumn Header="Pregledana" Binding="{Binding IsRead}" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Dodaj zabilješku" Width="176" Height="42" HorizontalAlignment="Right" Margin="0, 20,100,0" Click="addAlarmClick" />
-        <Button Content="Dodaj lijek od doktora" Width="176" Height="42" HorizontalAlignment="Right" Margin="0, 20,100,0" Click="addDrug"/>
+        <Button Content="Dodaj alarm" Width="176" Height="42" HorizontalAlignment="Right" Margin="0, 20,100,0" Click="addAlarmClick" />
     </StackPanel>
 </Page>

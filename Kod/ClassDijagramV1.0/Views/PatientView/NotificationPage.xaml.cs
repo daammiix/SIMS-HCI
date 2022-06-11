@@ -52,7 +52,11 @@ namespace ClassDijagramV1._0.Views.PatientView
             Notifications = _notificationController.GetAllNotifications();
         }
 
-        private void addDrug(object sender, RoutedEventArgs e)
+        private void addAlarmClick(object sender, RoutedEventArgs e)
+        {
+            parent.startWindow.Content = new AddAlarmPage(parent);
+        }
+        /*private void addDrug(object sender, RoutedEventArgs e)
         {
             //drug1 = new MedicineDrug("Lekadol", DateTime.Now.AddSeconds(10), DateTime.Now.AddSeconds(40), 8);
             //var start = new DateTime(2022, 4, 25, 20, 46 , 0);
@@ -88,15 +92,12 @@ namespace ClassDijagramV1._0.Views.PatientView
             timer.Elapsed += (sender, e) => { aTimer.Start(); };    // 30 sekundi prije dolazi notifikacija da se popije prvi lijek i pokrece se tajmer notifikacija
             timer.Start();
 
-        }
-
-        private void addAlarmClick(object sender, RoutedEventArgs e)
-        {
-            parent.startWindow.Content = new AddAlarmPage(parent);
-        }
+        }*/
 
 
-        
+
+
+
 
     }
 }

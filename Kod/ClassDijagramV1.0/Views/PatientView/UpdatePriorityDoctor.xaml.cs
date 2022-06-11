@@ -112,26 +112,36 @@ namespace ClassDijagramV1._0.Views.PatientView
 
         private void dodavanjPregledaDoktor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            Doctor l = (Doctor)izmjenaPregledaDoktor.SelectedItem;
-
+            
             DoctorsAppointmentsTime = new ObservableCollection<string>();
             List<Appointment> termini = new List<Appointment>();
+           
             if (izmjenaPregledaDoktor.SelectedItem != null && promjenaKalendar.SelectedDate != null)
             {
-                foreach (Appointment termin in Appointments)
-                {
-                    Doctor d = _doctorController.GetDoctorById(termin.DoctorId);
-                    if (l.Id == d.Id)
-                    {
-                        if (termin.AppointmentDate.Date.Equals(promjenaKalendar.SelectedDate))
-                        {
-                            termini.Add(termin);
-                        }
-                    }
-                }
+                termini = GetDoctorsAppointmentsThatDay();    
             }
 
+            FillDoctorsAppointmntsTime(termini);
+            EnableButton();
+        }
+
+        private List<Appointment> GetDoctorsAppointmentsThatDay()
+        {
+            List<Appointment> termini = new List<Appointment>();
+            Doctor l = (Doctor)izmjenaPregledaDoktor.SelectedItem;
+            foreach (Appointment termin in Appointments)
+            {
+                if (l.Id == termin.DoctorId
+                    && termin.AppointmentDate.Date.Equals(promjenaKalendar.SelectedDate))
+                {
+                    termini.Add(termin);
+                }
+            }
+            return termini;
+        }
+
+        private void FillDoctorsAppointmntsTime(List<Appointment> termini)
+        {
             DateTime danas = DateTime.Today;
 
             for (DateTime tm = danas.AddHours(7); tm < danas.AddHours(15); tm = tm.AddMinutes(30))
@@ -146,14 +156,14 @@ namespace ClassDijagramV1._0.Views.PatientView
                         slobodno = false;
                     }
                 }
-
                 if (slobodno)
                     DoctorsAppointmentsTime.Add(tm.ToString("HH:mm"));
-
             }
-
             timeCB.ItemsSource = DoctorsAppointmentsTime;
+        }
 
+        private void EnableButton()
+        {
             if (izmjenaPregledaDoktor.SelectedItem != null && promjenaKalendar.SelectedDate != null && timeCB.SelectedItem != null)
             {
                 addAppBtn.IsEnabled = true;
@@ -162,7 +172,6 @@ namespace ClassDijagramV1._0.Views.PatientView
             {
                 addAppBtn.IsEnabled = false;
             }
-
         }
     }
 }
