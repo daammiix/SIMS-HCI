@@ -93,11 +93,5 @@ namespace ClassDijagramV1._0.Views.PatientView
             timer.Start();
 
         }*/
-
-
-
-
-
-
     }
 }

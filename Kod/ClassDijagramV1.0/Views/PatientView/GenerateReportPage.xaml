@@ -24,7 +24,6 @@
             <RowDefinition Height="8" />
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -41,12 +40,18 @@
             Margin="42 0 0 0"/>
 
         <StackPanel Grid.Row="2" Grid.Column="1"
-                    Width="400" Height="300">
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center"
+                    Margin="0 80 0 0">
             
-            <Label Content="Generišite izvještaj za uvid u zakazane preglede i operacije"/>
+            <Label Content="Generišite izvještaj za uvid u zakazane preglede i operacije"
+                   FontSize="24"/>
 
-            <StackPanel Orientation="Horizontal">
-                <Label Content="OD :"/>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Center"
+                        Margin="0 30 0 0" >
+                <Label Content="Od :"/>
                 <DatePicker Grid.Row="1" Grid.Column="1"
                         HorizontalAlignment="right"
                         x:Name="kalendarod" FirstDayOfWeek="Monday"
@@ -59,8 +64,11 @@
             </StackPanel>
 
 
-            <StackPanel Orientation="Horizontal">
-                <Label Content="DO :"/>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Center"
+                        Margin="0 10 0 0" >
+                <Label Content="Do :"/>
                 <DatePicker Grid.Row="1" Grid.Column="1"
                         HorizontalAlignment="right"
                         x:Name="kalendardo" FirstDayOfWeek="Monday"
@@ -72,10 +80,11 @@
                 </DatePicker>
             </StackPanel>
             <Button x:Name="zakazi" Style="{StaticResource MaterialDesignFlatAccentBgButton}"
-                    Content="Zakazi pregled"
+                    Content="Generiši izvještaj"
                     IsEnabled="True"
                     Width="176" Height="42"
-                    Margin="8 8 8 16" Click="ReportPDFClick" />
+                    Margin="70 30 8 16" Click="ReportPDFClick" 
+                    HorizontalAlignment="Center"/>
         </StackPanel>
 
 

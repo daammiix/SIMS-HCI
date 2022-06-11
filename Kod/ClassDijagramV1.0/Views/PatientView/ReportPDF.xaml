@@ -8,50 +8,66 @@
       d:DesignHeight="1000" d:DesignWidth="800"
       Title="ReportPDF">
 
-        <Page.Resources>
-            <ResourceDictionary>
-                <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
-                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Grey.xaml" />
-                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.LightBlue.xaml" />
-                </ResourceDictionary.MergedDictionaries>
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Grey.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.LightBlue.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
-            </ResourceDictionary>
-        </Page.Resources>
-        <Grid Margin="10,30,10,10">
-        <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" Margin="100,0,0,0">
-                <Label FontSize="28">Izveštaj o zakazanim terminima</Label>
-                <Label Margin="50,0,0,0" VerticalAlignment="Center" FontSize="20">Izdato:</Label>
-                <Label x:Name="DateOfPrinting" VerticalAlignment="Center" FontSize="20"></Label>
+        </ResourceDictionary>
+    </Page.Resources>
+    <StackPanel Orientation="Vertical">
+        <DockPanel>
+            <StackPanel Width="200" Height="80">
+                <Image
+                    Source="Resources/Images/logo.jpg"  Height="80" Width="200" Stretch="Fill" />
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label x:Name="FromLabel" Content="{Binding Path=From}"></Label>
-                <Label Content=" - " ></Label>
-                <Label x:Name="ToLabel" Content="{Binding Path=To}"></Label>
+            <StackPanel HorizontalAlignment="Left">
+                <Label Content="Opšta bolnica" FontSize="24"/>
+                <Label Content="Novi Sad" FontSize="24"/>
             </StackPanel>
-            <DataGrid x:Name="AppointmentPreview"
+            <StackPanel HorizontalAlignment="Right">
+                <Label Content="21000 Novi Sad, ul. Dr. Sime Miloševića 6" />
+                <Label Content="Info pult: 065/123-456;"/>
+                <Label Content="Website: www.bolnica.org"/>
+                <Label Content="Email: bolnica.zdravo@gmail.org" />
+            </StackPanel>
+        </DockPanel>
+        <Rectangle HorizontalAlignment="Center" Height="5" Stroke="Black" Width="800">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="Black"></SolidColorBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" Margin="100,0,0,0">
+            <Label FontSize="28">Izvještaj o zakazanim pregledima</Label>
+            <Label Margin="50,0,0,0" VerticalAlignment="Center" FontSize="20">Izdato:</Label>
+            <Label x:Name="DateOfPrinting" VerticalAlignment="Center" FontSize="20"></Label>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Label x:Name="FromLabel" Content="{Binding Path=From}"></Label>
+            <Label Content=" - " ></Label>
+            <Label x:Name="ToLabel" Content="{Binding Path=To}"></Label>
+        </StackPanel>
+        <DataGrid x:Name="AppointmentPreview"
                       AutoGenerateColumns="False"
                       HorizontalScrollBarVisibility="Hidden"
                       HorizontalAlignment="Center"
                       Height="800"
                       Width="720"
                       Margin="30">
-
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Datum" Binding="{Binding AppointmentDate}" Width="180"/>
-                    <DataGridTextColumn Header="Trajanje" Binding="{Binding Duration}" Width="80"/>
-                    <DataGridTextColumn Header="Pacijent" Binding="{Binding Patient}" Width="130"/>
-                    <DataGridTextColumn Header="Lekar" Binding="{Binding Doctor}" Width="130"/>
-                    <DataGridTextColumn Header="Prostorija" Binding="{Binding Room}" Width="110"/>
-                    <DataGridTextColumn Header="Tip" Binding="{Binding AppointmentType}" Width="70"/>
-
-                </DataGrid.Columns>
-
-            </DataGrid>
-        </StackPanel>
-
-    </Grid>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Datum" Binding="{Binding AppointmentDate}" Width="auto"/>
+                <DataGridTextColumn Header="Trajanje" Binding="{Binding Duration}" Width="auto"/>
+                <DataGridTextColumn Header="Pacijent" Binding="{Binding PatientName}" Width="auto"/>
+                <DataGridTextColumn Header="Lekar" Binding="{Binding DoctorName}" Width="auto"/>
+                <DataGridTextColumn Header="Prostorija" Binding="{Binding Room.RoomNumber}" Width="auto"/>
+                <DataGridTextColumn Header="Tip" Binding="{Binding AppointmentTypeStr}" Width="auto"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
 </Page>

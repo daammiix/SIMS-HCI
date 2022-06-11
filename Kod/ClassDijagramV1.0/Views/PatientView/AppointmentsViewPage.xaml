@@ -40,12 +40,12 @@
             VerticalAlignment="Top" 
             Margin="42 0 0 0"/>
         <StackPanel Grid.Row="2" Grid.Column="2">
-            <Button x:Name="zakazi" Style="{StaticResource MaterialDesignFlatAccentBgButton}" Content="Zakazi pregled" Click="AddAppontment_Click"
+            <Button x:Name="zakazi" Style="{StaticResource MaterialDesignFlatAccentBgButton}" Content="Zakaži pregled" Click="AddAppontment_Click"
                     Margin="8 8 8 16"/>
             <Button x:Name="izmijeni" Style="{StaticResource MaterialDesignFlatAccentBgButton}" Content="Izmijeni pregled" Click="UpdateAppontment_Click"
-                    Margin="8 0 8 16"/>
-            <Button x:Name="otkazi" Style="{StaticResource MaterialDesignFlatAccentBgButton}" Content="Otkazi pregled" Click="RemoveAppontment_Click"
-                    Margin="8 0 8 16"/>
+                    Margin="8 0 8 16" IsEnabled="False"/>
+            <Button x:Name="otkazi" Style="{StaticResource MaterialDesignFlatAccentBgButton}" Content="Otkaži pregled" Click="RemoveAppontment_Click"
+                    Margin="8 0 8 16" IsEnabled="False"/>
             <Label x:Name="errorBan" Foreground="Red" />
         </StackPanel>
 
@@ -55,23 +55,23 @@
                   AutoGenerateColumns="False"
                   SelectedItem="{Binding SelectedAppointment, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Appointments, UpdateSourceTrigger=PropertyChanged}"
-                  SelectionMode="Single" IsReadOnly="True" >
+                  SelectionMode="Single" IsReadOnly="True" SelectionChanged="omogucidugmad" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Ime Pacijenta" Binding="{Binding PatientName}"/>
-                <DataGridTextColumn Header="Ime Doktora" Binding="{Binding DoctorName}" />
-                <DataGridTextColumn Header="Soba" Binding="{Binding Room.RoomNumber}" />
-                <DataGridTextColumn Header="Trajanje" Binding="{Binding Duration}" />
-                <DataGridTextColumn Header="Datum pregleda" Binding="{Binding AppointmentDate}" Width="*"/>
+                <DataGridTextColumn Header="Ime Pacijenta" Binding="{Binding PatientName}" Width="150" />
+                <DataGridTextColumn Header="Ime Doktora" Binding="{Binding DoctorName}" Width="*" />
+                <DataGridTextColumn Header="Soba" Binding="{Binding Room.RoomNumber}" Width="100" />
+                <DataGridTextColumn Header="Trajanje" Binding="{Binding Duration}" Width="*" />
+                <DataGridTextColumn Header="Datum pregleda" Binding="{Binding AppointmentDate}" Width="200"/>
             </DataGrid.Columns>
         </DataGrid>
         <DockPanel Grid.Row="3" Grid.Column="1">
-            <TextBlock Text="Generisi izvjestaj o pregledima i operacijama" FontSize="28"
+            <TextBlock Text="Generiši izvještaj o pregledima i operacijama" FontSize="28"
                         Margin="8" VerticalAlignment="Top"/>
             <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
                     VerticalAlignment="Center" HorizontalAlignment="Right"
                     Margin="8" Click="generatePDFClick">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock>Generisi</TextBlock>
+                    <TextBlock>Generiši</TextBlock>
                     <Image Source="Resources/Images/pdf.png"/>
 
                 </StackPanel>

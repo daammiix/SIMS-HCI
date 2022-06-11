@@ -26,11 +26,12 @@
                           SelectionMode="Single"
                   CanUserAddRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Opis" Binding="{Binding Content}" Width="auto" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Opis" Binding="{Binding Content}" Width="auto"  IsReadOnly="True"/>
 
-                <DataGridCheckBoxColumn Header="Pregledana" Binding="{Binding IsRead}" />
+                <DataGridCheckBoxColumn Header="Pregledana" Binding="{Binding IsRead}" Width="auto" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Dodaj alarm" Width="176" Height="42" HorizontalAlignment="Right" Margin="0, 20,100,0" Click="addAlarmClick" />
+        <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
+                Content="Dodaj alarm" Width="176" Height="42" HorizontalAlignment="Right" Margin="0, 20,100,0" Click="addAlarmClick" />
     </StackPanel>
 </Page>

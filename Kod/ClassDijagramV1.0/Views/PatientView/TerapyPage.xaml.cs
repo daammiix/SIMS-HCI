@@ -40,13 +40,8 @@ namespace ClassDijagramV1._0.Views.PatientView
 
             sac = new ScheduleAppointmentCollection();
             boje = new List<SolidColorBrush>();
-            boje.Add(new SolidColorBrush(Colors.Red));
+            boje.Add(new SolidColorBrush(Colors.Orchid));
             boje.Add(new SolidColorBrush(Colors.Orange));
-            boje.Add(new SolidColorBrush(Colors.Yellow));
-            boje.Add(new SolidColorBrush(Colors.Green));
-            boje.Add(new SolidColorBrush(Colors.Blue));
-            boje.Add(new SolidColorBrush(Colors.Purple));
-            boje.Add(new SolidColorBrush(Colors.DeepPink));
             FillCalendar();
         }
 
@@ -65,7 +60,7 @@ namespace ClassDijagramV1._0.Views.PatientView
                 sa.Subject = t.Name;
                 sa.EndTime = t.Date.AddMinutes(10);
                 sa.IsAllDay = false;
-                sa.AppointmentBackground = boje[rnd.Next(0,7)];
+                sa.AppointmentBackground = boje[rnd.Next(0,2)];
                 sac.Add(sa);
             }
 
@@ -84,7 +79,8 @@ namespace ClassDijagramV1._0.Views.PatientView
                     while (iterator < t.StopTaking)
                     {
                         iterator = iterator.AddHours(t.Interval);
-                        therapies.Add(new TherapyDTO(t.MedicineName, iterator));
+                        if(iterator>=DateTime.Now)
+                            therapies.Add(new TherapyDTO(t.MedicineName, iterator));
                     }
                 }
             }

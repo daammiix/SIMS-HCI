@@ -47,15 +47,15 @@
                   ItemsSource="{Binding OldAppointments, UpdateSourceTrigger=PropertyChanged}"
                   SelectionMode="Single" IsReadOnly="True" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Ime Pacijenta" Binding="{Binding PatientName}"/>
-                <DataGridTextColumn Header="Ime Doktora" Binding="{Binding DoctorName}" />
-                <DataGridTextColumn Header="Soba" Binding="{Binding Room.RoomNumber}" />
-                <DataGridTextColumn Header="Trajanje" Binding="{Binding Duration}" />
-                <DataGridTextColumn Header="Datum pregleda" Binding="{Binding AppointmentDate}"/>
-                <DataGridTemplateColumn Header="Opširnije">
+                <DataGridTextColumn Header="Ime Pacijenta" Binding="{Binding PatientName}" Width="*" />
+                <DataGridTextColumn Header="Ime Doktora" Binding="{Binding DoctorName}" Width="*" />
+                <DataGridTextColumn Header="Soba" Binding="{Binding Room.RoomNumber}" Width="*" />
+                <DataGridTextColumn Header="Trajanje" Binding="{Binding Duration}" Width="*" />
+                <DataGridTextColumn Header="Datum pregleda" Binding="{Binding AppointmentDate}" Width="200" />
+                <DataGridTemplateColumn Header="Opširnije" Width="*" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="openSpecificAppointmentClick">Details</Button>
+                            <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}" Click="openSpecificAppointmentClick">Details</Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

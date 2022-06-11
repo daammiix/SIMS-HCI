@@ -26,12 +26,18 @@
 	  <None Remove="Images\roomDoor.png" />
 	  <None Remove="Images\secretary.png" />
 	  <None Remove="Images\user.png" />
+	  <None Remove="Views\PatientView\Resources\Images\ahh.jpg" />
 	  <None Remove="Views\PatientView\Resources\Images\back-arrow.png" />
+	  <None Remove="Views\PatientView\Resources\Images\blah.jpg" />
+	  <None Remove="Views\PatientView\Resources\Images\demo.jpg" />
 	  <None Remove="Views\PatientView\Resources\Images\doctor.png" />
+	  <None Remove="Views\PatientView\Resources\Images\istorijaPregleda.jpg" />
+	  <None Remove="Views\PatientView\Resources\Images\logo.jpg" />
 	  <None Remove="Views\PatientView\Resources\Images\logout.png" />
 	  <None Remove="Views\PatientView\Resources\Images\notification.png" />
 	  <None Remove="Views\PatientView\Resources\Images\ocjeni.jpg" />
 	  <None Remove="Views\PatientView\Resources\Images\pdf.png" />
+	  <None Remove="Views\PatientView\Resources\Images\podaci.jpg" />
 	  <None Remove="Views\PatientView\Resources\Images\pregledTermina.jpg" />
 	  <None Remove="Views\PatientView\Resources\Images\terapija.jpg" />
 	  <None Remove="Views\PatientView\Resources\Images\zakazivanjeTermina.jpg" />
@@ -107,7 +113,16 @@
 	  <Resource Include="Views\PatientView\Resources\Images\back-arrow.png">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
+	  <Resource Include="Views\PatientView\Resources\Images\demo.jpg">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
 	  <Resource Include="Views\PatientView\Resources\Images\doctor.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Views\PatientView\Resources\Images\istorijaPregleda.jpg">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Views\PatientView\Resources\Images\logo.jpg">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
 	  <Resource Include="Views\PatientView\Resources\Images\logout.png">
@@ -120,6 +135,9 @@
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
 	  <Resource Include="Views\PatientView\Resources\Images\pdf.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Views\PatientView\Resources\Images\podaci.jpg">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
 	  <Resource Include="Views\PatientView\Resources\Images\pregledTermina.jpg">

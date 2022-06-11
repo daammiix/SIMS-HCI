@@ -51,7 +51,7 @@
                    Margin="20 0 20 0"
                    VerticalAlignment="Center"/>
             <Label x:Name="doktor"
-                   Content="{Binding octor}"
+                   Content="{Binding Doctor}"
                    VerticalAlignment="Center"/>
         </StackPanel>
 

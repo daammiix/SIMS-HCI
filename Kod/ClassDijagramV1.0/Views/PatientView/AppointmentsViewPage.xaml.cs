@@ -112,6 +112,12 @@ namespace ClassDijagramV1._0.Views.PatientView
         {
             parent.startWindow.Content = new GenerateReportPage(parent ,Appointments);
         }
+
+        private void omogucidugmad(object sender, SelectionChangedEventArgs e)
+        {
+            otkazi.IsEnabled = true;
+            izmijeni.IsEnabled = true;
+        }
     }
 
     // Reprezentuje appointment u view-u
@@ -253,6 +259,30 @@ namespace ClassDijagramV1._0.Views.PatientView
                     _appointment.AppointmentDate = value;
                     OnPropertyChanged("AppointmentDate");
                 }
+            }
+        }
+
+        public string AppointmentTypeStr
+        {
+            get
+            {
+                switch (_appointment.AppointmentType)
+                {
+                    case AppointmentType.operation:
+                        {
+                            return "Operacija";
+                        }
+                    case AppointmentType.generalPractitionerCheckup:
+                        {
+                            return "Generalni pregled";
+                        }
+                    case AppointmentType.specialistCheckup:
+                        {
+                            return "Pregled specijaliste";
+                        }
+                }
+
+                return "";
             }
         }
 

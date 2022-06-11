@@ -46,6 +46,11 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            <Image Grid.Row="2" Grid.Column="0"
+                   Source="/Images/patient.png"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Margin="80 30 0 0"/>
             <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right" Width="5">
                 <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"
                            Width="5"

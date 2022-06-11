@@ -99,15 +99,14 @@ namespace ClassDijagramV1._0.Views.PatientView
 
             await Task.Delay(2000);
             prioritetDoktor.dodavanjPregledaDoktor.SelectedItem = _doctorController.GetAllDoctors()[0];
-            await Task.Delay(1000);
+            await Task.Delay(2000);
             prioritetDoktor.kalendar.SelectedDate = new DateTime(2222, 10, 10, 10, 0, 0);
-            await Task.Delay(1000);
+            await Task.Delay(2000);
             prioritetDoktor.timeCB.SelectedItem = "10:00";
             await Task.Delay(2000);
             prioritetDoktor.addAppBtn.Background = new SolidColorBrush(Colors.Orange);
-
-
             await Task.Delay(100);
+
             DateTime deset = new DateTime(2222,10,10,10,0,0);
             TimeSpan interval = new TimeSpan(0, 0, 30, 0);
             Appointment simulacijaPregled = new Appointment(parent.Patient.Id,
@@ -120,8 +119,9 @@ namespace ClassDijagramV1._0.Views.PatientView
             parent.startWindow.Content = avp;
             await Task.Delay(2000);
             avp.tabelaPregledi.SelectedItem = avm;
+            await Task.Delay(2000);
             avp.izmijeni.Background = new SolidColorBrush(Colors.Orange);
-            await Task.Delay(1000);
+            await Task.Delay(100);
 
             AppointmentUpdatePage aup = new AppointmentUpdatePage(parent, _appointmentViewModels);
             parent.startWindow.Content = aup;
@@ -133,27 +133,33 @@ namespace ClassDijagramV1._0.Views.PatientView
             prioritetUpdateDoktor.promjenaKalendar.SelectedDate = new DateTime(2222, 10, 10, 10, 0, 0);
 
             await Task.Delay(4000);
+            prioritetUpdateDoktor.izmjenaPregledaDoktor.SelectedItem = _doctorController.GetAllDoctors()[1];
+            await Task.Delay(2000);
             prioritetUpdateDoktor.promjenaKalendar.SelectedDate = new DateTime(2222, 10, 11, 11, 0, 0);
             await Task.Delay(2000);
             prioritetUpdateDoktor.timeCB.SelectedItem = "11:00";
             await Task.Delay(2000);
-            prioritetUpdateDoktor.addAppBtn.BorderThickness = new Thickness(5);
+            prioritetUpdateDoktor.addAppBtn.Background = new SolidColorBrush(Colors.Orange);
+            await Task.Delay(100);
 
-            
-            DateTime jedanaest = new DateTime(2222, 11, 11, 11, 0, 0);
+            DateTime jedanaest = new DateTime(2222, 10, 11, 11, 0, 0);
             Appointment simulacijaUpdatePregled = new Appointment(parent.Patient.Id,
-                                            _doctorController.GetAllDoctors()[0].Id, _roomController.GetAllRooms()[0].RoomID,
+                                            _doctorController.GetAllDoctors()[1].Id, _roomController.GetAllRooms()[0].RoomID,
                                             jedanaest, interval, AppointmentType.generalPractitionerCheckup);
             AppointmentViewModel auvm = new AppointmentViewModel(simulacijaUpdatePregled);
             _appointmentViewModels.Remove(avm);
             _appointmentViewModels.Add(auvm);
 
-            parent.startWindow.Content = avp;
+            AppointmentsViewPage avp2 = new AppointmentsViewPage(parent, _appointmentViewModels);
+            parent.startWindow.Content = avp2;
             await Task.Delay(4000);
-            avp.tabelaPregledi.SelectedItem = auvm;
+            avp2.tabelaPregledi.SelectedItem = auvm;
             await Task.Delay(4000);
-            avp.otkazi.Background = new SolidColorBrush(Colors.Orange);
+            avp2.otkazi.Background = new SolidColorBrush(Colors.Orange);
             _appointmentViewModels.Remove(auvm);
+            await Task.Delay(200);
+            AppointmentsViewPage avp3 = new AppointmentsViewPage(parent, _appointmentViewModels);
+            parent.startWindow.Content = avp3;
 
 
         }

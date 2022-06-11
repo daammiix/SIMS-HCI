@@ -55,7 +55,7 @@ namespace ClassDijagramV1._0.Views.PatientView
             aTimer.Elapsed += (sender, e) =>
             {
                 aTimer.Interval = 24 * 60 * 60 * 1000;
-                if (end1.AddMinutes(-1) <= DateTime.Now)
+                if (end1.AddSeconds(-1) <= DateTime.Now)
                 {
                     aTimer.Enabled = false;
                 }
@@ -64,7 +64,7 @@ namespace ClassDijagramV1._0.Views.PatientView
             };
 
             // prvo se okida ovaj tajmer, 
-            var span = notification.Created.AddMinutes(-1) - DateTime.Now;
+            var span = notification.Created.AddSeconds(-1) - DateTime.Now;
             var timer = new Timer { Interval = span.TotalMilliseconds, AutoReset = false };
             timer.Elapsed += (sender, e) => { aTimer.Start(); };    // 30 sekundi prije dolazi notifikacija da se popije prvi lijek i pokrece se tajmer notifikacija
             timer.Start();
