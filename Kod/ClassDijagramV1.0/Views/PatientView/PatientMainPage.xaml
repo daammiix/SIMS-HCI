@@ -88,7 +88,7 @@
                             Style="{StaticResource MaterialDesignToolButton}"
                             Width="30"
                             Padding="2 0 2 0"
-                            materialDesign:RippleAssist.IsCentered="True">
+                            materialDesign:RippleAssist.IsCentered="True" Click="pregledTerminaHTML">
                         <materialDesign:PackIcon Kind="Help" />
                     </Button>
                 </StackPanel>
@@ -141,7 +141,7 @@
                         Style="{StaticResource MaterialDesignToolButton}"
                         Width="30"
                         Padding="2 0 2 0"
-                        materialDesign:RippleAssist.IsCentered="True">
+                        materialDesign:RippleAssist.IsCentered="True" Click="ocjenjivanjeHTML">
                         <materialDesign:PackIcon Kind="Help" />
                     </Button>
                 </StackPanel>
@@ -195,7 +195,7 @@
                         Style="{StaticResource MaterialDesignToolButton}"
                         Width="30"
                         Padding="2 0 2 0"
-                        materialDesign:RippleAssist.IsCentered="True">
+                        materialDesign:RippleAssist.IsCentered="True" Click="zakazivanjePregledaHTML">
                         <materialDesign:PackIcon Kind="Help" />
                     </Button>
                 </StackPanel>
@@ -248,7 +248,7 @@
                         Style="{StaticResource MaterialDesignToolButton}"
                         Width="30"
                         Padding="2 0 2 0"
-                        materialDesign:RippleAssist.IsCentered="True">
+                        materialDesign:RippleAssist.IsCentered="True" Click="uvidUTerapijuHTML">
                         <materialDesign:PackIcon Kind="Help" />
                     </Button>
                 </StackPanel>
@@ -301,7 +301,7 @@
                         Style="{StaticResource MaterialDesignToolButton}"
                         Width="30"
                         Padding="2 0 2 0"
-                        materialDesign:RippleAssist.IsCentered="True">
+                        materialDesign:RippleAssist.IsCentered="True" Click="zdravstveniKartonHTML">
                         <materialDesign:PackIcon Kind="Help" />
                     </Button>
                 </StackPanel>
@@ -354,7 +354,7 @@
                         Style="{StaticResource MaterialDesignToolButton}"
                         Width="30"
                         Padding="2 0 2 0"
-                        materialDesign:RippleAssist.IsCentered="True">
+                        materialDesign:RippleAssist.IsCentered="True" Click="demoHTML">
                         <materialDesign:PackIcon Kind="Help" />
                     </Button>
                 </StackPanel>

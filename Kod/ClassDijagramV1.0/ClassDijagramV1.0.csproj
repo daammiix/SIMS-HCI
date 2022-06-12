@@ -31,6 +31,7 @@
 	  <None Remove="Views\PatientView\Resources\Images\blah.jpg" />
 	  <None Remove="Views\PatientView\Resources\Images\demo.jpg" />
 	  <None Remove="Views\PatientView\Resources\Images\doctor.png" />
+	  <None Remove="Views\PatientView\Resources\Images\index.html" />
 	  <None Remove="Views\PatientView\Resources\Images\istorijaPregleda.jpg" />
 	  <None Remove="Views\PatientView\Resources\Images\logo.jpg" />
 	  <None Remove="Views\PatientView\Resources\Images\logout.png" />
@@ -131,9 +132,6 @@
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
 	  <Resource Include="Views\PatientView\Resources\Images\meni.png">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </Resource>
-	  <Resource Include="Views\PatientView\Resources\Images\menu.png">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
 	  <Resource Include="Views\PatientView\Resources\Images\notification.png">

@@ -5,6 +5,7 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -205,6 +206,66 @@ namespace ClassDijagramV1._0.Views.PatientView
             {
                 appointment.MedicalReport = new MedicalReport(loremIpsum, medicineTherapy);
             }
+        }
+
+        private void pregledTerminaHTML(object sender, RoutedEventArgs e)
+        {
+            var path = "D:\\Fax\\SIMS\\SIMSProjekat\\SIMS-HCI\\Kod\\ClassDijagramV1.0\\Views\\PatientView\\Resources\\HTML\\pregledTermina.html";
+            var info = new ProcessStartInfo(path)
+            {
+                UseShellExecute = true,
+            };
+            Process.Start(info);
+        }
+
+        private void zakazivanjePregledaHTML(object sender, RoutedEventArgs e)
+        {
+            var path = "D:\\Fax\\SIMS\\SIMSProjekat\\SIMS-HCI\\Kod\\ClassDijagramV1.0\\Views\\PatientView\\Resources\\HTML\\zakazivanjeTermina.html";
+            var info = new ProcessStartInfo(path)
+            {
+                UseShellExecute = true,
+            };
+            Process.Start(info);
+        }
+
+        private void zdravstveniKartonHTML(object sender, RoutedEventArgs e)
+        {
+            var path = "D:\\Fax\\SIMS\\SIMSProjekat\\SIMS-HCI\\Kod\\ClassDijagramV1.0\\Views\\PatientView\\Resources\\HTML\\zdravstveniKarton.html";
+            var info = new ProcessStartInfo(path)
+            {
+                UseShellExecute = true,
+            };
+            Process.Start(info);
+        }
+
+        private void ocjenjivanjeHTML(object sender, RoutedEventArgs e)
+        {
+            var path = "D:\\Fax\\SIMS\\SIMSProjekat\\SIMS-HCI\\Kod\\ClassDijagramV1.0\\Views\\PatientView\\Resources\\HTML\\ocjenjivanje.html";
+            var info = new ProcessStartInfo(path)
+            {
+                UseShellExecute = true,
+            };
+            Process.Start(info);
+        }
+
+        private void uvidUTerapijuHTML(object sender, RoutedEventArgs e)
+        {
+            var path = "D:\\Fax\\SIMS\\SIMSProjekat\\SIMS-HCI\\Kod\\ClassDijagramV1.0\\Views\\PatientView\\Resources\\HTML\\uvidUTerapiju.html";
+            var info = new ProcessStartInfo(path)
+            {
+                UseShellExecute = true,
+            };
+            Process.Start(info);
+        }
+
+        private void demoHTML(object sender, RoutedEventArgs e)
+        {
+            var path = "D:\\Fax\\SIMS\\SIMSProjekat\\SIMS-HCI\\Kod\\ClassDijagramV1.0\\Views\\PatientView\\Resources\\HTML\\demo.html";
+            var info = new ProcessStartInfo(path)
+            {
+                UseShellExecute = true,
+            };
+            Process.Start(info);
         }
     }
 }
