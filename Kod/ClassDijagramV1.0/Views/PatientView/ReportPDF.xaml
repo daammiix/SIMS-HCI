@@ -21,15 +21,12 @@
     </Page.Resources>
     <StackPanel Orientation="Vertical">
         <DockPanel>
-            <StackPanel Width="200" Height="80">
+            <StackPanel Width="500" Height="80">
                 <Image
-                    Source="Resources/Images/logo.jpg"  Height="80" Width="200" Stretch="Fill" />
+                    Source="Resources/Images/logoPDF.png"  Height="80" Width="500" />
             </StackPanel>
 
-            <StackPanel HorizontalAlignment="Left">
-                <Label Content="Opšta bolnica" FontSize="24"/>
-                <Label Content="Novi Sad" FontSize="24"/>
-            </StackPanel>
+
             <StackPanel HorizontalAlignment="Right">
                 <Label Content="21000 Novi Sad, ul. Dr. Sime Miloševića 6" />
                 <Label Content="Info pult: 065/123-456;"/>
