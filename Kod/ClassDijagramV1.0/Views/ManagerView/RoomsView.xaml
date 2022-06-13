@@ -51,12 +51,12 @@
                             <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=RoomName}"/>
                             <DataGridTextColumn Header="Broj sprata" Width="120" Binding="{Binding Path=Floor}"/>
                             <DataGridTextColumn Header="Broj sobe" Width="90" Binding="{Binding Path=RoomNumber}"/>
-                            <DataGridTextColumn Header="Status" Width="110" Binding="{Binding Path=RoomStatus, UpdateSourceTrigger=PropertyChanged}"/>
+                            <DataGridTextColumn Header="Status" Width="120" Binding="{Binding Path=RoomStatus, UpdateSourceTrigger=PropertyChanged}"/>
                             <DataGridTemplateColumn Header="Opremljenost" Width="*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock>
-                                        <Button Content="Opremljenost" Width="150" Margin="0,1,0,0" Style="{StaticResource DataGridButton}" Command="{Binding Path=DataContext.RoomEquipment,
+                                        <Button Content="Opremljenost" Width="140" Margin="0,1,0,0" Style="{StaticResource DataGridButton}" Command="{Binding Path=DataContext.RoomEquipment,
                                             RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"/>
                                         </TextBlock>
                                     </DataTemplate>

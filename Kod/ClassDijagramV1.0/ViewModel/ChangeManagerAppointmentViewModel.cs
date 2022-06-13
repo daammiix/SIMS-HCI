@@ -188,7 +188,15 @@ namespace ClassDijagramV1._0.ViewModel
                         OnPropertyChanged("ErrorMessage");
                         return;
                     }
-                    ChangeManagerAppointmentAction();
+                DateTime fromDatetime = DateTime.ParseExact(FromDate + "T" + FromTime, "dd/MM/yyyyTHH:mm", null);
+                DateTime toDatetime = DateTime.ParseExact(ToDate + "T" + ToTime, this.format, null);
+                if (fromDatetime.TimeOfDay > toDatetime.TimeOfDay)
+                {
+                    ErrorMessage = "Vremena nisu validna";
+                    OnPropertyChanged("ErrorMessage");
+                    return;
+                }
+                ChangeManagerAppointmentAction();
                 });
 
                 return _saveChandegManagerAppointment;

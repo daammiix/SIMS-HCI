@@ -57,6 +57,16 @@ namespace ClassDijagramV1._0.ViewModel
             Rooms = roomController.GetAllRooms();
             storage = (Storage)roomController.GetRoom("storage");
 
+            resetFields();
+        }
+
+        private void resetFields()
+        {
+            this._sourceRoom = null;
+            this.selectedQuantity = null;
+            this.ErrorFormatMessage = "";
+            this.ErrorMessage = "";
+
             FromDate = DateTime.Now.ToString("dd/MM/yyyy");
             FromTime = DateTime.Now.ToString("HH:mm");
             ToDate = DateTime.Now.ToString("dd/MM/yyyy");
@@ -92,6 +102,7 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _cancelStorageEquip = new RelayCommand(o =>
                 {
+                    resetFields();
                     ResetAllSelectedEquipments();
                     storageViewModel.CurrentStorageView = PreviousView;
                 });
@@ -276,6 +287,9 @@ namespace ClassDijagramV1._0.ViewModel
             selectedQuantity = "";
             selectedSourceRoom = null;
             storageViewModel.CurrentStorageView = PreviousView;
+
+            resetFields();
+            ResetAllSelectedEquipments();
         }
         private bool checkTimeSpansOverlap(DateTime fromDatetimeA, DateTime toDatetimeA, DateTime fromDatetimeB, DateTime toDatetimeB)
         {
