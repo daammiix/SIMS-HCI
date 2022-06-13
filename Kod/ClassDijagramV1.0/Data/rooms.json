@@ -12,7 +12,7 @@
       },
       {
         "EquipmentID": "PRG5",
-        "Quantity": 2
+        "Quantity": 1
       }
     ],
     "MedicineList": []
@@ -38,7 +38,7 @@
       },
       {
         "EquipmentID": "PRG5",
-        "Quantity": 1
+        "Quantity": 2
       }
     ],
     "MedicineList": []
