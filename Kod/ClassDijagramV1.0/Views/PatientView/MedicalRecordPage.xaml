@@ -48,7 +48,7 @@
                         Grid.Row="0"
                         Margin="8 8 8 0">
                     <Image
-                            Source="Resources/Images/pregledTermina.jpg"
+                            Source="Resources/Images/podaci.jpg"
                             Height="100"/>
                     <Button
                             Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
@@ -84,25 +84,8 @@
                             Width="30"
                             Padding="2 0 2 0"
                             materialDesign:RippleAssist.IsCentered="True">
-                        <materialDesign:PackIcon Kind="ShareVariant" />
+                        <materialDesign:PackIcon Kind="Help" />
                     </Button>
-                    <Button
-                            Style="{StaticResource MaterialDesignToolButton}"
-                            Width="30"
-                            Padding="2 0 2 0"
-                            materialDesign:RippleAssist.IsCentered="True">
-                        <materialDesign:PackIcon Kind="Heart" />
-                    </Button>
-                    <materialDesign:PopupBox
-                             Padding="2 0 2 0">
-                        <StackPanel>
-                            <Button
-                                    Content="More" />
-                            <Button
-                                    Content="Options" />
-                        </StackPanel>
-                    </materialDesign:PopupBox>
-
                 </StackPanel>
             </Grid>
         </materialDesign:Card>
@@ -120,7 +103,7 @@
                     Grid.Row="0"
                     Margin="8 8 8 0">
                     <Image
-                    Source="Resources/Images/ocjeni.jpg"
+                    Source="Resources/Images/istorijaPregleda.jpg"
                     Height="100"/>
                     <Button
                     Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
@@ -155,24 +138,8 @@
                         Width="30"
                         Padding="2 0 2 0"
                         materialDesign:RippleAssist.IsCentered="True">
-                        <materialDesign:PackIcon Kind="ShareVariant" />
+                        <materialDesign:PackIcon Kind="Help" />
                     </Button>
-                    <Button
-                        Style="{StaticResource MaterialDesignToolButton}"
-                        Width="30"
-                        Padding="2 0 2 0"
-                        materialDesign:RippleAssist.IsCentered="True">
-                        <materialDesign:PackIcon Kind="Heart" />
-                    </Button>
-                    <materialDesign:PopupBox
-                         Padding="2 0 2 0">
-                        <StackPanel>
-                            <Button
-                                Content="More" />
-                            <Button
-                                Content="Options" />
-                        </StackPanel>
-                    </materialDesign:PopupBox>
 
                 </StackPanel>
             </Grid>

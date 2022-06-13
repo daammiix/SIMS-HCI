@@ -36,7 +36,7 @@
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="1" Grid.Column="1"
                    Foreground="{StaticResource PrimaryHueLightForegroundBrush}"
-            Text="Zakazi pregled" FontSize="64"
+            Text="Zakažite pregled" FontSize="64"
             HorizontalAlignment="Left"
             VerticalAlignment="Top" 
             Margin="42 0 0 0"/>

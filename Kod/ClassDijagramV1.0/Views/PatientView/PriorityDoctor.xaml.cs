@@ -142,5 +142,10 @@ namespace ClassDijagramV1._0.Views.PatientView
             }
 
         }
+
+        private void addDoctor(object sender, RoutedEventArgs e)
+        {
+            parent.startWindow.Content = new PatientDataPage(parent);
+        }
     }
 }

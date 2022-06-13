@@ -16,7 +16,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Grey.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Orange.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.LightBlue.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
@@ -51,36 +51,24 @@
             <TextBox Grid.Row="0" Grid.Column="1"
                      x:Name="naziv"
                      HorizontalAlignment="Left"
-                     Width="200" Height="28"/>
-            <!--
-            <StackPanel Orientation="Horizontal"
-                        Grid.Row="3" Grid.Column="1"
-                        HorizontalAlignment="left">
-
-                <Button Content="P"/>
-                <Button Content="U"/>
-                <Button Content="S"/>
-                <Button Content="Č"/>
-                <Button Content="P"/>
-                <Button Content="S"/>
-                <Button Content="N"/>
-
-            </StackPanel>
-            -->
+                     Width="200" Height="28"
+                     materialDesign:HintAssist.Hint="Naziv"/>
 
             <StackPanel Grid.Row="1" Grid.Column="1"
                         Orientation="Horizontal">
                 <DatePicker 
                         HorizontalAlignment="Left"
                         x:Name="kalendarOD" FirstDayOfWeek="Monday"
-                        Width="95" Height="28">
+                        Width="95" Height="28"
+                    materialDesign:HintAssist.Hint="Od">
 
                 </DatePicker>
 
                 <DatePicker
                         HorizontalAlignment="Left"
                         x:Name="kalendarDO" FirstDayOfWeek="Monday"
-                        Width="95" Height="28" Margin="10 0 0 0">
+                        Width="95" Height="28" Margin="10 0 0 0"
+                    materialDesign:HintAssist.Hint="Do">
 
                 </DatePicker>
             </StackPanel>
@@ -93,7 +81,7 @@
                             Width="200"
                             Is24Hours="True"
                             Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
-                            materialDesign:HintAssist.Hint="Uneite vrijeme" />
+                            materialDesign:HintAssist.Hint="Uneite vrijeme"/>
             </StackPanel>
 
             <ListBox Grid.Row="3" Grid.Column="1"
@@ -122,11 +110,10 @@
                 TextWrapping="Wrap"
                 BorderBrush="LightBlue"
                 VerticalScrollBarVisibility="Auto"
-                materialDesign:HintAssist.Hint="Unesite Vaš komentar. "/>
-
-
+                materialDesign:HintAssist.Hint="Unesite Vaš opis. "/>
         </Grid>
 
-        <Button Content="Kreiraj podsjetnik" Width="176" Height="42" HorizontalAlignment="Right" Margin="0, 20,100,0" Click="addAlarmClick" />
+        <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
+                Content="Kreiraj podsjetnik" Width="176" Height="42" HorizontalAlignment="Right" Margin="0, 20,100,0" Click="addAlarmClick" />
     </StackPanel>
 </Page>

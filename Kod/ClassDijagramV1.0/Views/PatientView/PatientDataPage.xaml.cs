@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 ﻿using System.Windows.Controls;
+using ClassDijagramV1._0.ViewModel.PatientViewModels;
 
 namespace ClassDijagramV1._0.Views.PatientView
 {
@@ -34,8 +35,9 @@ namespace ClassDijagramV1._0.Views.PatientView
             InitializeComponent();
             parent = patientMain;
             LoggedPatient = parent.Patient;
-            this.DataContext = LoggedPatient;
+            //this.DataContext = LoggedPatient;
             //VIewMODEL
+            this.DataContext = new PatientDataViewModel(parent);
 
             App app = Application.Current as App;
             _medicalRecordController = app.MedicalRecordController;
