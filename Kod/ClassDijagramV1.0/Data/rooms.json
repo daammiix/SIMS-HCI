@@ -45,7 +45,7 @@
   },
   {
     "RoomID": "id8",
-    "RoomName": "Bolni\u010Dka soba",
+    "RoomName": "Intezivna nega",
     "Floor": 3,
     "RoomNumber": 22,
     "RoomStatus": "Aktivna",
@@ -56,7 +56,7 @@
       },
       {
         "EquipmentID": "OL36",
-        "Quantity": 1
+        "Quantity": 2
       },
       {
         "EquipmentID": "PRG5",
@@ -120,6 +120,15 @@
     "RoomName": "Bolni\u010Dka soba",
     "Floor": 2,
     "RoomNumber": 25,
+    "RoomStatus": "Aktivna",
+    "EquipmentList": [],
+    "MedicineList": []
+  },
+  {
+    "RoomID": "id88",
+    "RoomName": "Bolni\u010Dka soba",
+    "Floor": 2,
+    "RoomNumber": 88,
     "RoomStatus": "Aktivna",
     "EquipmentList": [],
     "MedicineList": []

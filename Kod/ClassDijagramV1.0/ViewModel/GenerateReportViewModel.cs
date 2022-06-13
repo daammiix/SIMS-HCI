@@ -2,6 +2,7 @@
 using ClassDijagramV1._0.Helpers;
 using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Util;
+using ClassDijagramV1._0.Views.ManagerView;
 using Controller;
 using System;
 using System.ComponentModel;
@@ -213,6 +214,8 @@ namespace ClassDijagramV1._0.ViewModel
 
         private void GenerateReportAction()
         {
+            GenerateNoticeWindow generate = new GenerateNoticeWindow();
+            generate.Show();
             PDFGenerator pdfGenerator = new PDFGenerator(RoomsAvailable);
             this.mainRoomsViewModel.ResetView();
         }

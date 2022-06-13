@@ -86,8 +86,8 @@
                 <ComboBox x:Name="Combo" Height="65" Width="280" HorizontalAlignment="Left" Style="{StaticResource ComboBoxTest2}"
                 VerticalContentAlignment="Center" IsReadOnly="True" FontSize="24" DropDownClosed="Combo_DropDownClosed">
                     <ComboBoxItem x:Name="Item1" Margin="5,0,0,0" Selected="ComboBoxItem_Selected">Izmeni profil</ComboBoxItem>
-                    <ComboBoxItem Margin="5,0,0,0" Selected="ComboBoxItem_Selected_1">Odjavi se</ComboBoxItem>
-                    <ComboBoxItem Margin="5,0,0,0" Selected="ComboBoxItem_Selected_2">Tutorijal</ComboBoxItem>
+                    <ComboBoxItem Margin="5,0,0,0" Selected="ComboBoxItem_Selected_1">Tutorijal</ComboBoxItem>
+                    <ComboBoxItem Margin="5,0,0,0" Selected="ComboBoxItem_Selected_2">Odjavi se</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
         </StackPanel>

@@ -40,17 +40,17 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Row="1"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
-                <DataGrid Grid.Column="1" Height="220" Width="250" x:Name="BusyRooms" Margin="20, 20, 10,0"
+                <DataGrid Grid.Column="1" Height="220" Width="350" x:Name="BusyRooms" Margin="20, 25, 10,0"
                       CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left" FontSize="20"
                       RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
                       CanUserDeleteRows="False" AutoGenerateColumns="False"
-                      ItemsSource="{Binding Path=EquipmentList}" IsReadOnly="True">
+                      ItemsSource="{Binding Path=RoomsAvailable}" IsReadOnly="True">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Zauzetost sale:" Width="*" />
+                        <DataGridTextColumn Header="Zauzetost sale:" Width="*" Binding="{Binding Path=.}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Label Content="Namena u koju se menja:" FontSize="26" Height="50" Margin="20,5,0,5" HorizontalContentAlignment="Left" HorizontalAlignment="Left"/>
-                <ComboBox x:Name="ChangeName" Width="320" Height="55" Margin="20,5,0,5" FontSize="24" HorizontalContentAlignment="Left" 
+                <ComboBox x:Name="ChangeName" Width="320" Height="55" Margin="-5,5,0,5" FontSize="24" HorizontalContentAlignment="Left" 
                           VerticalContentAlignment="Center" IsReadOnly="True" SelectedItem="{Binding selectedNewNameRoom}" Style="{StaticResource BasicComboBox}">
                     <ComboBoxItem Margin="5,0,0,0" Content="Operaciona Sala"/>
                     <ComboBoxItem Margin="5,0,0,0" Content="Sala za preglede"/>

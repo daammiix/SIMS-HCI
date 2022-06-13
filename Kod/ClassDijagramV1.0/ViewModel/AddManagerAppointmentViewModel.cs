@@ -111,7 +111,7 @@ namespace ClassDijagramV1._0.ViewModel
                     return;
                 FromTime = value;
                 DateTime time;
-                bool format = DateTime.TryParseExact(value, "HH:mm:TT", System.Globalization.CultureInfo.InvariantCulture,
+                bool format = DateTime.TryParseExact(value, "HH:mm", System.Globalization.CultureInfo.InvariantCulture,
                 System.Globalization.DateTimeStyles.None, out time);
                 if (!format)
                 {
@@ -176,6 +176,14 @@ namespace ClassDijagramV1._0.ViewModel
                     if(selectedName == null || selectedFromTime == "" || selectedToTime == "" || selectedName == "")
                     {
                         ErrorMessage = "Polje naziv ne sme da bude prazno";
+                        OnPropertyChanged("ErrorMessage");
+                        return;
+                    }
+                    DateTime fromDatetime = DateTime.ParseExact(FromDate + "T" + FromTime, "dd/MM/yyyyTHH:mm", null);
+                    DateTime toDatetime = DateTime.ParseExact(ToDate + "T" + ToTime, this.format, null);
+                    if (fromDatetime.TimeOfDay > toDatetime.TimeOfDay)
+                    {
+                        ErrorMessage = "Vremena nisu validna";
                         OnPropertyChanged("ErrorMessage");
                         return;
                     }
