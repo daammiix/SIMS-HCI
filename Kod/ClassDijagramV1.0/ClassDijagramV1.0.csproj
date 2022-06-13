@@ -126,9 +126,6 @@
 	  <Resource Include="Views\PatientView\Resources\Images\istorijaPregleda.jpg">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
-	  <Resource Include="Views\PatientView\Resources\Images\logo.jpg">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </Resource>
 	  <Resource Include="Views\PatientView\Resources\Images\logoPDF.png">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
