@@ -1,4 +1,5 @@
-﻿using Controller;
+﻿using ClassDijagramV1._0.ViewModel.PatientViewModels;
+using Controller;
 using Model;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,15 +21,7 @@ namespace ClassDijagramV1._0.Views.PatientView
             InitializeComponent();
             parent = patientMain;
             _appointment = appointment;
-
-            App app = Application.Current as App;
-            _doctorController = app.DoctorController;
-            Doctor doctor = _doctorController.GetDoctorById(_appointment.DoctorId);
-
-            datum.Content = _appointment.AppointmentDate;
-            doktor.Content = doctor.Name + " " + doctor.Surname;
-            doctorReport.Text = _appointment.MedicalReport.Description;
-            note.Text = _appointment.MedicalReport.Note;
+            this.DataContext = new AppointmentReportViewModel(_appointment);
         }
 
         private void addNoteClick(object sender, RoutedEventArgs e)

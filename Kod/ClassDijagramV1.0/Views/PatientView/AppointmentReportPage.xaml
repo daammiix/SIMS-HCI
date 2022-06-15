@@ -45,11 +45,13 @@
                    Margin="0 0 20 0"
                    VerticalAlignment="Center"/>
             <Label x:Name="datum"
+                   Content="{Binding Date}"
                    VerticalAlignment="Center"/>
             <Label FontWeight="Bold" Content="Doktor :"
                    Margin="20 0 20 0"
                    VerticalAlignment="Center"/>
             <Label x:Name="doktor"
+                   Content="{Binding Doctor}"
                    VerticalAlignment="Center"/>
         </StackPanel>
 
@@ -63,7 +65,8 @@
                           TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
                           TextBlock.FontWeight="Light"
                           Margin="24,8,24,16">
-                        <TextBlock x:Name="doctorReport" 
+                        <TextBlock x:Name="doctorReport"
+                                   Text="{Binding DoctorReport}"
                                    Style="{StaticResource MaterialDesignTextBlock}"
                                    TextWrapping="Wrap"/>
                     </StackPanel>
@@ -77,13 +80,13 @@
                           TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
                           TextBlock.FontWeight="Light"
                           Margin="24,8,24,16">
-                        <ListBox materialDesign:ListBoxItemAssist.ShowSelection="False">
+                        <ListBox materialDesign:ListBoxItemAssist.ShowSelection="False" ItemsSource="{Binding Lijekovi}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=MedicineName}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
 
-                            <TextBlock Text="Listbox" />
-                            <TextBlock Text="Without" />
-                            <TextBlock Text="Selection" />
-                            <TextBlock Text="Highlights" />
-                            <!--OVDE LIJEKOVI-->
                         </ListBox>
                     </StackPanel>
                 </Expander>
@@ -97,6 +100,7 @@
                         TextBlock.FontWeight="Light"
                           Margin="24,8,24,16">
                         <TextBlock x:Name="note" 
+                                   Text="{Binding Zabiljeska}"
                                    Style="{StaticResource MaterialDesignTextBlock}"
                                    TextWrapping="Wrap"/>
                     </StackPanel>

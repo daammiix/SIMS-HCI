@@ -36,6 +36,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <!-- Secretary -->
+
             <DataTemplate DataType="{x:Type profileViewModels:ProfileMainViewModel}">
                 <profileView:ProfileMainView/>
             </DataTemplate>

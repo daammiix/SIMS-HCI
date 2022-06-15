@@ -109,7 +109,7 @@
         <Button Grid.Row="1" Grid.Column="2"
                 x:Name="ratingBtn"
                 Style="{StaticResource MaterialDesignFlatAccentBgButton}"
-                Content="Pošalji ocjenu"
+                Content="Pošaljite ocjenu"
                 Width="176" Height="42"
                 IsEnabled="False"
                 Click="SendRatingHospitalResult"/>

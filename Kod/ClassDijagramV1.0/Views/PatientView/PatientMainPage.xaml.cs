@@ -5,6 +5,7 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -99,15 +100,14 @@ namespace ClassDijagramV1._0.Views.PatientView
 
             await Task.Delay(2000);
             prioritetDoktor.dodavanjPregledaDoktor.SelectedItem = _doctorController.GetAllDoctors()[0];
-            await Task.Delay(1000);
+            await Task.Delay(2000);
             prioritetDoktor.kalendar.SelectedDate = new DateTime(2222, 10, 10, 10, 0, 0);
-            await Task.Delay(1000);
+            await Task.Delay(2000);
             prioritetDoktor.timeCB.SelectedItem = "10:00";
             await Task.Delay(2000);
             prioritetDoktor.addAppBtn.Background = new SolidColorBrush(Colors.Orange);
-
-
             await Task.Delay(100);
+
             DateTime deset = new DateTime(2222,10,10,10,0,0);
             TimeSpan interval = new TimeSpan(0, 0, 30, 0);
             Appointment simulacijaPregled = new Appointment(parent.Patient.Id,
@@ -120,8 +120,9 @@ namespace ClassDijagramV1._0.Views.PatientView
             parent.startWindow.Content = avp;
             await Task.Delay(2000);
             avp.tabelaPregledi.SelectedItem = avm;
+            await Task.Delay(2000);
             avp.izmijeni.Background = new SolidColorBrush(Colors.Orange);
-            await Task.Delay(1000);
+            await Task.Delay(100);
 
             AppointmentUpdatePage aup = new AppointmentUpdatePage(parent, _appointmentViewModels);
             parent.startWindow.Content = aup;
@@ -133,27 +134,33 @@ namespace ClassDijagramV1._0.Views.PatientView
             prioritetUpdateDoktor.promjenaKalendar.SelectedDate = new DateTime(2222, 10, 10, 10, 0, 0);
 
             await Task.Delay(4000);
+            prioritetUpdateDoktor.izmjenaPregledaDoktor.SelectedItem = _doctorController.GetAllDoctors()[1];
+            await Task.Delay(2000);
             prioritetUpdateDoktor.promjenaKalendar.SelectedDate = new DateTime(2222, 10, 11, 11, 0, 0);
             await Task.Delay(2000);
             prioritetUpdateDoktor.timeCB.SelectedItem = "11:00";
             await Task.Delay(2000);
-            prioritetUpdateDoktor.addAppBtn.BorderThickness = new Thickness(5);
+            prioritetUpdateDoktor.addAppBtn.Background = new SolidColorBrush(Colors.Orange);
+            await Task.Delay(100);
 
-            
-            DateTime jedanaest = new DateTime(2222, 11, 11, 11, 0, 0);
+            DateTime jedanaest = new DateTime(2222, 10, 11, 11, 0, 0);
             Appointment simulacijaUpdatePregled = new Appointment(parent.Patient.Id,
-                                            _doctorController.GetAllDoctors()[0].Id, _roomController.GetAllRooms()[0].RoomID,
+                                            _doctorController.GetAllDoctors()[1].Id, _roomController.GetAllRooms()[0].RoomID,
                                             jedanaest, interval, AppointmentType.generalPractitionerCheckup);
             AppointmentViewModel auvm = new AppointmentViewModel(simulacijaUpdatePregled);
             _appointmentViewModels.Remove(avm);
             _appointmentViewModels.Add(auvm);
 
-            parent.startWindow.Content = avp;
+            AppointmentsViewPage avp2 = new AppointmentsViewPage(parent, _appointmentViewModels);
+            parent.startWindow.Content = avp2;
             await Task.Delay(4000);
-            avp.tabelaPregledi.SelectedItem = auvm;
+            avp2.tabelaPregledi.SelectedItem = auvm;
             await Task.Delay(4000);
-            avp.otkazi.Background = new SolidColorBrush(Colors.Orange);
+            avp2.otkazi.Background = new SolidColorBrush(Colors.Orange);
             _appointmentViewModels.Remove(auvm);
+            await Task.Delay(200);
+            AppointmentsViewPage avp3 = new AppointmentsViewPage(parent, _appointmentViewModels);
+            parent.startWindow.Content = avp3;
 
 
         }
@@ -185,12 +192,12 @@ namespace ClassDijagramV1._0.Views.PatientView
         /// <returns></returns>
         private void addMedicalReportToAllAppointmnts(Appointment appointment)
         {
-            Random rnd = new Random();
+            Random rnd1 = new Random();
+            Random rnd2 = new Random();
             var medicines = _medicineController.GetAllMedicines();
-            List<String> dvaLijeka = new List<String>() { medicines[rnd.Next(0, medicines.Count - 1)].Name ,
-                                                          medicines[rnd.Next(0, medicines.Count - 1)].Name };
+            List<String> dvaLijeka = new List<String>() { medicines[rnd1.Next(0, medicines.Count - 1)].Name ,
+                                                          medicines[rnd2.Next(0, medicines.Count - 1)].Name };
             String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet purus a ligula tempus porttitor. Ut urna orci, fermentum eget nibh quis, commodo convallis eros. Maecenas ut efficitur nisi, ac hendrerit dolor. Nullam non pretium lectus. Nulla facilisi. Praesent euismod mi nunc, ut commodo felis efficitur a. Cras quis arcu tortor. Nam congue ultrices metus eget eleifend. In hac habitasse platea dictumst. Nunc bibendum ante nec iaculis aliquet. In vel odio." +
-                                "Donec placerat pretium velit ac eleifend.Suspendisse vel vehicula lacus, et mollis orci.Vestibulum dictum dolor a cursus laoreet.Nunc vel ex at leo egestas malesuada sed accumsan eros.Vestibulum auctor, massa ut viverra vulputate, dui lectus accumsan urna, non pharetra risus nunc eu felis.Nulla eu accumsan metus.Vestibulum tempor convallis quam, at ornare felis molestie vitae.Fusce vel ante sed felis pharetra pharetra at quis neque.Ut eleifend pellentesque mauris," +
                                 " commodo convallis eros. Maecenas ut efficitur nisi, ac hendrerit dolor. Nullam non pretium lectus. Nulla facilisi. Praesent euismod mi nunc, ut commodo felis efficitur a. Cras quis arcu tortor. Nam congue ultrices metus eget eleifend. In hac habitasse platea dictumst. Nunc bibendum ante nec iaculis aliquet. In vel odio auctor, molestie risus at, faucibus orci. Etiam feugiat neque mauris, ut ultrices lectus porttitor eu. Nullam in sodales elit, sit amet auctor odio.";
             MedicineDrug medicine1 = new MedicineDrug(dvaLijeka[0],DateTime.Now,DateTime.Now.AddDays(21),8);
             MedicineDrug medicine2 = new MedicineDrug(dvaLijeka[0], DateTime.Now.AddDays(1), DateTime.Now.AddDays(2), 16);
@@ -199,6 +206,66 @@ namespace ClassDijagramV1._0.Views.PatientView
             {
                 appointment.MedicalReport = new MedicalReport(loremIpsum, medicineTherapy);
             }
+        }
+
+        private void pregledTerminaHTML(object sender, RoutedEventArgs e)
+        {
+            var path = "D:\\Fax\\SIMS\\SIMSProjekat\\SIMS-HCI\\Kod\\ClassDijagramV1.0\\Views\\PatientView\\Resources\\HTML\\pregledTermina.html";
+            var info = new ProcessStartInfo(path)
+            {
+                UseShellExecute = true,
+            };
+            Process.Start(info);
+        }
+
+        private void zakazivanjePregledaHTML(object sender, RoutedEventArgs e)
+        {
+            var path = "D:\\Fax\\SIMS\\SIMSProjekat\\SIMS-HCI\\Kod\\ClassDijagramV1.0\\Views\\PatientView\\Resources\\HTML\\zakazivanjeTermina.html";
+            var info = new ProcessStartInfo(path)
+            {
+                UseShellExecute = true,
+            };
+            Process.Start(info);
+        }
+
+        private void zdravstveniKartonHTML(object sender, RoutedEventArgs e)
+        {
+            var path = "D:\\Fax\\SIMS\\SIMSProjekat\\SIMS-HCI\\Kod\\ClassDijagramV1.0\\Views\\PatientView\\Resources\\HTML\\zdravstveniKarton.html";
+            var info = new ProcessStartInfo(path)
+            {
+                UseShellExecute = true,
+            };
+            Process.Start(info);
+        }
+
+        private void ocjenjivanjeHTML(object sender, RoutedEventArgs e)
+        {
+            var path = "D:\\Fax\\SIMS\\SIMSProjekat\\SIMS-HCI\\Kod\\ClassDijagramV1.0\\Views\\PatientView\\Resources\\HTML\\ocjenjivanje.html";
+            var info = new ProcessStartInfo(path)
+            {
+                UseShellExecute = true,
+            };
+            Process.Start(info);
+        }
+
+        private void uvidUTerapijuHTML(object sender, RoutedEventArgs e)
+        {
+            var path = "D:\\Fax\\SIMS\\SIMSProjekat\\SIMS-HCI\\Kod\\ClassDijagramV1.0\\Views\\PatientView\\Resources\\HTML\\uvidUTerapiju.html";
+            var info = new ProcessStartInfo(path)
+            {
+                UseShellExecute = true,
+            };
+            Process.Start(info);
+        }
+
+        private void demoHTML(object sender, RoutedEventArgs e)
+        {
+            var path = "D:\\Fax\\SIMS\\SIMSProjekat\\SIMS-HCI\\Kod\\ClassDijagramV1.0\\Views\\PatientView\\Resources\\HTML\\demo.html";
+            var info = new ProcessStartInfo(path)
+            {
+                UseShellExecute = true,
+            };
+            Process.Start(info);
         }
     }
 }

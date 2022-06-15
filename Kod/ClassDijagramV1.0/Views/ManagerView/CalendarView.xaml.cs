@@ -39,6 +39,7 @@ namespace ClassDijagramV1._0.Views.ManagerView
         {
             this.selectedDate = e.DateTime;
             calendarViewModel.ManagerAppointmentsOfDay.Clear();
+            calendarViewModel.selectedDate = e.DateTime;
             if (selectedDate.Day >= DateTime.Now.Day)
             {
                 foreach (var managerAppointment in ManagerAppointments)
@@ -46,12 +47,6 @@ namespace ClassDijagramV1._0.Views.ManagerView
                     if (managerAppointment.Start.Day == selectedDate.Day)
                     {
                         calendarViewModel.ManagerAppointmentsOfDay.Add(managerAppointment);
-
-                        calendarViewModel.selectedDate = e.DateTime;
-                    }
-                    if (managerAppointment.Start.Day != selectedDate.Day)
-                    {
-                        calendarViewModel.selectedDate = e.DateTime;
                     }
                 }
             }

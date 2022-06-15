@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClassDijagramV1._0.Views.ManagerView"
         mc:Ignorable="d"
-        Title="TutorialWindow" Height="450" Width="800">
+        Title="TutorialWindow"
+        Height="475"
+        Width="790"
+        BorderThickness="3"
+        BorderBrush="Black"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="NoResize">
     <Grid>
-        
+        <MediaElement Source="C:\Users\milan\Desktop\faks\SIMS-HCI\Kod\ClassDijagramV1.0\\tutorial.mkv"/>
     </Grid>
 </Window>

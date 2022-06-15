@@ -28,14 +28,14 @@ namespace ClassDijagramV1._0.Views.ManagerView
 
         private void ComboBoxItem_Selected_1(object sender, RoutedEventArgs e)
         {
-            WarningExit warningExit = new WarningExit(this);
-            warningExit.Show();
+            TutorialWindow tutorialWindow = new TutorialWindow();
+            tutorialWindow.Show();
         }
 
         private void ComboBoxItem_Selected_2(object sender, RoutedEventArgs e)
         {
-            TutorialWindow tutorialWindow = new TutorialWindow();
-            tutorialWindow.Show();
+            WarningExit warningExit = new WarningExit(this);
+            warningExit.Show();
         }
 
         private void Combo_DropDownClosed(object sender, System.EventArgs e)

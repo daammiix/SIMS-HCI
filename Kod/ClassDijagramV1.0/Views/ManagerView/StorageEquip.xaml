@@ -44,7 +44,7 @@
                 <TextBox x:Name="EquipmentTextBox" Width="200" Background="#E7E7E7" Height="45" Margin="25,0,0,5" HorizontalAlignment="Left" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="True" Text="{Binding Path=QEquipment.Equipment,Converter={StaticResource EquipmentToStringConverter}}" Style="{StaticResource BasicTextBox}"/>
                 <Label Content="Odaberite količinu" FontSize="26" Margin="22,0,0,0" Height="40" Width="250" HorizontalAlignment="Left"/>
                 <TextBox x:Name="Quantity" Width="100" Background="#E7E7E7" Height="45" Margin="25,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" Text="{Binding selectedQuantity,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextBox}"/>
-                <Label Width="300" HorizontalAlignment="Left" Content="{Binding ErrorMessage,UpdateSourceTrigger=PropertyChanged}" FontSize="16" Margin="15,10,0,5" Foreground="Red"/>
+                <Label Width="300" HorizontalAlignment="Left" Height="40" Content="{Binding ErrorMessage,UpdateSourceTrigger=PropertyChanged}" FontSize="16" Margin="15,10,0,5" Foreground="Red"/>
                 <Label Content="Sala u koju se premešta:" FontSize="26" Margin="22,0,0,5" HorizontalAlignment="Left"/>
                 <ComboBox x:Name="MovingTo" Width="230" Height="45" Margin="25,0,0,5" FontSize="22"
                           VerticalContentAlignment="Center" IsReadOnly="True" HorizontalAlignment="Left"

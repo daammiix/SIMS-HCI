@@ -1,4 +1,5 @@
-﻿using Controller;
+﻿using ClassDijagramV1._0.ViewModel.PatientViewModels;
+using Controller;
 using Model;
 using System;
 using System.Collections.ObjectModel;
@@ -22,14 +23,15 @@ namespace ClassDijagramV1._0.Views.PatientView
         public AppointmentUpdatePage(PatientMainWindow patientMain, ObservableCollection<AppointmentViewModel> appointmentViewModels)
         {
             InitializeComponent();
-            this.DataContext = this;
+            //this.DataContext = this;
+            this.DataContext = new UpdateAppointmentViewModel(AppointmentsViewPage.SelectedAppointment.Appointment);
             parent = patientMain;
             _appointmentViewModels = appointmentViewModels;
                        
             doctorRB.IsChecked = true;
-            dr.Text = AppointmentsViewPage.SelectedAppointment.Doctor.Name + " " + AppointmentsViewPage.SelectedAppointment.Doctor.Surname;
+            /*dr.Text = AppointmentsViewPage.SelectedAppointment.Doctor.Name + " " + AppointmentsViewPage.SelectedAppointment.Doctor.Surname;
             date.Text = AppointmentsViewPage.SelectedAppointment.AppointmentDate.ToString("HH:mm dd.MM.yyyy.");
-            room.Text = AppointmentsViewPage.SelectedAppointment.Room.RoomName.ToString();
+            room.Text = AppointmentsViewPage.SelectedAppointment.Room.RoomName.ToString();*/
         }
 
         private void doctorRB_Checked(object sender, RoutedEventArgs e)

@@ -63,6 +63,7 @@
       },
       {
         "EquipmentID": "OMN3",
+        <<<<<<< HEAD
         "Quantity": 384,
         "ErrorCount": 0
       },
@@ -70,7 +71,7 @@
         "EquipmentID": "OMR5",
         "Quantity": 392668,
         "ErrorCount": 0
-      }
+      },
     ],
     "MedicineList": [
       {

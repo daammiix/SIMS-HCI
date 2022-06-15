@@ -27,8 +27,8 @@
         <Grid Grid.Column="1">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="590"/>
-                <RowDefinition Height="65"/>
+                <RowDefinition Height="570"/>
+                <RowDefinition Height="85"/>
             </Grid.RowDefinitions>
 
             <syncfusion:SfScheduler Grid.Row="0"
@@ -38,7 +38,7 @@
                                     FontSize="20"
                                     Height="500"
                                     SelectedDate="{Binding selectedDate}"
-                                    Margin="0,20,0,40"
+                                    Margin="0,20,0,10"
                                     FirstDayOfWeek="Monday"
                                     CellTapped="Schedule_CellTapped"
                                     AppointmentEditorOpening="Schedule_AppointmentEditorOpening">
@@ -59,8 +59,8 @@
 
                 <StackPanel Grid.Column="1" Grid.Row="1">
                 <WrapPanel HorizontalAlignment="Right">
-                    <Button x:Name="SaveAddedRoom" HorizontalAlignment="Right" Height="32" Width="90" Content="Dodaj" Margin="5,10,10,0" Style="{StaticResource CRUDButton}" Command="{Binding AddManagerAppointment}"/>
-                    <Button x:Name="QuitAddedRoom" HorizontalAlignment="Right" Height="32" Width="90" Content="Izmeni" Margin="5,10,15,0" Style="{StaticResource CRUDButton}" Command="{Binding ChangeManagerAppointment}"/>
+                    <Button x:Name="SaveAddedRoom" HorizontalAlignment="Right" Height="32" Width="90" Content="Dodaj" Margin="5,0,10,0" Style="{StaticResource CRUDButton}" Command="{Binding AddManagerAppointment}"/>
+                    <Button x:Name="QuitAddedRoom" HorizontalAlignment="Right" Height="32" Width="90" Content="Izmeni" Margin="5,0,0,0" Style="{StaticResource CRUDButton}" Command="{Binding ChangeManagerAppointment}"/>
                 </WrapPanel>
             </StackPanel>
         </Grid>

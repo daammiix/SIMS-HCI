@@ -111,9 +111,12 @@ namespace ClassDijagramV1._0.Views.PatientView
         private void generatePDFClick(object sender, RoutedEventArgs e)
         {
             parent.startWindow.Content = new GenerateReportPage(parent ,Appointments);
-            //generateReport.Visibility = Visibility.Hidden;
-            //_printDialog.PrintVisual(this, "izvjestaj");
-            //generateReport.Visibility = Visibility.Visible;
+        }
+
+        private void omogucidugmad(object sender, SelectionChangedEventArgs e)
+        {
+            otkazi.IsEnabled = true;
+            izmijeni.IsEnabled = true;
         }
     }
 
@@ -256,6 +259,30 @@ namespace ClassDijagramV1._0.Views.PatientView
                     _appointment.AppointmentDate = value;
                     OnPropertyChanged("AppointmentDate");
                 }
+            }
+        }
+
+        public string AppointmentTypeStr
+        {
+            get
+            {
+                switch (_appointment.AppointmentType)
+                {
+                    case AppointmentType.operation:
+                        {
+                            return "Operacija";
+                        }
+                    case AppointmentType.generalPractitionerCheckup:
+                        {
+                            return "Generalni pregled";
+                        }
+                    case AppointmentType.specialistCheckup:
+                        {
+                            return "Pregled specijaliste";
+                        }
+                }
+
+                return "";
             }
         }
 

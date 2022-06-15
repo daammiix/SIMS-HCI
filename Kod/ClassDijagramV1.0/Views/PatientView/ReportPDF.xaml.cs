@@ -25,8 +25,7 @@ namespace ClassDijagramV1._0.Views.PatientView
     {
         public DateTime From { get; set; }
         public DateTime To { get; set; }
-        private ObservableCollection<AppointmentViewModel> _patientAppointments;
-        private AppointmentController _appointmentController;
+        private ObservableCollection<AppointmentViewModel> Appointments;
 
         public ReportPDF(ObservableCollection<AppointmentViewModel> patientAppointments,DateTime from, DateTime to)
         {
@@ -34,28 +33,12 @@ namespace ClassDijagramV1._0.Views.PatientView
             this.DataContext = this;
             From = from;
             To = to;
-            _patientAppointments = patientAppointments;
-            UpdateTable();
-
-        }
-
-        public void UpdateTable()
-        {
-            List<Appointment> appointments = new List<Appointment>();
-            foreach (AppointmentViewModel appointment in _patientAppointments)
-            {
-                if (appointment.AppointmentDate >= From && appointment.AppointmentDate <= To)
-                {
-                    appointments.Add(appointment.Appointment);
-                }    
-            }
-
-            appointments.Sort((x, y) => DateTime.Compare(x.AppointmentDate, y.AppointmentDate));
-            AppointmentPreview.ItemsSource = appointments;
+            Appointments = patientAppointments;
+            //UpdateTable();
             FromLabel.Content = From.ToString("dd/MM/yyyy");
             ToLabel.Content = To.ToString("dd/MM/yyyy");
             DateOfPrinting.Content = DateTime.Now.ToString("dd/MM/yyyy");
-
+            AppointmentPreview.ItemsSource = Appointments;
         }
     }
 }
