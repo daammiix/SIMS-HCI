@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.AccountsView"
+        xmlns:vr="clr-namespace:ClassDijagramV1._0.Util.ValidationRules"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
         WindowStyle="None"
@@ -26,7 +27,11 @@
                 <ResourceDictionary Source="../../../Styles/TextBox.xaml"/>
                 <ResourceDictionary Source="../../../Styles/Button.xaml"/>
                 <ResourceDictionary Source="../../../Styles/CheckBox.xaml"/>
+                <ResourceDictionary Source="../../../Styles/Validation.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type ValidationError}">
+                <TextBlock FontSize="16" FontStyle="Italic" Foreground="Red" HorizontalAlignment="Left" Margin="0,1" Text="{Binding Path=ErrorContent}"/>
+            </DataTemplate>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -88,6 +93,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -97,27 +104,51 @@
                    VerticalAlignment="Center"
                    Margin="0,0,15,15"/>
             <TextBox Grid.Row="0" Grid.Column="1"
+                     x:Name="usernameInput"
+                     Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
                  VerticalAlignment="Center"
                  Padding="5"
                  Width="180"
                  Margin="0,0,0,15"
-                 Style="{StaticResource TextBoxStyleAccount}"
-                 Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
-
+                 Style="{StaticResource TextBoxStyleAccount}">
+                <Binding Path="Username" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <vr:MandatoryRule Name="Username"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
             <!-- Row 2 -->
-            <TextBlock Grid.Row="1" Grid.Column="0"
+            <ContentPresenter Grid.Row="1" Grid.Column="0"
+                              Grid.ColumnSpan="2"
+                              Margin="0,0,0,5"
+                              Content="{Binding ElementName=usernameInput, Path=(Validation.Errors).CurrentItem}"/>
+
+            <!-- Row 3 -->
+            <TextBlock Grid.Row="2" Grid.Column="0"
                    Text="Password:"
                    VerticalAlignment="Center"
                    Margin="0,0,15,15"/>
-            <TextBox Grid.Row="1" Grid.Column="1"
+            <TextBox Grid.Row="2" Grid.Column="1"
+                     x:Name="passwordInput"
+                     Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
                  VerticalAlignment="Center"
                  Padding="5"
                  Margin="0,0,0,15"
-                 Style="{StaticResource TextBoxStyleAccount}"
-                 Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
+                 Style="{StaticResource TextBoxStyleAccount}">
+                <Binding Path="Password" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <vr:MandatoryRule Name="Password"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
 
-            <!-- Row 3 -->
-            <Button Grid.Row="2" Grid.Column="0"
+            <!-- Row 4 -->
+            <ContentPresenter Grid.Row="3" Grid.Column="0"
+                              Grid.ColumnSpan="2"
+                              Margin="0,0,0,5"
+                              Content="{Binding ElementName=passwordInput, Path=(Validation.Errors).CurrentItem}"/>
+            <!-- Row 5 -->
+            <Button Grid.Row="4" Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Content="Save"
                 Margin="0,25,0,0"

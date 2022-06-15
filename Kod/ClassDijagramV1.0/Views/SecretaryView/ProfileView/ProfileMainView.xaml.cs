@@ -23,6 +23,8 @@ namespace ClassDijagramV1._0.Views.SecretaryView.ProfileView
         public ProfileMainView()
         {
             InitializeComponent();
+            Focusable = true;
+            Loaded += (s, e) => Keyboard.Focus(this);
         }
     }
 }

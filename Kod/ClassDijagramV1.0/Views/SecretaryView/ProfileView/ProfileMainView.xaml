@@ -4,18 +4,29 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.ProfileView"
+             xmlns:vr="clr-namespace:ClassDijagramV1._0.Util.ValidationRules"
              mc:Ignorable="d"
              FontFamily="#Poppins"
              FontSize="20"
              Foreground="{StaticResource SCyan}"
              d:DesignHeight="550" d:DesignWidth="800">
 
+    <UserControl.InputBindings>
+        <KeyBinding Key="L"
+                    Modifiers="Ctrl"
+                    Command="{Binding LogoutCommand}"/>
+    </UserControl.InputBindings>
+
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../../Styles/TextBox.xaml"/>
                 <ResourceDictionary Source="../../../Styles/Button.xaml"/>
+                <ResourceDictionary Source="../../../Styles/Validation.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type ValidationError}">
+                <TextBlock FontSize="16" FontStyle="Italic" Foreground="Red" HorizontalAlignment="Left" Margin="0,1" Text="{Binding Path=ErrorContent}"/>
+            </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -27,6 +38,10 @@
         <Grid HorizontalAlignment="Center"
               Margin="0,20,0,0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -64,52 +79,106 @@
                        VerticalAlignment="Center"/>
             <TextBox Grid.Row="1"
                      Grid.Column="1"
+                     x:Name="inputPassword"
+                     Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
                      Margin="0,0,0,10"
                      MaxWidth="200"
-                     Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
-                     Style="{StaticResource TextBoxStyleAccount}"/>
-
-            <!-- Row 3 -->
-            <TextBlock Grid.Row="2"
-                       Grid.Column="0"
-                       Text="Name:"
-                       Margin="0,0,15,10"
-                       VerticalAlignment="Center"/>
-            <TextBox Grid.Row="2"
-                     Grid.Column="1"
-                     Margin="0,0,0,10"
-                     MaxWidth="200"
-                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
-                     Style="{StaticResource TextBoxStyleAccount}"/>
+                     Style="{StaticResource TextBoxStyleAccount}">
+                <Binding Path="Password" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <vr:MandatoryRule Name="Password"/>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+            <!-- Row 3-->
+            <ContentPresenter Grid.Row="2" Grid.Column="0"
+                              Margin="0,0,0,5"
+                              Grid.ColumnSpan="2"
+                              Content="{Binding ElementName=inputPassword, Path=(Validation.Errors).CurrentItem}"/>
 
             <!-- Row 4 -->
             <TextBlock Grid.Row="3"
                        Grid.Column="0"
-                       Text="Surname:"
+                       Text="Name:"
                        Margin="0,0,15,10"
                        VerticalAlignment="Center"/>
             <TextBox Grid.Row="3"
                      Grid.Column="1"
+                     x:Name="inputName"
+                     Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
                      Margin="0,0,0,10"
                      MaxWidth="200"
-                     Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}"
-                     Style="{StaticResource TextBoxStyleAccount}"/>
+                     Style="{StaticResource TextBoxStyleAccount}">
+                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <vr:MandatoryRule Name="Name"/>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
 
             <!-- Row 5 -->
-            <TextBlock Grid.Row="4"
+            <ContentPresenter Grid.Row="4" Grid.Column="0"
+                              Margin="0,0,0,5"
+                              Grid.ColumnSpan="2"
+                              Content="{Binding ElementName=inputName, Path=(Validation.Errors).CurrentItem}"/>
+            <!-- Row 6 -->
+            <TextBlock Grid.Row="5"
+                       Grid.Column="0"
+                       Text="Surname:"
+                       Margin="0,0,15,10"
+                       VerticalAlignment="Center"/>
+            <TextBox Grid.Row="5"
+                     Grid.Column="1"
+                     x:Name="inputSurname"
+                     Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"                     
+                     Margin="0,0,0,10"
+                     MaxWidth="200"
+                     Style="{StaticResource TextBoxStyleAccount}">
+                <Binding Path="Surname" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <vr:MandatoryRule Name="Surname"/>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+
+            <!-- Row 7 -->
+            <ContentPresenter Grid.Row="6" Grid.Column="0"
+                              Margin="0,0,0,5"
+                              Grid.ColumnSpan="2"
+                              Content="{Binding ElementName=inputSurname, Path=(Validation.Errors).CurrentItem}"/>
+
+            <!-- Row 8 -->
+            <TextBlock Grid.Row="7"
                        Grid.Column="0"
                        Text="Email:"
                        Margin="0,0,15,10"
                        VerticalAlignment="Center"/>
-            <TextBox Grid.Row="4"
+            <TextBox Grid.Row="7"
                      Grid.Column="1"
+                     x:Name="inputEmail"
+                     Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
                      Margin="0,0,0,10"
                      MaxWidth="200"
-                     Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
-                     Style="{StaticResource TextBoxStyleAccount}"/>
+                     Style="{StaticResource TextBoxStyleAccount}">
+                <Binding Path="Email" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <vr:MandatoryRule Name="Email"/>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
 
-            <!-- Row 6 -->
-            <Button Grid.Row="5" Grid.Column="0"
+            <!-- Row 9 -->
+            <ContentPresenter Grid.Row="8" Grid.Column="0"
+                              Margin="0,0,0,5"
+                              Grid.ColumnSpan="2"
+                              Content="{Binding ElementName=inputEmail, Path=(Validation.Errors).CurrentItem}"/>
+
+            <!-- Row 10 -->
+            <Button Grid.Row="9" Grid.Column="0"
                     Content="Logout"
                     Margin="0,20,0,0"
                     Grid.ColumnSpan="2"

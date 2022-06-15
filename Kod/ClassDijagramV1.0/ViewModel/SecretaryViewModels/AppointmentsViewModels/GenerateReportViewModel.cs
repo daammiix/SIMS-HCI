@@ -78,6 +78,8 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModel
             _documentGenerator.SetFooter("Damjan");
             _documentGenerator.SaveDocument(@"C:\Temp\Report.pdf");
 
+
+            MessageBox.Show("Izvestaj uspesno generisan, putanja:C:\\Temp\\Report.pdf", "Izvestaj uspesno generisan", MessageBoxButton.OK);
             dialog.Close();
         }
 

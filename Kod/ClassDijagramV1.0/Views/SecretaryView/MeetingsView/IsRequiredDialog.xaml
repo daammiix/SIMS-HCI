@@ -14,6 +14,12 @@
         FontSize="20"
         Title="IsRequired" Height="150" Width="250">
 
+    <Window.InputBindings>
+        <KeyBinding Key="Return"
+                    Command="{Binding OkCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+    </Window.InputBindings>
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

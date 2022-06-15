@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.FreeDaysViewModels
 {
@@ -71,6 +72,19 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.FreeDaysViewModels
                 }
 
                 return _refuseCommand;
+            }
+        }
+
+        public RelayCommand SearchCommand
+        {
+            get
+            {
+                if (_searchCommand == null)
+                {
+                    _searchCommand = new RelayCommand(o => SearchExecute(o as DataGrid));
+                }
+
+                return _searchCommand;
             }
         }
 
@@ -188,7 +202,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.FreeDaysViewModels
             }
 
             // Brisemo iz view-a mora iz dispatcher threda jer je on napravio
-            if (Application.Current.Dispatcher != null)
+            if (Application.Current != null)
             {
                 Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                 {
@@ -216,6 +230,28 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.FreeDaysViewModels
             {
                 _freeDaysRequestResolvedController.Remove(freeDayRequestResolvedViewModel.FreeDayRequestResolved);
             });
+        }
+
+        private void SearchExecute(DataGrid dg)
+        {
+            if (!SearchText.Equals(""))
+            {
+                DateTime searchedDateTime;
+                DateTime.TryParse(SearchText, out searchedDateTime);
+                var filteredFreeDayRequestsResolved = FreeDayRequestsResolved
+                                .Where(item => item.Doctor.Name.ToLower().Contains(SearchText.ToLower()) ||
+                                               item.Doctor.Jmbg.Contains(SearchText));
+                if (searchedDateTime != null)
+                {
+                    filteredFreeDayRequestsResolved.Concat(FreeDayRequestsResolved
+                        .Where(item => (item.From <= searchedDateTime && item.To >= searchedDateTime)));
+                }
+                dg.ItemsSource = filteredFreeDayRequestsResolved;
+            }
+            else
+            {
+                dg.ItemsSource = FreeDayRequestsResolved;
+            }
         }
 
         #endregion

@@ -29,6 +29,9 @@ namespace ClassDijagramV1._0.Views.SecretaryView.AppointmentsView
             _appointmentController = app.AppointmentController;
 
             InitializeComponent();
+            Focusable = true;
+            Loaded += (s, e) => Keyboard.Focus(this);
+
 
             _viewModel = this.DataContext as AppointmentsMainViewModel;
 

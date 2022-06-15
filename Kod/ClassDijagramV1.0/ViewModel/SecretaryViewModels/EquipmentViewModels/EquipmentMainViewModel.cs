@@ -5,8 +5,10 @@ using ClassDijagramV1._0.Views.SecretaryView.EquipmentView;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Timers;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.EquipmentViewModels
 {
@@ -14,7 +16,6 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.EquipmentViewModels
     {
         #region Fields
 
-        private string _searchText;
         private RelayCommand _searchCommand;
         private RelayCommand _makeOrderCommand;
         private EquipmentController _equipmentController;
@@ -29,6 +30,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.EquipmentViewModels
         // Sve narudzbine
         public ObservableCollection<PurchaseOrderViewModel> PurchaseOrders { get; set; }
 
+        public string SearchText { get; set; }
         public PurchaseOrderViewModel SelectedPurchaseOrder
         {
             get { return _selectedPurchaseOrder; }
@@ -52,6 +54,19 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.EquipmentViewModels
                 }
 
                 return _makeOrderCommand;
+            }
+        }
+
+        public RelayCommand SearchCommand
+        {
+            get
+            {
+                if (_searchCommand == null)
+                {
+                    _searchCommand = new RelayCommand(o => SearchExecute(o as ListView));
+                }
+
+                return _searchCommand;
             }
         }
 
@@ -144,6 +159,37 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.EquipmentViewModels
                 });
             }
 
+        }
+
+        private void SearchExecute(ListView lw)
+        {
+            if (!SearchText.Equals(""))
+            {
+                DateTime searchedDateTime;
+                DateTime.TryParse(SearchText, out searchedDateTime);
+
+                var filteredPurchaseOrders = PurchaseOrders
+                    .Where(item => item.SupplierName.ToLower().Contains(SearchText.ToLower())).ToList();
+
+                if (searchedDateTime != null)
+                {
+                    foreach (PurchaseOrderViewModel purchaseOrderVM in PurchaseOrders)
+                    {
+                        if (purchaseOrderVM.DeliveryTime.ToShortDateString().Equals(searchedDateTime.ToShortDateString()))
+                        {
+                            filteredPurchaseOrders.Add(purchaseOrderVM);
+                        }
+                    }
+                    // filteredPurchaseOrders.Concat(PurchaseOrders
+                    //    .Where(item => item.DeliveryTime.ToShortDateString().Equals(searchedDateTime.ToShortDateString())));
+                }
+
+                lw.ItemsSource = filteredPurchaseOrders;
+            }
+            else
+            {
+                lw.ItemsSource = PurchaseOrders;
+            }
         }
 
         #endregion

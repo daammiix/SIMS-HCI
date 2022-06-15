@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.AppointmentsView"
         xmlns:vm="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.AppointmentsViewModels"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:vr="clr-namespace:ClassDijagramV1._0.Util.ValidationRules"
         mc:Ignorable="d"
         Background="{StaticResource SBackground}"
         WindowStyle="None"
@@ -15,6 +16,12 @@
         Foreground="{StaticResource SCyan}"
         FontSize="20"
         Title="GenerateReport" Height="450" Width="800">
+
+    <Window.InputBindings>
+        <KeyBinding Key="Return"
+                    Command="{Binding GenerateCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}"/>
+    </Window.InputBindings>
 
     <Window.DataContext>
         <vm:GenerateReportViewModel/>
@@ -26,7 +33,11 @@
                 <ResourceDictionary Source="../../../Styles/TextBox.xaml"/>
                 <ResourceDictionary Source="../../../Styles/Button.xaml"/>
                 <ResourceDictionary Source="../../../Styles/DatePicker.xaml"/>
+                <ResourceDictionary Source="../../../Styles/Validation.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type ValidationError}">
+                <TextBlock FontSize="16" FontStyle="Italic" Foreground="Red" HorizontalAlignment="Left" Margin="0,1" Text="{Binding Path=ErrorContent}"/>
+            </DataTemplate>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -89,6 +100,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -100,29 +113,58 @@
                        VerticalAlignment="Center"/>
             <DatePicker Grid.Row="0"
                      Grid.Column="1"
+                     x:Name="fromInput"
                      Width="200"
                      Margin="0,0,0,15"
-                     SelectedDate="{Binding From, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                     Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
                      DisplayDateStart="{x:Static sys:DateTime.Now}"
                      Foreground="{StaticResource SLightGrayShade}"
                      BorderBrush="{StaticResource SCyan}"
-                     Style="{StaticResource SecretaryDatePicker}"/>
-
+                     Style="{StaticResource SecretaryDatePicker}">
+                <DatePicker.SelectedDate>
+                    <Binding Path="From" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <vr:MandatoryRule Name="From"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </DatePicker.SelectedDate>
+            </DatePicker>
             <!-- Row 2 -->
-            <TextBlock Grid.Row="1"
+            <ContentPresenter Grid.Row="1"
+                              Grid.Column="0" Grid.ColumnSpan="2"
+                              Margin="0,0,0,5"
+                              Content="{Binding ElementName=fromInput, Path=(Validation.Errors).CurrentItem}"/>
+
+            <!-- Row 3 -->
+            <TextBlock Grid.Row="2"
                        Grid.Column="0"
                        Text="To:"
                        VerticalAlignment="Center"/>
-            <DatePicker Grid.Row="1"
+            <DatePicker Grid.Row="2"
                      Grid.Column="1"
-                     SelectedDate="{Binding To, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                        x:Name="toInput"
+                        Margin="0,0,0,15"
+                     Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
                      DisplayDateStart="{x:Static sys:DateTime.Now}"
                      Foreground="{StaticResource SLightGrayShade}"
                      BorderBrush="{StaticResource SCyan}"
-                     Style="{StaticResource SecretaryDatePicker}"/>
+                     Style="{StaticResource SecretaryDatePicker}">
+                <DatePicker.SelectedDate>
+                    <Binding Path="To" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <vr:MandatoryRule Name="To"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </DatePicker.SelectedDate>
+            </DatePicker>
 
-            <!-- Row 3 -->
-            <Button Grid.Row="2" 
+            <!-- Row 4 -->
+            <ContentPresenter Grid.Row="3"
+                              Grid.Column="0" Grid.ColumnSpan="2"
+                              Content="{Binding ElementName=toInput, Path=(Validation.Errors).CurrentItem}"/>
+
+            <!-- Row 5 -->
+            <Button Grid.Row="4" 
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Margin="0,35,0,0"

@@ -14,6 +14,8 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
 
         private AccountController _accountController;
 
+        private string? _username;
+        private string? _password;
 
         #endregion
 
@@ -38,8 +40,36 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
             }
         }
 
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public string? Username
+        {
+            get
+            {
+                return _username;
+            }
+            set
+            {
+                if (_username != value)
+                {
+                    _username = value;
+                    OnPropertyChanged("Username");
+                }
+            }
+        }
+        public string? Password
+        {
+            get
+            {
+                return _password;
+            }
+            set
+            {
+                if (_password != value)
+                {
+                    _password = value;
+                    OnPropertyChanged("Password");
+                }
+            }
+        }
 
         #endregion
 
@@ -91,7 +121,9 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
         private bool CanChangeAccount()
         {
             if (_accountController.DoesAccountWithSameUsernameExist(Username, _accountViewModel.Account) ||
-                Username == "" || Password == "")
+                string.IsNullOrWhiteSpace(Username) ||
+                string.IsNullOrWhiteSpace(Password) ||
+                ErrorCount > 0)
             {
                 return false;
             }

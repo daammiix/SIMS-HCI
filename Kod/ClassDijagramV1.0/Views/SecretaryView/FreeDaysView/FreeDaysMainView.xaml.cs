@@ -23,6 +23,8 @@ namespace ClassDijagramV1._0.Views.SecretaryView.FreeDaysView
         public FreeDaysMainView()
         {
             InitializeComponent();
+            Focusable = true;
+            Loaded += (s, e) => Keyboard.Focus(this);
         }
     }
 }

@@ -4,11 +4,28 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClassDijagramV1._0.Views.SecretaryView"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:accountViewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels"
              mc:Ignorable="d"
              Background="Transparent"
              FontFamily="#Poppins"
+             Focusable="True"
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.InputBindings>
+        <KeyBinding Key="A"
+                    Modifiers="Ctrl+Shift"
+                    Command="{Binding AddAccountCommand}"/>
+        <KeyBinding Key="C"
+                    Modifiers="Ctrl+Shift"
+                    Command="{Binding ChangeAccountCommand}"/>
+        <KeyBinding Key="D"
+                    Modifiers="Ctrl+Shift"
+                    Command="{Binding DeleteAccountCommand}"/>
+        <KeyBinding Key="B"
+                    Modifiers="Ctrl+Shift"
+                    Command="{Binding BanUnbanAccountCommand}"/>
+    </UserControl.InputBindings>
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -28,13 +45,19 @@
                     Orientation="Horizontal"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right">
-            <TextBox Style="{StaticResource TextBoxStyleAccount}"
+            <TextBox Style="{StaticResource SearchTextBox}"
+                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                      Width="170"
                      Padding="5"
                      FontSize="16"
-                     Margin="0,0,15,0"/>
-            <Button Content="Search"
-                    Style="{StaticResource AccountButtonsStyle}"/>
+                     Margin="0,0,15,0">
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=AccountDataGrid}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
         </StackPanel>
         <Grid>
             <Grid.RowDefinitions>

@@ -8,14 +8,17 @@
     "EquipmentList": [
       {
         "EquipmentID": "OUL5",
-        "Quantity": 2
+        "Quantity": 2,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "PRG5",
-        "Quantity": 3
+        "Quantity": 3,
+        "ErrorCount": 0
       }
     ],
-    "MedicineList": []
+    "MedicineList": [],
+    "ErrorCount": 0
   },
   {
     "RoomID": "id7",
@@ -26,18 +29,22 @@
     "EquipmentList": [
       {
         "EquipmentID": "INST6",
-        "Quantity": 1
+        "Quantity": 1,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "OL36",
-        "Quantity": 2
+        "Quantity": 2,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "PRZ42",
-        "Quantity": 2
+        "Quantity": 2,
+        "ErrorCount": 0
       }
     ],
-    "MedicineList": []
+    "MedicineList": [],
+    "ErrorCount": 0
   },
   {
     "RoomID": "id8",
@@ -48,22 +55,27 @@
     "EquipmentList": [
       {
         "EquipmentID": "OUL5",
-        "Quantity": 3
+        "Quantity": 3,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "OL36",
-        "Quantity": 1
+        "Quantity": 1,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "PRG5",
-        "Quantity": 4
+        "Quantity": 4,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "INL56",
-        "Quantity": 3
+        "Quantity": 3,
+        "ErrorCount": 0
       }
     ],
-    "MedicineList": []
+    "MedicineList": [],
+    "ErrorCount": 0
   },
   {
     "RoomID": "id12",
@@ -72,7 +84,8 @@
     "RoomNumber": 64,
     "RoomStatus": "Aktivna",
     "EquipmentList": [],
-    "MedicineList": []
+    "MedicineList": [],
+    "ErrorCount": 0
   },
   {
     "RoomID": "id11",
@@ -83,10 +96,12 @@
     "EquipmentList": [
       {
         "EquipmentID": "INL56",
-        "Quantity": 1
+        "Quantity": 1,
+        "ErrorCount": 0
       }
     ],
-    "MedicineList": []
+    "MedicineList": [],
+    "ErrorCount": 0
   },
   {
     "RoomID": "id14",
@@ -97,10 +112,12 @@
     "EquipmentList": [
       {
         "EquipmentID": "PRG5",
-        "Quantity": 2
+        "Quantity": 2,
+        "ErrorCount": 0
       }
     ],
-    "MedicineList": []
+    "MedicineList": [],
+    "ErrorCount": 0
   },
   {
     "RoomID": "id77",
@@ -109,7 +126,8 @@
     "RoomNumber": 53,
     "RoomStatus": "Aktivna",
     "EquipmentList": [],
-    "MedicineList": []
+    "MedicineList": [],
+    "ErrorCount": 0
   },
   {
     "RoomID": "id18",
@@ -118,6 +136,7 @@
     "RoomNumber": 25,
     "RoomStatus": "Aktivna",
     "EquipmentList": [],
-    "MedicineList": []
+    "MedicineList": [],
+    "ErrorCount": 0
   }
 ]

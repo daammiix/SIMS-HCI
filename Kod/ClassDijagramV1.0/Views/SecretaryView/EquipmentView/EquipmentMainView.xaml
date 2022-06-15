@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.EquipmentView"
              xmlns:viewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.EquipmentViewModels"
              mc:Ignorable="d"
@@ -10,6 +11,12 @@
              Foreground="White"
              FontSize="20"
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.InputBindings>
+        <KeyBinding Key="M"
+                    Modifiers="Ctrl"
+                    Command="{Binding MakeOrderCommand}"/>
+    </UserControl.InputBindings>
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -31,12 +38,17 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right">
             <TextBox Style="{StaticResource TextBoxStyleAccount}"
+                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                      Width="170"
                      Padding="5"
                      FontSize="16"
-                     Margin="0,0,15,0"/>
-            <Button Content="Search"
-                    Style="{StaticResource AccountButtonsStyle}"/>
+                     Margin="0,0,15,0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=PurchaseOrdersList}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
         </StackPanel>
         <Grid Margin="0,15,0,0">
             <Grid.ColumnDefinitions>
@@ -63,7 +75,8 @@
                            Text="Purchase Orders"
                            HorizontalAlignment="Center"
                            Margin="0,0,0,5"/>
-                <ListView Grid.Row="1" 
+                <ListView Grid.Row="1"
+                          x:Name="PurchaseOrdersList"
                       Background="{StaticResource SBackground}"
                       Grid.RowSpan="3"
                       Padding="5"

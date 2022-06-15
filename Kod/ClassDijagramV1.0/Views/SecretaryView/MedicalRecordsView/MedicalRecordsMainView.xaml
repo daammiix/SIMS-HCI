@@ -3,12 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.MedicalRecordsView"
              xmlns:medicalRecordsViewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewModels"
              mc:Ignorable="d"
              Background="Transparent"
              FontFamily="#Poppins"
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.InputBindings>
+        <KeyBinding Key="A"
+                    Modifiers="Ctrl+Shift"
+                    Command="{Binding AddRecord}"/>
+        <KeyBinding Key="C"
+                    Modifiers="Ctrl+Shift"
+                    Command="{Binding ChangeRecord}"/>
+        <KeyBinding Key="D"
+                    Modifiers="Ctrl+Shift"
+                    Command="{Binding DeleteRecord}"/>
+    </UserControl.InputBindings>
 
     <UserControl.DataContext>
         <medicalRecordsViewModels:MedicalRecordsMainViewModel/>
@@ -30,13 +43,18 @@
                     Orientation="Horizontal"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right">
-            <TextBox Style="{StaticResource TextBoxStyleAccount}"
+            <TextBox Style="{StaticResource SearchTextBox}"
+                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                      Width="170"
                      Padding="5"
                      FontSize="16"
-                     Margin="0,0,15,0"/>
-            <Button Content="Search"
-                    Style="{StaticResource AccountButtonsStyle}"/>
+                     Margin="0,0,15,0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding SearchRecord}" CommandParameter="{Binding ElementName=MedicalRecordsDataGrid}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
         </StackPanel>
         <Grid>
             <Grid.RowDefinitions>
