@@ -13,7 +13,7 @@
       },
       {
         "EquipmentID": "PRG5",
-        "Quantity": 3,
+        "Quantity": 1,
         "ErrorCount": 0
       }
     ],
@@ -44,7 +44,8 @@
       },
       {
         "EquipmentID": "PRG5",
-        "Quantity": 2
+        "Quantity": 4,
+        "ErrorCount": 0
       }
     ],
     "MedicineList": [],
@@ -150,6 +151,7 @@
     "RoomNumber": 88,
     "RoomStatus": "Aktivna",
     "EquipmentList": [],
-    "MedicineList": []
+    "MedicineList": [],
+    "ErrorCount": 0
   }
 ]
