@@ -1,1 +1,100 @@
-[{"EquipmentID":"OUL5","Name":"Ultrazvuk","EquipmentType":"Medicinska oprema","UnitPrice":19520,"Units":2},{"EquipmentID":"OMR5","Name":"Magnetna rezonanca","EquipmentType":"Medicinska oprema","UnitPrice":22000.99,"Units":2},{"EquipmentID":"OL36","Name":"Laser","EquipmentType":"Medicinska oprema","UnitPrice":100,"Units":2},{"EquipmentID":"OMN3","Name":"Monitor","EquipmentType":"Medicinska oprema","UnitPrice":12000,"Units":2},{"EquipmentID":"PRZ42","Name":"Zavoji","EquipmentType":"Potro\u0161na roba","UnitPrice":50,"Units":2},{"EquipmentID":"PRG5","Name":"Gaze 5x5","EquipmentType":"Potro\u0161na roba","UnitPrice":25,"Units":1},{"EquipmentID":"PRG10","Name":"Gaze 10x10","EquipmentType":"Potro\u0161na roba","UnitPrice":35,"Units":1},{"EquipmentID":"PRGA35","Name":"Galoplast","EquipmentType":"Potro\u0161na roba","UnitPrice":250,"Units":2},{"EquipmentID":"PRH75","Name":"Hanzaplast","EquipmentType":"Potro\u0161na roba","UnitPrice":100,"Units":1},{"EquipmentID":"INST6","Name":"Stolovi","EquipmentType":"Inventar","UnitPrice":2500,"Units":2},{"EquipmentID":"INS8","Name":"Stolice","EquipmentType":"Inventar","UnitPrice":1750,"Units":2},{"EquipmentID":"INL56","Name":"Lampe","EquipmentType":"Inventar","UnitPrice":890,"Units":2},{"EquipmentID":"INN91","Name":"Nosila","EquipmentType":"Inventar","UnitPrice":2700,"Units":2},{"EquipmentID":"INPK13","Name":"Pomo\u0107ni kreveti","EquipmentType":"Inventar","UnitPrice":6000,"Units":2}]
+[
+  {
+    "EquipmentID": "OUL5",
+    "Name": "Ultrazvuk",
+    "EquipmentType": "Medicinska oprema",
+    "UnitPrice": 100,
+    "Units": 2
+  },
+  {
+    "EquipmentID": "OMR5",
+    "Name": "Magnetna rezonanca",
+    "EquipmentType": "Medicinska oprema",
+    "UnitPrice": 22000.99,
+    "Units": 2
+  },
+  {
+    "EquipmentID": "OL36",
+    "Name": "Laser",
+    "EquipmentType": "Medicinska oprema",
+    "UnitPrice": 100,
+    "Units": 2
+  },
+  {
+    "EquipmentID": "OMN3",
+    "Name": "Monitor",
+    "EquipmentType": "Medicinska oprema",
+    "UnitPrice": 100,
+    "Units": 2
+  },
+  {
+    "EquipmentID": "PRZ42",
+    "Name": "Zavoji",
+    "EquipmentType": "Potro\u0161na roba",
+    "UnitPrice": 50,
+    "Units": 2
+  },
+  {
+    "EquipmentID": "PRG5",
+    "Name": "Gaze 5x5",
+    "EquipmentType": "Potro\u0161na roba",
+    "UnitPrice": 100,
+    "Units": 2
+  },
+  {
+    "EquipmentID": "PRG10",
+    "Name": "Gaze 10x10",
+    "EquipmentType": "Potro\u0161na roba",
+    "UnitPrice": 35,
+    "Units": 1
+  },
+  {
+    "EquipmentID": "PRGA35",
+    "Name": "Galoplast",
+    "EquipmentType": "Potro\u0161na roba",
+    "UnitPrice": 250,
+    "Units": 2
+  },
+  {
+    "EquipmentID": "PRH75",
+    "Name": "Hanzaplast",
+    "EquipmentType": "Potro\u0161na roba",
+    "UnitPrice": 100,
+    "Units": 1
+  },
+  {
+    "EquipmentID": "INST6",
+    "Name": "Stolovi",
+    "EquipmentType": "Inventar",
+    "UnitPrice": 2500,
+    "Units": 2
+  },
+  {
+    "EquipmentID": "INS8",
+    "Name": "Stolice",
+    "EquipmentType": "Inventar",
+    "UnitPrice": 1750,
+    "Units": 2
+  },
+  {
+    "EquipmentID": "INL56",
+    "Name": "Lampe",
+    "EquipmentType": "Inventar",
+    "UnitPrice": 890,
+    "Units": 2
+  },
+  {
+    "EquipmentID": "INN91",
+    "Name": "Nosila",
+    "EquipmentType": "Inventar",
+    "UnitPrice": 2700,
+    "Units": 2
+  },
+  {
+    "EquipmentID": "INPK13",
+    "Name": "Pomo\u0107ni kreveti",
+    "EquipmentType": "Inventar",
+    "UnitPrice": 6000,
+    "Units": 2
+  }
+]

@@ -1,9 +1,5 @@
 ﻿using ClassDijagramV1._0.Util;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Model
 {
@@ -93,7 +89,7 @@ namespace ClassDijagramV1._0.Model
             }
         }
 
-        public DoctorRating(int doctorID,List<int> grades, double averageGrade, string comment)
+        public DoctorRating(int doctorID, List<int> grades, double averageGrade, string comment)
         {
             Id = ++idCounter;
             doctorId = doctorID;

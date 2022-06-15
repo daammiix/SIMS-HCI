@@ -1,9 +1,5 @@
 ﻿using ClassDijagramV1._0.Util;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Model
 {
@@ -93,11 +89,11 @@ namespace ClassDijagramV1._0.Model
 
         public QuarterlyReport(String ID, String Name, String Type, int MoneySpent, String Date)
         {
-            this.ID = ID;
-            this.Name = Name;
-            this.Type = Type;
-            this.MoneySpent = MoneySpent;
-            this.Date = Date;
+            this._id = ID;
+            this._name = Name;
+            this._type = Type;
+            this._moneySpent = MoneySpent;
+            this._date = Date;
         }
     }
 }

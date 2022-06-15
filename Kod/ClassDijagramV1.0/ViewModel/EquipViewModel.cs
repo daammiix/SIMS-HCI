@@ -5,11 +5,7 @@ using ClassDijagramV1._0.Views.ManagerView;
 using Controller;
 using Model;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel
@@ -24,7 +20,7 @@ namespace ClassDijagramV1._0.ViewModel
             From = from; To = to;
         }
     }
-    public class EquipViewModel
+    public class EquipViewModel : ObservableObject
     {
         readonly private String format = "dd/MM/yyyyTHH:mm";
         readonly private String fullFormat = "dd/MM/yyyy HH:mm";
@@ -38,26 +34,56 @@ namespace ClassDijagramV1._0.ViewModel
         private MainRoomsViewModel mainRoomsViewModel;
 
         public BindingList<Room> Rooms { get; set; }
-        public BindingList<Equipment> Equipments { get; set; }
+        public BindingList<Equipment> Equipments
+        {
+            get
+            {
+                return _equipments;
+            }
+            set
+            {
+                if (_equipments == value)
+                    return;
+
+                _equipments = value;
+            }
+        }
 
         public Room? destinationRoom { get; set; }
         public Room _sourceRoom;
         private Equipment _selectedEqipment;
-        public int _quantity;
+        public String _quantity = "";
+
+        public String ErrorMessage { get; set; }
+        public String ErrorFormatMessage { get; set; }
 
         public BindingList<String> RoomsFromAvailable { get; set; }
         public BindingList<String> RoomsToAvailable { get; set; }
         public BindingList<String> EquipmentAvailable { get; set; }
 
         public String FromDate;
-        public String FromTime { get; set; }
+        public String FromTime;
         public String ToDate;
-        public String ToTime { get; set; }
+        public String ToTime;
 
         private BindingList<Availability> availabilities { get; set; }
 
         private RelayCommand _saveEquipmentAppointment;
         private RelayCommand _cancelEquipmentAppointment;
+        private BindingList<Equipment> _equipments;
+
+        private BindingList<EquipmentAppointment> fakeAppointments
+        {
+            get
+            {
+                var now = DateTime.Now;
+                return new BindingList<EquipmentAppointment>
+                {
+                    new EquipmentAppointment("", "", _equipments[0], 0, now + TimeSpan.FromHours(1), now + TimeSpan.FromHours(2)),
+                    new EquipmentAppointment("", "", _equipments[0], 0, now - TimeSpan.FromMinutes(15), now + TimeSpan.FromMinutes(15)),
+                };
+            }
+        }
 
         public EquipViewModel(MainRoomsViewModel mainRoomsViewModel)
         {
@@ -70,20 +96,28 @@ namespace ClassDijagramV1._0.ViewModel
             appointmentController = app.AppointmentController;
 
             this.mainRoomsViewModel = mainRoomsViewModel;
+            destinationRoom = null;
 
-            this.destinationRoom = null;
+            resetFields();
 
-            Rooms = new BindingList<Room>();
-            RoomsFromAvailable = new BindingList<String>();
-            RoomsToAvailable = new BindingList<String>();
-            EquipmentAvailable = new BindingList<String>();
+            Equipments = equipmentController.GetAllEquipments();
+        }
+
+        private void resetFields()
+        {
+            _sourceRoom = null;
+            _selectedEqipment = null;
+            _quantity = null;
 
             FromDate = DateTime.Now.ToString("dd/MM/yyyy");
             FromTime = DateTime.Now.ToString("HH:mm");
             ToDate = DateTime.Now.ToString("dd/MM/yyyy");
             ToTime = DateTime.Now.ToString("HH:mm");
 
-            Equipments = equipmentController.GetAllEquipments();
+            Rooms = new BindingList<Room>();
+            RoomsFromAvailable = new BindingList<String>();
+            RoomsToAvailable = new BindingList<String>();
+            EquipmentAvailable = new BindingList<String>();
             availabilities = new BindingList<Availability>();
         }
 
@@ -93,6 +127,13 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _saveEquipmentAppointment = new RelayCommand(o =>
                 {
+                    if(selectedFromDate == "" || selectedFromTime == "" || selectedToDate == "" || selectedToTime == ""
+                    || _sourceRoom == null || _selectedEqipment == null || _quantity == null || _quantity == "")
+                    {
+                        ErrorFormatMessage = "Polja nisu popunjena";
+                        OnPropertyChanged("ErrorFormatMessage");
+                        return;
+                    }
                     SaveEquipmentAppointmentAction();
                 });
 
@@ -106,6 +147,7 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _cancelEquipmentAppointment = new RelayCommand(o =>
                 {
+                    resetFields();
                     this.mainRoomsViewModel.ResetView();
                 });
 
@@ -128,7 +170,7 @@ namespace ClassDijagramV1._0.ViewModel
                 ListsHandler();
             }
         }
-        public int selectedQuantity
+        public String selectedQuantity
         {
             get
             {
@@ -139,7 +181,24 @@ namespace ClassDijagramV1._0.ViewModel
                 if (_quantity == value)
                     return;
                 _quantity = value;
-                UpdateAvailableRooms();
+                int quantity;
+                bool is_number = int.TryParse(value, out quantity);
+                if (!is_number)
+                {
+                    ErrorMessage = "Uneta vrednost mora biti broj";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else if (quantity < 1)
+                {
+                    ErrorMessage = "Broj mora biti veći od 0";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                    UpdateAvailableRooms();
+                }
             }
         }
 
@@ -169,7 +228,48 @@ namespace ClassDijagramV1._0.ViewModel
                 if (FromDate == value)
                     return;
                 FromDate = value;
-                ListsHandler();
+                DateTime date;
+                bool format = DateTime.TryParseExact(value, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out date);
+                if (!format)
+                {
+                    ErrorFormatMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorFormatMessage");
+                }
+                else
+                {
+                    ErrorFormatMessage = "";
+                    OnPropertyChanged("ErrorFormatMessage");
+                    ListsHandler();
+                }
+            }
+        }
+
+        public String selectedFromTime
+        {
+            get
+            {
+                return FromTime;
+            }
+            set
+            {
+                if (FromTime == value)
+                    return;
+                FromTime = value;
+                DateTime time;
+                bool format = DateTime.TryParseExact(value, "HH:mm", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out time);
+                if (!format)
+                {
+                    ErrorFormatMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorFormatMessage");
+                }
+                else
+                {
+                    ErrorFormatMessage = "";
+                    OnPropertyChanged("ErrorFormatMessage");
+                    ListsHandler();
+                }
             }
         }
 
@@ -184,7 +284,48 @@ namespace ClassDijagramV1._0.ViewModel
                 if (ToDate == value)
                     return;
                 ToDate = value;
-                ListsHandler();
+                DateTime date;
+                bool format = DateTime.TryParseExact(value, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out date);
+                if (!format)
+                {
+                    ErrorFormatMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorFormatMessage");
+                }
+                else
+                {
+                    ErrorFormatMessage = "";
+                    OnPropertyChanged("ErrorFormatMessage");
+                    ListsHandler();
+                }
+            }
+        }
+
+        public String selectedToTime
+        {
+            get
+            {
+                return ToTime;
+            }
+            set
+            {
+                if (ToTime == value)
+                    return;
+                ToTime = value;
+                DateTime time;
+                bool format = DateTime.TryParseExact(value, "HH:mm", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out time);
+                if (!format)
+                {
+                    ErrorFormatMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorFormatMessage");
+                }
+                else
+                {
+                    ErrorFormatMessage = "";
+                    OnPropertyChanged("ErrorFormatMessage");
+                    ListsHandler();
+                }
             }
         }
 
@@ -200,9 +341,11 @@ namespace ClassDijagramV1._0.ViewModel
                 return;
             }
 
-            var equipmentAppointment = new EquipmentAppointment(_sourceRoom.RoomID, destinationRoom.RoomID, selectedEquipment, selectedQuantity, fromDatetime, toDatetime);
+            var quantity = Int32.Parse(selectedQuantity);
+            var equipmentAppointment = new EquipmentAppointment(_sourceRoom.RoomID, destinationRoom.RoomID, selectedEquipment, quantity, fromDatetime, toDatetime);
             equipmentAppointmentController.AddEquipmentAppointment(equipmentAppointment);
 
+            resetFields();
             this.mainRoomsViewModel.ResetView();
         }
 
@@ -225,18 +368,28 @@ namespace ClassDijagramV1._0.ViewModel
 
         public void UpdateAvailableRooms()
         {
-            selectedSourceRoom = null; // TODO check
+            selectedSourceRoom = null;
             Rooms.Clear();
+            int quantity = 0;
+            if (selectedEquipment == null)
+            {
+                return;
+            }
             try
             {
-                _quantity = Convert.ToInt32(selectedQuantity);
+                quantity = Convert.ToInt32(selectedQuantity);
             }
             catch (FormatException ex)
             {
-                _quantity = 0;
+                quantity = 0;
                 return;
             }
             BindingList<Room> rooms = roomController.GetAllRooms();
+            if(selectedQuantity == null)
+            {
+                return;
+            }
+            quantity = Int32.Parse(selectedQuantity);
             foreach (Room room in rooms)
             {
                 if (room == destinationRoom)
@@ -245,22 +398,12 @@ namespace ClassDijagramV1._0.ViewModel
                 }
                 foreach (var biding in room.EquipmentList)
                 {
-                    if (selectedEquipment.EquipmentID == biding.EquipmentID && biding.Quantity >= selectedQuantity)
+                    if (selectedEquipment.EquipmentID == biding.EquipmentID && biding.Quantity >= quantity)
                     {
                         Rooms.Add(room);
                     }
                 }
             }
-        }
-
-        private void DateField_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-            ListsHandler();
-        }
-
-        private void MovingFrom_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            ListsHandler();
         }
 
         private String formatAvailableTime(DateTime start, DateTime end)
@@ -279,10 +422,7 @@ namespace ClassDijagramV1._0.ViewModel
             var appointments = appointmentController.GetListOfAppointments();
             var equipmentAppointments = equipmentAppointmentController.GetAllEquipmentAppointment();
 
-            if (selectedSourceRoom == null)
-            {
-                return;
-            }
+
             DateTime selectedFrom, selectedTo;
             try
             {
@@ -294,7 +434,20 @@ namespace ClassDijagramV1._0.ViewModel
                 return;
             }
 
+            foreach (var appointment in fakeAppointments)
+            {
+                var aptFrom = appointment.FromDateTime.Date;
+                var aptTo = appointment.ToDateTime.Date;
+                if (checkTimeSpansOverlap(aptFrom, aptTo, selectedFrom, selectedTo))
+                {
+                    EquipmentAvailable.Add(formatAvailableTime(appointment.FromDateTime, appointment.ToDateTime));
+                }
+            }
 
+            if (selectedSourceRoom == null)
+            {
+                return;
+            }
             foreach (var equipmentAppointment in equipmentAppointments)
             {
                 var aptFrom = equipmentAppointment.FromDateTime.Date;
@@ -343,10 +496,6 @@ namespace ClassDijagramV1._0.ViewModel
                     }
                 }
             }
-
-            var now = DateTime.Now;
-            EquipmentAvailable.Add(formatAvailableTime(now + TimeSpan.FromHours(1), now + TimeSpan.FromHours(2)));
-            EquipmentAvailable.Add(formatAvailableTime(now - TimeSpan.FromMinutes(15), now + TimeSpan.FromMinutes(15)));
         }
     }
 }

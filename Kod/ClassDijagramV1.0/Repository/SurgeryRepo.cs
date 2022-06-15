@@ -3,7 +3,6 @@
 // Created: Sunday, April 10, 2022 5:08:59 PM
 // Purpose: Definition of Class SurgeryRepo
 
-using ClassDijagramV1._0.Model;
 using Model;
 using System;
 using System.Collections.ObjectModel;

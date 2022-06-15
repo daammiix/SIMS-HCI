@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ClassDijagramV1._0.Views.PatientView"
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1000"
       Title="UpdatePriorityDoctor">
@@ -46,7 +47,7 @@
 
             <TextBlock Grid.Row="0" Grid.Column="0"
                        VerticalAlignment="Center"
-                       Text="Izaberite ljekara :" Margin="20" FontSize="20"/>
+                       Text="Izaberite doktora :" Margin="20" FontSize="20"/>
             <TextBlock Grid.Row="1" Grid.Column="0"
                        VerticalAlignment="Center"
                        Text="Izaberite datum pregleda :" Margin="20" FontSize="20"/>
@@ -89,24 +90,26 @@
                       HorizontalAlignment="Left"
                       x:Name="timeCB" ItemsSource="{Binding DoctorsAppointmentsTime}"
                       SelectionChanged="dodavanjPregledaDoktor_SelectionChanged"
-                      Width="200" Height="28"/>
+                      Width="200" Height="28"
+                      materialDesign:HintAssist.Hint="Izaberite vrijeme"/>
 
         </Grid>
        
         <StackPanel Grid.Row="0" Grid.Column="2">
             <CheckBox
-                Content="Moj izabrani doktor opste prakse"
+                Content="Moj izabrani doktor opšte prakse"
                 Style="{StaticResource MaterialDesignCheckBox}" />
             <TextBlock Grid.Row="2" Grid.Column="0"
                        VerticalAlignment="Center"
                        Text="Nemate izabranog doktora?" Margin="0 20" FontSize="20"/>
             <Button Style="{StaticResource MaterialDesignPaperSecondaryButton}"
-                    Content="Izaberite doktora opste prakse" />
+                    Content="Izaberite doktora opšte prakse" Click="addDoctor" />
 
         </StackPanel>
 
 
         <Button Grid.Row="1" Grid.Column="2"
+                Style="{StaticResource MaterialDesignFlatAccentBgButton}"
                 x:Name="addAppBtn" Content="Izmijenite pregled" Click="UpdateAppointmentClick" IsEnabled="False"
                     Width="176" Height="42"/>
 

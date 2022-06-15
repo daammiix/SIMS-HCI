@@ -4,11 +4,6 @@ using ClassDijagramV1._0.Model.Enums;
 using ClassDijagramV1._0.Util;
 using Controller;
 using Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
@@ -139,7 +134,14 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
                 // provera zato sto je trenutno implementirano samo za pacijente, posle nece trebati
                 return (_person == null) ? "" : _person.Name;
             }
-            set { _person.Name = value; }
+            set
+            {
+                if (_person.Name != value)
+                {
+                    _person.Name = value;
+                    OnPropertyChanged("Name");
+                }
+            }
         }
 
         public string Surname
@@ -202,6 +204,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
         }
 
         #endregion
+
 
     }
 }

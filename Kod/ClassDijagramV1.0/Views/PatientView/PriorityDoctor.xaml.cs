@@ -1,25 +1,13 @@
 using ClassDijagramV1._0.Controller;
 using ClassDijagramV1._0.Model;
-using ClassDijagramV1._0.Util;
-using ClassDijagramV1._0.Views.PatientView;
 using Controller;
 using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ClassDijagramV1._0.Views.PatientView
 {
@@ -36,32 +24,27 @@ namespace ClassDijagramV1._0.Views.PatientView
             PropertyChanged(this, e);
         }
 
-        // pacijentovi appointmenti, lista appointmentViewModela prosledjena konstruktoru
-        private ObservableCollection<AppointmentViewModel> _patientAppointments;
-        // ulogovan pacijent
-        private Patient _logedPatient;
         // kontroleri
-        public AppointmentController _appointmentController;
-        public RoomController _roomController;
-        public RoomAppointmentController _roomAppointmentController;
-        public DoctorController _doctorController;
-        public ActivityController _activityController;
-        public NotificationController _notificationController;
+        private AppointmentController _appointmentController;
+        private RoomController _roomController;
+        private RoomAppointmentController _roomAppointmentController;
+        private DoctorController _doctorController;
+        private ActivityController _activityController;
+        private NotificationController _notificationController;
 
+        private ObservableCollection<AppointmentViewModel> _patientAppointments;
         private PatientMainWindow parent { get; set; }
-        public ObservableCollection<Appointment> Appointments{ get; private set; }
+        public ObservableCollection<Appointment> Appointments { get; private set; }
         public BindingList<Room> Rooms { get; set; }
         public ObservableCollection<Doctor> Doctors { get; set; }
         public ObservableCollection<String> DoctorsAppointmentsTime { get; set; }
 
-        public PriorityDoctor(PatientMainWindow patientMain, ObservableCollection<AppointmentViewModel> patientAppointments,
-            Patient logedPatient)
+        public PriorityDoctor(PatientMainWindow patientMain, ObservableCollection<AppointmentViewModel> patientAppointments)
         {
             InitializeComponent();
             this.DataContext = this;
             parent = patientMain;
             _patientAppointments = patientAppointments;
-            _logedPatient = logedPatient;
 
             App app = Application.Current as App;
             _appointmentController = app.AppointmentController;
@@ -90,31 +73,18 @@ namespace ClassDijagramV1._0.Views.PatientView
             DateTime date = new DateTime(year, month, day, hour, minutes, 0);
             TimeSpan interval = date.AddMinutes(30) - date;
 
-            Room r1 = getFreeRoom(date,interval);
+            Room r1 = _roomAppointmentController.GetFreeRoom(date, date + interval);
             Doctor d1 = (Doctor)dodavanjPregledaDoktor.SelectedItem;
-
-            Appointment a1 = new Appointment(_logedPatient.Id, d1.Id, r1.RoomID, date, interval, AppointmentType.generalPractitionerCheckup);
-
+            Appointment a1 = new Appointment(parent.Patient.Id, d1.Id, r1.RoomID, date, interval, AppointmentType.generalPractitionerCheckup);
+            
             _appointmentController.AddAppointment(a1);
-            // Da bi se updatovao i view
             _patientAppointments.Add(new AppointmentViewModel(a1));
-            _notificationController.AddNotification(a1, r1, NotificationType.addingAppointment);
-            //activity
-            ActivityLog activity = new ActivityLog(DateTime.Now, _logedPatient.Id, TypeOfActivity.makeAppointment);
+            parent.Patient.Appointments.Add(a1);
+            _notificationController.AddNotificationForAppointment(a1);
+            ActivityLog activity = new ActivityLog(DateTime.Now, parent.Patient.Id, TypeOfActivity.makeAppointment);
             _activityController.AddActivity(activity);
-            parent.startWindow.Content = new AppointmentsViewPage(_patientAppointments, parent, _logedPatient, parent.Account);
-        }
 
-        private Room getFreeRoom(DateTime start, TimeSpan interval)
-        {
-            foreach (Room room in Rooms)
-            {
-                if (_roomAppointmentController.GetFreeRoom(room, start, start + interval))
-                {
-                    return room;
-                }             
-            }
-            return null;
+            parent.startWindow.Content = new AppointmentsViewPage(parent,_patientAppointments);
         }
 
         private void dodavanjPregledaDoktor_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -171,6 +141,11 @@ namespace ClassDijagramV1._0.Views.PatientView
                 addAppBtn.IsEnabled = false;
             }
 
+        }
+
+        private void addDoctor(object sender, RoutedEventArgs e)
+        {
+            parent.startWindow.Content = new PatientDataPage(parent);
         }
     }
 }

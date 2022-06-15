@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.EquipmentView"
         xmlns:viewModels="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.EquipmentViewModels"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:vr="clr-namespace:ClassDijagramV1._0.Util.ValidationRules"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -15,6 +16,13 @@
         FontSize="20"
         Background="{StaticResource SBackground}"
         Height="550" Width="1000">
+
+    <Window.InputBindings>
+        <KeyBinding Key="Return"
+                    Command="{Binding MakeOrderCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}"/>
+    </Window.InputBindings>
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -22,7 +30,11 @@
                 <ResourceDictionary Source="../../../Styles/Button.xaml"/>
                 <ResourceDictionary Source="../../../Styles/DatePicker.xaml"/>
                 <ResourceDictionary Source="../../../Styles/ListView.xaml"/>
+                <ResourceDictionary Source="../../../Styles/Validation.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type ValidationError}">
+                <TextBlock FontSize="16" FontStyle="Italic" Foreground="Red" HorizontalAlignment="Left" Margin="0,1" Text="{Binding Path=ErrorContent}"/>
+            </DataTemplate>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -195,7 +207,8 @@
               HorizontalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="131*"/>
+                    <RowDefinition Height="265*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" 
                        Text="Order Equipment"
@@ -208,7 +221,7 @@
                       ScrollViewer.CanContentScroll="False"
                       DragOver="ListView_DragOver"
                       Drop="ListView_Drop"
-                      ItemsSource="{Binding EquipmentInOrder}">
+                      ItemsSource="{Binding EquipmentInOrder}" Grid.RowSpan="2">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -316,6 +329,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
@@ -326,19 +340,34 @@
                        VerticalAlignment="Center"
                        Margin="0,0,10,15"/>
                 <TextBox Grid.Column="1"
+                         x:Name="supplierInput"
                      Grid.Row="0"
-                     Text="{Binding SupplierName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                      Margin="0,0,0,10"
-                     Style="{StaticResource TextBoxStyleAccount}"/>
-
+                     Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
+                     Style="{StaticResource TextBoxStyleAccount}">
+                    <Binding Path="SupplierName" UpdateSourceTrigger="PropertyChanged" 
+                             TargetNullValue="">
+                        <Binding.ValidationRules>
+                            <vr:MandatoryRule Name="Supplier name"/>
+                            <ExceptionValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox>
                 <!-- Row 2 -->
+                <ContentPresenter Grid.Row="1"
+                                  Grid.Column="0" Grid.ColumnSpan="2"
+                                  Margin="0,0,0,5"
+                                  Content="{Binding ElementName=supplierInput, Path=(Validation.Errors).CurrentItem}"/>
+
+
+                <!-- Row 3 -->
                 <TextBlock Grid.Column="0" 
-                       Grid.Row="1"
+                       Grid.Row="2"
                        Text="Delivery Time:"
                        VerticalAlignment="Center"
                        Margin="0,0,10,15"/>
                 <DatePicker Grid.Column="1"
-                        Grid.Row="1"
+                        Grid.Row="2"
                         Margin="0,0,0,15"
                         Validation.ErrorTemplate="{x:Null}"
                         SelectedDate="{Binding DeliveryTime, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
@@ -348,14 +377,14 @@
                         Style="{StaticResource SecretaryDatePicker}"
                         CalendarStyle="{StaticResource SecretaryCalendarStyle}"/>
 
-                <!-- Row 3-->
+                <!-- Row 4-->
                 <TextBlock Grid.Column="0" 
-                       Grid.Row="2"
+                       Grid.Row="3"
                        Text="Description:"
                        VerticalAlignment="Center"
                        Margin="0,0,10,15"/>
                 <TextBox Grid.Column="1"
-                     Grid.Row="2"
+                     Grid.Row="3"
                      Text="{Binding Description, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                      Margin="0,0,0,10"
                      Style="{StaticResource TextBoxStyleAccountMultiLine}"/>

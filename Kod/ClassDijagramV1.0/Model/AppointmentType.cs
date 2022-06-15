@@ -4,14 +4,12 @@
  * Purpose: Definition of the Enum Model.AppointmentType
  ***********************************************************************/
 
-using System;
-
 namespace Model
 {
-   public enum AppointmentType
-   {
-      generalPractitionerCheckup,
-      specialistCheckup,
-      operation
-   }
+    public enum AppointmentType
+    {
+        generalPractitionerCheckup,
+        specialistCheckup,
+        operation
+    }
 }

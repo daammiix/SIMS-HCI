@@ -1,11 +1,7 @@
 ﻿using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Service;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Controller
 {
@@ -87,6 +83,18 @@ namespace ClassDijagramV1._0.Controller
         public MedicalRecord GetMedicalRecord(int medicalRecordNumber)
         {
             return _medicalRecordService.GetMedicalRecord(medicalRecordNumber);
+        }
+
+
+        /// <summary>
+        /// Vraca zdravstveni karton od zadatok pacijenta
+        /// </summary>
+        /// <param name="patientID"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public MedicalRecord GetPatientsMedicalRecord(int patientID)
+        {
+            return _medicalRecordService.GetPatientsMedicalRecord(patientID);
         }
 
         /// <summary>

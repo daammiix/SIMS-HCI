@@ -5,16 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClassDijagramV1._0.Views.ManagerView"
         mc:Ignorable="d" 
-        d:DesignHeight="655" d:DesignWidth="980"
+        d:DesignHeight="655"
+        d:DesignWidth="980"
         Background="#D9D4CC"
-        FontFamily="Berlin Sans FB Demi"
+        FontFamily="Sylfaen"
+        FontWeight="Bold"
         Foreground="#1F1313">
 
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../Theme/DateTextBoxTheme.xaml"/>
-                <ResourceDictionary Source="../../Theme/TimeTextBoxTheme.xaml"/>
+                <ResourceDictionary Source="../../Theme/BasicTextBoxTheme.xaml"/>
+                <ResourceDictionary Source="../../Theme/BasicComboBoxTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -27,32 +29,29 @@
         <TextBlock Grid.Row="0"
                    Text="Promena namene sale"
                    VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
+                   HorizontalAlignment="Left"
                    FontSize="36"
                    Foreground="#1F1313">
         </TextBlock>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="350"/>
-                <ColumnDefinition Width="450"/>
+                <ColumnDefinition Width="490"/>
+                <ColumnDefinition Width="490"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Row="1"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
-                <Label Content="Odaberite datum:" FontSize="24" Margin="20,0,0,0" Height="40" Width="250" HorizontalAlignment="Left"/>
-                <DatePicker x:Name="PickerDate" FontSize="24" Margin="20,0,0,5" Height="40" Width="250" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-
-                <DataGrid Grid.Column="1" Height="200" Width="250" x:Name="BusyRooms" Margin="20, 10, 10,0"
-                      CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left" FontSize="18"
+            <StackPanel Grid.Row="1"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
+                <DataGrid Grid.Column="1" Height="220" Width="350" x:Name="BusyRooms" Margin="20, 25, 10,0"
+                      CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left" FontSize="20"
                       RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
                       CanUserDeleteRows="False" AutoGenerateColumns="False"
-                      ItemsSource="{Binding Path=EquipmentList}" IsReadOnly="True">
+                      ItemsSource="{Binding Path=RoomsAvailable}" IsReadOnly="True">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Zauzetost sale:" Width="*" />
+                        <DataGridTextColumn Header="Zauzetost sale:" Width="*" Binding="{Binding Path=.}"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Label Content="Namena u koju se menja:" FontSize="24" Height="50" Margin="20,5,0,5" HorizontalContentAlignment="Left" HorizontalAlignment="Left"/>
-                <ComboBox x:Name="ChangeName" Width="320" Height="55" Margin="20,5,0,5" FontSize="24" HorizontalContentAlignment="Left" 
-                          VerticalContentAlignment="Center" IsReadOnly="True" SelectedItem="{Binding selectedNewNameRoom}">
+                <Label Content="Namena u koju se menja:" FontSize="26" Height="50" Margin="20,5,0,5" HorizontalContentAlignment="Left" HorizontalAlignment="Left"/>
+                <ComboBox x:Name="ChangeName" Width="320" Height="55" Margin="-5,5,0,5" FontSize="24" HorizontalContentAlignment="Left" 
+                          VerticalContentAlignment="Center" IsReadOnly="True" SelectedItem="{Binding selectedNewNameRoom}" Style="{StaticResource BasicComboBox}">
                     <ComboBoxItem Margin="5,0,0,0" Content="Operaciona Sala"/>
                     <ComboBoxItem Margin="5,0,0,0" Content="Sala za preglede"/>
                     <ComboBoxItem Margin="5,0,0,0" Content="Bolnička soba"/>
@@ -61,31 +60,31 @@
                 </ComboBox>
             </StackPanel>
 
-            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left" Width="450">
-                <Label Content="Zakaži salu od:" FontSize="24" Margin="0,0,0,5" HorizontalContentAlignment="Left"/>
+            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" Width="450">
+                <Label Content="Zakaži salu od:" FontSize="26" Margin="40,20,0,5" HorizontalContentAlignment="Left"/>
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
-                        <Label Content="Datum:" FontSize="24" Height="40" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
-                        <Label Content="Vreme:" FontSize="24" Height="40" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
+                        <Label Content="Datum:" FontSize="26" Height="40" Margin="40,5,0,5" HorizontalContentAlignment="Right"/>
+                        <Label Content="Vreme:" FontSize="26" Height="40" Margin="40,10,0,5" HorizontalContentAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="40" Margin="0,5,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedFromDate,Mode=TwoWay}" Style="{StaticResource DateTextBox}"/>
-                        <TextBox x:Name="FromTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="0,5,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromTime,Mode=TwoWay}"  Style="{StaticResource TimeTextBox}"/>
+                        <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="45" Margin="0,5,0,5" FontSize="20" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedFromDate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextBox}"/>
+                        <TextBox x:Name="FromTimeField" Width="200" Background="#E7E7E7" Height="45" Margin="0,5,0,5" FontSize="20" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedFromTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource BasicTextBox}"/>
                     </StackPanel>
                 </StackPanel>
 
-                <Label Content="Zakaži salu do:" FontSize="24" Margin="0,15,0,5" HorizontalContentAlignment="Left"/>
+                <Label Content="Zakaži salu do:" FontSize="26" Margin="40,15,0,5" HorizontalContentAlignment="Left"/>
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
-                        <Label Content="Datum:" FontSize="24" Height="40" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
-                        <Label Content="Vreme:" FontSize="24" Height="40" Margin="0,5,0,5" HorizontalContentAlignment="Right"/>
+                        <Label Content="Datum:" FontSize="26" Height="40" Margin="40,5,0,5" HorizontalContentAlignment="Right"/>
+                        <Label Content="Vreme:" FontSize="26" Height="40" Margin="40,10,0,5" HorizontalContentAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="40" Margin="0,5,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedToDate,Mode=TwoWay}"  Style="{StaticResource DateTextBox}"/>
-                        <TextBox x:Name="ToTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="0,5,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToTime,Mode=TwoWay}"  Style="{StaticResource TimeTextBox}"/>
+                        <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="45" Margin="0,5,0,5" FontSize="20" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedToDate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource BasicTextBox}"/>
+                        <TextBox x:Name="ToTimeField" Width="200" Background="#E7E7E7" Height="45" Margin="0,5,0,5" FontSize="20" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedToTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource BasicTextBox}"/>
                     </StackPanel>
                 </StackPanel>
-
+                <Label Width="300" HorizontalAlignment="Left" Content="{Binding ErrorMessage,UpdateSourceTrigger=PropertyChanged}" FontSize="14" Margin="50,15,0,5" Foreground="Red"/>
             </StackPanel>
         </Grid>
 

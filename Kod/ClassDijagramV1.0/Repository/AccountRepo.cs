@@ -1,12 +1,7 @@
 ﻿using ClassDijagramV1._0.FileHandlers;
 using ClassDijagramV1._0.Model;
-using Model;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Repository
 {
@@ -56,30 +51,28 @@ namespace ClassDijagramV1._0.Repository
         }
 
         /// <summary>
-        /// Dodaje novi account u listu account-a ako ne postoji account sa istim username-om
+        /// Dodaje novi account u listu account-a ako ne postoji account sa istim username-om ili id-em
         /// </summary>
         /// <param name="newAccount"></param>
-        /// <returns></returns>
+        /// <returns>true ako je novi acc uspesno dodat, u suprotnom false</returns>
         public bool AddAccount(Account newAccount)
         {
-            // Flag za proveru da li postoji account sa istim username-om kao novi account
-            bool notexists = true;
-
-            // Ako postoji pregazimo ga
+            bool notExists = true;
             Account? toUpdate = null;
+
             // Provera da li postoji account sa istim username-om
             foreach (Account account in Accounts)
             {
-                if (account.Username.Equals(newAccount.Username))
+                if (account.Username.Equals(newAccount.Username) || account.Id == newAccount.Id)
                 {
-                    notexists = false;
+                    notExists = false;
                     toUpdate = account;
                     break;
                 }
             }
 
             // Ako ne postoji dodaj ga i vrati true
-            if (notexists)
+            if (notExists)
             {
                 Accounts.Add(newAccount);
                 return true;
@@ -88,7 +81,6 @@ namespace ClassDijagramV1._0.Repository
             else
             {
                 toUpdate = newAccount;
-                // Vrati false kao indikator da nisi dodao novi
                 return false;
             }
 
@@ -101,14 +93,11 @@ namespace ClassDijagramV1._0.Repository
         /// <returns>Trazeni account</returns>
         public Account GetAccount(string username)
         {
-            // Proveri da li postoji account sa datim username-om
             foreach (Account account in Accounts)
             {
                 if (account.Username.Equals(username))
                     return account;
             }
-
-            // Ako ne postoji account sa tim username-om vrati null
             return null;
         }
 
@@ -128,7 +117,6 @@ namespace ClassDijagramV1._0.Repository
                 }
             }
 
-            // Ako nije postojao account sa tim username-om vrati false
             return false;
         }
 
@@ -139,7 +127,6 @@ namespace ClassDijagramV1._0.Repository
         /// <param name="account"></param>
         public void UpdateAccount(Account account)
         {
-            // referenca na account za updatovanje
             Account accForUpdate = null;
 
             // Proveri da li postoji trazeni account

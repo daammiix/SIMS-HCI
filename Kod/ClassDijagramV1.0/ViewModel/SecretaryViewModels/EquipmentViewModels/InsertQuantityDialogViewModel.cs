@@ -1,9 +1,4 @@
 ﻿using ClassDijagramV1._0.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.EquipmentViewModels
@@ -49,7 +44,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.EquipmentViewModels
 
         #region Private Helpers
 
-        // Sacuvamo quantity i ugasio dialog
+        // Sacuvamo quantity i ugasimo dialog
         private void Finish(Window dialog)
         {
             // updatujemo quantity

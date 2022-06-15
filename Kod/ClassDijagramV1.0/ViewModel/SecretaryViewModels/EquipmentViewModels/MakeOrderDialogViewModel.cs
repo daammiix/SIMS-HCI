@@ -1,13 +1,9 @@
 ﻿using ClassDijagramV1._0.Controller;
 using ClassDijagramV1._0.Model;
-using ClassDijagramV1._0.Model.Enums;
 using ClassDijagramV1._0.Util;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.EquipmentViewModels
@@ -47,7 +43,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.EquipmentViewModels
             }
         }
 
-        public string SupplierName { get; set; }
+        public string? SupplierName { get; set; }
         public DateTime DeliveryTime { get; set; }
         public string Description { get; set; }
 
@@ -107,7 +103,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.EquipmentViewModels
         /// <returns></returns>
         private bool MakeOrderCanExecute()
         {
-            if (EquipmentInOrder.Count > 0 && SupplierName != "" && DeliveryTime != DateTime.MinValue)
+            if (EquipmentInOrder.Count > 0 && !string.IsNullOrWhiteSpace(SupplierName) && DeliveryTime != DateTime.MinValue)
             {
                 return true;
             }

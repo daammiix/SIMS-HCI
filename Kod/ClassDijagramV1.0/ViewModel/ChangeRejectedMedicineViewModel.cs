@@ -5,23 +5,27 @@ using ClassDijagramV1._0.Util;
 using ClassDijagramV1._0.Views.ManagerView;
 using Controller;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel
 {
-    public class ChangeRejectedMedicineViewModel
+    public class ChangeRejectedMedicineViewModel : ObservableObject
     {
+        private String _id;
+        private String _name;
+        private String _status;
+        private String _quantity;
+        private String _medicineComponents;
+
         public RoomController roomController;
         public MedicineController medicineController;
         public Storage storage;
         private IRefreshableMedicineView medicineView;
         public QuantifiedMedicine quantifiedMedicine { get; set; }
         public BindingList<String> MedicineComponents { get; set; }
+
+        public String ErrorMessage { get; set; }
 
         private RelayCommand _saveChangedRejectedMedicine;
         private RelayCommand _quitChangededRejectedMedicine;
@@ -48,6 +52,70 @@ namespace ClassDijagramV1._0.ViewModel
                 changeRejectedMedicineWindow.ChangeComponents.AppendText(component + Environment.NewLine);
             }
 
+            this.ID = quantifiedMedicine.Medicines.ID;
+            this.Name = quantifiedMedicine.Medicines.Name;
+            this.Status = quantifiedMedicine.Medicines.Status;
+            this.Quantity = quantifiedMedicine.Quantity.ToString();
+            foreach(var component in quantifiedMedicine.Medicines.MedicineComponents)
+            {
+                this.MedicineComponentsTextBox += this.MedicineComponentsTextBox + component + "\n";
+            }
+        }
+
+        public String ID
+        {
+            get { return _id; }
+            set
+            {
+                if (_id == value) { return; }
+                _id = value;
+            }
+        }
+        public String Name
+        {
+            get { return _name; }
+            set
+            {
+                if (_name == value) { return; }
+                _name = value;
+            }
+        }
+        public String Status
+        {
+            get { return _status; }
+            set
+            {
+                if (_status == value) { return; }
+                _status = value;
+            }
+        }
+        public String Quantity
+        {
+            get { return _quantity; }
+            set
+            {
+                if (_quantity == value) { return; }
+                _quantity = value;
+            }
+        }
+        public String MedicineComponentsTextBox
+        {
+            get { return _medicineComponents; }
+            set
+            {
+                if (_medicineComponents == value) { return; }
+                _medicineComponents = value;
+                if (value.Length < 1)
+                {
+                    ErrorMessage = "Šifra i naziv ne smeju biti prazni";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                }
+            }
         }
 
         public RelayCommand SaveChangedRejectedMedicine
@@ -56,6 +124,12 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _saveChangedRejectedMedicine = new RelayCommand(o =>
                 {
+                    if(_medicineComponents == "" || _medicineComponents == null)
+                    {
+                        ErrorMessage = "Polja nisu popunjena";
+                        OnPropertyChanged("ErrorMessage");
+                        return;
+                    }
                     ChangeRejectedMedicineAction();
                 });
 
@@ -78,7 +152,7 @@ namespace ClassDijagramV1._0.ViewModel
 
         private Medicines MedicineFromTextBoxes()
         {
-            var addComponents = changeRejectedMedicineWindow.ChangeComponents.Text;
+            var addComponents = MedicineComponentsTextBox;
             MedicineComponents.Clear();
             string[] components = addComponents.Split(',');
             foreach (string c in components)
@@ -86,17 +160,16 @@ namespace ClassDijagramV1._0.ViewModel
                 var component = c.Trim();
                 MedicineComponents.Add(component);
             }
-            return new Medicines(changeRejectedMedicineWindow.ChangedDrugsId.Text, changeRejectedMedicineWindow.ChangedDrugsName.Text, changeRejectedMedicineWindow.ChangeDrugsStatus.Text, MedicineComponents);
+            return new Medicines(ID, Name, Status, MedicineComponents);
         }
 
         private void ChangeRejectedMedicineAction()
         {
             var medicine = MedicineFromTextBoxes();
-            var quantity = Int32.Parse(changeRejectedMedicineWindow.ChangedDrugsQuantity.Text);
-            String medicineId = quantifiedMedicine.Medicines.ID;
+            var quantity = Int32.Parse(Quantity);
 
             medicineController.ChangeMedicines(medicine);
-            roomController.ChangeStorageMedicineQuantity(medicineId, quantity);
+            roomController.ChangeStorageMedicineQuantity(ID, quantity);
 
             medicineView.RefreshMedicines();
             changeRejectedMedicineWindow.Close();

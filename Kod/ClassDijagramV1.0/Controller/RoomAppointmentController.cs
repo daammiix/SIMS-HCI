@@ -2,11 +2,7 @@
 using ClassDijagramV1._0.Service;
 using Model;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Controller
 {
@@ -73,9 +69,9 @@ namespace ClassDijagramV1._0.Controller
         /// <param name="end"></param>
         /// <param name="room"></param>
         /// <returns></returns>
-        public bool GetFreeRoom(Room room, DateTime start, DateTime end)
+        public Room GetFreeRoom(DateTime start, DateTime end)
         {
-            return roomAppointmentService.GetFreeRoom(room, start, end);
+            return roomAppointmentService.GetFreeRoom(start, end);
         }
     }
 }

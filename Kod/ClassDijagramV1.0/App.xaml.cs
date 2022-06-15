@@ -1,11 +1,9 @@
 ﻿using ClassDijagramV1._0.Controller;
-using ClassDijagramV1._0.Converters;
 using ClassDijagramV1._0.FileHandlers;
 using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Model.Enums;
 using ClassDijagramV1._0.Repository;
 using ClassDijagramV1._0.Service;
-using ClassDijagramV1._0.ViewModel;
 using Controller;
 using Model;
 using Repository;
@@ -13,10 +11,7 @@ using Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
-using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ClassDijagramV1._0
@@ -43,14 +38,16 @@ namespace ClassDijagramV1._0
         public static string _medicalRecordFilePath = "../../../Data/medicalRecords.json";
         public string _storageFilePath = "../../../Data/storage.json";
         public string _roomAppointmentsFilePath = "../../../Data/roomAppointments.json";
-        public static string _purchaseOrdersFilePath = "../../../Data/purchaseOrders.json";
         public static string _hospitalRatingsFilePath = "../../../Data/hospitalratings.json";
         public static string _doctorRatingsFilePath = "../../../Data/doctorratings.json";
         public static string _activityFilePath = "../../../Data/activity.json";
         public string _medicinesFilePath = "../../../Data/medicines.json";
         public string _reportsFilePath = "../../../Data/reports.json";
         public static string _notificationsFilePath = "../../../Data/notifications.json";
-
+        public static string _freeDayRequestsResolvedPath = "../../../Data/freeDayRequestsResolved.json";
+        public static string _freeDayRequestsPath = "../../../Data/freeDayRequests.json";
+        public static string _purchaseOrdersFilePath = "../../../Data/purchaseOrders.json";
+        private static string _quarterlyReportsFilePath = "..\\..\\..\\Data\\quarterlyReports.json";
 
         #endregion
 
@@ -83,6 +80,8 @@ namespace ClassDijagramV1._0
 
         public ReportsController reportsController { get; set; }
 
+        public ManagerAppointmentController managerAppointmentController { get; set; }
+
         public QuarterlyReportsController QuarterlyReportsController { get; set; }
 
         public RatingController RatingController { get; set; }
@@ -95,13 +94,29 @@ namespace ClassDijagramV1._0
 
         public NotificationController NotificationController { get; set; }
 
+        public FreeDaysRequestResolvedController FreeDaysRequestResolvedController { get; set; }
 
+        public FreeDaysRequestController FreeDaysRequestController { get; set; }
 
         #endregion
 
         public App()
         {
-            // Appointments
+            // Syncfusion License
+            Syncfusion.Licensing.SyncfusionLicenseProvider
+                .RegisterLicense("NjQ5ODAwQDMyMzAyZTMxMmUzMEs5Q29xeG4yNlZaZGRVaUpEMHhpRzFWNXNZQlVMWmcxOUdlL25UNWo0UUU9");
+
+            // FreeDaysRequests
+            var freeDaysRequestsRepo = new FreeDaysRequestRepo
+                (new FileHandler<FreeDayRequest>(_freeDayRequestsPath));
+            var freeDaysRequestsService = new FreeDaysRequestService(freeDaysRequestsRepo);
+            FreeDaysRequestController = new FreeDaysRequestController(freeDaysRequestsService);
+
+            // FreeDaysRequestsResolved
+            var freeDaysRequestsResolvedRepo = new FreeDaysRequestResolvedRepo
+                (new FileHandler<FreeDayRequestResolved>(_freeDayRequestsResolvedPath));
+            var freeDaysRequestsResolvedService = new FreeDaysRequestResolvedService(freeDaysRequestsResolvedRepo);
+            FreeDaysRequestResolvedController = new FreeDaysRequestResolvedController(freeDaysRequestsResolvedService);
 
             // Rooms-Storage
             var roomRepo = new RoomRepoJson(new FileHandler<BindingList<Room>>(_roomsFilePath), new FileHandler<BindingList<Storage>>(_storageFilePath));
@@ -190,8 +205,14 @@ namespace ClassDijagramV1._0
             var reportsService = new ReportsService(reportsRepo);
             reportsController = new ReportsController(reportsService);
 
+            //Manager appointment
+            var managerAppointmentRepo = new ManagerAppointmentRepo();
+            var managerAppointmentService = new ManagerAppointmentService(managerAppointmentRepo);
+            managerAppointmentController = new ManagerAppointmentController(managerAppointmentService);
+
             //QuarterlyReports
-            var quarterlyReportsRepo = new QuarterlyReportsRepo();
+            var quarterlyReportsFileHander = new FileHandler<BindingList<QuarterlyReport>>(_quarterlyReportsFilePath);
+            var quarterlyReportsRepo = new QuarterlyReportsRepo(quarterlyReportsFileHander);
             var quarterlyReportsService = new QuarterlyReportsService(quarterlyReportsRepo);
             QuarterlyReportsController = new QuarterlyReportsController(quarterlyReportsService);
 
@@ -205,7 +226,7 @@ namespace ClassDijagramV1._0
             var purchaseOrderService = new PurchaseOrderService(purchaseOrderRepo, roomService, equipmentService);
             PurchaseOrderController = new PurchaseOrderController(purchaseOrderService);
 
-            // Appointment
+            // Notification
             var notificationRepository = new NotificationRepo(new FileHandler<Notification>(_notificationsFilePath));
             var notificationService = new NotificationService(notificationRepository);
             NotificationController = new NotificationController(notificationService);
@@ -220,7 +241,6 @@ namespace ClassDijagramV1._0
             // tako da u trenutku formiranja ovi podaci ne postoje trebalo bi ovde ispod povezati sve
             // da bi se i ovi podaci lepo povezali
             ConnectData();
-
         }
 
         private void dispatcherTimer_Tick(object? sender, EventArgs e)
@@ -232,7 +252,6 @@ namespace ClassDijagramV1._0
         private void Application_Exit(object sender, ExitEventArgs e)
         {
             SaveAll();
-
         }
 
         private void SaveAll()
@@ -250,6 +269,8 @@ namespace ClassDijagramV1._0
             RatingController.SaveDoctorRatings();
             ActivityController.SaveActivity();
             NotificationController.SaveNotifications();
+            FreeDaysRequestController.SaveFreeDayRequests();
+            FreeDaysRequestResolvedController.SaveFreeDayRequests();
         }
 
         private void MakeTestData()
@@ -347,7 +368,6 @@ namespace ClassDijagramV1._0
             AccountController.AddAccount(ac7);
             AccountController.AddAccount(ac8);
             AccountController.AddAccount(ac9);
-
         }
 
         private void ConnectData()
@@ -456,12 +476,15 @@ namespace ClassDijagramV1._0
                 maxId = purchaseOrders.Max(order => order.Id);
                 PurchaseOrder.idCounter = maxId;
             }
+
+            // Akaunti
+            List<Account> accounts = AccountController.GetAccounts().ToList();
+            if (accounts.Count > 0)
+            {
+                maxId = accounts.Max(account => account.Id);
+                Account.idCounter = maxId;
+            }
         }
 
-        private void Application_Deactivated(object sender, EventArgs e)
-        {
-            SaveAll();
-            Environment.Exit(0);
-        }
     }
 }

@@ -1,11 +1,6 @@
 ﻿using ClassDijagramV1._0.Repository;
 using Model;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Service
 {
@@ -51,19 +46,19 @@ namespace ClassDijagramV1._0.Service
         /// Vraca menadzera sa zadatim id-em u suprotnom vraca null
         /// </summary>
         /// <param name="id"></param>
-        public Manager GetManagerById(int id)
+        public Manager? GetManagerById(int id)
         {
-            Manager? ret = null;
+            Manager? requiredManager = null;
             foreach (var manager in _managerRepo.GetManagers())
             {
                 if (manager.Id == id)
                 {
-                    ret = manager;
+                    requiredManager = manager;
                     break;
                 }
             }
 
-            return ret;
+            return requiredManager;
         }
 
         #endregion

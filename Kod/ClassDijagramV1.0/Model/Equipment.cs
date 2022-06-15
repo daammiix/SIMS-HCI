@@ -1,10 +1,6 @@
 ﻿using ClassDijagramV1._0.Model.Enums;
 using ClassDijagramV1._0.Util;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Model
 {
@@ -74,11 +70,11 @@ namespace ClassDijagramV1._0.Model
 
         public Equipment(String EquipmentID, String Name, String EquipmentType, double price, UnitsType units)
         {
-            this.EquipmentID = EquipmentID;
-            this.Name = Name;
-            this.EquipmentType = EquipmentType;
-            this.UnitPrice = price;
-            this.Units = units;
+            this._equipmentID = EquipmentID;
+            this._name = Name;
+            this._equipmentType = EquipmentType;
+            this._unitPrice = price;
+            this._units = units;
         }
 
         public Equipment()

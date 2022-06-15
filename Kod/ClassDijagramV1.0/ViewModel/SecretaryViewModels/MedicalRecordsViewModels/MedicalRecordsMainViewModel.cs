@@ -3,13 +3,10 @@ using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Util;
 using ClassDijagramV1._0.Views.SecretaryView.MedicalRecordsView;
 using Model;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewModels
 {
@@ -38,6 +35,8 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewMod
         public ObservableCollection<MedicalRecordViewModel> MedicalRecords { get; private set; }
 
         public MedicalRecordViewModel SelectedMedicalRecord { get; set; }
+
+        public string SearchText { get; set; }
 
         #endregion
 
@@ -114,6 +113,19 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewMod
             }
         }
 
+        public RelayCommand SearchRecord
+        {
+            get
+            {
+                if (_searchRecord == null)
+                {
+                    _searchRecord = new RelayCommand(o => SearchExecute(o as DataGrid));
+                }
+
+                return _searchRecord;
+            }
+        }
+
         #endregion
 
         #region Private Helpers
@@ -146,6 +158,23 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.MedicalRecordsViewMod
             dialog.Owner = Application.Current.MainWindow;
 
             dialog.ShowDialog();
+        }
+
+        private void SearchExecute(DataGrid dg)
+        {
+            if (!SearchText.Equals(""))
+            {
+                var filteredMedicalRecords = MedicalRecords
+                    .Where(medicalRecordVM => medicalRecordVM.MedicalRecord.Number.ToString().Contains(SearchText) ||
+                                              medicalRecordVM.Patient.Name.ToLower().Contains(SearchText.ToLower()) ||
+                                              medicalRecordVM.Patient.Surname.ToLower().Contains(SearchText.ToLower()) ||
+                                              medicalRecordVM.Patient.Jmbg.ToLower().Contains(SearchText.ToLower()));
+                dg.ItemsSource = filteredMedicalRecords;
+            }
+            else
+            {
+                dg.ItemsSource = MedicalRecords;
+            }
         }
 
         #endregion 

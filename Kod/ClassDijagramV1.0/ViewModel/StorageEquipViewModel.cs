@@ -6,16 +6,12 @@ using ClassDijagramV1._0.Views.ManagerView;
 using Controller;
 using Model;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel
 {
-    public class StorageEquipViewModel
+    public class StorageEquipViewModel : ObservableObject
     {
         readonly private String format = "dd/MM/yyyyTHH:mm";
         readonly private String timeFormat = "HH:mm";
@@ -33,11 +29,14 @@ namespace ClassDijagramV1._0.ViewModel
         public QuantifiedEquipment QEquipment { get; set; }
         private String _quantity;
 
+        public String ErrorMessage { get; set; }
+        public String ErrorFormatMessage { get; set; }
+
         public BindingList<String> RoomsAvailable { get; set; }
         public String FromDate;
-        public String FromTime { get; set; }
+        public String FromTime;
         public String ToDate;
-        public String ToTime { get; set; }
+        public String ToTime;
         private BindingList<Availability> availabilities { get; set; }
 
         private RelayCommand _saveStorageEquip;
@@ -58,6 +57,16 @@ namespace ClassDijagramV1._0.ViewModel
             Rooms = roomController.GetAllRooms();
             storage = (Storage)roomController.GetRoom("storage");
 
+            resetFields();
+        }
+
+        private void resetFields()
+        {
+            this._sourceRoom = null;
+            this.selectedQuantity = null;
+            this.ErrorFormatMessage = "";
+            this.ErrorMessage = "";
+
             FromDate = DateTime.Now.ToString("dd/MM/yyyy");
             FromTime = DateTime.Now.ToString("HH:mm");
             ToDate = DateTime.Now.ToString("dd/MM/yyyy");
@@ -73,6 +82,13 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _saveStorageEquip = new RelayCommand(o =>
                 {
+                    if (selectedFromDate == "" || selectedFromTime == "" || selectedToDate == "" || selectedToTime == ""
+                    || _sourceRoom == null || _quantity == null || _quantity == "")
+                    {
+                        ErrorFormatMessage = "Polja nisu popunjena";
+                        OnPropertyChanged("ErrorFormatMessage");
+                        return;
+                    }
                     SaveStorageEquipAction();
                 });
 
@@ -86,6 +102,8 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _cancelStorageEquip = new RelayCommand(o =>
                 {
+                    resetFields();
+                    ResetAllSelectedEquipments();
                     storageViewModel.CurrentStorageView = PreviousView;
                 });
 
@@ -104,7 +122,48 @@ namespace ClassDijagramV1._0.ViewModel
                 if (FromDate == value)
                     return;
                 FromDate = value;
-                ListsHandler();
+                DateTime date;
+                bool format = DateTime.TryParseExact(value, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out date);
+                if (!format)
+                {
+                    ErrorFormatMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorFormatMessage");
+                }
+                else
+                {
+                    ErrorFormatMessage = "";
+                    OnPropertyChanged("ErrorFormatMessage");
+                    ListsHandler();
+                }
+            }
+        }
+
+        public String selectedFromTime
+        {
+            get
+            {
+                return FromTime;
+            }
+            set
+            {
+                if (FromTime == value)
+                    return;
+                FromTime = value;
+                DateTime time;
+                bool format = DateTime.TryParseExact(value, "HH:mm", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out time);
+                if (!format)
+                {
+                    ErrorFormatMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorFormatMessage");
+                }
+                else
+                {
+                    ErrorFormatMessage = "";
+                    OnPropertyChanged("ErrorFormatMessage");
+                    ListsHandler();
+                }
             }
         }
 
@@ -119,7 +178,48 @@ namespace ClassDijagramV1._0.ViewModel
                 if (ToDate == value)
                     return;
                 ToDate = value;
-                ListsHandler();
+                DateTime date;
+                bool format = DateTime.TryParseExact(value, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out date);
+                if (!format)
+                {
+                    ErrorFormatMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorFormatMessage");
+                }
+                else
+                {
+                    ErrorFormatMessage = "";
+                    OnPropertyChanged("ErrorFormatMessage");
+                    ListsHandler();
+                }
+            }
+        }
+
+        public String selectedToTime
+        {
+            get
+            {
+                return ToTime;
+            }
+            set
+            {
+                if (ToTime == value)
+                    return;
+                ToTime = value;
+                DateTime time;
+                bool format = DateTime.TryParseExact(value, "HH:mm", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out time);
+                if (!format)
+                {
+                    ErrorFormatMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorFormatMessage");
+                }
+                else
+                {
+                    ErrorFormatMessage = "";
+                    OnPropertyChanged("ErrorFormatMessage");
+                    ListsHandler();
+                }
             }
         }
 
@@ -134,7 +234,24 @@ namespace ClassDijagramV1._0.ViewModel
                 if (_quantity == value)
                     return;
                 _quantity = value;
-                UpdateAvailabilityOfEquipment();
+                int quantity;
+                bool is_number = int.TryParse(value, out quantity);
+                if (!is_number)
+                {
+                    ErrorMessage = "Uneta vrednost mora biti broj";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else if (quantity < 1)
+                {
+                    ErrorMessage = "Broj mora biti veći od 0";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                    UpdateAvailabilityOfEquipment();
+                }
             }
         }
 
@@ -170,6 +287,9 @@ namespace ClassDijagramV1._0.ViewModel
             selectedQuantity = "";
             selectedSourceRoom = null;
             storageViewModel.CurrentStorageView = PreviousView;
+
+            resetFields();
+            ResetAllSelectedEquipments();
         }
         private bool checkTimeSpansOverlap(DateTime fromDatetimeA, DateTime toDatetimeA, DateTime fromDatetimeB, DateTime toDatetimeB)
         {
@@ -196,7 +316,7 @@ namespace ClassDijagramV1._0.ViewModel
 
         public void UpdateAvailabilityOfEquipment()
         {
-            if(selectedQuantity != "")
+            if (selectedQuantity != "")
             {
                 var newselecteQuantity = Int32.Parse(selectedQuantity);
                 var quantity = Int32.Parse(_quantity);
@@ -208,7 +328,7 @@ namespace ClassDijagramV1._0.ViewModel
                     return;
                 }
             }
-            
+
         }
 
         public void ListsHandler()
@@ -270,6 +390,13 @@ namespace ClassDijagramV1._0.ViewModel
                     }
                 }
             }
+        }
+
+        public void ResetAllSelectedEquipments()
+        {
+            storageViewModel.StorageSuppliesVM.ResetSelectedEquipment();
+            storageViewModel.StorageInventoryVM.ResetSelectedEquipment();
+            storageViewModel.StorageMedicalEquipmentVM.ResetSelectedEquipment();
         }
     }
 }

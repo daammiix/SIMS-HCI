@@ -1,17 +1,17 @@
 ﻿using ClassDijagramV1._0.Model.Enums;
 using ClassDijagramV1._0.Util;
-using Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Model
 {
     public class Account : ObservableObject
     {
+        #region Static Fields
+
+        public static int idCounter = 0;
+
+        #endregion
+
         #region Fields
 
         private string _username;
@@ -24,6 +24,8 @@ namespace ClassDijagramV1._0.Model
         #endregion
 
         #region Properties
+
+        public int Id { get; private set; }
 
         public string Username
         {
@@ -121,6 +123,7 @@ namespace ClassDijagramV1._0.Model
 
         public Account(int personId, Role role, string username = "", string password = "", bool isGuest = false, bool banned = false)
         {
+            Id = ++idCounter;
             Role = role;
             Username = username;
             Password = password;

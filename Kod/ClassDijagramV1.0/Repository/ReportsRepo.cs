@@ -1,11 +1,7 @@
 ﻿using ClassDijagramV1._0.Model;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Repository
 {
@@ -38,12 +34,6 @@ namespace ClassDijagramV1._0.Repository
         public BindingList<Reports> GetAllReports()
         {
             return reports;
-        }
-
-        private void writeReports()
-        {
-            String jsonString = JsonSerializer.Serialize(reports);
-            System.IO.File.WriteAllText(path, jsonString);
         }
     }
 }

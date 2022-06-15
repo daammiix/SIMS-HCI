@@ -1,19 +1,7 @@
 ﻿using Model;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ClassDijagramV1._0.Views.PatientView
 {
@@ -22,18 +10,14 @@ namespace ClassDijagramV1._0.Views.PatientView
     /// </summary>
     public partial class MedicalRecordPage : Page
     {
-        private Patient _logedPatient;
+        #region Fields
         private PatientMainWindow parent { get; set; }
-        public ObservableCollection<AppointmentViewModel> OldAppointments
-        {
-            get;
-            set;
-        }
-        public MedicalRecordPage(PatientMainWindow patientMain, Patient logedPatient, ObservableCollection<AppointmentViewModel> oldAppointmentViewModels)
+        public ObservableCollection<AppointmentViewModel> OldAppointments { get; set; }
+        #endregion
+        public MedicalRecordPage(PatientMainWindow patientMain, ObservableCollection<AppointmentViewModel> oldAppointmentViewModels)
         {
             InitializeComponent();
             parent = patientMain;
-            _logedPatient = logedPatient;
             OldAppointments = oldAppointmentViewModels;
         }
 

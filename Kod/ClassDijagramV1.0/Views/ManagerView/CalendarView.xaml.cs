@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows.Controls;
+using Syncfusion.UI.Xaml.Scheduler;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ClassDijagramV1._0.ViewModel;
+using System;
+using ClassDijagramV1._0.Controller;
+using System.Collections.ObjectModel;
+using ClassDijagramV1._0.Model;
+using System.Windows;
+using System.ComponentModel;
 
 namespace ClassDijagramV1._0.Views.ManagerView
 {
@@ -20,9 +16,45 @@ namespace ClassDijagramV1._0.Views.ManagerView
     /// </summary>
     public partial class CalendarView : UserControl
     {
+        private CalendarViewModel calendarViewModel;
+        DateTime selectedDate;
+        ManagerAppointmentController managerAppointmentController;
+        public BindingList<ManagerAppointment> ManagerAppointments
+        {
+            get;
+            set;
+        }
         public CalendarView()
         {
             InitializeComponent();
+            calendarViewModel = new CalendarViewModel();
+            this.DataContext = calendarViewModel;
+            var app = Application.Current as App;
+
+            managerAppointmentController = app.managerAppointmentController;
+            ManagerAppointments = managerAppointmentController.GetAllManagerAppointments();
+        }
+
+        public void Schedule_CellTapped(object sender, CellTappedEventArgs e)
+        {
+            this.selectedDate = e.DateTime;
+            calendarViewModel.ManagerAppointmentsOfDay.Clear();
+            calendarViewModel.selectedDate = e.DateTime;
+            if (selectedDate.Day >= DateTime.Now.Day)
+            {
+                foreach (var managerAppointment in ManagerAppointments)
+                {
+                    if (managerAppointment.Start.Day == selectedDate.Day)
+                    {
+                        calendarViewModel.ManagerAppointmentsOfDay.Add(managerAppointment);
+                    }
+                }
+            }
+        }
+
+        private void Schedule_AppointmentEditorOpening(object sender, AppointmentEditorOpeningEventArgs e)
+        {
+            e.Cancel = true;
         }
     }
 }

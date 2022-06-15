@@ -13,8 +13,8 @@
         ResizeMode="NoResize"
         Background="#B0C69D"
         Foreground="#1F1313"
-        FontWeight="Light"
-        FontFamily="Berlin Sans FB Demi"
+        FontFamily="Sylfaen"
+        FontWeight="Bold"
         BorderThickness="4"
         BorderBrush="#455736">
 
@@ -53,12 +53,12 @@
                              Command="{Binding RenovatingWallPainting}"/>
 
                 <RadioButton x:Name="RenovatingMerge"
-                             Content="Renoviranje - spajanje soba"
+                             Content="Renoviranje - spajanje sale"
                              Style="{StaticResource ReservationButton}"
                              Command="{Binding RenovatingMerge}"/>
                 
                 <RadioButton x:Name="RenovatingSplit"
-                             Content="Renoviranje - razdvajanje soba "
+                             Content="Renoviranje - razdvajanje sale "
                              Style="{StaticResource ReservationButton}"
                              Command="{Binding RenovatingSplit}"/>
 

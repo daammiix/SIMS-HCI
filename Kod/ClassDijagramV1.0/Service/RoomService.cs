@@ -3,12 +3,10 @@
 // Created: 08 April 2022 14:44:24
 // Purpose: Definition of Class RoomService
 
-using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using ClassDijagramV1._0.Model;
 using Model;
 using Repository;
+using System;
+using System.ComponentModel;
 
 namespace Service
 {
@@ -61,7 +59,7 @@ namespace Service
             repo.ChangeStorageMedicineQuantity(meidicineId, quantity);
         }
 
-        public Boolean CheckIfUniq(Room room, bool existingRoom)
+        private Boolean CheckIfUniq(Room room, bool existingRoom)
         {
             var rooms = repo.GetAllRooms();
             foreach (var r in rooms)
@@ -85,7 +83,7 @@ namespace Service
             return true;
         }
 
-        public Boolean CheckIfValid(Room room)
+        private Boolean CheckIfValid(Room room)
         {
             if ((room.Floor > 4) || (room.RoomNumber > 499))
             {

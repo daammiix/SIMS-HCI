@@ -9,11 +9,13 @@
              d:DesignHeight="655"
              d:DesignWidth="930"
              Background="#D9D4CC"
-             FontFamily="Berlin Sans FB Demi">
+             FontFamily="Sylfaen"
+        FontWeight="Bold">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../Theme/TextboxTheme.xaml"/>
+                <ResourceDictionary Source="../../Theme/DataGridButtonsTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converters:PollsConverter x:Key="PollsConverter"/>
         </ResourceDictionary>
@@ -47,7 +49,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock>
-                                        <Button Content="Zakazivanje"  Command="{Binding Path=DataContext.OpenReport,
+                                        <Button Content="Prikaži" Width="150" Margin="0,1,0,0" Style="{StaticResource DataGridButton}" Command="{Binding Path=DataContext.OpenReport,
                                             RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" />
                                     </TextBlock>
                                 </DataTemplate>

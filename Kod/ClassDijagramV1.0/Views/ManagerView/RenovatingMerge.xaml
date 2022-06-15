@@ -8,14 +8,15 @@
         mc:Ignorable="d" 
         d:DesignHeight="655" d:DesignWidth="980"
         Background="#D9D4CC"
-        FontFamily="Berlin Sans FB Demi"
+        FontFamily="Sylfaen"
+        FontWeight="Bold"
         Foreground="#1F1313">
 
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../Theme/DateTextBoxTheme.xaml"/>
-                <ResourceDictionary Source="../../Theme/TimeTextBoxTheme.xaml"/>
+                <ResourceDictionary Source="../../Theme/BasicTextBoxTheme.xaml"/>
+                <ResourceDictionary Source="../../Theme/BasicComboBoxTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converters:RoomToStringConverter x:Key="RoomToStringConverter"/>
         </ResourceDictionary>
@@ -30,21 +31,21 @@
         <TextBlock Grid.Row="0"
                    Text="Renoviranje - spajanje sala"
                    VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
+                   HorizontalAlignment="Left"
                    FontSize="36"
                    Foreground="Black">
         </TextBlock>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="490"/>
+                <ColumnDefinition Width="360"/>
                 <ColumnDefinition Width="490"/>
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Row="1"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
-                <Label Content="Sala u koju se spaja:" FontSize="24" Margin="20,5,0,5" HorizontalContentAlignment="Left"/>
-                <TextBox x:Name="MergingTo" IsReadOnly="True" Width="230" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedRoom,Converter={StaticResource RoomToStringConverter}}" />
-                <Label Content="Dostupnost sale:" FontSize="24" Margin="20,0,0,5" HorizontalContentAlignment="Left"/>
-                <DataGrid Grid.Column="1" Height="200" Width="250" x:Name="MergingToRoom" Margin="20, 5, 10,0"
+                <Label Content="Sala u koju se spaja:" FontSize="26" Margin="30,5,0,5" HorizontalContentAlignment="Left"/>
+                <TextBox x:Name="MergingTo" IsReadOnly="True" Width="230" Padding="5" Height="45" Margin="5,0,0,5" FontSize="22" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedRoom,Converter={StaticResource RoomToStringConverter}}" Style="{StaticResource BasicTextBox}"/>
+                <Label Content="Dostupnost sale:" FontSize="26" Margin="30,0,0,5" HorizontalContentAlignment="Left"/>
+                <DataGrid Grid.Column="1" Height="200" Width="250" x:Name="MergingToRoom" Margin="35,5,10,0"
                       CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left" FontSize="18"
                       RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
                       CanUserDeleteRows="False" AutoGenerateColumns="False"
@@ -56,17 +57,17 @@
             </StackPanel>
 
             <StackPanel Grid.Column="1">
-                <Label Content="Sala koja se spaja:" FontSize="24" Margin="15,5,0,5"/>
-                <ComboBox x:Name="MergingRoom" Width="230" Height="40" Margin="18,0,0,5" FontSize="22"
+                <Label Content="Sala koja se spaja:" FontSize="26" Margin="15,5,0,5"/>
+                <ComboBox x:Name="MergingRoom" Width="230" Height="45" Margin="18,0,0,5" FontSize="22"
                           VerticalContentAlignment="Center" IsReadOnly="True" HorizontalAlignment="Left"
-                          ItemsSource="{Binding Rooms}" SelectedItem="{Binding selectedMergingRoom}">
+                          ItemsSource="{Binding Rooms}" SelectedItem="{Binding selectedMergingRoom}" Style="{StaticResource BasicComboBox}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Converter={StaticResource RoomToStringConverter}}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <Label Content="Dostupnost sale:" FontSize="24" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
+                <Label Content="Dostupnost sale:" FontSize="26" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
                 <DataGrid  Height="200" Width="250" x:Name="MergingRoomGrid" Margin="20, 5, 10,0"
                       CanUserAddRows="False" SelectionMode="Single" HorizontalAlignment="Left"
                       RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
@@ -87,20 +88,20 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
-                <Label Content="Zakaži opremanje:" FontSize="24" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
+                <Label Content="Zakaži opremanje:" FontSize="24" Margin="30,0,0,5" HorizontalContentAlignment="Left"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Label Content="Od:" FontSize="24" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
-                    <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="40" Margin="0,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedFromDate}" Style="{StaticResource DateTextBox}"/>
-                    <TextBox x:Name="FromTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=FromTime}"  Style="{StaticResource TimeTextBox}"/>
+                    <Label Content="Od:" FontSize="24" Margin="30,0,0,5" HorizontalContentAlignment="Left"/>
+                    <TextBox x:Name="FromDateField" Width="200" Background="#E7E7E7" Height="40" Margin="3,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedFromDate, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextBox}"/>
+                    <TextBox x:Name="FromTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedFromTime, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource BasicTextBox}"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Label Content="Do:" FontSize="24" Margin="15,0,0,5" HorizontalContentAlignment="Left"/>
-                    <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="40" Margin="3,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedToDate}"  Style="{StaticResource DateTextBox}"/>
-                    <TextBox x:Name="ToTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=ToTime}"  Style="{StaticResource TimeTextBox}"/>
+                    <Label Content="Do:" FontSize="24" Margin="30,0,0,5" HorizontalContentAlignment="Left"/>
+                    <TextBox x:Name="ToDateField" Width="200" Background="#E7E7E7" Height="40" Margin="3,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedToDate, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource BasicTextBox}"/>
+                    <TextBox x:Name="ToTimeField" Width="200" Background="#E7E7E7" Height="40" Margin="20,0,0,5" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=selectedToTime, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource BasicTextBox}"/>
                 </StackPanel>
-
+                <Label Width="400" HorizontalAlignment="Left" Content="{Binding ErrorFormatMessage,UpdateSourceTrigger=PropertyChanged}" FontSize="16" Margin="75,10,0,5" Foreground="Red"/>
             </StackPanel>
 
             <WrapPanel Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right">

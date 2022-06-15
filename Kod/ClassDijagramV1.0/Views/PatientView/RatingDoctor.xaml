@@ -52,7 +52,8 @@
                     x:Name="doktoriSaPregleda"
                     ItemsSource="{Binding Doctors}"
                     Width="150"
-                    Margin="40 0 0 0">
+                    Margin="40 0 0 0" SelectionChanged="DoctorChosen"
+                    materialDesign:HintAssist.Hint="Izaberite doktora">
                     <!---->
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -77,6 +78,7 @@
                     x:Name="pitanje1"
                     Margin="32 0 0 0"
                     Cursor="Hand"
+                    IsEnabled="False"
                     ValueChanged="EverythingRated"/>
             </StackPanel>
             <StackPanel>
@@ -88,6 +90,7 @@
                     x:Name="pitanje2"
                     Margin="32 0 0 0"
                     Cursor="Hand"
+                    IsEnabled="False"
                     ValueChanged="EverythingRated"/>
             </StackPanel>
             <StackPanel>
@@ -99,6 +102,7 @@
                     x:Name="pitanje3"
                     Margin="32 0 0 0"
                     Cursor="Hand"
+                    IsEnabled="False"
                     ValueChanged="EverythingRated"/>
             </StackPanel>
             <StackPanel>
@@ -110,6 +114,7 @@
                     x:Name="pitanje4"
                     Margin="32 0 0 0"
                     Cursor="Hand"
+                    IsEnabled="False"
                     ValueChanged="EverythingRated"/>
             </StackPanel>
 
@@ -133,7 +138,7 @@
         <Button Grid.Row="1" Grid.Column="2"
                 x:Name="ratingBtn"
                 Style="{StaticResource MaterialDesignFlatAccentBgButton}"
-                Content="Pošalji ocjenu"
+                Content="Pošaljite ocjenu"
                 Width="176" Height="42"
                 IsEnabled="False"
                 Click="SendRatingDoctorResult"/>

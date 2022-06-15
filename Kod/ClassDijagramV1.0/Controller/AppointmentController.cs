@@ -1,11 +1,9 @@
-using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Model.DTO;
 using Model;
 using Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows;
 
 namespace Controller
 {
@@ -85,6 +83,17 @@ namespace Controller
         public DoctorWithTerminAndRoomDTO? FindClosestFreeTerminForSpecialization(DoctorType doctorType, DateTime from, int duration)
         {
             return _appointmentService.FindClosestFreeTerminForSpecialization(doctorType, from, duration);
+        }
+
+        /// <summary>
+        /// Vraca listu appointmenta za odredjeni period
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
+        public List<Appointment> GetAppointmentsForRange(DateTime from, DateTime to)
+        {
+            return _appointmentService.GetAppointmentsForRange(from, to);
         }
     }
 }

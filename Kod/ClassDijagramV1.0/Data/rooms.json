@@ -8,62 +8,79 @@
     "EquipmentList": [
       {
         "EquipmentID": "OUL5",
-        "Quantity": 2
+        "Quantity": 2,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "PRG5",
-        "Quantity": 4
+        "Quantity": 1,
+        "ErrorCount": 0
       }
     ],
-    "MedicineList": []
+    "MedicineList": [],
+    "ErrorCount": 0
   },
   {
     "RoomID": "id7",
     "RoomName": "Sala za preglede",
     "Floor": 1,
-    "RoomNumber": 103,
+    "RoomNumber": 21,
     "RoomStatus": "Aktivna",
     "EquipmentList": [
       {
         "EquipmentID": "INST6",
-        "Quantity": 1
+        "Quantity": 1,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "OL36",
-        "Quantity": 2
+        "Quantity": 2,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "PRZ42",
-        "Quantity": 2
+        "Quantity": 2,
+        "ErrorCount": 0
+      },
+      {
+        "EquipmentID": "PRG5",
+        "Quantity": 4,
+        "ErrorCount": 0
       }
     ],
-    "MedicineList": []
+    "MedicineList": [],
+    "ErrorCount": 0
   },
   {
     "RoomID": "id8",
-    "RoomName": "Bolni\u010Dka soba",
+    "RoomName": "Intezivna nega",
     "Floor": 3,
     "RoomNumber": 22,
     "RoomStatus": "Aktivna",
     "EquipmentList": [
       {
         "EquipmentID": "OUL5",
-        "Quantity": 2
+        "Quantity": 3,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "OL36",
-        "Quantity": 1
+        "Quantity": 1,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "PRG5",
-        "Quantity": 5
+        "Quantity": 4,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "INL56",
-        "Quantity": 3
+        "Quantity": 3,
+        "ErrorCount": 0
       }
     ],
-    "MedicineList": []
+    "MedicineList": [],
+    "ErrorCount": 0
   },
   {
     "RoomID": "id12",
@@ -72,7 +89,8 @@
     "RoomNumber": 64,
     "RoomStatus": "Aktivna",
     "EquipmentList": [],
-    "MedicineList": []
+    "MedicineList": [],
+    "ErrorCount": 0
   },
   {
     "RoomID": "id11",
@@ -83,10 +101,12 @@
     "EquipmentList": [
       {
         "EquipmentID": "INL56",
-        "Quantity": 1
+        "Quantity": 1,
+        "ErrorCount": 0
       }
     ],
-    "MedicineList": []
+    "MedicineList": [],
+    "ErrorCount": 0
   },
   {
     "RoomID": "id14",
@@ -97,18 +117,41 @@
     "EquipmentList": [
       {
         "EquipmentID": "PRG5",
-        "Quantity": 2
+        "Quantity": 2,
+        "ErrorCount": 0
       }
     ],
-    "MedicineList": []
+    "MedicineList": [],
+    "ErrorCount": 0
   },
   {
     "RoomID": "id77",
-    "RoomName": "Operaciona Sala",
+    "RoomName": "Sala za sastanke",
     "Floor": 1,
-    "RoomNumber": 54,
+    "RoomNumber": 53,
     "RoomStatus": "Aktivna",
     "EquipmentList": [],
-    "MedicineList": []
+    "MedicineList": [],
+    "ErrorCount": 0
+  },
+  {
+    "RoomID": "id18",
+    "RoomName": "Bolni\u010Dka soba",
+    "Floor": 2,
+    "RoomNumber": 25,
+    "RoomStatus": "Aktivna",
+    "EquipmentList": [],
+    "MedicineList": [],
+    "ErrorCount": 0
+  },
+  {
+    "RoomID": "id88",
+    "RoomName": "Bolni\u010Dka soba",
+    "Floor": 2,
+    "RoomNumber": 88,
+    "RoomStatus": "Aktivna",
+    "EquipmentList": [],
+    "MedicineList": [],
+    "ErrorCount": 0
   }
 ]

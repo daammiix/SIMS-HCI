@@ -3,35 +3,84 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ClassDijagramV1._0.Views.ManagerView"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             xmlns:converters="clr-namespace:ClassDijagramV1._0.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="655" d:DesignWidth="1280"
              Background="#D9D4CC"
-             FontFamily="Berlin Sans FB Demi">
+             FontFamily="Sylfaen"
+             FontWeight="Bold">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:ManagerAppointmentConverter x:Key="ManagerAppointmentConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="750"/>
-            <ColumnDefinition Width="230"/>
+            <ColumnDefinition Width="350"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
+        <Grid Grid.Column="1">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="590"/>
-                <RowDefinition Height="65"/>
+                <RowDefinition Height="570"/>
+                <RowDefinition Height="85"/>
             </Grid.RowDefinitions>
 
+            <syncfusion:SfScheduler Grid.Row="0"
+                                    x:Name="Schedule"
+                                    ItemsSource="{Binding ScheduleViewModel.ManagerAppointments}"
+                                    ViewType="Month"
+                                    FontSize="20"
+                                    Height="500"
+                                    SelectedDate="{Binding selectedDate}"
+                                    Margin="0,20,0,10"
+                                    FirstDayOfWeek="Monday"
+                                    CellTapped="Schedule_CellTapped"
+                                    AppointmentEditorOpening="Schedule_AppointmentEditorOpening">
+                <syncfusion:SfScheduler.AppointmentMapping>
+                    <syncfusion:AppointmentMapping 
+                        Subject="ID"
+                        StartTime="Start"
+                        EndTime="End"
+                        AppointmentBackground="Color"
+                        Location="Name" />
+                </syncfusion:SfScheduler.AppointmentMapping>
+                <syncfusion:SfScheduler.MonthViewSettings>
+                    <syncfusion:MonthViewSettings MonthNavigationDirection="Vertical"
+                                                  AppointmentDisplayMode="Indicator"/>
+                </syncfusion:SfScheduler.MonthViewSettings>
+            </syncfusion:SfScheduler>
 
 
+                <StackPanel Grid.Column="1" Grid.Row="1">
+                <WrapPanel HorizontalAlignment="Right">
+                    <Button x:Name="SaveAddedRoom" HorizontalAlignment="Right" Height="32" Width="90" Content="Dodaj" Margin="5,0,10,0" Style="{StaticResource CRUDButton}" Command="{Binding AddManagerAppointment}"/>
+                    <Button x:Name="QuitAddedRoom" HorizontalAlignment="Right" Height="32" Width="90" Content="Izmeni" Margin="5,0,0,0" Style="{StaticResource CRUDButton}" Command="{Binding ChangeManagerAppointment}"/>
+                </WrapPanel>
+            </StackPanel>
         </Grid>
 
-        <StackPanel Grid.Column="1" Orientation="Vertical">
-            <Label Content="Današnje obaveze:" FontSize="20" HorizontalContentAlignment="Left" Margin="10,30,0,0"/>
-            <DataGrid x:Name="DazEvents" CanUserAddRows="False"
+
+
+        <StackPanel Grid.Column="2" Orientation="Vertical">
+            <Label Content="Današnje obaveze:" FontSize="20" HorizontalContentAlignment="Left" Margin="20,30,0,0"/>
+            <Grid Height="300">
+                <DataGrid x:Name="DayEvents" CanUserAddRows="False" SelectionMode="Single"
+                          CanUserResizeColumns="False"  CanUserResizeRows="False" Margin="20,0,0,0"
+                          RowBackground="#B0C69D" Background="#D9D4CC" BorderBrush="#455736"
+                          FontSize="18" BorderThickness="4" CanUserReorderColumns="False"
                           CanUserDeleteRows="False" AutoGenerateColumns="False"
-                          BorderThickness="0" Background="Beige" OverridesDefaultStyle="True"
-                          IsReadOnly="True">
-            </DataGrid>
+                          IsReadOnly="True" ItemsSource="{Binding Path=ManagerAppointmentsOfDay}" SelectedItem="{Binding selectedManagerAppointment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Obaveze" Width="*" Binding="{Binding Path=., Converter={StaticResource ManagerAppointmentConverter}}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
         </StackPanel>
         
     </Grid>

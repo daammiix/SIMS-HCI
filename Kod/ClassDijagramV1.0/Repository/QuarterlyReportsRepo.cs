@@ -1,26 +1,19 @@
-﻿using ClassDijagramV1._0.Model;
+﻿using ClassDijagramV1._0.FileHandlers;
+using ClassDijagramV1._0.Model;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Repository
 {
     public class QuarterlyReportsRepo
     {
-        private String path = "..\\..\\..\\Data\\quarterlyReports.json";
+        private FileHandler<BindingList<QuarterlyReport>> fileHandler;
         private BindingList<QuarterlyReport> quarterlyReports = new BindingList<QuarterlyReport>();
-        public QuarterlyReportsRepo()
+        public QuarterlyReportsRepo(FileHandler<BindingList<QuarterlyReport>> fileHandler)
         {
-            string jsonData = System.IO.File.ReadAllText(path);
-            BindingList<QuarterlyReport>? jsonQuarterlyReport = JsonSerializer.Deserialize<BindingList<QuarterlyReport>>(jsonData);
-            if (jsonQuarterlyReport != null)
-            {
-                this.quarterlyReports = jsonQuarterlyReport;
-            }
+            this.fileHandler = fileHandler;
+            quarterlyReports = this.fileHandler.Read();
         }
 
         public QuarterlyReport? GetQuarterlyReport(String quarterlyReportsID)
@@ -38,12 +31,6 @@ namespace ClassDijagramV1._0.Repository
         public BindingList<QuarterlyReport> GetAllQuarterlyReports()
         {
             return quarterlyReports;
-        }
-
-        private void writeReports()
-        {
-            String jsonString = JsonSerializer.Serialize(quarterlyReports);
-            System.IO.File.WriteAllText(path, jsonString);
         }
     }
 }

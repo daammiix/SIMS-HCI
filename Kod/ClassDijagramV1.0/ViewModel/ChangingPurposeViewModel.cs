@@ -5,16 +5,13 @@ using ClassDijagramV1._0.Views.ManagerView;
 using Controller;
 using Model;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ClassDijagramV1._0.ViewModel
 {
-    public class ChangingPurposeViewModel
+    public class ChangingPurposeViewModel : ObservableObject
     {
         readonly private String format = "dd/MM/yyyyTHH:mm";
         readonly private String timeFormat = "HH:mm";
@@ -31,6 +28,8 @@ namespace ClassDijagramV1._0.ViewModel
 
         public BindingList<String> RoomsAvailable { get; set; }
         private BindingList<Availability> availabilities { get; set; }
+
+        public String ErrorMessage { get; set; }
 
         public String FromDate;
         public String FromTime { get; set; }
@@ -55,7 +54,13 @@ namespace ClassDijagramV1._0.ViewModel
 
             this.mainRoomsViewModel = mainRoomsViewModel;
 
+            resetFields();
+        }
+
+        private void resetFields()
+        {
             this.selectedRoom = null;
+            _newNameRoom = null;
 
             FromDate = DateTime.Now.ToString("dd/MM/yyyy");
             FromTime = DateTime.Now.ToString("HH:mm");
@@ -72,6 +77,13 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _saveRenovatingRoom = new RelayCommand(o =>
                 {
+                    if(selectedFromDate == "" || selectedFromTime == "" || selectedToDate == "" || selectedToTime == "" 
+                       || selectedNewNameRoom == null || selectedNewNameRoom == "")
+                    {
+                        ErrorMessage = "Polja nisu popunjena";
+                        OnPropertyChanged("ErrorMessage");
+                        return;
+                    }
                     SaveChangingPurposeAction();
                 });
 
@@ -85,6 +97,7 @@ namespace ClassDijagramV1._0.ViewModel
             {
                 _cancelRenovatingRoom = new RelayCommand(o =>
                 {
+                    resetFields();
                     this.mainRoomsViewModel.ResetView();
                 });
 
@@ -103,7 +116,48 @@ namespace ClassDijagramV1._0.ViewModel
                 if (FromDate == value)
                     return;
                 FromDate = value;
-                ListsHandler();
+                DateTime date;
+                bool format = DateTime.TryParseExact(value, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out date);
+                if (!format)
+                {
+                    ErrorMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                    ListsHandler();
+                }
+            }
+        }
+
+        public String selectedFromTime
+        {
+            get
+            {
+                return FromTime;
+            }
+            set
+            {
+                if (FromTime == value)
+                    return;
+                FromTime = value;
+                DateTime time;
+                bool format = DateTime.TryParseExact(value, "HH:mm", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out time);
+                if (!format)
+                {
+                    ErrorMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                    ListsHandler();
+                }
             }
         }
 
@@ -118,7 +172,48 @@ namespace ClassDijagramV1._0.ViewModel
                 if (ToDate == value)
                     return;
                 ToDate = value;
-                ListsHandler();
+                DateTime date;
+                bool format = DateTime.TryParseExact(value, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out date);
+                if (!format)
+                {
+                    ErrorMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                    ListsHandler();
+                }
+            }
+        }
+
+        public String selectedToTime
+        {
+            get
+            {
+                return ToTime;
+            }
+            set
+            {
+                if (ToTime == value)
+                    return;
+                ToTime = value;
+                DateTime time;
+                bool format = DateTime.TryParseExact(value, "HH:mm", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out time);
+                if (!format)
+                {
+                    ErrorMessage = "Uneti format je pogrešan";
+                    OnPropertyChanged("ErrorMessage");
+                }
+                else
+                {
+                    ErrorMessage = "";
+                    OnPropertyChanged("ErrorMessage");
+                    ListsHandler();
+                }
             }
         }
         public String selectedNewNameRoom
@@ -170,6 +265,7 @@ namespace ClassDijagramV1._0.ViewModel
             roomAppointment.newRoomName = selectedNewNameRoom;
             roomAppointmentController.AddRoomAppointment(roomAppointment);
 
+            resetFields();
             this.mainRoomsViewModel.ResetView();
         }
 

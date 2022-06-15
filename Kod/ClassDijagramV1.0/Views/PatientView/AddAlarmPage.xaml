@@ -16,11 +16,11 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Grey.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Orange.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.LightBlue.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
-    <StackPanel Background="{StaticResource MaterialDesignBackground}">
+    <StackPanel Background="{StaticResource MaterialDesignToolBackground}">
         <TextBlock Text="Kreiraj podsjetnik" Margin="40,20,0,20" FontSize="64"/>
         <Grid>
             <Grid.RowDefinitions>
@@ -48,53 +48,27 @@
             <TextBlock Grid.Row="3" Grid.Column="0"
                        VerticalAlignment="Center"
                        Text="Dani :" Margin="20" FontSize="20"/>
-
             <TextBox Grid.Row="0" Grid.Column="1"
+                     x:Name="naziv"
                      HorizontalAlignment="Left"
-                     Width="200" Height="28"/>
-            <!--
-            <StackPanel Orientation="Horizontal"
-                        Grid.Row="3" Grid.Column="1"
-                        HorizontalAlignment="left">
-
-                <Button Content="P"/>
-                <Button Content="U"/>
-                <Button Content="S"/>
-                <Button Content="Č"/>
-                <Button Content="P"/>
-                <Button Content="S"/>
-                <Button Content="N"/>
-
-            </StackPanel>
-            -->
-            
-
-            <ListBox Grid.Row="3" Grid.Column="1"
-                     HorizontalAlignment="left"
-                     VerticalAlignment="Center"
-                     Style="{StaticResource MaterialDesignFilterChipPrimaryListBox}" >
-                <ListBoxItem Content="P" />
-                <ListBoxItem Content="U" />
-                <ListBoxItem Content="S" />
-                <ListBoxItem Content="Č" />
-                <ListBoxItem Content="P" />
-                <ListBoxItem Content="S" />
-                <ListBoxItem Content="N" />
-            </ListBox>
+                     Width="200" Height="28"
+                     materialDesign:HintAssist.Hint="Naziv"/>
 
             <StackPanel Grid.Row="1" Grid.Column="1"
                         Orientation="Horizontal">
                 <DatePicker 
                         HorizontalAlignment="Left"
                         x:Name="kalendarOD" FirstDayOfWeek="Monday"
-                        Width="95" Height="28">
+                        Width="95" Height="28"
+                    materialDesign:HintAssist.Hint="Od">
 
                 </DatePicker>
 
                 <DatePicker
                         HorizontalAlignment="Left"
                         x:Name="kalendarDO" FirstDayOfWeek="Monday"
-                        Width="95" Height="28" Margin="10 0 0 0">
+                        Width="95" Height="28" Margin="10 0 0 0"
+                    materialDesign:HintAssist.Hint="Do">
 
                 </DatePicker>
             </StackPanel>
@@ -102,19 +76,29 @@
 
             <StackPanel Grid.Row="2" Grid.Column="1"
                         Orientation="Horizontal">
-                <ComboBox Grid.Row="2" Grid.Column="1"
-                      HorizontalAlignment="Left"
-                      x:Name="hourCB" ItemsSource="{Binding hour}"
-                      IsEditable="True"
-                      Width="95" Height="28"/>
-                <ComboBox Grid.Row="2" Grid.Column="1"
-                      HorizontalAlignment="Left"
-                      x:Name="minutesCB" ItemsSource="{Binding minutes}"
-                      IsEditable="True"
-                      Width="95" Height="28" Margin="10 0 0 0"/>
+                        <materialDesign:TimePicker 
+                            x:Name="vrijeme"
+                            Width="200"
+                            Is24Hours="True"
+                            Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
+                            materialDesign:HintAssist.Hint="Uneite vrijeme"/>
             </StackPanel>
 
-                <TextBox Grid.Row="4" Grid.ColumnSpan="2"
+            <ListBox Grid.Row="3" Grid.Column="1"
+                     x:Name="dani"
+                     HorizontalAlignment="left"
+                     VerticalAlignment="Center"
+                     Style="{StaticResource MaterialDesignFilterChipPrimaryListBox}" >
+                <ListBoxItem x:Name="ponedeljak" Content="P" />
+                <ListBoxItem x:Name="utorak" Content="U" />
+                <ListBoxItem x:Name="srijeda" Content="S" />
+                <ListBoxItem x:Name="cetvrtak" Content="Č" />
+                <ListBoxItem x:Name="petak" Content="P" />
+                <ListBoxItem x:Name="subota" Content="S" />
+                <ListBoxItem x:Name="nedelja" Content="N" />
+            </ListBox>
+
+            <TextBox Grid.Row="4" Grid.ColumnSpan="2"
                 x:Name="komentar"
                 Background="{StaticResource MaterialDesignLightBackground}"
                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -126,11 +110,10 @@
                 TextWrapping="Wrap"
                 BorderBrush="LightBlue"
                 VerticalScrollBarVisibility="Auto"
-                materialDesign:HintAssist.Hint="Unesite Vaš komentar. "/>
-
-
+                materialDesign:HintAssist.Hint="Unesite Vaš opis. "/>
         </Grid>
 
-        <Button Content="Kreiraj podsjetnik" Width="176" Height="42" HorizontalAlignment="Right" Margin="0, 20,100,0" />
+        <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
+                Content="Kreiraj podsjetnik" Width="176" Height="42" HorizontalAlignment="Right" Margin="0, 20,100,0" Click="addAlarmClick" />
     </StackPanel>
 </Page>

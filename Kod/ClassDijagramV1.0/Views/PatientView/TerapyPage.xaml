@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ClassDijagramV1._0.Views.PatientView"
+      xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
       mc:Ignorable="d" 
       d:DesignHeight="650" d:DesignWidth="1024"
       Title="TerapyPage">
@@ -20,6 +21,30 @@
     </Page.Resources>
 
     <Grid Background="{StaticResource MaterialDesignToolBackground}">
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="12"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="12"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="1" Grid.Column="1"
+                   Foreground="{StaticResource PrimaryHueLightForegroundBrush}"
+                   Text="Uvid u terapiju" FontSize="64"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" 
+                   Margin="42 0 0 0"/>
+
+        <syncfusion:SfScheduler x:Name="kalendar"
+                                ViewType="Month"
+                                FirstDayOfWeek="Monday"
+                                Grid.Row="2" Grid.Column="1"
+                                AppointmentEditorOpening="click"
+                                >
+        </syncfusion:SfScheduler>
     </Grid>
 </Page>

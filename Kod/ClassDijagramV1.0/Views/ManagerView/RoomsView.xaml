@@ -8,13 +8,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="655" d:DesignWidth="980"
              Background="#D9D4CC"
-             FontFamily="Berlin Sans FB Demi">
+             FontFamily="Sylfaen"
+             FontWeight="Bold">
 
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../Theme/TextboxTheme.xaml"/>
-
+                <ResourceDictionary Source="../../Theme/DataGridButtonsTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -50,12 +51,12 @@
                             <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=RoomName}"/>
                             <DataGridTextColumn Header="Broj sprata" Width="120" Binding="{Binding Path=Floor}"/>
                             <DataGridTextColumn Header="Broj sobe" Width="90" Binding="{Binding Path=RoomNumber}"/>
-                            <DataGridTextColumn Header="Status" Width="110" Binding="{Binding Path=RoomStatus, UpdateSourceTrigger=PropertyChanged}"/>
+                            <DataGridTextColumn Header="Status" Width="120" Binding="{Binding Path=RoomStatus, UpdateSourceTrigger=PropertyChanged}"/>
                             <DataGridTemplateColumn Header="Opremljenost" Width="*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock>
-                                        <Button Content="Opremljenost" Command="{Binding Path=DataContext.RoomEquipment,
+                                        <Button Content="Opremljenost" Width="140" Margin="0,1,0,0" Style="{StaticResource DataGridButton}" Command="{Binding Path=DataContext.RoomEquipment,
                                             RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"/>
                                         </TextBlock>
                                     </DataTemplate>
@@ -65,7 +66,7 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock>
-                                        <Button Content="Zakazivanje"  Command="{Binding Path=DataContext.RoomReservation,
+                                        <Button Content="Zakazivanje" Width="150" Margin="0,1,0,0" Style="{StaticResource DataGridButton}" Command="{Binding Path=DataContext.RoomReservation,
                                             RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"/>
                                         </TextBlock>
                                     </DataTemplate>

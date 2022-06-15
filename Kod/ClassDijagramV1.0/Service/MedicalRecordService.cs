@@ -3,11 +3,7 @@ using ClassDijagramV1._0.Repository;
 using Model;
 using Service;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Service
 {
@@ -63,14 +59,10 @@ namespace ClassDijagramV1._0.Service
             // Proverimo da li postoji kartona sa istim brojem kao novi
             bool exists = false;
             MedicalRecord? toUpdate = null;
-            foreach (var mr in _medicalRecordRepo.GetMedicalRecords())
+            if (!IsMedicalRecordNumberUnique(newMedicalRecord.Number))
             {
-                if (mr.Number == newMedicalRecord.Number)
-                {
-                    exists = true;
-                    toUpdate = mr;
-                    break;
-                }
+                toUpdate = GetMedicalRecord(newMedicalRecord.Number);
+                exists = true;
             }
 
             if (exists)
@@ -78,14 +70,12 @@ namespace ClassDijagramV1._0.Service
                 toUpdate = newMedicalRecord;
                 return;
             }
-            else
-            {
-                // Dodamo medical Record
-                _medicalRecordRepo.AddMedicalRecord(newMedicalRecord);
-                // Povezemo pacijenta sa njegovim Medical Record-om
-                Patient p = _patientService.GetPatientById(newMedicalRecord.PatientId);
-                p.MedicalRecordNumber = newMedicalRecord.Number;
-            }
+
+            // Dodamo medical Record
+            _medicalRecordRepo.AddMedicalRecord(newMedicalRecord);
+            // Povezemo pacijenta sa njegovim Medical Record-om
+            Patient p = _patientService.GetPatientById(newMedicalRecord.PatientId);
+            p.MedicalRecordNumber = newMedicalRecord.Number;
         }
 
         /// <summary>
@@ -97,23 +87,12 @@ namespace ClassDijagramV1._0.Service
         /// <exception cref="NotImplementedException"></exception>
         public bool RemoveMedicalRecord(int medicalRecordNumber)
         {
-            MedicalRecord mrToRemove = null;
-            foreach (var mr in _medicalRecordRepo.GetMedicalRecords())
-            {
-                if (mr.Number == medicalRecordNumber)
-                {
-                    mrToRemove = mr;
-                }
-            }
+            MedicalRecord? mrToRemove = null;
+            mrToRemove = GetMedicalRecord(medicalRecordNumber);
 
             if (mrToRemove != null)
             {
-                // Izbrisemo medical Record
-                _medicalRecordRepo.RemoveMedicalRecord(mrToRemove);
-                // Stavimo MedicalRecordNumber pacijenta na null
-                Patient p = _patientService.GetPatientById(mrToRemove.PatientId);
-                p.MedicalRecordNumber = null;
-
+                RemoveMedicalRecordAndItsDependencies(mrToRemove);
                 return true;
             }
 
@@ -136,9 +115,20 @@ namespace ClassDijagramV1._0.Service
         /// <param name="medicalRecordNumber"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public MedicalRecord GetMedicalRecord(int medicalRecordNumber)
+        public MedicalRecord? GetMedicalRecord(int medicalRecordNumber)
         {
             return _medicalRecordRepo.GetMedicalRecord(medicalRecordNumber);
+        }
+
+        /// <summary>
+        /// Vraca zdravstveni karton od zadatok pacijenta
+        /// </summary>
+        /// <param name="patientID"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public MedicalRecord GetPatientsMedicalRecord(int patientID)
+        {
+            return _medicalRecordRepo.GetPatientsMedicalRecord(patientID);
         }
 
         /// <summary>
@@ -165,6 +155,19 @@ namespace ClassDijagramV1._0.Service
             }
 
             return unique;
+        }
+
+        #endregion
+
+        #region Private Helpers
+
+        private void RemoveMedicalRecordAndItsDependencies(MedicalRecord mrToRemove)
+        {
+            // Izbrisemo medical Record
+            _medicalRecordRepo.RemoveMedicalRecord(mrToRemove);
+            // Stavimo MedicalRecordNumber pacijenta na null
+            Patient p = _patientService.GetPatientById(mrToRemove.PatientId);
+            p.MedicalRecordNumber = null;
         }
 
         #endregion

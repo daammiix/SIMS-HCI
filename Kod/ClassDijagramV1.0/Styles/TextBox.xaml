@@ -110,4 +110,50 @@
         </Setter>
     </Style>
 
+    <Style x:Key="SearchTextBox" TargetType="TextBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border BorderBrush="{StaticResource SCyan}"
+                            Background="{StaticResource SDarkGrayShade}"
+                            BorderThickness="1"
+                            CornerRadius="15">
+                        <Grid>
+                            <TextBox Padding="10"
+                                 x:Name="SearchBox"
+                                 CaretBrush="White"
+                                 Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
+                                 BorderThickness="0"
+                                 MaxWidth="300"
+                                 MaxHeight="65"
+                                 VerticalAlignment="Center"
+                                 Background="Transparent"
+                                 Foreground="{StaticResource SLightGrayShade}"/>
+                            <TextBlock IsHitTestVisible="False"
+                                   Text="Search"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Margin="10,0,0,0"
+                                   Grid.Column="1"
+                                   FontSize="16"
+                                   Foreground="{StaticResource SLightGrayShade}">
+
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=SearchBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

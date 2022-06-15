@@ -6,17 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ClassDijagramV1._0.Views.PatientView
 {
@@ -25,64 +16,87 @@ namespace ClassDijagramV1._0.Views.PatientView
     /// </summary>
     public partial class RatingDoctor : Page
     {
-        private Patient _logedPatient;
-        private PatientMainWindow parent { get; set; }
-        // pacijentovi appointmenti, lista appointmentViewModela prosledjena konstruktoru
-        private ObservableCollection<AppointmentViewModel> _patientAppointments;
-        //public ObservableCollection<AppointmentViewModel> Appointments;
-        // kontroleri
-        public AppointmentController _appointmentController;
-        public DoctorController _doctorController;
+        #region Fields
 
-        public ObservableCollection<Appointment> Appointments { get; private set; }
-        public ObservableCollection<Doctor> Doctors { get; set; }
+        private PatientMainWindow parent { get; set; }
+        private ObservableCollection<AppointmentViewModel> _oldAppointmentViewModels;
+        private DoctorController _doctorController;
         private RatingController _ratingController;
-        public ObservableCollection<DoctorRating> DoctorRatings { get; set; }
-        public RatingDoctor(ObservableCollection<AppointmentViewModel> appointments,PatientMainWindow patientMain, Patient logedPatient)
+        public ObservableCollection<Doctor> Doctors { get; set; }
+
+        #endregion
+        public RatingDoctor(PatientMainWindow patientMain, ObservableCollection<AppointmentViewModel> appointmentViewModels)
         {
             InitializeComponent();
             parent = patientMain;
             this.DataContext = this;
-            _logedPatient = logedPatient;
+            _oldAppointmentViewModels = appointmentViewModels;
+
             App app = Application.Current as App;
-            _appointmentController = app.AppointmentController;
             _doctorController = app.DoctorController;
             _ratingController = app.RatingController;
 
-            //Appointments = appointments;
-            Appointments = _appointmentController.GetAppointments();
             Doctors = new ObservableCollection<Doctor>();
-            foreach (Appointment a in Appointments)
-            {
-                if ( (a.PatientId == _logedPatient.Id)
-                    && (a.AppointmentDate < DateTime.Now)
-                    && (!Doctors.Contains(_doctorController.GetDoctorById(a.DoctorId))) )
-                {
-                    Doctors.Add(_doctorController.GetDoctorById(a.DoctorId));
-                }
-                
-            }
-            DoctorRatings = _ratingController.GetAllDoctorRatings();
+            FillDoctorsComboBox();
+            
         }
 
+        /// <summary>
+        /// Puni listu doktora
+        /// </summary>
+        /// <returns></returns>
+        private void FillDoctorsComboBox()
+        {
+            foreach (AppointmentViewModel a in _oldAppointmentViewModels)
+            {
+                if (!Doctors.Contains(_doctorController.GetDoctorById(a.Appointment.DoctorId)))
+                {
+                    Doctors.Add(_doctorController.GetDoctorById(a.Appointment.DoctorId));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Salje doktorovu ocjenu
+        /// </summary>
+        /// <returns></returns>
         private void SendRatingDoctorResult(object sender, RoutedEventArgs e)
         {
             List<int> ocjene = new List<int>() { pitanje1.Value, pitanje2.Value, pitanje3.Value, pitanje4.Value };
             string comment = komentar.Text;
             Doctor d1 = (Doctor)doktoriSaPregleda.SelectedItem;
 
-            DoctorRating dr = new DoctorRating(d1.Id,ocjene, ocjene.Average(), comment);
+            DoctorRating dr = new DoctorRating(d1.Id, ocjene, ocjene.Average(), comment);
 
             _ratingController.AddRatingDoctor(dr);
 
-            parent.startWindow.Content = new PatientMainPage(parent, _logedPatient, parent.Account);
+            parent.startWindow.Content = new PatientMainPage(parent);
         }
+
+        /// <summary>
+        /// Doktor izabran
+        /// </summary>
+        /// <returns></returns>
+        private void DoctorChosen(object sender, SelectionChangedEventArgs e)
+        {
+            pitanje1.IsEnabled = true;
+            pitanje2.IsEnabled = true;
+            pitanje3.IsEnabled = true;
+            pitanje4.IsEnabled = true;
+        }
+
+        /// <summary>
+        /// Doktor ocjenjen
+        /// </summary>
+        /// <returns></returns>
         private void EverythingRated(object sender, RoutedPropertyChangedEventArgs<int> e)
         {
-            if (pitanje1.Value != 0 && pitanje2.Value != 0 && pitanje2.Value != 0 && pitanje4.Value != 0 && doktoriSaPregleda.SelectedItem != null)
+            if (pitanje1.Value != 0 && pitanje2.Value != 0 && pitanje2.Value != 0 && pitanje4.Value != 0)
             {
                 ratingBtn.IsEnabled = true;
             }
         }
+
+        
     }
 }

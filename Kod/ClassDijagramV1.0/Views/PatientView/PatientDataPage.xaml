@@ -20,7 +20,150 @@
         </ResourceDictionary>
     </Page.Resources>
 
-    <Grid>
-        
+    <Grid Background="{StaticResource MaterialDesignToolBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="12"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="12"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="1" Grid.Column="1"
+                   Foreground="{StaticResource PrimaryHueLightForegroundBrush}"
+            Text="Podaci o pacijentu" FontSize="64"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" 
+            Margin="42 0 0 0"/>
+
+
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Row="2" Grid.Column="0"
+                   Source="/Images/patient.png"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Margin="80 30 0 0"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right" Width="5">
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"
+                           Width="5"
+                           Margin="-20 0 0 0"
+                           HorizontalAlignment="Right"
+                           Background="{StaticResource SLightGrayShade}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <TextBox x:Name="imePrezime"
+                         Text="{Binding Path=Name}"
+                         Width="200"
+                         IsEnabled="False"                  
+                         materialDesign:HintAssist.HelperText="Ime i prezime"
+                         materialDesign:HintAssist.HelperTextFontSize="16"
+                         FontWeight="Bold"
+                         TextAlignment="Center"
+                         Margin="20"/>
+                <TextBox x:Name="jmbg"
+                         Text="{Binding Path=Jmbg}"
+                         Width="200"
+                         IsEnabled="False"                  
+                         materialDesign:HintAssist.HelperText="JMBG"
+                         materialDesign:HintAssist.HelperTextFontSize="16"
+                         FontWeight="Bold"
+                         TextAlignment="Center"
+                         Margin="20"/>
+                <TextBox x:Name="datumRodjenja"
+                         Text="{Binding Path=DateOfBirth}"
+                         Width="200"
+                         IsEnabled="False"                  
+                         materialDesign:HintAssist.HelperText="Datum rođenja"
+                         materialDesign:HintAssist.HelperTextFontSize="16"
+                         FontWeight="Bold"
+                         TextAlignment="Center"
+                         Margin="20"/>
+                <TextBox x:Name="pol"
+                         Text="{Binding Path=Gender}"
+                         Width="200"
+                         IsEnabled="False"                  
+                         materialDesign:HintAssist.HelperText="Pol"
+                         materialDesign:HintAssist.HelperTextFontSize="16"
+                         FontWeight="Bold"
+                         TextAlignment="Center"
+                         Margin="20"/>
+                <TextBox x:Name="socialSecurityNumbet"
+                         Text="{Binding Path=MedicalRecordNumber}"
+                         Width="200"
+                         IsEnabled="False"                  
+                         materialDesign:HintAssist.HelperText="Broj zdravstvenog kartona"
+                         materialDesign:HintAssist.HelperTextFontSize="16"
+                         FontWeight="Bold"
+                         TextAlignment="Center"
+                         Margin="20"/>
+                <TextBox x:Name="krvnaGrupa"
+                         Text="{Binding Path=Blood}"
+                         Width="200"
+                         IsEnabled="False"                  
+                         materialDesign:HintAssist.HelperText="Krvna grupa"
+                         materialDesign:HintAssist.HelperTextFontSize="16"
+                         FontWeight="Bold"
+                         TextAlignment="Center"
+                         Margin="20"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2">
+                <TextBox x:Name="adresaStanovanja"
+                         Text="{Binding Path=Address}"
+                         Width="200"                
+                         materialDesign:HintAssist.HelperText="Adresa stanovanja"
+                         materialDesign:HintAssist.HelperTextFontSize="16"
+                         FontWeight="Bold"
+                         TextAlignment="Center"
+                         Margin="20"/>
+                <TextBox x:Name="brojTelefona"
+                         Text="{Binding Path=PhoneNumber}"
+                         Width="200"                
+                         materialDesign:HintAssist.HelperText="Broj telefona"
+                         materialDesign:HintAssist.HelperTextFontSize="16"
+                         FontWeight="Bold"
+                         TextAlignment="Center"
+                         Margin="20"/>
+                <TextBox x:Name="email"
+                         Text="{Binding Path=Email}"
+                         Width="200"                
+                         materialDesign:HintAssist.HelperText="Email"
+                         materialDesign:HintAssist.HelperTextFontSize="16"
+                         FontWeight="Bold"
+                         TextAlignment="Center"
+                         Margin="20"/>
+                <ComboBox ItemsSource="{Binding Doctors}"
+                          SelectedItem="{Binding SelectedDoctor}"
+                          Width="200"
+                          Margin="20"/>
+                <Expander  Width="200"
+                           Margin="20"
+                           Header="Alergeni"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Background="{x:Null}"
+                           BorderBrush="{x:Null}">
+                    <StackPanel
+                          Orientation="Vertical"
+                          TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                          TextBlock.FontWeight="Light"
+                          Margin="24,8,24,16">
+                        <ListBox x:Name="alergeni"
+                                 FontWeight="Bold"
+                                 />
+                    </StackPanel>
+                </Expander>
+            </StackPanel>
+
+        </Grid>
+
     </Grid>
 </Page>

@@ -1,0 +1,81 @@
+﻿<Window x:Class="ClassDijagramV1._0.Views.SecretaryView.FreeDaysView.EnterDescriptionDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.FreeDaysView"
+        mc:Ignorable="d"
+        Background="{StaticResource SBackground}"
+        FontFamily="#Poppins"
+        FontSize="20"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        Foreground="{StaticResource SCyan}"
+        AllowsTransparency="True"
+        Title="EnterDescriptionDialog" Height="450" Width="400">
+
+    <Window.InputBindings>
+        <KeyBinding Key="Return"
+                    Command="{Binding SaveCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+    </Window.InputBindings>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../../Styles/TextBox.xaml"/>
+                <ResourceDictionary Source="../../../Styles/Button.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0"
+              MouseDown="Header_MouseDown"
+              Background="{StaticResource SBackground}">
+            <!-- Title -->
+            <TextBlock Text="Enter Description"
+                       Margin="0,7,0,3"
+                       FontSize="24"
+                       Foreground="{StaticResource SLightGrayShade}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+        </Grid>
+
+        <!-- Content -->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Description -->
+            <StackPanel Grid.Row="0"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <TextBlock Text="Description:"
+                           Margin="0,0,15,0"
+                           VerticalAlignment="Center"/>
+                <TextBox Style="{StaticResource TextBoxStyleAccountMultiLine}"
+                         Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
+                         Width="200"
+                         MaxWidth="200"
+                         Height="250"
+                         MaxHeight="250"/>
+            </StackPanel>
+            <!-- Save -->
+            <Button Grid.Row="1"
+                    Content="Save"
+                    Margin="0,15,0,15"
+                    Command="{Binding SaveCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource AccountButtonsStyle}"/>
+        </Grid>
+    </Grid>
+</Window>

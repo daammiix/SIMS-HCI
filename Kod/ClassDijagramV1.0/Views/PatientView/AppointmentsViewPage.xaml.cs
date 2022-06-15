@@ -4,21 +4,10 @@ using ClassDijagramV1._0.Util;
 using Controller;
 using Model;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ClassDijagramV1._0.Views.PatientView
 {
@@ -31,15 +20,14 @@ namespace ClassDijagramV1._0.Views.PatientView
 
         private AppointmentController _appointmentController;
         private RoomController _roomController;
-
         private PatientController _patientController;
-        public ActivityController _activityController;
-        public BanningPatientController _banningPatientController;
+        private ActivityController _activityController;
+        private BanningPatientController _banningPatientController;
+        private NotificationController _notificationController;
         private PatientMainWindow parent { get; set; }
 
-        // Ulogovan pacijent
-        private Patient _logedPatient;
-        private Account _account;
+
+        private PrintDialog _printDialog = new PrintDialog();
 
         #endregion
 
@@ -47,64 +35,44 @@ namespace ClassDijagramV1._0.Views.PatientView
         #region Properties
 
         public static AppointmentViewModel? SelectedAppointment { get; set; }
-        public ObservableCollection<AppointmentViewModel> Appointments
-        {
-            get;
-            set;
-        }
-
-        public BindingList<Room> Rooms
-        {
-            get;
-            set;
-        }
+        public ObservableCollection<AppointmentViewModel> Appointments { get; set; }
+        public BindingList<Room> Rooms { get; set; }
 
         #endregion
 
-        /// <summary>
-        /// Pacijent koji je ulogovan
-        /// </summary>
-        /// <param name="p"></param>
-        public AppointmentsViewPage(ObservableCollection<AppointmentViewModel> appointments,
-            PatientMainWindow patientMain, Patient logedPatient, Account account)
+        public AppointmentsViewPage(PatientMainWindow patientMain, ObservableCollection<AppointmentViewModel> appointments)
         {
             InitializeComponent();
-
-            _logedPatient = logedPatient;
-            _account = account;
-
             this.DataContext = this;
             parent = patientMain;
+
             App app = Application.Current as App;
             _appointmentController = app.AppointmentController;
-
             _roomController = app.roomController;
-            _patientController = app.PatientController;
             _activityController = app.ActivityController;
             _banningPatientController = app.BanningPatientController;
+            _notificationController = app.NotificationController;
 
             Appointments = appointments;
-
             // Pokupimo sve sobe
             Rooms = _roomController.GetAllRooms();
 
         }
         private void AddAppontment_Click(object sender, RoutedEventArgs e)
         {
-            if (_banningPatientController.CheckStatusOfPatient(_logedPatient.Id, _account) == true)
+            if (_banningPatientController.CheckStatusOfPatient(parent.Patient.Id, parent.Account) == true)
             {
                 errorBan.Content = "Banovani ste!";
             }
             else
             {
-                // Prosledimo listu AppointmentViewModela jer tu dodajemo novi appointment kako bi se view azurirao
-                parent.startWindow.Content = new AppointmentAddPage(parent, Appointments, _logedPatient);
-            }  
+                parent.startWindow.Content = new AppointmentAddPage(parent, Appointments);
+            }
         }
 
         private void UpdateAppontment_Click(object sender, RoutedEventArgs e)
         {
-            if (_banningPatientController.CheckStatusOfPatient(_logedPatient.Id, _account) == true)
+            if (_banningPatientController.CheckStatusOfPatient(parent.Patient.Id, parent.Account) == true)
             {
                 errorBan.Content = "Banovani ste!";
             }
@@ -112,15 +80,14 @@ namespace ClassDijagramV1._0.Views.PatientView
             {
                 if (tabelaPregledi.SelectedIndex != -1)
                 {
-                    parent.startWindow.Content = new AppointmentUpdatePage(parent, Appointments, _logedPatient);
+                    parent.startWindow.Content = new AppointmentUpdatePage(parent, Appointments);
                 }
             }
-            
         }
 
         private void RemoveAppontment_Click(object sender, RoutedEventArgs e)
         {
-            if (_banningPatientController.CheckStatusOfPatient(_logedPatient.Id, _account) == true)
+            if (_banningPatientController.CheckStatusOfPatient(parent.Patient.Id, parent.Account) == true)
             {
                 errorBan.Content = "Banovani ste!";
             }
@@ -128,20 +95,28 @@ namespace ClassDijagramV1._0.Views.PatientView
             {
                 if (tabelaPregledi.SelectedIndex != -1)
                 {
-                    //_appointmentController.AddNotification((Appointment)tabelaPregledi.SelectedItem, NotificationType.deletingAppointment);
-                    //tabelaPregledi.ItemsSource = _appointmentController.GetAllAppointmentsByPatient(parent.patientID);
-                    //Appointments.Remove((Appointment)tabelaPregledi.SelectedItem);
                     AppointmentViewModel selectedAppointment = (AppointmentViewModel)tabelaPregledi.SelectedItem;
-                    // Izbrisemo i iz view-a i iz baze
+                    _notificationController.RemoveNotificationByAppointment(selectedAppointment.Id);
                     Appointments.Remove(selectedAppointment);
+                    parent.Patient.Appointments.Remove(selectedAppointment.Appointment);
                     _appointmentController.RemoveAppointment(selectedAppointment.Id);
-                    //activity
-                    ActivityLog activity = new ActivityLog(DateTime.Now, _logedPatient.Id, TypeOfActivity.cancelAppointment);
+                    ActivityLog activity = new ActivityLog(DateTime.Now, parent.Patient.Id, TypeOfActivity.cancelAppointment);
                     _activityController.AddActivity(activity);
                 }
             }
-            
 
+
+        }
+
+        private void generatePDFClick(object sender, RoutedEventArgs e)
+        {
+            parent.startWindow.Content = new GenerateReportPage(parent ,Appointments);
+        }
+
+        private void omogucidugmad(object sender, SelectionChangedEventArgs e)
+        {
+            otkazi.IsEnabled = true;
+            izmijeni.IsEnabled = true;
         }
     }
 
@@ -284,6 +259,30 @@ namespace ClassDijagramV1._0.Views.PatientView
                     _appointment.AppointmentDate = value;
                     OnPropertyChanged("AppointmentDate");
                 }
+            }
+        }
+
+        public string AppointmentTypeStr
+        {
+            get
+            {
+                switch (_appointment.AppointmentType)
+                {
+                    case AppointmentType.operation:
+                        {
+                            return "Operacija";
+                        }
+                    case AppointmentType.generalPractitionerCheckup:
+                        {
+                            return "Generalni pregled";
+                        }
+                    case AppointmentType.specialistCheckup:
+                        {
+                            return "Pregled specijaliste";
+                        }
+                }
+
+                return "";
             }
         }
 

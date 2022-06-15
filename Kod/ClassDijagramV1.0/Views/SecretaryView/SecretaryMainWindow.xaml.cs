@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using ClassDijagramV1._0.Model;
+using ClassDijagramV1._0.ViewModel.SecretaryViewModels;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ClassDijagramV1._0.Views.SecretaryView
@@ -8,7 +10,10 @@ namespace ClassDijagramV1._0.Views.SecretaryView
     /// </summary>
     public partial class SecretaryMainWindow : Window
     {
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="acc">Acc sekretara</param>
         public SecretaryMainWindow()
         {
             InitializeComponent();

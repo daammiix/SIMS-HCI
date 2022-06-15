@@ -1,8 +1,6 @@
 using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Util;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 
 namespace Model
 {

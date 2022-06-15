@@ -1,11 +1,7 @@
 ﻿using ClassDijagramV1._0.FileHandlers;
 using Model;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassDijagramV1._0.Repository
 {
@@ -55,12 +51,11 @@ namespace ClassDijagramV1._0.Repository
         }
 
         /// <summary>
-        /// Dodaje novog sekretara 
+        /// Dodaje novog sekretara ako ne postoji sekretar sa istim id-em i jmbg-om, u suprotnom pregazimo starog
         /// </summary>
         /// <param name="newSecretary"></param>
         public void AddSecretary(Secretary newSecretary)
         {
-            // Ako nema sekretara sa istim id-em i jmbgo dodajemo novog u suprotnom samo pregazimo istog
             bool exists = false;
             Secretary? toUpdate = null;
             foreach (Secretary secretary in Secretaries)

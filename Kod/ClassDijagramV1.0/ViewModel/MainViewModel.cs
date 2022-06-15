@@ -1,21 +1,9 @@
-using ClassDijagramV1._0.Controller;
-using ClassDijagramV1._0.Model;
-using ClassDijagramV1._0.Model.Enums;
 using ClassDijagramV1._0.Util;
-using ClassDijagramV1._0.Views;
-using ClassDijagramV1._0.Views.SecretaryView;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 
 namespace ClassDijagramV1._0.ViewModel
 {
-    class MainViewModel : ObservableObject
+    public class MainViewModel : ObservableObject
     {
 
         public RelayCommand _roomsViewCommand;
@@ -36,6 +24,7 @@ namespace ClassDijagramV1._0.ViewModel
 
         public WorkersViewModel WorkersVM { get; set; }
         public ReportsViewModel ReportsVM { get; set; }
+        public AccountViewModel AccountVM { get; set; }
 
 
         private object _currentView;
@@ -134,7 +123,6 @@ namespace ClassDijagramV1._0.ViewModel
 
         }
 
-
         public MainViewModel()
         {
             MainRoomsVM = new MainRoomsViewModel();
@@ -142,8 +130,14 @@ namespace ClassDijagramV1._0.ViewModel
             StorageVM = new StorageViewModel();
             WorkersVM = new WorkersViewModel();
             ReportsVM = new ReportsViewModel();
+            AccountVM = new AccountViewModel();
 
             CurrentView = CalendarVM;
+        }
+
+        public void ChangeToAccountView()
+        {
+            CurrentView = AccountVM;
         }
     }
 }

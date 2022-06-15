@@ -3,19 +3,9 @@ using Controller;
 using Model;
 using Syncfusion.UI.Xaml.Scheduler;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ClassDijagramV1._0.Views.SecretaryView.AppointmentsView
 {
@@ -39,6 +29,9 @@ namespace ClassDijagramV1._0.Views.SecretaryView.AppointmentsView
             _appointmentController = app.AppointmentController;
 
             InitializeComponent();
+            Focusable = true;
+            Loaded += (s, e) => Keyboard.Focus(this);
+
 
             _viewModel = this.DataContext as AppointmentsMainViewModel;
 
@@ -65,7 +58,7 @@ namespace ClassDijagramV1._0.Views.SecretaryView.AppointmentsView
                 // MessageBox.Show("dodavanje");
 
                 // Ako je selektovani dan pre danasnjeg ne otvorimo dialog
-                if (selectedDate.Day >= DateTime.Now.Day)
+                if (selectedDate.Ticks > DateTime.Now.Subtract(TimeSpan.FromDays(1)).Ticks)
                 {
                     AddAppointmentDialog addAppointmentDialog = new AddAppointmentDialog(_viewModel.ScheduleViewModel.Appointments,
                                 selectedDate);
