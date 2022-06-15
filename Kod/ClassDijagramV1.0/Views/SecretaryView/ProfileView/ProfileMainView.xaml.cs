@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ClassDijagramV1._0.Views.SecretaryView.FreeDaysView
+namespace ClassDijagramV1._0.Views.SecretaryView.ProfileView
 {
     /// <summary>
-    /// Interaction logic for FreeDaysMainView.xaml
+    /// Interaction logic for ProfileMainView.xaml
     /// </summary>
-    public partial class FreeDaysMainView : UserControl
+    public partial class ProfileMainView : UserControl
     {
-        public FreeDaysMainView()
+        public ProfileMainView()
         {
             InitializeComponent();
             Focusable = true;

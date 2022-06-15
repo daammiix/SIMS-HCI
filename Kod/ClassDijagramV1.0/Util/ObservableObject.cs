@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace ClassDijagramV1._0.Util
 {
-    public class ObservableObject : INotifyPropertyChanged
+    public class ObservableObject : ValidationErrorContainer, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 

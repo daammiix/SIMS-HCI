@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.MeetingsView"
         xmlns:converters ="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels.Converters"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:vr="clr-namespace:ClassDijagramV1._0.Util.ValidationRules"
         mc:Ignorable="d"
         Background="{StaticResource SBackground}"
         FontFamily="#Poppins"
@@ -15,6 +16,12 @@
         Foreground="{StaticResource SCyan}"
         AllowsTransparency="True"
         Title="AddMeeting" Height="550" Width="1050">
+
+    <Window.InputBindings>
+        <KeyBinding Key="Return"
+                    Command="{Binding AddMeeting}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+    </Window.InputBindings>
 
     <Window.Resources>
         <ResourceDictionary>
@@ -26,7 +33,11 @@
                 <ResourceDictionary Source="../../../Styles/DatePicker.xaml"/>
                 <ResourceDictionary Source="../../../Styles/ComboBox.xaml"/>
                 <ResourceDictionary Source="../../../Styles/RadioButton.xaml"/>
+                <ResourceDictionary Source="../../../Styles/Validation.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type ValidationError}">
+                <TextBlock FontSize="16" FontStyle="Italic" Foreground="Red" HorizontalAlignment="Left" Margin="0,1" Text="{Binding Path=ErrorContent}"/>
+            </DataTemplate>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -262,6 +273,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <!-- Row 1 -->
@@ -290,19 +302,33 @@
                                Margin="0,0,15,15"/>
                     <TextBox Grid.Column="1"
                              Grid.Row="1"
-                             Text="{Binding Duration}"
+                             x:Name="durationInput"
+                             Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
                              MaxWidth="300"
                              Margin="0,0,0,15"
-                             Style="{StaticResource TextBoxStyleAccount}"/>
-
+                             Style="{StaticResource TextBoxStyleAccount}">
+                        <Binding Path="Duration" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vr:MandatoryRule Name="Duration"/>
+                                <vr:NumberRule Name="Duration"/>
+                                <ExceptionValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox>
                     <!-- Row 3 -->
+                    <ContentPresenter Grid.Row="2"
+                                      Grid.Column="0" Grid.ColumnSpan="2"
+                                      Margin="0,0,0,5"
+                                      Content="{Binding ElementName=durationInput, Path=(Validation.Errors).CurrentItem}"/>
+
+                    <!-- Row 4 -->
                     <TextBlock Grid.Column="0"
-                               Grid.Row="2"
+                               Grid.Row="3"
                                Text="Room:"
                                VerticalAlignment="Center"
                                Margin="0,0,15,15"/>
                     <ComboBox Grid.Column="1"
-                              Grid.Row="2"
+                              Grid.Row="3"
                               Margin="0,0,0,15"
                               Height="65"
                               Width="250"

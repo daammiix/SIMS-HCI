@@ -43,7 +43,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.EquipmentViewModels
             }
         }
 
-        public string SupplierName { get; set; }
+        public string? SupplierName { get; set; }
         public DateTime DeliveryTime { get; set; }
         public string Description { get; set; }
 
@@ -103,7 +103,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.EquipmentViewModels
         /// <returns></returns>
         private bool MakeOrderCanExecute()
         {
-            if (EquipmentInOrder.Count > 0 && SupplierName != "" && DeliveryTime != DateTime.MinValue)
+            if (EquipmentInOrder.Count > 0 && !string.IsNullOrWhiteSpace(SupplierName) && DeliveryTime != DateTime.MinValue)
             {
                 return true;
             }

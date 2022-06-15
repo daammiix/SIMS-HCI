@@ -476,6 +476,14 @@ namespace ClassDijagramV1._0
                 maxId = purchaseOrders.Max(order => order.Id);
                 PurchaseOrder.idCounter = maxId;
             }
+
+            // Akaunti
+            List<Account> accounts = AccountController.GetAccounts().ToList();
+            if (accounts.Count > 0)
+            {
+                maxId = accounts.Max(account => account.Id);
+                Account.idCounter = maxId;
+            }
         }
 
     }

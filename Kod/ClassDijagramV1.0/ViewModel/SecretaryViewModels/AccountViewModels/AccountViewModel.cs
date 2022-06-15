@@ -134,7 +134,14 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
                 // provera zato sto je trenutno implementirano samo za pacijente, posle nece trebati
                 return (_person == null) ? "" : _person.Name;
             }
-            set { _person.Name = value; }
+            set
+            {
+                if (_person.Name != value)
+                {
+                    _person.Name = value;
+                    OnPropertyChanged("Name");
+                }
+            }
         }
 
         public string Surname
@@ -197,6 +204,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
         }
 
         #endregion
+
 
     }
 }

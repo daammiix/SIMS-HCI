@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.AppointmentsView"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:vr="clr-namespace:ClassDijagramV1._0.Util.ValidationRules"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
         WindowStyle="None"
@@ -15,6 +16,12 @@
         FontSize="24"
         Height="730" Width="600">
 
+    <Window.InputBindings>
+        <KeyBinding Key="Return"
+                    Command="{Binding AddAppointmentCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+    </Window.InputBindings>
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -24,8 +31,12 @@
                 <ResourceDictionary Source="../../../Styles/ComboBox.xaml"/>
                 <ResourceDictionary Source="../../../Styles/RadioButton.xaml"/>
                 <ResourceDictionary Source="../../../Styles/DatePicker.xaml"/>
+                <ResourceDictionary Source="../../../Styles/Validation.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
+            <DataTemplate DataType="{x:Type ValidationError}">
+                <TextBlock FontSize="16" FontStyle="Italic" Foreground="Red" HorizontalAlignment="Left" Margin="0,1" Text="{Binding Path=ErrorContent}"/>
+            </DataTemplate>
 
             <!-- Tab item style -->
             <Style x:Key="TabItemStyle" TargetType="TabItem">
@@ -213,6 +224,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
@@ -282,19 +294,34 @@
                    Margin="0,0,15,15"
                    VerticalAlignment="Center"/>
                     <TextBox Grid.Column="1"
-                 Grid.Row="2"
-                 Margin="0,0,0,15"
-                 Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}"
-                 Style="{StaticResource TextBoxStyleAccount}"/>
+                             Grid.Row="2"
+                             x:Name="durationInput"
+                             Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
+                             Margin="0,0,0,15"
+                             Style="{StaticResource TextBoxStyleAccount}">
+                        <Binding Path="Duration" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <vr:MandatoryRule Name="Duration"/>
+                                <vr:NumberRule Name="Duration"/>
+                                <ExceptionValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox>
+                    <ContentPresenter Grid.Row="3"
+                                      Grid.Column="0"
+                                      Grid.ColumnSpan="2"
+                                      Margin="0,0,0,5"
+                                      Content="{Binding ElementName=durationInput, Path=(Validation.Errors).CurrentItem}"/>
 
-                    <!-- Row 4 -->
+
+                    <!-- Row 5 -->
                     <TextBlock Grid.Column="0" 
-                   Grid.Row="3"
+                   Grid.Row="4"
                    VerticalAlignment="Center"
                    Margin="0,0,15,15"
                    Text="Patient:"/>
                     <ComboBox Grid.Column="1"
-                  Grid.Row="3"
+                  Grid.Row="4"
                   Margin="0,0,0,15"
                   Width="300"
                   Height="65"
@@ -305,14 +332,14 @@
                   ItemContainerStyle="{StaticResource ItemContainerStyle}">
                     </ComboBox>
 
-                    <!-- Row 5 -->
+                    <!-- Row 6 -->
                     <TextBlock Grid.Column="0" 
-                   Grid.Row="4"
+                   Grid.Row="5"
                    VerticalAlignment="Center"
                    Margin="0,0,15,15"
                    Text="Doctor:"/>
                     <ComboBox Grid.Column="1"
-                  Grid.Row="4"
+                  Grid.Row="5"
                   Margin="0,0,0,15"
                   Width="300"
                   Height="65"
@@ -323,14 +350,14 @@
                   ItemContainerStyle="{StaticResource ItemContainerStyle}">
                     </ComboBox>
 
-                    <!-- Row 6 -->
+                    <!-- Row 7 -->
                     <TextBlock Grid.Column="0" 
-                   Grid.Row="5"
+                   Grid.Row="6"
                    VerticalAlignment="Center"
                    Margin="0,0,15,15"
                    Text="Room:"/>
                     <ComboBox Grid.Column="1"
-                  Grid.Row="5"
+                  Grid.Row="6"
                   Margin="0,0,0,15"
                   Width="300"
                   Height="65"
@@ -341,14 +368,14 @@
                   ItemContainerStyle="{StaticResource ItemContainerStyle}">
                     </ComboBox>
 
-                    <!-- Row 7 -->
+                    <!-- Row 8 -->
                     <TextBlock Grid.Column="0" 
-                   Grid.Row="6"
+                   Grid.Row="7"
                    VerticalAlignment="Top"
                    Margin="0,0,20,15"
                    Text="AppointmentType:"/>
                     <StackPanel Grid.Column="1"
-                    Grid.Row="6"
+                    Grid.Row="7"
                     Margin="0,0,0,10">
                         <RadioButton Content="general checkup" 
                          GroupName="AppointmentType"
@@ -369,7 +396,7 @@
 
                     <!-- Add button -->
                     <Button Grid.Column="0"
-                            Grid.Row="7"
+                            Grid.Row="8"
                             Grid.ColumnSpan="2"
                             VerticalAlignment="Center"
                             Content="Add"

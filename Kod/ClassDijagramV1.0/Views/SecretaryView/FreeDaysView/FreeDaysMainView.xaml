@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:ClassDijagramV1._0.Views.SecretaryView.FreeDaysView"
              xmlns:vm="clr-namespace:ClassDijagramV1._0.ViewModel.SecretaryViewModels.FreeDaysViewModels"
              mc:Ignorable="d" 
@@ -10,6 +11,16 @@
              Foreground="White"
              FontSize="20"
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.InputBindings>
+        <KeyBinding Key="A"
+                    Modifiers="Ctrl+Shift"
+                    Command="{Binding AcceptCommand}"/>
+        <KeyBinding Key="R"
+                    Modifiers="Ctrl+Shift"
+                    Command="{Binding RefuseCommand}"/>
+
+    </UserControl.InputBindings>
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -30,13 +41,20 @@
                     Orientation="Horizontal"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right">
-            <TextBox Style="{StaticResource TextBoxStyleAccount}"
+            <TextBox Style="{StaticResource SearchTextBox}"
+                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                      Width="170"
                      Padding="5"
                      FontSize="16"
-                     Margin="0,0,15,0"/>
-            <Button Content="Search"
-                    Style="{StaticResource AccountButtonsStyle}"/>
+                     Margin="0,0,15,0">
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=ResolvedRequestsDataGrid}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+            </TextBox>
         </StackPanel>
 
         <Grid Margin="0,15,0,0">
@@ -112,6 +130,7 @@
                                Margin="0,0,0,10"
                                Text="Resolved Requests"/>
                     <DataGrid Grid.Row="1" 
+                              x:Name="ResolvedRequestsDataGrid"
                           Margin="7,0,0,0"
                           RowHeight="35"
                           ItemsSource="{Binding FreeDayRequestsResolved}"

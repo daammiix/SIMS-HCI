@@ -35,7 +35,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
 
         #region Properties
 
-        public string Username
+        public string? Username
         {
             get { return _username; }
             set
@@ -48,7 +48,7 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
             }
         }
 
-        public string Password
+        public string? Password
         {
             get { return _password; }
             set
@@ -61,19 +61,19 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
             }
         }
 
-        public string Name
+        public string? Name
         {
             get { return _name; }
             set { _name = value; }
         }
 
-        public string Surname
+        public string? Surname
         {
             get { return _surname; }
             set { _surname = value; }
         }
 
-        public string Jmbg
+        public string? Jmbg
         {
             get { return _jmbg; }
             set { _jmbg = value; }
@@ -228,7 +228,13 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
         private bool CanAddAccount()
         {
             // Moze ako polja nisu prazna
-            if (Username.Equals("") || Password.Equals("") || Name.Equals("") || Surname.Equals(""))
+
+            if (string.IsNullOrWhiteSpace(Username) ||
+                string.IsNullOrWhiteSpace(Password) ||
+                string.IsNullOrWhiteSpace(Name) ||
+                string.IsNullOrWhiteSpace(Surname) ||
+                string.IsNullOrWhiteSpace(Jmbg) ||
+                ErrorCount > 0)
             {
                 return false;
             }

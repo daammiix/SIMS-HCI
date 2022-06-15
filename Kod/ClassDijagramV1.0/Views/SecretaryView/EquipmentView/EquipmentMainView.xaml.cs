@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace ClassDijagramV1._0.Views.SecretaryView.EquipmentView
 {
@@ -10,6 +11,8 @@ namespace ClassDijagramV1._0.Views.SecretaryView.EquipmentView
         public EquipmentMainView()
         {
             InitializeComponent();
+            Focusable = true;
+            Loaded += (s, e) => Keyboard.Focus(this);
         }
     }
 }

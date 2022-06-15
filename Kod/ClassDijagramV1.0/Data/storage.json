@@ -8,98 +8,123 @@
     "EquipmentList": [
       {
         "EquipmentID": "OL36",
-        "Quantity": 35
+        "Quantity": 103606,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "OUL5",
-        "Quantity": 14
+        "Quantity": 118218,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "PRZ42",
-        "Quantity": 20
+        "Quantity": 20,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "PRG5",
-        "Quantity": 314
+        "Quantity": 314,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "PRG10",
-        "Quantity": 525
+        "Quantity": 525,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "PRGA35",
-        "Quantity": 30
+        "Quantity": 30,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "INST6",
-        "Quantity": 10
+        "Quantity": 10,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "INS8",
-        "Quantity": 10
+        "Quantity": 10,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "INN91",
-        "Quantity": 7
+        "Quantity": 7,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "INPK13",
-        "Quantity": 8
+        "Quantity": 8,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "INL56",
-        "Quantity": 55
+        "Quantity": 55,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "OMN3",
-        "Quantity": 150
+        <<<<<<< HEAD
+        "Quantity": 384,
+        "ErrorCount": 0
       },
       {
         "EquipmentID": "OMR5",
-        "Quantity": 13
-      }
+        "Quantity": 392668,
+        "ErrorCount": 0
+      },
     ],
     "MedicineList": [
       {
         "MedicineID": "LB400",
-        "Quantity": 30
+        "Quantity": 30,
+        "ErrorCount": 0
       },
       {
         "MedicineID": "LA40",
-        "Quantity": 20
+        "Quantity": 28,
+        "ErrorCount": 0
       },
       {
         "MedicineID": "LM300",
-        "Quantity": 32
+        "Quantity": 32,
+        "ErrorCount": 0
       },
       {
         "MedicineID": "LC300",
-        "Quantity": 18
+        "Quantity": 18,
+        "ErrorCount": 0
       },
       {
         "MedicineID": "LMI15",
-        "Quantity": 25
+        "Quantity": 25,
+        "ErrorCount": 0
       },
       {
         "MedicineID": "MLS15",
-        "Quantity": 35
+        "Quantity": 35,
+        "ErrorCount": 0
       },
       {
         "MedicineID": "LPG40",
-        "Quantity": 68
+        "Quantity": 68,
+        "ErrorCount": 0
       },
       {
         "MedicineID": "LF200",
-        "Quantity": 44
+        "Quantity": 44,
+        "ErrorCount": 0
       },
       {
         "MedicineID": "LDR800",
-        "Quantity": 18
+        "Quantity": 18,
+        "ErrorCount": 0
       },
       {
         "MedicineID": "kg7",
-        "Quantity": 16
+        "Quantity": 16,
+        "ErrorCount": 0
       }
-    ]
+    ],
+    "ErrorCount": 0
   }
 ]

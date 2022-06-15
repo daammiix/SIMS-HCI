@@ -17,6 +17,12 @@
         Foreground="{StaticResource SLightGrayShade}"
         Title="InsertQuantityDialog" Height="250" Width="400">
 
+    <Window.InputBindings>
+        <KeyBinding Key="Return"
+                    Command="{Binding OkCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}"/>
+    </Window.InputBindings>
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

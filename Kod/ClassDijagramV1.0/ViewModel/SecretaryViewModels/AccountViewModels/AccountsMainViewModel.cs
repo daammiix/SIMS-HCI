@@ -3,8 +3,11 @@ using ClassDijagramV1._0.Model;
 using ClassDijagramV1._0.Util;
 using ClassDijagramV1._0.Views.SecretaryView.AccountsView;
 using Controller;
+using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
 {
@@ -27,6 +30,8 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
 
         private RelayCommand _changeAccountCommand;
 
+        private RelayCommand _searchCommand;
+
         #endregion
 
         #region Properties
@@ -38,6 +43,8 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
             get { return _accountViewModel; }
             set { _accountViewModel = value; }
         }
+
+        public string SearchText { get; set; }
 
         #endregion
 
@@ -95,6 +102,19 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
                 }
 
                 return _changeAccountCommand;
+            }
+        }
+
+        public RelayCommand SearchCommand
+        {
+            get
+            {
+                if (_searchCommand == null)
+                {
+                    _searchCommand = new RelayCommand(o => { SearchExecute(o as DataGrid); });
+                }
+
+                return _searchCommand;
             }
         }
 
@@ -192,6 +212,22 @@ namespace ClassDijagramV1._0.ViewModel.SecretaryViewModels.AccountViewModels
             changeAccountDialog.DataContext = new ChangeAccountDialogViewModel(AccountViewModel);
             changeAccountDialog.Owner = Application.Current.MainWindow;
             changeAccountDialog.ShowDialog();
+        }
+
+        private void SearchExecute(DataGrid dg)
+        {
+            if (!SearchText.Equals(""))
+            {
+                var filteredAccounts = Accounts
+                    .Where(accVM => accVM.Username.ToLower().Contains(SearchText.ToLower()) ||
+                                    accVM.Password.ToLower().Contains(SearchText.ToLower()) ||
+                                    accVM.PersonId.ToString().Contains(SearchText));
+                dg.ItemsSource = filteredAccounts;
+            }
+            else
+            {
+                dg.ItemsSource = Accounts;
+            }
         }
 
         #endregion
